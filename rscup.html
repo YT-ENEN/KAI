@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:image" content="/png/銳能夏季盃.png">
+    <title>銳能夏季盃 | REBORN Summer Cup Official</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&family=Oswald:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { theme: { extend: { colors: { darkBg: '#050505', rebornGold: '#FFD700', rebornOrange: '#FF5722', cardBg: '#121212', inputBg: '#1A1A1A' }, fontFamily: { sans: ['Oswald', 'Noto Sans TC', 'sans-serif'] } } } }
+    </script>
+    <style>
+        /* 防白邊終極解法：強制全區黑底 */
+        html { background-color: #050505; height: 100%; scroll-behavior: smooth; }
+        body { background-color: #050505; color: white; overflow-x: hidden; min-height: 100vh; margin: 0; padding: 0; }
+        ::-webkit-scrollbar { width: 8px; } ::-webkit-scrollbar-track { background: #050505; } ::-webkit-scrollbar-thumb { background: #FF5722; border-radius: 4px; }
+        
+        /* 避免導覽列擋住標題 */
+        section, header { scroll-margin-top: 80px; }
+
+        .esports-text { font-style: italic; text-transform: uppercase; }
+        .text-gradient { background: linear-gradient(90deg, #FFD700 0%, #FFAAA5 50%, #FF5722 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .glass-panel { background: rgba(18, 18, 18, 0.8); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255, 215, 0, 0.1); }
+        
+        /* 英雄區背景優化 */
+        .hero-bg {
+            background-image: linear-gradient(to bottom, rgba(5,5,5,0.4) 0%, rgba(5,5,5,1) 100%), url('https://cdn.phototourl.com/free/2026-05-08-75ccbbe1-958a-431a-a120-df48044de62e.png');
+            background-size: cover;
+            background-position: center top;
+            background-repeat: no-repeat;
+        }
+
+        @media (max-width: 768px) {
+            .hero-bg {
+                background-attachment: scroll;
+                background-position: center center;
+            }
+        }
+
+        .rule-card { background: linear-gradient(145deg, #111 0%, #0a0a0a 100%); border-left: 4px solid #FF5722; transition: all 0.3s ease; }
+        .rule-card:hover { transform: translateX(5px); border-left-color: #FFD700; background: #1a1a1a; }
+        
+        .btn-cta { position: relative; background: linear-gradient(45deg, #FF5722, #FFD700); z-index: 1; overflow: hidden; transform: skewX(-10deg); transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1); border: none; cursor: pointer; }
+        .btn-cta-inner { display: block; transform: skewX(10deg); }
+        .btn-cta::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent); transition: all 0.5s ease; z-index: -1; }
+        .btn-cta:hover { box-shadow: 0 0 30px rgba(255, 87, 34, 0.6); transform: skewX(-10deg) translateY(-3px); }
+        .btn-cta:hover::before { left: 100%; }
+        
+        .form-section-title { position: relative; padding-left: 1rem; margin-bottom: 1.5rem; font-size: 1.25rem; font-weight: 900; color: #FFD700; }
+        .form-section-title::before { content: ''; position: absolute; left: 0; top: 10%; height: 80%; width: 4px; background: #FF5722; border-radius: 2px; }
+        
+        .form-input { width: 100%; padding: 14px 18px; background: #1a1a1a; border: 1px solid #333; border-radius: 8px; color: white; transition: all 0.3s ease; font-size: 16px; }
+        .form-input:focus { outline: none; border-color: #FFD700; background: #222; box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.15); }
+        
+        .member-card { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.25rem; transition: all 0.3s ease; }
+        .hidden-section { display: none !important; }
+        .score-table th, .score-table td { border-bottom: 1px solid #222; padding: 16px; text-align: center; }
+        .score-table th { color: #FFD700; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; }
+        
+        .avatar-preview { width: 120px; height: 120px; border-radius: 50%; border: 2px dashed #444; display: flex; align-items: center; justify-content: center; overflow: hidden; background: #0a0a0a; cursor: pointer; transition: 0.3s; position: relative; }
+        .avatar-preview:hover { border-color: #FFD700; background: #111; }
+        .avatar-preview img { width: 100%; height: 100%; object-fit: cover; position: absolute; top:0; left:0; z-index: 5; }
+
+        /* 賽事規章摺疊樣式 */
+        .rule-header { cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 1.5rem; transition: background 0.3s; }
+        .rule-header:hover { background: rgba(255, 255, 255, 0.05); }
+        .rule-content { max-height: 0; overflow: hidden; transition: max-height 0.5s ease-out; background: rgba(0, 0, 0, 0.2); }
+        .rule-content.open { max-height: 1000px; padding-bottom: 1.5rem; }
+        .rule-arrow { transition: transform 0.3s; color: #FFD700; }
+        .rule-arrow.rotated { transform: rotate(180deg); }
+
+        /* 導覽列滾動效果 */
+        nav.scrolled { padding-top: 0.75rem; padding-bottom: 0.75rem; background: rgba(5, 5, 5, 0.95); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+    </style>
+</head>
+<body class="antialiased font-sans bg-darkBg">
+
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-5 glass-panel border-none">
+        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+            <a href="#" class="text-2xl font-black esports-text text-rebornGold tracking-wider">REBORN<span class="text-white">CUP</span></a>
+            
+            <!-- Mobile Menu Toggle -->
+            <button id="mobile-menu-btn" class="lg:hidden text-white text-2xl">☰</button>
+
+            <div class="hidden lg:flex items-center space-x-8 text-sm font-bold tracking-widest">
+                <a href="javascript:void(0)" onclick="jumpTo('schedule')" class="hover:text-rebornGold transition-colors uppercase">賽事時程</a>
+                <a href="javascript:void(0)" onclick="jumpTo('rules')" class="hover:text-rebornGold transition-colors uppercase">賽制規章</a>
+                <a href="javascript:void(0)" onclick="jumpTo('prize')" class="hover:text-rebornGold transition-colors uppercase">獎金池</a>
+                <a href="javascript:void(0)" onclick="jumpTo('register')" class="bg-rebornOrange hover:bg-white hover:text-black text-white px-5 py-2.5 rounded transition-all font-black uppercase">立即報名</a>
+                <button onclick="openLoginModal()" class="bg-white/10 hover:bg-rebornGold hover:text-black text-white px-5 py-2.5 rounded transition-all flex items-center font-black">🛡️ 戰隊登入</button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden absolute top-full left-0 w-full bg-darkBg border-t border-white/10 p-6 flex flex-col space-y-4 text-center font-bold">
+            <a href="javascript:void(0)" onclick="jumpTo('schedule')" class="py-2 hover:text-rebornGold">賽事時程</a>
+            <a href="javascript:void(0)" onclick="jumpTo('rules')" class="py-2 hover:text-rebornGold">賽制規章</a>
+            <a href="javascript:void(0)" onclick="jumpTo('prize')" class="py-2 hover:text-rebornGold">獎金池</a>
+            <a href="javascript:void(0)" onclick="jumpTo('register')" class="py-3 bg-rebornOrange text-white rounded">立即報名</a>
+            <button onclick="openLoginModal()" class="py-3 bg-white/10 text-white rounded">🛡️ 戰隊登入</button>
+        </div>
+    </nav>
+
+    <div id="view-landing">
+        <header id="about" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+            <div class="absolute inset-0 z-0 hero-bg"></div>
+            
+            <canvas id="hero-canvas" class="absolute inset-0 z-10 w-full h-full pointer-events-none"></canvas>
+            
+            <div class="relative z-20 text-center px-6 max-w-5xl mx-auto mt-20">
+                <h2 class="esports-text text-rebornGold tracking-[0.4em] text-sm md:text-xl mb-6 opacity-100 drop-shadow-lg font-bold">REBORN ENTERTAINMENT PRESENTS</h2>
+                <h1 class="esports-text text-5xl md:text-8xl lg:text-9xl font-black mb-10 leading-none drop-shadow-2xl">
+                    RUINENG<br>
+                    <span class="text-gradient">SUMMER CUP</span>
+                </h1>
+                <p class="text-gray-300 text-lg md:text-2xl max-w-2xl mx-auto mb-12 font-bold tracking-wide drop-shadow-md">
+                    2026 銳能夏季盃電競聯賽<br>
+                    由 恩恩遊戲日常 轉播・總獎金 8,000 NTD
+                </p>
+                <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-8">
+                    <a href="#register" class="btn-cta inline-block px-14 py-6 text-2xl font-black text-black shadow-2xl w-full md:w-auto">
+                        <span class="btn-cta-inner tracking-widest">立即組建戰隊</span>
+                    </a>
+                    <a href="#rules" class="text-white hover:text-rebornGold font-black text-xl tracking-widest transition-all border-b-2 border-transparent hover:border-rebornGold pb-1">
+                        查看賽事規章 →
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <section id="schedule" class="py-24 relative z-10 bg-[#0a0a0a]">
+            <div class="max-w-6xl mx-auto px-6">
+                <div class="text-center mb-16"><h3 class="esports-text text-rebornGold tracking-widest text-lg mb-2">SCHEDULE & SCORING</h3><h2 class="esports-text text-4xl md:text-5xl font-black text-white">賽事時程與計分制度</h2></div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                    <div><h3 class="text-2xl font-black text-rebornOrange mb-6 border-b border-gray-800 pb-2">一、 賽事時程</h3><ul class="space-y-6 text-gray-300"><li class="glass-panel p-6 rounded-lg"><span class="block text-rebornGold font-bold mb-1">開賽時間</span>暫定 6 月中旬，連續四週進行。</li><li class="glass-panel p-6 rounded-lg border-l-4 border-rebornOrange"><span class="block font-bold text-white text-lg mb-2">Week 1 - 3 (小組循環賽)</span>18 隊分為 A、B、C 三組。</li><li class="glass-panel p-6 rounded-lg border-l-4 border-rebornGold"><span class="block font-bold text-white text-lg mb-2">Week 4 (最終決賽)</span>累積積分排名前 12 名之隊伍晉級決賽。</li></ul></div>
+                    <div><h3 class="text-2xl font-black text-rebornOrange mb-6 border-b border-gray-800 pb-2">二、 計分規則</h3><div class="glass-panel rounded-lg p-6 mb-6 text-sm"><div class="flex justify-between items-center mb-4 border-b border-gray-700 pb-2"><span class="font-bold text-white">擊殺分 (Kill Point)</span><span class="text-rebornOrange font-black text-xl">1 分 / 擊殺</span></div><span class="font-bold text-white">同分判定順序</span><span class="text-gray-400 block mt-1">總擊殺數 > 吃雞次數 > 決賽最後名次</span></div><div class="overflow-x-auto glass-panel rounded-lg"><table class="w-full score-table text-sm"><thead><tr class="bg-black/50"><th>#1</th><th>#2</th><th>#3</th><th>#4</th><th>#5</th><th>#6</th></tr></thead><tbody><tr><td class="text-rebornGold font-bold text-lg">12</td><td>9</td><td>8</td><td>7</td><td>6</td><td>5</td></tr></tbody><thead><tr class="bg-black/50"><th>#7</th><th>#8</th><th>#9</th><th>#10</th><th colspan="2">#11 - #12</th></tr></thead><tbody><tr><td>4</td><td>3</td><td>2</td><td>1</td><td colspan="2" class="text-gray-500">0</td></tr></tbody></table></div></div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="rules" class="py-24 relative z-10 bg-[#111]">
+            <div class="max-w-6xl mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h3 class="esports-text text-rebornGold tracking-widest text-lg mb-2">OFFICIAL RULES</h3>
+                    <h2 class="esports-text text-4xl md:text-5xl font-black text-white">賽事規章與規範</h2>
+                </div>
+
+                <div class="space-y-4 max-w-4xl mx-auto">
+                    <!-- 規範 1 -->
+                    <div class="rule-card rounded-lg overflow-hidden border border-white/5">
+                        <div class="rule-header" onclick="toggleRule(this)">
+                            <h4 class="font-bold text-xl flex items-center"><span class="text-rebornOrange mr-3">01.</span> 賽事基本規範</h4>
+                            <span class="rule-arrow text-2xl">▼</span>
+                        </div>
+                        <div class="rule-content px-6">
+                            <p class="text-gray-400 leading-relaxed">
+                                本賽事旨在提供公平競爭的環境。所有選手在參賽期間應保持體育精神，尊重對手與主辦方。賽事流程將依據官方公告進行，如有變動將於 Discord 同步通知。
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 規範 2 -->
+                    <div class="rule-card rounded-lg overflow-hidden border border-white/5">
+                        <div class="rule-header" onclick="toggleRule(this)">
+                            <h4 class="font-bold text-xl flex items-center"><span class="text-rebornOrange mr-3">02.</span> 溝通與聯絡（Discord 規範）</h4>
+                            <span class="rule-arrow text-2xl">▼</span>
+                        </div>
+                        <div class="rule-content px-6">
+                            <ul class="text-gray-400 space-y-3 list-disc pl-5">
+                                <li>所有參賽選手必須加入指定 Discord 伺服器，並完成身分組驗證。</li>
+                                <li><span class="text-rebornOrange font-bold">罰則：</span>比賽日當天若發現隊伍中有隊員未在 DC 頻道中，<span class="text-white font-bold">該隊當日總分直接扣除 5 分</span>，累犯將視情況取消參賽資格。</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 規範 3 -->
+                    <div class="rule-card rounded-lg overflow-hidden border border-white/5">
+                        <div class="rule-header" onclick="toggleRule(this)">
+                            <h4 class="font-bold text-xl flex items-center"><span class="text-rebornOrange mr-3">03.</span> 核心參賽規範（嚴懲條款）</h4>
+                            <span class="rule-arrow text-2xl">▼</span>
+                        </div>
+                        <div class="rule-content px-6">
+                            <div class="space-y-4">
+                                <div>
+                                    <h5 class="text-white font-bold mb-2">● 身分核實（嚴禁代打）</h5>
+                                    <p class="text-gray-400">報名表單之遊戲 ID、UID 必須與參賽者完全一致。</p>
+                                    <p class="text-gray-400"><span class="text-rebornOrange font-bold">罰則：</span>經檢舉並查證屬實為「代打」者，該隊伍立即取消所有參賽資格，並不予退還報名費，且該隊員將永久列入銳能娛樂賽事黑名單。</p>
+                                </div>
+                                <div>
+                                    <h5 class="text-white font-bold mb-2">● 重複報名與跨隊限制</h5>
+                                    <p class="text-gray-400">每位選手僅能代表一支隊伍參賽。</p>
+                                    <p class="text-gray-400"><span class="text-rebornOrange font-bold">罰則：</span>若發現同一人同時出現在兩支報名隊伍中，兩支隊伍皆取消資格。</p>
+                                </div>
+                                <div>
+                                    <h5 class="text-white font-bold mb-2">● 公平競爭與外掛防制</h5>
+                                    <p class="text-gray-400">嚴禁使用任何第三方輔助軟體、腳本或不當模擬器。</p>
+                                    <p class="text-gray-400">賽後官方有權要求前三名隊伍提供特定片段之第一人稱視角（或手元錄影）查核。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 規範 4 -->
+                    <div class="rule-card rounded-lg overflow-hidden border border-white/5">
+                        <div class="rule-header" onclick="toggleRule(this)">
+                            <h4 class="font-bold text-xl flex items-center"><span class="text-rebornOrange mr-3">04.</span> 技術問題處理</h4>
+                            <span class="rule-arrow text-2xl">▼</span>
+                        </div>
+                        <div class="rule-content px-6">
+                            <ul class="text-gray-400 space-y-3 list-disc pl-5">
+                                <li><span class="text-white font-bold">斷線處理：</span>遊戲開始後（飛機起飛後），若因選手個人網路、設備問題斷線，賽事將不予重賽。</li>
+                                <li><span class="text-white font-bold">伺服器異常：</span>若發生大規模斷線（超過 50% 選手受到影響），由主辦方判定是否進行該場重賽。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="prize" class="py-24 relative z-10 bg-darkBg text-center"><h2 class="esports-text text-4xl md:text-5xl font-black mb-16">賽事獎勵</h2><div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 items-end"><div class="glass-panel rounded-xl p-8 border"><h3 class="text-2xl font-bold mb-4">亞軍</h3><div class="text-3xl text-rebornGold font-black">2,000 NTD</div></div><div class="glass-panel rounded-xl p-10 border border-rebornGold transform md:-translate-y-8 bg-black"><h3 class="text-4xl font-black mb-6">冠軍</h3><div class="text-5xl text-gradient font-black">5,000 NTD</div><p class="mt-4 text-sm">+ 實體獎盃 🏆</p></div><div class="glass-panel rounded-xl p-8 border"><h3 class="text-2xl font-bold mb-4">季軍</h3><div class="text-3xl text-rebornOrange font-black">1,000 NTD</div></div></div></section>
+
+        <section id="register" class="py-24 relative z-10 bg-[#0a0a0a]">
+            <div class="max-w-4xl mx-auto px-6 text-center glass-panel rounded-2xl p-12 bg-cardBg border-t-4 border-rebornGold">
+                <div class="text-center mb-8">
+                    <h2 class="esports-text text-4xl font-black text-white">官方報名系統</h2>
+                    <p class="text-gray-400 mt-2">請設定隊伍密碼，後續可憑「隊名+密碼」登入戰隊後台隨時修改名單。</p>
+                </div>
+                <div id="reg-form-section" class="text-left">
+                    <!-- 快速導航與聯絡 -->
+                    <div class="mb-8 p-4 bg-white/5 border border-white/10 rounded-xl flex flex-col md:flex-row justify-between items-center gap-4">
+                        <p class="text-xs text-gray-400">已有戰隊？點擊上方導覽列「🛡️ 戰隊登入」修改名單</p>
+                        <a href="https://lin.ee/UAvLQWP" target="_blank" class="flex items-center text-[#06C755] font-bold text-sm hover:underline">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/LINE_logo.svg" class="w-4 h-4 mr-2" alt="LINE">
+                            有報名疑問？聯繫官方 LINE
+                        </a>
+                    </div>
+                    
+                    <form onsubmit="handleInitialSubmit(event)">
+                        <h3 class="form-section-title">Step 1: 建立戰隊與設定密碼</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                            <input type="text" id="init_tName" class="form-input" placeholder="隊伍名稱 (Team Name) *" required>
+                            <input type="password" id="init_tPwd" class="form-input border-rebornOrange" placeholder="設定登入密碼 (供修改名單用) *" required>
+                            <input type="text" id="init_tTag" class="form-input" placeholder="隊伍簡稱 (例如: CZL) *" required>
+                            <input type="email" id="init_cEmail" class="form-input" placeholder="隊長聯絡 Email *" required>
+                            <input type="text" id="init_cName" class="form-input" placeholder="隊長真實姓名 *" required>
+                            <input type="text" id="init_cIGN" class="form-input" placeholder="隊長遊戲暱稱 *" required>
+                        </div>
+                        <button type="submit" class="btn-cta w-full py-4 text-xl font-black text-black rounded-lg"><span class="btn-cta-inner">建立戰隊，前往完善名單</span></button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="login-modal" class="hidden-section fixed inset-0 z-[9999] flex items-center justify-center bg-black/90 backdrop-blur-md transition-opacity">
+        <div class="glass-panel p-8 md:p-12 rounded-2xl max-w-sm w-full border border-gray-700 mx-4 relative">
+            <button onclick="closeLoginModal()" class="absolute top-4 right-6 text-gray-500 hover:text-white text-2xl font-black">×</button>
+            <div class="text-center mb-6">
+                <div class="w-16 h-16 mx-auto mb-4 bg-gray-900 rounded-full flex items-center justify-center text-rebornGold text-3xl font-black shadow-lg">🛡️</div>
+                <h3 class="text-2xl font-black text-rebornGold tracking-widest mb-1">TEAM LOGIN</h3>
+                <p class="text-xs text-gray-400">登入管理中心修改隊徽與名單</p>
+            </div>
+            <form onsubmit="handleLogin(event)">
+                <input type="text" id="login_tName" class="form-input mb-4 text-center text-lg" placeholder="隊伍名稱" required>
+                <input type="password" id="login_tPwd" class="form-input mb-6 text-center text-lg" placeholder="登入密碼" required>
+                <button type="submit" id="btn-login-submit" class="btn-cta w-full py-3 font-black text-black rounded-lg"><span class="btn-cta-inner">登入讀取資料</span></button>
+            </form>
+            <div id="login-error" class="text-red-500 text-sm text-center mt-4 hidden font-bold"></div>
+        </div>
+    </div>
+
+    <div id="view-dashboard" class="hidden-section min-h-screen pt-32 pb-24 bg-[#0a0a0a]">
+        <div class="max-w-4xl mx-auto px-6 glass-panel rounded-2xl p-12 bg-cardBg relative border-t-4 border-green-500">
+            <button onclick="switchView('landing')" class="absolute top-6 right-8 text-gray-500 hover:text-white text-sm font-bold border border-gray-600 px-3 py-1 rounded">登出系統</button>
+            
+            <div class="flex flex-col md:flex-row items-center md:items-start space-y-4 md:space-y-0 md:space-x-6 mb-8 bg-[#111] p-6 rounded-xl border border-gray-800">
+                <div class="flex-shrink-0 flex flex-col items-center">
+                    <label for="avatar-upload" class="avatar-preview bg-black border-2" id="preview-container" title="上傳或更換隊徽">
+                        <span id="upload-text" class="text-3xl text-gray-600 z-10">+</span>
+                        <img id="dash-avatar-img" src="" alt="隊徽">
+                    </label>
+                    <input type="file" id="avatar-upload" accept="image/*" class="hidden" onchange="previewAvatar(event)">
+                </div>
+                <div class="text-center md:text-left">
+                    <h2 id="display_tName" class="text-4xl font-black text-rebornGold mb-2">TEAM NAME</h2>
+                    <span id="display_tTag" class="bg-gray-800 text-white px-3 py-1 rounded text-sm font-bold tracking-widest">TAG</span>
+                </div>
+            </div>
+            
+            <form onsubmit="saveDashboard(event)">
+                <h3 class="form-section-title text-sm">隊長資料與聯絡方式</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                    <input type="text" id="dash_cUID" class="form-input text-sm border-rebornGold/30" placeholder="隊長遊戲 UID *" required>
+                    <input type="tel" id="dash_cPhone" class="form-input text-sm border-rebornGold/30" placeholder="聯絡電話 *" required>
+                    <input type="text" id="dash_cLine" class="form-input text-sm border-rebornGold/30" placeholder="LINE ID *" required>
+                </div>
+                
+                <h3 class="form-section-title text-sm">隊員資料填寫進度</h3>
+                <div id="members-container"></div>
+                <button type="button" id="btn-add-member" onclick="addMemberSlot()" class="text-sm text-rebornOrange border border-rebornOrange/50 px-4 py-3 rounded w-full mb-8 hover:bg-rebornOrange hover:text-black transition">+ 新增替補欄位</button>
+                <button type="submit" id="final-submit-btn" class="btn-cta w-full py-4 text-lg font-black text-black rounded-lg shadow-[0_0_15px_rgba(255,215,0,0.3)]">
+                    <span class="btn-cta-inner tracking-widest">儲存並覆蓋最新資料至賽事中心</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div id="success-modal" class="hidden-section fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-sm transition-opacity">
+        <div class="glass-panel p-8 md:p-12 rounded-2xl max-w-md w-full text-center border-t-4 border-rebornGold mx-4">
+            <div class="text-6xl mb-4">🏆</div>
+            <h3 class="text-2xl font-black text-white mb-2" id="success-title">系統儲存成功！</h3>
+            <p class="text-gray-400 text-sm mb-6 leading-relaxed" id="success-msg">您的最新戰隊名單與隊徽皆已安全上傳。<br>開賽前可隨時憑密碼登入此後台進行修改。</p>
+            
+            <!-- LINE 登錄提醒 -->
+            <div class="bg-[#06C755]/10 border border-[#06C755]/30 rounded-xl p-4 mb-8">
+                <p class="text-[#06C755] font-black text-sm mb-2">📢 重要：請務必完成 LINE 登錄</p>
+                <p class="text-gray-300 text-xs mb-3">請隊長務必加入官方 LINE 並發送「隊伍名稱」，以利後續賽事聯繫與報到。</p>
+                <a href="https://lin.ee/UAvLQWP" target="_blank" class="inline-flex items-center bg-[#06C755] text-white px-4 py-2 rounded-lg font-bold text-sm hover:opacity-90 transition">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/LINE_logo.svg" class="w-4 h-4 mr-2" alt="LINE">
+                    前往官方 LINE 登錄
+                </a>
+            </div>
+
+            <button onclick="closeSuccessModal()" class="w-full bg-rebornGold text-black font-black py-4 rounded-lg hover:bg-yellow-400 transition tracking-widest uppercase">我知道了</button>
+        </div>
+    </div>
+
+    <footer class="pt-16 pb-8 bg-[#050505] text-center text-xs text-gray-600 font-bold border-t border-white/10">
+        © 2026 REBORN Entertainment. Powered by 源吉工程公司 & GARENA FREE FIRE
+    </footer>
+
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbzFcOnRrmKPQ_091jO6JgvS3cTi6fXS2SuWl_nHBcx6uuvWTgEk1Bg6hvx-fXc4NYrO5Q/exec';
+
+        // 導覽列捲動效果
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // 行動裝置選單切換
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // 點擊連結後自動關閉行動裝置選單
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // 賽事規章摺疊功能
+        function toggleRule(header) {
+            const content = header.nextElementSibling;
+            const arrow = header.querySelector('.rule-arrow');
+            
+            // 關閉其他已開啟的規章 (選配，若想讓使用者一次只能看一個)
+            /*
+            document.querySelectorAll('.rule-content').forEach(c => {
+                if (c !== content) {
+                    c.classList.remove('open');
+                    c.previousElementSibling.querySelector('.rule-arrow').classList.remove('rotated');
+                }
+            });
+            */
+            
+            content.classList.toggle('open');
+            arrow.classList.toggle('rotated');
+        }
+
+        let teamData = { name: '', password: '', tag: '', cName: '', cIGN: '', cEmail: '', rawBase64: '', mimeType: '', existingLogo: '' };
+        let memberCount = 0;
+        const maxMembers = 5;
+
+        // 強力跳轉：解決協作平台 iframe 跳轉無效問題
+        function jumpTo(targetId) {
+            const target = document.getElementById(targetId);
+            if (target) {
+                const navHeight = 80; // 導覽列高度
+                const targetPosition = target.getBoundingClientRect().top + window.scrollY - navHeight;
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        function switchView(viewName) {
+            document.getElementById('view-landing').classList.toggle('hidden-section', viewName !== 'landing');
+            document.getElementById('view-dashboard').classList.toggle('hidden-section', viewName !== 'dashboard');
+            if(viewName === 'landing') { teamData.password = ''; } 
+            window.scrollTo(0, 0);
+        }
+
+        function openLoginModal() { 
+            document.getElementById('login-modal').classList.remove('hidden-section'); 
+            document.getElementById('login-error').classList.add('hidden');
+        }
+        function closeLoginModal() { document.getElementById('login-modal').classList.add('hidden-section'); }
+        function closeSuccessModal() { document.getElementById('success-modal').classList.add('hidden-section'); }
+
+        async function handleLogin(e) {
+            e.preventDefault();
+            const btn = document.getElementById('btn-login-submit');
+            const errorDiv = document.getElementById('login-error');
+            const tName = document.getElementById('login_tName').value.trim();
+            const pwd = document.getElementById('login_tPwd').value.trim();
+            
+            btn.querySelector('.btn-cta-inner').innerText = '資料讀取中...';
+            btn.disabled = true; errorDiv.classList.add('hidden');
+
+            try {
+                const response = await fetch(scriptURL, {
+                    method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify({ action: 'login', tName: tName, password: pwd })
+                });
+                const resData = await response.json();
+                
+                if (resData.result === 'success') {
+                    const d = resData.data;
+                    console.log("Login data received:", d);
+                    
+                    teamData.name = d.tName; 
+                    teamData.password = pwd; 
+                    teamData.tag = d.tTag; 
+                    teamData.cName = d.cName; 
+                    teamData.cIGN = d.cIGN; 
+                    teamData.cEmail = d.cEmail;
+                    
+                    // 兼容不同欄位名稱
+                    const logoUrl = d.logoUrl || d.logo_url || d.tLogo || "";
+                    teamData.existingLogo = logoUrl;
+                    
+                    document.getElementById('display_tName').innerText = d.tName;
+                    document.getElementById('display_tTag').innerText = d.tTag;
+                    document.getElementById('dash_cUID').value = d.cUID || '';
+                    document.getElementById('dash_cPhone').value = d.cPhone || '';
+                    document.getElementById('dash_cLine').value = d.cLine || '';
+
+                    if(logoUrl && logoUrl !== "無隊徽" && logoUrl !== "") {
+                        document.getElementById('upload-text').style.display = "none";
+                        document.getElementById('dash-avatar-img').src = logoUrl;
+                        document.getElementById('dash-avatar-img').style.display = 'block';
+                    } else {
+                        document.getElementById('upload-text').style.display = "block";
+                        document.getElementById('dash-avatar-img').style.display = 'none';
+                    }
+
+                    document.getElementById('members-container').innerHTML = '';
+                    memberCount = 0;
+                    
+                    for(let i=1; i<=5; i++) {
+                        const n = d[`m${i}_name`]; const g = d[`m${i}_ign`]; const u = d[`m${i}_uid`];
+                        if(n || g || u || i <= 3) {
+                            addMemberSlot(i <= 3);
+                            document.getElementById(`m${i}_name`).value = n || '';
+                            document.getElementById(`m${i}_ign`).value = g || '';
+                            document.getElementById(`m${i}_uid`).value = u || '';
+                            document.getElementById(`m${i}_name`).dispatchEvent(new Event('input'));
+                        }
+                    }
+                    closeLoginModal(); switchView('dashboard');
+                } else {
+                    errorDiv.innerText = resData.message; errorDiv.classList.remove('hidden');
+                }
+            } catch (err) {
+                errorDiv.innerText = '系統連線失敗，請稍後再試。'; errorDiv.classList.remove('hidden');
+            } finally {
+                btn.disabled = false; btn.querySelector('.btn-cta-inner').innerText = '登入讀取資料';
+            }
+        }
+
+        function handleInitialSubmit(e) {
+            e.preventDefault();
+            teamData.name = document.getElementById('init_tName').value;
+            teamData.password = document.getElementById('init_tPwd').value;
+            teamData.tag = document.getElementById('init_tTag').value;
+            teamData.cName = document.getElementById('init_cName').value;
+            teamData.cIGN = document.getElementById('init_cIGN').value;
+            teamData.cEmail = document.getElementById('init_cEmail').value; 
+
+            document.getElementById('display_tName').innerText = teamData.name;
+            document.getElementById('display_tTag').innerText = teamData.tag;
+            
+            document.getElementById('upload-text').style.display = "block";
+            document.getElementById('dash-avatar-img').style.display = 'none';
+            document.getElementById('dash-avatar-img').src = '';
+            
+            initDashboardMembers(); switchView('dashboard');
+        }
+
+        function initDashboardMembers() {
+            document.getElementById('members-container').innerHTML = '';
+            memberCount = 0; addMemberSlot(true); addMemberSlot(true); addMemberSlot(true);
+        }
+
+        function addMemberSlot(isRequired = false) {
+            if (memberCount >= maxMembers) return;
+            memberCount++;
+            const div = document.createElement('div'); div.className = 'member-card'; div.id = `mc-${memberCount}`;
+            div.innerHTML = `
+                <div class="flex justify-between items-center mb-3">
+                    <div class="text-white font-bold text-xs">${isRequired ? '必填隊員' : '替補隊員'} ${memberCount}</div>
+                    <div id="status-m${memberCount}" class="text-red-500 font-bold text-xs">🔴 待填寫</div>
+                </div>
+                <div class="grid grid-cols-3 gap-2">
+                    <input type="text" id="m${memberCount}_name" class="form-input text-xs member-input" data-idx="${memberCount}" placeholder="真實姓名" ${isRequired?'required':''}>
+                    <input type="text" id="m${memberCount}_ign" class="form-input text-xs member-input" data-idx="${memberCount}" placeholder="遊戲暱稱" ${isRequired?'required':''}>
+                    <input type="text" id="m${memberCount}_uid" class="form-input text-xs member-input" data-idx="${memberCount}" placeholder="遊戲 UID" ${isRequired?'required':''}>
+                </div>`;
+            document.getElementById('members-container').appendChild(div); bindInputListeners(div); updateAddBtn();
+        }
+
+        function updateAddBtn() { document.getElementById('btn-add-member').style.display = memberCount >= maxMembers ? 'none' : 'block'; }
+
+        function bindInputListeners(container) {
+            container.querySelectorAll('.member-input').forEach(input => {
+                input.addEventListener('input', (e) => {
+                    const idx = e.target.getAttribute('data-idx');
+                    const n = document.getElementById(`m${idx}_name`).value.trim();
+                    const i = document.getElementById(`m${idx}_ign`).value.trim();
+                    const u = document.getElementById(`m${idx}_uid`).value.trim();
+                    const status = document.getElementById(`status-m${idx}`); const card = document.getElementById(`mc-${idx}`);
+                    if (n && i && u) { status.innerHTML = '🟢 資料完整'; status.className = 'text-green-400 font-bold text-xs'; card.style.borderColor = 'rgba(74, 222, 128, 0.4)'; }
+                    else if (n || i || u) { status.innerHTML = '🟠 資料不全'; status.className = 'text-orange-500 font-bold text-xs'; card.style.borderColor = 'rgba(249, 115, 22, 0.4)'; }
+                    else { status.innerHTML = '🔴 待填寫'; status.className = 'text-red-500 font-bold text-xs'; card.style.borderColor = 'rgba(255, 255, 255, 0.1)'; }
+                });
+            });
+        }
+
+        function previewAvatar(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = new Image();
+                    img.onload = function() {
+                        const canvas = document.createElement('canvas'); const ctx = canvas.getContext('2d');
+                        const maxSize = 250; let width = img.width, height = img.height;
+                        if (width > height && width > maxSize) { height *= maxSize / width; width = maxSize; } 
+                        else if (height > maxSize) { width *= maxSize / height; height = maxSize; }
+                        canvas.width = width; canvas.height = height; ctx.drawImage(img, 0, 0, width, height);
+                        
+                        teamData.rawBase64 = canvas.toDataURL('image/jpeg', 0.8).split(',')[1];
+                        teamData.mimeType = 'image/jpeg';
+                        
+                        document.getElementById('dash-avatar-img').src = canvas.toDataURL('image/jpeg', 0.8);
+                        document.getElementById('dash-avatar-img').style.display = 'block';
+                        document.getElementById('upload-text').style.display = 'none';
+                    };
+                    img.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        async function saveDashboard(e) {
+            e.preventDefault();
+            const btn = document.getElementById('final-submit-btn');
+            const originalText = btn.querySelector('.btn-cta-inner').innerText;
+            btn.disabled = true; btn.querySelector('.btn-cta-inner').innerText = '正在加密上傳至賽事中心...';
+
+            const payload = {
+                action: 'save', 
+                password: teamData.password, 
+                existingLogo: teamData.existingLogo || '',
+                tLogoBase64: teamData.rawBase64 || '', 
+                tLogoMime: teamData.mimeType || '', 
+                tLogoName: teamData.tag ? (teamData.tag + "_logo.jpg") : "logo.jpg",
+                tName: teamData.name, 
+                tTag: teamData.tag, 
+                cName: teamData.cName, 
+                cIGN: teamData.cIGN, 
+                cEmail: teamData.cEmail,
+                cUID: document.getElementById('dash_cUID').value, 
+                cPhone: document.getElementById('dash_cPhone').value, 
+                cLine: document.getElementById('dash_cLine').value,
+                m1_name: document.getElementById('m1_name')?.value || '', 
+                m1_ign: document.getElementById('m1_ign')?.value || '', 
+                m1_uid: document.getElementById('m1_uid')?.value || '',
+                m2_name: document.getElementById('m2_name')?.value || '', 
+                m2_ign: document.getElementById('m2_ign')?.value || '', 
+                m2_uid: document.getElementById('m2_uid')?.value || '',
+                m3_name: document.getElementById('m3_name')?.value || '', 
+                m3_ign: document.getElementById('m3_ign')?.value || '', 
+                m3_uid: document.getElementById('m3_uid')?.value || '',
+                m4_name: document.getElementById('m4_name')?.value || '', 
+                m4_ign: document.getElementById('m4_ign')?.value || '', 
+                m4_uid: document.getElementById('m4_uid')?.value || '',
+                m5_name: document.getElementById('m5_name')?.value || '', 
+                m5_ign: document.getElementById('m5_ign')?.value || '', 
+                m5_uid: document.getElementById('m5_uid')?.value || ''
+            };
+
+            console.log("Saving payload:", payload);
+
+            try {
+                const response = await fetch(scriptURL, {
+                    method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify(payload)
+                });
+                const resData = await response.json();
+                
+                if(resData.result === 'success') {
+                    document.getElementById('success-modal').classList.remove('hidden-section');
+                    document.getElementById('success-title').innerText = "系統儲存成功！";
+                    document.getElementById('success-msg').innerHTML = "您的最新戰隊名單與隊徽皆已安全上傳。<br>開賽前可隨時憑密碼登入此後台進行修改。";
+                    teamData.rawBase64 = ''; 
+                    // 統一使用 logoUrl
+                    if (resData.logoUrl) {
+                        teamData.existingLogo = resData.logoUrl;
+                    } else if (resData.logo_url) {
+                        teamData.existingLogo = resData.logo_url;
+                    }
+                } else {
+                    alert('發生錯誤：' + resData.message);
+                }
+            } catch (err) {
+                alert('網路連線逾時，請確認網路狀態後再試。');
+            } finally {
+                btn.disabled = false; btn.querySelector('.btn-cta-inner').innerText = originalText;
+            }
+        }
+
+        const canvas = document.getElementById('hero-canvas'); const ctx = canvas.getContext('2d'); let particles = [];
+        function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; } window.addEventListener('resize', resizeCanvas); resizeCanvas();
+        class Particle { constructor() { this.x = Math.random()*canvas.width; this.y = canvas.height+10; this.size = Math.random()*3+1; this.sy = (Math.random()*1+0.5)*-1; this.o = Math.random()*0.8+0.2; } update() { this.y += this.sy; this.o -= 0.002; if(this.o<=0) { this.y = canvas.height+10; this.o = Math.random()*0.8+0.2; } } draw() { ctx.globalAlpha = this.o; ctx.fillStyle = '#FFD700'; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI*2); ctx.fill(); } }
+        function init() { particles = []; for(let i=0; i<60; i++) particles.push(new Particle()); }
+        function animate() { ctx.clearRect(0,0,canvas.width,canvas.height); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animate); }
+        init(); animate();
+    </script>
+</body>
+</html>
