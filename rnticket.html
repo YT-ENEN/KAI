@@ -3,25 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta property="og:image" content="/png/銳能.png">
-    <link rel="icon" href="/rnent.ico" type="image/x-icon">
     <title>REBORN 銳能娛樂 | 賽事營運系統</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsrsasign/10.5.25/jsrsasign-all-min.js"></script>
     <style>
-        /* ================= 基礎視覺設定 (專業白黃配色) ================= */
         body { font-family: 'Helvetica Neue', Arial, sans-serif; background-color: #f4f6f8; color: #333; margin: 0; line-height: 1.6; }
         .hidden { display: none !important; }
         .container { max-width: 900px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.08); border-top: 5px solid #FFB300; }
         h2 { color: #1a1a1a; margin-top: 0; border-left: 5px solid #FFB300; padding-left: 10px; }
         h3 { border-bottom: 2px solid #eee; padding-bottom: 10px; color: #1a1a1a; }
         
-        /* 導覽列 */
         .navbar { background: #fff; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; }
         .nav-brand { font-weight: 900; font-size: 22px; color: #1a1a1a; }
         .nav-brand span { color: #FFB300; }
         .nav-links button { background: none; border: none; color: #666; margin-left: 20px; cursor: pointer; font-size: 16px; font-weight: bold; transition: 0.2s; }
         .nav-links button.active { color: #FFB300; border-bottom: 2px solid #FFB300; padding-bottom: 5px; }
 
-        /* UI 元件 */
         .event-banner { background: #1a1a1a; color: #fff; padding: 25px; border-radius: 8px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
         .event-details { background: #fafafa; border: 1px solid #eee; border-top: none; padding: 25px; border-radius: 0 0 8px 8px; margin-top: -5px; }
         
@@ -44,7 +40,6 @@
         .admin-table { width: 100%; border-collapse: collapse; margin-top: 15px; }
         .admin-table th, .admin-table td { padding: 10px; border-bottom: 1px solid #eee; text-align: left; }
         
-        /* 拓元式等待動畫 */
         .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.9); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; }
         .spinner { border: 6px solid #f3f3f3; border-top: 6px solid #FFB300; border-radius: 50%; width: 60px; height: 60px; animation: spin 1s linear infinite; }
         @keyframes spin { 100% { transform: rotate(360deg); } }
@@ -52,7 +47,7 @@
 </head>
 <body>
 
-    <div id="loading-overlay" class="overlay hidden"><div class="spinner"></div><div style="margin-top:20px; font-weight:bold;">與 Google Sheet 資料庫通訊中...</div></div>
+    <div id="loading-overlay" class="overlay"><div class="spinner"></div><div id="loading-text" style="margin-top:20px; font-weight:bold;">系統初始化載入中...</div></div>
 
     <div class="navbar">
         <div class="nav-brand">REBORN <span>銳能娛樂</span></div>
@@ -103,7 +98,7 @@
 
     <div id="admin-auth-page" class="container page-section hidden" style="max-width:400px; text-align:center;">
         <h2>🔒 系統後台驗證</h2>
-        <div class="form-group"><input type="password" id="admin-pwd" placeholder="請輸入管理員金鑰"></div>
+        <div class="form-group"><input type="password" id="admin-pwd" placeholder="請輸入管理員密碼"></div>
         <button class="btn-main" onclick="verifyAdmin()">驗證控制台</button>
     </div>
 
@@ -144,40 +139,100 @@
     </div>
 
     <script>
-        // ======= 🛠️ 請在下方填入你的 Google API 金鑰與試算表 ID =======
+        // ======= 🛠️ 請在下方填入你的 Google 試算表 ID =======
         const CONFIG = {
-            API_KEY: "AIzaSyD54Io6lReYzhUfjeh4y60wQZh4Z-yh93c", 
-            SPREADSHEET_ID: "1vtKNEdzms4lRRaW_DQPkbrxQy_gagxxnw0PP40ftXtw"
+            SPREADSHEET_ID: "填入你的_Google_試算表_ID_字串", 
+            CLIENT_EMAIL: "", // 稍後將自動從 credentials.json 讀取
+            PRIVATE_KEY: ""   // 稍後將自動從 credentials.json 讀取
         };
 
+        let cachedToken = null;
+        let tokenExpiry = 0;
         let userTeam = localStorage.getItem('reborn_team') || "";
         let userLeader = localStorage.getItem('reborn_leader') || "";
         let lobbySettings = { name: "", fee: 200, totalSlots: 12, adminPwd: "" };
         let selectedSlots = [];
         let adminReservedSlots = [];
 
-        // 封裝 Sheets API 的基礎請求方法
+        function showLoading(msg = "與資料庫通訊中...") {
+            document.getElementById('loading-text').innerText = msg;
+            document.getElementById('loading-overlay').classList.remove('hidden');
+        }
+        function hideLoading() {
+            document.getElementById('loading-overlay').classList.add('hidden');
+        }
+
+        // ================= 讀取本地 JSON 憑證 =================
+        async function loadCredentials() {
+            try {
+                const response = await fetch('./credentials.json');
+                if (!response.ok) throw new Error("找不到 credentials.json 檔案。");
+                
+                const data = await response.json();
+                CONFIG.CLIENT_EMAIL = data.client_email;
+                CONFIG.PRIVATE_KEY = data.private_key;
+            } catch (err) {
+                hideLoading();
+                alert(`憑證讀取失敗！\n1. 請確認 credentials.json 與 HTML 在同一個資料夾。\n2. 請透過 VS Code 的 Live Server 運行此網頁 (不能直接雙擊 HTML 檔案開啟)。\n錯誤詳情：${err.message}`);
+                throw err;
+            }
+        }
+
+        // 核心：生成服務帳戶授權 Token
+        async function getAccessToken() {
+            if (cachedToken && Date.now() < tokenExpiry) return cachedToken;
+            try {
+                const header = { alg: 'RS256', typ: 'JWT' };
+                const now = Math.floor(Date.now() / 1000);
+                const claim = {
+                    iss: CONFIG.CLIENT_EMAIL,
+                    scope: 'https://www.googleapis.com/auth/spreadsheets',
+                    aud: 'https://oauth2.googleapis.com/token',
+                    exp: now + 3600,
+                    iat: now
+                };
+                const signature = KJUR.jws.JWS.sign('RS256', JSON.stringify(header), JSON.stringify(claim), CONFIG.PRIVATE_KEY);
+                
+                const res = await fetch('https://oauth2.googleapis.com/token', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: `grant_type=urn%3Aietf%3Aparams%3Aoauth%3Agrant-type%3Ajwt-bearer&assertion=${signature}`
+                });
+                
+                if(!res.ok) throw new Error("取得 Token 失敗，請檢查 Private Key 格式或 Client Email。");
+                const data = await res.json();
+                cachedToken = data.access_token;
+                tokenExpiry = Date.now() + (data.expires_in - 300) * 1000; 
+                return cachedToken;
+            } catch (err) {
+                throw new Error("授權憑證生成失敗：" + err.message);
+            }
+        }
+
+        // 封裝 Sheet 讀取請求
         async function fetchSheetData(range) {
-            const url = `https://sheets.googleapis.com/v4/spreadsheets/${CONFIG.SPREADSHEET_ID}/values/${encodeURIComponent(range)}?key=${CONFIG.API_KEY}`;
-            const res = await fetch(url);
-            if (!res.ok) throw new Error("讀取資料庫失敗，請檢查凭证與共用設定！");
+            const token = await getAccessToken();
+            const url = `https://sheets.googleapis.com/v4/spreadsheets/${CONFIG.SPREADSHEET_ID}/values/${encodeURIComponent(range)}`;
+            const res = await fetch(url, { headers: { 'Authorization': `Bearer ${token}` } });
+            if (!res.ok) throw new Error("資料庫讀取失敗，請確認已將服務帳戶信箱加入試算表的共用權限。");
             return await res.json();
         }
 
+        // 封裝 Sheet 寫入請求
         async function writeSheetData(range, values, method = "POST", append = true) {
-            // 純前端環境下，寫入需要將 API KEY 改為授權管道，或使用試算表公用代理。
-            // 這裡採用標準 Sheets API 結構，請確保留標題列並正確設置。
+            const token = await getAccessToken();
             let url = `https://sheets.googleapis.com/v4/spreadsheets/${CONFIG.SPREADSHEET_ID}/values/${encodeURIComponent(range)}`;
-            if(append) url += `:append?valueInputOption=USER_ENTERED`;
-            else url += `?valueInputOption=USER_ENTERED`;
-            url += `&key=${CONFIG.API_KEY}`;
+            url += append ? `:append?valueInputOption=USER_ENTERED` : `?valueInputOption=USER_ENTERED`;
             
             const res = await fetch(url, {
                 method: append ? "POST" : "PUT",
-                headers: { "Content-Type": "application/json" },
+                headers: { 
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json' 
+                },
                 body: JSON.stringify({ values: values })
             });
-            if (!res.ok) throw new Error("寫入資料庫失敗，請確認試算表已對外開放編輯！");
+            if (!res.ok) throw new Error("資料寫入失敗，請檢查試算表格式或寫入範圍。");
             return await res.json();
         }
 
@@ -206,9 +261,9 @@
         // ================= 1. 大廳渲染與防重複報名比對 =================
         async function loadLobby() {
             try {
-                document.getElementById('loading-overlay').classList.remove('hidden');
+                showLoading();
                 const settingsData = await fetchSheetData("賽事設定!A2:L2");
-                const regData = await fetchSheetData("報名名單!A2:H100");
+                const regData = await fetchSheetData("報名名單!A2:H200");
                 
                 const settings = settingsData.values ? settingsData.values[0] : [];
                 lobbySettings.name = settings[0] || "目前無開放賽事";
@@ -217,7 +272,7 @@
                 lobbySettings.adminPwd = settings[10] || "admin123";
 
                 document.getElementById('display-event-name').innerText = lobbySettings.name;
-                document.getElementById('display-event-sub').innerText = `主播: ${settings[2]||'未定'} | 報名費: ${lobbySettings.fee} NTD`;
+                document.getElementById('display-event-sub').innerText = `日期: ${settings[1]||''} | 主播: ${settings[2]||'未定'} | 報名費: ${lobbySettings.fee} NTD`;
 
                 let takenSlots = [];
                 if (regData.values) {
@@ -234,7 +289,7 @@
                 const container = document.getElementById('lobby-grid'); container.innerHTML = "";
                 if(takenSlots.length >= lobbySettings.totalSlots) {
                     document.getElementById('sold-out-msg').classList.remove('hidden'); document.getElementById('booking-area').classList.add('hidden');
-                    document.getElementById('loading-overlay').classList.add('hidden'); return;
+                    hideLoading(); return;
                 }
                 document.getElementById('sold-out-msg').classList.add('hidden'); document.getElementById('booking-area').classList.remove('hidden');
 
@@ -256,8 +311,8 @@
                     }
                     container.appendChild(btn);
                 }
-                document.getElementById('loading-overlay').classList.add('hidden');
-            } catch (err) { alert(err.message); document.getElementById('loading-overlay').classList.add('hidden'); }
+                hideLoading();
+            } catch (err) { alert("讀取大廳錯誤：" + err.message); hideLoading(); }
         }
 
         function updateLobbyPrice() {
@@ -269,71 +324,75 @@
         // 送出搶票
         async function submitQueue() {
             try {
-                document.getElementById('loading-overlay').classList.remove('hidden');
+                showLoading("系統比對名額中...");
                 const price = selectedSlots.length * lobbySettings.fee;
-                const freshLobby = await fetchSheetData("報名名單!A2:H100");
+                
+                const freshLobby = await fetchSheetData("報名名單!A2:H200");
                 let freshTaken = [];
                 if(freshLobby.values) {
-                    freshLobby.values.forEach(row => { if(row[5]!=='kicked' && row[3]) row[3].split(',').forEach(s => freshTaken.push(parseInt(s.trim()))); });
+                    freshLobby.values.forEach(row => { if(row[5]!=='kicked' && row[3]) row[3].toString().split(',').forEach(s => freshTaken.push(parseInt(s.trim()))); });
                 }
                 for(let slot of selectedSlots) {
                     if(freshTaken.includes(slot)) {
-                        document.getElementById('loading-overlay').classList.add('hidden');
-                        alert(`⚠️ 第 ${slot} 組已被搶先報名！請刷新大廳重選。`); loadLobby(); return;
+                        hideLoading();
+                        alert(`⚠️ 第 ${slot} 組已被其他戰隊搶先報名！請刷新大廳重選。`); loadLobby(); return;
                     }
                 }
-                const newRow = [new Date().toISOString(), userTeam, userLeader, selectedSlots.join(', '), price, 'unpaid', '', lobbySettings.name];
+                
+                const safeSlots = "'" + selectedSlots.join(', ');
+                const newRow = [new Date().toLocaleString('zh-TW', {hour12:false}), userTeam, userLeader, safeSlots, price.toString(), 'unpaid', '', lobbySettings.name];
                 await writeSheetData("報名名單!A:H", [newRow], "POST", true);
+                
                 alert("劃位成功！請至『我的賽事』進行對帳核對。"); switchPage('dashboard-page');
-            } catch (err) { alert(err.message); document.getElementById('loading-overlay').classList.add('hidden'); }
+            } catch (err) { alert(err.message); hideLoading(); }
         }
 
         // ================= 2. 玩家儀表板管理 =================
         async function loadDashboard() {
             try {
-                document.getElementById('loading-overlay').classList.remove('hidden');
-                const regData = await fetchSheetData("報名名單!A2:H100");
+                showLoading();
+                const regData = await fetchSheetData("報名名單!A2:H200");
                 const setData = await fetchSheetData("賽事設定!A2:J2");
-                document.getElementById('loading-overlay').classList.add('hidden');
+                hideLoading();
 
                 const container = document.getElementById('orders-container'); container.innerHTML = "";
                 const settings = setData.values ? setData.values[0] : [];
                 const bankAcc = settings[6] || "主辦方尚未填寫帳戶";
                 const bankNote = settings[7] || "";
 
-                if(!regData.values) { container.innerHTML = `<p style='text-align:center;color:#999;'>目前查無您的賽事紀錄。</p>`; return; }
+                if(!regData.values) { container.innerHTML = `<p style='text-align:center;color:#999;padding:30px;'>目前查無您的賽事紀錄。</p>`; return; }
 
                 let hasRecord = false;
                 regData.values.forEach((row, index) => {
                     if (row[1] && row[1].toString().trim() === userTeam.trim() && row[5] !== 'kicked') {
                         hasRecord = true;
                         const rowIndex = index + 2; 
-                        let html = `<div class="order-card"><h3>🚩 ${row[7] || '交流賽'}</h3><p><strong>組別：</strong> 第 ${row[3]} 組 &nbsp;|&nbsp; <strong>總金額：</strong> ${row[4]} NTD</p>`;
+                        let html = `<div class="order-card"><h3>🚩 ${row[7] || '交流賽'}</h3><p><strong>組別：</strong> 第 ${row[3].toString().replace(/'/g,"")} 組 &nbsp;|&nbsp; <strong>總金額：</strong> <span style="color:#d32f2f; font-weight:bold; font-size:18px;">${row[4]}</span> NTD</p>`;
                         if(row[5] === 'unpaid') {
-                            html += `<div style="background:#fafafa; padding:15px; border-radius:6px; border:1px solid #ddd;"><p>匯款帳號：<strong>${bankAcc}</strong> (${bankNote})</p><input type="text" id="bank-${rowIndex}" placeholder="請填寫您的匯款後五碼" style="padding:8px; width:50%; margin-right:10px;"><button class="btn-main" onclick="sendPayment(${rowIndex})">回報資訊</button></div>`;
+                            html += `<div style="background:#fafafa; padding:15px; border-radius:6px; border:1px solid #ddd;"><p>匯款帳號：<strong>${bankAcc}</strong> (${bankNote})</p><input type="text" id="bank-${rowIndex}" placeholder="請填寫您的匯款後五碼" style="padding:10px; width:60%; margin-right:10px; border:1px solid #ccc; border-radius:4px;"><button class="btn-main" onclick="sendPayment(${rowIndex})">回報對帳</button></div>`;
                         } else if(row[5] === 'reviewing') {
                             html += `<p style="color:#2196f3; font-weight:bold;">⏳ 款項對帳審核中 (您送出的五碼：${row[6]})</p>`;
                         } else if(row[5] === 'paid') {
                             html += `<p style="color:#4caf50; font-weight:bold;">✅ 款項已核對完成 (取得參賽權)</p>`;
                             if(settings[8] && settings[9]) {
                                 html += `<div style="background:#1a1a1a; color:#fff; padding:15px; border-radius:6px; margin-top:10px;"><h4>🔑 今日比賽房密：</h4>房間：${settings[8]} <br>密碼：${settings[9]}</div>`;
-                            } else html += `<p style="color:#888;">房密主辦方正於後台設定中，請於當日在此等待重新刷新。</p>`;
+                            } else html += `<p style="color:#888;">主辦方尚未發佈房密，請於當日在此等待重新刷新。</p>`;
                         }
                         html += `</div>`; container.innerHTML += html;
                     }
                 });
-                if(!hasRecord) container.innerHTML = `<p style='text-align:center;color:#999;'>目前查無您的賽事紀錄。</p>`;
-            } catch(err) { alert(err.message); }
+                if(!hasRecord) container.innerHTML = `<p style='text-align:center;color:#999;padding:30px;'>目前查無您的賽事紀錄。</p>`;
+            } catch(err) { alert(err.message); hideLoading(); }
         }
 
         async function sendPayment(rowIndex) {
             const code = document.getElementById(`bank-${rowIndex}`).value.trim();
             if(!code) return alert("請填寫您的後五碼以利對帳！");
             try {
-                document.getElementById('loading-overlay').classList.remove('hidden');
+                showLoading("送出匯款資訊中...");
                 await writeSheetData(`報名名單!F${rowIndex}:G${rowIndex}`, [["reviewing", code]], "PUT", false);
                 alert("回報成功！"); loadDashboard();
-            } catch(err) { alert(err.message); }
+            } catch(err) { alert(err.message); hideLoading(); }
         }
 
         // ================= 3. 管理員控制後台 =================
@@ -360,7 +419,7 @@
 
         async function loadAdminData() {
             try {
-                const regData = await fetchSheetData("報名名單!A2:H100");
+                const regData = await fetchSheetData("報名名單!A2:H200");
                 const tbody = document.getElementById('admin-pending-list'); tbody.innerHTML = "";
                 if(!regData.values) { tbody.innerHTML = `<tr><td colspan="5" style="color:#999;">無待審核清單</td></tr>`; return; }
                 
@@ -377,10 +436,10 @@
 
         async function approvePayment(rowIdx) {
             try {
-                document.getElementById('loading-overlay').classList.remove('hidden');
+                showLoading("款項放行中...");
                 await writeSheetData(`報名名單!F${rowIdx}`, [["paid"]], "PUT", false);
-                alert("審核通過！"); loadAdminData();
-            } catch(err) { alert(err.message); document.getElementById('loading-overlay').classList.add('hidden'); }
+                alert("審核通過！"); loadAdminData(); hideLoading();
+            } catch(err) { alert(err.message); hideLoading(); }
         }
 
         async function publishNewEvent() {
@@ -397,22 +456,19 @@
             if(!confirm("⚠️ 發佈全新賽事將會覆蓋原本設定並初始化報名名單，確定要送出嗎？")) return;
 
             try {
-                document.getElementById('loading-overlay').classList.remove('hidden');
-                // 1. 更新賽事設定 (保留 K 欄密碼不覆蓋)
+                showLoading("上傳新賽事資料中...");
                 const newSettings = [name, date, caster, "200", fee, dline, bank, note, "", "", lobbySettings.adminPwd, mode];
                 await writeSheetData("賽事設定!A2:L2", [newSettings], "PUT", false);
                 
-                // 2. 清空舊的名單歷史 (先覆蓋一個大空值陣列清除前 40 筆)
                 let emptyMatrix = Array(40).fill(["", "", "", "", "", "", "", ""]);
                 await writeSheetData("報名名單!A2:H41", emptyMatrix, "PUT", false);
 
-                // 3. 寫入本次主辦方卡位預留
                 if(adminReservedSlots.length > 0) {
-                    let reserveRows = adminReservedSlots.map(slot => [new Date().toISOString(), "主辦方保留", "管理員", slot.toString(), "0", "reserved", "N/A", name]);
+                    let reserveRows = adminReservedSlots.map(slot => [new Date().toLocaleString('zh-TW', {hour12:false}), "主辦方保留", "管理員", `'${slot}`, "0", "reserved", "N/A", name]);
                     await writeSheetData("報名名單!A2", reserveRows, "POST", true);
                 }
                 alert("🚀 賽事設定與主辦方卡位已成功同步至雲端大廳！"); loadLobby(); switchPage('lobby-page');
-            } catch(err) { alert(err.message); document.getElementById('loading-overlay').classList.add('hidden'); }
+            } catch(err) { alert(err.message); hideLoading(); }
         }
 
         async function publishRoom() {
@@ -420,13 +476,31 @@
             const rp = document.getElementById('admin-r-pass').value;
             if(!rn || !rp) return alert("房間名稱與密碼皆須完整填寫！");
             try {
-                document.getElementById('loading-overlay').classList.remove('hidden');
+                showLoading("廣播房密中...");
                 await writeSheetData("賽事設定!I2:J2", [[rn, rp]], "PUT", false);
-                alert("🔑 賽事房密已成功廣播！"); document.getElementById('loading-overlay').classList.add('hidden');
-            } catch(err) { alert(err.message); document.getElementById('loading-overlay').classList.add('hidden'); }
+                alert("🔑 賽事房密已成功廣播！"); hideLoading();
+            } catch(err) { alert(err.message); hideLoading(); }
         }
 
-        updateNavProfile(); switchPage(userTeam ? 'lobby-page' : 'login-page');
+        // ================= 系統初始化入口 =================
+        async function initSystem() {
+            try {
+                await loadCredentials();
+                // 取得初步設定以抓取 adminPwd
+                const data = await fetchSheetData("賽事設定!A2:L2");
+                if(data.values) lobbySettings.adminPwd = data.values[0][10] || "admin123";
+                
+                updateNavProfile();
+                hideLoading();
+                switchPage(userTeam ? 'lobby-page' : 'login-page');
+            } catch (err) {
+                // 如果出錯，載入畫面將卡住並顯示錯誤，以策安全
+                console.error(err);
+            }
+        }
+
+        // 啟動系統
+        initSystem();
     </script>
 </body>
 </html>
