@@ -35,19 +35,43 @@
         <div class="text-2xl font-black tracking-wider flex items-center gap-2">
             <span class="text-[#FFD700]">⚡ REBORN</span> 銳能娛樂
         </div>
-        <div id="loginSection" class="flex items-center gap-4">
-            <button onclick="openRegisterModal()" class="text-sm font-bold text-gray-400 hover:text-white transition hidden sm:block">戰隊註冊</button>
-            <button onclick="simulateLogin()" class="text-sm font-bold bg-white text-black px-4 py-1.5 rounded hover:bg-[#FFD700] transition">戰隊登入</button>
-            <div id="loggedInUser" class="hidden flex items-center gap-4">
-                <div class="text-right hidden sm:block">
+        
+        <button onclick="toggleMobileMenu()" class="sm:hidden text-gray-300 hover:text-[#FFD700] focus:outline-none transition">
+            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        </button>
+
+        <div class="hidden sm:block">
+            <div id="desktopLoginSection" class="flex items-center gap-4">
+                <button onclick="openRegisterModal()" class="text-sm font-bold text-gray-400 hover:text-white transition">戰隊註冊</button>
+                <button onclick="simulateLogin()" class="text-sm font-bold bg-white text-black px-4 py-1.5 rounded hover:bg-[#FFD700] transition">戰隊登入</button>
+            </div>
+            <div id="desktopLoggedInUser" class="hidden items-center gap-4">
+                <div class="text-right">
                     <span class="block text-xs text-gray-400 mb-0.5">已登入隊長</span>
-                    <span id="displayTeamName" class="font-esport text-[#FFD700] tracking-wider font-bold text-lg"></span>
+                    <span id="desktopDisplayTeamName" class="font-esport text-[#FFD700] tracking-wider font-bold text-lg"></span>
                 </div>
                 <div class="w-10 h-10 bg-gray-800 rounded-full border-2 border-[#FFD700] flex items-center justify-center font-bold text-[#FFD700]">C</div>
                 <button onclick="logout()" class="text-xs text-gray-500 hover:text-white transition ml-2">登出</button>
             </div>
         </div>
     </nav>
+
+    <div id="mobileMenuPanel" class="fixed top-[68px] left-0 w-full glass-dark border-t border-gray-800 flex flex-col px-6 py-6 gap-6 shadow-2xl z-40 transform -translate-y-full transition-transform duration-300 sm:hidden">
+        <div id="mobileLoginSection" class="flex flex-col gap-4">
+            <button onclick="openRegisterModal(); toggleMobileMenu()" class="text-left text-lg font-bold text-gray-300 hover:text-white border-b border-gray-800 pb-3">戰隊註冊</button>
+            <button onclick="simulateLogin(); toggleMobileMenu()" class="text-left text-lg font-bold text-[#FFD700] pb-2">戰隊登入</button>
+        </div>
+        <div id="mobileLoggedInUser" class="hidden flex-col gap-4">
+            <div class="flex items-center gap-4 border-b border-gray-700 pb-4">
+                <div class="w-12 h-12 bg-gray-800 rounded-full border-2 border-[#FFD700] flex items-center justify-center font-bold text-[#FFD700] text-xl">C</div>
+                <div>
+                    <span class="block text-sm text-gray-400 mb-1">已登入隊長</span>
+                    <span id="mobileDisplayTeamName" class="font-esport text-[#FFD700] tracking-wider font-bold text-xl"></span>
+                </div>
+            </div>
+            <button onclick="logout(); toggleMobileMenu()" class="text-left text-lg font-bold text-gray-400 hover:text-red-400 pb-2">登出</button>
+        </div>
+    </div>
 
     <main class="max-w-7xl mx-auto px-4 py-8">
         <div class="flex justify-between items-end mb-8 border-b border-gray-300 pb-4">
@@ -138,6 +162,39 @@
         function showLoader() { document.getElementById('globalLoader').classList.remove('hidden'); document.getElementById('globalLoader').classList.add('flex'); }
         function hideLoader() { document.getElementById('globalLoader').classList.add('hidden'); document.getElementById('globalLoader').classList.remove('flex'); }
 
+        // 🌟 新增：手機版漢堡選單滑動邏輯 🌟
+        function toggleMobileMenu() {
+            const panel = document.getElementById('mobileMenuPanel');
+            if (panel.classList.contains('-translate-y-full')) {
+                panel.classList.remove('-translate-y-full');
+                panel.classList.add('translate-y-0');
+            } else {
+                panel.classList.remove('translate-y-0');
+                panel.classList.add('-translate-y-full');
+            }
+        }
+
+        // 🌟 新增：統一同步所有裝置的登入/登出 UI 狀態 🌟
+        function updateAuthUI() {
+            if (currentUser) {
+                // 桌機版
+                document.getElementById('desktopLoginSection').classList.replace('flex', 'hidden');
+                document.getElementById('desktopLoggedInUser').classList.replace('hidden', 'flex');
+                document.getElementById('desktopDisplayTeamName').innerText = currentUser.teamName;
+                // 手機版
+                document.getElementById('mobileLoginSection').classList.replace('flex', 'hidden');
+                document.getElementById('mobileLoggedInUser').classList.replace('hidden', 'flex');
+                document.getElementById('mobileDisplayTeamName').innerText = currentUser.teamName;
+            } else {
+                // 桌機版
+                document.getElementById('desktopLoginSection').classList.replace('hidden', 'flex');
+                document.getElementById('desktopLoggedInUser').classList.replace('flex', 'hidden');
+                // 手機版
+                document.getElementById('mobileLoginSection').classList.replace('hidden', 'flex');
+                document.getElementById('mobileLoggedInUser').classList.replace('flex', 'hidden');
+            }
+        }
+
         window.onload = () => {
             fetchEventList();
             setInterval(() => fetchEventList(true), 15000); 
@@ -191,8 +248,6 @@
             
             document.getElementById('bookEventTitle').innerText = currentEvent.EventName;
             document.getElementById('eventFeeDisplay').innerText = currentEvent.Fee;
-            
-            // 💡 載入匯款資訊顯示
             document.getElementById('paymentInstructionsDisplay').innerText = currentEvent.PaymentInstructions || '主辦方尚未設定匯款資訊，請稍後詢問。';
 
             updateSeatCart();
@@ -372,7 +427,6 @@
                         let paymentHtml = `<div class="text-xs mt-3 flex flex-col gap-1"><span class="text-gray-500">繳費狀態:</span> <span class="text-white font-esport tracking-widest bg-black p-1 rounded border border-gray-700">${reg.paymentInfo || '未填寫'}</span></div>`;
                         
                         if (reg.status === '待審核' && (!reg.paymentInfo || reg.paymentInfo === '未填寫')) {
-                            // 💡 查詢面板也同步帶出該賽事專屬的匯款資訊
                             let instHtml = reg.paymentInstructions ? `<div class="mt-2 mb-2 p-2 bg-gray-800 border-l-2 border-[#FFD700] text-gray-300 text-xs whitespace-pre-line">${reg.paymentInstructions}</div>` : '';
                             
                             let allowedMethods = (reg.paymentMethods || '轉帳').split(',').map(s=>s.trim());
@@ -418,8 +472,27 @@
 
         function openRegisterModal() { document.getElementById('registerModal').classList.remove('hidden'); }
         async function submitRegister(e) { e.preventDefault(); showLoader(); const payload = { action: 'register', uid: document.getElementById('regUid').value, password: document.getElementById('regPassword').value, teamName: document.getElementById('regTeamName').value, captain: document.getElementById('regCaptain').value, contact: document.getElementById('regContact').value }; try { const response = await fetch(GAS_URL, { method: 'POST', body: JSON.stringify(payload) }); const result = await response.json(); alert(result.message); if (result.success) document.getElementById('registerModal').classList.add('hidden'); } catch (error) { alert('連線伺服器失敗'); } finally { hideLoader(); } }
-        async function simulateLogin() { const uid = prompt("隊長 UID:"); const password = prompt("密碼:"); if (!uid || !password) return; showLoader(); try { const response = await fetch(GAS_URL, { method: 'POST', body: JSON.stringify({ action: 'login', uid, password }) }); const result = await response.json(); if (result.success) { currentUser = result.user; document.querySelectorAll('#loginSection > button')[0].classList.add('hidden'); document.querySelectorAll('#loginSection > button')[1].classList.add('hidden'); document.getElementById('loggedInUser').classList.remove('hidden'); document.getElementById('displayTeamName').innerText = currentUser.teamName; alert(`歡迎回來，${currentUser.teamName}`); } else alert(result.message); } catch (error) { alert("連線異常"); } finally { hideLoader(); } }
-        function logout() { currentUser = null; document.querySelectorAll('#loginSection > button')[0].classList.remove('hidden'); document.querySelectorAll('#loginSection > button')[1].classList.remove('hidden'); document.getElementById('loggedInUser').classList.add('hidden'); document.getElementById('queryResultContainer').innerHTML = '<div class="text-gray-500 text-center py-10 text-sm">請點擊下方按鈕載入紀錄</div>'; }
+        
+        async function simulateLogin() { 
+            const uid = prompt("隊長 UID:"); const password = prompt("密碼:"); 
+            if (!uid || !password) return; 
+            showLoader(); 
+            try { 
+                const response = await fetch(GAS_URL, { method: 'POST', body: JSON.stringify({ action: 'login', uid, password }) }); 
+                const result = await response.json(); 
+                if (result.success) { 
+                    currentUser = result.user; 
+                    updateAuthUI(); // 同步更新桌機與手機介面
+                    alert(`歡迎回來，${currentUser.teamName}`); 
+                } else alert(result.message); 
+            } catch (error) { alert("連線異常"); } finally { hideLoader(); } 
+        }
+
+        function logout() { 
+            currentUser = null; 
+            updateAuthUI(); // 同步更新桌機與手機介面
+            document.getElementById('queryResultContainer').innerHTML = '<div class="text-gray-500 text-center py-10 text-sm">請點擊下方按鈕載入紀錄</div>'; 
+        }
     </script>
 </body>
 </html>
