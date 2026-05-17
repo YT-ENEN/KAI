@@ -3,504 +3,421 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>REBORN 銳能娛樂 | 賽事營運系統</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsrsasign/10.5.25/jsrsasign-all-min.js"></script>
+    <title>銳能娛樂報名系統 | REBORN</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Helvetica Neue', Arial, sans-serif; background-color: #f4f6f8; color: #333; margin: 0; line-height: 1.6; }
-        .hidden { display: none !important; }
-        .container { max-width: 900px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.08); border-top: 5px solid #FFB300; }
-        h2 { color: #1a1a1a; margin-top: 0; border-left: 5px solid #FFB300; padding-left: 10px; }
-        h3 { border-bottom: 2px solid #eee; padding-bottom: 10px; color: #1a1a1a; }
-        
-        .navbar { background: #fff; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; }
-        .nav-brand { font-weight: 900; font-size: 22px; color: #1a1a1a; }
-        .nav-brand span { color: #FFB300; }
-        .nav-links button { background: none; border: none; color: #666; margin-left: 20px; cursor: pointer; font-size: 16px; font-weight: bold; transition: 0.2s; }
-        .nav-links button.active { color: #FFB300; border-bottom: 2px solid #FFB300; padding-bottom: 5px; }
-
-        .event-banner { background: #1a1a1a; color: #fff; padding: 25px; border-radius: 8px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
-        .event-details { background: #fafafa; border: 1px solid #eee; border-top: none; padding: 25px; border-radius: 0 0 8px 8px; margin-top: -5px; }
-        
-        .slot-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 15px 0; }
-        .slot-btn { padding: 15px; border: 2px solid #eee; background: #fff; font-size: 16px; font-weight: bold; border-radius: 6px; cursor: pointer; transition: 0.2s; }
-        .slot-btn.selected { background: #FFB300; border-color: #FFB300; color: #1a1a1a; box-shadow: inset 0 0 0 2px #fff; }
-        .slot-btn.sold { background: #e0e0e0; border-color: #ccc; color: #888; cursor: not-allowed; text-decoration: line-through; }
-        .slot-btn.admin-reserved { background: #1a1a1a; border-color: #1a1a1a; color: #FFB300; }
-
-        .grid-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .form-group { margin-bottom: 15px; }
-        .form-group label { display: block; margin-bottom: 5px; font-weight: bold; color: #555; font-size: 14px; }
-        .form-group input, .form-group select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; }
-        
-        .btn-main { padding: 12px 25px; border: none; font-size: 16px; font-weight: bold; border-radius: 6px; cursor: pointer; background: #FFB300; color: #1a1a1a; transition: 0.3s; }
-        .btn-main:hover { background: #e5a000; }
-        .btn-main:disabled { background: #ccc; cursor: not-allowed; }
-        
-        .order-card { background: #fff; border: 2px solid #FFB300; padding: 20px; border-radius: 8px; margin-bottom: 15px; }
-        .admin-table { width: 100%; border-collapse: collapse; margin-top: 15px; }
-        .admin-table th, .admin-table td { padding: 10px; border-bottom: 1px solid #eee; text-align: left; }
-        
-        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.9); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; }
-        .spinner { border: 6px solid #f3f3f3; border-top: 6px solid #FFB300; border-radius: 50%; width: 60px; height: 60px; animation: spin 1s linear infinite; }
-        @keyframes spin { 100% { transform: rotate(360deg); } }
+        body { font-family: 'Noto Sans TC', sans-serif; background-color: #F8F9FA; }
+        .font-esport { font-family: 'Oswald', sans-serif; }
+        .glass-dark { background: rgba(10, 10, 10, 0.85); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .glass-panel { background: rgba(20, 20, 20, 0.95); backdrop-filter: blur(20px); border-left: 1px solid rgba(255, 215, 0, 0.3); }
+        .neon-shadow { box-shadow: 0 0 15px rgba(255, 215, 0, 0.4); }
+        .hover-neon:hover { box-shadow: 0 0 25px rgba(255, 215, 0, 0.8); text-shadow: 0 0 8px rgba(255, 215, 0, 0.5); }
+        .tech-clip { clip-path: polygon(0 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%); }
+        .loader-spin { border-top-color: #FFD700; animation: spinner 1s linear infinite; }
+        @keyframes spinner { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: rgba(0,0,0,0.2); }
+        ::-webkit-scrollbar-thumb { background: #FFD700; border-radius: 3px; }
+        select option { background-color: #1a1a1a; color: #fff; }
     </style>
 </head>
-<body>
+<body class="relative min-h-screen text-gray-900 overflow-x-hidden pt-[80px]">
 
-    <div id="loading-overlay" class="overlay"><div class="spinner"></div><div id="loading-text" style="margin-top:20px; font-weight:bold;">系統初始化載入中...</div></div>
+    <div id="globalLoader" class="fixed inset-0 bg-black/80 z-[100] hidden flex-col items-center justify-center backdrop-blur-sm">
+        <div class="w-16 h-16 border-4 border-gray-600 rounded-full loader-spin mb-4"></div>
+        <div class="text-[#FFD700] font-esport font-bold tracking-widest animate-pulse">SYSTEM PROCESSING...</div>
+    </div>
 
-    <div class="navbar">
-        <div class="nav-brand">REBORN <span>銳能娛樂</span></div>
-        <div class="nav-links">
-            <button id="nav-lobby" onclick="switchPage('lobby-page')">賽事大廳</button>
-            <button id="nav-dashboard" onclick="switchPage('dashboard-page')">我的賽事</button>
-            <button id="nav-admin-entry" onclick="switchPage('admin-auth-page')" style="color:#ddd; font-size:12px;">管理員</button>
-            <button id="nav-login" onclick="logout()" style="color:#FFB300; border:1px solid #FFB300; padding:5px 15px; border-radius:20px;">切換帳號</button>
+    <nav class="w-full fixed top-0 z-50 glass-dark text-white px-6 py-4 flex justify-between items-center shadow-lg">
+        <div class="text-2xl font-black tracking-wider flex items-center gap-2">
+            <span class="text-[#FFD700]">⚡ REBORN</span> 銳能娛樂
         </div>
-    </div>
-
-    <div id="login-page" class="container page-section">
-        <h2>戰隊資料綁定</h2>
-        <div class="form-group"><label>戰隊名稱</label><input type="text" id="reg-team" placeholder="例：CZL FORCE"></div>
-        <div class="form-group"><label>負責人遊戲ID</label><input type="text" id="reg-leader"></div>
-        <button class="btn-main" style="width:100%;" onclick="processLogin()">確認綁定進入大廳</button>
-    </div>
-
-    <div id="lobby-page" class="container page-section hidden">
-        <h2>🏆 銳能賽事大廳</h2>
-        <div class="event-banner" onclick="toggleDetails()">
-            <div>
-                <h3 style="margin:0; color:#FFB300; border:none;" id="display-event-name">讀取賽事中...</h3>
-                <p style="margin:5px 0 0 0;" id="display-event-sub">點擊展開選位</p>
+        <div id="loginSection" class="flex items-center gap-4">
+            <button onclick="openRegisterModal()" class="text-sm font-bold text-gray-400 hover:text-white transition hidden sm:block">戰隊註冊</button>
+            <button onclick="simulateLogin()" class="text-sm font-bold bg-white text-black px-4 py-1.5 rounded hover:bg-[#FFD700] transition">戰隊登入</button>
+            <div id="loggedInUser" class="hidden flex items-center gap-4">
+                <div class="text-right hidden sm:block">
+                    <span class="block text-xs text-gray-400 mb-0.5">已登入隊長</span>
+                    <span id="displayTeamName" class="font-esport text-[#FFD700] tracking-wider font-bold text-lg"></span>
+                </div>
+                <div class="w-10 h-10 bg-gray-800 rounded-full border-2 border-[#FFD700] flex items-center justify-center font-bold text-[#FFD700]">C</div>
+                <button onclick="logout()" class="text-xs text-gray-500 hover:text-white transition ml-2">登出</button>
             </div>
-            <div>▼</div>
         </div>
-        <div id="event-details" class="event-details hidden">
-            <div id="sold-out-msg" class="hidden" style="background:#ffebee; color:#d32f2f; padding:20px; text-align:center; border-radius:6px; font-size:20px; font-weight:bold;">❌ 本場次已售完</div>
-            <div id="booking-area">
-                <p style="color:#d32f2f; font-weight:bold;">單次最高限選 3 組。黑色/灰色為已被預留或售出之組別。</p>
-                <div class="slot-grid" id="lobby-grid"></div>
-                <div style="display:flex; justify-content:space-between; margin-top:20px; align-items:center;">
-                    <div>
-                        <strong>已選組別：</strong> <span id="lobby-selected-text" style="color:#FFB300;">尚未選擇</span><br>
-                        <strong>結帳總計：</strong> <span id="lobby-total-price" style="color:#d32f2f; font-size:20px; font-weight:bold;">0</span> NTD
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-4 py-8">
+        <div class="flex justify-between items-end mb-8 border-b border-gray-300 pb-4">
+            <h1 class="text-4xl font-black">賽事列表 <span class="text-gray-400 text-2xl font-esport">EVENTS</span></h1>
+            <div class="flex items-center gap-4">
+                <span id="refreshIndicator" class="text-xs text-gray-400 font-bold hidden items-center gap-1"><span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span> 狀態即時同步中</span>
+                <button onclick="toggleQueryPanel()" class="text-sm font-bold text-white bg-black px-4 py-2 hover:text-[#FFD700] transition tech-clip border border-[#FFD700]/30">賽事狀態查詢 🔍</button>
+            </div>
+        </div>
+        <div id="eventGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="text-gray-400 font-bold col-span-3 text-center py-12 animate-pulse">正在載入賽事資訊...</div>
+        </div>
+    </main>
+
+    <div id="queryPanel" class="fixed right-0 top-0 h-full w-[400px] max-w-full glass-panel z-50 text-white shadow-2xl transform translate-x-full transition-transform duration-300 flex flex-col">
+        <div class="p-6 border-b border-gray-800 flex justify-between items-center bg-black/50">
+            <h3 class="text-xl font-bold flex items-center gap-2">
+                <svg class="w-5 h-5 text-[#FFD700]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                我的報名與匯款
+            </h3>
+            <button onclick="toggleQueryPanel()" class="text-gray-400 hover:text-white text-2xl">✕</button>
+        </div>
+        <div class="p-6 flex-1 overflow-y-auto">
+            <div id="queryResultContainer"><div class="text-gray-500 text-center py-10 text-sm">請點擊下方按鈕載入紀錄</div></div>
+            <button onclick="fetchQueryData()" class="w-full bg-white text-black font-bold py-3 mt-4 hover:bg-gray-200 transition tech-clip shadow-lg">載入 / 更新狀態</button>
+        </div>
+    </div>
+
+    <div id="bookingModal" class="fixed inset-0 bg-black/90 z-[60] hidden flex flex-col items-center justify-center backdrop-blur-sm p-4">
+        <div class="bg-gray-900 border border-gray-700 p-6 w-full max-w-2xl tech-clip relative max-h-full flex flex-col">
+            <button onclick="closeBookingModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl z-10">✕</button>
+            <h2 class="text-white text-2xl font-bold mb-1 flex items-center gap-2 pr-8" id="bookEventTitle">選取報名組數與位置</h2>
+            <p class="text-gray-400 text-xs mb-4 pb-4 border-b border-gray-700 flex-shrink-0">點擊下方空位進行選擇，單一賽事最高限購 3 組。</p>
+            
+            <div class="overflow-y-auto flex-1 pr-2">
+                
+                <div class="bg-gray-800 p-3 rounded border-l-4 border-[#FFD700] mb-5">
+                    <h4 class="text-[#FFD700] font-bold text-xs mb-1 flex items-center gap-1"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> 主辦方指定匯款資訊</h4>
+                    <p class="text-gray-300 text-sm whitespace-pre-line tracking-wide" id="paymentInstructionsDisplay">載入中...</p>
+                </div>
+
+                <div class="mb-6">
+                    <div class="flex justify-between text-xs text-gray-400 mb-2">
+                        <span>主辦方舞台區</span>
+                        <div class="flex gap-3">
+                            <span class="flex items-center gap-1"><div class="w-3 h-3 bg-gray-700"></div> 鎖定</span>
+                            <span class="flex items-center gap-1"><div class="w-3 h-3 bg-[#FFD700]"></div> 已選</span>
+                            <span class="flex items-center gap-1"><div class="w-3 h-3 border border-gray-500"></div> 空位</span>
+                        </div>
                     </div>
-                    <button id="btn-register" class="btn-main" disabled onclick="submitQueue()">立即送出搶位</button>
+                    <div id="seatGrid" class="grid grid-cols-4 md:grid-cols-6 gap-3 bg-black/50 p-4 rounded border border-gray-800"></div>
                 </div>
-            </div>
-        </div>
-    </div>
 
-    <div id="dashboard-page" class="container page-section hidden">
-        <h2>📅 參賽與繳費管理</h2>
-        <div id="orders-container"></div>
-    </div>
-
-    <div id="admin-auth-page" class="container page-section hidden" style="max-width:400px; text-align:center;">
-        <h2>🔒 系統後台驗證</h2>
-        <div class="form-group"><input type="password" id="admin-pwd" placeholder="請輸入管理員密碼"></div>
-        <button class="btn-main" onclick="verifyAdmin()">驗證控制台</button>
-    </div>
-
-    <div id="admin-page" class="container page-section hidden">
-        <h2>⚙️ REBORN 營運控制台</h2>
-        <div style="background:#fafafa; border:2px solid #FFB300; padding:25px; border-radius:8px; margin-bottom:30px;">
-            <h3>📝 1. 新增動態賽事與設定</h3>
-            <div class="grid-2col">
-                <div class="form-group"><label>賽事名稱</label><input type="text" id="set-name"></div>
-                <div class="form-group"><label>開賽時間</label><input type="datetime-local" id="set-date"></div>
-                <div class="form-group"><label>賽制模式選擇</label>
-                    <select id="set-mode" onchange="renderAdminGrid()"><option value="12">經典模式 - 12組</option><option value="15">經典模式 - 15組</option><option value="2">團隊突襲 - 2組</option></select>
+                <div class="bg-black/80 p-4 rounded border border-gray-700 mb-6 flex justify-between items-end">
+                    <div>
+                        <span class="block text-gray-400 text-sm mb-1">已選位置： <span id="selectedSeatsList" class="text-white font-bold">無</span></span>
+                        <span class="block text-gray-400 text-sm">賽事單價： NT$ <span id="eventFeeDisplay">0</span></span>
+                    </div>
+                    <div class="text-right">
+                        <span class="block text-gray-500 text-sm mb-1">總計金額 TOTAL</span>
+                        <span class="font-esport text-3xl font-bold text-[#FFD700]">NT$ <span id="totalPriceDisplay">0</span></span>
+                    </div>
                 </div>
-                <div class="form-group"><label>選擇主播</label><select id="set-caster"><option>恩恩主播</option><option>江林主播</option><option>藍月亮主播</option></select></div>
-                <div class="form-group"><label>每組報名費</label><input type="number" id="set-entry-fee" value="200"></div>
-                <div class="form-group"><label>防呆期限 (天)</label><input type="number" id="set-deadline" value="3"></div>
-                <div class="form-group"><label>匯款帳號</label><input type="text" id="set-bank" placeholder="銀行代碼 - 帳號"></div>
-                <div class="form-group"><label>匯款備註</label><input type="text" id="set-bank-note" placeholder="網銀或無卡"></div>
+
+                <form onsubmit="submitForm(event)">
+                    <div class="mb-6">
+                        <label class="block text-gray-400 text-sm mb-2 font-bold text-[#FFD700]">🏆 設定參賽隊名與繳費方式</label>
+                        <div id="dynamicTeamInputs" class="bg-black/40 p-4 rounded border border-gray-800 space-y-4">
+                            <div class="text-gray-500 text-sm text-center py-2">請先在上方選擇位置</div>
+                        </div>
+                    </div>
+                    <button type="submit" id="finalSubmitBtn" disabled class="w-full bg-gray-600 text-gray-400 font-black py-4 tech-clip transition text-lg cursor-not-allowed flex-shrink-0">請先選擇至少一個位置</button>
+                </form>
             </div>
-            <h4>📌 選擇主辦方保留卡位（點擊切換黑色標記）</h4>
-            <div class="slot-grid" id="admin-grid"></div>
-            <button class="btn-main" style="width:100%; background:#1a1a1a; color:#FFB300;" onclick="publishNewEvent()">🚀 儲存設定並上傳到大廳</button>
-        </div>
-        <div style="background:#fff; border:1px solid #ddd; padding:20px; border-radius:8px; margin-bottom:20px;">
-            <h3>💰 2. 匯款款項放行審核</h3>
-            <table class="admin-table">
-                <thead><tr><th>戰隊</th><th>組別</th><th>應繳總額</th><th>後五碼</th><th>操作</th></tr></thead>
-                <tbody id="admin-pending-list"></tbody>
-            </table>
-        </div>
-        <div style="background:#1a1a1a; padding:20px; border-radius:8px; color:#fff;">
-            <h3 style="color:#00ffcc; margin-top:0;">🔑 3. 即時派發賽事房密</h3>
-            <div style="display:flex; gap:15px; margin-bottom:15px;">
-                <input type="text" id="admin-r-name" placeholder="房間名稱" style="padding:10px; flex:1; border-radius:4px;"><input type="text" id="admin-r-pass" placeholder="房間密碼" style="padding:10px; flex:1; border-radius:4px;">
-            </div>
-            <button class="btn-main" onclick="publishRoom()">廣播送出房密</button>
         </div>
     </div>
+    
+    <div id="registerModal" class="fixed inset-0 bg-black/90 z-[70] hidden flex flex-col items-center justify-center backdrop-blur-sm"><div class="bg-gray-900 border border-gray-700 p-8 w-[90%] max-w-md tech-clip relative"><button onclick="document.getElementById('registerModal').classList.add('hidden')" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl">✕</button><h2 class="text-white text-xl font-bold mb-6 border-b border-gray-700 pb-2 flex items-center gap-2"><span class="text-[#FFD700]">⚡</span> 建立新戰隊</h2><form onsubmit="submitRegister(event)"><div class="mb-4"><input type="text" id="regUid" placeholder="隊長UID" required class="w-full bg-black border border-gray-600 text-white px-4 py-2 focus:border-[#FFD700] focus:outline-none mb-2"><input type="password" id="regPassword" placeholder="密碼" required class="w-full bg-black border border-gray-600 text-white px-4 py-2 focus:border-[#FFD700] focus:outline-none mb-2"><input type="text" id="regTeamName" required placeholder="戰隊名稱" class="w-full bg-black border border-gray-600 text-[#FFD700] px-4 py-2 focus:border-[#FFD700] focus:outline-none mb-2 font-bold"><input type="text" id="regCaptain" placeholder="隊長名稱" required class="w-full bg-black border border-gray-600 text-white px-4 py-2 focus:border-[#FFD700] focus:outline-none mb-2"><input type="text" id="regContact" placeholder="聯絡方式" required class="w-full bg-black border border-gray-600 text-white px-4 py-2 focus:border-[#FFD700] focus:outline-none mb-4"></div><button type="submit" class="w-full bg-white text-black font-black py-3 tech-clip hover:bg-[#FFD700]">確認註冊</button></form></div></div>
 
     <script>
-        // ======= 🛠️ 請在下方填入你的 Google 試算表 ID =======
-        const CONFIG = {
-            SPREADSHEET_ID: "填入你的_Google_試算表_ID_字串", 
-            CLIENT_EMAIL: "", // 稍後將自動從 credentials.json 讀取
-            PRIVATE_KEY: ""   // 稍後將自動從 credentials.json 讀取
+        // 🔴🔴🔴 請替換為您的 Apps Script 網址 🔴🔴🔴
+        const GAS_URL = 'https://script.google.com/macros/s/YOUR_API_ID_HERE/exec';
+
+        let currentUser = null;
+        let currentEvent = null; 
+        let selectedSeats = [];  
+
+        function showLoader() { document.getElementById('globalLoader').classList.remove('hidden'); document.getElementById('globalLoader').classList.add('flex'); }
+        function hideLoader() { document.getElementById('globalLoader').classList.add('hidden'); document.getElementById('globalLoader').classList.remove('flex'); }
+
+        window.onload = () => {
+            fetchEventList();
+            setInterval(() => fetchEventList(true), 15000); 
         };
 
-        let cachedToken = null;
-        let tokenExpiry = 0;
-        let userTeam = localStorage.getItem('reborn_team') || "";
-        let userLeader = localStorage.getItem('reborn_leader') || "";
-        let lobbySettings = { name: "", fee: 200, totalSlots: 12, adminPwd: "" };
-        let selectedSlots = [];
-        let adminReservedSlots = [];
-
-        function showLoading(msg = "與資料庫通訊中...") {
-            document.getElementById('loading-text').innerText = msg;
-            document.getElementById('loading-overlay').classList.remove('hidden');
-        }
-        function hideLoading() {
-            document.getElementById('loading-overlay').classList.add('hidden');
-        }
-
-        // ================= 讀取本地 JSON 憑證 =================
-        async function loadCredentials() {
-            try {
-                const response = await fetch('./credentials.json');
-                if (!response.ok) throw new Error("找不到 credentials.json 檔案。");
-                
-                const data = await response.json();
-                CONFIG.CLIENT_EMAIL = data.client_email;
-                CONFIG.PRIVATE_KEY = data.private_key;
-            } catch (err) {
-                hideLoading();
-                alert(`憑證讀取失敗！\n1. 請確認 credentials.json 與 HTML 在同一個資料夾。\n2. 請透過 VS Code 的 Live Server 運行此網頁 (不能直接雙擊 HTML 檔案開啟)。\n錯誤詳情：${err.message}`);
-                throw err;
-            }
-        }
-
-        // 核心：生成服務帳戶授權 Token
-        async function getAccessToken() {
-            if (cachedToken && Date.now() < tokenExpiry) return cachedToken;
-            try {
-                const header = { alg: 'RS256', typ: 'JWT' };
-                const now = Math.floor(Date.now() / 1000);
-                const claim = {
-                    iss: CONFIG.CLIENT_EMAIL,
-                    scope: 'https://www.googleapis.com/auth/spreadsheets',
-                    aud: 'https://oauth2.googleapis.com/token',
-                    exp: now + 3600,
-                    iat: now
-                };
-                const signature = KJUR.jws.JWS.sign('RS256', JSON.stringify(header), JSON.stringify(claim), CONFIG.PRIVATE_KEY);
-                
-                const res = await fetch('https://oauth2.googleapis.com/token', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: `grant_type=urn%3Aietf%3Aparams%3Aoauth%3Agrant-type%3Ajwt-bearer&assertion=${signature}`
-                });
-                
-                if(!res.ok) throw new Error("取得 Token 失敗，請檢查 Private Key 格式或 Client Email。");
-                const data = await res.json();
-                cachedToken = data.access_token;
-                tokenExpiry = Date.now() + (data.expires_in - 300) * 1000; 
-                return cachedToken;
-            } catch (err) {
-                throw new Error("授權憑證生成失敗：" + err.message);
-            }
-        }
-
-        // 封裝 Sheet 讀取請求
-        async function fetchSheetData(range) {
-            const token = await getAccessToken();
-            const url = `https://sheets.googleapis.com/v4/spreadsheets/${CONFIG.SPREADSHEET_ID}/values/${encodeURIComponent(range)}`;
-            const res = await fetch(url, { headers: { 'Authorization': `Bearer ${token}` } });
-            if (!res.ok) throw new Error("資料庫讀取失敗，請確認已將服務帳戶信箱加入試算表的共用權限。");
-            return await res.json();
-        }
-
-        // 封裝 Sheet 寫入請求
-        async function writeSheetData(range, values, method = "POST", append = true) {
-            const token = await getAccessToken();
-            let url = `https://sheets.googleapis.com/v4/spreadsheets/${CONFIG.SPREADSHEET_ID}/values/${encodeURIComponent(range)}`;
-            url += append ? `:append?valueInputOption=USER_ENTERED` : `?valueInputOption=USER_ENTERED`;
+        async function fetchEventList(silent = false) {
+            if(!silent) document.getElementById('eventGrid').innerHTML = '<div class="text-gray-400 font-bold col-span-3 text-center py-12 animate-pulse">正在載入賽事資訊...</div>';
+            else document.getElementById('refreshIndicator').classList.remove('hidden');
             
-            const res = await fetch(url, {
-                method: append ? "POST" : "PUT",
-                headers: { 
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json' 
-                },
-                body: JSON.stringify({ values: values })
+            try {
+                const response = await fetch(GAS_URL);
+                const result = await response.json();
+                if (result.success && result.data.length > 0) {
+                    window.eventsData = result.data;
+                    let html = '';
+                    result.data.forEach(event => html += createEventCard(event));
+                    document.getElementById('eventGrid').innerHTML = html;
+                }
+            } catch (error) {
+                if(!silent) document.getElementById('eventGrid').innerHTML = '<div class="text-red-400 col-span-3 text-center py-12">系統連線失敗。</div>';
+            } finally {
+                if(silent) setTimeout(() => document.getElementById('refreshIndicator').classList.add('hidden'), 2000);
+            }
+        }
+
+        function createEventCard(event) {
+            const dateStr = new Date(event.Date).toISOString().split('T')[0];
+            const reserved = event.ReservedSlots || 0;
+            const remainingSlots = event.TotalSlots - reserved - event.takenSlots.length;
+            const displayTotal = event.TotalSlots - reserved; 
+            
+            let noteHtml = event.OrganizerNote ? `<div class="bg-gray-800 text-yellow-400 text-xs p-2 rounded mb-4 border-l-2 border-yellow-400">${event.OrganizerNote}</div>` : '';
+
+            if (event.Status === '已完賽' || event.Status === '已售完') {
+                return `<div class="glass-dark text-white tech-clip relative opacity-60 grayscale"><div class="absolute inset-0 bg-black/60 z-10 flex flex-col items-center justify-center backdrop-blur-sm"><span class="text-3xl font-esport font-black tracking-widest text-gray-300 border-2 border-gray-300 p-2 transform -rotate-12">${event.Status === '已完賽' ? 'COMPLETED' : 'SOLD OUT'}</span></div><div class="p-8 relative z-0"><div class="flex justify-between items-start mb-4"><span class="bg-gray-600 text-white text-xs font-black px-3 py-1 tech-clip">${event.Mode}</span></div><h2 class="text-2xl font-bold mb-2">${event.EventName}</h2><p class="text-gray-400 text-sm mb-4">${dateStr} 開賽</p>${noteHtml}</div></div>`;
+            }
+
+            if (event.Status === '即將開放') {
+                const openDate = new Date(event.OpenTime);
+                const openStr = `${openDate.getMonth() + 1}月${openDate.getDate()}日 ${String(openDate.getHours()).padStart(2, '0')}:${String(openDate.getMinutes()).padStart(2, '0')}`;
+                return `<div class="glass-dark text-white tech-clip relative group transition-all duration-300 border-t-4 border-t-blue-500"><div class="absolute -bottom-4 -right-4 text-[80px] font-esport font-black text-white/5 pointer-events-none select-none">${event.Mode}</div><div class="p-8"><div class="flex justify-between items-start mb-4"><span class="bg-blue-600 text-white text-xs font-black px-3 py-1 tech-clip">${event.Mode}</span><span class="text-xs text-blue-400 border border-blue-400 px-2 py-1 rounded font-bold">即將開放</span></div><h2 class="text-2xl font-bold mb-2">${event.EventName}</h2><p class="text-gray-400 text-sm mb-4">${dateStr} 開賽</p>${noteHtml}<div class="flex justify-between items-end mb-8 bg-black/40 p-4 rounded"><div class="w-full text-center text-[#FFD700] font-bold tracking-widest text-sm">${openStr} 正式開放報名</div></div><button disabled class="w-full bg-gray-800 text-blue-500 font-black py-4 tech-clip cursor-not-allowed text-lg tracking-widest">時間未到 尚未開放</button></div></div>`;
+            }
+
+            return `<div class="glass-dark text-white tech-clip relative group transition-all duration-300 hover:-translate-y-2 border-t-4 border-t-[#FFD700]"><div class="absolute -bottom-4 -right-4 text-[80px] font-esport font-black text-white/5 pointer-events-none select-none">${event.Mode}</div><div class="p-8"><div class="flex justify-between items-start mb-4"><span class="bg-[#FFD700] text-black text-xs font-black px-3 py-1 tech-clip font-esport">${event.Mode}</span><span class="text-xs text-[#FFD700] border border-[#FFD700] px-2 py-1 rounded">報名中</span></div><h2 class="text-2xl font-bold mb-2">${event.EventName}</h2><p class="text-gray-400 text-sm mb-4">${dateStr} 開賽</p>${noteHtml}<div class="flex justify-between items-end mb-8 bg-black/40 p-4 rounded-lg border border-gray-800"><div><span class="block text-gray-500 text-xs mb-1">報名費</span><span class="font-esport text-xl text-white">NT$ ${event.Fee}</span></div><div class="text-right"><span class="block text-gray-500 text-xs mb-1">剩餘空位</span><span class="font-esport text-xl font-bold text-[#FFD700]">${remainingSlots} / ${displayTotal}</span></div></div><button onclick="openSeatSelector('${event.EventID}')" class="w-full bg-[#FFD700] text-black font-black py-4 tech-clip hover-neon transition-all duration-300 text-lg tracking-widest">選位與報名</button></div></div>`;
+        }
+
+        function openSeatSelector(eventID) {
+            if (!currentUser) return alert('請先登入戰隊帳號！');
+            currentEvent = window.eventsData.find(e => e.EventID === eventID);
+            selectedSeats = [];
+            
+            document.getElementById('bookEventTitle').innerText = currentEvent.EventName;
+            document.getElementById('eventFeeDisplay').innerText = currentEvent.Fee;
+            
+            // 💡 載入匯款資訊顯示
+            document.getElementById('paymentInstructionsDisplay').innerText = currentEvent.PaymentInstructions || '主辦方尚未設定匯款資訊，請稍後詢問。';
+
+            updateSeatCart();
+
+            const grid = document.getElementById('seatGrid');
+            grid.innerHTML = '';
+            
+            for(let i=1; i<=currentEvent.TotalSlots; i++) {
+                let isReserved = i <= currentEvent.ReservedSlots;
+                let isTaken = currentEvent.takenSlots.includes(i);
+                
+                let btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'py-3 text-center rounded text-sm font-bold font-esport transition-all relative overflow-hidden ';
+                btn.innerText = i < 10 ? '0'+i : i;
+                
+                if(isReserved || isTaken) {
+                    btn.className += 'bg-gray-700 text-gray-500 cursor-not-allowed opacity-50';
+                    btn.disabled = true;
+                    btn.innerHTML += `<div class="absolute inset-0 flex items-center justify-center text-[10px] text-black bg-black/50 tracking-widest backdrop-blur-[1px]">${isReserved?'保留':'售出'}</div>`;
+                } else {
+                    btn.className += 'border border-gray-500 hover:border-[#FFD700] hover:text-[#FFD700] text-gray-300';
+                    btn.onclick = () => toggleSeat(i, btn);
+                }
+                grid.appendChild(btn);
+            }
+            document.getElementById('bookingModal').classList.remove('hidden');
+        }
+
+        function toggleSeat(seatNo, btn) {
+            const idx = selectedSeats.indexOf(seatNo);
+            if (idx > -1) {
+                selectedSeats.splice(idx, 1);
+                btn.classList.remove('bg-[#FFD700]', 'text-black', 'border-[#FFD700]', 'neon-shadow');
+                btn.classList.add('border-gray-500', 'text-gray-300');
+            } else {
+                if (selectedSeats.length >= 3) return alert('單一賽事最高限購 3 組！');
+                selectedSeats.push(seatNo);
+                btn.classList.remove('border-gray-500', 'text-gray-300');
+                btn.classList.add('bg-[#FFD700]', 'text-black', 'border-[#FFD700]', 'neon-shadow');
+            }
+            selectedSeats.sort((a,b) => a-b);
+            updateSeatCart();
+        }
+
+        function changePayMethod(seat) {
+            const method = document.getElementById(`payMethod_${seat}`).value;
+            const input = document.getElementById(`payInfo_${seat}`);
+            if (method === '轉帳') {
+                input.placeholder = '帳號末 5 碼 (可先留空)';
+                input.maxLength = 5;
+            } else {
+                input.placeholder = '收據機號/時間分行 (可先留空)';
+                input.maxLength = 20;
+            }
+        }
+
+        function updateSeatCart() {
+            document.getElementById('selectedSeatsList').innerText = selectedSeats.length ? selectedSeats.join(', ') + ' 號' : '無';
+            document.getElementById('totalPriceDisplay').innerText = selectedSeats.length * currentEvent.Fee;
+            
+            const container = document.getElementById('dynamicTeamInputs');
+            const submitBtn = document.getElementById('finalSubmitBtn');
+            
+            const currentValues = {};
+            selectedSeats.forEach(seat => {
+                if (document.getElementById(`teamName_${seat}`)) {
+                    currentValues[seat] = {
+                        name: document.getElementById(`teamName_${seat}`).value,
+                        method: document.getElementById(`payMethod_${seat}`).value,
+                        info: document.getElementById(`payInfo_${seat}`).value
+                    };
+                }
             });
-            if (!res.ok) throw new Error("資料寫入失敗，請檢查試算表格式或寫入範圍。");
-            return await res.json();
-        }
 
-        // ================= 路由與權限校驗 =================
-        function switchPage(pageId) {
-            document.querySelectorAll('.page-section').forEach(el => el.classList.add('hidden'));
-            document.querySelectorAll('.nav-links button').forEach(el => el.classList.remove('active'));
-            if(pageId !== 'login-page' && pageId !== 'admin-auth-page' && !userTeam) pageId = 'login-page';
-            document.getElementById(pageId).classList.remove('hidden');
-            if(pageId === 'lobby-page') { document.getElementById('nav-lobby').classList.add('active'); loadLobby(); }
-            if(pageId === 'dashboard-page') { document.getElementById('nav-dashboard').classList.add('active'); loadDashboard(); }
-        }
+            container.innerHTML = '';
+            let allowedMethods = (currentEvent.PaymentMethods || '轉帳').split(',').map(s=>s.trim());
 
-        function processLogin() {
-            const team = document.getElementById('reg-team').value.trim();
-            const leader = document.getElementById('reg-leader').value.trim();
-            if(!team || !leader) return alert("資料請填寫完整！");
-            userTeam = team; userLeader = leader;
-            localStorage.setItem('reborn_team', team); localStorage.setItem('reborn_leader', leader);
-            updateNavProfile(); switchPage('lobby-page');
-        }
-        function logout() { localStorage.removeItem('reborn_team'); userTeam = ""; document.getElementById('nav-login').innerText = "切換帳號"; switchPage('login-page'); }
-        function updateNavProfile() { if(userTeam) document.getElementById('nav-login').innerText = `👤 ${userTeam}`; }
-        function toggleDetails() { document.getElementById('event-details').classList.toggle('hidden'); }
-
-        // ================= 1. 大廳渲染與防重複報名比對 =================
-        async function loadLobby() {
-            try {
-                showLoading();
-                const settingsData = await fetchSheetData("賽事設定!A2:L2");
-                const regData = await fetchSheetData("報名名單!A2:H200");
+            if (selectedSeats.length > 0) {
+                submitBtn.disabled = false;
+                submitBtn.className = 'w-full bg-[#FFD700] text-black font-black py-4 tech-clip hover-neon transition text-lg';
                 
-                const settings = settingsData.values ? settingsData.values[0] : [];
-                lobbySettings.name = settings[0] || "目前無開放賽事";
-                lobbySettings.fee = parseInt(settings[4]) || 200;
-                lobbySettings.totalSlots = parseInt(settings[11]) || 12;
-                lobbySettings.adminPwd = settings[10] || "admin123";
-
-                document.getElementById('display-event-name').innerText = lobbySettings.name;
-                document.getElementById('display-event-sub').innerText = `日期: ${settings[1]||''} | 主播: ${settings[2]||'未定'} | 報名費: ${lobbySettings.fee} NTD`;
-
-                let takenSlots = [];
-                if (regData.values) {
-                    regData.values.forEach(row => {
-                        if (row[5] !== 'kicked' && row[3]) {
-                            row[3].toString().split(',').forEach(s => {
-                                let v = parseInt(s.trim());
-                                if(!isNaN(v)) takenSlots.push(v);
-                            });
-                        }
+                selectedSeats.forEach((seat, index) => {
+                    const suffix = String.fromCharCode(65 + index); 
+                    const defaultName = currentValues[seat]?.name || (selectedSeats.length > 1 ? `${currentUser.teamName} ${suffix}隊` : currentUser.teamName);
+                    const defaultMethod = currentValues[seat]?.method || allowedMethods[0];
+                    const defaultInfo = currentValues[seat]?.info || '';
+                    
+                    let optionsHtml = '';
+                    allowedMethods.forEach(method => {
+                        optionsHtml += `<option value="${method}" ${defaultMethod === method ? 'selected' : ''}>${method === '轉帳' ? 'ATM/網銀轉帳' : '無卡存款'}</option>`;
                     });
-                }
-
-                const container = document.getElementById('lobby-grid'); container.innerHTML = "";
-                if(takenSlots.length >= lobbySettings.totalSlots) {
-                    document.getElementById('sold-out-msg').classList.remove('hidden'); document.getElementById('booking-area').classList.add('hidden');
-                    hideLoading(); return;
-                }
-                document.getElementById('sold-out-msg').classList.add('hidden'); document.getElementById('booking-area').classList.remove('hidden');
-
-                for(let i=1; i<=lobbySettings.totalSlots; i++) {
-                    const btn = document.createElement('button'); btn.className = 'slot-btn';
-                    if(takenSlots.includes(i)) {
-                        btn.classList.add('sold'); btn.innerHTML = `第 ${i} 組`; btn.disabled = true;
-                    } else {
-                        btn.innerHTML = `第 ${i} 組`;
-                        btn.onclick = () => {
-                            const idx = selectedSlots.indexOf(i);
-                            if(idx > -1) { selectedSlots.splice(idx, 1); btn.classList.remove('selected'); } 
-                            else {
-                                if(selectedSlots.length >= 3) return alert("單筆訂單最多僅限選擇 3 組！");
-                                selectedSlots.push(i); btn.classList.add('selected');
-                            }
-                            updateLobbyPrice();
-                        };
-                    }
-                    container.appendChild(btn);
-                }
-                hideLoading();
-            } catch (err) { alert("讀取大廳錯誤：" + err.message); hideLoading(); }
-        }
-
-        function updateLobbyPrice() {
-            document.getElementById('lobby-selected-text').innerText = selectedSlots.length > 0 ? selectedSlots.join(', ') : "尚未選擇";
-            document.getElementById('lobby-total-price').innerText = selectedSlots.length * lobbySettings.fee;
-            document.getElementById('btn-register').disabled = selectedSlots.length === 0;
-        }
-
-        // 送出搶票
-        async function submitQueue() {
-            try {
-                showLoading("系統比對名額中...");
-                const price = selectedSlots.length * lobbySettings.fee;
-                
-                const freshLobby = await fetchSheetData("報名名單!A2:H200");
-                let freshTaken = [];
-                if(freshLobby.values) {
-                    freshLobby.values.forEach(row => { if(row[5]!=='kicked' && row[3]) row[3].toString().split(',').forEach(s => freshTaken.push(parseInt(s.trim()))); });
-                }
-                for(let slot of selectedSlots) {
-                    if(freshTaken.includes(slot)) {
-                        hideLoading();
-                        alert(`⚠️ 第 ${slot} 組已被其他戰隊搶先報名！請刷新大廳重選。`); loadLobby(); return;
-                    }
-                }
-                
-                const safeSlots = "'" + selectedSlots.join(', ');
-                const newRow = [new Date().toLocaleString('zh-TW', {hour12:false}), userTeam, userLeader, safeSlots, price.toString(), 'unpaid', '', lobbySettings.name];
-                await writeSheetData("報名名單!A:H", [newRow], "POST", true);
-                
-                alert("劃位成功！請至『我的賽事』進行對帳核對。"); switchPage('dashboard-page');
-            } catch (err) { alert(err.message); hideLoading(); }
-        }
-
-        // ================= 2. 玩家儀表板管理 =================
-        async function loadDashboard() {
-            try {
-                showLoading();
-                const regData = await fetchSheetData("報名名單!A2:H200");
-                const setData = await fetchSheetData("賽事設定!A2:J2");
-                hideLoading();
-
-                const container = document.getElementById('orders-container'); container.innerHTML = "";
-                const settings = setData.values ? setData.values[0] : [];
-                const bankAcc = settings[6] || "主辦方尚未填寫帳戶";
-                const bankNote = settings[7] || "";
-
-                if(!regData.values) { container.innerHTML = `<p style='text-align:center;color:#999;padding:30px;'>目前查無您的賽事紀錄。</p>`; return; }
-
-                let hasRecord = false;
-                regData.values.forEach((row, index) => {
-                    if (row[1] && row[1].toString().trim() === userTeam.trim() && row[5] !== 'kicked') {
-                        hasRecord = true;
-                        const rowIndex = index + 2; 
-                        let html = `<div class="order-card"><h3>🚩 ${row[7] || '交流賽'}</h3><p><strong>組別：</strong> 第 ${row[3].toString().replace(/'/g,"")} 組 &nbsp;|&nbsp; <strong>總金額：</strong> <span style="color:#d32f2f; font-weight:bold; font-size:18px;">${row[4]}</span> NTD</p>`;
-                        if(row[5] === 'unpaid') {
-                            html += `<div style="background:#fafafa; padding:15px; border-radius:6px; border:1px solid #ddd;"><p>匯款帳號：<strong>${bankAcc}</strong> (${bankNote})</p><input type="text" id="bank-${rowIndex}" placeholder="請填寫您的匯款後五碼" style="padding:10px; width:60%; margin-right:10px; border:1px solid #ccc; border-radius:4px;"><button class="btn-main" onclick="sendPayment(${rowIndex})">回報對帳</button></div>`;
-                        } else if(row[5] === 'reviewing') {
-                            html += `<p style="color:#2196f3; font-weight:bold;">⏳ 款項對帳審核中 (您送出的五碼：${row[6]})</p>`;
-                        } else if(row[5] === 'paid') {
-                            html += `<p style="color:#4caf50; font-weight:bold;">✅ 款項已核對完成 (取得參賽權)</p>`;
-                            if(settings[8] && settings[9]) {
-                                html += `<div style="background:#1a1a1a; color:#fff; padding:15px; border-radius:6px; margin-top:10px;"><h4>🔑 今日比賽房密：</h4>房間：${settings[8]} <br>密碼：${settings[9]}</div>`;
-                            } else html += `<p style="color:#888;">主辦方尚未發佈房密，請於當日在此等待重新刷新。</p>`;
-                        }
-                        html += `</div>`; container.innerHTML += html;
-                    }
+                    
+                    container.innerHTML += `
+                    <div class="bg-black/60 p-3 rounded border border-gray-700 flex flex-col gap-3 relative">
+                        <div class="absolute -left-2 -top-2 bg-[#FFD700] text-black font-esport font-black w-6 h-6 flex items-center justify-center rounded">${seat}</div>
+                        <div class="flex items-center gap-2 pl-4">
+                            <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                            <input type="text" id="teamName_${seat}" value="${defaultName}" required class="flex-1 bg-transparent text-[#FFD700] border-b border-gray-600 focus:border-[#FFD700] focus:outline-none placeholder-gray-600 font-bold font-esport">
+                        </div>
+                        <div class="flex flex-col sm:flex-row gap-2 pl-4">
+                            <select id="payMethod_${seat}" onchange="changePayMethod(${seat})" class="bg-gray-800 border border-gray-600 text-gray-300 px-2 py-1 text-sm rounded focus:border-[#FFD700] outline-none">
+                                ${optionsHtml}
+                            </select>
+                            <input type="text" id="payInfo_${seat}" value="${defaultInfo}" class="flex-1 bg-black border border-gray-600 text-white px-3 py-1 text-sm rounded focus:border-[#FFD700] outline-none placeholder-gray-600 tracking-wider" placeholder="${defaultMethod==='轉帳'?'帳號末 5 碼 (可先留空)':'收據機號/時間分行 (可先留空)'}">
+                        </div>
+                    </div>`;
                 });
-                if(!hasRecord) container.innerHTML = `<p style='text-align:center;color:#999;padding:30px;'>目前查無您的賽事紀錄。</p>`;
-            } catch(err) { alert(err.message); hideLoading(); }
-        }
-
-        async function sendPayment(rowIndex) {
-            const code = document.getElementById(`bank-${rowIndex}`).value.trim();
-            if(!code) return alert("請填寫您的後五碼以利對帳！");
-            try {
-                showLoading("送出匯款資訊中...");
-                await writeSheetData(`報名名單!F${rowIndex}:G${rowIndex}`, [["reviewing", code]], "PUT", false);
-                alert("回報成功！"); loadDashboard();
-            } catch(err) { alert(err.message); hideLoading(); }
-        }
-
-        // ================= 3. 管理員控制後台 =================
-        function verifyAdmin() {
-            const pwd = document.getElementById('admin-pwd').value.trim();
-            if(pwd === lobbySettings.adminPwd) { switchPage('admin-page'); renderAdminGrid(); loadAdminData(); } 
-            else alert("金鑰錯誤，拒絕放行權限！");
-        }
-
-        function renderAdminGrid() {
-            const size = parseInt(document.getElementById('set-mode').value);
-            const container = document.getElementById('admin-grid'); container.innerHTML = "";
-            adminReservedSlots = [];
-            for(let i=1; i<=size; i++) {
-                const btn = document.createElement('button'); btn.className = 'slot-btn'; btn.innerText = `第 ${i} 組`;
-                btn.onclick = () => {
-                    const idx = adminReservedSlots.indexOf(i);
-                    if(idx > -1) { adminReservedSlots.splice(idx, 1); btn.classList.remove('admin-reserved'); } 
-                    else { adminReservedSlots.push(i); btn.classList.add('admin-reserved'); }
-                };
-                container.appendChild(btn);
+            } else {
+                submitBtn.disabled = true;
+                submitBtn.className = 'w-full bg-gray-600 text-gray-400 font-black py-4 tech-clip transition text-lg cursor-not-allowed';
+                container.innerHTML = '<div class="text-gray-500 text-sm text-center py-2">請先在上方選擇位置</div>';
             }
         }
 
-        async function loadAdminData() {
-            try {
-                const regData = await fetchSheetData("報名名單!A2:H200");
-                const tbody = document.getElementById('admin-pending-list'); tbody.innerHTML = "";
-                if(!regData.values) { tbody.innerHTML = `<tr><td colspan="5" style="color:#999;">無待審核清單</td></tr>`; return; }
-                
-                let count = 0;
-                regData.values.forEach((row, idx) => {
-                    if(row[5] === 'reviewing') {
-                        count++;
-                        tbody.innerHTML += `<tr><td><strong>${row[1]}</strong></td><td>第 ${row[3]} 組</td><td>${row[4]}</td><td>${row[6]}</td><td><button class="btn-main" style="padding:5px 10px; font-size:13px;" onclick="approvePayment(${idx+2})">放行</button></td></tr>`;
-                    }
-                });
-                if(count === 0) tbody.innerHTML = `<tr><td colspan="5" style="color:#999;">無待審核清單</td></tr>`;
-            } catch(err) { console.log(err); }
-        }
+        function closeBookingModal() { document.getElementById('bookingModal').classList.add('hidden'); }
 
-        async function approvePayment(rowIdx) {
-            try {
-                showLoading("款項放行中...");
-                await writeSheetData(`報名名單!F${rowIdx}`, [["paid"]], "PUT", false);
-                alert("審核通過！"); loadAdminData(); hideLoading();
-            } catch(err) { alert(err.message); hideLoading(); }
-        }
-
-        async function publishNewEvent() {
-            const name = document.getElementById('set-name').value;
-            const date = document.getElementById('set-date').value;
-            const mode = document.getElementById('set-mode').value;
-            const caster = document.getElementById('set-caster').value;
-            const fee = document.getElementById('set-entry-fee').value;
-            const dline = document.getElementById('set-deadline').value;
-            const bank = document.getElementById('set-bank').value;
-            const note = document.getElementById('set-bank-note').value;
+        async function submitForm(e) {
+            e.preventDefault();
+            const teamNames = [];
+            const payments = [];
             
-            if(!name) return alert("賽事名稱必須填寫！");
-            if(!confirm("⚠️ 發佈全新賽事將會覆蓋原本設定並初始化報名名單，確定要送出嗎？")) return;
-
+            selectedSeats.forEach(seat => {
+                teamNames.push(document.getElementById(`teamName_${seat}`).value);
+                const method = document.getElementById(`payMethod_${seat}`).value;
+                const info = document.getElementById(`payInfo_${seat}`).value;
+                payments.push(info ? `${method}: ${info}` : '未填寫');
+            });
+            
+            showLoader();
             try {
-                showLoading("上傳新賽事資料中...");
-                const newSettings = [name, date, caster, "200", fee, dline, bank, note, "", "", lobbySettings.adminPwd, mode];
-                await writeSheetData("賽事設定!A2:L2", [newSettings], "PUT", false);
-                
-                let emptyMatrix = Array(40).fill(["", "", "", "", "", "", "", ""]);
-                await writeSheetData("報名名單!A2:H41", emptyMatrix, "PUT", false);
-
-                if(adminReservedSlots.length > 0) {
-                    let reserveRows = adminReservedSlots.map(slot => [new Date().toLocaleString('zh-TW', {hour12:false}), "主辦方保留", "管理員", `'${slot}`, "0", "reserved", "N/A", name]);
-                    await writeSheetData("報名名單!A2", reserveRows, "POST", true);
-                }
-                alert("🚀 賽事設定與主辦方卡位已成功同步至雲端大廳！"); loadLobby(); switchPage('lobby-page');
-            } catch(err) { alert(err.message); hideLoading(); }
+                const response = await fetch(GAS_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({ 
+                        action: 'bookSlot', eventID: currentEvent.EventID, uid: currentUser.uid, 
+                        teamNames: teamNames, payments: payments, slots: selectedSeats 
+                    })
+                });
+                const result = await response.json();
+                if (result.success) {
+                    alert(result.message);
+                    closeBookingModal();
+                    fetchEventList(true); 
+                } else alert(result.message);
+            } catch (error) { alert("伺服器連線異常"); } finally { hideLoader(); }
         }
 
-        async function publishRoom() {
-            const rn = document.getElementById('admin-r-name').value;
-            const rp = document.getElementById('admin-r-pass').value;
-            if(!rn || !rp) return alert("房間名稱與密碼皆須完整填寫！");
-            try {
-                showLoading("廣播房密中...");
-                await writeSheetData("賽事設定!I2:J2", [[rn, rp]], "PUT", false);
-                alert("🔑 賽事房密已成功廣播！"); hideLoading();
-            } catch(err) { alert(err.message); hideLoading(); }
+        function toggleQueryPanel() {
+            const panel = document.getElementById('queryPanel');
+            panel.classList.toggle('translate-x-full'); panel.classList.toggle('translate-x-0');
         }
 
-        // ================= 系統初始化入口 =================
-        async function initSystem() {
-            try {
-                await loadCredentials();
-                // 取得初步設定以抓取 adminPwd
-                const data = await fetchSheetData("賽事設定!A2:L2");
-                if(data.values) lobbySettings.adminPwd = data.values[0][10] || "admin123";
-                
-                updateNavProfile();
-                hideLoading();
-                switchPage(userTeam ? 'lobby-page' : 'login-page');
-            } catch (err) {
-                // 如果出錯，載入畫面將卡住並顯示錯誤，以策安全
-                console.error(err);
-            }
+        function changeUpdatePayMethod(regID) {
+            const method = document.getElementById(`updatePayMethod_${regID}`).value;
+            const input = document.getElementById(`payUpdate_${regID}`);
+            if (method === '轉帳') { input.placeholder = '末5碼'; input.maxLength = 5; } 
+            else { input.placeholder = '收據機號/時間'; input.maxLength = 20; }
         }
 
-        // 啟動系統
-        initSystem();
+        async function fetchQueryData() {
+            if (!currentUser) return alert('請先登入！');
+            showLoader();
+            try {
+                const response = await fetch(GAS_URL, { method: 'POST', body: JSON.stringify({ action: 'queryStatus', uid: currentUser.uid }) });
+                const result = await response.json();
+                const container = document.getElementById('queryResultContainer');
+                container.innerHTML = '';
+
+                if (result.success && result.data.length > 0) {
+                    result.data.forEach(reg => {
+                        let statusColor = 'bg-gray-500/20 text-gray-400';
+                        if(reg.status === '審核成功') statusColor = 'bg-green-500/20 text-green-400';
+                        if(reg.status === '待審核') statusColor = 'bg-yellow-500/20 text-yellow-400';
+                        
+                        let slotsTxt = reg.slots ? `<span class="bg-gray-800 text-gray-300 px-2 rounded border border-gray-600 text-xs ml-2">位置: ${reg.slots}</span>` : '';
+                        
+                        let paymentHtml = `<div class="text-xs mt-3 flex flex-col gap-1"><span class="text-gray-500">繳費狀態:</span> <span class="text-white font-esport tracking-widest bg-black p-1 rounded border border-gray-700">${reg.paymentInfo || '未填寫'}</span></div>`;
+                        
+                        if (reg.status === '待審核' && (!reg.paymentInfo || reg.paymentInfo === '未填寫')) {
+                            // 💡 查詢面板也同步帶出該賽事專屬的匯款資訊
+                            let instHtml = reg.paymentInstructions ? `<div class="mt-2 mb-2 p-2 bg-gray-800 border-l-2 border-[#FFD700] text-gray-300 text-xs whitespace-pre-line">${reg.paymentInstructions}</div>` : '';
+                            
+                            let allowedMethods = (reg.paymentMethods || '轉帳').split(',').map(s=>s.trim());
+                            let optionsHtml = '';
+                            allowedMethods.forEach(method => { optionsHtml += `<option value="${method}">${method}</option>`; });
+
+                            paymentHtml += `
+                            ${instHtml}
+                            <div class="mt-2 flex gap-1">
+                                <select id="updatePayMethod_${reg.regID}" onchange="changeUpdatePayMethod('${reg.regID}')" class="bg-gray-800 border border-gray-600 text-gray-300 px-1 py-1 text-xs rounded focus:border-[#FFD700] outline-none">
+                                    ${optionsHtml}
+                                </select>
+                                <input type="text" id="payUpdate_${reg.regID}" placeholder="末 5 碼" maxlength="5" class="bg-black border border-gray-600 text-white px-2 py-1 text-xs rounded flex-1 focus:border-[#FFD700] outline-none">
+                                <button onclick="updatePayment('${reg.regID}')" class="bg-[#FFD700] text-black px-2 py-1 text-xs rounded font-bold hover:brightness-110 transition">送出</button>
+                            </div>`;
+                        }
+
+                        let roomHtml = '';
+                        if(reg.roomUnlocked) {
+                            roomHtml = `<div class="mt-4 border border-[#FFD700]/50 bg-[#FFD700]/10 rounded p-4 relative"><div class="text-xs text-[#FFD700] mb-2 font-bold flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-[#FFD700] animate-ping"></span>今日開賽！房間資訊解鎖</div><div class="grid grid-cols-2 gap-4"><div class="bg-black/60 p-2 rounded border border-gray-700"><span class="block text-[10px] text-gray-500 mb-1">Room</span><span class="font-bold text-white select-all">${reg.roomName}</span></div><div class="bg-black/60 p-2 rounded border border-gray-700"><span class="block text-[10px] text-gray-500 mb-1">Password</span><span class="font-esport font-bold text-white tracking-widest select-all">${reg.roomPassword}</span></div></div></div>`;
+                        }
+
+                        container.innerHTML += `<div class="bg-gray-900 border border-gray-700 rounded-lg p-5 mb-4"><div class="flex justify-between items-center mb-4"><span class="text-sm text-gray-400 font-bold">${reg.eventName}</span><span class="text-xs ${statusColor} px-2 py-1 rounded font-bold">${reg.status}</span></div><div class="mb-1 text-lg font-esport font-bold text-[#FFD700] flex items-center">${reg.teamName}${slotsTxt}</div>${paymentHtml}${roomHtml}</div>`;
+                    });
+                } else container.innerHTML = '<div class="text-gray-500 text-center py-10">查無報名紀錄。</div>';
+            } catch (error) { alert("查詢失敗"); } finally { hideLoader(); }
+        }
+
+        async function updatePayment(regID) {
+            const method = document.getElementById(`updatePayMethod_${regID}`).value;
+            const inputVal = document.getElementById(`payUpdate_${regID}`).value;
+            if(!inputVal) return alert('請填寫繳費資訊');
+            const finalInfo = `${method}: ${inputVal}`;
+            
+            showLoader();
+            try {
+                const response = await fetch(GAS_URL, { method: 'POST', body: JSON.stringify({ action: 'updatePayment', regID: regID, uid: currentUser.uid, paymentInfo: finalInfo }) });
+                const result = await response.json();
+                alert(result.message);
+                if(result.success) fetchQueryData(); 
+            } catch (e) { alert('伺服器錯誤'); } finally { hideLoader(); }
+        }
+
+        function openRegisterModal() { document.getElementById('registerModal').classList.remove('hidden'); }
+        async function submitRegister(e) { e.preventDefault(); showLoader(); const payload = { action: 'register', uid: document.getElementById('regUid').value, password: document.getElementById('regPassword').value, teamName: document.getElementById('regTeamName').value, captain: document.getElementById('regCaptain').value, contact: document.getElementById('regContact').value }; try { const response = await fetch(GAS_URL, { method: 'POST', body: JSON.stringify(payload) }); const result = await response.json(); alert(result.message); if (result.success) document.getElementById('registerModal').classList.add('hidden'); } catch (error) { alert('連線伺服器失敗'); } finally { hideLoader(); } }
+        async function simulateLogin() { const uid = prompt("隊長 UID:"); const password = prompt("密碼:"); if (!uid || !password) return; showLoader(); try { const response = await fetch(GAS_URL, { method: 'POST', body: JSON.stringify({ action: 'login', uid, password }) }); const result = await response.json(); if (result.success) { currentUser = result.user; document.querySelectorAll('#loginSection > button')[0].classList.add('hidden'); document.querySelectorAll('#loginSection > button')[1].classList.add('hidden'); document.getElementById('loggedInUser').classList.remove('hidden'); document.getElementById('displayTeamName').innerText = currentUser.teamName; alert(`歡迎回來，${currentUser.teamName}`); } else alert(result.message); } catch (error) { alert("連線異常"); } finally { hideLoader(); } }
+        function logout() { currentUser = null; document.querySelectorAll('#loginSection > button')[0].classList.remove('hidden'); document.querySelectorAll('#loginSection > button')[1].classList.remove('hidden'); document.getElementById('loggedInUser').classList.add('hidden'); document.getElementById('queryResultContainer').innerHTML = '<div class="text-gray-500 text-center py-10 text-sm">請點擊下方按鈕載入紀錄</div>'; }
     </script>
 </body>
 </html>
