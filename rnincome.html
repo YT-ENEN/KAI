@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>銳能娛樂 - 專屬收支系統</title>
+  <style>
+    :root { --primary: #1e293b; --accent: #0f766e; --bg: #f8fafc; }
+    body { font-family: '微軟正黑體', sans-serif; background-color: var(--bg); padding: 15px; color: #334155; margin: 0; }
+    .container { max-width: 700px; margin: 20px auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
+    h2 { color: var(--primary); border-bottom: 2px solid #e2e8f0; padding-bottom: 12px; margin-top: 0; font-size: 22px; }
+    .form-group { margin-bottom: 18px; }
+    .form-group.hidden { display: none; }
+    label { display: block; margin-bottom: 6px; font-weight: 600; font-size: 14px; }
+    input, select { width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; box-sizing: border-box; font-size: 14px; transition: all 0.2s; }
+    input:focus, select:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.1); }
+    button { background-color: var(--accent); color: white; padding: 12px 20px; border: none; border-radius: 6px; cursor: pointer; width: 100%; font-size: 16px; font-weight: bold; margin-top: 10px; transition: background 0.2s; }
+    button:hover { background-color: #115e59; }
+    button:disabled { background-color: #94a3b8; cursor: not-allowed; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .welcome-box { background: #f0fdfa; border: 1px solid #ccfbf1; padding: 15px; border-radius: 8px; margin-bottom: 25px; color: #115e59; font-size: 14px; display: flex; justify-content: space-between; align-items: center; }
+    #loginApp { max-width: 380px; margin: 80px auto; }
+    
+    @media (max-width: 500px) {
+      .grid-2 { grid-template-columns: 1fr; gap: 10px; }
+      .container { padding: 20px; margin: 10px auto; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <!-- 登入區塊 -->
+  <div id="loginApp">
+    <h2 style="text-align: center;">銳能娛樂 - 系統登入</h2>
+    <div class="form-group">
+      <label>請輸入管理密碼</label>
+      <input type="password" id="loginPw" placeholder="••••••••" onkeyup="if(event.key==='Enter') login()">
+    </div>
+    <button id="loginBtn" onclick="login()">安全登入</button>
+  </div>
+
+  <!-- 主系統區塊 (預設完全清空，登入後透過 JS 注入) -->
+  <div id="mainApp" style="display: none;"></div>
+</div>
+
+<script>
+  // 🔴 必填！請將下方網址替換為你 Google Apps Script 部署出來的「網頁應用程式網址」
+  const API_URL = "https://script.google.com/macros/s/AKfycbzL2HmnTWECWy9xFG04FuqBv2DCmx0Qmlw21bJ7I1oKTn1FFTASYPlDv9C9gHx4iiDb/exec";
+
+  let currentPw = "";
+
+  // --- 共用 API 呼叫模組 ---
+  function callAPI(payload, buttonId, originalText, onSuccess) {
+    const btn = document.getElementById(buttonId);
+    if(btn) { btn.disabled = true; btn.innerText = "處理中..."; }
+    
+    fetch(API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" }, // 避免 CORS 錯誤的關鍵
+      body: JSON.stringify(payload)
+    })
+    .then(res => res.json())
+    .then(data => {
+      if(btn) { btn.disabled = false; btn.innerText = originalText; }
+      onSuccess(data);
+    })
+    .catch(err => {
+      if(btn) { btn.disabled = false; btn.innerText = originalText; }
+      alert("連線失敗，請檢查網路或 API 網址是否正確。");
+      console.error(err);
+    });
+  }
+
+  // --- 登入驗證 ---
+  function login() {
+    const pw = document.getElementById("loginPw").value;
+    if (!pw) return alert("請輸入密碼！");
+
+    callAPI({ action: "verify", password: pw }, "loginBtn", "安全登入", function(res) {
+      if(res.status === "SUCCESS") {
+        currentPw = pw;
+        document.getElementById("loginApp").style.display = "none";
+        renderMainSystem();
+      } else {
+        alert("密碼錯誤，拒絕存取！");
+      }
+    });
+  }
+
+  // --- 渲染主系統介面 ---
+  function renderMainSystem() {
+    const mainApp = document.getElementById("mainApp");
+    mainApp.style.display = "block";
+    mainApp.innerHTML = `
+      <h2>銳能娛樂 - 專屬收支系統</h2>
+      <div class="welcome-box">
+        <span>✅ 已與資料庫安全連線</span>
+        <button onclick="logout()" style="width: auto; margin: 0; padding: 6px 12px; background: #ef4444; font-size: 12px;">登出</button>
+      </div>
+      
+      <div class="grid-2">
+        <div class="form-group"><label>日期</label><input type="date" id="date"></div>
+        <div class="form-group">
+          <label>收支類型</label>
+          <select id="type" onchange="toggleAmountField()">
+            <option value="收入"> 🟢 收入</option>
+            <option value="支出"> 🔴 支出</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="form-group"><label>資金類別</label><input type="text" id="fundCategory" placeholder="例如：專案款、宣傳費"></div>
+        <div class="form-group"><label>存入/支付帳戶</label><input type="text" id="account" placeholder="例如：台新銀行、零用金"></div>
+      </div>
+
+      <div class="form-group"><label>項目說明</label><input type="text" id="desc" placeholder="請輸入款項詳細用途"></div>
+      
+      <div class="grid-2">
+        <div class="form-group" id="incomeGroup"><label>收入金額</label><input type="number" id="income" value="0"></div>
+        <div class="form-group hidden" id="expenseGroup"><label>支出金額</label><input type="number" id="expense" value="0"></div>
+        <div class="form-group"><label>備註 / 單據編號</label><input type="text" id="note" placeholder="發票號碼或核銷憑證"></div>
+      </div>
+
+      <button id="submitBtn" onclick="submitData()">確認送出並寫入資料庫</button>
+      
+      <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 30px 0;">
+      <button onclick="showChangePw()" style="background-color: #64748b;">修改系統密碼</button>
+    `;
+    document.getElementById("date").valueAsDate = new Date();
+  }
+
+  // --- 切換收支欄位 ---
+  function toggleAmountField() {
+    const type = document.getElementById("type").value;
+    const incomeGroup = document.getElementById("incomeGroup");
+    const expenseGroup = document.getElementById("expenseGroup");
+    
+    if (type === "收入") {
+      incomeGroup.classList.remove("hidden");
+      expenseGroup.classList.add("hidden");
+      document.getElementById("expense").value = "0";
+    } else {
+      incomeGroup.classList.add("hidden");
+      expenseGroup.classList.remove("hidden");
+      document.getElementById("income").value = "0";
+    }
+  }
+
+  // --- 提交資料 ---
+  function submitData() {
+    const payload = {
+      action: "submit",
+      password: currentPw,
+      date: document.getElementById("date").value,
+      type: document.getElementById("type").value,
+      fundCategory: document.getElementById("fundCategory").value,
+      account: document.getElementById("account").value,
+      desc: document.getElementById("desc").value,
+      note: document.getElementById("note").value,
+      income: document.getElementById("income").value,
+      expense: document.getElementById("expense").value
+    };
+
+    if(!payload.date || !payload.desc) return alert("請至少填寫『日期』與『項目說明』！");
+
+    callAPI(payload, "submitBtn", "確認送出並寫入資料庫", function(res) {
+      if(res.status === "SUCCESS") {
+        alert("🎉 資料寫入成功！\\n系統自動計算最新餘額為：" + res.newBalance + " 元");
+        document.getElementById("desc").value = "";
+        document.getElementById("income").value = "0";
+        document.getElementById("expense").value = "0";
+        document.getElementById("note").value = "";
+      } else {
+        alert("驗證失敗，請重新登入！");
+        location.reload();
+      }
+    });
+  }
+
+  // --- 修改密碼介面 ---
+  function showChangePw() {
+    document.getElementById("mainApp").innerHTML = `
+      <h2>修改系統密碼</h2>
+      <div class="form-group"><label>請輸入全新管理密碼</label><input type="password" id="newPw" placeholder="請輸入新密碼"></div>
+      <button id="changePwBtn" onclick="changePassword()">確認變更</button>
+      <button onclick="renderMainSystem()" style="background-color: #64748b; margin-top: 10px;">取消返回</button>
+    `;
+  }
+
+  // --- 執行修改密碼 ---
+  function changePassword() {
+    const newPw = document.getElementById("newPw").value;
+    if(!newPw) return alert("新密碼不能為空！");
+    
+    callAPI({ action: "changePw", oldPw: currentPw, newPw: newPw }, "changePwBtn", "確認變更", function(res) {
+      if(res.status === "SUCCESS") {
+        alert("密碼修改成功！下次登入請使用新密碼。");
+        currentPw = newPw;
+        renderMainSystem();
+      } else {
+        alert("密碼變更失敗。");
+      }
+    });
+  }
+
+  // --- 登出 ---
+  function logout() {
+    currentPw = "";
+    document.getElementById("mainApp").style.display = "none";
+    document.getElementById("loginApp").style.display = "block";
+    document.getElementById("loginPw").value = "";
+  }
+</script>
+</body>
+</html>
+
