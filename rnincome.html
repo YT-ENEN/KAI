@@ -5,59 +5,141 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>銳能娛樂 - 專屬收支系統</title>
   <style>
-    :root { --primary: #1e293b; --accent: #0f766e; --bg: #f8fafc; }
-    body { font-family: '微軟正黑體', sans-serif; background-color: var(--bg); padding: 15px; color: #334155; margin: 0; }
-    .container { max-width: 700px; margin: 20px auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
-    h2 { color: var(--primary); border-bottom: 2px solid #e2e8f0; padding-bottom: 12px; margin-top: 0; font-size: 22px; }
-    .form-group { margin-bottom: 18px; }
-    .form-group.hidden { display: none; }
-    label { display: block; margin-bottom: 6px; font-weight: 600; font-size: 14px; }
-    input, select { width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; box-sizing: border-box; font-size: 14px; transition: all 0.2s; }
-    input:focus, select:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.1); }
-    button { background-color: var(--accent); color: white; padding: 12px 20px; border: none; border-radius: 6px; cursor: pointer; width: 100%; font-size: 16px; font-weight: bold; margin-top: 10px; transition: background 0.2s; }
-    button:hover { background-color: #115e59; }
-    button:disabled { background-color: #94a3b8; cursor: not-allowed; }
-    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    .welcome-box { background: #f0fdfa; border: 1px solid #ccfbf1; padding: 15px; border-radius: 8px; margin-bottom: 25px; color: #115e59; font-size: 14px; display: flex; justify-content: space-between; align-items: center; }
-    #loginApp { max-width: 380px; margin: 80px auto; }
-    
-    @media (max-width: 500px) {
-      .grid-2 { grid-template-columns: 1fr; gap: 10px; }
-      .container { padding: 20px; margin: 10px auto; }
+    :root { 
+      --primary: #1a1a1a;      /* 質感深灰 */
+      --accent: #FFD700;       /* 銳能黃 */
+      --accent-hover: #E6C200; 
+      --bg: #f4f4f5; 
+      --text-dark: #111111;
     }
+    body { font-family: '微軟正黑體', sans-serif; background-color: var(--bg); padding: 15px; color: var(--text-dark); margin: 0; }
+    .container { max-width: 800px; margin: 20px auto; background: white; padding: 25px; border-radius: 12px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
+    h2 { color: var(--primary); border-left: 6px solid var(--accent); padding-left: 12px; margin-top: 0; font-size: 24px; font-weight: 900; letter-spacing: 1px; }
+    
+    .form-group { margin-bottom: 15px; }
+    .form-group.hidden { display: none; }
+    label { display: block; margin-bottom: 6px; font-weight: 700; font-size: 14px; }
+    input, select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; font-size: 14px; background: #fafafa; }
+    input:focus, select:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.3); background: #fff; }
+    
+    button { background-color: var(--accent); color: var(--primary); padding: 12px 20px; border: none; border-radius: 6px; cursor: pointer; width: 100%; font-size: 16px; font-weight: 900; margin-top: 10px; transition: 0.2s; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+    button:hover { background-color: var(--accent-hover); transform: translateY(-1px); }
+    button:disabled { background-color: #e2e8f0; color: #94a3b8; cursor: not-allowed; transform: none; box-shadow: none; }
+    .btn-dark { background-color: var(--primary); color: white; }
+    .btn-dark:hover { background-color: #333; }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    #loginApp { max-width: 380px; margin: 10vh auto; text-align: center; }
+    
+    .tabs { display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+    .tab { flex: 1; padding: 12px; text-align: center; cursor: pointer; font-weight: 900; border-radius: 6px; background: #f8f9fa; color: #888; transition: 0.3s; }
+    .tab.active { background: var(--primary); color: var(--accent); }
+
+    .dashboard-card { background: var(--primary); color: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+    .dashboard-card span { display: block; font-size: 14px; color: #aaa; font-weight: bold; }
+    .dashboard-card strong { display: block; font-size: 32px; color: var(--accent); margin-top: 5px; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+    .dashboard-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+    
+    .table-wrapper { overflow-x: auto; margin-top: 15px; border-radius: 8px; border: 1px solid #eee; }
+    table { width: 100%; border-collapse: collapse; min-width: 600px; font-size: 14px; }
+    th, td { padding: 12px; text-align: left; border-bottom: 1px solid #eee; }
+    th { background: #f8f9fa; font-weight: 900; color: #555; }
+    .text-green { color: #059669; font-weight: 900; }
+    .text-red { color: #dc2626; font-weight: 900; }
+
+    .ai-report-box { background: #fffdf0; border: 2px dashed var(--accent); padding: 20px; border-radius: 8px; margin-top: 20px; display: none; }
+    
+    @media (max-width: 500px) { .grid-2, .dashboard-grid { grid-template-columns: 1fr; gap: 10px; } }
   </style>
 </head>
 <body>
 
 <div class="container">
-  <!-- 登入區塊 -->
+  <!-- 登入介面 -->
   <div id="loginApp">
-    <h2 style="text-align: center;">銳能娛樂 - 系統登入</h2>
-    <div class="form-group">
-      <label>請輸入管理密碼</label>
+    <h2 style="border: none; text-align: center; color: var(--accent); background: var(--primary); padding: 20px; border-radius: 8px; font-size: 28px; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">銳能娛樂</h2>
+    <div class="form-group" style="text-align: left; margin-top: 20px;">
+      <label>請輸入系統管理密碼</label>
       <input type="password" id="loginPw" placeholder="••••••••" onkeyup="if(event.key==='Enter') login()">
     </div>
     <button id="loginBtn" onclick="login()">安全登入</button>
   </div>
 
-  <!-- 主系統區塊 (預設完全清空，登入後透過 JS 注入) -->
-  <div id="mainApp" style="display: none;"></div>
+  <!-- 系統主介面 -->
+  <div id="mainApp" style="display: none;">
+    <h2>內部財務管理系統</h2>
+    
+    <div class="tabs">
+      <div class="tab active" id="tab-form" onclick="switchTab('form')">✍️ 新增帳務</div>
+      <div class="tab" id="tab-report" onclick="switchTab('report')">📊 財務儀表板</div>
+    </div>
+
+    <!-- 區塊：新增帳務 -->
+    <div id="view-form">
+      <div class="grid-2">
+        <div class="form-group"><label>日期</label><input type="date" id="date"></div>
+        <div class="form-group">
+          <label>收支類型</label>
+          <select id="type" onchange="toggleAmountField()">
+            <option value="收入"> 🟢 收入 (收款)</option><option value="支出"> 🔴 支出 (付款)</option>
+          </select>
+        </div>
+      </div>
+      <div class="grid-2">
+        <div class="form-group"><label>資金類別</label><input type="text" id="fundCategory" placeholder="例如：專案款、設備採購"></div>
+        <div class="form-group"><label>存入/支付帳戶</label><input type="text" id="account" placeholder="例如：台新銀行、零用金"></div>
+      </div>
+      <div class="form-group"><label>項目說明 (必填)</label><input type="text" id="desc" placeholder="請輸入款項詳細用途"></div>
+      <div class="grid-2">
+        <div class="form-group" id="incomeGroup"><label>收入金額</label><input type="number" id="income" value="0"></div>
+        <div class="form-group hidden" id="expenseGroup"><label>支出金額</label><input type="number" id="expense" value="0"></div>
+        <div class="form-group"><label>備註 / 單據編號</label><input type="text" id="note" placeholder="發票號碼或核銷憑證"></div>
+      </div>
+      <button id="submitBtn" onclick="submitData()">確認送出並寫入資料庫</button>
+      <hr style="border: 0; border-top: 1px solid #eee; margin: 25px 0;">
+      <button onclick="logout()" class="btn-dark" style="width: auto; padding: 8px 16px; font-size: 14px; float: right;">登出系統</button>
+      <div style="clear: both;"></div>
+    </div>
+
+    <!-- 區塊：報表與明細 -->
+    <div id="view-report" style="display: none;">
+      <div class="dashboard-grid">
+        <div class="dashboard-card"><span>累積總收入</span><strong id="displayTotalIncome">0</strong></div>
+        <div class="dashboard-card"><span>累積總支出</span><strong id="displayTotalExpense" style="color: #f87171;">0</strong></div>
+      </div>
+
+      <button onclick="generateAIReport()" style="background: var(--primary); color: var(--accent);">🤖 一鍵生成本月 AI 財務報表</button>
+      <div id="aiReportBox" class="ai-report-box"></div>
+
+      <h3 style="margin-top: 30px; border-bottom: 2px solid #eee; padding-bottom: 8px; color: var(--primary);">最新帳務明細 (近20筆)</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr><th>日期</th><th>類型</th><th>說明</th><th>金額</th><th>帳戶結餘</th></tr>
+          </thead>
+          <tbody id="recordTableBody">
+            <tr><td colspan="5" style="text-align:center; padding: 20px;">載入中...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script>
-  // 🔴 必填！請將下方網址替換為你 Google Apps Script 部署出來的「網頁應用程式網址」
+  // 👇👇👇 必填！請將下方引號內的網址替換為你 GAS 部署出來的 API 網址 👇👇👇
   const API_URL = "https://script.google.com/macros/s/AKfycbzL2HmnTWECWy9xFG04FuqBv2DCmx0Qmlw21bJ7I1oKTn1FFTASYPlDv9C9gHx4iiDb/exec";
 
   let currentPw = "";
+  let globalRecords = [];
 
-  // --- 共用 API 呼叫模組 ---
   function callAPI(payload, buttonId, originalText, onSuccess) {
     const btn = document.getElementById(buttonId);
-    if(btn) { btn.disabled = true; btn.innerText = "處理中..."; }
+    if(btn) { btn.disabled = true; btn.innerText = "連線處理中..."; }
     
     fetch(API_URL, {
       method: "POST",
-      headers: { "Content-Type": "text/plain;charset=utf-8" }, // 避免 CORS 錯誤的關鍵
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
       body: JSON.stringify(payload)
     })
     .then(res => res.json())
@@ -67,92 +149,54 @@
     })
     .catch(err => {
       if(btn) { btn.disabled = false; btn.innerText = originalText; }
-      alert("連線失敗，請檢查網路或 API 網址是否正確。");
-      console.error(err);
+      alert("資料庫連線失敗，請檢查網路狀態！");
     });
   }
 
-  // --- 登入驗證 ---
   function login() {
     const pw = document.getElementById("loginPw").value;
     if (!pw) return alert("請輸入密碼！");
-
     callAPI({ action: "verify", password: pw }, "loginBtn", "安全登入", function(res) {
       if(res.status === "SUCCESS") {
         currentPw = pw;
         document.getElementById("loginApp").style.display = "none";
-        renderMainSystem();
+        document.getElementById("mainApp").style.display = "block";
+        document.getElementById("date").valueAsDate = new Date();
+        loadData();
       } else {
         alert("密碼錯誤，拒絕存取！");
       }
     });
   }
 
-  // --- 渲染主系統介面 ---
-  function renderMainSystem() {
-    const mainApp = document.getElementById("mainApp");
-    mainApp.style.display = "block";
-    mainApp.innerHTML = `
-      <h2>銳能娛樂 - 專屬收支系統</h2>
-      <div class="welcome-box">
-        <span>✅ 已與資料庫安全連線</span>
-        <button onclick="logout()" style="width: auto; margin: 0; padding: 6px 12px; background: #ef4444; font-size: 12px;">登出</button>
-      </div>
-      
-      <div class="grid-2">
-        <div class="form-group"><label>日期</label><input type="date" id="date"></div>
-        <div class="form-group">
-          <label>收支類型</label>
-          <select id="type" onchange="toggleAmountField()">
-            <option value="收入"> 🟢 收入</option>
-            <option value="支出"> 🔴 支出</option>
-          </select>
-        </div>
-      </div>
+  function switchTab(tabName) {
+    document.getElementById("tab-form").classList.remove("active");
+    document.getElementById("tab-report").classList.remove("active");
+    document.getElementById("view-form").style.display = "none";
+    document.getElementById("view-report").style.display = "none";
 
-      <div class="grid-2">
-        <div class="form-group"><label>資金類別</label><input type="text" id="fundCategory" placeholder="例如：專案款、宣傳費"></div>
-        <div class="form-group"><label>存入/支付帳戶</label><input type="text" id="account" placeholder="例如：台新銀行、零用金"></div>
-      </div>
-
-      <div class="form-group"><label>項目說明</label><input type="text" id="desc" placeholder="請輸入款項詳細用途"></div>
-      
-      <div class="grid-2">
-        <div class="form-group" id="incomeGroup"><label>收入金額</label><input type="number" id="income" value="0"></div>
-        <div class="form-group hidden" id="expenseGroup"><label>支出金額</label><input type="number" id="expense" value="0"></div>
-        <div class="form-group"><label>備註 / 單據編號</label><input type="text" id="note" placeholder="發票號碼或核銷憑證"></div>
-      </div>
-
-      <button id="submitBtn" onclick="submitData()">確認送出並寫入資料庫</button>
-      
-      <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 30px 0;">
-      <button onclick="showChangePw()" style="background-color: #64748b;">修改系統密碼</button>
-    `;
-    document.getElementById("date").valueAsDate = new Date();
+    document.getElementById("tab-" + tabName).classList.add("active");
+    document.getElementById("view-" + tabName).style.display = "block";
+    
+    if (tabName === "report") loadData();
   }
 
-  // --- 切換收支欄位 ---
   function toggleAmountField() {
     const type = document.getElementById("type").value;
-    const incomeGroup = document.getElementById("incomeGroup");
-    const expenseGroup = document.getElementById("expenseGroup");
-    
     if (type === "收入") {
-      incomeGroup.classList.remove("hidden");
-      expenseGroup.classList.add("hidden");
+      document.getElementById("incomeGroup").classList.remove("hidden");
+      document.getElementById("expenseGroup").classList.add("hidden");
       document.getElementById("expense").value = "0";
     } else {
-      incomeGroup.classList.add("hidden");
-      expenseGroup.classList.remove("hidden");
+      document.getElementById("incomeGroup").classList.add("hidden");
+      document.getElementById("expenseGroup").classList.remove("hidden");
       document.getElementById("income").value = "0";
     }
   }
 
-  // --- 提交資料 ---
   function submitData() {
     const payload = {
-      action: "submit",
-      password: currentPw,
+      action: "submit", password: currentPw,
       date: document.getElementById("date").value,
       type: document.getElementById("type").value,
       fundCategory: document.getElementById("fundCategory").value,
@@ -162,57 +206,114 @@
       income: document.getElementById("income").value,
       expense: document.getElementById("expense").value
     };
-
-    if(!payload.date || !payload.desc) return alert("請至少填寫『日期』與『項目說明』！");
+    
+    if(!payload.date || !payload.desc) return alert("請務必填寫『日期』與『項目說明』！");
 
     callAPI(payload, "submitBtn", "確認送出並寫入資料庫", function(res) {
       if(res.status === "SUCCESS") {
-        alert("🎉 資料寫入成功！\\n系統自動計算最新餘額為：" + res.newBalance + " 元");
+        alert("✅ 資料寫入成功！");
         document.getElementById("desc").value = "";
         document.getElementById("income").value = "0";
         document.getElementById("expense").value = "0";
         document.getElementById("note").value = "";
+        loadData();
       } else {
-        alert("驗證失敗，請重新登入！");
+        alert("寫入失敗，密碼驗證錯誤，請重新登入！");
         location.reload();
       }
     });
   }
 
-  // --- 修改密碼介面 ---
-  function showChangePw() {
-    document.getElementById("mainApp").innerHTML = `
-      <h2>修改系統密碼</h2>
-      <div class="form-group"><label>請輸入全新管理密碼</label><input type="password" id="newPw" placeholder="請輸入新密碼"></div>
-      <button id="changePwBtn" onclick="changePassword()">確認變更</button>
-      <button onclick="renderMainSystem()" style="background-color: #64748b; margin-top: 10px;">取消返回</button>
-    `;
-  }
-
-  // --- 執行修改密碼 ---
-  function changePassword() {
-    const newPw = document.getElementById("newPw").value;
-    if(!newPw) return alert("新密碼不能為空！");
-    
-    callAPI({ action: "changePw", oldPw: currentPw, newPw: newPw }, "changePwBtn", "確認變更", function(res) {
+  function loadData() {
+    callAPI({ action: "fetchData", password: currentPw }, null, null, function(res) {
       if(res.status === "SUCCESS") {
-        alert("密碼修改成功！下次登入請使用新密碼。");
-        currentPw = newPw;
-        renderMainSystem();
-      } else {
-        alert("密碼變更失敗。");
+        globalRecords = res.records;
+        document.getElementById("displayTotalIncome").innerText = "$" + res.totalIncome.toLocaleString();
+        document.getElementById("displayTotalExpense").innerText = "$" + res.totalExpense.toLocaleString();
+        
+        let tbody = "";
+        if(res.records.length === 0) {
+          tbody = "<tr><td colspan='5' style='text-align:center; padding: 20px;'>目前資料庫無任何紀錄</td></tr>";
+        } else {
+          res.records.slice(0, 20).forEach(r => {
+            let amtHtml = r.type === '收入' 
+              ? `<span class="text-green">+$${r.income.toLocaleString()}</span>` 
+              : `<span class="text-red">-$${r.expense.toLocaleString()}</span>`;
+            
+            tbody += `<tr>
+              <td>${r.date}</td>
+              <td><span style="background:#eee; padding:2px 6px; border-radius:4px; font-size:12px;">${r.type}</span></td>
+              <td style="font-weight:bold;">${r.desc}</td>
+              <td>${amtHtml}</td>
+              <td style="font-weight:bold; color:#555;">$${r.balance.toLocaleString()}</td>
+            </tr>`;
+          });
+        }
+        document.getElementById("recordTableBody").innerHTML = tbody;
       }
     });
   }
 
-  // --- 登出 ---
-  function logout() {
-    currentPw = "";
-    document.getElementById("mainApp").style.display = "none";
-    document.getElementById("loginApp").style.display = "block";
-    document.getElementById("loginPw").value = "";
+  function generateAIReport() {
+    const reportBox = document.getElementById("aiReportBox");
+    reportBox.style.display = "block";
+    reportBox.innerHTML = "<p style='text-align:center; font-weight:bold; color:#555;'>🤖 AI 正在計算本月數據，請稍候...</p>";
+
+    const now = new Date();
+    const currentMonthStr = now.getFullYear() + "-" + String(now.getMonth() + 1).padStart(2, '0');
+    
+    let mIncome = 0, mExpense = 0;
+    let categoryData = {};
+
+    globalRecords.forEach(r => {
+      if (r.date.startsWith(currentMonthStr)) {
+        mIncome += r.income;
+        mExpense += r.expense;
+        
+        if (r.type === "支出") {
+          let cat = r.category || "未填寫分類";
+          if (!categoryData[cat]) categoryData[cat] = 0;
+          categoryData[cat] += r.expense;
+        }
+      }
+    });
+
+    let mBalance = mIncome - mExpense;
+    let statusMsg = mBalance >= 0 
+      ? "<span class='text-green'>✅ 本月目前為盈餘狀態，表現良好，請繼續保持！</span>" 
+      : "<span class='text-red'>⚠️ 本月目前呈現赤字，請密切注意後續資金控管！</span>";
+
+    let maxCat = "無", maxCatAmt = 0;
+    for (let cat in categoryData) {
+      if (categoryData[cat] > maxCatAmt) {
+        maxCatAmt = categoryData[cat];
+        maxCat = cat;
+      }
+    }
+
+    setTimeout(() => {
+      reportBox.innerHTML = `
+        <h4 style="margin:0 0 15px 0; color:var(--primary); font-size:18px; border-bottom:1px solid #ccc; padding-bottom:8px;">📊 ${currentMonthStr} 月份 AI 財務速報</h4>
+        <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
+          <span>本月總收入：</span> <strong class="text-green">$${mIncome.toLocaleString()}</strong>
+        </div>
+        <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
+          <span>本月總支出：</span> <strong class="text-red">$${mExpense.toLocaleString()}</strong>
+        </div>
+        <div style="display:flex; justify-content:space-between; margin-bottom:15px; font-size:18px;">
+          <span>本月淨結餘：</span> <strong style="color:var(--primary);">$${mBalance.toLocaleString()}</strong>
+        </div>
+        <div style="background:white; padding:12px; border-radius:6px; font-size:14px; line-height:1.6;">
+          <strong>💡 AI 洞察分析：</strong><br>${statusMsg}<br><br>
+          🔥 <strong>最燒錢的項目：</strong> 本月在【<span style="color:var(--primary); font-weight:bold;">${maxCat}</span>】類別花費最高，達 $${maxCatAmt.toLocaleString()} 元。
+        </div>
+      `;
+    }, 800);
+  }
+
+  function logout() { 
+    if(confirm("確定要登出系統嗎？")) { location.reload(); }
   }
 </script>
 </body>
 </html>
-
