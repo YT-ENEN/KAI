@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>REBORN Studio | Admin Control Panel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/html5-qrcode"></script>
+    <style>
+        :root {
+            /* 極簡白金配色系統 */
+            --bg-color: #F5F5F7;         /* 蘋果灰底色 */
+            --surface: #FFFFFF;          /* 卡片純白 */
+            --reborn-yellow: #FFB800;    /* 銳能黃 */
+            --reborn-yellow-hover: #E6A600;
+            --text-main: #1D1D1F;        /* 深黑字體 */
+            --text-muted: #86868B;       /* 灰字 */
+            --border-color: #E5E5EA;     /* 淡灰邊線 */
+            --danger: #FF3B30;
+            --success: #34C759;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; font-family: 'Inter', 'Noto Sans TC', sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-main); overflow: hidden; display: flex; height: 100vh; }
+        
+        .hidden { display: none !important; }
+        .fade-in { animation: fadeIn 0.3s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* ====== 按鈕設計 ====== */
+        .btn-main { background: var(--reborn-yellow); color: #000; padding: 14px 24px; border: none; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; transition: 0.2s; display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+        .btn-main:active { transform: scale(0.97); background: var(--reborn-yellow-hover); }
+        .btn-secondary { background: #F2F2F7; color: var(--text-main); padding: 14px 24px; border: none; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; transition: 0.2s; }
+        .btn-secondary:active { transform: scale(0.97); background: #E5E5EA; }
+        .btn-danger { background: rgba(255, 59, 48, 0.1); color: var(--danger); border: none; padding: 8px 16px; border-radius: 8px; font-weight: 600; cursor: pointer; }
+        .btn-success { background: rgba(52, 199, 89, 0.1); color: var(--success); border: none; padding: 8px 16px; border-radius: 8px; font-weight: 600; cursor: pointer; }
+
+        /* ====== 輸入框設計 ====== */
+        .input-box { background: var(--surface); border-radius: 12px; padding: 12px 16px; margin-bottom: 16px; border: 1px solid var(--border-color); display: flex; flex-direction: column; transition: 0.3s; }
+        .input-box.focused { border-color: var(--reborn-yellow); box-shadow: 0 0 0 3px rgba(255, 184, 0, 0.15); }
+        .input-box label { font-size: 12px; color: var(--text-muted); margin-bottom: 6px; font-weight: 500; }
+        .input-box input, select { background: transparent; border: none; color: var(--text-main); font-size: 16px; outline: none; width: 100%; font-weight: 500; }
+        .fake-input { color: var(--text-muted); font-size: 16px; min-height: 20px; line-height: 20px; font-weight: 500; }
+        .fake-input.has-value { color: var(--text-main); }
+
+        /* ====== 版面佈局 ====== */
+        #view-auth { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px; }
+        #admin-app { width: 100%; display: flex; flex-direction: row; }
+        
+        .sidebar { width: 260px; background: var(--surface); border-right: 1px solid var(--border-color); display: flex; flex-direction: column; padding: 30px 20px; z-index: 10; }
+        .brand { font-size: 22px; font-weight: 800; color: #000; margin-bottom: 40px; letter-spacing: 0.5px; padding-left: 10px; }
+        .brand span { font-size: 11px; color: var(--text-muted); letter-spacing: 0; font-weight: 500; display: block; margin-top: 4px; }
+        
+        .nav-link { padding: 16px 20px; color: var(--text-muted); font-size: 15px; font-weight: 600; border-radius: 12px; cursor: pointer; margin-bottom: 8px; transition: 0.2s; display: flex; align-items: center; gap: 12px; }
+        .nav-link:hover { background: var(--bg-color); color: var(--text-main); }
+        .nav-link.active { background: var(--reborn-yellow); color: #000; }
+        
+        .main-content { flex: 1; overflow-y: auto; padding: 40px; position: relative; -webkit-overflow-scrolling: touch; }
+        .page-title { font-size: 32px; font-weight: 800; margin-bottom: 30px; color: #000; letter-spacing: -0.5px; }
+        .admin-card { background: var(--surface); border-radius: 20px; padding: 28px; border: 1px solid var(--border-color); margin-bottom: 24px; box-shadow: var(--shadow); }
+        .card-title { font-size: 18px; font-weight: 700; margin-bottom: 20px; color: #000; }
+        
+        /* ====== 表格設計 ====== */
+        .data-table { width: 100%; border-collapse: collapse; }
+        .data-table th { text-align: left; padding: 14px 12px; font-size: 13px; color: var(--text-muted); border-bottom: 2px solid var(--bg-color); font-weight: 600; }
+        .data-table td { padding: 16px 12px; font-size: 14px; border-bottom: 1px solid var(--border-color); vertical-align: middle; font-weight: 500; }
+        .data-table tr:last-child td { border-bottom: none; }
+        
+        .badge { padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; display: inline-block; background: #000; color: var(--reborn-yellow); }
+        .badge.outline { background: transparent; border: 1px solid var(--border-color); color: var(--text-muted); }
+
+        /* ====== 掃描器設計 ====== */
+        #reader-container { width: 100%; max-width: 320px; margin: 0 auto 24px auto; overflow: hidden; border-radius: 20px; border: 4px solid var(--bg-color); box-shadow: var(--shadow); aspect-ratio: 1; background: #000; }
+        .scan-result-card { background: var(--bg-color); border-radius: 16px; padding: 24px; text-align: center; margin-top: 20px; border: 1px solid var(--border-color); }
+        .scan-result-card h3 { margin-bottom: 8px; font-size: 24px; font-weight: 800; color: #000; }
+        .scan-result-card .pts { font-size: 36px; font-weight: 800; margin-bottom: 20px; color: var(--reborn-yellow); text-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+
+        /* 響應式 */
+        @media (max-width: 768px) {
+            body { flex-direction: column; }
+            .sidebar { width: 100%; padding: 15px; flex-direction: row; border-right: none; border-bottom: 1px solid var(--border-color); overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch; box-shadow: var(--shadow); }
+            .brand { display: none; }
+            .nav-link { margin-bottom: 0; margin-right: 10px; padding: 12px 16px; font-size: 14px; }
+            .main-content { padding: 20px; }
+            .page-title { font-size: 24px; }
+            .admin-card { padding: 20px; }
+        }
+        
+        /* Modal & Numpad */
+        .modal-backdrop { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 200; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: 0.3s; }
+        .modal-backdrop.active { opacity: 1; pointer-events: auto; }
+        .modal-sheet { background: var(--surface); border-radius: 24px; padding: 30px 24px; width: 90%; max-width: 400px; transform: scale(0.95); transition: 0.3s cubic-bezier(0.32, 0.72, 0, 1); box-shadow: 0 20px 40px rgba(0,0,0,0.1); position: relative; }
+        .modal-backdrop.active .modal-sheet { transform: scale(1); }
+        .sheet-title { font-size: 20px; font-weight: 800; margin-bottom: 8px; text-align: center; color: #000; }
+        .sheet-desc { font-size: 14px; color: var(--text-muted); margin-bottom: 24px; text-align: center; font-weight: 500; }
+        .btn-close { position: absolute; top: 16px; right: 16px; width: 32px; height: 32px; background: var(--bg-color); border-radius: 50%; border: none; color: var(--text-muted); font-size: 18px; cursor: pointer; transition: 0.2s; }
+        
+        .numpad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+        .num-key { appearance: none; border: none; color: #000; background: var(--bg-color); border-radius: 16px; aspect-ratio: 1.8; display: flex; justify-content: center; align-items: center; font-size: 24px; font-weight: 600; cursor: pointer; transition: 0.1s; user-select: none; }
+        .num-key:active { background: #E5E5EA; transform: scale(0.95); }
+        .num-key.action { font-size: 18px; font-weight: 700; background: transparent; color: var(--text-muted); }
+        
+        /* Toast */
+        .toast { position: fixed; top: 20px; left: 50%; transform: translate(-50%, -20px); background: #000; color: white; padding: 14px 28px; border-radius: 30px; font-size: 14px; font-weight: 600; box-shadow: 0 10px 30px rgba(0,0,0,0.2); opacity: 0; pointer-events: none; transition: 0.3s; z-index: 9999; }
+        .toast.show { opacity: 1; transform: translate(-50%, 0); }
+        .loading-text { font-size: 14px; color: var(--text-muted); text-align: center; padding: 30px; font-weight: 500; }
+    </style>
+</head>
+<body>
+
+    <div id="toast" class="toast">操作成功</div>
+
+    <!-- 🔐 登入畫面 -->
+    <div id="view-auth">
+        <div style="background: white; padding: 40px; border-radius: 24px; box-shadow: var(--shadow); text-align: center; width: 90%; max-width: 400px; border: 1px solid var(--border-color);">
+            <h1 style="margin-bottom: 8px; font-weight: 800; color: #000; letter-spacing: 1px;">REBORN</h1>
+            <p style="color: var(--text-muted); margin-bottom: 30px; font-size: 14px; font-weight: 500;">管理員終端控制台</p>
+            
+            <div class="input-box" style="text-align: center; cursor: pointer;" onclick="openNumpad('login-pin')">
+                <label style="text-align: left;">管理員 PIN 碼</label>
+                <div id="login-pin" class="fake-input" style="font-size: 28px; letter-spacing: 8px; margin-top: 4px; font-weight: 800; color: #000;" data-value="">點此輸入...</div>
+            </div>
+            <button class="btn-main" style="width: 100%; margin-top: 10px;" onclick="submitPin()">確認登入</button>
+        </div>
+    </div>
+
+    <!-- 💻 後台系統主體 -->
+    <div id="admin-app" class="hidden">
+        
+        <!-- 側邊欄 -->
+        <aside class="sidebar">
+            <div class="brand">REBORN<br><span>Admin Control Panel</span></div>
+            <div class="nav-link active" id="nav-scanner" onclick="switchView('scanner')">📸 掃碼收銀台</div>
+            <div class="nav-link" id="nav-airdrop" onclick="switchView('airdrop')">🎁 發送點數</div>
+            <div class="nav-link" id="nav-tasks" onclick="switchView('tasks')">✅ 審核與任務</div>
+            <div class="nav-link" id="nav-store" onclick="switchView('store')">🛍️ 商城管理</div>
+            <div class="nav-link" id="nav-members" onclick="switchView('members')">👥 會員庫</div>
+            <div style="flex:1;"></div>
+            <div class="nav-link" style="color: var(--danger);" onclick="location.reload()">登出系統</div>
+        </aside>
+
+        <main class="main-content">
+            
+            <!-- 1. 掃碼收銀台 -->
+            <section id="view-scanner" class="fade-in">
+                <h2 class="page-title">掃碼收銀台</h2>
+                <div style="display: flex; gap: 24px; flex-wrap: wrap;">
+                    <div class="admin-card" style="flex: 1; min-width: 300px; text-align: center;">
+                        <h3 class="card-title">會員條碼掃描</h3>
+                        <div id="reader-container"></div>
+                        <button class="btn-main" id="btn-start-scan" onclick="startScanner()" style="width: 100%;">啟動攝影機</button>
+                        <button class="btn-secondary hidden" id="btn-stop-scan" onclick="stopScanner()" style="width: 100%;">停止掃描</button>
+                    </div>
+                    <div class="admin-card" style="flex: 1; min-width: 300px;">
+                        <h3 class="card-title">操作面板</h3>
+                        <div id="scan-waiting" style="color: var(--text-muted); text-align: center; padding: 40px 0; font-weight: 500; background: var(--bg-color); border-radius: 16px;">等待掃描中...</div>
+                        <div id="scan-result" class="hidden">
+                            <div class="scan-result-card">
+                                <h3 id="res-name">-</h3>
+                                <div style="font-size: 13px; margin-bottom: 15px; color: var(--text-muted); font-weight: 600;" id="res-uid">UID: -</div>
+                                <div class="pts" id="res-pts">0 pts</div>
+                                <span class="badge" id="res-tier">-</span>
+                            </div>
+                            <h4 style="margin: 24px 0 16px 0; font-size: 16px; color: #000;">快速手動扣點</h4>
+                            <div class="input-box" style="cursor: pointer;" onclick="openNumpad('manual-deduct-pts')">
+                                <label>扣除額度</label>
+                                <div id="manual-deduct-pts" class="fake-input" data-value="">點擊輸入數值...</div>
+                            </div>
+                            <div class="input-box">
+                                <label>事由</label>
+                                <input type="text" id="manual-deduct-reason" placeholder="例如：現場購買服飾">
+                            </div>
+                            <button class="btn-main" style="width: 100%; background: #000; color: var(--reborn-yellow);" onclick="executeDeduct()">確認扣除點數</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. 批次發送點數 -->
+            <section id="view-airdrop" class="hidden">
+                <h2 class="page-title">發送點數 Airdrop</h2>
+                <div class="admin-card">
+                    <h3 class="card-title">設定發放內容</h3>
+                    <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 16px;">
+                        <div class="input-box" style="cursor: pointer;" onclick="openNumpad('airdrop-pts')">
+                            <label>發放額度</label>
+                            <div id="airdrop-pts" class="fake-input" data-value="">點擊輸入...</div>
+                        </div>
+                        <div class="input-box"><label>發放事由 (必填)</label><input type="text" id="airdrop-reason" placeholder="例如：2026秋季盃完賽獎勵"></div>
+                    </div>
+                </div>
+                <div class="admin-card">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h3 class="card-title" style="margin:0;">選擇對象</h3>
+                        <button class="btn-main" style="padding: 10px 20px; font-size: 14px;" onclick="executeAirdrop()">發放給選定者</button>
+                    </div>
+                    <div style="overflow-x: auto;">
+                        <table class="data-table">
+                            <thead><tr><th style="width: 40px;"><input type="checkbox" onchange="toggleAllAirdrop(this)"></th><th>UID</th><th>Gamer Tag</th><th>當前等級</th></tr></thead>
+                            <tbody id="tbody-airdrop"><tr><td colspan="4" class="loading-text">資料載入中...</td></tr></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. 審核與任務列 -->
+            <section id="view-tasks" class="hidden">
+                <h2 class="page-title">審核與任務 Tasks</h2>
+                <div class="admin-card">
+                    <h3 class="card-title" style="color: var(--reborn-yellow-hover);">1. 補登審核 (Claims)</h3>
+                    <div style="overflow-x: auto;">
+                        <table class="data-table">
+                            <thead><tr><th>時間</th><th>申請人 (UID)</th><th>賽事名稱</th><th>隊伍 / 負責人</th><th>操作</th></tr></thead>
+                            <tbody id="tbody-tasks-claim"><tr><td colspan="5" class="loading-text">暫無待審核項目</td></tr></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="admin-card">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px;">
+                        <h3 class="card-title" style="margin:0;">2. 兌換核銷 (Redeems)</h3>
+                        <button class="btn-main" style="background: #000; color: white; padding: 10px 20px; font-size: 14px;" onclick="openGlobalScanner('redeem')">📷 掃碼核銷</button>
+                    </div>
+                    
+                    <div style="display: flex; gap: 12px; margin-bottom: 24px; max-width: 500px;">
+                        <input type="text" id="manual-redeem-input" placeholder="或手動輸入任務編號 (Task ID)..." style="padding: 12px 16px; border-radius: 12px; border: 1px solid var(--border-color); background: var(--bg-color); color: var(--text-main); flex: 1; font-size: 14px; outline: none; font-weight: 500;">
+                        <button class="btn-secondary" onclick="manualRedeemTask()" style="padding: 12px 20px; font-size: 14px;">手動確認</button>
+                    </div>
+                    
+                    <div style="overflow-x: auto;">
+                        <table class="data-table">
+                            <thead><tr><th>時間</th><th>申請人</th><th>任務編號</th><th>兌換項目</th><th>操作</th></tr></thead>
+                            <tbody id="tbody-tasks-redeem"><tr><td colspan="5" class="loading-text">暫無待派發項目</td></tr></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. 商城管理 -->
+            <section id="view-store" class="hidden">
+                <h2 class="page-title">商城管理 Store</h2>
+                <div class="admin-card">
+                    <h3 class="card-title">新增上架</h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                        <div class="input-box"><label>商品名稱</label><input type="text" id="new-item-title" placeholder="例如：紀念服飾"></div>
+                        <div class="input-box" style="cursor: pointer;" onclick="openNumpad('new-item-points')"><label>兌換點數</label><div id="new-item-points" class="fake-input" data-value="">點擊輸入...</div></div>
+                        <div class="input-box"><label>商品類型</label><select id="new-item-type"><option value="physical">實體商品 (現場核銷)</option><option value="virtual">數位虛寶 (線上派發)</option></select></div>
+                        <div class="input-box"><label>圖片網址 (URL)</label><input type="text" id="new-item-image" placeholder="https://..."></div>
+                    </div>
+                    <button class="btn-main" style="width: 100%; margin-top: 8px;" onclick="addStoreItem()">確認上架</button>
+                </div>
+                <div class="admin-card">
+                    <h3 class="card-title">架上商品</h3>
+                    <div style="overflow-x: auto;">
+                        <table class="data-table">
+                            <thead><tr><th>圖片</th><th>商品名稱</th><th>類型</th><th>點數</th><th>操作</th></tr></thead>
+                            <tbody id="tbody-store"><tr><td colspan="5" class="loading-text">資料載入中...</td></tr></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5. 會員總覽 -->
+            <section id="view-members" class="hidden">
+                <h2 class="page-title">會員庫 Database</h2>
+                <div class="admin-card">
+                    <div style="display: flex; gap: 12px; margin-bottom: 24px; max-width: 500px;">
+                        <div class="input-box" style="flex: 1; margin-bottom: 0; padding: 0; border: none; background: var(--bg-color);">
+                            <input type="text" id="search-member-input" placeholder="輸入 UID 或 名稱..." style="padding: 14px 16px; height: 100%; border-radius: 12px;">
+                        </div>
+                        <button class="btn-main" style="padding: 0 24px;" onclick="searchMember()">搜尋</button>
+                        <button class="btn-secondary" onclick="openGlobalScanner('search')" style="padding: 0 16px; font-size: 20px;">📷</button>
+                    </div>
+                    <div style="overflow-x: auto;">
+                        <table class="data-table">
+                            <thead><tr><th>UID</th><th>Gamer Tag</th><th>Email</th><th>點數</th><th>等級</th></tr></thead>
+                            <tbody id="tbody-members"><tr><td colspan="5" class="loading-text">資料載入中...</td></tr></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- 🍎 共用彈出視窗 -->
+    <div id="modal-approve" class="modal-backdrop" onclick="closeModal('approve', event)">
+        <div class="modal-sheet">
+            <button class="btn-close" onclick="forceCloseModal('approve')">&times;</button>
+            <h3 class="sheet-title">核准補登</h3>
+            <p class="sheet-desc" id="approve-desc">請確認發放的點數額度。</p>
+            <div class="input-box" style="cursor: pointer;" onclick="openNumpad('approve-pts-input')"><label>核准發放點數</label><div id="approve-pts-input" class="fake-input has-value" data-value="100">100</div></div>
+            <button class="btn-main" style="width: 100%; margin-top: 10px;" onclick="confirmApprove()">確認發放</button>
+        </div>
+    </div>
+
+    <div id="numpad-overlay" class="modal-backdrop" onclick="closeNumpadEvent(event)">
+        <div id="floating-numpad" class="modal-sheet" style="padding: 24px; max-width: 320px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;"><span style="color: var(--text-muted); font-weight: 600; font-size: 14px;">請輸入數值</span><span style="color: var(--reborn-yellow-hover); font-weight: 700; cursor: pointer; padding: 5px;" onclick="closeNumpad()">完成</span></div>
+            <div class="numpad"><button type="button" class="num-key" onclick="fnInput('1')">1</button><button type="button" class="num-key" onclick="fnInput('2')">2</button><button type="button" class="num-key" onclick="fnInput('3')">3</button><button type="button" class="num-key" onclick="fnInput('4')">4</button><button type="button" class="num-key" onclick="fnInput('5')">5</button><button type="button" class="num-key" onclick="fnInput('6')">6</button><button type="button" class="num-key" onclick="fnInput('7')">7</button><button type="button" class="num-key" onclick="fnInput('8')">8</button><button type="button" class="num-key" onclick="fnInput('9')">9</button><button type="button" class="num-key action" onclick="fnClear()">C</button><button type="button" class="num-key" onclick="fnInput('0')">0</button><button type="button" class="num-key action" onclick="fnDelete()">⌫</button></div>
+        </div>
+    </div>
+
+    <div id="global-scanner-modal" class="modal-backdrop" onclick="closeGlobalScannerEvent(event)">
+        <div class="modal-sheet" style="text-align: center; padding: 30px 20px;"><button class="btn-close" onclick="closeGlobalScanner()">&times;</button><h3 class="sheet-title" id="g-scan-title">掃描條碼</h3><p class="sheet-desc" style="margin-bottom: 20px;">請將條碼對準畫面中心</p><div id="g-reader-container" style="width: 100%; max-width: 280px; margin: 0 auto 24px auto; border-radius: 20px; overflow: hidden; border: 4px solid var(--bg-color); aspect-ratio: 1; background: #000;"></div><button class="btn-secondary" style="width: 100%;" onclick="closeGlobalScanner()">取消</button></div>
+    </div>
+
+    <script>
+        // ==========================================
+        // ⚠️ 終極提醒：請把下面換成你剛剛在 GAS「最新部署」的網址
+        // ==========================================
+        const GAS_API_URL = "https://script.google.com/macros/s/AKfycbwlSJcv6ftVp5grAB2tbyqNzK1WlFZcjYdvNtfJJxooQm8hjFbhZVL2aXYIUHDX6UA/exec";
+
+        async function callAPI(payload) {
+            try { let res = await fetch(GAS_API_URL, { method: 'POST', body: JSON.stringify(payload) }); return await res.json(); } 
+            catch(e) { console.error(e); return { status: "error", message: "連線失敗，請檢查網址或網路狀態" }; }
+        }
+
+        // ====== UI 與鍵盤邏輯 ======
+        let activeInputId = null;
+        function openNumpad(inputId) { document.querySelectorAll('.input-box.focused').forEach(el => el.classList.remove('focused')); activeInputId = inputId; document.getElementById('numpad-overlay').classList.add('active'); const el = document.getElementById(inputId); if(el) { const inputBox = el.closest('.input-box'); if(inputBox) inputBox.classList.add('focused'); } }
+        function closeNumpad() { document.getElementById('numpad-overlay').classList.remove('active'); if(activeInputId) { const el = document.getElementById(activeInputId); if(el) { const box = el.closest('.input-box'); if(box) box.classList.remove('focused'); } } activeInputId = null; }
+        function closeNumpadEvent(event) { if (event.target.id === 'numpad-overlay') closeNumpad(); }
+        function fnInput(num) { if(!activeInputId) return; const el = document.getElementById(activeInputId); let currentVal = el.getAttribute('data-value') || ''; currentVal += num; el.setAttribute('data-value', currentVal); if(activeInputId === 'login-pin') el.innerText = '* '.repeat(currentVal.length); else el.innerText = currentVal; el.classList.add('has-value'); }
+        function fnClear() { if(!activeInputId) return; const el = document.getElementById(activeInputId); el.setAttribute('data-value', ''); el.innerText = activeInputId === 'login-pin' ? '點此輸入...' : '點擊輸入...'; el.classList.remove('has-value'); }
+        function fnDelete() { if(!activeInputId) return; const el = document.getElementById(activeInputId); let currentVal = el.getAttribute('data-value') || ''; currentVal = currentVal.slice(0, -1); el.setAttribute('data-value', currentVal); if(currentVal.length === 0) fnClear(); else { if(activeInputId === 'login-pin') el.innerText = '* '.repeat(currentVal.length); else el.innerText = currentVal; } }
+        function showToast(message) { const toast = document.getElementById('toast'); toast.innerText = message; toast.classList.add('show'); setTimeout(() => { toast.classList.remove('show'); }, 3000); }
+
+        function submitPin() {
+            const pin = document.getElementById('login-pin').getAttribute('data-value');
+            if(pin === "1234" || pin === "") { 
+                closeNumpad(); document.getElementById('view-auth').style.opacity = '0';
+                setTimeout(() => { document.getElementById('view-auth').classList.add('hidden'); document.getElementById('admin-app').classList.remove('hidden'); document.getElementById('admin-app').classList.add('fade-in'); showToast("歡迎登入 REBORN 系統"); fetchInitialData(); }, 300);
+            } else { showToast("密碼錯誤"); fnClear(); }
+        }
+
+        function switchView(viewName) {
+            closeNumpad();
+            ['scanner', 'airdrop', 'tasks', 'members', 'store'].forEach(v => { document.getElementById(`view-${v}`).classList.add('hidden'); document.getElementById(`nav-${v}`).classList.remove('active'); });
+            document.getElementById(`view-${viewName}`).classList.remove('hidden'); document.getElementById(`view-${viewName}`).classList.add('fade-in'); document.getElementById(`nav-${viewName}`).classList.add('active');
+            if(viewName !== 'scanner' && html5QrcodeScanner) stopScanner();
+        }
+
+        // ====== 核心：資料庫連線 ======
+        async function fetchInitialData() {
+            showToast("與 Google 資料庫同步中...");
+            const res = await callAPI({ action: "adminGetDashboard" });
+            if(res.status === 'success') {
+                let airdropHtml = ''; res.users.forEach(u => { airdropHtml += `<tr><td><input type="checkbox" class="airdrop-cb" data-uid="${u.uid}"></td><td style="font-weight:600;">${u.uid}</td><td>${u.gamerTag}</td><td><span class="badge outline">${u.level}</span></td></tr>`; }); document.getElementById('tbody-airdrop').innerHTML = airdropHtml || '<tr><td colspan="4" class="loading-text">尚無會員資料</td></tr>';
+                let membersHtml = ''; res.users.forEach(u => { membersHtml += `<tr><td style="font-weight:600;">${u.uid}</td><td>${u.gamerTag}</td><td style="color:var(--text-muted);">${u.email}</td><td style="color:var(--reborn-yellow-hover);font-weight:800;">${u.points}</td><td><span class="badge outline">${u.level}</span></td></tr>`; }); document.getElementById('tbody-members').innerHTML = membersHtml || '<tr><td colspan="5" class="loading-text">尚無會員資料</td></tr>';
+                let claimsHtml = ''; res.tasks.filter(t => t.type === 'Claim').forEach(t => { claimsHtml += `<tr><td style="color:var(--text-muted);">${t.date}</td><td style="font-weight:600;">${t.uid}</td><td style="font-weight:700;">${t.detail}</td><td><span style="font-size:12px;color:var(--text-muted);">${t.extra}</span></td><td><button class="btn-success" onclick="openApproveModal(this, '${t.uid}', '${t.id}')">核准</button></td></tr>`; }); document.getElementById('tbody-tasks-claim').innerHTML = claimsHtml || '<tr><td colspan="5" class="loading-text">目前乾淨溜溜，無待審核項目</td></tr>';
+                let redeemsHtml = ''; res.tasks.filter(t => t.type === 'Redeem').forEach(t => { redeemsHtml += `<tr><td style="color:var(--text-muted);">${t.date}</td><td style="font-weight:600;">${t.uid}</td><td style="font-size:12px; color:var(--text-muted);">${t.id}</td><td style="font-weight:700;">${t.detail}</td><td><button class="btn-secondary" style="padding:6px 14px; font-size:13px;" onclick="completeTask('${t.id}')">完成核銷</button></td></tr>`; }); document.getElementById('tbody-tasks-redeem').innerHTML = redeemsHtml || '<tr><td colspan="5" class="loading-text">目前乾淨溜溜，無待派發項目</td></tr>';
+                fetchStoreItems(); 
+            } else {
+                showToast("連線失敗！請確認 GAS_API_URL 是否正確填寫");
+            }
+        }
+
+        async function manualRedeemTask() {
+            const val = document.getElementById('manual-redeem-input').value;
+            if(!val) return showToast("請輸入任務編號或商品編號！");
+            showToast("手動核銷處理中...");
+            const res = await callAPI({ action: "adminCompleteTask", taskID: val });
+            if(res.status === 'success') { showToast("✅ 任務已成功手動核銷！"); document.getElementById('manual-redeem-input').value = ''; fetchInitialData(); } 
+            else showToast("❌ 核銷失敗：" + res.message);
+        }
+
+        async function completeTask(taskId) { 
+            showToast('核銷處理中...');
+            const res = await callAPI({ action: "adminCompleteTask", taskID: taskId });
+            if(res.status === 'success') { showToast('任務已標記為完成！'); fetchInitialData(); } 
+            else showToast(res.message);
+        }
+
+        let pendingApproveUid = ""; let pendingApproveTaskID = "";
+        function openApproveModal(btn, uid, taskId) { pendingApproveUid = uid; pendingApproveTaskID = taskId; document.getElementById('approve-desc').innerText = `準備發放點數給：${uid}`; document.getElementById('modal-approve').classList.add('active'); }
+        function forceCloseModal(type) { document.getElementById(`modal-${type}`).classList.remove('active'); closeNumpad(); }
+        function closeModal(type, event) { if (event.target.classList.contains('modal-backdrop')) forceCloseModal(type); }
+        
+        async function confirmApprove() { 
+            const pts = document.getElementById('approve-pts-input').getAttribute('data-value');
+            if(!pts) return showToast("請輸入核准點數！"); forceCloseModal('approve'); closeNumpad(); showToast(`核准中... 發放 ${pts} 點`);
+            const res = await callAPI({ action: "adminApproveTask", taskID: pendingApproveTaskID, pts: pts });
+            if(res.status === 'success') { showToast("核准成功，點數已派發。"); fetchInitialData(); } else showToast(res.message); 
+        }
+
+        async function fetchStoreItems() { const res = await callAPI({ action: "getStoreItems" }); if(res.status === 'success') { let html = ''; res.items.forEach(item => { html += `<tr><td><img src="${item.image || 'https://via.placeholder.com/40'}" style="width:40px; height:40px; object-fit:cover; border-radius:10px; background:var(--bg-color);"></td><td style="font-weight:600;">${item.title}</td><td><span class="badge outline">${item.type === 'physical' ? '實體' : '虛寶'}</span></td><td style="color:var(--reborn-yellow-hover); font-weight:800;">${item.points}</td><td><button class="btn-danger" style="padding:6px 14px; font-size:13px;" onclick="deleteStoreItem('${item.id}')">下架</button></td></tr>`; }); document.getElementById('tbody-store').innerHTML = html || '<tr><td colspan="5" class="loading-text">商城目前沒有商品</td></tr>'; } }
+        async function addStoreItem() { const title = document.getElementById('new-item-title').value; const points = document.getElementById('new-item-points').getAttribute('data-value'); const type = document.getElementById('new-item-type').value; const image = document.getElementById('new-item-image').value; if(!title || !points) return showToast("請填寫名稱與點數！"); showToast("上架中..."); closeNumpad(); const res = await callAPI({ action: "adminAddStoreItem", item: { title, points, type, image } }); if(res.status === 'success') { showToast("上架成功！"); document.getElementById('new-item-title').value = ''; document.getElementById('new-item-points').setAttribute('data-value', ''); document.getElementById('new-item-points').innerText = '點擊輸入...'; document.getElementById('new-item-points').classList.remove('has-value'); document.getElementById('new-item-image').value = ''; fetchStoreItems(); } else showToast(res.message); }
+        async function deleteStoreItem(id) { if(!confirm("確定要下架嗎？")) return; showToast("下架中..."); const res = await callAPI({ action: "adminDeleteStoreItem", itemId: id }); if(res.status === 'success') { showToast("下架成功！"); fetchStoreItems(); } else showToast(res.message); }
+        function toggleAllAirdrop(checkbox) { document.querySelectorAll('.airdrop-cb').forEach(cb => cb.checked = checkbox.checked); }
+        async function executeAirdrop() { const pts = document.getElementById('airdrop-pts').getAttribute('data-value'); const reason = document.getElementById('airdrop-reason').value; const checkedBoxes = document.querySelectorAll('.airdrop-cb:checked'); if(!pts || !reason) return showToast("請輸入點數與事由！"); if(checkedBoxes.length === 0) return showToast("請至少勾選一位！"); let uids = []; checkedBoxes.forEach(cb => { uids.push(cb.getAttribute('data-uid')); }); closeNumpad(); showToast(`發送中... 準備發送給 ${uids.length} 位`); const res = await callAPI({ action: "adminAirdropBatch", uids: uids, pts: pts, reason: reason }); if(res.status === 'success') { showToast("發放成功！"); document.getElementById('airdrop-pts').setAttribute('data-value', ''); document.getElementById('airdrop-pts').innerText = '點擊輸入...'; document.getElementById('airdrop-pts').classList.remove('has-value'); document.getElementById('airdrop-reason').value = ''; fetchInitialData(); } }
+        
+        // ====== 掃描器 ======
+        let html5QrcodeScanner = null; let scannedUserUid = null;
+        function startScanner() { document.getElementById('btn-start-scan').classList.add('hidden'); document.getElementById('btn-stop-scan').classList.remove('hidden'); document.getElementById('scan-waiting').innerText = "相機啟動中... 請將條碼對準畫面"; html5QrcodeScanner = new Html5Qrcode("reader-container"); html5QrcodeScanner.start({ facingMode: "environment" }, { fps: 10, qrbox: { width: 250, height: 250 } }, (decodedText) => { stopScanner(); processScanResult(decodedText); }, (errorMessage) => {} ).catch((err) => { showToast("相機啟動失敗 (請確認在 HTTPS 環境)"); stopScanner(); }); }
+        function stopScanner() { if(html5QrcodeScanner) { html5QrcodeScanner.stop().then(() => { html5QrcodeScanner.clear(); html5QrcodeScanner = null; document.getElementById('btn-start-scan').classList.remove('hidden'); document.getElementById('btn-stop-scan').classList.add('hidden'); document.getElementById('scan-waiting').innerText = "已停止掃描"; }).catch(err => console.log(err)); } }
+        async function processScanResult(uid) { document.getElementById('scan-waiting').classList.remove('hidden'); document.getElementById('scan-result').classList.add('hidden'); document.getElementById('scan-waiting').innerHTML = "查詢會員資料中...<br><span style='font-size:12px;opacity:0.6;'>(連線中)</span>"; scannedUserUid = uid; const res = await callAPI({ action: "adminGetUser", uid: uid }); if(res.status === 'success') { document.getElementById('scan-waiting').classList.add('hidden'); document.getElementById('scan-result').classList.remove('hidden'); document.getElementById('res-name').innerText = res.user.gamerTag; document.getElementById('res-uid').innerText = "UID: " + res.user.uid; document.getElementById('res-pts').innerText = res.user.points + " pts"; document.getElementById('res-tier').innerText = res.user.level; showToast("成功讀取會員資料！"); } else { document.getElementById('scan-waiting').innerText = "找不到該會員資料"; scannedUserUid = null; } }
+        async function executeDeduct() { const pts = document.getElementById('manual-deduct-pts').getAttribute('data-value'); const reason = document.getElementById('manual-deduct-reason').value; if(!pts || !reason) return showToast("請填寫扣除點數與事由！"); if(!scannedUserUid) return showToast("無法取得使用者 UID"); closeNumpad(); showToast(`處理中... 準備扣除 ${pts} 點`); const res = await callAPI({ action: "adminDeduct", uid: scannedUserUid, pts: pts, reason: reason }); if(res.status === 'success') { showToast("扣點成功！"); document.getElementById('manual-deduct-pts').setAttribute('data-value', ''); document.getElementById('manual-deduct-pts').innerText = '點擊輸入數值...'; document.getElementById('manual-deduct-pts').classList.remove('has-value'); document.getElementById('manual-deduct-reason').value = ''; document.getElementById('scan-result').classList.add('hidden'); document.getElementById('scan-waiting').classList.remove('hidden'); document.getElementById('scan-waiting').innerText = "等待下一次掃描..."; scannedUserUid = null; fetchInitialData(); } else { showToast(res.message); } }
+        
+        let globalScannerObj = null; let globalScanType = "";
+        function openGlobalScanner(type) { globalScanType = type; document.getElementById('global-scanner-modal').classList.add('active'); const titleEl = document.getElementById('g-scan-title'); if (type === 'search') titleEl.innerText = '掃描會員條碼'; else if (type === 'redeem') titleEl.innerText = '掃描兌換 QR Code'; globalScannerObj = new Html5Qrcode("g-reader-container"); globalScannerObj.start({ facingMode: "environment" }, { fps: 10, qrbox: { width: 250, height: 250 } }, (decodedText) => { closeGlobalScanner(); handleGlobalScanResult(decodedText, globalScanType); }, (errorMessage) => {} ).catch((err) => { showToast("相機啟動失敗"); closeGlobalScanner(); }); }
+        function closeGlobalScanner() { document.getElementById('global-scanner-modal').classList.remove('active'); if (globalScannerObj) { globalScannerObj.stop().then(() => { globalScannerObj.clear(); globalScannerObj = null; }).catch(err => console.log(err)); } }
+        function closeGlobalScannerEvent(event) { if (event.target.id === 'global-scanner-modal') closeGlobalScanner(); }
+        function handleGlobalScanResult(text, type) { if (type === 'search') { document.getElementById('search-member-input').value = text; searchMember(); } else if (type === 'redeem') { document.getElementById('manual-redeem-input').value = text; manualRedeemTask(); } }
+        async function searchMember() { const val = document.getElementById('search-member-input').value; if(!val) return showToast("請輸入 UID！"); showToast(`搜尋中... (${val})`); const res = await callAPI({ action: "adminGetUser", uid: val }); if(res.status === 'success') { const u = res.user; document.getElementById('tbody-members').innerHTML = `<tr><td style="font-weight:600;">${u.uid}</td><td>${u.gamerTag}</td><td style="color:var(--text-muted);">${u.email}</td><td style="color:var(--reborn-yellow-hover);font-weight:800;">${u.points}</td><td><span class="badge outline">${u.level}</span></td></tr>`; } else { showToast("查無此人"); document.getElementById('tbody-members').innerHTML = '<tr><td colspan="5" class="loading-text">無符合資料</td></tr>'; } }
+    </script>
+</body>
+</html>
