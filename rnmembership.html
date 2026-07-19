@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>REBORN Studio | 會員中樞 (正式串接版)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.0/dist/JsBarcode.all.min.js"></script>
+    <style>
+        :root {
+            --apple-bg: #000000;
+            --apple-surface: #1C1C1E;
+            --apple-surface-elevated: #2C2C2E;
+            --reborn-gold: #E5C07B;
+            --reborn-gold-gradient: linear-gradient(135deg, #F9D423 0%, #FF4E50 100%);
+            --reborn-premium-gradient: linear-gradient(135deg, #d4af37 0%, #aa7700 100%);
+            --text-primary: #FFFFFF;
+            --text-secondary: #8E8E93;
+            --border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+        
+        body { background-color: var(--apple-bg); color: var(--text-primary); font-family: 'Inter', '-apple-system', 'BlinkMacSystemFont', 'Noto Sans TC', sans-serif; min-height: 100vh; overflow-x: hidden; display: flex; justify-content: center; }
+        ::-webkit-scrollbar { display: none; }
+
+        .app-container { width: 100%; max-width: 430px; min-height: 100vh; position: relative; background-color: var(--apple-bg); display: flex; flex-direction: column; }
+        .hidden { display: none !important; opacity: 0; pointer-events: none; }
+        .fade-in { animation: fadeIn 0.4s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* ====== 身分驗證區塊 ====== */
+        .auth-wrapper { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 40px 30px; transition: opacity 0.3s; }
+        .auth-header { text-align: center; margin-bottom: 50px; }
+        .auth-header h1 { font-weight: 700; font-size: 28px; letter-spacing: 2px; }
+        .auth-header p { color: var(--text-secondary); font-size: 15px; margin-top: 8px; }
+
+        .input-box { background: var(--apple-surface); border-radius: 14px; padding: 8px 16px; margin-bottom: 16px; display: flex; flex-direction: column; border: 1px solid transparent; transition: border 0.3s, background 0.3s; }
+        .input-box:focus-within { border-color: var(--reborn-gold); background: var(--apple-surface-elevated); }
+        .input-box label { font-size: 11px; color: var(--text-secondary); font-weight: 500; text-transform: uppercase; margin-bottom: 4px; }
+        .input-box input { background: transparent; border: none; color: white; font-size: 17px; outline: none; padding: 4px 0; width: 100%; }
+
+        .btn-main { background: white; color: black; width: 100%; padding: 16px; border: none; border-radius: 14px; font-size: 17px; font-weight: 600; cursor: pointer; margin-top: 20px; transition: opacity 0.2s, transform 0.1s; display: flex; justify-content: center; align-items: center; gap: 8px;}
+        .btn-main:active { transform: scale(0.97); opacity: 0.8; }
+        .btn-main:disabled { opacity: 0.5; cursor: not-allowed; }
+        .btn-text { background: none; border: none; color: var(--reborn-gold); width: 100%; padding: 16px; font-size: 15px; cursor: pointer; margin-top: 8px; font-weight: 500; }
+        .btn-secondary { background: var(--apple-surface-elevated); color: white; width: 100%; padding: 16px; border: none; border-radius: 14px; font-size: 15px; font-weight: 600; cursor: pointer; margin-top: 10px; transition: 0.2s; }
+        .btn-secondary:active { transform: scale(0.97); background: #3a3a3c; }
+
+        /* ====== 主畫面 ====== */
+        .main-content { flex: 1; padding: 20px 20px 100px 20px; overflow-y: auto; }
+        .header-title { font-size: 34px; font-weight: 700; margin-top: 10px; margin-bottom: 24px; letter-spacing: -0.5px; }
+        .greeting-text { font-size: 15px; color: var(--text-secondary); margin-top: 10px; font-weight: 500; }
+
+        /* ====== 數位會員卡 ====== */
+        .wallet-card { background: var(--apple-surface); border-radius: 20px; padding: 24px; position: relative; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5); margin-bottom: 30px; transition: background 0.3s; }
+        
+        /* 💡 修正了卡片顏色的 CSS 對應 */
+        .wallet-card.tier-core { background: linear-gradient(135deg, #2b2b2c, #131314); }
+        .wallet-card.tier-prime { background: linear-gradient(135deg, #4CAF50 0%, #1B5E20 100%); }
+        .wallet-card.tier-premium { background: var(--reborn-premium-gradient); color: white; }
+        .wallet-card.tier-premium .barcode-area { background: rgba(255,255,255,0.9); }
+        .wallet-card.tier-apex { background: linear-gradient(135deg, #BDBDBD 0%, #424242 100%); }
+        .wallet-card.tier-force { background: #000; border: 1px solid #333; color: #FF3B30; box-shadow: 0 0 20px rgba(255, 59, 48, 0.2); }
+        .wallet-card.tier-force .card-tier { background: rgba(255, 59, 48, 0.2); color: #FF3B30; }
+
+        .wallet-card .barcode-area { background: white; padding: 12px; border-radius: 12px; text-align: center; margin-bottom: 15px; }
+        .card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 30px; }
+        .card-brand { font-weight: 700; font-size: 18px; letter-spacing: 1px; }
+        .card-tier { font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 20px; background: rgba(0,0,0,0.3); backdrop-filter: blur(10px); }
+
+        .card-points-label { font-size: 13px; font-weight: 500; opacity: 0.8; margin-bottom: 4px; }
+        .card-points { font-size: 42px; font-weight: 300; letter-spacing: -1px; margin-bottom: 30px; display: flex; align-items: baseline; }
+        .card-points span { font-size: 16px; font-weight: 600; margin-left: 6px; }
+
+        .barcode-area svg { width: 100%; height: 50px; }
+        .card-uid { font-family: monospace; font-size: 13px; text-align: center; opacity: 0.7; letter-spacing: 2px; cursor: pointer; transition: 0.2s; padding: 4px; border-radius: 8px; }
+        .card-uid:active { background: rgba(255,255,255,0.2); }
+
+        /* ====== 兌換商城 ====== */
+        .store-section { margin-top: 10px; }
+        .section-title { font-size: 20px; font-weight: 600; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: baseline; }
+        .store-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        
+        /* ====== 交易明細 (History) ====== */
+        .history-list { background: var(--apple-surface); border-radius: 16px; padding: 8px 16px; margin-bottom: 24px; }
+        .history-item { display: flex; justify-content: space-between; align-items: center; padding: 16px 0; border-bottom: 1px solid var(--border-color); }
+        .history-item:last-child { border-bottom: none; }
+        .history-info { display: flex; flex-direction: column; gap: 4px; }
+        .history-title { font-size: 15px; font-weight: 500; }
+        .history-date { font-size: 12px; color: var(--text-secondary); }
+        .history-points.positive { color: #32D74B; font-weight: 600; font-size: 16px; }
+        .history-points.negative { color: #FF453A; font-weight: 600; font-size: 16px; }
+        .history-points.pending { color: var(--reborn-gold); font-weight: 600; font-size: 14px; }
+
+        /* ====== 會員等級與進度展示區 ====== */
+        .tier-display { background: var(--apple-surface-elevated); border-radius: 16px; padding: 20px; margin-bottom: 24px; border: 1px solid rgba(212, 175, 55, 0.3); }
+        .tier-header { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
+        .tier-icon { width: 50px; height: 50px; background: var(--reborn-premium-gradient); border-radius: 12px; display: flex; justify-content: center; align-items: center; font-size: 24px; }
+        .tier-info h4 { font-size: 13px; color: var(--text-secondary); font-weight: 500; margin-bottom: 4px; }
+        .tier-info h3 { font-size: 18px; font-weight: 700; color: var(--reborn-gold); }
+
+        /* 等級進度條 */
+        .progress-container { background: rgba(0,0,0,0.3); padding: 16px; border-radius: 12px; }
+        .progress-text { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 8px; color: var(--text-secondary); }
+        .progress-text strong { color: white; }
+        .progress-bar-bg { width: 100%; height: 6px; background: #3a3a3c; border-radius: 4px; overflow: hidden; margin-bottom: 12px; }
+        .progress-bar-fill { height: 100%; background: var(--reborn-gold-gradient); width: 0%; border-radius: 4px; transition: width 1s ease-in-out; }
+        .progress-action { text-align: center; font-size: 13px; color: var(--reborn-gold); cursor: pointer; padding-top: 4px; font-weight: 500; }
+
+        /* ====== 底部導航列 ====== */
+        .bottom-nav { position: absolute; bottom: 0; left: 0; width: 100%; height: 85px; background: rgba(28, 28, 30, 0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-top: 1px solid var(--border-color); display: flex; justify-content: space-around; align-items: flex-start; padding-top: 12px; z-index: 100; }
+        .nav-item { display: flex; flex-direction: column; align-items: center; color: var(--text-secondary); font-size: 10px; font-weight: 500; gap: 4px; cursor: pointer; transition: color 0.3s; flex: 1;}
+        .nav-item svg { width: 24px; height: 24px; fill: currentColor; }
+        .nav-item.active { color: white; }
+
+        /* ====== Modal ====== */
+        .modal-backdrop { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 200; display: flex; align-items: flex-end; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+        .modal-backdrop.active { opacity: 1; pointer-events: auto; }
+        .modal-sheet { position: relative; width: 100%; background: rgba(28, 28, 30, 0.85); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px); border-top: 1px solid rgba(255,255,255,0.15); border-radius: 24px 24px 0 0; padding: 30px 24px 40px 24px; transform: translate3d(0, 100%, 0); transition: transform 0.4s cubic-bezier(0.32, 0.72, 0, 1); will-change: transform; }
+        .modal-backdrop.active .modal-sheet { transform: translate3d(0, 0, 0); }
+        .sheet-drag { width: 40px; height: 4px; background: rgba(255,255,255,0.3); border-radius: 4px; margin: 0 auto 20px auto; }
+        .sheet-title { font-size: 22px; font-weight: 700; margin-bottom: 10px; padding-right: 30px; }
+        .sheet-desc { font-size: 15px; color: var(--text-secondary); margin-bottom: 24px; line-height: 1.5; }
+        #qrcode-container { background: white; padding: 16px; border-radius: 16px; display: inline-block; margin-bottom: 20px; }
+        .btn-close { position: absolute; top: 20px; right: 20px; width: 32px; height: 32px; background: rgba(255,255,255,0.1); border-radius: 50%; border: none; color: white; font-size: 18px; display: flex; justify-content: center; align-items: center; cursor: pointer; transition: 0.2s; }
+        
+        .tier-list-item { display: flex; align-items: center; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--border-color); }
+        .tier-list-item:last-child { border-bottom: none; }
+        .tier-circle { width: 12px; height: 12px; border-radius: 50%; border: 2px solid white; }
+        .tier-list-info { flex: 1; }
+        .tier-name { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+        .tier-req { font-size: 12px; color: var(--text-secondary); }
+
+        /* ====== Toast ====== */
+        .toast { position: absolute; top: 20px; left: 50%; transform: translate(-50%, -20px); background: rgba(255,255,255,0.95); color: black; padding: 12px 24px; border-radius: 30px; font-size: 14px; font-weight: 600; box-shadow: 0 8px 24px rgba(0,0,0,0.2); opacity: 0; pointer-events: none; transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); z-index: 300; text-align: center; width: max-content; max-width: 90%; }
+        .toast.show { opacity: 1; transform: translate(-50%, 0); }
+        
+        /* ====== 商品卡片設計 ====== */
+        .store-item-card { background: var(--apple-surface-elevated); border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; border: 1px solid rgba(255,255,255,0.05); }
+        .store-item-img { width: 100%; height: 140px; object-fit: cover; background: #333; }
+        .store-item-info { padding: 14px; display: flex; flex-direction: column; flex: 1; }
+        .store-item-type { font-size: 10px; color: var(--reborn-gold); margin-bottom: 4px; font-weight: 700; letter-spacing: 0.5px; }
+        .store-item-title { font-size: 14px; font-weight: 600; margin-bottom: 12px; line-height: 1.4; }
+        .store-item-bottom { display: flex; justify-content: space-between; align-items: center; margin-top: auto; }
+        .store-item-points { font-size: 16px; font-weight: 700; color: white; }
+        .store-item-btn { background: var(--reborn-gold-gradient); color: black; border: none; border-radius: 8px; padding: 6px 14px; font-size: 13px; font-weight: 700; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+        <div id="toast" class="toast">操作成功</div>
+
+        <!-- ====== 登入區塊 ====== -->
+        <div id="view-auth" class="auth-wrapper fade-in">
+            <div class="auth-header">
+                <h1>REBORN ID</h1>
+                <p>登入您的賽事與生態圈通行證</p>
+            </div>
+            <div id="login-form">
+                <div class="input-box"><label>Email</label><input type="email" id="login-email" placeholder="name@example.com"></div>
+                <div class="input-box"><label>Password</label><input type="password" id="login-pwd" placeholder="••••••••"></div>
+                <button class="btn-main" onclick="doLogin(this)">Sign In</button>
+                <button class="btn-text" onclick="toggleAuth()">建立新的 REBORN ID</button>
+            </div>
+            <div id="register-form" class="hidden">
+                <div class="input-box"><label>Gamer Tag</label><input type="text" id="reg-name" placeholder="您的顯示名稱"></div>
+                <div class="input-box"><label>Email</label><input type="email" id="reg-email" placeholder="name@example.com"></div>
+                <div class="input-box"><label>Password</label><input type="password" id="reg-pwd" placeholder="••••••••"></div>
+                <button class="btn-main" onclick="doRegister(this)">Create Account</button>
+                <button class="btn-text" onclick="toggleAuth()">已有帳號？返回登入</button>
+            </div>
+        </div>
+
+        <div id="view-app" class="hidden">
+            <!-- ===== 1. Wallet (首頁) ===== -->
+            <div id="tab-wallet" class="main-content fade-in">
+                <!-- 💡 小更新 1：專屬問候語 -->
+                <div class="greeting-text" id="display-greeting">早安，玩家</div>
+                <h2 class="header-title">Wallet</h2>
+                
+                <div class="wallet-card tier-core" id="display-wallet-card">
+                    <div class="card-top">
+                        <span class="card-brand">REBORN STUDIO</span>
+                        <span class="card-tier" id="display-tier-badge">CORE</span>
+                    </div>
+                    <div class="card-points-label">當前可用點數 (Spendable)</div>
+                    <div class="card-points" id="display-points">0<span>pts</span></div>
+                    <div class="barcode-area"><svg id="member-barcode"></svg></div>
+                    <!-- 💡 小更新 2：點擊複製 UID -->
+                    <div class="card-uid" id="display-uid" onclick="copyUid()" title="點擊複製">UID: -</div>
+                </div>
+
+                <div class="section-title">
+                    近期紀錄
+                    <span style="font-size: 13px; color: var(--reborn-gold); cursor: pointer;" onclick="switchTab('profile')">查看全部</span>
+                </div>
+                <div class="history-list" id="wallet-history-list" style="margin-bottom: 0;">
+                    <div style="text-align:center; padding:20px; color:var(--text-secondary); font-size:13px;">載入紀錄中...</div>
+                </div>
+            </div>
+
+            <!-- ===== 2. Store (商城) ===== -->
+            <div id="tab-store" class="main-content hidden">
+                <h2 class="header-title">Rewards</h2>
+                <div class="store-section">
+                    <div class="store-grid" id="store-items-container">
+                        <div style="text-align:center; padding:40px 20px; color:var(--text-secondary); grid-column: span 2; font-size: 14px;">
+                            商品載入中...
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== 3. Profile (會員資料/明細/補登) ===== -->
+            <div id="tab-profile" class="main-content hidden">
+                <h2 class="header-title">Profile</h2>
+
+                <div class="tier-display">
+                    <div class="tier-header">
+                        <div class="tier-icon">👑</div>
+                        <div class="tier-info">
+                            <h4>當前會員等級</h4>
+                            <h3 id="display-profile-level">CORE</h3>
+                        </div>
+                    </div>
+                    
+                    <div class="progress-container">
+                        <div class="progress-text">
+                            <span>歷史累積: <strong id="display-history-pts">0 pts</strong></span>
+                            <span id="display-next-tier">距下階段尚差 <strong>-- pts</strong></span>
+                        </div>
+                        <div class="progress-bar-bg">
+                            <div class="progress-bar-fill" id="display-progress-fill"></div>
+                        </div>
+                        <div class="progress-action" onclick="openModal('tiers')">
+                            查看所有等級特權進度 &rarr;
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-title">賽事專區</div>
+                <button class="btn-main" style="margin-top: 0; margin-bottom: 30px; background: var(--reborn-gold-gradient);" onclick="openModal('claim')">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:4px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="12" y1="18" x2="12" y2="12"></line><line x1="9" y1="15" x2="15" y2="15"></line></svg>
+                    申請比賽點數補登
+                </button>
+
+                <div class="section-title">帳號設定</div>
+                <div class="input-box"><label>Gamer Tag / 暱稱</label><input type="text" id="profile-name" value=""></div>
+                <div class="input-box"><label>聯絡信箱 (不可更改)</label><input type="email" id="profile-email" value="" disabled style="opacity: 0.5;"></div>
+                <div class="input-box"><label>新密碼 (若不更改請留白)</label><input type="password" id="profile-pwd" placeholder="••••••••"></div>
+                <button class="btn-secondary" onclick="doUpdateProfile(this)">儲存變更</button>
+
+                <div class="section-title" style="margin-top: 30px;">點數交易明細</div>
+                <div class="history-list" id="profile-history-list">
+                     <div style="text-align:center; padding:20px; color:var(--text-secondary); font-size:13px;">載入紀錄中...</div>
+                </div>
+                
+                <button class="btn-text" style="color: #FF453A; margin-top: 10px;" onclick="doLogout()">登出帳號</button>
+            </div>
+
+            <!-- ====== 底部導航 ====== -->
+            <nav class="bottom-nav">
+                <div class="nav-item active" id="nav-wallet" onclick="switchTab('wallet')">
+                    <svg viewBox="0 0 24 24"><path d="M21 7.5H3c-.83 0-1.5.67-1.5 1.5v9c0 .83.67 1.5 1.5 1.5h18c.83 0 1.5-.67 1.5-1.5v-9c0-.83-.67-1.5-1.5-1.5zm-1.5 9h-15v-6h15v6zm-15-7.5v-1.5c0-.83.67-1.5 1.5-1.5h15c.83 0 1.5.67 1.5 1.5v1.5h-18z"/></svg>
+                    Wallet
+                </div>
+                <div class="nav-item" id="nav-store" onclick="switchTab('store')">
+                    <svg viewBox="0 0 24 24"><path d="M19 6h-2c0-2.76-2.24-5-5-5S7 3.24 7 6H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-7-3c1.66 0 3 1.34 3 3H9c0-1.66 1.34-3 3-3zm7 17H5V8h14v12zm-7-8c-1.66 0-3-1.34-3-3H7c0 2.76 2.24 5 5 5s5-2.24 5-5h-2c0 1.66-1.34 3-3 3z"/></svg>
+                    Rewards
+                </div>
+                <div class="nav-item" id="nav-profile" onclick="switchTab('profile')">
+                    <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                    Profile
+                </div>
+            </nav>
+        </div>
+
+        <!-- ====== Modals ====== -->
+        <div id="modal-virtual" class="modal-backdrop" onclick="closeModal('virtual', event)">
+            <div class="modal-sheet">
+                <button class="btn-close" onclick="forceCloseModal('virtual')">&times;</button>
+                <div class="sheet-drag"></div>
+                <h3 class="sheet-title" id="modal-v-title">兌換虛寶</h3>
+                <p class="sheet-desc" id="modal-v-desc">請輸入您的遊戲 UID 以便派發審核。</p>
+                <div class="input-box" style="background: rgba(0,0,0,0.3); margin-bottom: 24px;"><label>Game UID</label><input type="number" id="ff-uid" placeholder="例如: 123456789"></div>
+                <button class="btn-main" id="btn-submit-virtual" onclick="doRedeem('virtual', this)">確認兌換</button>
+            </div>
+        </div>
+
+        <div id="modal-physical" class="modal-backdrop" onclick="closeModal('physical', event)">
+            <div class="modal-sheet" style="text-align: center;">
+                <button class="btn-close" onclick="forceCloseModal('physical')">&times;</button>
+                <div class="sheet-drag"></div>
+                <h3 class="sheet-title" id="modal-p-title" style="text-align: left;">兌換實體周邊</h3>
+                <p class="sheet-desc" id="modal-p-desc" style="text-align: left;">請出示下方 QR Code 供客服掃描。</p>
+                <div id="qrcode-container"></div>
+                <button class="btn-main" id="btn-submit-physical" onclick="doRedeem('physical', this)">前往官方 LINE 領取</button>
+            </div>
+        </div>
+
+        <div id="modal-claim" class="modal-backdrop" onclick="closeModal('claim', event)">
+            <div class="modal-sheet">
+                <button class="btn-close" onclick="forceCloseModal('claim')">&times;</button>
+                <div class="sheet-drag"></div>
+                <h3 class="sheet-title">申請比賽補登</h3>
+                <p class="sheet-desc">填寫參賽資訊，審核通過後點數將自動匯入餘額與累積歷史中。</p>
+                <div class="input-box" style="background: rgba(0,0,0,0.3);"><label>賽事名稱</label><input type="text" id="claim-event" placeholder="例如: 2026春季盃"></div>
+                <div class="input-box" style="background: rgba(0,0,0,0.3);"><label>所屬戰隊 / 隊伍名稱</label><input type="text" id="claim-team" placeholder="填寫隊名"></div>
+                <div class="input-box" style="background: rgba(0,0,0,0.3); margin-bottom: 24px;"><label>報名負責人</label><input type="text" id="claim-leader" placeholder="填寫負責人名稱 / Gamer Tag"></div>
+                <button class="btn-main" onclick="doClaim(this)">送出審核</button>
+            </div>
+        </div>
+
+        <div id="modal-tiers" class="modal-backdrop" onclick="closeModal('tiers', event)">
+            <div class="modal-sheet">
+                <button class="btn-close" onclick="forceCloseModal('tiers')">&times;</button>
+                <div class="sheet-drag"></div>
+                <h3 class="sheet-title">會員等級制度</h3>
+                <p class="sheet-desc">等級由「歷史累積點數」決定，兌換商品不會影響升級進度。</p>
+                
+                <div style="margin-bottom: 20px;">
+                    <div class="tier-list-item"><div class="tier-circle" style="border-color: #8E8E93; background: #8E8E93;"></div><div class="tier-list-info"><div class="tier-name" style="color: #8E8E93;">CORE (核心會員)</div><div class="tier-req">註冊即取得</div></div></div>
+                    <div class="tier-list-item"><div class="tier-circle" style="border-color: #4CAF50; background: #4CAF50;"></div><div class="tier-list-info"><div class="tier-name" style="color: #4CAF50;">PRIME (菁英會員)</div><div class="tier-req">歷史累積達 500 pts</div></div></div>
+                    <div class="tier-list-item"><div class="tier-circle" style="border-color: var(--reborn-gold); background: var(--reborn-gold);"></div><div class="tier-list-info"><div class="tier-name" style="color: var(--reborn-gold);">REBORN PREMIUM</div><div class="tier-req">歷史累積達 1,000 pts</div></div></div>
+                    <div class="tier-list-item"><div class="tier-circle" style="border-color: #E0E0E0;"></div><div class="tier-list-info"><div class="tier-name" style="color: #E0E0E0;">APEX (頂峰會員)</div><div class="tier-req">歷史累積達 2,000 pts</div></div></div>
+                    <div class="tier-list-item"><div class="tier-circle" style="border-color: #FF3B30;"></div><div class="tier-list-info"><div class="tier-name" style="color: #FF3B30;">超銳能會員 (黑卡)</div><div class="tier-req">CZL FORCE 內部或特殊邀約</div></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ==========================================
+        // 🚀 請換成你 Google Apps Script 最新部署的 URL
+        // ==========================================
+        const GAS_API_URL = "https://script.google.com/macros/s/AKfycbwlSJcv6ftVp5grAB2tbyqNzK1WlFZcjYdvNtfJJxooQm8hjFbhZVL2aXYIUHDX6UA/exec";
+
+        let currentUser = {}; 
+        let pendingRedeem = {}; 
+        let isQrGenerated = false;
+        let syncInterval = null; 
+
+        // 💡 觸覺震動回饋機制
+        function vibratePhone() {
+            if ("vibrate" in navigator) {
+                navigator.vibrate(50); // 短促震動 50ms
+            }
+        }
+
+        async function callGAS(payload, btnElement, isSilent = false) {
+            let originalText = "處理中...";
+            if(btnElement && !isSilent) {
+                originalText = btnElement.innerHTML;
+                btnElement.innerHTML = '<span style="opacity:0.7">連線中...</span>';
+                btnElement.disabled = true;
+            }
+            try {
+                let response = await fetch(GAS_API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' }, 
+                    body: JSON.stringify(payload)
+                });
+                let result = await response.json();
+                if(btnElement && !isSilent) { btnElement.innerHTML = originalText; btnElement.disabled = false; }
+                return result;
+            } catch (error) {
+                if(btnElement && !isSilent) { btnElement.innerHTML = originalText; btnElement.disabled = false; }
+                return { status: "error", message: "網路連線異常，請確認 GAS 網址是否正確。" };
+            }
+        }
+
+        // ==========================================
+        // 🌟 修正：精準的卡片等級顏色判斷邏輯
+        // ==========================================
+        function getTierClass(levelString) {
+            if (!levelString) return 'tier-core';
+            const lvl = levelString.toUpperCase();
+            if (lvl.includes('PRIME')) return 'tier-prime';
+            if (lvl.includes('PREMIUM')) return 'tier-premium';
+            if (lvl.includes('APEX')) return 'tier-apex';
+            // 抓取黑卡、超銳能、FORCE等關鍵字
+            if (lvl.includes('黑卡') || lvl.includes('超銳能') || lvl.includes('FORCE')) return 'tier-force';
+            return 'tier-core';
+        }
+
+        // ==========================================
+        // 🌟 新增：更新智慧問候語
+        // ==========================================
+        function updateGreeting() {
+            const hour = new Date().getHours();
+            let greeting = "你好";
+            if (hour >= 5 && hour < 12) greeting = "早安";
+            else if (hour >= 12 && hour < 18) greeting = "午安";
+            else greeting = "晚安";
+            
+            document.getElementById('display-greeting').innerText = `${greeting}，${currentUser.gamerTag || '玩家'}`;
+        }
+
+        // ==========================================
+        // 🌟 新增：點擊複製 UID
+        // ==========================================
+        function copyUid() {
+            if(!currentUser.uid) return;
+            navigator.clipboard.writeText(currentUser.uid).then(() => {
+                vibratePhone();
+                showToast("已複製 UID： " + currentUser.uid);
+            });
+        }
+
+        // ==========================================
+        // 背景自動同步系統
+        // ==========================================
+        function startAutoSync() {
+            if(syncInterval) clearInterval(syncInterval);
+            
+            syncInterval = setInterval(async () => {
+                if(!currentUser.uid) return;
+
+                const userRes = await callGAS({ action: "adminGetUser", uid: currentUser.uid }, null, true);
+                if(userRes.status === 'success') {
+                    currentUser.points = userRes.user.points;
+                    currentUser.level = userRes.user.level;
+                    currentUser.gamerTag = userRes.user.gamerTag;
+
+                    document.getElementById('display-points').innerHTML = currentUser.points + "<span>pts</span>";
+                    document.getElementById('display-tier-badge').innerText = currentUser.level;
+                    document.getElementById('display-profile-level').innerText = currentUser.level;
+                    updateGreeting(); // 同步更新名稱
+                    
+                    // 套用精準卡面顏色判斷
+                    const walletCard = document.getElementById('display-wallet-card');
+                    const newClass = getTierClass(currentUser.level);
+                    if(!walletCard.classList.contains(newClass)) {
+                        walletCard.className = "wallet-card";
+                        walletCard.classList.add(newClass);
+                    }
+                }
+
+                fetchHistory();
+                fetchStoreItems(true); 
+            }, 5000); 
+        }
+
+        // ==========================================
+        // 抓取商城商品
+        // ==========================================
+        async function fetchStoreItems(isSilent = false) {
+            const container = document.getElementById('store-items-container');
+            const res = await callGAS({ action: "getStoreItems" }, null, isSilent);
+            
+            if(res.status === 'success') {
+                if(res.items.length === 0) {
+                    container.innerHTML = '<div style="text-align:center; padding:40px 20px; color:var(--text-secondary); grid-column: span 2; font-size:14px;">目前尚未有上架商品</div>';
+                    return;
+                }
+                
+                let html = '';
+                res.items.forEach(item => {
+                    const typeLabel = item.type === 'physical' ? '實體周邊' : '數位虛寶';
+                    html += `
+                    <div class="store-item-card">
+                        <img class="store-item-img" src="${item.image || 'https://via.placeholder.com/150'}">
+                        <div class="store-item-info">
+                            <div class="store-item-type">${typeLabel}</div>
+                            <div class="store-item-title">${item.title}</div>
+                            <div class="store-item-bottom">
+                                <div class="store-item-points">${item.points} <span style="font-size:10px; font-weight:normal; color:var(--text-secondary);">pts</span></div>
+                                <button class="store-item-btn" onclick="openModal('${item.type}', '${item.title}', ${item.points})">兌換</button>
+                            </div>
+                        </div>
+                    </div>`;
+                });
+                
+                if(container.innerHTML !== html) {
+                    container.innerHTML = html;
+                }
+            }
+        }
+
+        // ==========================================
+        // 抓取明細與計算等級進度 (已修復計算 Bug)
+        // ==========================================
+        async function fetchHistory() {
+            const res = await callGAS({ action: "getHistory", uid: currentUser.uid }, null, true);
+            if(res.status === 'success') {
+                let historyHtml = '';
+                let totalAccumulated = 0; 
+                
+                res.history.forEach(item => {
+                    let colorClass = item.amount > 0 ? 'positive' : (item.amount < 0 ? 'negative' : 'pending');
+                    let sign = item.amount > 0 ? '+' : '';
+                    let statusBadge = item.status === 'pending' ? '<span style="font-size:10px; background:rgba(229,192,123,0.2); color:var(--reborn-gold); padding:2px 6px; border-radius:4px; margin-left:6px;">審核中</span>' : '';
+                    
+                    historyHtml += `
+                    <div class="history-item">
+                        <div class="history-info">
+                            <div class="history-title">${item.action} ${statusBadge}</div>
+                            <div class="history-date">${item.date}</div>
+                        </div>
+                        <div class="history-points ${colorClass}">${sign}${item.amount}</div>
+                    </div>`;
+
+                    if(item.amount > 0 && item.status !== 'pending') {
+                        totalAccumulated += item.amount;
+                    }
+                });
+
+                if(!historyHtml) {
+                    historyHtml = '<div style="text-align:center; padding:20px; color:var(--text-secondary); font-size:13px;">目前尚無交易紀錄</div>';
+                }
+                
+                const walletList = document.getElementById('wallet-history-list');
+                if (walletList.innerHTML !== historyHtml) {
+                    walletList.innerHTML = historyHtml;
+                    document.getElementById('profile-history-list').innerHTML = historyHtml;
+                }
+
+                let basePts = Math.max(totalAccumulated, parseInt(currentUser.points) || 0);
+                updateTierProgress(basePts);
+            }
+        }
+
+        function updateTierProgress(totalPts) {
+            document.getElementById('display-history-pts').innerText = totalPts + " pts";
+            let nextTierPts = 500;
+            let progress = 0;
+
+            if(totalPts < 500) { nextTierPts = 500; progress = (totalPts / 500) * 100; }
+            else if(totalPts < 1000) { nextTierPts = 1000; progress = ((totalPts - 500) / 500) * 100; }
+            else if(totalPts < 2000) { nextTierPts = 2000; progress = ((totalPts - 1000) / 1000) * 100; }
+            else { nextTierPts = totalPts; progress = 100; document.getElementById('display-next-tier').innerHTML = "已達最高等級"; }
+
+            if(totalPts < 2000) {
+                document.getElementById('display-next-tier').innerHTML = `距下階段尚差 <strong>${nextTierPts - totalPts} pts</strong>`;
+            }
+            
+            setTimeout(() => {
+                document.getElementById('display-progress-fill').style.width = progress + '%';
+            }, 200);
+        }
+
+        // ==========================================
+        // 登入與操作功能
+        // ==========================================
+        async function doLogin(btn) {
+            vibratePhone(); // 震動回饋
+            const email = document.getElementById('login-email').value.trim();
+            const pwd = document.getElementById('login-pwd').value.trim();
+            if(!email || !pwd) return showToast("請完整輸入 Email 與密碼！");
+            if(GAS_API_URL.includes("在此貼上你的")) return showToast("尚未串接：請先在原始碼中填寫 GAS_API_URL！");
+
+            const res = await callGAS({ action: "login", email: email, password: pwd }, btn);
+            if(res.status === "success") {
+                vibratePhone(); // 成功時再震動一次
+                showToast("登入成功！");
+                currentUser = res.userData; 
+                
+                document.getElementById('display-uid').innerText = "UID: " + currentUser.uid;
+                document.getElementById('display-points').innerHTML = currentUser.points + "<span>pts</span>";
+                document.getElementById('display-tier-badge').innerText = currentUser.level;
+                document.getElementById('display-profile-level').innerText = currentUser.level;
+                document.getElementById('profile-name').value = currentUser.gamerTag;
+                document.getElementById('profile-email').value = email;
+                
+                updateGreeting(); // 載入問候語
+
+                const walletCard = document.getElementById('display-wallet-card');
+                walletCard.className = "wallet-card"; 
+                walletCard.classList.add(getTierClass(currentUser.level)); // 套用精準顏色判斷
+
+                document.getElementById('view-auth').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('view-auth').classList.add('hidden'); 
+                    document.getElementById('view-app').classList.remove('hidden');
+                    JsBarcode("#member-barcode", currentUser.uid, { format: "CODE128", displayValue: false, background: "transparent", lineColor: "#000000", height: 40, margin: 0 });
+                    
+                    fetchStoreItems();
+                    fetchHistory();
+                    startAutoSync(); 
+                }, 300);
+            } else { showToast(res.message); }
+        }
+
+        async function doRegister(btn) {
+            vibratePhone();
+            const name = document.getElementById('reg-name').value.trim();
+            const email = document.getElementById('reg-email').value.trim();
+            const pwd = document.getElementById('reg-pwd').value.trim();
+            if(!name || !email || !pwd) return showToast("請完整填寫所有註冊資料！");
+
+            const res = await callGAS({ action: "register", gamerTag: name, email: email, password: pwd }, btn);
+            if(res.status === "success") {
+                vibratePhone();
+                showToast(res.message);
+                document.getElementById('reg-pwd').value = '';
+                toggleAuth();
+            } else { showToast(res.message); }
+        }
+
+        async function doRedeem(type, btn) {
+            vibratePhone();
+            let payload = { action: "redeem", uid: currentUser.uid, itemName: pendingRedeem.name, points: pendingRedeem.points, type: type };
+            if (type === 'virtual') {
+                const gameUid = document.getElementById('ff-uid').value.trim(); 
+                if (!gameUid) return showToast('請輸入 Game UID！'); 
+                payload.gameUid = gameUid;
+            }
+            const res = await callGAS(payload, btn);
+            if(res.status === "success") {
+                vibratePhone();
+                forceCloseModal(type); 
+                showToast('申請已送出！點數已扣除。');
+                currentUser.points -= parseInt(pendingRedeem.points);
+                document.getElementById('display-points').innerHTML = currentUser.points + "<span>pts</span>";
+                
+                if(type === 'virtual') document.getElementById('ff-uid').value = ''; 
+                fetchHistory(); 
+            } else { showToast(res.message || "點數不足或發生錯誤！"); }
+        }
+
+        async function doClaim(btn) {
+            vibratePhone();
+            const eventName = document.getElementById('claim-event').value.trim();
+            const teamName = document.getElementById('claim-team').value.trim();
+            const leaderName = document.getElementById('claim-leader').value.trim();
+            if(!eventName || !teamName || !leaderName) return showToast('請完整填寫所有資訊！'); 
+            
+            const payload = { action: "claim", uid: currentUser.uid, eventName: eventName, teamName: teamName, leaderName: leaderName };
+            const res = await callGAS(payload, btn);
+            if(res.status === "success") {
+                vibratePhone();
+                document.getElementById('claim-event').value = '';
+                document.getElementById('claim-team').value = '';
+                document.getElementById('claim-leader').value = '';
+                forceCloseModal('claim');
+                showToast('已送出補登審核！');
+                fetchHistory(); 
+            } else { showToast(res.message); }
+        }
+
+        async function doUpdateProfile(btn) {
+            vibratePhone();
+            const newName = document.getElementById('profile-name').value.trim();
+            const newPwd = document.getElementById('profile-pwd').value.trim();
+            if(!newName) return showToast('暱稱不可為空！');
+            const res = await callGAS({ action: "updateProfile", uid: currentUser.uid, gamerTag: newName, newPassword: newPwd }, btn);
+            if(res.status === "success") { 
+                vibratePhone();
+                showToast('會員資料已成功更新！'); 
+                document.getElementById('profile-pwd').value = ''; 
+                currentUser.gamerTag = newName; 
+                updateGreeting(); // 更新名稱後順便更新首頁問候語
+            } 
+            else { showToast(res.message); }
+        }
+
+        function doLogout() {
+            vibratePhone();
+            if(syncInterval) clearInterval(syncInterval); 
+            currentUser = {};
+            document.getElementById('login-pwd').value = '';
+            document.getElementById('view-app').classList.add('hidden');
+            document.getElementById('view-auth').classList.remove('hidden');
+            document.getElementById('view-auth').style.opacity = '1';
+            switchTab('wallet'); 
+        }
+
+        function toggleAuth() { vibratePhone(); document.getElementById('login-form').classList.toggle('hidden'); document.getElementById('register-form').classList.toggle('hidden'); }
+        
+        function switchTab(tabName) {
+            vibratePhone();
+            ['wallet', 'store', 'profile'].forEach(tab => { document.getElementById(`tab-${tab}`).classList.add('hidden'); document.getElementById(`nav-${tab}`).classList.remove('active'); });
+            document.getElementById(`tab-${tabName}`).classList.remove('hidden'); 
+            document.getElementById(`tab-${tabName}`).classList.add('fade-in'); 
+            document.getElementById(`nav-${tabName}`).classList.add('active');
+        }
+
+        function openModal(type, itemName, points) {
+            vibratePhone();
+            document.getElementById(`modal-${type}`).classList.add('active');
+            if(itemName && points) pendingRedeem = { name: itemName, points: points };
+
+            if (type === 'virtual') {
+                document.getElementById('modal-v-title').innerText = `兌換 ${itemName}`; 
+                document.getElementById('modal-v-desc').innerText = `將扣除 ${points} pts。請輸入遊戲 UID。`;
+            } else if (type === 'physical') {
+                document.getElementById('modal-p-title').innerText = `兌換 ${itemName}`; 
+                document.getElementById('modal-p-desc').innerText = `將扣除 ${points} pts。請出示下方條碼。`;
+                if (!isQrGenerated && currentUser.uid) { 
+                    new QRCode(document.getElementById("qrcode-container"), { text: "REDEEM-" + currentUser.uid + "-" + itemName, width: 160, height: 160, colorDark : "#000000", colorLight : "#ffffff", correctLevel : QRCode.CorrectLevel.H }); 
+                    isQrGenerated = true; 
+                }
+            }
+        }
+
+        function closeModal(type, event) { if (event.target.classList.contains('modal-backdrop') || event.target.classList.contains('sheet-drag')) forceCloseModal(type); }
+        function forceCloseModal(type) { vibratePhone(); document.getElementById(`modal-${type}`).classList.remove('active'); }
+        function showToast(message) { const toast = document.getElementById('toast'); toast.innerText = message; toast.classList.add('show'); setTimeout(() => { toast.classList.remove('show'); }, 3000); }
+    </script>
+</body>
+</html>
