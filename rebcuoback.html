@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>銳能秋季盃 (RAC) - 賽事後台中控室</title>
+    <style>
+        :root {
+            --bg-dark: #0a0a0a;
+            --panel-bg: #1a1a1a;
+            --primary: #FF5722;
+            --secondary: #FFD700;
+            --text-light: #f5f5f5;
+            --border-color: rgba(255, 215, 0, 0.2);
+            --success: #4CAF50;
+            --danger: #F44336;
+            --warning: #FF9800;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+        body { background-color: var(--bg-dark); color: var(--text-light); display: flex; height: 100vh; overflow: hidden; }
+        
+        .text-gradient { background: linear-gradient(90deg, #FFD700 0%, #FFAAA5 50%, #FF5722 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 900; }
+        
+        /* 登入畫面 */
+        #login-view { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(10, 10, 10, 0.95); display: flex; justify-content: center; align-items: center; z-index: 1000; flex-direction: column; }
+        .login-box { background: var(--panel-bg); padding: 3rem; border-radius: 12px; border: 1px solid var(--border-color); text-align: center; box-shadow: 0 0 30px rgba(255, 87, 34, 0.2); width: 90%; max-width: 400px; }
+
+        /* 側邊欄與主要內容 */
+        .sidebar { width: 250px; background: #111; border-right: 1px solid var(--border-color); display: flex; flex-direction: column; flex-shrink: 0;}
+        .logo-container { padding: 1.5rem; text-align: center; border-bottom: 1px solid #222; }
+        .logo-container img { width: 150px; height: auto; }
+        .menu-items { flex: 1; overflow-y: auto; padding: 1rem; }
+        .folder-item { display: flex; justify-content: space-between; align-items: center; padding: 10px; margin-bottom: 8px; background: rgba(255,255,255,0.05); border-radius: 6px; cursor: pointer; transition: 0.3s; border-left: 3px solid transparent; }
+        .folder-item:hover, .folder-item.active { background: rgba(255, 215, 0, 0.1); border-left-color: var(--secondary); }
+        .delete-folder-btn { background: transparent; border: none; color: #888; cursor: pointer; font-size: 1rem; }
+        
+        .main-content { flex: 1; padding: 2rem; overflow-y: auto; }
+        .header-actions { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid #333; gap: 15px;}
+        .action-btns { display: flex; gap: 10px; align-items: center; flex-wrap: wrap;}
+
+        /* 表單與按鈕 */
+        .btn { background: linear-gradient(45deg, var(--primary), var(--secondary)); border: none; padding: 10px 20px; color: #000; font-weight: bold; border-radius: 6px; cursor: pointer; transition: 0.3s; }
+        .btn:hover { box-shadow: 0 0 15px rgba(255, 87, 34, 0.6); transform: translateY(-2px); }
+        .btn-outline { background: transparent; border: 1px solid var(--secondary); color: var(--secondary); }
+        .btn-danger { background: transparent; border: 1px solid var(--danger); color: var(--danger); }
+        .btn-small { padding: 5px 10px; font-size: 0.8rem; }
+        input[type="text"], input[type="password"] { width: 100%; padding: 10px; margin: 5px 0 15px; background: #222; border: 1px solid #444; color: white; border-radius: 4px; }
+        input[type="checkbox"] { transform: scale(1.2); margin-right: 5px; accent-color: var(--primary); }
+
+        /* 隊伍卡片 */
+        .team-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+        .team-card { background: linear-gradient(145deg, #111 0%, #0a0a0a 100%); border: 1px solid #333; border-left: 4px solid var(--danger); padding: 1.5rem; border-radius: 8px; cursor: pointer; transition: 0.3s; }
+        .team-card.paid { border-left-color: var(--success); }
+        .team-card:hover { transform: translateX(5px); background: #1a1a1a; }
+        .status-badge { font-size: 0.8rem; padding: 3px 8px; border-radius: 12px; color: white; }
+        .bg-red { background-color: var(--danger); }
+        .bg-green { background-color: var(--success); }
+        .bg-orange { background-color: var(--warning); }
+        .bg-gray { background-color: #555; }
+
+        /* 彈出視窗 */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: none; justify-content: center; align-items: center; z-index: 500; }
+        .modal-content { background: var(--panel-bg); padding: 2rem; border-radius: 12px; width: 90%; max-width: 650px; border: 1px solid var(--primary); max-height: 90vh; overflow-y: auto; }
+        
+        /* 抽籤結果區塊 */
+        .draw-container { display: flex; gap: 2rem; margin-top: 1rem; }
+        .group-box { flex: 1; background: #111; padding: 1rem; border-radius: 8px; border: 1px solid #333; }
+        .group-box h3 { color: var(--secondary); margin-bottom: 1rem; text-align: center; border-bottom: 1px solid #333; padding-bottom: 10px;}
+        .draw-item { display: flex; justify-content: space-between; align-items: center; padding: 10px; border-bottom: 1px solid #222; font-size: 0.95rem; background: rgba(255,255,255,0.02); margin-bottom: 5px; border-radius: 4px;}
+        
+        .hidden { display: none !important; }
+
+        /* 響應式設計 (RWD) */
+        @media (max-width: 768px) {
+            body { flex-direction: column; overflow-y: auto; }
+            .sidebar { width: 100%; height: auto; border-right: none; border-bottom: 1px solid var(--border-color); flex-shrink: 0;}
+            .logo-container { padding: 1rem; display: flex; justify-content: space-between; align-items: center; }
+            .logo-container img { width: 120px; }
+            .menu-items { max-height: 150px; }
+            .header-actions { flex-direction: column; align-items: flex-start; }
+            .draw-container { flex-direction: column; gap: 1rem; }
+            .member-row { flex-direction: column; gap: 5px !important; margin-bottom: 15px !important; background: #222; padding: 10px; border-radius: 4px; }
+            .member-row span { width: auto !important; line-height: 1.2 !important; margin-bottom: 5px; font-weight: bold;}
+        }
+    </style>
+</head>
+<body>
+    <div id="login-view">
+        <div class="login-box">
+            <img src="https://cdn.phototourl.com/free/2026-08-04-426245ea-e131-4229-a2aa-0736f2b25f29.png" alt="銳能娛樂" style="width: 200px; margin-bottom: 20px;">
+            <h2 class="text-gradient" style="margin-bottom: 20px;">賽事後台中控室</h2>
+            <input type="password" id="admin-pwd" placeholder="請輸入管理員密碼">
+            <button class="btn" style="width: 100%;" onclick="login()">登入系統</button>
+            <p id="login-error" style="color: var(--danger); margin-top: 10px; display: none;">驗證中...</p>
+        </div>
+    </div>
+
+    <div class="sidebar">
+        <div class="logo-container">
+            <img src="https://cdn.phototourl.com/free/2026-08-04-426245ea-e131-4229-a2aa-0736f2b25f29.png" alt="銳能秋季盃 LOGO">
+            <button class="btn btn-outline btn-small" style="margin-top: 10px;" onclick="openTourModal()">+ 新增賽事</button>
+        </div>
+        <div class="menu-items" id="tournament-list"></div>
+    </div>
+
+    <div class="main-content">
+        <div id="welcome-screen" style="text-align: center; margin-top: 10vh;">
+            <h1 class="text-gradient" style="font-size: 2.5rem;">秋風橫掃，準備開火！</h1>
+            <p style="color: #888; margin-top: 1rem;">請從左側選擇或新增聯賽資料夾以進行名單管理。</p>
+        </div>
+
+        <div id="tournament-dashboard" class="hidden">
+            <div class="header-actions">
+                <div>
+                    <h1 id="t-title" class="text-gradient" style="font-size: 2rem;">賽事名稱</h1>
+                </div>
+                <div class="action-btns">
+                    <label style="margin-right: 15px; cursor: pointer; color: var(--secondary);">
+                        <input type="checkbox" id="t-status-toggle" onchange="toggleTourStatus()"> 鎖定開賽 (限制編輯2次)
+                    </label>
+                    <button class="btn btn-outline" onclick="openTeamModal()">+ 快速建檔隊伍</button>
+                    <button class="btn" style="background: var(--primary); color: white;" onclick="startDraw()">🎲 檢視/進行分組</button>
+                </div>
+            </div>
+
+            <h3 style="margin-bottom: 1rem; color: var(--secondary);">參賽隊伍名單 (<span id="team-count">0</span> / 24)</h3>
+            <div class="team-grid" id="teams-container"></div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="team-modal">
+        <div class="modal-content">
+            <h2 id="team-modal-title" class="text-gradient" style="margin-bottom: 1rem;">新增/編輯隊伍</h2>
+            <input type="hidden" id="edit-team-id">
+            
+            <div style="display: flex; gap: 15px; align-items: center; margin-bottom: 15px; background: #222; padding: 15px; border-radius: 6px; flex-wrap: wrap;">
+                <div style="flex: 1; min-width: 200px;">
+                    <label style="color: var(--secondary); font-weight: bold;">隊伍名稱 (必填)：</label>
+                    <input type="text" id="team-name" placeholder="輸入戰隊名稱" style="margin-bottom: 0;">
+                </div>
+                <div style="padding-top: 20px;">
+                    <label style="cursor: pointer; font-weight: bold; color: var(--success); font-size: 1.1rem;">
+                        <input type="checkbox" id="team-paid" style="transform: scale(1.5); margin-right: 8px;"> 已繳費
+                    </label>
+                </div>
+            </div>
+            
+            <h3 style="margin: 15px 0 10px; border-bottom: 1px solid #333; padding-bottom: 5px;">隊員名單 (可後補，需滿4人才算完整)</h3>
+            <div id="players-inputs"></div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
+                <button id="btn-delete-team" class="btn btn-danger hidden" onclick="deleteTeam()">🗑️ 刪除</button>
+                <div style="margin-left: auto; display: flex; gap: 10px;">
+                    <button class="btn btn-outline" onclick="closeModal('team-modal')">取消</button>
+                    <button class="btn" onclick="saveTeam()">儲存資料</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="tour-modal">
+        <div class="modal-content">
+            <h2 class="text-gradient" style="margin-bottom: 1rem;">新增賽事資料夾</h2>
+            <label>賽事名稱：</label>
+            <input type="text" id="new-t-name" placeholder="例如：銳能秋季盃">
+            <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px;">
+                <button class="btn btn-outline" onclick="closeModal('tour-modal')">取消</button>
+                <button class="btn" onclick="saveTournament()">建立</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="draw-modal">
+        <div class="modal-content" style="max-width: 900px;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <h2 class="text-gradient" style="font-size: 1.8rem;">🏆 賽事分組調度</h2>
+                <button class="btn btn-danger btn-small" onclick="forceReDraw()">⚠️ 重新亂數抽籤</button>
+            </div>
+            <p style="color: #888; margin-bottom: 15px; margin-top: 10px;">您可以手動將隊伍移至另一組 (每組上限 12 隊)</p>
+            
+            <div class="draw-container">
+                <div class="group-box">
+                    <h3>A 組名單 (<span id="count-A">0</span>)</h3>
+                    <div id="group-a-list"></div>
+                </div>
+                <div class="group-box">
+                    <h3>B 組名單 (<span id="count-B">0</span>)</h3>
+                    <div id="group-b-list"></div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 20px;">
+                <button class="btn" onclick="closeModal('draw-modal')">儲存分組並關閉</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 替換為你的 Google Apps Script 網址
+        const API_URL = 'https://script.google.com/macros/s/AKfycbzH0XpHOBwNMA7xZU1CBLRe9SafvPboyZWcqR0UWkHcT81qQ7gAbaUOQQjMB8CUl4OS/exec';
+        let adminPassword = '';
+
+        // 系統資料狀態
+        let tournaments = [{ id: 1, name: '銳能秋季盃', isStarted: false, hasDrawn: false, teams: [] }];
+        let currentTourId = null;
+        let drawState = { A: [], B: [] };
+
+        // 模擬登入 (正式版可替換為 fetch API 請求驗證)
+        async function login() {
+            const pwd = document.getElementById('admin-pwd').value;
+            const errorMsg = document.getElementById('login-error');
+            if(!pwd) return;
+
+            errorMsg.style.display = 'block';
+            errorMsg.style.color = '#fff';
+            errorMsg.innerText = '系統驗證中...';
+
+            // 這裡模擬本地驗證，正式環境可解除下方註解並使用 API 驗證
+            /*
+            try {
+                const res = await fetch(API_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({ action: 'login', password: pwd })
+                });
+                const data = await res.json();
+                if(data.status === 'success') {
+                    adminPassword = pwd;
+                    document.getElementById('login-view').style.display = 'none';
+                    renderSidebar();
+                } else {
+                    errorMsg.style.color = 'var(--danger)';
+                    errorMsg.innerText = '密碼錯誤！';
+                }
+            } catch(e) {
+                errorMsg.style.color = 'var(--danger)';
+                errorMsg.innerText = '連線失敗，請檢查網路。';
+            }
+            */
+            
+            // 本地測試直接放行
+            setTimeout(() => {
+                document.getElementById('login-view').style.display = 'none';
+                renderSidebar();
+            }, 500);
+        }
+
+        function renderSidebar() {
+            const list = document.getElementById('tournament-list');
+            list.innerHTML = '';
+            tournaments.forEach(t => {
+                const div = document.createElement('div');
+                div.className = `folder-item ${currentTourId === t.id ? 'active' : ''}`;
+                div.innerHTML = `
+                    <div style="flex: 1;" onclick="loadTournament(${t.id})">📁 ${t.name}</div>
+                    <button class="delete-folder-btn" onclick="deleteTournament(${t.id}, event)" title="刪除">🗑️</button>
+                `;
+                list.appendChild(div);
+            });
+        }
+
+        function deleteTournament(id, event) {
+            event.stopPropagation();
+            if(confirm('⚠️ 確定刪除這個賽事與所有隊伍嗎？')) {
+                tournaments = tournaments.filter(t => t.id !== id);
+                if(currentTourId === id) {
+                    currentTourId = null;
+                    document.getElementById('welcome-screen').classList.remove('hidden');
+                    document.getElementById('tournament-dashboard').classList.add('hidden');
+                }
+                renderSidebar();
+            }
+        }
+
+        function openTourModal() {
+            document.getElementById('new-t-name').value = '';
+            document.getElementById('tour-modal').style.display = 'flex';
+        }
+
+        function saveTournament() {
+            const name = document.getElementById('new-t-name').value;
+            if(!name) return alert('請輸入賽事名稱');
+            tournaments.push({ id: Date.now(), name, isStarted: false, hasDrawn: false, teams: [] });
+            closeModal('tour-modal');
+            renderSidebar();
+        }
+
+        function loadTournament(id) {
+            currentTourId = id;
+            renderSidebar();
+            const tour = tournaments.find(t => t.id === id);
+            document.getElementById('welcome-screen').classList.add('hidden');
+            document.getElementById('tournament-dashboard').classList.remove('hidden');
+            document.getElementById('t-title').innerText = tour.name;
+            document.getElementById('t-status-toggle').checked = tour.isStarted;
+            renderTeams();
+        }
+
+        function toggleTourStatus() {
+            tournaments.find(t => t.id === currentTourId).isStarted = document.getElementById('t-status-toggle').checked;
+        }
+
+        function renderTeams() {
+            const tour = tournaments.find(t => t.id === currentTourId);
+            const container = document.getElementById('teams-container');
+            document.getElementById('team-count').innerText = tour.teams.length;
+            container.innerHTML = '';
+
+            tour.teams.forEach(team => {
+                const isPaid = team.isPaid;
+                const isComplete = team.validCount >= 4; // 判斷名單是否大於等於4人
+                
+                const div = document.createElement('div');
+                div.className = `team-card ${isPaid ? 'paid' : ''}`;
+                div.onclick = () => openTeamModal(team.id);
+                div.innerHTML = `
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                        <h3 style="color: white; font-size: 1.2rem; word-break: break-all;">${team.name}</h3>
+                        <span class="status-badge ${isPaid ? 'bg-green' : 'bg-red'}">${isPaid ? '✔ 已繳費' : '✖ 未繳費'}</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span class="status-badge ${isComplete ? 'bg-green' : 'bg-orange'}">${isComplete ? '名單完整' : '名單未齊'} (${team.validCount}/6)</span>
+                        <span class="status-badge bg-gray">修改: ${team.editCount}/2</span>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function openTeamModal(teamId = null) {
+            const tour = tournaments.find(t => t.id === currentTourId);
+            const delBtn = document.getElementById('btn-delete-team');
+
+            if (teamId) {
+                if (tour.isStarted) {
+                    const team = tour.teams.find(t => t.id === teamId);
+                    if (team.editCount >= 2) return alert('⚠️ 賽事已開始，此隊伍已達修改次數上限！');
+                }
+                delBtn.classList.remove('hidden');
+            } else {
+                delBtn.classList.add('hidden');
+                if(tour.teams.length >= 24) return alert('隊伍數量已達 24 隊上限！');
+            }
+
+            document.getElementById('team-modal').style.display = 'flex';
+            const pContainer = document.getElementById('players-inputs');
+            pContainer.innerHTML = '';
+            
+            let teamData = teamId ? tour.teams.find(t => t.id === teamId) : { name: '', isPaid: false, players: Array(6).fill({name:'', ign:'', uid:''}) };
+            
+            document.getElementById('edit-team-id').value = teamId || '';
+            document.getElementById('team-name').value = teamData.name;
+            document.getElementById('team-paid').checked = teamData.isPaid;
+
+            for(let i=0; i<6; i++) {
+                const p = teamData.players[i] || {name:'', ign:'', uid:''};
+                pContainer.innerHTML += `
+                    <div class="member-row" style="display: flex; gap: 10px; margin-bottom: 10px;">
+                        <span style="line-height: 40px; color: #888; width: 50px;">隊員${i+1}</span>
+                        <input type="text" id="p${i}_name" value="${p.name}" placeholder="姓名" style="margin:0; flex: 1;">
+                        <input type="text" id="p${i}_ign" value="${p.ign}" placeholder="遊戲暱稱" style="margin:0; flex: 1;">
+                        <input type="text" id="p${i}_uid" value="${p.uid}" placeholder="遊戲UID" style="margin:0; flex: 1;">
+                    </div>
+                `;
+            }
+        }
+
+        // 修改：無條件允許儲存，僅計算有效人數
+        function saveTeam() {
+            const tour = tournaments.find(t => t.id === currentTourId);
+            const teamId = document.getElementById('edit-team-id').value;
+            const tName = document.getElementById('team-name').value;
+            const isPaid = document.getElementById('team-paid').checked;
+            
+            if(!tName) return alert('隊伍名稱不可為空！');
+
+            let players = [], validCount = 0;
+            for(let i=0; i<6; i++) {
+                const name = document.getElementById(`p${i}_name`).value.trim();
+                const ign = document.getElementById(`p${i}_ign`).value.trim();
+                const uid = document.getElementById(`p${i}_uid`).value.trim();
+                if(name || ign || uid) validCount++; // 只要填了一格就算作一人(寬鬆判定)，可依需求改為需全填
+                players.push({name, ign, uid});
+            }
+
+            if (teamId) {
+                const team = tour.teams.find(t => t.id == teamId);
+                team.name = tName;
+                team.isPaid = isPaid;
+                team.players = players;
+                team.validCount = validCount;
+                if (tour.isStarted) team.editCount++;
+            } else {
+                tour.teams.push({ id: Date.now(), name: tName, isPaid, validCount, editCount: 0, players });
+                // 如果是新隊伍且已經抽過籤了，預設丟入人少的組別
+                if (tour.hasDrawn) {
+                    if (drawState.A.length <= drawState.B.length) drawState.A.push(tour.teams[tour.teams.length-1]);
+                    else drawState.B.push(tour.teams[tour.teams.length-1]);
+                }
+            }
+            closeModal('team-modal');
+            renderTeams();
+        }
+
+        function deleteTeam() {
+            if(confirm('⚠️ 確定要刪除這支隊伍嗎？')) {
+                const tour = tournaments.find(t => t.id === currentTourId);
+                const teamId = document.getElementById('edit-team-id').value;
+                tour.teams = tour.teams.filter(t => t.id != teamId);
+                // 同步移除抽籤陣列中的該隊伍
+                drawState.A = drawState.A.filter(t => t.id != teamId);
+                drawState.B = drawState.B.filter(t => t.id != teamId);
+                
+                closeModal('team-modal');
+                renderTeams();
+            }
+        }
+
+        // 修改：抽籤狀態保留邏輯
+        function startDraw() {
+            const tour = tournaments.find(t => t.id === currentTourId);
+            if(tour.teams.length === 0) return alert('目前沒有隊伍可進行分組！');
+            
+            // 如果還沒抽過籤，才進行洗牌
+            if(!tour.hasDrawn) {
+                let shuffled = [...tour.teams].sort(() => 0.5 - Math.random());
+                let mid = Math.ceil(shuffled.length / 2);
+                drawState.A = shuffled.slice(0, mid);
+                drawState.B = shuffled.slice(mid);
+                tour.hasDrawn = true;
+            }
+            
+            renderDrawLists();
+            document.getElementById('draw-modal').style.display = 'flex';
+        }
+
+        // 強制重新抽籤
+        function forceReDraw() {
+            if(confirm('⚠️ 警告：這將會打亂現有的所有分組，確定要重新亂數抽籤嗎？')) {
+                const tour = tournaments.find(t => t.id === currentTourId);
+                tour.hasDrawn = false;
+                startDraw();
+            }
+        }
+
+        function renderDrawLists() {
+            document.getElementById('count-A').innerText = drawState.A.length;
+            document.getElementById('count-B').innerText = drawState.B.length;
+
+            const renderGroup = (group, elementId, currentGroupName, targetGroupName) => {
+                const el = document.getElementById(elementId);
+                el.innerHTML = '';
+                group.forEach((team, index) => {
+                    const badgeColor = team.isPaid ? 'var(--success)' : 'var(--danger)';
+                    el.innerHTML += `
+                        <div class="draw-item">
+                            <span><strong>${index + 1}.</strong> ${team.name} <small style="color:${badgeColor}">(${team.isPaid ? '已繳' : '未繳'})</small></span>
+                            <button class="btn btn-outline btn-small" onclick="swapGroup(${team.id}, '${currentGroupName}', '${targetGroupName}')">移至 ${targetGroupName} ⮂</button>
+                        </div>`;
+                });
+            };
+            renderGroup(drawState.A, 'group-a-list', 'A', 'B');
+            renderGroup(drawState.B, 'group-b-list', 'B', 'A');
+        }
+
+        function swapGroup(teamId, fromGroup, toGroup) {
+            if(drawState[toGroup].length >= 12) {
+                return alert(`⚠️ 目標組別已滿 12 隊，請先將隊伍移出再進行操作！`);
+            }
+            const teamIndex = drawState[fromGroup].findIndex(t => t.id === teamId);
+            if (teamIndex > -1) {
+                const team = drawState[fromGroup].splice(teamIndex, 1)[0];
+                drawState[toGroup].push(team);
+                renderDrawLists();
+            }
+        }
+
+        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+    </script>
+</body>
+</html>
