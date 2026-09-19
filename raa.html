@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#060607">
+<meta name="description" content="RAA 2026｜REBORN ANNUAL AWARDS 銳能年度大賞。為 2026 春季盃、秋季盃、冬季盃寫下年度終章。">
+<title>RAA 2026｜銳能年度大賞</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+TC:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#050506;--panel:#0b0c0f;--panel2:#101116;--gold:#f1c66b;--gold2:#b98a32;--cream:#fff2cf;
+  --text:#f7f5ef;--muted:#9d9a91;--line:rgba(241,198,107,.18);--line2:rgba(255,255,255,.08);
+  --danger:#ff7777;--ok:#7fe0ad;--warn:#f2c86d;--shadow:0 24px 80px rgba(0,0,0,.45);
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:'Inter','Noto Sans TC',sans-serif;overflow-x:hidden}button,input,textarea,select{font:inherit}button,a{color:inherit}a{text-decoration:none}img{max-width:100%;display:block}
+#particleCanvas{position:fixed;inset:0;width:100%;height:100%;z-index:-3;background:radial-gradient(circle at 50% 0%,rgba(188,130,38,.13),transparent 38%),linear-gradient(#070708,#040405 65%,#020203)}
+.tech-grid{position:fixed;inset:0;z-index:-2;pointer-events:none;opacity:.32;background-image:linear-gradient(rgba(241,198,107,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(241,198,107,.045) 1px,transparent 1px);background-size:64px 64px;mask-image:linear-gradient(to bottom,black,transparent 86%)}
+.scan{position:fixed;left:0;right:0;height:1px;z-index:-1;pointer-events:none;background:linear-gradient(90deg,transparent,rgba(241,198,107,.52),transparent);filter:blur(.2px);animation:scan 8s linear infinite}@keyframes scan{from{top:-2%}to{top:102%}}
+.wrap{width:min(1180px,calc(100% - 40px));margin:auto}.eyebrow{font-size:12px;font-weight:800;letter-spacing:.24em;color:var(--gold);text-transform:uppercase}.muted{color:var(--muted)}
+.topbar{position:fixed;top:0;left:0;right:0;z-index:200;background:linear-gradient(to bottom,rgba(4,4,5,.88),rgba(4,4,5,.28),transparent);backdrop-filter:blur(10px);transition:.25s}.topbar.scrolled{background:rgba(5,5,6,.86);border-bottom:1px solid var(--line2)}
+.nav{height:82px;display:flex;align-items:center;justify-content:space-between}.brand{display:flex;align-items:center;gap:12px;font-weight:800;font-size:12px;letter-spacing:.13em}.brand img{width:70px;max-height:36px;object-fit:contain}.brand small{color:#aaa;font-size:10px}.hamb{width:48px;height:48px;background:rgba(255,255,255,.035);border:1px solid var(--line2);border-radius:4px;display:grid;place-items:center;cursor:pointer;transition:.2s}.hamb:hover{border-color:var(--gold);transform:skewX(-4deg)}.hamb i,.hamb i:before,.hamb i:after{display:block;width:21px;height:1px;background:white;content:"";position:relative}.hamb i:before{position:absolute;top:-7px}.hamb i:after{position:absolute;top:7px}
+.drawerShade{position:fixed;inset:0;background:rgba(0,0,0,.68);z-index:400;opacity:0;pointer-events:none;transition:.28s}.drawerShade.on{opacity:1;pointer-events:auto}.drawer{position:fixed;right:0;top:0;height:100dvh;width:min(440px,92vw);z-index:410;background:rgba(8,8,10,.97);border-left:1px solid var(--line);padding:28px;transform:translateX(105%);transition:.34s cubic-bezier(.2,.8,.2,1);backdrop-filter:blur(24px)}.drawer.on{transform:none}.drawerHead{display:flex;justify-content:space-between;align-items:center;padding-bottom:24px;border-bottom:1px solid var(--line2)}.drawerHead img{width:110px}.iconBtn{width:42px;height:42px;background:none;border:1px solid var(--line2);color:white;font-size:25px;cursor:pointer}.drawerNav{padding-top:14px}.drawerNav a,.drawerNav button{width:100%;display:flex;align-items:center;justify-content:space-between;padding:16px 6px;border:0;border-bottom:1px solid var(--line2);background:none;color:#eee;text-align:left;cursor:pointer;font-weight:700}.drawerNav span{color:var(--gold);font-size:11px;letter-spacing:.1em}.drawerNav a:hover,.drawerNav button:hover{padding-left:14px;color:var(--gold)}
+.hero{min-height:100dvh;display:flex;align-items:center;position:relative;overflow:hidden;padding:120px 0 70px}.hero:after{content:"";position:absolute;left:7%;right:7%;bottom:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.4}.heroStage{position:absolute;inset:0;pointer-events:none}.heroStage:before{content:"";position:absolute;width:600px;height:600px;left:50%;top:54%;transform:translate(-50%,-50%);border:1px solid rgba(241,198,107,.13);border-radius:50%;box-shadow:0 0 160px rgba(241,198,107,.07),inset 0 0 120px rgba(241,198,107,.035)}.heroStage:after{content:"";position:absolute;width:900px;height:2px;left:50%;top:55%;transform:translate(-50%,-50%) rotate(-13deg);background:linear-gradient(90deg,transparent,rgba(241,198,107,.18),transparent)}
+.heroContent{position:relative;z-index:2;text-align:center}.heroLogo{width:min(470px,78vw);margin:12px auto 12px;filter:drop-shadow(0 0 28px rgba(241,198,107,.12))}.hero h1{font-size:clamp(34px,6vw,76px);line-height:1;margin:0;font-weight:900;letter-spacing:.04em}.hero h1 .slant{display:inline-block;transform:skewX(-9deg)}.hero .sub{font-size:clamp(13px,1.5vw,17px);max-width:720px;margin:22px auto;color:#bdb8aa;line-height:1.8}.heroMeta{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:28px 0}.pill{border:1px solid var(--line);background:rgba(241,198,107,.04);padding:10px 14px;font-size:12px;color:#d7c79f;clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%)}
+.actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}.btn{appearance:none;border:1px solid var(--line2);padding:13px 18px;background:#101116;color:white;cursor:pointer;font-weight:800;letter-spacing:.02em;transition:.2s;clip-path:polygon(9px 0,100% 0,calc(100% - 9px) 100%,0 100%)}.btn:hover{transform:translateY(-2px);border-color:var(--gold)}.btn.gold{background:linear-gradient(100deg,#f0cc79,#c28e34);color:#15100a;border-color:transparent}.btn.ghost{background:rgba(255,255,255,.025)}.btn.danger{border-color:rgba(255,119,119,.35);color:#ff9f9f;background:rgba(255,119,119,.06)}.btn.small{padding:8px 11px;font-size:12px}.btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+section{padding:100px 0}.sectionHead{display:flex;align-items:end;justify-content:space-between;gap:30px;margin-bottom:34px}.sectionTitle{font-size:clamp(31px,5vw,62px);line-height:1.02;margin:10px 0 0;font-weight:900;letter-spacing:-.04em}.sectionLead{max-width:520px;color:var(--muted);line-height:1.75}.stage{position:relative;background:linear-gradient(180deg,rgba(255,255,255,.015),rgba(241,198,107,.018),transparent);border-top:1px solid var(--line2);border-bottom:1px solid var(--line2)}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.card{position:relative;border:1px solid var(--line2);background:linear-gradient(145deg,rgba(18,19,23,.92),rgba(7,8,10,.92));padding:24px;min-height:170px;overflow:hidden;box-shadow:inset 0 1px rgba(255,255,255,.02)}.card:before{content:"";position:absolute;left:0;top:0;width:40px;height:1px;background:var(--gold);box-shadow:0 0 20px rgba(241,198,107,.5)}.card h3{font-size:21px;margin:10px 0}.card p{color:var(--muted);line-height:1.7;font-size:14px}.cardCode{font-size:10px;font-weight:900;color:var(--gold);letter-spacing:.18em}.tag{display:inline-flex;align-items:center;gap:7px;padding:7px 10px;border:1px solid var(--line);font-size:11px;color:#d9c28a;margin-top:8px}.tag:before{content:"";width:5px;height:5px;background:var(--gold);border-radius:50%;box-shadow:0 0 10px var(--gold)}
+.juryNote{margin-top:18px;padding:20px 22px;border:1px solid rgba(241,198,107,.22);background:linear-gradient(90deg,rgba(241,198,107,.08),rgba(241,198,107,.02));display:flex;gap:14px;align-items:flex-start}.juryNote b{color:var(--cream)}
+.timeline{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line2)}.step{padding:25px;border-right:1px solid var(--line2);min-height:170px}.step:last-child{border-right:0}.step b{font-size:10px;letter-spacing:.15em;color:var(--gold)}.step h3{margin:30px 0 8px}.step p{font-size:13px;line-height:1.6;color:var(--muted)}
+.nomineeFilters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}.filterBtn{padding:10px 13px;background:#0d0e11;border:1px solid var(--line2);color:#aaa;cursor:pointer}.filterBtn.active{color:#120e08;background:var(--gold);border-color:var(--gold);font-weight:800}.nomineeGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.nomineeCard{min-height:210px;display:flex;flex-direction:column;justify-content:space-between}.nomineeAvatar{width:68px;height:68px;border:1px solid var(--line);background:linear-gradient(135deg,#17181c,#09090b);display:grid;place-items:center;font-weight:900;font-size:23px;color:var(--gold);overflow:hidden;clip-path:polygon(9px 0,100% 0,100% calc(100% - 9px),calc(100% - 9px) 100%,0 100%,0 9px)}.nomineeAvatar img{width:100%;height:100%;object-fit:cover}.nomineeName{font-size:22px;font-weight:900;margin-top:18px}.nomineeMeta{font-size:12px;color:#a9a59b;margin-top:6px}.emptyState{grid-column:1/-1;border:1px dashed var(--line);padding:45px;text-align:center;color:var(--muted)}
+.teamArchive{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.teamCard{padding:18px;border:1px solid var(--line2);background:rgba(12,13,16,.74);position:relative;min-height:118px}.teamCard h4{margin:0 0 12px;font-size:17px}.seasonDots{display:flex;gap:5px;flex-wrap:wrap}.seasonChip{font-size:10px;padding:5px 7px;border:1px solid var(--line);color:#cfbd91}.teamCard p{font-size:11px;color:var(--muted);margin:10px 0 0}.archiveFoot{margin-top:20px;color:#918b7d;font-size:13px;line-height:1.7}
+.liveBox{display:grid;grid-template-columns:1.2fr .8fr;min-height:300px;border:1px solid var(--line2);overflow:hidden}.liveMain{padding:40px;background:radial-gradient(circle at 20% 30%,rgba(241,198,107,.1),transparent 35%),#0b0c0e}.liveSide{border-left:1px solid var(--line2);padding:32px;display:flex;flex-direction:column;justify-content:space-between}.liveDot{display:inline-flex;align-items:center;gap:8px;color:#c6c0b5;font-size:12px}.liveDot i{width:8px;height:8px;background:#dc534f;border-radius:50%;box-shadow:0 0 16px #dc534f}
+.footer{padding:40px 0 50px;border-top:1px solid var(--line2);font-size:11px;color:#6f6c66}.footerLine{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}.footer img{width:85px;opacity:.75;margin-bottom:14px}
+/* hidden portal */
+.portal{position:fixed;inset:0;z-index:1000;background:rgba(4,4,5,.985);display:none;overflow:auto}.portal.open{display:block}.portalTop{position:sticky;top:0;z-index:30;background:rgba(5,5,6,.88);backdrop-filter:blur(22px);border-bottom:1px solid var(--line2)}.portalNav{height:76px;display:flex;align-items:center;justify-content:space-between}.portalNav img{width:92px}.portalBody{padding:48px 0 90px}.portalIntro{text-align:center;max-width:760px;margin:0 auto 36px}.portalIntro h2{font-size:clamp(34px,6vw,66px);margin:8px 0}.roleGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;max-width:900px;margin:0 auto}.roleCard{position:relative;text-align:left;min-height:260px;padding:28px;border:1px solid var(--line2);background:linear-gradient(145deg,#111216,#08090b);cursor:pointer;overflow:hidden}.roleCard:after{content:"";position:absolute;right:-80px;bottom:-130px;width:260px;height:260px;border:1px solid rgba(241,198,107,.15);transform:rotate(35deg)}.roleCard:hover{border-color:var(--gold)}.roleCard .no{font-size:58px;font-weight:900;color:rgba(241,198,107,.11);position:absolute;right:18px;top:12px}.roleCard h3{font-size:30px;margin:55px 0 8px}.roleCard p{max-width:420px;color:var(--muted);line-height:1.7}.portalPane{display:none}.portalPane.active{display:block}.paneHead{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:24px}.paneHead h3{font-size:34px;margin:0}.backLink{background:none;border:0;color:var(--gold);cursor:pointer;font-weight:800}.formGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.field{margin-bottom:16px}.field.full{grid-column:1/-1}.field label{display:block;font-size:11px;font-weight:800;letter-spacing:.08em;margin-bottom:8px;color:#c8c3b7}.field input,.field select,.field textarea{width:100%;border:1px solid var(--line2);background:#0b0c0f;color:white;padding:14px 14px;outline:none;border-radius:0}.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--gold);box-shadow:0 0 0 2px rgba(241,198,107,.06)}.field small{color:#77736a;display:block;margin-top:6px;line-height:1.5}.checks{display:flex;gap:8px;flex-wrap:wrap}.check{position:relative}.check input{position:absolute;opacity:0;pointer-events:none}.check span{display:block;border:1px solid var(--line2);padding:10px 12px;color:#aaa;cursor:pointer}.check input:checked+span{border-color:var(--gold);background:rgba(241,198,107,.08);color:var(--cream)}
+.identityCard{max-width:800px;margin:0 auto}.identityOk{display:none;max-width:1000px;margin:0 auto}.identityOk.show{display:block}.portalTabs{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0}.portalTab{border:1px solid var(--line2);background:#0d0e11;color:#aaa;padding:10px 13px;cursor:pointer}.portalTab.active{background:var(--gold);color:#160f07;border-color:var(--gold);font-weight:800}.portalPanel{display:none}.portalPanel.active{display:block}.searchResults{display:grid;gap:8px;margin-top:10px}.candidateBtn{text-align:left;width:100%;border:1px solid var(--line2);padding:13px;background:#0d0e11;color:white;cursor:pointer}.candidateBtn:hover,.candidateBtn.selected{border-color:var(--gold);background:rgba(241,198,107,.06)}.selectedCandidate{border-left:2px solid var(--gold);padding:11px 14px;background:rgba(241,198,107,.06);margin:12px 0;color:#d8c496}.statusList{display:grid;gap:10px}.statusRow{border:1px solid var(--line2);padding:14px;display:flex;justify-content:space-between;gap:15px;align-items:center}.statusBadge{font-size:11px;font-weight:800;padding:6px 8px;border:1px solid}.statusBadge.pending{color:var(--warn);border-color:rgba(242,200,109,.3)}.statusBadge.approved{color:var(--ok);border-color:rgba(127,224,173,.3)}.statusBadge.rejected{color:var(--danger);border-color:rgba(255,119,119,.3)}
+.toast{position:fixed;z-index:2000;left:50%;bottom:30px;transform:translate(-50%,20px);opacity:0;pointer-events:none;transition:.25s;background:#15161a;border:1px solid var(--line);box-shadow:var(--shadow);padding:13px 17px;max-width:min(520px,90vw);font-size:13px}.toast.show{opacity:1;transform:translate(-50%,0)}
+.loading{opacity:.55;pointer-events:none}.announcement{position:relative;z-index:3;background:rgba(241,198,107,.06);border-bottom:1px solid var(--line);padding:9px 15px;text-align:center;font-size:11px;color:#d7c698;letter-spacing:.04em}.noDisplay{display:none!important}
+@media(max-width:900px){.grid3,.nomineeGrid{grid-template-columns:repeat(2,1fr)}.teamArchive{grid-template-columns:repeat(2,1fr)}.timeline{grid-template-columns:repeat(2,1fr)}.step:nth-child(2){border-right:0}.step:nth-child(-n+2){border-bottom:1px solid var(--line2)}.liveBox{grid-template-columns:1fr}.liveSide{border-left:0;border-top:1px solid var(--line2)}.sectionHead{display:block}.sectionLead{margin-top:18px}.heroStage:before{width:430px;height:430px}}
+@media(max-width:640px){.wrap{width:min(100% - 24px,1180px)}.nav{height:70px}.brand small{display:none}.hero{padding-top:105px}.heroMeta{gap:6px}.pill{padding:8px 9px}.grid3,.grid2,.nomineeGrid,.teamArchive,.roleGrid,.formGrid{grid-template-columns:1fr}.timeline{grid-template-columns:1fr}.step{border-right:0!important;border-bottom:1px solid var(--line2)}.step:last-child{border-bottom:0}.sectionTitle{font-size:38px}.sectionHead{margin-bottom:25px}section{padding:74px 0}.card{padding:20px}.juryNote{display:block}.portalBody{padding-top:30px}.paneHead h3{font-size:28px}.portalNav{height:68px}.statusRow{align-items:flex-start;flex-direction:column}.heroLogo{width:min(390px,86vw)}}
+</style>
+</head>
+<body>
+<canvas id="particleCanvas" aria-hidden="true"></canvas><div class="tech-grid"></div><div class="scan"></div>
+<div id="announcement" class="announcement">RAA 2026｜REBORN ANNUAL AWARDS</div>
+<header class="topbar" id="topbar">
+  <div class="wrap nav">
+    <a class="brand" href="#top"><img src="https://cdn.phototourl.com/free/2026-09-19-e17e160e-82da-4792-aef8-db041c70ffa0.png" alt="RAA Logo"><small>REBORN ANNUAL AWARDS · 2026</small></a>
+    <button class="hamb" id="openMenu" aria-label="開啟選單"><i></i></button>
+  </div>
+</header>
+<div class="drawerShade" id="drawerShade"></div>
+<aside class="drawer" id="drawer">
+  <div class="drawerHead"><img src="https://cdn.phototourl.com/free/2026-09-19-e17e160e-82da-4792-aef8-db041c70ffa0.png" alt="RAA"><button class="iconBtn" id="closeMenu" aria-label="關閉">×</button></div>
+  <nav class="drawerNav">
+    <a href="#info" data-close>頒獎典禮資訊 <span>01</span></a>
+    <a href="#awards" data-close>典禮規則・獎項 <span>02</span></a>
+    <a href="#voting" data-close>投票制度 <span>03</span></a>
+    <a href="#nominees" data-close>入圍名單 <span>04</span></a>
+    <button type="button" class="openParticipantStatus" data-close>入圍狀態 <span>05</span></button>
+    <a href="#teams" data-close>歷屆參賽隊伍 <span>06</span></a>
+    <button type="button" class="openPortal" data-close>我要投票／參選 <span>07</span></button>
+    <a href="#about" data-close>關於 RAA <span>08</span></a>
+    <a href="#live" data-close>典禮直播 <span>09</span></a>
+  </nav>
+</aside>
+<main id="top">
+<section class="hero">
+  <div class="heroStage"></div>
+  <div class="wrap heroContent">
+    <div class="eyebrow">THE FINAL CHAPTER OF REBORN 2026</div>
+    <img class="heroLogo" src="https://cdn.phototourl.com/free/2026-09-19-e17e160e-82da-4792-aef8-db041c70ffa0.png" alt="RAA 銳能年度大賞 Logo">
+    <h1><span class="slant">銳能年度大賞</span></h1>
+    <p class="sub">REBORN ANNUAL AWARDS。春季盃、秋季盃、冬季盃的勝負、名字與記憶，在冬季盃總決賽之後走上同一座年度舞台。</p>
+    <div class="heroMeta"><span class="pill">2026 SEASON FINALE</span><span class="pill">SPRING · AUTUMN · WINTER</span><span class="pill" id="heroCeremony">冬季盃總決賽後</span></div>
+    <div class="actions"><a href="#nominees" class="btn gold">查看正式入圍</a><button class="btn ghost openPortal" type="button">進入投票中心</button></div>
+  </div>
+</section>
+<section id="info">
+  <div class="wrap">
+    <div class="sectionHead"><div><div class="eyebrow">CEREMONY INFORMATION</div><h2 class="sectionTitle">2026 最後一幕，<br>不是另一場比賽。</h2></div><p class="sectionLead">RAA 將接續銳能冬季盃總決賽直播舉行。它不是單純把冠軍再念一次，而是把三個賽季裡的隊伍、選手、主播與觀眾重新聚回同一座舞台。</p></div>
+    <div class="grid3"><article class="card"><div class="cardCode">WHEN / 01</div><h3 id="ceremonyCard">冬季盃總決賽後</h3><p>總決賽結束後直接進入 RAA 年度大賞，讓冬季賽事與年度典禮成為一個完整收尾。</p></article><article class="card"><div class="cardCode">WHERE / 02</div><h3>銳能官方直播舞台</h3><p>得獎名單與主辦方指定獎項將於典禮中依流程揭曉，直播連結會於活動前同步更新。</p></article><article class="card"><div class="cardCode">RANGE / 03</div><h3>春季盃・秋季盃・冬季盃</h3><p>2026 RAA 的年度範圍固定以三個賽季為基礎，歷屆參賽紀錄也會成為主辦方評選的重要依據。</p></article></div>
+  </div>
+</section>
+<section class="stage" id="awards">
+  <div class="wrap">
+    <div class="sectionHead"><div><div class="eyebrow">AWARD CATEGORIES</div><h2 class="sectionTitle">六座年度獎項。</h2></div><p class="sectionLead">三座公開票選獎，三座主辦方評選獎。公開票選必須先通過入圍審核；主辦方評選則直接從符合資格的年度參賽紀錄中評估。</p></div>
+    <div class="grid3" id="awardGrid">
+      <article class="card"><div class="cardCode">PUBLIC VOTE 01</div><h3>最佳戰隊獎</h3><p>年度賽事中最受觀眾肯定的戰隊表現。</p><span class="tag">觀眾投票</span></article>
+      <article class="card"><div class="cardCode">PUBLIC VOTE 02</div><h3>最佳選手獎</h3><p>觀眾可使用選手暱稱、遊戲名稱或 UID 搜尋正式入圍者。</p><span class="tag">觀眾投票</span></article>
+      <article class="card"><div class="cardCode">PUBLIC VOTE 03</div><h3>人氣戰隊獎</h3><p>記錄年度最具社群支持度與人氣的參賽隊伍。</p><span class="tag">觀眾投票</span></article>
+      <article class="card"><div class="cardCode">JURY AWARD 04</div><h3>精神總錦標獎</h3><p>綜合賽事態度、參與精神與年度互動，由主辦方評選。</p><span class="tag">主辦方決定</span></article>
+      <article class="card"><div class="cardCode">JURY AWARD 05</div><h3>年度隊伍獎</h3><p>依春、秋、冬三季參賽紀錄與年度表現，由主辦方評選。</p><span class="tag">主辦方決定</span></article>
+      <article class="card"><div class="cardCode">JURY AWARD 06</div><h3>年度主播獎</h3><p>表揚陪伴年度賽事並提升直播觀賽體驗的主播。</p><span class="tag">主辦方決定</span></article>
+    </div>
+    <div class="juryNote"><span class="tag">IMPORTANT</span><div><b>主辦方決定的獎項不需要自行申請入圍。</b><div class="muted" style="margin-top:7px;line-height:1.7">歷屆符合資格的參賽隊伍、相關選手與主播皆可能納入主辦方評選範圍；最終提名與得獎名單由 RAA 主辦方依年度紀錄決定。</div></div></div>
+  </div>
+</section>
+<section id="voting">
+  <div class="wrap">
+    <div class="sectionHead"><div><div class="eyebrow">VOTING SYSTEM</div><h2 class="sectionTitle">每一票，都有身份。</h2></div><p class="sectionLead">投票入口不直接拆成公開頁面，而是在本網站中開啟隱藏投票中心。觀眾與參賽選手／負責人分流，並以實際遊戲 UID 作為主要防重複投票鍵。</p></div>
+    <div class="timeline"><div class="step"><b>STEP 01</b><h3>選擇身份</h3><p>觀眾，或參賽選手／隊伍負責人。</p></div><div class="step"><b>STEP 02</b><h3>UID 登記</h3><p>輸入實際遊戲 UID 與遊戲名稱。參賽身份另填隊伍與賽季。</p></div><div class="step"><b>STEP 03</b><h3>搜尋候選</h3><p>可輸入選手暱稱、遊戲名稱、隊伍名稱；有 UID 時可直接精準搜尋。</p></div><div class="step"><b>STEP 04</b><h3>完成有效票</h3><p>同一 UID 對同一獎項只能保留一張有效票，異常票可由後台人工作廢。</p></div></div>
+  </div>
+</section>
+<section class="stage" id="nominees">
+  <div class="wrap">
+    <div class="sectionHead"><div><div class="eyebrow">OFFICIAL NOMINEES</div><h2 class="sectionTitle">正式入圍名單。</h2></div><p class="sectionLead">公開申請送出後仍需人工審核；只有狀態成為「正式入圍」才會顯示在這裡，也才會進入觀眾票選搜尋結果。</p></div>
+    <div class="nomineeFilters" id="nomineeFilters"></div>
+    <div class="nomineeGrid" id="nomineeGrid"><div class="emptyState">正在讀取 RAA 正式入圍名單…</div></div>
+  </div>
+</section>
+<section id="teams">
+  <div class="wrap">
+    <div class="sectionHead"><div><div class="eyebrow">TEAM ARCHIVE</div><h2 class="sectionTitle">歷屆參賽隊伍。</h2></div><p class="sectionLead">收錄 2026 春季盃、秋季盃、冬季盃的參賽隊伍。此名單同時作為年度隊伍獎、精神總錦標等主辦方指定評選的重要資格資料。</p></div>
+    <div class="teamArchive" id="teamArchive"><div class="emptyState">歷屆參賽隊伍資料將由主辦方後台匯入。</div></div>
+    <div class="archiveFoot">※ 歷屆參賽隊伍不代表已入圍公開票選獎項；公開票選獎仍需經申請與人工審核。主辦方指定獎項則不需自行提出入圍申請。</div>
+  </div>
+</section>
+<section class="stage" id="about"><div class="wrap"><div class="sectionHead"><div><div class="eyebrow">ABOUT RAA</div><h2 class="sectionTitle">REBORN<br>ANNUAL AWARDS.</h2></div><p class="sectionLead">RAA 是銳能娛樂的年度賽事總結。2026 首屆 RAA 以三個賽季為核心，不只記錄冠軍，也記錄長期參與、人氣、賽事精神與直播陪伴，讓一年真正留下完整結尾。</p></div></div></section>
+<section id="live"><div class="wrap"><div class="sectionHead"><div><div class="eyebrow">CEREMONY LIVE</div><h2 class="sectionTitle">典禮直播。</h2></div><p class="sectionLead">冬季盃總決賽結束後，直播流程將直接接續 RAA。投票期間不公開即時票數，最終有效票與主辦方評選結果於典禮揭曉。</p></div><div class="liveBox"><div class="liveMain"><div class="liveDot"><i></i> LIVE CHANNEL</div><h3 style="font-size:34px;margin:65px 0 10px">RAA 2026 CEREMONY</h3><p class="muted" id="liveText">直播連結尚未公開。</p></div><div class="liveSide"><div><div class="cardCode">STREAM ACCESS</div><h3>銳能官方直播</h3><p class="muted" style="line-height:1.7">總決賽後不換台，直接進入年度頒獎典禮。</p></div><a id="streamBtn" href="#" target="_blank" rel="noopener" class="btn ghost">COMING SOON</a></div></div></div></section>
+</main>
+<footer class="footer"><div class="wrap footerLine"><div><img src="https://cdn.phototourl.com/free/2026-09-19-e17e160e-82da-4792-aef8-db041c70ffa0.png" alt="RAA"><div>© 2026 REBORN · REBORN ANNUAL AWARDS.</div></div><div>SPRING CUP · AUTUMN CUP · WINTER CUP<br>THE FINAL CHAPTER OF 2026</div></div></footer>
+
+<!-- Single-file hidden voting / participant portal. It is not a separate public HTML page. -->
+<div class="portal" id="portal" aria-hidden="true">
+  <div class="portalTop"><div class="wrap portalNav"><img src="https://cdn.phototourl.com/free/2026-09-19-e17e160e-82da-4792-aef8-db041c70ffa0.png" alt="RAA"><button class="iconBtn" id="closePortal" aria-label="離開投票中心">×</button></div></div>
+  <div class="wrap portalBody">
+    <div id="roleChooser">
+      <div class="portalIntro"><div class="eyebrow">PRIVATE ENTRY · RAA VOTING CENTER</div><h2>選擇你的身份</h2><p class="muted">這個投票中心藏在 RAA 官網內，不另外開公開子頁面。完成 UID 身份登記後才會進入對應功能。</p></div>
+      <div class="roleGrid"><button class="roleCard" type="button" data-role="audience"><div class="no">01</div><div class="cardCode">AUDIENCE</div><h3>我是觀眾</h3><p>登記遊戲 UID 與暱稱後進入公開票選。可用選手暱稱、遊戲名稱、隊伍名稱或 UID 搜尋候選人。</p><span class="tag">進入觀眾註冊</span></button><button class="roleCard" type="button" data-role="participant"><div class="no">02</div><div class="cardCode">PARTICIPANT</div><h3>我是參賽選手</h3><p>選手或隊伍負責人需填寫參賽隊伍與春／秋／冬參賽賽季，可投票、申請公開票選獎項與查詢審核狀態。</p><span class="tag">進入參賽者頁面</span></button></div>
+    </div>
+
+    <section class="portalPane" id="audiencePane">
+      <div class="paneHead"><button class="backLink" type="button" data-back>← 返回身份選擇</button><h3>觀眾註冊</h3><span></span></div>
+      <div class="identityCard card" id="audienceIdentityCard"><div class="cardCode">AUDIENCE REGISTRATION</div><h3>先登記你的投票身份</h3><p>UID 是同獎項防重複投票的主要識別。請填寫你實際使用的遊戲 UID。</p><form id="audienceIdentityForm"><div class="formGrid"><div class="field"><label>遊戲 UID *</label><input name="gameUid" inputmode="numeric" pattern="[0-9]*" maxlength="30" required placeholder="例如：1234567890"><small>請輸入 5–30 位數字。</small></div><div class="field"><label>遊戲名稱／暱稱 *</label><input name="playerName" maxlength="40" required placeholder="你的遊戲名稱"></div></div><button class="btn gold" type="submit">完成身份登記</button></form></div>
+      <div class="identityOk" id="audienceWorkspace"><div class="card"><div class="cardCode">BALLOT</div><h3>觀眾投票</h3><p id="audienceHello" class="muted"></p><div id="audienceBallot"></div></div></div>
+    </section>
+
+    <section class="portalPane" id="participantPane">
+      <div class="paneHead"><button class="backLink" type="button" data-back>← 返回身份選擇</button><h3>參賽選手／負責人</h3><span></span></div>
+      <div class="identityCard card" id="participantIdentityCard"><div class="cardCode">PARTICIPANT IDENTITY</div><h3>確認你的參賽身份</h3><p>請填寫實際遊戲 UID、隊伍名稱與 2026 參加過的賽季。賽季可複選。</p><form id="participantIdentityForm"><div class="formGrid"><div class="field"><label>遊戲 UID *</label><input name="gameUid" inputmode="numeric" pattern="[0-9]*" maxlength="30" required></div><div class="field"><label>遊戲名稱／選手暱稱 *</label><input name="playerName" maxlength="40" required></div><div class="field"><label>參賽隊伍名稱 *</label><input name="teamName" maxlength="60" list="teamSuggestions" required placeholder="輸入歷屆參賽隊名"><datalist id="teamSuggestions"></datalist></div><div class="field"><label>身份 *</label><select name="participantRole" required><option value="">請選擇</option><option>參賽選手</option><option>隊伍負責人</option><option>選手兼負責人</option></select></div><div class="field full"><label>2026 參加賽季 *（可複選）</label><div class="checks"><label class="check"><input type="checkbox" name="seasons" value="春季盃"><span>春季盃</span></label><label class="check"><input type="checkbox" name="seasons" value="秋季盃"><span>秋季盃</span></label><label class="check"><input type="checkbox" name="seasons" value="冬季盃"><span>冬季盃</span></label></div></div></div><button class="btn gold" type="submit">進入參賽者中心</button></form></div>
+      <div class="identityOk" id="participantWorkspace"><div class="card"><div class="cardCode">PARTICIPANT CENTER</div><h3 id="participantHello">參賽者中心</h3><div class="portalTabs"><button class="portalTab active" data-ptab="participantVote">參賽者投票</button><button class="portalTab" data-ptab="participantApply">報名參選</button><button class="portalTab" data-ptab="participantStatus">入圍狀態</button></div>
+        <div class="portalPanel active" id="participantVote"><div id="participantBallot"></div></div>
+        <div class="portalPanel" id="participantApply"><form id="applicationForm"><div class="formGrid"><div class="field"><label>選手暱稱</label><input name="playerName" readonly></div><div class="field"><label>隊伍名稱</label><input name="teamName" readonly></div><div class="field full"><label>申請公開票選獎項 *（可複選）</label><div class="checks"><label class="check"><input type="checkbox" name="awards" value="最佳戰隊獎"><span>最佳戰隊獎</span></label><label class="check"><input type="checkbox" name="awards" value="最佳選手獎"><span>最佳選手獎</span></label><label class="check"><input type="checkbox" name="awards" value="人氣戰隊獎"><span>人氣戰隊獎</span></label></div><small>精神總錦標獎、年度隊伍獎、年度主播獎由主辦方決定，不需要自行申請入圍。</small></div><div class="field full"><label>年度代表成績／補充說明</label><textarea name="note" rows="6" maxlength="1200" placeholder="可填寫三季參賽經歷、代表賽事、隊伍故事或希望主辦方審核時參考的資訊。"></textarea></div></div><button class="btn gold" type="submit">送出入圍申請</button></form></div>
+        <div class="portalPanel" id="participantStatus"><div class="actions" style="justify-content:flex-start;margin-bottom:16px"><button class="btn ghost small" id="refreshStatus" type="button">重新查詢狀態</button></div><div class="statusList" id="statusList"><div class="muted">尚未查詢。</div></div></div>
+      </div></div>
+    </section>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+/* ========= CONFIG =========
+   Deploy Code.gs as a Google Apps Script Web App, then paste the /exec URL here.
+*/
+const RAA_CONFIG={
+  API_URL:'https://script.google.com/macros/s/AKfycbzQAGZ3paoNy-yDd-YoIKaV60z954ZKcmysVphpRFPHaDhTEdXmtwoIS2sIcyTnzW2McA/exec',
+  LOGO_URL:'https://cdn.phototourl.com/free/2026-09-19-e17e160e-82da-4792-aef8-db041c70ffa0.png'
+};
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const escapeHTML=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+let bootstrap={settings:{},awards:[],nominees:[],teams:[],seasons:['春季盃','秋季盃','冬季盃']};
+let identity={audience:null,participant:null};
+let searchTimers={};
+function toast(msg){const el=$('#toast');el.textContent=msg;el.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>el.classList.remove('show'),3200)}
+async function api(action,data={}){if(!RAA_CONFIG.API_URL||RAA_CONFIG.API_URL.includes('PASTE_'))throw new Error('尚未設定 Apps Script API_URL');const res=await fetch(RAA_CONFIG.API_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action,...data}),redirect:'follow'});const out=await res.json();if(!out.ok)throw new Error(out.message||'伺服器錯誤');return out}
+function formDataObject(form){const fd=new FormData(form),obj={};for(const [k,v] of fd.entries()){if(obj[k]!==undefined)obj[k]=Array.isArray(obj[k])?[...obj[k],v]:[obj[k],v];else obj[k]=v}return obj}
+function openMenu(){ $('#drawer').classList.add('on');$('#drawerShade').classList.add('on') }
+function closeMenu(){ $('#drawer').classList.remove('on');$('#drawerShade').classList.remove('on') }
+$('#openMenu').onclick=openMenu;$('#closeMenu').onclick=closeMenu;$('#drawerShade').onclick=closeMenu;$$('[data-close]').forEach(x=>x.addEventListener('click',closeMenu));
+window.addEventListener('scroll',()=>$('#topbar').classList.toggle('scrolled',scrollY>30));
+
+function openPortal(){closeMenu();$('#portal').classList.add('open');$('#portal').setAttribute('aria-hidden','false');document.body.style.overflow='hidden';resetPortalView()}
+function closePortal(){ $('#portal').classList.remove('open');$('#portal').setAttribute('aria-hidden','true');document.body.style.overflow=''; }
+$$('.openPortal').forEach(b=>b.onclick=openPortal);$('#closePortal').onclick=closePortal;
+$$('.openParticipantStatus').forEach(b=>b.onclick=()=>{openPortal();$('#roleChooser').style.display='none';$$('.portalPane').forEach(x=>x.classList.remove('active'));$('#participantPane').classList.add('active');if(identity.participant){$$('.portalTab').forEach(x=>x.classList.remove('active'));$$('.portalPanel').forEach(x=>x.classList.remove('active'));$('[data-ptab="participantStatus"]').classList.add('active');$('#participantStatus').classList.add('active');loadStatus()}});
+function resetPortalView(){ $('#roleChooser').style.display='block';$$('.portalPane').forEach(x=>x.classList.remove('active')) }
+$$('[data-back]').forEach(b=>b.onclick=resetPortalView);
+$$('[data-role]').forEach(b=>b.onclick=()=>{ $('#roleChooser').style.display='none';$('#'+b.dataset.role+'Pane').classList.add('active') });
+
+async function loadBootstrap(){
+  try{
+    bootstrap=await api('publicBootstrap');
+    renderPublic();
+  }catch(e){
+    console.warn(e);toast(e.message);
+    renderPublic();
+  }
+}
+function renderPublic(){
+  const s=bootstrap.settings||{};
+  if(s.announcement)$('#announcement').textContent=s.announcement;
+  if(s.ceremonyText){$('#heroCeremony').textContent=s.ceremonyText;$('#ceremonyCard').textContent=s.ceremonyText}
+  if(s.streamUrl && /^https?:\/\//.test(s.streamUrl)){const btn=$('#streamBtn');btn.href=s.streamUrl;btn.textContent='前往典禮直播';$('#liveText').textContent='直播入口已公開，點擊右側按鈕前往官方直播。'}
+  renderAwards();renderNomineeFilters('全部');renderTeams();fillTeamSuggestions();
+}
+function renderAwards(){
+  if(!bootstrap.awards?.length)return;
+  $('#awardGrid').innerHTML=bootstrap.awards.map((a,i)=>`<article class="card"><div class="cardCode">${escapeHTML(a.method==='觀眾投票'?'PUBLIC VOTE':'JURY AWARD')} ${String(i+1).padStart(2,'0')}</div><h3>${escapeHTML(a.award)}</h3><p>${escapeHTML(a.description||'')}</p><span class="tag">${escapeHTML(a.method)}</span></article>`).join('');
+}
+function renderNomineeFilters(active){
+  const awards=['全部',...new Set((bootstrap.nominees||[]).map(x=>x.award))];
+  const root=$('#nomineeFilters');root.innerHTML=awards.map(a=>`<button class="filterBtn ${a===active?'active':''}" data-award="${escapeHTML(a)}">${escapeHTML(a)}</button>`).join('');
+  $$('.filterBtn',root).forEach(b=>b.onclick=()=>{renderNomineeFilters(b.dataset.award);renderNominees(b.dataset.award)});renderNominees(active);
+}
+function renderNominees(filter='全部'){
+  const all=bootstrap.nominees||[];const list=filter==='全部'?all:all.filter(x=>x.award===filter);const root=$('#nomineeGrid');
+  if(!list.length){root.innerHTML='<div class="emptyState">目前尚無公開的正式入圍名單。通過人工審核後會自動顯示於此。</div>';return}
+  root.innerHTML=list.map(n=>{const initial=(n.displayName||'?').slice(0,2);const img=n.imageUrl?`<img src="${escapeHTML(n.imageUrl)}" alt="">`:escapeHTML(initial);return `<article class="card nomineeCard"><div><div class="nomineeAvatar">${img}</div><div class="nomineeName">${escapeHTML(n.displayName)}</div><div class="nomineeMeta">${escapeHTML(n.award)}${n.teamName?' · '+escapeHTML(n.teamName):''}</div></div><div><div class="seasonDots">${(n.seasons||[]).map(s=>`<span class="seasonChip">${escapeHTML(s)}</span>`).join('')}</div>${n.gameUid?`<div class="nomineeMeta" style="margin-top:10px">UID ${escapeHTML(n.gameUid)}</div>`:''}</div></article>`}).join('');
+}
+function renderTeams(){const list=bootstrap.teams||[];const root=$('#teamArchive');if(!list.length){root.innerHTML='<div class="emptyState">歷屆參賽隊伍資料將由主辦方後台匯入。</div>';return}root.innerHTML=list.map(t=>`<article class="teamCard"><h4>${escapeHTML(t.teamName)}</h4><div class="seasonDots">${(t.seasons||[]).map(s=>`<span class="seasonChip">${escapeHTML(s)}</span>`).join('')}</div>${t.note?`<p>${escapeHTML(t.note)}</p>`:''}</article>`).join('')}
+function fillTeamSuggestions(){const dl=$('#teamSuggestions');dl.innerHTML=(bootstrap.teams||[]).map(t=>`<option value="${escapeHTML(t.teamName)}"></option>`).join('')}
+
+$('#audienceIdentityForm').onsubmit=async e=>{e.preventDefault();const btn=e.submitter;btn.disabled=true;try{const d=formDataObject(e.target);const r=await api('registerIdentity',{role:'audience',...d});identity.audience=r.profile;$('#audienceIdentityCard').style.display='none';$('#audienceWorkspace').classList.add('show');$('#audienceHello').textContent=`${r.profile.playerName} · UID ${r.profile.gameUid}`;renderBallot('#audienceBallot','audience');toast('觀眾身份登記完成')}catch(err){toast(err.message)}finally{btn.disabled=false}};
+$('#participantIdentityForm').onsubmit=async e=>{e.preventDefault();const btn=e.submitter;btn.disabled=true;try{const d=formDataObject(e.target);d.seasons=[...e.target.querySelectorAll('[name="seasons"]:checked')].map(x=>x.value);if(!d.seasons.length)throw new Error('請至少選擇一個參賽賽季');const r=await api('registerIdentity',{role:'participant',...d});identity.participant={...r.profile,participantRole:d.participantRole};$('#participantIdentityCard').style.display='none';$('#participantWorkspace').classList.add('show');$('#participantHello').textContent=`${r.profile.teamName} · ${r.profile.playerName}`;const af=$('#applicationForm');af.playerName.value=r.profile.playerName;af.teamName.value=r.profile.teamName;renderBallot('#participantBallot','participant');loadStatus();toast('參賽身份登記完成')}catch(err){toast(err.message)}finally{btn.disabled=false}};
+
+function renderBallot(selector,role){const root=$(selector);const publicAwards=(bootstrap.awards||[]).filter(a=>a.publicVote).map(a=>a.award);root.innerHTML=`<form class="ballotForm" data-ballot-role="${role}"><div class="formGrid"><div class="field"><label>選擇獎項 *</label><select name="award" required><option value="">請選擇</option>${publicAwards.map(a=>`<option>${escapeHTML(a)}</option>`).join('')}</select></div><div class="field"><label>搜尋候選人 *</label><input name="query" autocomplete="off" placeholder="暱稱、遊戲名稱、隊伍名稱或 UID" disabled></div><div class="field full"><div class="searchResults"></div><input type="hidden" name="nomineeId"><div class="selectedCandidate">尚未選擇候選人。</div></div></div><button class="btn gold" type="submit">送出這一票</button></form>`;const form=$('.ballotForm',root);const award=form.award,q=form.query;award.onchange=()=>{q.disabled=!award.value;q.value='';form.nomineeId.value='';$('.searchResults',form).innerHTML='';$('.selectedCandidate',form).textContent='尚未選擇候選人。'};q.oninput=()=>{clearTimeout(searchTimers[role]);searchTimers[role]=setTimeout(()=>searchCandidates(form),280)};form.onsubmit=e=>submitBallot(e,role)}
+async function searchCandidates(form){const q=form.query.value.trim(),award=form.award.value;if(!q||!award)return;const out=$('.searchResults',form);out.innerHTML='<div class="muted">搜尋中…</div>';try{const r=await api('searchNominees',{q,award});if(!r.items.length){out.innerHTML='<div class="muted">找不到符合的正式入圍候選人。</div>';return}out.innerHTML=r.items.map(n=>`<button type="button" class="candidateBtn" data-id="${escapeHTML(n.id)}" data-name="${escapeHTML(n.displayName)}">${escapeHTML(n.displayName)}${n.teamName?' · '+escapeHTML(n.teamName):''}${n.gameUid?' · UID '+escapeHTML(n.gameUid):''}</button>`).join('');$$('.candidateBtn',out).forEach(b=>b.onclick=()=>{$$('.candidateBtn',out).forEach(x=>x.classList.remove('selected'));b.classList.add('selected');form.nomineeId.value=b.dataset.id;$('.selectedCandidate',form).textContent='已選擇：'+b.dataset.name})}catch(e){out.innerHTML='';toast(e.message)}}
+async function submitBallot(e,role){e.preventDefault();const form=e.target,profile=identity[role];if(!profile)return toast('請先完成身份登記');if(!form.nomineeId.value)return toast('請先搜尋並選擇候選人');const btn=e.submitter;btn.disabled=true;try{const r=await api('submitVote',{voterUid:profile.gameUid,voterName:profile.playerName,role,teamName:profile.teamName||'',seasons:profile.seasons||[],award:form.award.value,nomineeId:form.nomineeId.value});toast(r.message);form.reset();form.query.disabled=true;$('.searchResults',form).innerHTML='';$('.selectedCandidate',form).textContent='此票已完成。你可以選擇其他獎項繼續投票。'}catch(err){toast(err.message)}finally{btn.disabled=false}}
+
+$$('.portalTab').forEach(b=>b.onclick=()=>{$$('.portalTab').forEach(x=>x.classList.remove('active'));$$('.portalPanel').forEach(x=>x.classList.remove('active'));b.classList.add('active');$('#'+b.dataset.ptab).classList.add('active');if(b.dataset.ptab==='participantStatus')loadStatus()});
+$('#applicationForm').onsubmit=async e=>{e.preventDefault();const p=identity.participant;if(!p)return toast('請先完成參賽身份登記');const awards=[...e.target.querySelectorAll('[name="awards"]:checked')].map(x=>x.value);if(!awards.length)return toast('至少選擇一個要申請的公開票選獎項');const btn=e.submitter;btn.disabled=true;try{const r=await api('applyNomination',{gameUid:p.gameUid,playerName:p.playerName,teamName:p.teamName,participantRole:p.participantRole,seasons:p.seasons,awards,note:e.target.note.value});toast(r.message);e.target.querySelectorAll('[name="awards"]').forEach(x=>x.checked=false);e.target.note.value='';loadStatus()}catch(err){toast(err.message)}finally{btn.disabled=false}};
+async function loadStatus(){const p=identity.participant;if(!p)return;const root=$('#statusList');root.innerHTML='<div class="muted">查詢中…</div>';try{const r=await api('applicationStatus',{uid:p.gameUid});if(!r.items.length){root.innerHTML='<div class="muted">目前沒有這個 UID 的入圍申請紀錄。</div>';return}root.innerHTML=r.items.map(x=>`<div class="statusRow"><div><b>${escapeHTML(x.award)}</b><div class="muted" style="margin-top:5px;font-size:12px">${escapeHTML(x.teamName)} · ${(x.seasons||[]).map(escapeHTML).join(' / ')}</div>${x.reviewNote?`<div style="margin-top:7px;font-size:12px">審核備註：${escapeHTML(x.reviewNote)}</div>`:''}</div><span class="statusBadge ${x.status==='待審核'?'pending':x.status==='審核通過'?'approved':'rejected'}">${escapeHTML(x.status)}</span></div>`).join('')}catch(e){root.innerHTML='';toast(e.message)}}
+$('#refreshStatus').onclick=loadStatus;
+
+/* tech particle canvas */
+(()=>{const c=$('#particleCanvas'),ctx=c.getContext('2d');let w,h,dpr,pts=[];function resize(){dpr=Math.min(devicePixelRatio||1,2);w=innerWidth;h=innerHeight;c.width=w*dpr;c.height=h*dpr;c.style.width=w+'px';c.style.height=h+'px';ctx.setTransform(dpr,0,0,dpr,0,0);const count=Math.max(38,Math.min(90,Math.floor(w*h/22000)));pts=Array.from({length:count},()=>({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-.5)*.18,vy:(Math.random()-.5)*.18,r:Math.random()*1.3+.35,a:Math.random()*.55+.12}))}function draw(){ctx.clearRect(0,0,w,h);for(const p of pts){p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>w)p.vx*=-1;if(p.y<0||p.y>h)p.vy*=-1;ctx.beginPath();ctx.fillStyle=`rgba(241,198,107,${p.a})`;ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill()}for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){const a=pts[i],b=pts[j],dx=a.x-b.x,dy=a.y-b.y,d=Math.hypot(dx,dy);if(d<115){ctx.strokeStyle=`rgba(241,198,107,${(1-d/115)*.07})`;ctx.lineWidth=.6;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke()}}requestAnimationFrame(draw)}addEventListener('resize',resize);resize();draw()})();
+loadBootstrap();
+</script>
+</body>
+</html>
