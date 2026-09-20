@@ -54,6 +54,22 @@ section{padding:100px 0}.sectionHead{display:flex;align-items:end;justify-conten
 .announcePopup{position:fixed;inset:0;z-index:2600;display:none;place-items:center;background:rgba(0,0,0,.76);backdrop-filter:blur(15px);padding:20px}.announcePopup.open{display:grid}.announceCard{width:min(560px,100%);border:1px solid var(--goldline);background:radial-gradient(circle at 80% 0,rgba(241,198,107,.12),transparent 33%),#0c0d10;box-shadow:0 35px 130px rgba(0,0,0,.76);padding:28px;position:relative;overflow:hidden}.announceCard:after{content:'';position:absolute;right:-100px;bottom:-150px;width:300px;height:300px;border:1px solid rgba(241,198,107,.1);transform:rotate(30deg)}.announceLogo{width:138px;margin-bottom:24px;position:relative;z-index:1}.announceCard h3{font-size:30px;margin:8px 0 14px;position:relative;z-index:1}.announceMessage{font-size:15px;line-height:1.85;color:#e5ddca;white-space:pre-wrap;position:relative;z-index:1}.announceMeta{font-size:10px;color:#767168;margin-top:18px;position:relative;z-index:1}.announceClose{margin-top:24px;width:100%;position:relative;z-index:1}
 @media(max-width:640px){.profileReview{grid-template-columns:1fr}.profilePhoto{width:120px}.reviewGrid{grid-template-columns:1fr}.reviewItem.full{grid-column:auto}.uploadZone{grid-template-columns:72px 1fr}.photoPreview{width:72px;height:72px}.announceCard{padding:22px}.announceCard h3{font-size:25px}}
 
+
+/* V4.1 hotfix · restored historical team score/rank */
+.teamCard{min-height:210px!important;display:flex;flex-direction:column}
+.teamCardTop{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.teamRankBadge{min-width:54px;text-align:center;border:1px solid var(--goldline);background:rgba(241,198,107,.06);padding:7px 8px}
+.teamRankBadge span{display:block;font-size:8px;color:#847d70;letter-spacing:.12em}
+.teamRankBadge b{display:block;margin-top:3px;font-size:20px;color:var(--gold)}
+.teamScoreTotal{margin-top:14px;border-top:1px solid var(--line2);border-bottom:1px solid var(--line2);padding:10px 0;display:flex;justify-content:space-between;align-items:end}
+.teamScoreTotal span{font-size:9px;color:#7f796f;letter-spacing:.1em}
+.teamScoreTotal b{font-size:22px;color:var(--cream)}
+.teamSeasonResults{display:grid;gap:6px;margin-top:10px}
+.teamSeasonResult{display:grid;grid-template-columns:58px 1fr 1fr;gap:6px;align-items:center;font-size:9px}
+.teamSeasonResult span{color:#817c72}
+.teamSeasonResult b{font-size:10px;color:#cfc7b6;font-weight:700}
+.teamCard .teamNote{margin-top:auto!important;padding-top:12px}
+
 </style>
 </head>
 <body>
@@ -276,7 +292,8 @@ function renderNominees(filter='全部'){
   if(!list.length){root.innerHTML='<div class="emptyState">目前尚無公開的正式入圍名單。通過人工審核後會自動顯示於此。</div>';return}
   root.innerHTML=list.map(n=>{const initial=(n.displayName||'?').slice(0,2);const img=n.imageUrl?`<img src="${escapeHTML(n.imageUrl)}" alt="">`:escapeHTML(initial);const live=n.publicVote&&n.voteCount!==null?`<div class="liveVotePanel"><div class="liveVoteTop"><span>LIVE VALID VOTES</span><b>${Number(n.voteCount||0).toLocaleString()} 票</b></div><div class="liveVoteTrack"><div class="liveVoteFill" style="width:${Math.min(100,Number(n.votePercent||0))}%"></div></div><div class="liveVoteMeta"><span>${Number(n.votePercent||0).toFixed(1)}%</span><span>本獎項共 ${Number(n.awardVoteTotal||0).toLocaleString()} 張有效票</span></div></div>`:'';return `<article class="card nomineeCard"><div><div class="nomineeAvatar">${img}</div><div class="nomineeName">${escapeHTML(n.displayName)}</div><div class="nomineeMeta">${escapeHTML(n.award)}${n.teamName?' · '+escapeHTML(n.teamName):''}</div></div><div><div class="seasonDots">${(n.seasons||[]).map(s=>`<span class="seasonChip">${escapeHTML(s)}</span>`).join('')}</div>${n.gameUid?`<div class="nomineeMeta" style="margin-top:10px">UID ${escapeHTML(n.gameUid)}</div>`:''}${live}</div></article>`}).join('');
 }
-function renderTeams(){const list=bootstrap.teams||[];const root=$('#teamArchive');if(!list.length){root.innerHTML='<div class="emptyState">歷屆參賽隊伍資料將由主辦方後台匯入。</div>';return}root.innerHTML=list.map(t=>`<article class="teamCard"><h4>${escapeHTML(t.teamName)}</h4><div class="seasonDots">${(t.seasons||[]).map(s=>`<span class="seasonChip">${escapeHTML(s)}</span>`).join('')}</div>${t.note?`<p>${escapeHTML(t.note)}</p>`:''}</article>`).join('')}
+function teamPublicResult(label,score,rank){const scoreText=score===''||score===null||score===undefined?'—':`${Number(score).toLocaleString()} 分`;const rankText=rank===''||rank===null||rank===undefined?'—':`第 ${Number(rank)} 名`;return `<div class="teamSeasonResult"><span>${label}</span><b>${scoreText}</b><b>${rankText}</b></div>`}
+function renderTeams(){const list=bootstrap.teams||[];const root=$('#teamArchive');if(!list.length){root.innerHTML='<div class="emptyState">歷屆參賽隊伍資料將由主辦方後台匯入。</div>';return}root.innerHTML=list.map(t=>{const rank=t.annualRank===''||t.annualRank===null||t.annualRank===undefined?'—':Number(t.annualRank);const total=t.totalScore===''||t.totalScore===null||t.totalScore===undefined?'—':Number(t.totalScore).toLocaleString();return `<article class="teamCard"><div class="teamCardTop"><div><h4>${escapeHTML(t.teamName)}</h4><div class="seasonDots">${(t.seasons||[]).map(s=>`<span class="seasonChip">${escapeHTML(s)}</span>`).join('')}</div></div><div class="teamRankBadge"><span>ANNUAL</span><b>${rank==='—'?'—':'#'+rank}</b></div></div><div class="teamScoreTotal"><span>YEAR TOTAL SCORE</span><b>${total==='—'?'—':total+' 分'}</b></div><div class="teamSeasonResults">${teamPublicResult('春季盃',t.springScore,t.springRank)}${teamPublicResult('秋季盃',t.autumnScore,t.autumnRank)}${teamPublicResult('冬季盃',t.winterScore,t.winterRank)}</div>${t.note?`<p class="teamNote">${escapeHTML(t.note)}</p>`:''}</article>`}).join('')}
 function fillTeamSuggestions(){const dl=$('#teamSuggestions');dl.innerHTML=(bootstrap.teams||[]).map(t=>`<option value="${escapeHTML(t.teamName)}"></option>`).join('')}
 
 async function loginRole(role,form){const btn=form.querySelector('button[type="submit"]');btn.disabled=true;try{const d=formDataObject(form);const r=await api('loginIdentity',{role,gameUid:d.gameUid});identity[role]=r.profile;saveSession(role,r.profile.gameUid);showWorkspace(role);toast('登入成功')}catch(err){toast(err.message)}finally{btn.disabled=false}}
