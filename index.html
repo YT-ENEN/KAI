@@ -2,11 +2,11 @@
 <html lang="zh-TW">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#ffffff">
-<meta name="description" content="REBORN Entertainment 銳能娛樂｜電子競技賽事企劃、製播工程、品牌視覺與娛樂內容整合。">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>REBORN Entertainment 銳能娛樂</title>
+<title>REBORN Entertainment 銳能娛樂｜電競賽事・製播・品牌整合</title>
+<meta name="description" content="REBORN Entertainment 銳能娛樂，專注於電競賽事主辦與承辦、直播製播、賽事視覺、品牌整合、社群會員營運與商業合作。">
+<meta name="theme-color" content="#FFD700">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -144,6 +144,108 @@ nav{
   text-shadow: 0 0 5px rgba(255, 215, 0, 0.3);
 }
 
+/* hamburger menu */
+.menu-toggle{
+  width:46px;
+  height:46px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.82);
+  border-radius:50%;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  gap:5px;
+  cursor:pointer;
+  transition:.3s;
+}
+.menu-toggle:hover{
+  border-color:var(--gold);
+  transform:translateY(-2px);
+}
+.menu-toggle span{
+  width:20px;
+  height:2px;
+  background:#111;
+  transition:.3s;
+}
+.menu-toggle.active span:nth-child(1){ transform:translateY(7px) rotate(45deg); }
+.menu-toggle.active span:nth-child(2){ opacity:0; }
+.menu-toggle.active span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
+
+.menu-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.32);
+  backdrop-filter:blur(4px);
+  z-index:998;
+  opacity:0;
+  visibility:hidden;
+  transition:.35s;
+}
+.menu-overlay.active{ opacity:1; visibility:visible; }
+
+.menu-panel{
+  position:fixed;
+  top:0;
+  right:0;
+  width:min(420px, 92vw);
+  height:100vh;
+  z-index:999;
+  background:#111;
+  color:#fff;
+  padding:105px 34px 42px;
+  transform:translateX(100%);
+  transition:transform .4s cubic-bezier(.4,0,.2,1);
+  overflow-y:auto;
+  box-shadow:-18px 0 60px rgba(0,0,0,.25);
+}
+.menu-panel.active{ transform:translateX(0); }
+.menu-kicker{
+  color:var(--gold);
+  font-family:'Rajdhani',sans-serif;
+  letter-spacing:3px;
+  font-size:12px;
+  font-weight:700;
+  margin-bottom:14px;
+}
+.menu-panel h2{
+  font-size:30px;
+  line-height:1.15;
+  margin-bottom:30px;
+}
+.menu-group{
+  padding:24px 0;
+  border-top:1px solid rgba(255,255,255,.12);
+}
+.menu-group-title{
+  color:#999;
+  font-size:11px;
+  letter-spacing:2px;
+  margin-bottom:12px;
+  font-weight:700;
+}
+.menu-link{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+  padding:12px 0;
+  color:#fff;
+  text-decoration:none;
+  font-size:17px;
+  font-weight:700;
+  transition:.25s;
+}
+.menu-link span{ color:#777; font-size:13px; font-weight:600; }
+.menu-link:hover{ color:var(--gold); padding-left:6px; }
+.menu-note{
+  color:#8f8f8f;
+  font-size:12px;
+  line-height:1.7;
+  margin-top:20px;
+}
+
 /* hero */
 .hero{
   min-height:100vh;
@@ -268,7 +370,7 @@ nav{
 .news-track{
   white-space:nowrap;
   display:inline-block;
-  animation:marquee 30s linear infinite;
+  animation:marquee 38s linear infinite;
 }
 
 .news-track span{
@@ -282,6 +384,7 @@ nav{
   from{ transform:translateX(0); }
   to{ transform:translateX(-50%); }
 }
+.news-track:hover{ animation-play-state:paused; }
 
 /* sections */
 section{
@@ -391,6 +494,57 @@ section{
   line-height:1.8;
   font-size: 15px;
 }
+
+
+/* business scope */
+.business-scope{
+  background:#111;
+  color:#fff;
+}
+.business-scope .section-title{ color:#fff; }
+.business-scope .section-desc{ color:#b9b9b9; }
+.scope-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:1px;
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.12);
+}
+.scope-item{
+  background:#111;
+  padding:38px 30px;
+  min-height:230px;
+}
+.scope-number{
+  color:var(--gold);
+  font-family:'Rajdhani',sans-serif;
+  font-weight:700;
+  font-size:14px;
+  letter-spacing:2px;
+  margin-bottom:26px;
+}
+.scope-item h3{
+  font-size:21px;
+  margin-bottom:14px;
+}
+.scope-item p{
+  color:#aaa;
+  font-size:14px;
+  line-height:1.85;
+}
+.event-stat{
+  position:absolute;
+  left:18px;
+  bottom:18px;
+  background:rgba(0,0,0,.86);
+  color:#fff;
+  padding:13px 16px;
+  border-left:4px solid var(--gold);
+  font-weight:800;
+  letter-spacing:.5px;
+  z-index:2;
+}
+.event-stat strong{ color:var(--gold); font-size:22px; }
 
 /* featured-event */
 .featured-event {
@@ -536,92 +690,6 @@ section{
   color:var(--gold);
 }
 
-/* contact */
-.contact{
-  background:var(--bg2);
-}
-
-.contact-box{
-  max-width:800px;
-  margin:auto;
-  background:var(--card);
-  border:1px solid var(--line);
-  border-radius:4px;
-  padding:70px;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 20px 50px rgba(0,0,0,0.05);
-}
-
-.contact-box h2{
-  text-align:center;
-  font-size:42px;
-  margin-bottom:15px;
-  font-weight: 900;
-  color:#1a1a1a;
-}
-
-.contact-box p{
-  text-align:center;
-  color:var(--gray);
-  margin-bottom:50px;
-  font-size: 17px;
-}
-
-.form-group{
-  margin-bottom:30px;
-}
-
-.form-group label{
-  display:block;
-  margin-bottom:12px;
-  color:#B8860B;
-  font-size: 14px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.form-group input,
-.form-group textarea,
-.form-group select{
-  width:100%;
-  padding:18px;
-  border-radius:4px;
-  border:1px solid var(--line);
-  background:rgba(0, 0, 0, 0.02);
-  color:#000;
-  font-family: inherit;
-  transition: 0.3s;
-}
-
-.form-group input:focus,
-.form-group textarea:focus,
-.form-group select:focus{
-  outline: none;
-  border-color: var(--gold);
-  background: rgba(255, 215, 0, 0.03);
-}
-
-.submit-btn{
-  width:100%;
-  padding:20px;
-  border:none;
-  border-radius:4px;
-  background:var(--gold);
-  color:black;
-  font-weight:900;
-  cursor:pointer;
-  font-size: 16px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  transition: 0.3s;
-}
-
-.submit-btn:hover{
-  transform: translateY(-3px);
-  box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
-}
-
 footer{
   text-align:center;
   padding:50px 20px;
@@ -638,6 +706,9 @@ footer{
     grid-template-columns: 1fr;
     gap: 40px;
   }
+  .scope-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
 }
 
 @media(max-width:768px){
@@ -647,278 +718,26 @@ footer{
   .nav-links{
     display:none;
   }
+  .menu-panel{
+    padding:96px 26px 34px;
+  }
+  .scope-grid{
+    grid-template-columns:1fr;
+  }
+  .scope-item{
+    min-height:auto;
+  }
   .section-title{
     font-size:36px;
-  }
-  .contact-box{
-    padding:40px 25px;
   }
   .about-box {
     padding: 30px;
   }
 }
-
-
-/* ===== 2026.09 Mobile / UX refresh ===== */
-:root{
-  --nav-h: 78px;
-  --shadow-soft: 0 18px 60px rgba(16, 16, 16, .08);
-  --radius-lg: 22px;
-  --radius-md: 16px;
-}
-
-body.menu-open{ overflow:hidden; }
-
-nav{
-  padding-top: env(safe-area-inset-top);
-}
-nav.scrolled{
-  background:rgba(255,255,255,.96);
-  box-shadow:0 10px 30px rgba(0,0,0,.06);
-}
-.nav-container{ min-height:var(--nav-h); }
-.logo{ display:inline-flex; align-items:center; min-height:44px; }
-
-.menu-toggle,
-.menu-close{
-  -webkit-tap-highlight-color:transparent;
-}
-.menu-toggle{
-  display:none;
-  width:46px;
-  height:46px;
-  border:1px solid var(--line);
-  border-radius:14px;
-  background:rgba(255,255,255,.92);
-  align-items:center;
-  justify-content:center;
-  flex-direction:column;
-  gap:5px;
-  cursor:pointer;
-  box-shadow:0 8px 24px rgba(0,0,0,.06);
-}
-.menu-toggle span{
-  width:19px;
-  height:2px;
-  background:#111;
-  border-radius:999px;
-  transition:.25s ease;
-}
-.menu-toggle[aria-expanded="true"] span:nth-child(1){ transform:translateY(7px) rotate(45deg); }
-.menu-toggle[aria-expanded="true"] span:nth-child(2){ opacity:0; }
-.menu-toggle[aria-expanded="true"] span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
-
-.mobile-menu-backdrop{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.35);
-  backdrop-filter:blur(4px);
-  opacity:0;
-  visibility:hidden;
-  transition:.3s ease;
-  z-index:1000;
-}
-.mobile-menu-panel{
-  position:fixed;
-  top:0;
-  right:0;
-  width:min(88vw, 390px);
-  height:100dvh;
-  padding:calc(24px + env(safe-area-inset-top)) 24px calc(24px + env(safe-area-inset-bottom));
-  background:#fff;
-  z-index:1001;
-  transform:translateX(105%);
-  transition:transform .36s cubic-bezier(.22,.8,.2,1);
-  box-shadow:-24px 0 70px rgba(0,0,0,.16);
-  display:flex;
-  flex-direction:column;
-}
-.mobile-menu-backdrop.open{ opacity:1; visibility:visible; }
-.mobile-menu-panel.open{ transform:translateX(0); }
-.mobile-menu-head{ display:flex; align-items:flex-start; justify-content:space-between; gap:20px; }
-.mobile-menu-kicker{ color:#a67a00; font-family:'Rajdhani',sans-serif; font-weight:700; letter-spacing:2px; font-size:12px; }
-.mobile-menu-title{ font-size:28px; font-weight:900; margin-top:4px; }
-.menu-close{
-  width:44px; height:44px; border-radius:14px; border:1px solid var(--line);
-  background:#fff; color:#111; font-size:29px; line-height:1; cursor:pointer;
-}
-.mobile-menu-links{ display:grid; gap:8px; margin-top:46px; }
-.mobile-menu-links a{
-  display:flex; align-items:center; gap:18px; min-height:58px; padding:0 8px;
-  color:#111; text-decoration:none; font-weight:800; font-size:19px;
-  border-bottom:1px solid rgba(0,0,0,.07);
-}
-.mobile-menu-links a span{ color:#b8860b; font-family:'Rajdhani',sans-serif; font-size:13px; letter-spacing:1px; }
-.mobile-menu-footer{ margin-top:auto; color:#888; font-size:10px; letter-spacing:1.8px; }
-
-.hero::before,
-.hero::after{
-  content:"";
-  position:absolute;
-  pointer-events:none;
-  border-radius:50%;
-  filter:blur(2px);
-}
-.hero::before{
-  width:min(50vw, 640px); height:min(50vw, 640px); right:-12%; top:8%;
-  background:radial-gradient(circle, rgba(255,215,0,.16), rgba(255,215,0,0) 68%);
-}
-.hero::after{
-  width:320px; height:320px; left:-140px; bottom:4%;
-  background:radial-gradient(circle, rgba(184,134,11,.08), rgba(184,134,11,0) 70%);
-}
-.hero h1{ font-size:clamp(54px, 7vw, 86px); }
-
-.featured-event{ background:linear-gradient(180deg,#f7f7f7 0%,#fff 100%); }
-.event-autumn{
-  padding:20px;
-  border:1px solid rgba(0,0,0,.07);
-  border-radius:28px;
-  background:rgba(255,255,255,.8);
-  box-shadow:var(--shadow-soft);
-}
-.event-image{ border-radius:20px; aspect-ratio:16/9; }
-.event-image img{ width:100%; height:100%; object-fit:cover; }
-.event-season-badge{
-  position:absolute;
-  left:16px;
-  bottom:16px;
-  padding:9px 13px;
-  border-radius:999px;
-  background:rgba(0,0,0,.76);
-  color:#fff;
-  backdrop-filter:blur(10px);
-  font-family:'Rajdhani',sans-serif;
-  font-size:12px;
-  font-weight:700;
-  letter-spacing:1.5px;
-}
-.event-lead{ color:#a66f00 !important; font-weight:800; font-size:19px; }
-.event-content > p{ color:var(--gray); line-height:1.85; margin-bottom:18px; }
-.event-meta-grid{ display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:28px 0 30px; }
-.event-meta-item{
-  min-height:82px;
-  padding:16px 18px;
-  border-radius:14px;
-  border:1px solid rgba(0,0,0,.07);
-  background:#fafafa;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-}
-.event-meta-item span{ color:#8c8c8c; font-size:11px; letter-spacing:1px; margin-bottom:4px; }
-.event-meta-item strong{ color:#181818; font-size:15px; }
-.event-actions{ display:flex; gap:12px; flex-wrap:wrap; }
-
-.service-icon{
-  width:54px;
-  height:54px;
-  border-radius:16px;
-  display:grid;
-  place-items:center;
-  background:linear-gradient(145deg,#fff8ce,#ffd700);
-  box-shadow:inset 0 0 0 1px rgba(184,134,11,.12),0 10px 24px rgba(184,134,11,.12);
-}
-.service-icon svg{
-  width:27px; height:27px; fill:none; stroke:#111; stroke-width:1.8;
-  stroke-linecap:round; stroke-linejoin:round;
-}
-
-.btn:focus-visible,
-.nav-links a:focus-visible,
-.mobile-menu-links a:focus-visible,
-.menu-toggle:focus-visible,
-.menu-close:focus-visible,
-input:focus-visible,
-textarea:focus-visible,
-select:focus-visible{
-  outline:3px solid rgba(255,215,0,.45);
-  outline-offset:3px;
-}
-
-@media(max-width:992px){
-  :root{ --nav-h:70px; }
-  .desktop-nav{ display:none; }
-  .menu-toggle{ display:flex; }
-  .nav-container{ padding:10px 18px; }
-  section{ padding:96px 18px; }
-  .section-header{ margin-bottom:48px; }
-  .event-container{ gap:30px; }
-}
-
-@media(max-width:768px){
-  .hero{
-    min-height:100svh;
-    padding:calc(var(--nav-h) + env(safe-area-inset-top) + 42px) 20px 48px;
-    align-items:center;
-  }
-  .hero-content{ width:100%; }
-  .hero-sub{ font-size:12px; letter-spacing:3px; margin-bottom:16px; }
-  .hero h1{ font-size:clamp(48px, 15vw, 66px); line-height:.94; margin-bottom:24px; }
-  .hero p{ font-size:16px; line-height:1.75; margin-bottom:30px; max-width:34rem; }
-  .hero-buttons{ gap:10px; }
-  .hero-buttons .btn{ flex:1 1 100%; text-align:center; }
-
-  .news{ padding:16px 0; }
-  .news-wrap{ gap:20px; padding:0 18px; }
-  .news-title{ font-size:11px; letter-spacing:1.5px; }
-  .news-track span{ margin-right:64px; font-size:13px; }
-
-  section{ padding:78px 16px; }
-  .section-header{ text-align:left; margin-bottom:34px; }
-  .section-title{ font-size:34px; margin-bottom:14px; }
-  .section-desc{ margin:0; font-size:15px; }
-
-  .event-autumn{ padding:10px; border-radius:22px; gap:24px; }
-  .event-image{ border-radius:15px; }
-  .event-content{ padding:4px 8px 12px; }
-  .event-content h2{ font-size:34px; line-height:1.08; margin-bottom:16px; }
-  .event-lead{ font-size:16px; }
-  .event-meta-grid{ grid-template-columns:1fr 1fr; gap:8px; margin:22px 0; }
-  .event-meta-item{ min-height:74px; padding:13px; border-radius:12px; }
-  .event-meta-item strong{ font-size:13px; }
-  .event-actions{ gap:10px; }
-  .event-actions .btn{ width:100%; text-align:center; padding:15px 18px; }
-
-  .about-box{ padding:26px 22px; border-radius:18px; }
-  .about-box p{ font-size:15px; line-height:1.9; }
-
-  .service-grid{ grid-template-columns:1fr; gap:14px; }
-  .service-card{ padding:28px 24px; border-radius:18px; }
-  .service-card:hover{ transform:none; }
-  .service-icon{ margin-bottom:20px; }
-
-  .project-grid{ grid-template-columns:1fr; gap:18px; }
-  .project-card{ border-radius:18px; }
-  .project-image{ height:auto; aspect-ratio:16/9; }
-  .project-content{ padding:24px; }
-
-  .contact-box{ padding:30px 20px; border-radius:20px; }
-  .contact-box h2{ font-size:34px; }
-  .contact-box p{ font-size:15px; margin-bottom:34px; }
-  .form-group{ margin-bottom:20px; }
-  .form-group input,
-  .form-group textarea,
-  .form-group select{ font-size:16px; min-height:52px; border-radius:12px; }
-  .submit-btn{ min-height:54px; border-radius:12px; }
-
-  footer{ padding-bottom:calc(38px + env(safe-area-inset-bottom)); }
-}
-
-@media(max-width:420px){
-  .event-meta-grid{ grid-template-columns:1fr; }
-  .mobile-menu-panel{ width:92vw; }
-}
-
-@media(prefers-reduced-motion:reduce){
-  html{ scroll-behavior:auto; }
-  *,*::before,*::after{ animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; }
-}
-
 </style>
 </head>
 
-<body id="top">
+<body>
 
 <!-- loader -->
 <div id="loader">
@@ -932,45 +751,39 @@ select:focus-visible{
 <div id="particles-js"></div>
 
 <!-- navbar -->
-<nav id="navbar" aria-label="主要導覽">
+<nav id="navbar">
   <div class="nav-container">
-    <a class="logo" href="#top" aria-label="REBORN 銳能娛樂首頁">REBORN</a>
-
-    <div class="nav-links desktop-nav">
-      <a href="#featured">熱門賽事</a>
-      <a href="#about">關於我們</a>
-      <a href="#services">服務項目</a>
-      <a href="#projects">專案實績</a>
-      <a href="#contact">聯絡我們</a>
-    </div>
-
-    <button class="menu-toggle" id="menuToggle" type="button" aria-label="開啟選單" aria-controls="mobileMenu" aria-expanded="false">
+    <a class="logo" href="#top" aria-label="回到首頁">REBORN</a>
+    <button class="menu-toggle" id="menuToggle" type="button" aria-label="開啟網站選單" aria-expanded="false" aria-controls="menuPanel">
       <span></span><span></span><span></span>
     </button>
   </div>
-
-  <div class="mobile-menu-backdrop" id="menuBackdrop" aria-hidden="true"></div>
-  <aside class="mobile-menu-panel" id="mobileMenu" aria-hidden="true">
-    <div class="mobile-menu-head">
-      <div>
-        <div class="mobile-menu-kicker">REBORN ENTERTAINMENT</div>
-        <div class="mobile-menu-title">銳能娛樂</div>
-      </div>
-      <button class="menu-close" id="menuClose" type="button" aria-label="關閉選單">×</button>
-    </div>
-    <div class="mobile-menu-links">
-      <a href="#featured"><span>01</span>熱門賽事</a>
-      <a href="#about"><span>02</span>關於我們</a>
-      <a href="#services"><span>03</span>服務項目</a>
-      <a href="#projects"><span>04</span>專案實績</a>
-      <a href="#contact"><span>05</span>聯絡我們</a>
-    </div>
-    <div class="mobile-menu-footer">E-SPORTS · BROADCAST · ENTERTAINMENT</div>
-  </aside>
 </nav>
 
+<div class="menu-overlay" id="menuOverlay"></div>
+<aside class="menu-panel" id="menuPanel" aria-hidden="true">
+  <div class="menu-kicker">REBORN NETWORK</div>
+  <h2>銳能娛樂<br>官方網站導覽</h2>
+
+  <div class="menu-group">
+    <div class="menu-group-title">OFFICIAL WEBSITE</div>
+    <a class="menu-link" href="#about">關於銳能娛樂 <span>ABOUT</span></a>
+    <a class="menu-link" href="#services">業務與服務 <span>SERVICES</span></a>
+    <a class="menu-link" href="#business">合作範圍 <span>BUSINESS</span></a>
+    <a class="menu-link" href="#projects">專案實績 <span>PROJECTS</span></a>
+  </div>
+
+  <div class="menu-group">
+    <div class="menu-group-title">REBORN OFFICIAL PAGES</div>
+    <a class="menu-link" href="https://www.rebormnent.com/rnmembership.html" target="_blank" rel="noopener noreferrer">銳能會員 <span>MEMBERSHIP ↗</span></a>
+    <a class="menu-link" href="https://www.rebormnent.com/raa.html" target="_blank" rel="noopener noreferrer">RAA 銳能年度大賞 <span>RAA ↗</span></a>
+    <a class="menu-link" href="https://lin.ee/xTKnekT" target="_blank" rel="noopener noreferrer">銳能娛樂官方 LINE <span>LINE ↗</span></a>
+  </div>
+  <div class="menu-note">賽事報名、合作詢問與官方公告請以銳能娛樂官方 LINE 為主要聯繫窗口。</div>
+</aside>
+
 <!-- hero -->
-<section class="hero reveal">
+<section class="hero reveal" id="top">
   <div class="hero-content">
     <div class="hero-sub">
       E-SPORTS • BROADCAST • ENTERTAINMENT
@@ -988,8 +801,8 @@ select:focus-visible{
       <a href="#projects" class="btn btn-primary">
         查看實績
       </a>
-      <a href="#contact" class="btn btn-outline">
-        商業合作
+      <a href="https://lin.ee/xTKnekT" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+        官方 LINE / 商業合作
       </a>
     </div>
   </div>
@@ -1003,10 +816,14 @@ select:focus-visible{
     </div>
     <div class="news-marquee">
       <div class="news-track">
-        <span>銳能秋季盃 2026｜楓靡全場啦・銳氣逼人・戰火點燃</span>
-        <span>18 支參賽戰隊集結｜秋季聯賽正式登場</span>
-        <span>REBORN Entertainment｜持續拓展賽事製播與娛樂內容工程</span>
-        <span>品牌合作與商業委託現正開放洽談</span>
+        <span>❄️ 銳能冬季盃即將登場｜2026 第三賽季正式進入倒數</span>
+        <span>🏆 RAA REBORN ANNUAL AWARDS 即將登場｜為 2026 銳能三大賽季寫下年度最終章</span>
+        <span>⚡ 銳能娛樂持續拓展賽事主辦、製播、品牌視覺與社群會員營運</span>
+        <span>🤝 賽事協辦、品牌合作與商業委託開放洽談｜請洽官方 LINE</span>
+        <span>❄️ 銳能冬季盃即將登場｜2026 第三賽季正式進入倒數</span>
+        <span>🏆 RAA REBORN ANNUAL AWARDS 即將登場｜為 2026 銳能三大賽季寫下年度最終章</span>
+        <span>⚡ 銳能娛樂持續拓展賽事主辦、製播、品牌視覺與社群會員營運</span>
+        <span>🤝 賽事協辦、品牌合作與商業委託開放洽談｜請洽官方 LINE</span>
       </div>
     </div>
   </div>
@@ -1016,36 +833,31 @@ select:focus-visible{
 <section class="featured-event reveal" id="featured">
   <div class="container">
     <div class="section-header">
-      <div class="section-sub">CURRENT EVENT · AUTUMN 2026</div>
-      <div class="section-title">熱門賽事</div>
-      <div class="section-desc">本季主打聯賽正式切換為「銳能秋季盃 2026」。</div>
+      <div class="section-sub">2026 SEASON</div>
+      <div class="section-title">銳能秋季盃</div>
+      <div class="section-desc">延續銳能季度賽事體系，以完整賽制、專業製播與賽事營運串起 2026 年度競技內容。</div>
     </div>
-
-    <div class="event-container event-autumn">
+    <div class="event-container">
       <div class="event-image">
-        <img src="png/銳能秋季盃封面.png" alt="銳能秋季盃 2026 聯賽主視覺" fetchpriority="high" decoding="async">
-        <div class="event-season-badge">AUTUMN 2026</div>
+        <img src="https://cdn.phototourl.com/free/2026-05-08-75ccbbe1-958a-431a-a120-df48044de62e.png" alt="銳能秋季盃 2026 賽事主視覺" onerror="this.src='https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1200&q=80'">
+        <div class="event-stat"><strong>24</strong> 組參賽</div>
       </div>
-
       <div class="event-content">
-        <div class="event-tag">FEATURED TOURNAMENT</div>
+        <div class="event-tag">REBORN OFFICIAL EVENT</div>
         <h2>銳能秋季盃 2026</h2>
-        <p class="event-lead">楓靡全場啦！銳氣逼人・戰火點燃。</p>
         <p>
-          銳能娛樂秋季聯賽正式登場，以秋季橙金主視覺結合高張力競技氛圍，
-          聚集 18 支參賽戰隊，延續 REBORN 對賽事製播、直播視覺與競技體驗的完整規格。
+          銳能娛樂 2026 年度季度賽事之一，由銳能團隊負責賽事企劃、選手對接、流程控場、直播製播與視覺整合，
+          讓參賽隊伍與觀眾都能獲得更完整的競技體驗。
         </p>
-
-        <div class="event-meta-grid">
-          <div class="event-meta-item"><span>主辦</span><strong>銳能娛樂</strong></div>
-          <div class="event-meta-item"><span>轉播</span><strong>恩恩遊戲日常</strong></div>
-          <div class="event-meta-item"><span>參賽規模</span><strong>18 支戰隊</strong></div>
-          <div class="event-meta-item"><span>賽事版本</span><strong>AUTUMN 2026</strong></div>
-        </div>
-
-        <div class="event-actions">
-          <a href="#contact" class="btn btn-primary">賽事合作洽談</a>
-          <a href="assets/reborn-autumn-cup-2026.png" class="btn btn-outline" target="_blank" rel="noopener">查看聯賽主視覺</a>
+        <p style="margin-bottom: 30px;">
+          📌 參賽規模：24 組<br>
+          🎮 賽事形式：季度制競技賽事<br>
+          🎙️ 執行範圍：賽務、製播、視覺、選手與社群溝通<br>
+          ⚡ 年度進程：夏季盃 → 秋季盃 → 冬季盃 → RAA 年度大賞
+        </p>
+        <div style="display:flex;gap:15px;flex-wrap:wrap;">
+          <a href="https://lin.ee/xTKnekT" target="_blank" rel="noopener noreferrer" class="btn btn-primary">賽事與合作洽詢</a>
+          <a href="https://www.rebormnent.com/raa.html" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="border-color:#B8860B;color:#B8860B;">查看 RAA 年度大賞</a>
         </div>
       </div>
     </div>
@@ -1068,18 +880,21 @@ select:focus-visible{
     </div>
     <div class="about-box">
       <p>
-        REBORN Entertainment 銳能娛樂前身為 KAI Studio 製圖工作室，
-        長期深耕於戰隊品牌設計與娛樂視覺整合領域。
+        REBORN Entertainment 銳能娛樂前身為 KAI Studio 製圖工作室，從戰隊品牌設計與社群視覺起步，
+        逐步發展為以電子競技為核心的娛樂整合團隊。
       </p>
       <p>
-        如今，我們正式拓展至電子競技賽事企劃、
-        賽事製播工程、直播視覺設計與娛樂內容整合，
-        致力打造真正具有職業規格的競技娛樂體驗。
+        現階段業務涵蓋電競賽事主辦與承辦、賽制與流程規劃、選手與工作人員對接、OBS 直播製播、
+        轉播視覺包裝、品牌識別、宣傳內容與賽事社群經營。我們不是只完成「一場比賽」，
+        而是把報名、賽務、直播、宣傳與賽後內容視為同一套完整的觀賽與品牌體驗。
       </p>
       <p>
-        從賽事流程規劃、OBS 製播工程、
-        動態視覺包裝到品牌核心識別，
-        我們重視每一次曝光的細節與娛樂張力。
+        銳能同時建立自有季度賽事、會員制度與年度內容企劃，讓參賽者能累積參與紀錄與會員價值，
+        也讓合作品牌能在單次曝光之外，進一步進入長期賽事內容、直播節目、社群與年度活動之中。
+      </p>
+      <p>
+        對外合作方面，我們可依專案需求整合主播、賽務、導播、視覺設計與現場／線上工作人員，
+        提供從單項支援到整體承辦的彈性合作方式，協助社群、戰隊、品牌與主辦單位降低執行成本並維持內容品質。
       </p>
     </div>
   </div>
@@ -1098,38 +913,67 @@ select:focus-visible{
     </div>
     <div class="service-grid">
       <div class="service-card">
-        <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4h10v3c0 3.6-2 6.6-5 7.8C9 13.6 7 10.6 7 7V4Z"/><path d="M9 20h6M12 15v5M7 6H4v1c0 2.5 1.6 4.5 4 5M17 6h3v1c0 2.5-1.6 4.5-4 5"/></svg></div>
-        <h3>賽事企劃與執行</h3>
-        <p>
-          提供完整電競賽事統籌服務，
-          包含賽制規劃、選手管理、
-          賽事流程執行與聯賽營運。
-        </p>
+        <div class="service-icon">🏆</div>
+        <h3>賽事主辦與承辦</h3>
+        <p>從賽事定位、賽制規劃、報名機制、賽程安排到總決賽執行，建立可落地、可控場的完整賽務流程。</p>
       </div>
       <div class="service-card">
-        <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="m16 10 5-3v10l-5-3z"/></svg></div>
-        <h3>賽事製播工程</h3>
-        <p>
-          專精於 OBS 製播、
-          導播流程、直播視覺包裝與轉播工程整合。
-        </p>
+        <div class="service-icon">🎥</div>
+        <h3>直播製播與導播</h3>
+        <p>整合 OBS 場景、轉播流程、比分資訊、畫面切換與主播需求，讓線上賽事具備一致且專業的直播品質。</p>
       </div>
       <div class="service-card">
-        <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/></svg></div>
-        <h3>品牌視覺設計</h3>
-        <p>
-          提供戰隊 LOGO、
-          主視覺、品牌識別與社群視覺整合。
-        </p>
+        <div class="service-icon">⚡</div>
+        <h3>賽事視覺與品牌</h3>
+        <p>提供賽事 LOGO、主視覺、直播包裝、宣傳圖卡與社群素材，建立每個賽季清楚可辨識的視覺語言。</p>
       </div>
       <div class="service-card">
-        <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m10 9 5 3-5 3V9Z"/></svg></div>
-        <h3>影音娛樂企劃</h3>
-        <p>
-          提供賽事精華、
-          前導片與娛樂內容企劃，
-          提升品牌影響力。
-        </p>
+        <div class="service-icon">🎮</div>
+        <h3>賽務與選手管理</h3>
+        <p>協助隊伍審核、選手對接、規章溝通、爭議處理與比賽日控場，降低主辦方在大量參賽者管理上的負擔。</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">◆</div>
+        <h3>會員與社群營運</h3>
+        <p>透過銳能會員制度、參賽紀錄與活動內容，延長玩家與品牌在單次賽事之外的互動週期與回流機會。</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">↗</div>
+        <h3>商業合作與整合曝光</h3>
+        <p>依品牌目標規劃賽事冠名、直播曝光、內容合作、視覺置入與年度企劃，讓合作不只停留在單一版位。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- business scope -->
+<section class="business-scope reveal" id="business">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-sub">HOW WE WORK</div>
+      <div class="section-title">從企劃到直播，一套團隊完成</div>
+      <div class="section-desc">依專案規模彈性整合賽務、製播、視覺與人力，不需要為每一個環節重新尋找不同窗口。</div>
+    </div>
+    <div class="scope-grid">
+      <div class="scope-item">
+        <div class="scope-number">01 / PLAN</div>
+        <h3>賽事定位與規則</h3>
+        <p>釐清受眾、參賽規模、賽制、獎勵與時程，先把一場活動變成可執行的賽事架構。</p>
+      </div>
+      <div class="scope-item">
+        <div class="scope-number">02 / OPERATE</div>
+        <h3>報名與賽務營運</h3>
+        <p>處理隊伍資料、賽程、規章、工作人員分工與比賽日控場，確保資訊一致並降低溝通成本。</p>
+      </div>
+      <div class="scope-item">
+        <div class="scope-number">03 / BROADCAST</div>
+        <h3>直播與觀賽體驗</h3>
+        <p>把畫面、數據、主播、導播節奏與直播視覺整合成完整節目，而不只是單純把遊戲畫面播出去。</p>
+      </div>
+      <div class="scope-item">
+        <div class="scope-number">04 / GROW</div>
+        <h3>內容延伸與年度經營</h3>
+        <p>賽後持續透過社群、會員、精華內容、季度賽事與 RAA 年度大賞延長活動生命週期。</p>
       </div>
     </div>
   </div>
@@ -1151,7 +995,7 @@ select:focus-visible{
       <div class="project-card">
         <div class="project-image">
           <!-- 這裡放您上傳的銳能夏季盃封面圖 -->
-          <img loading="lazy" decoding="async" src="https://cdn.phototourl.com/free/2026-05-08-75ccbbe1-958a-431a-a120-df48044de62e.png" alt="銳能夏季盃" onerror="this.src='https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1200&q=80'">
+          <img src="https://cdn.phototourl.com/free/2026-05-08-75ccbbe1-958a-431a-a120-df48044de62e.png" alt="銳能夏季盃" onerror="this.src='https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1200&q=80'">
         </div>
         <div class="project-content">
           <div class="project-tag">
@@ -1162,7 +1006,7 @@ select:focus-visible{
             全新季度電競聯賽，總獎金 NT$ 8,000，由恩恩遊戲日常 轉播。
           </p>
           <div style="display: flex; gap: 15px; align-items: center;">
-            <a class="watch-btn" href="#contact">
+            <a class="watch-btn" href="https://lin.ee/xTKnekT" target="_blank" rel="noopener noreferrer">
               了解更多 →
             </a>
             <a class="watch-btn" href="https://sites.google.com/view/rscofficial/%E9%8A%B3%E8%83%BD%E5%A4%8F%E5%AD%A3%E7%9B%83" target="_blank" style="font-size: 13px;">
@@ -1175,7 +1019,7 @@ select:focus-visible{
       <!-- 星際女神 -->
       <div class="project-card">
         <div class="project-image">
-          <img loading="lazy" decoding="async" src="https://cdn.phototourl.com/free/2026-05-07-3f25c2d0-4f9b-4843-9827-ac6f82d5ad88.png" alt="江林叔叔星際女神爭霸賽">
+          <img src="https://cdn.phototourl.com/free/2026-05-07-3f25c2d0-4f9b-4843-9827-ac6f82d5ad88.png" alt="江林叔叔星際女神爭霸賽">
         </div>
         <div class="project-content">
           <div class="project-tag">
@@ -1194,7 +1038,7 @@ select:focus-visible{
       <!-- 女槍神 -->
       <div class="project-card">
         <div class="project-image">
-          <img loading="lazy" decoding="async" src="https://cdn.phototourl.com/free/2026-05-07-75aea810-f2da-4bb8-9313-64203c86ba53.png" alt="第四屆女槍神聯賽">
+          <img src="https://cdn.phototourl.com/free/2026-05-07-75aea810-f2da-4bb8-9313-64203c86ba53.png" alt="第四屆女槍神聯賽">
         </div>
         <div class="project-content">
           <div class="project-tag">
@@ -1213,46 +1057,13 @@ select:focus-visible{
   </div>
 </section>
 
-<!-- contact -->
-<section class="contact reveal" id="contact">
-  <div class="container">
-    <div class="contact-box">
-      <h2>聯絡我們</h2>
-      <p>
-        歡迎商業合作、賽事委託與品牌合作洽談。
-      </p>
-      <form id="rebornForm">
-        <div class="form-group">
-          <label>姓名 / 品牌名稱</label>
-          <input type="text" required>
-        </div>
-        <div class="form-group">
-          <label>電子郵件</label>
-          <input type="email" required>
-        </div>
-        <div class="form-group">
-          <label>合作項目</label>
-          <select>
-            <option>賽事企劃與執行</option>
-            <option>賽事製播工程</option>
-            <option>品牌視覺設計</option>
-            <option>影音娛樂企劃</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>需求內容</label>
-          <textarea rows="6"></textarea>
-        </div>
-        <button class="submit-btn">
-          SEND MESSAGE
-        </button>
-      </form>
-    </div>
-  </div>
-</section>
-
 <footer>
-  © 2026 REBORN Entertainment 銳能娛樂
+  <div style="margin-bottom:10px;">© 2026 REBORN Entertainment 銳能娛樂</div>
+  <div style="display:flex;justify-content:center;gap:18px;flex-wrap:wrap;">
+    <a href="https://www.rebormnent.com/rnmembership.html" target="_blank" rel="noopener noreferrer" style="color:#777;text-decoration:none;">銳能會員</a>
+    <a href="https://www.rebormnent.com/raa.html" target="_blank" rel="noopener noreferrer" style="color:#777;text-decoration:none;">RAA 年度大賞</a>
+    <a href="https://lin.ee/xTKnekT" target="_blank" rel="noopener noreferrer" style="color:#777;text-decoration:none;">官方 LINE</a>
+  </div>
 </footer>
 
 <!-- particles -->
@@ -1265,38 +1076,39 @@ window.addEventListener("load",()=>{
     document.getElementById("loader").classList.add("hide");
     // 初始觸發一次 reveal
     handleReveal();
-  },650);
+  },1200);
 });
 
 /* Navbar scroll effect */
-const navbar = document.getElementById("navbar");
-function updateNavbar(){
-  navbar.classList.toggle("scrolled", window.scrollY > 24);
-}
-window.addEventListener("scroll", updateNavbar, { passive:true });
-updateNavbar();
+window.addEventListener("scroll", () => {
+  const nav = document.querySelector("nav");
+  if (window.scrollY > 50) {
+    nav.style.background = "rgba(255,255,255,.95)";
+    nav.style.boxShadow = "0 10px 30px rgba(0,0,0,.06)";
+  } else {
+    nav.style.background = "rgba(255,255,255,.85)";
+    nav.style.boxShadow = "none";
+  }
+});
 
-/* Mobile hamburger menu */
+/* Hamburger menu */
 const menuToggle = document.getElementById("menuToggle");
-const mobileMenu = document.getElementById("mobileMenu");
-const menuBackdrop = document.getElementById("menuBackdrop");
-const menuClose = document.getElementById("menuClose");
+const menuPanel = document.getElementById("menuPanel");
+const menuOverlay = document.getElementById("menuOverlay");
 
 function setMenu(open){
+  menuToggle.classList.toggle("active", open);
+  menuPanel.classList.toggle("active", open);
+  menuOverlay.classList.toggle("active", open);
   menuToggle.setAttribute("aria-expanded", String(open));
-  menuToggle.setAttribute("aria-label", open ? "關閉選單" : "開啟選單");
-  mobileMenu.setAttribute("aria-hidden", String(!open));
-  menuBackdrop.setAttribute("aria-hidden", String(!open));
-  mobileMenu.classList.toggle("open", open);
-  menuBackdrop.classList.toggle("open", open);
-  document.body.classList.toggle("menu-open", open);
+  menuPanel.setAttribute("aria-hidden", String(!open));
+  document.body.style.overflow = open ? "hidden" : "";
 }
 
-menuToggle.addEventListener("click", () => setMenu(menuToggle.getAttribute("aria-expanded") !== "true"));
-menuClose.addEventListener("click", () => setMenu(false));
-menuBackdrop.addEventListener("click", () => setMenu(false));
-mobileMenu.querySelectorAll('a[href^="#"]').forEach(link => link.addEventListener("click", () => setMenu(false)));
-window.addEventListener("keydown", (e) => { if(e.key === "Escape") setMenu(false); });
+menuToggle.addEventListener("click", () => setMenu(!menuPanel.classList.contains("active")));
+menuOverlay.addEventListener("click", () => setMenu(false));
+menuPanel.querySelectorAll("a").forEach(link => link.addEventListener("click", () => setMenu(false)));
+document.addEventListener("keydown", e => { if(e.key === "Escape") setMenu(false); });
 
 /* Reveal on scroll */
 function handleReveal() {
@@ -1338,7 +1150,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 /* particles */
 particlesJS("particles-js",{
   particles:{
-    number:{ value: window.innerWidth < 768 ? 24 : 60 },
+    number:{ value:60 },
     color:{ value:"#FFD700" },
     shape:{ type:"circle" },
     opacity:{ value:0.3 },
@@ -1357,8 +1169,8 @@ particlesJS("particles-js",{
   },
   interactivity:{
     events:{
-      onhover:{ enable: window.innerWidth >= 768, mode:"grab" },
-      onclick:{ enable: window.innerWidth >= 768, mode:"push" }
+      onhover:{ enable:true, mode:"grab" },
+      onclick:{ enable:true, mode:"push" }
     },
     modes:{
       grab:{ distance:200, line_linked:{ opacity:0.3 } }
