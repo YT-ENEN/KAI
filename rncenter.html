@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#0a0a0a" />
+  <title>銳能娛樂中央控制中心</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="toastRoot"></div>
+
+  <section id="loginView" class="login-shell">
+    <div class="login-card">
+      <div class="brand-mark">R</div>
+      <div class="eyebrow">REBORNNMENT INTERNAL</div>
+      <h1>中央控制中心</h1>
+      <p>專案、人事、帳號、文件與控制台的統一工作入口。</p>
+      <form id="loginForm" class="stack-lg">
+        <label class="field"><span>員工帳號</span><input id="loginUsername" autocomplete="username" required /></label>
+        <label class="field"><span>密碼</span><input id="loginPassword" type="password" autocomplete="current-password" required /></label>
+        <button class="btn btn-primary" type="submit">登入中央控制中心</button>
+      </form>
+      <div class="login-note">此系統僅供授權員工使用，所有敏感操作皆會留下紀錄。</div>
+    </div>
+  </section>
+
+  <div id="appView" class="app-shell hidden">
+    <aside id="sidebar" class="sidebar">
+      <div class="sidebar-head">
+        <div class="brand-row"><div class="brand-mark sm">R</div><div><strong>REBORNNMENT</strong><span>CENTRAL CONTROL</span></div></div>
+        <button id="closeNav" class="icon-btn mobile-only" aria-label="關閉選單">×</button>
+      </div>
+      <nav id="nav" class="nav"></nav>
+      <div class="sidebar-user">
+        <div class="avatar" id="sideAvatar">R</div>
+        <div class="grow"><strong id="sideName">—</strong><span id="sideRole">—</span></div>
+        <button id="logoutBtn" class="icon-btn" title="登出">↪</button>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <button id="openNav" class="icon-btn mobile-only" aria-label="開啟選單">☰</button>
+        <div><div id="pageEyebrow" class="eyebrow">REBORNNMENT</div><h2 id="pageTitle">中央總覽</h2></div>
+        <div class="top-actions"><button id="quickProposal" class="btn btn-ghost">＋ 提案</button><button id="quickTask" class="btn btn-primary">＋ 任務</button></div>
+      </header>
+      <div id="content" class="content"></div>
+    </main>
+  </div>
+
+  <div id="modalRoot"></div>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
