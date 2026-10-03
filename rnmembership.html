@@ -1,746 +1,316 @@
-<!DOCTYPE html>
-<html lang="zh-TW">
+<!doctype html>
+<html lang="zh-Hant">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>REBORN Studio | 會員中樞 (導覽列固定版)</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.0/dist/JsBarcode.all.min.js"></script>
-    <style>
-        :root {
-            --apple-bg: #000000;
-            --apple-surface: #1C1C1E;
-            --apple-surface-elevated: #2C2C2E;
-            --reborn-gold: #E5C07B;
-            --reborn-gold-gradient: linear-gradient(135deg, #F9D423 0%, #FF4E50 100%);
-            --reborn-premium-gradient: linear-gradient(135deg, #d4af37 0%, #aa7700 100%);
-            --text-primary: #FFFFFF;
-            --text-secondary: #8E8E93;
-            --border-color: rgba(255, 255, 255, 0.1);
-            --nav-height: 85px; /* 💡 定義導覽列高度變數 */
-        }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f6f6f3">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>銳能會員中心 | REBORN ENTERTAINMENT</title>
+<!-- 單檔版本；可直接放在原網站。修改 GAS_API_URL 後與 Code.gs v3.0 一起部署。 -->
+<style>:root{--bg:#f6f6f3;--paper:#fff;--ink:#232a2b;--muted:#767e7c;--gold:#b58a42;--gold-light:#f4ecdc;--line:#e8eae5;--green:#26745c;--red:#b44444;--radius:18px;--shadow:0 6px 30px #27302905;--font:Inter,"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:14px;line-height:1.6;-webkit-tap-highlight-color:transparent}button,input,select,textarea{font:inherit}button,a,input,select,textarea{touch-action:manipulation}button{cursor:pointer}button:disabled{cursor:wait;opacity:.55}a{color:inherit;text-decoration:none}h1,h2,h3,p{margin:0}h1{font-size:30px;letter-spacing:-1px;font-weight:750;line-height:1.4}h2{font-size:18px;font-weight:700}h3{font-size:15px}p{color:var(--muted)}svg.icon{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.65;stroke-linecap:round;stroke-linejoin:round;flex:none}button:focus-visible,a:focus-visible{outline:3px solid #be934777;outline-offset:4px}input:focus,select:focus,textarea:focus{outline:0;border-color:var(--gold);box-shadow:0 0 0 3px #b58a4215}[hidden],.hidden{display:none!important}.muted{color:var(--muted)}.micro{font-size:12px}.eyebrow{font-size:10px;font-weight:700;letter-spacing:2.4px;color:var(--gold);text-transform:uppercase}.mono{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.2px}.stack{display:grid;gap:18px}.row{display:flex;align-items:center;gap:12px}.between{justify-content:space-between}.wrap{flex-wrap:wrap}.end{justify-content:flex-end}.grow{flex:1;min-width:0}.gap8{gap:8px}.brand{display:flex;align-items:center;gap:11px}.brand-mark{width:36px;height:40px;display:grid;place-items:center;background:var(--ink);border-radius:10px;color:#edd9a8}.brand-mark svg{width:19px;height:25px;fill:currentColor}.brand-name{font-size:19px;font-weight:800;letter-spacing:2px;line-height:1.3}.brand small{display:block;font-size:9px;letter-spacing:1.6px;color:var(--muted);font-weight:500}.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--line);border-radius:10px;background:var(--paper);padding:10px 16px;color:var(--ink);font-weight:600;transition:background .15s,border-color .15s;white-space:nowrap}.btn:hover{background:#f3f4f0;border-color:#d9ddd5}.btn.primary{background:var(--ink);color:white;border-color:var(--ink)}.btn.primary:hover{background:#394240}.btn.gold{background:var(--gold-light);color:#806025;border-color:#e8d8b9}.btn.danger{background:#fcf0ef;color:var(--red);border-color:#f0dbd8}.btn.good{background:#edf6f1;color:var(--green);border-color:#d9eadd}.btn.small{padding:6px 11px;font-size:12px;border-radius:8px}.btn.square{width:38px;height:38px;padding:0}.btn.full{width:100%;padding:13px}.text-btn{padding:0;color:var(--gold);font-weight:600;background:none;border:0;font-size:13px}.btn .icon{width:16px;height:16px}.card{padding:24px;background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);min-width:0}.card-head{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:20px}.card-head p{margin-top:2px;font-size:12px}.section-label{font-size:11px;letter-spacing:1.3px;color:var(--muted);font-weight:600;margin-bottom:12px}.badge{display:inline-flex;align-items:center;gap:5px;font-size:11px;line-height:1.5;padding:4px 9px;border-radius:7px;white-space:nowrap;background:#f0f2ed;color:#616a63;font-weight:600}.badge.pending,.badge.gold{background:var(--gold-light);color:#8c682d}.badge.completed{background:#edf6f0;color:var(--green)}.badge.rejected{background:#fcefee;color:var(--red)}.badge.dark{background:var(--ink);color:#e5d6b9}.avatar{width:35px;height:35px;border-radius:11px;background:#f3f0e8;color:#917144;display:grid;place-items:center;font-size:13px;font-weight:700;flex:none}.avatar.large{width:64px;height:64px;border-radius:18px;font-size:24px}.field{display:grid;gap:6px;font-size:13px;font-weight:600;margin-bottom:16px}.field input,.field select,.field textarea{width:100%;min-width:0;background:white;border:1px solid #dfe3db;border-radius:10px;padding:11px 12px;color:var(--ink);font-weight:400;min-height:44px}.field input:disabled,.field select:disabled{background:#f5f6f2;color:var(--muted)}.field small{font-size:11px;font-weight:400;color:var(--muted)}.field textarea{resize:vertical;min-height:75px}.fields2{display:grid;grid-template-columns:1fr 1fr;gap:16px}.fields2 .field{margin-bottom:0}.field.last{margin-bottom:0}.inline-error{font-size:12px;color:var(--red);background:#fff1ef;padding:10px 12px;border-radius:8px;margin:12px 0;white-space:pre-wrap}.inline-error:empty{display:none}.hint{border:1px solid #eadebf;border-radius:11px;background:#fcf8ef;color:#937335;padding:12px 15px;font-size:12px}.hint p{color:inherit}.empty{padding:35px 15px;text-align:center;color:var(--muted);font-size:13px}.empty .icon{width:28px;height:28px;color:#b7bcb4;margin-bottom:9px}.empty strong{display:block;font-size:14px;color:#5a655e;margin-bottom:3px}.tabs{display:flex;gap:5px;padding:4px;background:#eef0ea;border-radius:10px;max-width:100%;overflow-x:auto}.tabs button{background:none;color:var(--muted);border:0;border-radius:7px;padding:7px 13px;white-space:nowrap;font-size:12px;font-weight:600}.tabs button.active{background:#fff;color:var(--ink);box-shadow:0 2px 5px #1728200a}.progress{height:5px;border-radius:8px;background:#eee;overflow:hidden;margin:12px 0}.progress span{display:block;height:100%;background:var(--gold);border-radius:8px;transition:width .3s}.line-item{padding:16px 0;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px}.line-item:last-child{border-bottom:0}.line-item strong{font-size:13px;font-weight:600;overflow-wrap:anywhere}.line-item p{font-size:11px;margin-top:4px}.amount{font-size:15px;font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}.positive{color:var(--green)}.negative{color:var(--red)}.table-wrap{overflow-x:auto}table{border-collapse:collapse;width:100%;text-align:left;white-space:nowrap;font-size:13px}th{font-weight:600;color:var(--muted);font-size:11px;padding:12px 16px;background:#fafbf8;border-bottom:1px solid var(--line)}td{padding:16px;border-bottom:1px solid var(--line)}tr:last-child td{border-bottom:0}td:first-child,th:first-child{padding-left:20px}td strong{font-weight:600}.table-card{padding:0;overflow:hidden}.table-card .card-head{padding:20px 22px;margin-bottom:0}.table-card tbody tr:hover{background:#fdfdfb}.pagination{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 20px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}.search{position:relative;display:flex;align-items:center;max-width:360px;min-width:150px}.search>.icon{position:absolute;left:13px;width:16px;height:16px;color:#9aa196}.search input{width:100%;padding:10px 12px 10px 38px;border:1px solid var(--line);border-radius:10px;background:white;font-size:13px;min-width:0}.toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px;flex-wrap:wrap}.page-head{margin-bottom:28px;display:flex;align-items:center;justify-content:space-between;gap:15px}.page-head p{margin-top:7px;font-size:13px}.connection{display:flex;align-items:center;gap:7px;color:var(--muted);font-size:11px;white-space:nowrap}.dot{width:6px;height:6px;border-radius:50%;background:#6f9e87;flex:none}.connection.bad .dot{background:#bd6b52}.connection.busy .dot{background:#c5a367}.topbar{height:76px;display:flex;align-items:center;justify-content:space-between;padding:0 36px;background:#fff;border-bottom:1px solid var(--line);gap:12px}.topbar .top-date{font-size:12px;color:var(--muted)}.sidebar{background:#fff;position:fixed;top:0;bottom:0;left:0;width:230px;border-right:1px solid var(--line);padding:29px 20px;display:flex;flex-direction:column;z-index:20}.sidebar>.brand{margin-bottom:48px;padding:0 8px}.sidebar .nav-caption{font-size:10px;font-weight:600;letter-spacing:1.6px;color:#a0a69e;padding-left:14px;margin:0 0 13px}.nav-links{display:grid;gap:6px}.nav-link{display:flex;align-items:center;gap:12px;border:0;padding:12px 14px;border-radius:10px;background:none;text-align:left;color:#7b8279;font-size:13px;font-weight:550;white-space:nowrap}.nav-link:hover{background:#f5f6f1}.nav-link.active{background:#f4edde;color:#82602d}.nav-link .icon{width:18px;height:18px}.nav-link .counter{margin-left:auto;font-size:10px;line-height:1.4;padding:2px 6px;border-radius:5px;background:#ead8b4;color:#85601f}.sidebar-foot{margin-top:auto;padding:22px 10px 0;border-top:1px solid var(--line);display:grid;gap:17px}.sidebar-foot .nav-link{padding:0;color:#898f85;font-size:12px}.workspace{margin-left:230px;min-width:0}.content{max-width:1320px;padding:32px 36px 48px;margin:auto;min-width:0}.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:25px}.stat{padding:20px}.stat .stat-label{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:9px}.stat b{font-size:28px;font-weight:700;letter-spacing:-1px;display:block;margin:9px 0 3px;line-height:1.3;font-variant-numeric:tabular-nums}.stat small{font-size:10px;color:#a2a89d}.stat .stat-icon{margin-left:auto;color:var(--gold)}.two-col{display:grid;grid-template-columns:1.55fr 1fr;gap:22px}.three-col{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);padding:13px 20px;background:#293431;color:white;box-shadow:0 10px 40px #1b282133;border-radius:11px;z-index:300;max-width:min(92vw,540px);font-size:13px;display:none}.toast.show{display:block}.net-banner{background:#fff0e9;color:#9c5b3e;border-bottom:1px solid #efdbce;padding:10px 24px;font-size:12px;display:flex;justify-content:center;align-items:center;gap:15px}.net-banner button{background:none;border:0;text-decoration:underline;color:inherit;font-size:12px;white-space:nowrap}.auth-page{min-height:100dvh;display:grid;grid-template-columns:1.15fr 1fr;align-items:center;padding:60px;gap:80px;max-width:1360px;margin:auto}.auth-hero{padding:0 20px}.auth-hero .brand{margin-bottom:65px}.auth-hero h1{font-size:48px;letter-spacing:-2.2px;line-height:1.4;max-width:540px;font-weight:750}.auth-hero h1 em{font-style:normal;color:var(--gold)}.auth-hero>p{font-size:14px;line-height:2;margin:20px 0 30px;max-width:370px}.hero-rule{width:40px;height:3px;background:var(--gold);margin:0 0 27px}.auth-features{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:450px;margin-top:55px;border-top:1px solid var(--line);padding-top:24px}.auth-features .icon{color:var(--gold);margin-bottom:9px}.auth-features strong{font-size:12px;display:block}.auth-features p{font-size:10px;margin-top:5px}.auth-box{padding:36px;max-width:430px;width:100%;justify-self:center;border-radius:24px;box-shadow:0 15px 55px #303e1e08;background:white;border:1px solid var(--line)}.auth-box h2{font-size:24px;letter-spacing:-.5px;margin:7px 0}.auth-box>p{font-size:12px;margin-bottom:26px}.auth-box .tabs{margin-bottom:24px}.auth-note{border-top:1px solid var(--line);margin-top:23px;padding-top:17px;font-size:11px;text-align:center}.auth-footer{display:flex;justify-content:space-between;font-size:10px;color:#a3a79e;margin-top:26px;gap:15px}.auth-footer button{font-size:10px;color:#8b9387;font-weight:400}.check-label{display:flex;gap:8px;align-items:center;font-size:12px;color:var(--muted)}input[type=checkbox]{accent-color:var(--gold);width:16px;height:16px;cursor:pointer;flex:none}dialog{border:1px solid var(--line);padding:0;border-radius:22px;background:white;color:var(--ink);box-shadow:0 24px 100px #18241f33;width:calc(100% - 32px);max-width:510px;max-height:90dvh;overflow:auto;font-family:var(--font)}dialog::backdrop{background:#1d282855;backdrop-filter:blur(4px)}dialog.wide{max-width:750px}.dialog-head{padding:23px 26px 18px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:12px}.dialog-head h2{font-size:18px}.dialog-body{padding:24px 26px}.dialog-foot{display:flex;justify-content:flex-end;gap:10px;padding:18px 26px;border-top:1px solid var(--line);background:#fbfcf9;border-radius:0 0 22px 22px}.dialog-sub{font-size:12px;color:var(--muted);margin-top:4px}.dialog-tabs{margin:20px 0}.task-card{padding:18px 0;border-bottom:1px solid var(--line)}.task-card:last-child{border:0}.task-card strong{font-size:13px}.task-meta{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:11px;color:var(--muted);margin-top:6px}.task-note{margin-top:10px;background:#f6f7f2;padding:10px 12px;border-radius:9px;font-size:12px;color:#737c70}.spinner{width:16px;height:16px;border-radius:50%;border:2px solid currentColor;border-right-color:transparent;animation:spin 1s linear infinite;display:inline-block;vertical-align:middle}.skeleton{background:linear-gradient(90deg,#eef0e9,#fafbf8,#eef0e9);background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:8px;height:14px;margin:12px 0}.product-image{background:#f5f3eb;display:grid;place-items:center;height:135px;position:relative;overflow:hidden;border-radius:12px}.product-image img{width:100%;height:100%;object-fit:cover}.product-image .icon{width:40px;height:40px;color:#b1935b}.product-image .badge{position:absolute;top:10px;left:10px;background:#fffffff0}.product-card{padding:15px}.product-card h3{margin:16px 0 5px;font-size:15px}.product-card>p{font-size:11px;min-height:18px}.product-card .product-bottom{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:18px;padding-top:14px;border-top:1px solid var(--line)}.product-card .price{font-size:20px;font-weight:700;letter-spacing:-.5px}.product-card .price small{font-size:10px;font-weight:500;color:var(--muted);margin-left:4px}.receipt-code{background:#f8f9f4;border:1px dashed #cad0c2;padding:18px;border-radius:12px;text-align:center;overflow-wrap:anywhere}.qr{display:block;background:white;margin:0 auto;width:160px;height:160px}.event-card h3{font-size:16px;margin:12px 0 10px}.event-slots{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0 20px}.event-slot{padding:5px 8px;font-size:11px;background:#f6f7f2;color:#757f6f;border-radius:7px}.slot-edit{display:grid;grid-template-columns:1.25fr 1fr .8fr auto;align-items:end;gap:9px;padding:12px;background:#f8f9f5;border-radius:11px;margin-bottom:12px}.slot-edit .field{margin:0;font-size:11px}.slot-edit input{padding:8px;min-height:38px}.loading-panel{text-align:center;padding:100px 20px;color:var(--muted)}.loading-panel .spinner{width:28px;height:28px;margin-bottom:15px}.help-list{padding-left:20px;color:var(--muted);font-size:12px;line-height:2}.help-list li{margin:7px 0}.divider{height:1px;background:var(--line);margin:22px 0}.footer-note{font-size:10px;text-align:center;color:#a4aaa0;margin-top:30px}.mobile-brand{display:none}.break-text{overflow-wrap:anywhere;white-space:normal}
+@keyframes spin{to{transform:rotate(360deg)}}@keyframes shimmer{to{background-position:-200% 0}}
+@media(min-width:1500px){.content{padding-top:42px}.auth-page{padding-top:100px}}@media(max-width:1100px){.sidebar{width:205px;padding:25px 15px}.workspace{margin-left:205px}.content{padding:27px 24px}.topbar{padding:0 24px}.three-col{grid-template-columns:repeat(2,1fr)}.auth-page{gap:45px;padding:40px}.auth-hero h1{font-size:38px}.stat-grid{gap:10px}.stat{padding:16px}.two-col{gap:16px}}
+@media(max-width:780px){body{font-size:14px}.sidebar{position:sticky;top:0;bottom:auto;width:100%;padding:10px 12px;border-right:0;border-bottom:1px solid var(--line);display:block}.sidebar>.brand,.sidebar .nav-caption,.sidebar-foot{display:none}.nav-links{display:flex;overflow:auto;gap:4px;scrollbar-width:none}.nav-link{padding:9px 12px;font-size:12px;gap:7px}.nav-link .icon{width:17px}.workspace{margin-left:0}.topbar{height:60px;padding:0 20px}.topbar .top-date{display:none}.mobile-brand{display:flex}.mobile-brand .brand-mark{width:26px;height:30px;border-radius:7px}.mobile-brand .brand-name{font-size:13px}.mobile-brand small{font-size:7px}.topbar .desktop-crumb{display:none}.content{padding:22px 18px 40px}.page-head{margin-bottom:22px;gap:10px}.page-head h1{font-size:24px}.page-head p{font-size:12px}.page-head>.btn{font-size:11px;padding:9px 12px}.stat-grid{grid-template-columns:1fr 1fr;gap:10px}.stat{padding:16px}.stat b{font-size:26px}.card{padding:20px}.table-card{padding:0}.two-col{grid-template-columns:1fr}.three-col{grid-template-columns:1fr 1fr;gap:12px}.auth-page{display:block;padding:30px 20px}.auth-hero{padding:0}.auth-hero .brand{margin-bottom:28px}.auth-hero h1{font-size:31px;letter-spacing:-1px;max-width:100%}.auth-hero>p{font-size:12px;margin:15px 0 24px;max-width:100%}.auth-features{display:none}.hero-rule{display:none}.auth-box{margin:30px auto 0;padding:26px;max-width:480px}.auth-box h2{font-size:22px}.fields2{gap:12px}.dialog-head{padding:20px}.dialog-body{padding:20px}.dialog-foot{padding:16px 20px}.net-banner{font-size:11px;padding:10px 15px;text-align:left}.product-image{height:120px}.product-card{padding:12px}.product-card h3{font-size:13px}.product-card .product-bottom{gap:6px}.product-card .price{font-size:17px}.product-card .btn{padding:6px 10px;font-size:11px}.toolbar .search{flex:1;max-width:none}.event-card{padding:18px}.slot-edit{grid-template-columns:1fr 1fr;gap:10px}.slot-edit .btn{justify-self:end}.footer-note{margin-top:24px}.toast{bottom:20px}.table-wrap td{padding:13px}.table-wrap th{padding:12px}}
+@media(max-width:380px){.content{padding:20px 13px}.nav-link{padding:9px 10px}.fields2{grid-template-columns:1fr}.three-col{gap:9px}.auth-box{padding:23px}.page-head{align-items:flex-start}.connection{font-size:10px}.topbar{padding:0 13px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+.page-head>div{min-width:0}.page-head h1{overflow-wrap:anywhere}.mobile-data-list{display:none}
+@media(max-width:780px){.toolbar>.grow{flex-basis:100%;width:100%;justify-content:stretch}.toolbar>.grow .search{flex:1}.desktop-data{display:none}.mobile-data-list{display:block;padding:0 18px}.mobile-data-row{padding:18px 0;border-bottom:1px solid var(--line)}.mobile-data-row:last-child{border-bottom:0}.mobile-data-row .row strong{font-size:12px}.mobile-data-row>h3{font-size:13px;margin-top:12px}.mobile-data-row>p{font-size:10px;margin-top:5px}.mobile-data-row .data-meta{background:#f7f8f3;border-radius:8px;padding:9px 10px;margin:10px 0;font-size:11px;color:#64725e}.mobile-data-row .data-meta .mono{display:block;margin-top:3px}.mobile-data-row .data-foot{display:flex;align-items:center;justify-content:space-between;font-size:10px;color:var(--muted);gap:10px}.mobile-data-row .badge{font-size:10px}.mobile-data-row .avatar{width:30px;height:30px;border-radius:8px;font-size:11px}}
 
-        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-        
-        body { background-color: var(--apple-bg); color: var(--text-primary); font-family: 'Inter', '-apple-system', 'BlinkMacSystemFont', 'Noto Sans TC', sans-serif; min-height: 100vh; overflow-x: hidden; display: flex; justify-content: center; }
-        ::-webkit-scrollbar { display: none; }
-
-        .app-container { width: 100%; max-width: 430px; min-height: 100vh; position: relative; background-color: var(--apple-bg); display: flex; flex-direction: column; }
-        .hidden { display: none !important; opacity: 0; pointer-events: none; }
-        .fade-in { animation: fadeIn 0.4s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* ====== 身分驗證區塊 ====== */
-        .auth-wrapper { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 40px 30px; transition: opacity 0.3s; }
-        .auth-header { text-align: center; margin-bottom: 50px; }
-        .auth-header h1 { font-weight: 700; font-size: 28px; letter-spacing: 2px; }
-        .auth-header p { color: var(--text-secondary); font-size: 15px; margin-top: 8px; }
-
-        .input-box { background: var(--apple-surface); border-radius: 14px; padding: 8px 16px; margin-bottom: 16px; display: flex; flex-direction: column; border: 1px solid transparent; transition: border 0.3s, background 0.3s; }
-        .input-box:focus-within { border-color: var(--reborn-gold); background: var(--apple-surface-elevated); }
-        .input-box label { font-size: 11px; color: var(--text-secondary); font-weight: 500; text-transform: uppercase; margin-bottom: 4px; }
-        .input-box input { background: transparent; border: none; color: white; font-size: 17px; outline: none; padding: 4px 0; width: 100%; }
-
-        .btn-main { background: white; color: black; width: 100%; padding: 16px; border: none; border-radius: 14px; font-size: 17px; font-weight: 600; cursor: pointer; margin-top: 20px; transition: opacity 0.2s, transform 0.1s; display: flex; justify-content: center; align-items: center; gap: 8px;}
-        .btn-main:active { transform: scale(0.97); opacity: 0.8; }
-        .btn-main:disabled { opacity: 0.5; cursor: not-allowed; }
-        .btn-text { background: none; border: none; color: var(--reborn-gold); width: 100%; padding: 16px; font-size: 15px; cursor: pointer; margin-top: 8px; font-weight: 500; }
-        .btn-secondary { background: var(--apple-surface-elevated); color: white; width: 100%; padding: 16px; border: none; border-radius: 14px; font-size: 15px; font-weight: 600; cursor: pointer; margin-top: 10px; transition: 0.2s; }
-        .btn-secondary:active { transform: scale(0.97); background: #3a3a3c; }
-
-        /* ====== 主畫面 ====== */
-        .main-content { 
-            flex: 1; 
-            padding: 20px 20px 20px 20px; /* 💡 預設 padding */
-            overflow-y: auto; 
-            /* 💡 重要：為了 fixed 的導覽列，內容底部需要留白，否則最後的內容會被遮住 */
-            padding-bottom: calc(var(--nav-height) + 20px); 
-        }
-        .header-title { font-size: 34px; font-weight: 700; margin-top: 10px; margin-bottom: 24px; letter-spacing: -0.5px; }
-        .greeting-text { font-size: 15px; color: var(--text-secondary); margin-top: 10px; font-weight: 500; }
-
-        /* ====== 數位會員卡 ====== */
-        .wallet-card { background: var(--apple-surface); border-radius: 20px; padding: 24px; position: relative; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5); margin-bottom: 30px; transition: background 0.3s; }
-        
-        .wallet-card.tier-core { background: linear-gradient(135deg, #2b2b2c, #131314); }
-        .wallet-card.tier-prime { background: linear-gradient(135deg, #4CAF50 0%, #1B5E20 100%); }
-        .wallet-card.tier-premium { background: var(--reborn-premium-gradient); color: white; }
-        .wallet-card.tier-premium .barcode-area { background: rgba(255,255,255,0.9); }
-        .wallet-card.tier-apex { background: linear-gradient(135deg, #BDBDBD 0%, #424242 100%); }
-        .wallet-card.tier-force { background: #000; border: 1px solid #333; color: #FF3B30; box-shadow: 0 0 20px rgba(255, 59, 48, 0.2); }
-        .wallet-card.tier-force .card-tier { background: rgba(255, 59, 48, 0.2); color: #FF3B30; }
-
-        .wallet-card .barcode-area { background: white; padding: 12px; border-radius: 12px; text-align: center; margin-bottom: 15px; }
-        .card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 30px; }
-        .card-brand { font-weight: 700; font-size: 18px; letter-spacing: 1px; }
-        .card-tier { font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 20px; background: rgba(0,0,0,0.3); backdrop-filter: blur(10px); }
-
-        .card-points-label { font-size: 13px; font-weight: 500; opacity: 0.8; margin-bottom: 4px; }
-        .card-points { font-size: 42px; font-weight: 300; letter-spacing: -1px; margin-bottom: 30px; display: flex; align-items: baseline; }
-        .card-points span { font-size: 16px; font-weight: 600; margin-left: 6px; }
-
-        .barcode-area svg { width: 100%; height: 50px; }
-        .card-uid { font-family: monospace; font-size: 13px; text-align: center; opacity: 0.7; letter-spacing: 2px; cursor: pointer; transition: 0.2s; padding: 4px; border-radius: 8px; }
-        .card-uid:active { background: rgba(255,255,255,0.2); }
-
-        /* ====== 兌換商城 ====== */
-        .store-section { margin-top: 10px; }
-        .section-title { font-size: 20px; font-weight: 600; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: baseline; }
-        .store-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-        
-        /* ====== 交易明細 (History) ====== */
-        .history-list { background: var(--apple-surface); border-radius: 16px; padding: 8px 16px; margin-bottom: 24px; }
-        .history-item { display: flex; justify-content: space-between; align-items: center; padding: 16px 0; border-bottom: 1px solid var(--border-color); }
-        .history-item:last-child { border-bottom: none; }
-        .history-info { display: flex; flex-direction: column; gap: 4px; }
-        .history-title { font-size: 15px; font-weight: 500; }
-        .history-date { font-size: 12px; color: var(--text-secondary); }
-        .history-points.positive { color: #32D74B; font-weight: 600; font-size: 16px; }
-        .history-points.negative { color: #FF453A; font-weight: 600; font-size: 16px; }
-        .history-points.pending { color: var(--reborn-gold); font-weight: 600; font-size: 14px; }
-
-        /* ====== 會員等級與進度展示區 ====== */
-        .tier-display { background: var(--apple-surface-elevated); border-radius: 16px; padding: 20px; margin-bottom: 24px; border: 1px solid rgba(212, 175, 55, 0.3); }
-        .tier-header { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
-        .tier-icon { width: 50px; height: 50px; background: var(--reborn-premium-gradient); border-radius: 12px; display: flex; justify-content: center; align-items: center; font-size: 24px; }
-        .tier-info h4 { font-size: 13px; color: var(--text-secondary); font-weight: 500; margin-bottom: 4px; }
-        .tier-info h3 { font-size: 18px; font-weight: 700; color: var(--reborn-gold); }
-
-        /* 等級進度條 */
-        .progress-container { background: rgba(0,0,0,0.3); padding: 16px; border-radius: 12px; }
-        .progress-text { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 8px; color: var(--text-secondary); }
-        .progress-text strong { color: white; }
-        .progress-bar-bg { width: 100%; height: 6px; background: #3a3a3c; border-radius: 4px; overflow: hidden; margin-bottom: 12px; }
-        .progress-bar-fill { height: 100%; background: var(--reborn-gold-gradient); width: 0%; border-radius: 4px; transition: width 1s ease-in-out; }
-        .progress-action { text-align: center; font-size: 13px; color: var(--reborn-gold); cursor: pointer; padding-top: 4px; font-weight: 500; }
-
-        /* ====== 底部導航列 ====== */
-        .bottom-nav { 
-            /* 💡 修改：從 absolute 改為 fixed，讓它固定在螢幕底部 */
-            position: fixed; 
-            bottom: 0; 
-            /* 💡 修改：配合 fixed 定位，需要設定相對於螢幕的寬度和位置 */
-            left: 50%;
-            transform: translateX(-50%); /* 水平置中 */
-            width: 100%; 
-            max-width: 430px; /* 💡 重要：寬度要跟父容器一致 */
-            
-            height: var(--nav-height); 
-            background: rgba(28, 28, 30, 0.95); /* 稍微提高不透明度，防止內容透出太明顯 */
-            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); 
-            border-top: 1px solid var(--border-color); 
-            display: flex; justify-content: space-around; align-items: flex-start; 
-            padding-top: 12px; 
-            z-index: 100; 
-        }
-        .nav-item { display: flex; flex-direction: column; align-items: center; color: var(--text-secondary); font-size: 10px; font-weight: 500; gap: 4px; cursor: pointer; transition: color 0.3s; flex: 1;}
-        .nav-item svg { width: 24px; height: 24px; fill: currentColor; }
-        .nav-item.active { color: white; }
-
-        /* ====== Modal (彈出視窗) ====== */
-        /* 💡 彈出視窗現在獨立存在，不隸屬於任何 tab */
-        .modal-backdrop { 
-            position: fixed; /* 💡 改為 fixed，確保覆蓋整個螢幕 */
-            top: 0; 
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100%; 
-            max-width: 430px;
-            height: 100%; 
-            background: rgba(0,0,0,0.6); /* 加深背景 */
-            backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); 
-            z-index: 200; /* 高於導航列 */
-            display: flex; align-items: flex-end; 
-            opacity: 0; pointer-events: none; transition: opacity 0.3s; 
-        }
-        .modal-backdrop.active { opacity: 1; pointer-events: auto; }
-        .modal-sheet { position: relative; width: 100%; background: rgba(28, 28, 30, 0.95); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px); border-top: 1px solid rgba(255,255,255,0.15); border-radius: 24px 24px 0 0; padding: 30px 24px 40px 24px; transform: translate3d(0, 100%, 0); transition: transform 0.4s cubic-bezier(0.32, 0.72, 0, 1); will-change: transform; }
-        .modal-backdrop.active .modal-sheet { transform: translate3d(0, 0, 0); }
-        .sheet-drag { width: 40px; height: 4px; background: rgba(255,255,255,0.3); border-radius: 4px; margin: 0 auto 20px auto; }
-        .sheet-title { font-size: 22px; font-weight: 700; margin-bottom: 10px; padding-right: 30px; }
-        .sheet-desc { font-size: 15px; color: var(--text-secondary); margin-bottom: 24px; line-height: 1.5; }
-        #qrcode-container { background: white; padding: 16px; border-radius: 16px; display: inline-block; margin-bottom: 20px; }
-        .btn-close { position: absolute; top: 20px; right: 20px; width: 32px; height: 32px; background: rgba(255,255,255,0.1); border-radius: 50%; border: none; color: white; font-size: 18px; display: flex; justify-content: center; align-items: center; cursor: pointer; transition: 0.2s; }
-        
-        .tier-list-item { display: flex; align-items: center; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--border-color); }
-        .tier-list-item:last-child { border-bottom: none; }
-        .tier-circle { width: 12px; height: 12px; border-radius: 50%; border: 2px solid white; }
-        .tier-list-info { flex: 1; }
-        .tier-name { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
-        .tier-req { font-size: 12px; color: var(--text-secondary); }
-
-        /* ====== Toast ====== */
-        .toast { position: fixed; /* 💡 改為 fixed */
-            top: 20px; left: 50%; transform: translate(-50%, -20px); background: rgba(255,255,255,0.95); color: black; padding: 12px 24px; border-radius: 30px; font-size: 14px; font-weight: 600; box-shadow: 0 8px 24px rgba(0,0,0,0.2); opacity: 0; pointer-events: none; transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); z-index: 300; text-align: center; width: max-content; max-width: 90%; }
-        .toast.show { opacity: 1; transform: translate(-50%, 0); }
-        
-        /* ====== 商品卡片設計 ====== */
-        .store-item-card { background: var(--apple-surface-elevated); border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; border: 1px solid rgba(255,255,255,0.05); }
-        .store-item-img { width: 100%; height: 140px; object-fit: cover; background: #333; }
-        .store-item-info { padding: 14px; display: flex; flex-direction: column; flex: 1; }
-        .store-item-type { font-size: 10px; color: var(--reborn-gold); margin-bottom: 4px; font-weight: 700; letter-spacing: 0.5px; }
-        .store-item-title { font-size: 14px; font-weight: 600; margin-bottom: 12px; line-height: 1.4; }
-        .store-item-bottom { display: flex; justify-content: space-between; align-items: center; margin-top: auto; }
-        .store-item-points { font-size: 16px; font-weight: 700; color: white; }
-        .store-item-btn { background: var(--reborn-gold-gradient); color: black; border: none; border-radius: 8px; padding: 6px 14px; font-size: 13px; font-weight: 700; cursor: pointer; }
-    </style>
+.member-home-grid{display:grid;grid-template-columns:1.08fr 1fr;gap:24px}.wallet-card{position:relative;overflow:hidden;min-height:290px;border-radius:21px;background:linear-gradient(118deg,#293932,#21312c 72%,#3e4935);padding:27px 30px;color:#fff;box-shadow:0 15px 30px #24372412}.wallet-card:before{content:"";position:absolute;width:270px;height:270px;border:1px solid #bbce9e25;transform:rotate(-32deg);right:-95px;top:20px;border-radius:34px}.wallet-card:after{content:"";position:absolute;width:310px;height:310px;border:1px solid #bbce9e12;transform:rotate(-32deg);right:-105px;top:15px;border-radius:34px}.wallet-top,.wallet-foot{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between}.wallet-brand{font-size:15px;font-weight:800;letter-spacing:2px}.wallet-label{font-size:11px;color:#c2caba;margin:31px 0 3px;letter-spacing:.8px}.wallet-points{font-size:58px;letter-spacing:-2px;font-weight:550;line-height:1.2;position:relative;z-index:1;display:flex;align-items:baseline;gap:9px;font-variant-numeric:tabular-nums}.wallet-points small{font-size:13px;letter-spacing:0;color:#c2caba;font-weight:500}.wallet-foot{border-top:1px solid #ffffff1c;margin-top:29px;padding-top:20px;gap:15px}.wallet-foot strong{font-size:12px;font-weight:500}.wallet-foot .mono{font-size:10px;color:#aebfa9}.wallet-foot .btn{background:#ffffff12;border-color:#ffffff26;color:#e9eddf;font-size:10px;padding:7px 10px}.wallet-card.force{background:#232424}.wallet-card.apex{background:linear-gradient(120deg,#404c4b,#6c7973)}.wallet-card.premium{background:linear-gradient(120deg,#6e532d,#a6864d)}.wallet-card.core{background:linear-gradient(120deg,#293432,#35413a)}.quick-stats{display:grid;grid-template-columns:1fr 1fr;gap:14px}.quick-stats .stat b{font-size:24px}.quick-action{display:flex;align-items:center;gap:16px;border:1px solid var(--line);border-radius:13px;padding:17px;background:#fff;width:100%;text-align:left}.quick-action>.icon{width:25px;height:25px;color:var(--gold)}.quick-action .grow strong{font-size:13px}.quick-action .grow p{font-size:11px;margin-top:4px}.quick-action:hover{background:#fafbf6;border-color:#dfe2d7}.quick-action>.icon:last-child{width:16px;height:16px;color:#aeb4a5}.member-home-bottom{display:grid;grid-template-columns:1.25fr 1fr;gap:24px;margin-top:24px}.claim-steps{display:grid;gap:23px;margin-top:22px}.claim-steps>div{display:flex;gap:15px;align-items:flex-start}.claim-steps>div>span{color:var(--gold);font-size:13px;font-weight:600;letter-spacing:1px;line-height:1.8}.claim-steps strong{font-size:12px}.claim-steps p{font-size:11px;margin-top:4px}.tier-line{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--line);font-size:12px;color:var(--muted)}.tier-line:last-of-type{border:0}.next-event{padding:16px 0;border-bottom:1px solid var(--line)}.next-event:last-child{border:0}.next-event strong{font-size:13px}.next-event p{font-size:11px;margin-top:6px}.member-card-dialog{padding:22px;text-align:center;background:#f7f8f2;border-radius:15px}.member-card-dialog .qr{margin-bottom:16px;width:175px;height:175px}.member-card-dialog .barcode-box{padding:10px;background:white;border-radius:9px}.member-card-dialog .mono{font-size:13px;margin-top:12px;display:block}
+@media(max-width:1100px){.member-home-grid{gap:16px}.member-home-bottom{gap:16px}.wallet-card{padding:25px}.wallet-points{font-size:52px}.quick-action{padding:15px}.quick-action .grow p{font-size:10px}}
+@media(max-width:900px){.member-home-grid{grid-template-columns:1fr}.member-home-bottom{grid-template-columns:1fr}.member-home-grid>.stack{grid-template-columns:1fr 1fr;gap:12px}.member-home-grid>.stack .quick-stats{grid-column:1/-1}.wallet-card{min-height:265px}.quick-action{padding:14px}.quick-action>.icon:first-child{width:21px;height:21px}}
+@media(max-width:780px){.member-home-grid{gap:15px}.wallet-card{padding:24px}.wallet-label{margin-top:25px}.wallet-points{font-size:52px}.member-home-bottom{gap:16px;margin-top:18px}.quick-action{gap:9px}.quick-action>.icon:last-child{display:none}.quick-stats .stat{padding:17px}.wallet-foot{margin-top:22px}.member-home-grid>.stack{gap:10px}.wallet-foot .btn{padding:7px}.quick-action .grow p{font-size:9px}.quick-action .grow strong{font-size:12px}}
+@media(max-width:780px){.sidebar{position:fixed;top:auto;bottom:0;border-top:1px solid var(--line);border-bottom:0;padding:7px 7px calc(7px + env(safe-area-inset-bottom));background:#ffffffee;backdrop-filter:blur(15px)}.nav-links{justify-content:space-around;gap:2px;overflow:hidden}.nav-link{flex:1;min-width:0;padding:7px 3px;font-size:10px;flex-direction:column;gap:4px;line-height:1.5}.nav-link .icon{width:19px;height:19px}.content{padding-bottom:calc(110px + env(safe-area-inset-bottom))}.toast{bottom:calc(90px + env(safe-area-inset-bottom))}}
+#nav-name{display:block;max-width:140px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.wallet-foot>div{min-width:0}.wallet-foot strong{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:230px}
+@media(max-width:780px){#home-content .page-head>.micro{display:none}.wallet-foot strong{max-width:180px}}
+</style>
 </head>
 <body>
+<div id="net-banner" class="net-banner" hidden><span id="net-text"></span><button data-action="sync">重新同步</button><button data-action="connection">連線設定</button></div>
+<div id="auth" class="auth-page">
+ <section class="auth-hero">
+  <div data-brand></div><div class="hero-rule"></div><div class="eyebrow">YOUR REBORN MEMBERSHIP</div>
+  <h1 style="margin-top:16px">每一場參賽，<br>都值得<em>被記住。</em></h1>
+  <p>你的銳能會員卡、賽事紀錄與專屬獎勵。<br>在這裡，讓每一次上場都累積成新的可能。</p>
+  <div class="auth-features"><div><span data-icon="scan"></span><strong>專屬會員卡</strong><p>一張卡，記錄你的銳能旅程</p></div><div><span data-icon="calendar"></span><strong>參賽點數補登</strong><p>找到賽事，輕鬆送出審核</p></div><div><span data-icon="gift"></span><strong>會員獎勵兌換</strong><p>用點數解鎖更多精彩</p></div></div>
+ </section>
+ <section class="auth-box"><div class="eyebrow">WELCOME TO REBORN</div><h2 id="auth-title">歡迎回來</h2><p id="auth-sub">登入會員，繼續你的賽事旅程。</p>
+  <div class="tabs"><button class="active" data-action="auth-mode" data-mode="login">會員登入</button><button data-action="auth-mode" data-mode="register">建立帳號</button></div>
+  <form id="login-form"><label class="field">電子信箱<input type="email" id="login-email" required maxlength="254" placeholder="name@example.com" autocomplete="username"></label><label class="field">密碼<input type="password" id="login-password" required maxlength="128" placeholder="輸入你的密碼" autocomplete="current-password"></label><div id="login-error" class="inline-error" role="alert"></div><button class="btn primary full" type="submit">登入會員<span data-icon="arrow"></span></button></form>
+  <form id="register-form" hidden><label class="field">遊戲暱稱<input id="register-name" required maxlength="60" placeholder="你希望大家怎麼稱呼你" autocomplete="nickname"></label><label class="field">電子信箱<input id="register-email" type="email" required maxlength="254" placeholder="name@example.com" autocomplete="email"></label><label class="field">密碼<input id="register-password" type="password" required minlength="6" maxlength="128" autocomplete="new-password" placeholder="至少 6 個字元"></label><label class="field">確認密碼<input id="register-confirm" type="password" required minlength="6" maxlength="128" autocomplete="new-password" placeholder="再輸入一次密碼"></label><div id="register-error" class="inline-error" role="alert"></div><button class="btn primary full" type="submit">建立 REBORN ID<span data-icon="arrow"></span></button></form>
+  <div class="auth-note">首次註冊即獲得 <b style="color:var(--gold)">50 點</b> 迎新紅利</div><div class="auth-footer"><span>© 2026 REBORN ENTERTAINMENT</span><button class="text-btn" data-action="connection">連線設定</button></div><div class="connection" style="justify-content:center;margin-top:17px"><span class="dot"></span>等待連線</div>
+ </section>
+</div>
+<div id="app" hidden>
+ <aside class="sidebar"><div data-brand></div><div class="nav-caption">MEMBER CENTER</div><nav class="nav-links" aria-label="會員中心導覽">
+  <button class="nav-link active" data-action="view" data-view="home"><span data-icon="home"></span>會員總覽</button><button class="nav-link" data-action="view" data-view="rewards"><span data-icon="gift"></span>獎勵兌換</button><button class="nav-link" data-action="view" data-view="claim"><span data-icon="calendar"></span>賽事補登</button><button class="nav-link" data-action="view" data-view="history"><span data-icon="history"></span>我的紀錄</button><button class="nav-link" data-action="view" data-view="profile"><span data-icon="user"></span>會員設定</button>
+ </nav><div class="sidebar-foot"><div class="row"><span class="avatar" id="nav-avatar">R</span><div><strong id="nav-name" style="font-size:12px">銳能會員</strong><p id="nav-level" class="micro">REBORN ID</p></div></div><button class="nav-link" data-action="logout"><span data-icon="logout"></span>登出帳號</button><span class="micro muted" style="font-size:9px;letter-spacing:1px">REBORN · EVERY MOMENT COUNTS</span></div></aside>
+ <div class="workspace"><header class="topbar"><div class="desktop-crumb micro muted">銳能娛樂 <span style="margin:0 10px;color:#c1c6bb">/</span> <span id="crumb">會員總覽</span></div><div data-mobile-brand></div><div class="row"><div class="connection"><span class="dot"></span>正在連線…</div><button class="btn square" data-action="sync" title="重新同步" aria-label="重新同步"><span data-icon="refresh"></span></button><button class="btn square" data-action="logout" title="登出" aria-label="登出"><span data-icon="logout"></span></button></div></header>
+  <main class="content"><section id="page-home"><div id="home-content"></div></section>
+   <section id="page-rewards" hidden><div class="page-head"><div><div class="eyebrow">REWARDS COLLECTION</div><h1 style="margin-top:8px">每一點，都有新可能</h1><p>用參賽累積的點數，兌換喜歡的獎勵。</p></div><span class="badge gold"><span data-icon="coins"></span><span id="store-balance">—</span> 點</span></div><div class="toolbar"><div class="tabs" id="reward-filters"><button class="active" data-action="reward-filter" data-filter="all">所有獎勵</button><button data-action="reward-filter" data-filter="virtual">鑽石／虛寶</button><button data-action="reward-filter" data-filter="voucher">兌換券</button><button data-action="reward-filter" data-filter="physical">實體商品</button></div></div><div id="reward-grid" class="three-col"></div></section>
+   <section id="page-claim" hidden><div class="page-head"><div><div class="eyebrow">MATCH PARTICIPATION</div><h1 style="margin-top:8px">記下這一次上場</h1><p>選擇參賽場次，送出點數補登申請。</p></div></div>
+    <div class="two-col"><article class="card"><div class="card-head"><h2>參賽資訊</h2><span class="badge gold">完成後送審</span></div><form id="claim-form">
+     <label class="field">賽事類型<select id="claim-type" required><option value="exchange">交流賽</option><option value="league">聯賽</option></select></label><label class="field">選擇賽事<select id="claim-event" required></select></label><div id="claim-manual-fields" hidden><label class="field">過往賽事名稱<input id="claim-name" maxlength="100" placeholder="例如：2026 銳能秋季盃"></label><div class="fields2"><label class="field">比賽日期<input id="claim-date" type="date"></label><label class="field">比賽時間<input id="claim-time" type="time"></label></div><label class="field" style="margin-top:16px">參賽組別<input id="claim-manual-group" maxlength="30" placeholder="例如：3 或 A"></label></div>
+     <div id="claim-scheduled-fields"><label class="field">日期與時段<select id="claim-slot" required></select></label><label class="field">參賽組別<select id="claim-group" required></select></label></div>
+     <div class="fields2"><label class="field">隊伍名稱<input id="claim-team" required maxlength="80" placeholder="填寫當時報名的隊名"></label><label class="field">報名負責人<input id="claim-leader" required maxlength="80" placeholder="填寫負責人名稱"></label></div><div id="claim-error" class="inline-error" role="alert"></div><div class="row between" style="margin-top:22px"><span class="micro muted">審核通過後可獲得 <b id="claim-points" style="color:var(--gold)">50</b> 點</span><button class="btn primary" type="submit">送出補登<span data-icon="arrow"></span></button></div>
+    </form></article><div class="stack" style="align-content:start"><article class="card"><div class="card-head"><h2>補登流程</h2><span data-icon="tasks"></span></div><div class="claim-steps"><div><span>01</span><div><strong>找到你的參賽場次</strong><p>選擇類型、賽事、時段及組別。</p></div></div><div><span>02</span><div><strong>確認報名資訊</strong><p>隊伍與負責人請和原報名資料一致。</p></div></div><div><span>03</span><div><strong>等待主辦單位審核</strong><p>通過後，點數與參賽紀錄會自動更新。</p></div></div></div><div class="divider"></div><p class="micro">同一場次、時段與組別只需申請一次。若被駁回，可依備註修正後重新申請。</p></article><div class="hint"><strong>找不到過往賽事？</strong><p style="margin-top:5px">在賽事選單選擇「手動填寫」，補上日期與時段，主辦方仍可人工審核。</p></div><button class="btn" data-action="view" data-view="history">查看我的申請紀錄<span data-icon="arrow"></span></button></div></div>
+   </section>
+   <section id="page-history" hidden><div class="page-head"><div><div class="eyebrow">YOUR REBORN JOURNEY</div><h1 style="margin-top:8px">我的紀錄</h1><p>每一筆點數、每一場參賽，都留在這裡。</p></div></div><div class="toolbar"><div class="tabs" id="history-tabs"><button class="active" data-action="history-mode" data-mode="points">點數明細</button><button data-action="history-mode" data-mode="tasks">補登與兌換申請</button></div></div><article class="card" id="history-panel"></article></section>
+   <section id="page-profile" hidden><div class="page-head"><div><div class="eyebrow">MEMBERSHIP & ACCOUNT</div><h1 style="margin-top:8px">會員設定</h1><p>保持資料更新，讓每次兌換都更順利。</p></div></div><div class="two-col"><article class="card"><div class="card-head"><h2>帳號資料</h2><span data-icon="user"></span></div><form id="profile-form"><label class="field">遊戲暱稱<input id="profile-name" required maxlength="60" autocomplete="nickname"></label><label class="field">電子信箱<input id="profile-email" type="email" disabled><small>電子信箱為登入帳號，無法在此變更。</small></label><label class="field">遊戲 UID<input id="profile-game-uid" inputmode="numeric" pattern="[0-9]{5,20}" maxlength="20" placeholder="選填，虛寶兌換時可自動帶入"><small>這是遊戲內的數字 UID，與 REBORN 會員編號不同。</small></label><div class="divider"></div><h3 style="margin-bottom:16px">變更密碼 <span class="micro muted" style="font-weight:400">不修改請留白</span></h3><label class="field">目前密碼<input id="profile-current-password" type="password" autocomplete="current-password" maxlength="128"></label><label class="field">新密碼<input id="profile-password" type="password" minlength="6" maxlength="128" autocomplete="new-password" placeholder="至少 6 個字元"></label><label class="field">確認新密碼<input id="profile-confirm" type="password" minlength="6" maxlength="128" autocomplete="new-password"></label><div id="profile-error" class="inline-error" role="alert"></div><button class="btn primary" type="submit">儲存變更<span data-icon="check"></span></button></form></article><div class="stack" style="align-content:start"><article class="card" id="tier-panel"></article><article class="card"><div class="card-head"><h2>會員等級制度</h2><span data-icon="trophy"></span></div><div class="tier-line"><span class="badge">CORE</span><span>註冊即取得</span></div><div class="tier-line"><span class="badge completed">PRIME</span><span>累積 500 點</span></div><div class="tier-line"><span class="badge gold">REBORN PREMIUM</span><span>累積 1,000 點</span></div><div class="tier-line"><span class="badge dark">APEX</span><span>累積 2,000 點</span></div><p class="micro" style="margin-top:18px">累積點數由後端統一計算；兌換商品不影響升級進度。超銳能黑卡依特殊邀約資格保留。</p></article><button class="btn" data-action="connection"><span data-icon="settings"></span>連線設定</button></div></div></section>
+   <div class="footer-note">© 2026 REBORN ENTERTAINMENT · 每一場參賽，都值得被記住。</div>
+  </main>
+ </div>
+</div>
 
-    <div class="app-container">
-        <div id="toast" class="toast">操作成功</div>
+<dialog id="modal" aria-labelledby="dialog-title"></dialog>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<script>const ROLE = 'member';
+// 將這一行改成「最新部署」的 /exec 網址；兩個 HTML 必須使用同一個後端。
+const GAS_API_URL = 'https://script.google.com/macros/s/AKfycbwlSJcv6ftVp5grAB2tbyqNzK1WlFZcjYdvNtfJJxooQm8hjFbhZVL2aXYIUHDX6UA/exec';
+const API_VERSION = '3.0';
+const $ = id => document.getElementById(id);
+const esc = v => String(v ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const num = n => Number(n||0).toLocaleString('zh-TW');
+const kindName = t => t==='league'?'聯賽':'交流賽';
+const eventIsOpen = e => e.status==='active'&&(!e.claimUntil||Date.parse(e.claimUntil)>=Date.now());
+const eventStatusName = e => e.status==='archived'?'已封存':e.status==='closed'?'已關閉':eventIsOpen(e)?'開放補登':'已截止';
+const productKind = t => ({virtual:'鑽石／虛寶',physical:'實體商品',voucher:'兌換券'}[t]||'商品');
+const stateName = s => ({Pending:'待審核',Completed:'已完成',Rejected:'已駁回'}[s]||s);
+const statusBadge = s => `<span class="badge ${String(s).toLowerCase()}">${esc(stateName(s))}</span>`;
+const iconPaths = {
+ home:'M3 10 12 3l9 7v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1Z M9 21v-8h6v8',
+ gift:'M3 8h18v4H3z M5 12v9h14v-9 M12 8v13 M12 8H7a3 3 0 1 1 3-3Z M12 8h5a3 3 0 1 0-3-3Z',
+ calendar:'M4 5h16a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1 M7 3v4 M17 3v4 M3 11h18 M8 15h2 M14 15h2 M8 18h2',
+ history:'M3 11a9 9 0 1 1 2.6 7 M3 4v7h7 M12 7v5l3 2',
+ user:'M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8 M4 21v-2a5 5 0 0 1 5-5h6a5 5 0 0 1 5 5v2',
+ users:'M9 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8 M2 21v-2a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v2 M17 4a4 4 0 0 1 0 8 M22 21v-2a5 5 0 0 0-4-4',
+ check:'m5 12 4 4L19 6',
+ tasks:'M9 4H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-4 M9 2h6v4H9z M8 12l2 2 5-5 M8 18h8',
+ settings:'M9 3h6l1 3 3 1 2 5-2 5-3 1-1 3H9l-1-3-3-1-2-5 2-5 3-1Z M12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6',
+ arrow:'M5 12h14 M13 6l6 6-6 6',
+ logout:'M9 4H4v16h5 M9 12h12 M17 8l4 4-4 4',
+ refresh:'M20 7A9 9 0 0 0 4 7 M4 3v4h4 M4 17a9 9 0 0 0 16 0 M20 21v-4h-4',
+ search:'M11 3a8 8 0 1 0 0 16 8 8 0 0 0 0-16 M17 17l4 4',
+ plus:'M12 5v14 M5 12h14',
+ close:'m6 6 12 12 M18 6 6 18',
+ copy:'M9 9h12v12H9z M5 15H3V3h12v2',
+ scan:'M8 3H3v5 M16 3h5v5 M21 16v5h-5 M8 21H3v-5 M7 7h3v3H7z M14 7h3v3h-3z M7 14h3v3H7z M14 14h3v3h-3z',
+ diamond:'M7 4h10l5 7-10 10L2 11Z M2 11h20 M7 4l5 17 5-17',
+ trophy:'M8 3h8v8a4 4 0 0 1-8 0Z M8 5H4v3a4 4 0 0 0 4 4 M16 5h4v3a4 4 0 0 1-4 4 M12 15v5 M7 21h10',
+ lock:'M5 10h14v11H5z M8 10V6a4 4 0 0 1 8 0v4 M12 14v3',
+ coins:'M12 3c5 0 8 2 8 4s-3 4-8 4-8-2-8-4 3-4 8-4 M4 7v5c0 2 3 4 8 4s8-2 8-4V7 M4 12v5c0 2 3 4 8 4s8-2 8-4v-5',
+ edit:'m15 5 4 4 M4 20l4-1L20 7a2 2 0 0 0-4-4L4 15Z',
+ clock:'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18 M12 7v5l4 2',
+ ticket:'M3 6h18v4a2 2 0 0 0 0 4v4H3v-4a2 2 0 0 0 0-4Z M15 6v3 M15 11v2 M15 15v3',
+ shield:'m12 3 8 3v5c0 5-4 8-8 10-4-2-8-5-8-10V6Z M8 12l3 3 5-6',
+ camera:'M8 5l2-2h4l2 2h5v16H3V5Z M12 8a5 5 0 1 0 0 10 5 5 0 0 0 0-10'
+};
+function icon(name){return `<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="${iconPaths[name]||iconPaths.gift}"/></svg>`;}
+function fillIcons(){document.querySelectorAll('[data-icon]').forEach(el=>el.innerHTML=icon(el.dataset.icon));}
+function brand(mobile=false){return `<div class="brand ${mobile?'mobile-brand':''}"><span class="brand-mark"><svg viewBox="0 0 22 30" aria-hidden="true"><path d="M13 0 1 17h8L7 30l14-19h-9Z"/></svg></span><div class="brand-name">REBORN<small>ENTERTAINMENT</small></div></div>`;}
+function empty(title,desc='',name='history'){return `<div class="empty">${icon(name)}<strong>${esc(title)}</strong>${esc(desc)}</div>`;}
+function loading(){return '<div class="loading-panel"><span class="spinner"></span><p>正在同步資料…</p></div>';}
+function pageButtons(data,action){return `<div class="pagination"><span>共 ${num(data.total)} 筆 · 第 ${data.page} 頁</span><div class="row gap8"><button class="btn small" data-action="${action}" data-page="${data.page-1}" ${data.page<=1?'disabled':''}>上一頁</button><button class="btn small" data-action="${action}" data-page="${data.page+1}" ${!data.hasMore?'disabled':''}>下一頁</button></div></div>`;}
+function dateLabel(){return new Intl.DateTimeFormat('zh-TW',{timeZone:'Asia/Taipei',year:'numeric',month:'long',day:'numeric',weekday:'short'}).format(new Date());}
+function shortDate(v){return String(v||'').replace('T',' ').replace(/Z$/,'').slice(0,16);}
+function persistGet(store,key,fallback=''){try{return store.getItem(key)||fallback;}catch{return fallback;}}
+function persistSet(store,key,value){try{store.setItem(key,value);}catch{}}
+function persistRemove(store,key){try{store.removeItem(key);}catch{}}
+let endpoint = persistGet(localStorage,'rn_api_v3',GAS_API_URL);
+let token = persistGet(sessionStorage,`rn_${ROLE}_token`);
+let requestQueue = Promise.resolve();
+const pendingMemory = new Map();
+let busyCount=0, modalBusy=false, lastSync=0, syncFailures=0, syncTimer=null;
+const tinyHash=s=>{let h=2166136261,j=5381;for(let i=0;i<s.length;i++){h=Math.imul(h^s.charCodeAt(i),16777619);j=Math.imul(j,33)^s.charCodeAt(i);}return (h>>>0).toString(36)+(j>>>0).toString(36);};
+function rememberToken(v){token=v;persistSet(sessionStorage,`rn_${ROLE}_token`,v);}
+function clearToken(){token='';persistRemove(sessionStorage,`rn_${ROLE}_token`);clearTimeout(syncTimer);}
+function api(action,data={},mutation=false){
+ const run=()=>apiFetch(action,data,mutation);
+ const result=requestQueue.then(run,run);requestQueue=result.catch(()=>{});return result;
+}
+async function apiFetch(action,data,mutation){
+ if(!/^https:\/\/script\.google\.com\/macros\/s\/[A-Za-z0-9_-]+\/exec$/.test(endpoint))throw apiError('ENDPOINT','請在連線設定填入正確的 /exec 部署網址。');
+ const payload={...data,action};if(token&&!['health','getEvents','getStoreItems','login','register','adminLogin'].includes(action))payload.token=token;
+ const pendingKey=`rn_pending_${ROLE}_${tinyHash(JSON.stringify(payload))}`;
+ if(mutation){
+   let id=persistGet(sessionStorage,pendingKey)||pendingMemory.get(pendingKey);if(!id){id=crypto.randomUUID?crypto.randomUUID():`RN-${Date.now()}-${Math.random().toString(36).slice(2)}-${Math.random().toString(36).slice(2)}`;persistSet(sessionStorage,pendingKey,id);}pendingMemory.set(pendingKey,id);payload.requestId=id;
+ }
+ let lastError;
+ for(let attempt=0;attempt<3;attempt++){
+   if(!navigator.onLine){setConnection('bad','目前離線');throw apiError('OFFLINE',mutation?'目前離線，請恢復連線後再次送出。':'目前離線，請恢復連線後重試。');}
+   setConnection('busy',attempt?'正在重新連線…':'正在同步…');
+   const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),45000);
+   try{
+     const response=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload),mode:'cors',credentials:'omit',redirect:'follow',signal:controller.signal});
+     if([429,502,503,504].includes(response.status))throw apiError('SERVER_ERROR','後端目前繁忙，正在重新連線。');
+     const raw=await response.text();let result;
+     try{result=JSON.parse(raw);}catch{throw apiError('BAD_DEPLOYMENT','後端未回傳資料。請確認存取權為「所有人」，並使用最新版本的 /exec 網址。');}
+     if(result.apiVersion!==API_VERSION)throw apiError('OLD_BACKEND','目前連到舊版後端。請先貼上 Code.gs、執行 setupReborn，並部署新版本。');
+     if(result.status!=='success'){
+       const e=apiError(result.code||'SERVER_ERROR',result.message||'操作失敗。');
+       if(e.code==='BUSY'||e.code==='SERVER_ERROR')throw e;
+       if(mutation){persistRemove(sessionStorage,pendingKey);pendingMemory.delete(pendingKey);}
+       setConnection('ok','已連線');if(e.code==='UNAUTHORIZED')onSessionExpired();throw e;
+     }
+     if(mutation){persistRemove(sessionStorage,pendingKey);pendingMemory.delete(pendingKey);}
+     setConnection('ok','已連線');return result;
+   }catch(e){
+     lastError=e.code?e:apiError(e.name==='AbortError'?'TIMEOUT':'NETWORK',e.name==='AbortError'?'連線逾時。':'無法連上後端。');
+     if(!['TIMEOUT','NETWORK','BUSY','SERVER_ERROR'].includes(lastError.code))throw lastError;
+     setConnection('bad',lastError.code==='BUSY'?'伺服器處理中':'連線中斷');
+     if(attempt<2)await new Promise(resolve=>setTimeout(resolve,800*(attempt+1)));
+   }finally{clearTimeout(timeout);}
+ }
+ const message=mutation?'尚未確認操作結果，請保持原填寫內容再次送出。系統會沿用同一請求編號，避免重複扣點或發點。':'連線失敗，請按「重新同步」。若持續發生，請檢查後端部署版本與存取權。';
+ showNet(message);throw apiError(lastError.code,message);
+}
+function apiError(code,message){const e=new Error(message);e.code=code;return e;}
+function setConnection(state,label){document.querySelectorAll('.connection').forEach(el=>{el.className=`connection ${state==='ok'?'':state}`;el.innerHTML=`<span class="dot"></span>${esc(label)}`;});if(state==='ok')$('net-banner').hidden=true;}
+function showNet(message){$('net-text').textContent=message;$('net-banner').hidden=false;}
+function toast(message){$('toast').textContent=message;$('toast').classList.add('show');clearTimeout(toast.timer);toast.timer=setTimeout(()=>$('toast').classList.remove('show'),5000);}
+async function busy(btn,fn,errorId){
+ if(btn?.disabled || btn?.closest('form')?.dataset.busy==='1')return;
+ const scope=btn?.closest('dialog'),form=btn?.closest('form');if(scope&&modalBusy)return;
+ const label=btn?.innerHTML,controls=[...(form||scope)?.querySelectorAll('input,select,textarea,button')||[]].map(el=>({el,disabled:el.disabled}));
+ controls.forEach(({el})=>el.disabled=true);
+ if(btn){btn.disabled=true;btn.innerHTML='<span class="spinner"></span> 處理中…';}if(form)form.dataset.busy='1';
+ if(errorId && $(errorId))$(errorId).textContent='';busyCount++;if(scope)modalBusy=true;
+ try{return await fn();}catch(e){if(errorId&&$(errorId))$(errorId).textContent=e.message;else toast(e.message);}
+ finally{controls.forEach(({el,disabled})=>el.disabled=disabled);if(btn){btn.innerHTML=label;btn.disabled=false;}if(form)delete form.dataset.busy;busyCount--;if(scope)modalBusy=false;}
+}
+function openDialog(title,body,footer='',wide=false){
+ $('modal').classList.toggle('wide',wide);$('modal').innerHTML=`<div class="dialog-head"><h2 id="dialog-title">${esc(title)}</h2><button class="btn square" data-action="close-modal" aria-label="關閉">${icon('close')}</button></div>${body}${footer}`;
+ if(!$('modal').open)$('modal').showModal();
+}
+function closeDialog(){if(!modalBusy)$('modal').close();}
+function connDialog(){openDialog('連線設定',`<div class="dialog-body"><p class="dialog-sub">兩個頁面請連到同一個會員後端。</p><div class="field" style="margin-top:18px"><label for="api-endpoint">後端部署網址</label><input id="api-endpoint" type="url" value="${esc(endpoint)}" placeholder="https://script.google.com/macros/s/…/exec"><small>請使用最新部署的 /exec 網址。</small></div><div id="connection-error" class="inline-error"></div><div id="connection-test-result" class="hint" hidden></div><div class="divider"></div><h3>第一次升級</h3><ol class="help-list"><li>備份試算表，再以 Code.gs 取代原後端程式。</li><li>設定 INITIAL_ADMIN_PIN，執行 setupReborn 並授權。</li><li>管理部署作業選擇「新版本」，執行身分選「我」、存取權選「所有人」。</li><li>將取得的 /exec 網址填入本頁與會員後台。</li></ol><p class="micro muted">連線設定僅儲存於目前瀏覽器。正式上線請同時修改兩個 HTML 的 GAS_API_URL。</p></div>`,`<div class="dialog-foot"><button class="btn" data-action="test-connection">測試連線</button><button class="btn primary" data-action="save-connection">儲存設定</button></div>`);}
+async function testConnection(btn){await busy(btn,async()=>{const old=endpoint;endpoint=$('api-endpoint').value.trim();try{const res=await api('health');$('connection-test-result').hidden=false;$('connection-test-result').textContent=res.configured?'連線正常，v3.0 已完成初始化。':'已連上後端；請先在 Apps Script 執行 setupReborn。';}finally{endpoint=old;}},'connection-error');}
+function saveConnection(){const url=$('api-endpoint').value.trim();if(!/^https:\/\/script\.google\.com\/macros\/s\/[A-Za-z0-9_-]+\/exec$/.test(url)){$('connection-error').textContent='請填入 script.google.com 的 /exec 網址。';return;}const changed=url!==endpoint;endpoint=url;persistSet(localStorage,'rn_api_v3',url);closeDialog();if(changed){clearToken();showAuth();}toast('連線設定已儲存。');}
+async function copyText(v){try{await navigator.clipboard.writeText(v);toast('已複製。');}catch{openDialog('複製編號',`<div class="dialog-body"><input aria-label="編號" readonly value="${esc(v)}" style="width:100%;padding:14px;border:1px solid var(--line);border-radius:10px" onclick="this.select()"><p class="micro" style="margin-top:12px">點選編號後，可長按複製。</p></div>`);}}
+function historyHtml(items){return items.length?items.map(t=>`<div class="line-item"><span class="avatar">${icon(t.amount<0?'gift':t.amount>0?'coins':'calendar')}</span><div class="grow"><strong>${esc(t.action)}</strong><p>${esc(shortDate(t.date))}${t.isRefund?' · 退還點數':''}</p></div>${t.status==='Completed'?`<span class="amount ${t.amount>0?'positive':t.amount<0?'negative':'muted'}">${t.amount>0?'+':''}${num(t.amount)}</span>`:statusBadge(t.status)}</div>`).join(''):empty('還沒有點數紀錄','參賽或兌換後，會顯示在這裡。');}
+function taskHtml(t,admin=false){return `<article class="task-card"><div class="row between"><div class="row gap8"><strong>${esc(t.detail)}</strong><span class="badge">${t.type==='Claim'?'賽事補登':'商品兌換'}</span></div>${statusBadge(t.status)}</div><div class="task-meta"><span>${esc(shortDate(t.date))}</span><span class="mono">${esc(t.id)}</span>${admin?`<span>${esc(t.uid)}</span>`:''}</div>${t.type==='Claim'?`<div class="task-note">${esc(t.eventDate?`${t.eventDate} ${t.eventTime} · 第 ${t.groupNo} 組 · ${t.teamName} · 負責人：${t.leaderName}`:t.extra)}${!t.eventId?'<span class="badge gold" style="margin-left:8px">手動／舊版申請</span>':''}</div>`:`<div class="task-note">${t.gameUid?`遊戲 UID：<b class="mono">${esc(t.gameUid)}</b>`:esc(t.extra)}${t.points!==null?` · ${num(t.points)} 點`:''}</div>`}${t.note?`<div class="micro muted" style="margin-top:10px">處理備註：${esc(t.note)}</div>`:''}${t.handledAt?`<div class="micro muted" style="margin-top:5px">處理時間：${esc(shortDate(t.handledAt))}</div>`:''}${!admin&&t.type==='Redeem'&&t.status==='Pending'?`<button class="text-btn" style="margin-top:12px" data-action="receipt" data-id="${esc(t.id)}">查看領取憑證 →</button>`:''}</article>`;}
+function scheduleSync(){clearTimeout(syncTimer);if(!token)return;syncTimer=setTimeout(async()=>{if(!document.hidden&&!busyCount)await backgroundSync();scheduleSync();},Math.min(300000,60000*Math.pow(2,syncFailures)));}
+async function backgroundSync(){if(!token||busyCount)return;try{await syncData(true);syncFailures=0;}catch{syncFailures++;}lastSync=Date.now();}
+async function afterWrite(){try{await syncData(true);}catch{toast('操作已完成，畫面同步稍後重試。');}}
+document.addEventListener('visibilitychange',()=>{if(!document.hidden&&token&&Date.now()-lastSync>15000&&!busyCount)backgroundSync();});
+window.addEventListener('online',()=>{if(token)backgroundSync();else setConnection('ok','網路已恢復');});
+window.addEventListener('offline',()=>{setConnection('bad','目前離線');showNet('目前離線，資料恢復連線後會重新同步。');});
+document.addEventListener('click',e=>{const btn=e.target.closest('[data-action]');if(!btn||btn.disabled)return;const a=btn.dataset.action;if(a==='close-modal')closeDialog();else if(a==='connection')connDialog();else if(a==='test-connection')testConnection(btn);else if(a==='save-connection')saveConnection();else if(a==='copy')copyText(btn.dataset.value);else if(a==='sync')busy(btn,async()=>{if(token){await syncData(false);scheduleSync();}else{const res=await api('health');toast(res.configured?'後端連線正常。':'請先在 Apps Script 執行 setupReborn。');}});else handleAction(a,btn);});
+$('modal').addEventListener('cancel',e=>{if(modalBusy)e.preventDefault();});
+fillIcons();
 
-        <!-- ====== 登入區塊 ====== -->
-        <div id="view-auth" class="auth-wrapper fade-in">
-            <div class="auth-header">
-                <h1>REBORN ID</h1>
-                <p>登入您的賽事與生態圈通行證</p>
-            </div>
-            <div id="login-form">
-                <div class="input-box"><label>Email</label><input type="email" id="login-email" placeholder="name@example.com"></div>
-                <div class="input-box"><label>Password</label><input type="password" id="login-pwd" placeholder="••••••••"></div>
-                <button class="btn-main" onclick="doLogin(this)">Sign In</button>
-                <button class="btn-text" onclick="toggleAuth()">建立新的 REBORN ID</button>
-            </div>
-            <div id="register-form" class="hidden">
-                <div class="input-box"><label>Gamer Tag</label><input type="text" id="reg-name" placeholder="您的顯示名稱"></div>
-                <div class="input-box"><label>Email</label><input type="email" id="reg-email" placeholder="name@example.com"></div>
-                <div class="input-box"><label>Password</label><input type="password" id="reg-pwd" placeholder="••••••••"></div>
-                <button class="btn-main" onclick="doRegister(this)">Create Account</button>
-                <button class="btn-text" onclick="toggleAuth()">已有帳號？返回登入</button>
-            </div>
-        </div>
+// 本地生成 CODE128-B 及 QR v2-L；會員卡與領取憑證不依賴 CDN。
+const CODE128 = '212222 222122 222221 121223 121322 131222 122213 122312 132212 221213 221312 231212 112232 122132 122231 113222 123122 123221 223211 221132 221231 213212 223112 312131 311222 321122 321221 312212 322112 322211 212123 212321 232121 111323 131123 131321 112313 132113 132311 211313 231113 231311 112133 112331 132131 113123 113321 133121 313121 211331 231131 213113 213311 213131 311123 311321 331121 312113 312311 332111 314111 221411 431111 111224 111422 121124 121421 141122 141221 112214 112412 122114 122411 142112 142211 241211 221114 413111 241112 134111 111242 121142 121241 114212 124112 124211 411212 421112 421211 212141 214121 412121 111143 111341 131141 114113 114311 411113 411311 113141 114131 311141 411131 211412 211214 211232 2331112'.split(' ');
+function barcodeSvg(value){
+ const codes=[104],bytes=Array.from(value).map(c=>c.charCodeAt(0)-32);if(bytes.some(n=>n<0||n>95))return '';
+ let check=104;bytes.forEach((n,i)=>{codes.push(n);check+=n*(i+1);});codes.push(check%103,106);
+ let x=12,rects='';codes.forEach(n=>{[...CODE128[n]].forEach((w,i)=>{const width=Number(w);if(i%2===0)rects+=`<rect x="${x}" y="6" width="${width}" height="44"/>`;x+=width;});});
+ return `<svg viewBox="0 0 ${x+12} 56" role="img" aria-label="會員條碼 ${esc(value)}" style="width:100%;height:56px;background:white;fill:#17221e">${rects}</svg>`;
+}
+function qrSvg(value){
+ const bytes=Array.from(new TextEncoder().encode(value));if(bytes.length>32)return '';
+ const bits=[];const push=(v,n)=>{for(let i=n-1;i>=0;i--)bits.push(v>>>i&1);};push(4,4);push(bytes.length,8);bytes.forEach(v=>push(v,8));push(0,Math.min(4,272-bits.length));while(bits.length%8)bits.push(0);
+ const data=[];for(let i=0;i<bits.length;i+=8){let b=0;for(let j=0;j<8;j++)b=b<<1|bits[i+j];data.push(b);}let pad=0;while(data.length<34)data.push(pad++%2===0?236:17);
+ const gf=(a,b)=>{let r=0;for(let i=7;i>=0;i--){r=(r<<1)^((r>>>7)*0x11d);r^=(b>>>i&1)*a;}return r;};
+ let gen=[1],root=1;for(let i=0;i<10;i++){const next=new Array(gen.length+1).fill(0);gen.forEach((v,j)=>{next[j]^=v;next[j+1]^=gf(v,root);});gen=next;root=gf(root,2);}
+ const rem=data.concat(new Array(10).fill(0));for(let i=0;i<data.length;i++){const factor=rem[i];for(let j=0;j<gen.length;j++)rem[i+j]^=gf(gen[j],factor);}const code=data.concat(rem.slice(-10)),stream=[];code.forEach(v=>{for(let i=7;i>=0;i--)stream.push(v>>>i&1);});
+ const size=25,m=Array.from({length:size},()=>new Array(size).fill(false)),reserved=Array.from({length:size},()=>new Array(size).fill(false));
+ const set=(x,y,v=true)=>{if(x>=0&&y>=0&&x<size&&y<size){m[y][x]=!!v;reserved[y][x]=true;}};
+ const finder=(x,y)=>{for(let dy=-1;dy<=7;dy++)for(let dx=-1;dx<=7;dx++)set(x+dx,y+dy,dx>=0&&dx<=6&&dy>=0&&dy<=6&&(dx===0||dx===6||dy===0||dy===6||dx>=2&&dx<=4&&dy>=2&&dy<=4));};
+ finder(0,0);finder(18,0);finder(0,18);for(let i=8;i<17;i++){set(i,6,i%2===0);set(6,i,i%2===0);}for(let y=-2;y<=2;y++)for(let x=-2;x<=2;x++)set(18+x,18+y,Math.max(Math.abs(x),Math.abs(y))!==1);
+ const format=()=>{const value=8;let rem=value;for(let i=0;i<10;i++)rem=(rem<<1)^((rem>>>9)*0x537);const b=((value<<10)|rem)^0x5412,bit=i=>(b>>>i&1)!==0;for(let i=0;i<=5;i++)set(8,i,bit(i));set(8,7,bit(6));set(8,8,bit(7));set(7,8,bit(8));for(let i=9;i<15;i++)set(14-i,8,bit(i));for(let i=0;i<8;i++)set(size-1-i,8,bit(i));for(let i=8;i<15;i++)set(8,size-15+i,bit(i));set(8,size-8,true);};format();
+ let idx=0,up=true;for(let right=size-1;right>=1;right-=2){if(right===6)right=5;for(let i=0;i<size;i++){const y=up?size-1-i:i;for(let c=0;c<2;c++){const x=right-c;if(!reserved[y][x])m[y][x]=!!(stream[idx++]||0)^((x+y)%2===0);}}up=!up;}format();
+ let path='';m.forEach((row,y)=>row.forEach((v,x)=>{if(v)path+=`M${x+4} ${y+4}h1v1h-1z`;}));return `<svg class="qr" viewBox="0 0 33 33" role="img" aria-label="QR Code ${esc(value)}" shape-rendering="crispEdges"><rect width="33" height="33" fill="white"/><path d="${path}" fill="#17221e"/></svg>`;
+}
 
-        <!-- ====== 主應用程式區塊 ====== -->
-        <div id="view-app" class="hidden">
-            <!-- ===== 1. Wallet (首頁) ===== -->
-            <div id="tab-wallet" class="main-content fade-in">
-                <div class="greeting-text" id="display-greeting">早安，玩家</div>
-                <h2 class="header-title">Wallet</h2>
-                
-                <div class="wallet-card tier-core" id="display-wallet-card">
-                    <div class="card-top">
-                        <span class="card-brand">REBORN STUDIO</span>
-                        <span class="card-tier" id="display-tier-badge">CORE</span>
-                    </div>
-                    <div class="card-points-label">當前可用點數 (Spendable)</div>
-                    <div class="card-points" id="display-points">0<span>pts</span></div>
-                    <div class="barcode-area"><svg id="member-barcode"></svg></div>
-                    <div class="card-uid" id="display-uid" onclick="copyUid()" title="點擊複製">UID: -</div>
-                </div>
-
-                <div class="section-title">
-                    近期紀錄
-                    <span style="font-size: 13px; color: var(--reborn-gold); cursor: pointer;" onclick="switchTab('profile')">查看全部</span>
-                </div>
-                <div class="history-list" id="wallet-history-list" style="margin-bottom: 0;">
-                    <div style="text-align:center; padding:20px; color:var(--text-secondary); font-size:13px;">載入紀錄中...</div>
-                </div>
-            </div>
-
-            <!-- ===== 2. Store (商城) ===== -->
-            <div id="tab-store" class="main-content hidden">
-                <h2 class="header-title">Rewards</h2>
-                <div class="store-section">
-                    <div class="store-grid" id="store-items-container">
-                        <div style="text-align:center; padding:40px 20px; color:var(--text-secondary); grid-column: span 2; font-size: 14px;">
-                            商品載入中...
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ===== 3. Profile (會員資料/明細/補登) ===== -->
-            <div id="tab-profile" class="main-content hidden">
-                <h2 class="header-title">Profile</h2>
-
-                <div class="tier-display">
-                    <div class="tier-header">
-                        <div class="tier-icon">👑</div>
-                        <div class="tier-info">
-                            <h4>當前會員等級</h4>
-                            <h3 id="display-profile-level">CORE</h3>
-                        </div>
-                    </div>
-                    
-                    <div class="progress-container">
-                        <div class="progress-text">
-                            <span>歷史累積: <strong id="display-history-pts">0 pts</strong></span>
-                            <span id="display-next-tier">距下階段尚差 <strong>-- pts</strong></span>
-                        </div>
-                        <div class="progress-bar-bg">
-                            <div class="progress-bar-fill" id="display-progress-fill"></div>
-                        </div>
-                        <div class="progress-action" onclick="openModal('tiers')">
-                            查看所有等級特權進度 &rarr;
-                        </div>
-                    </div>
-                </div>
-
-                <div class="section-title">賽事專區</div>
-                <button class="btn-main" style="margin-top: 0; margin-bottom: 30px; background: var(--reborn-gold-gradient);" onclick="openModal('claim')">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:4px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="12" y1="18" x2="12" y2="12"></line><line x1="9" y1="15" x2="15" y2="15"></line></svg>
-                    申請比賽點數補登
-                </button>
-
-                <div class="section-title">帳號設定</div>
-                <div class="input-box"><label>Gamer Tag / 暱稱</label><input type="text" id="profile-name" value=""></div>
-                <div class="input-box"><label>聯絡信箱 (不可更改)</label><input type="email" id="profile-email" value="" disabled style="opacity: 0.5;"></div>
-                <div class="input-box"><label>新密碼 (若不更改請留白)</label><input type="password" id="profile-pwd" placeholder="••••••••"></div>
-                <button class="btn-secondary" onclick="doUpdateProfile(this)">儲存變更</button>
-
-                <div class="section-title" style="margin-top: 30px;">點數交易明細</div>
-                <div class="history-list" id="profile-history-list">
-                     <div style="text-align:center; padding:20px; color:var(--text-secondary); font-size:13px;">載入紀錄中...</div>
-                </div>
-                
-                <button class="btn-text" style="color: #FF453A; margin-top: 10px;" onclick="doLogout()">登出帳號</button>
-            </div>
-
-            <!-- ====== 底部導航 ====== -->
-            <nav class="bottom-nav">
-                <div class="nav-item active" id="nav-wallet" onclick="switchTab('wallet')">
-                    <svg viewBox="0 0 24 24"><path d="M21 7.5H3c-.83 0-1.5.67-1.5 1.5v9c0 .83.67 1.5 1.5 1.5h18c.83 0 1.5-.67 1.5-1.5v-9c0-.83-.67-1.5-1.5-1.5zm-1.5 9h-15v-6h15v6zm-15-7.5v-1.5c0-.83.67-1.5 1.5-1.5h15c.83 0 1.5.67 1.5 1.5v1.5h-18z"/></svg>
-                    Wallet
-                </div>
-                <div class="nav-item" id="nav-store" onclick="switchTab('store')">
-                    <svg viewBox="0 0 24 24"><path d="M19 6h-2c0-2.76-2.24-5-5-5S7 3.24 7 6H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-7-3c1.66 0 3 1.34 3 3H9c0-1.66 1.34-3 3-3zm7 17H5V8h14v12zm-7-8c-1.66 0-3-1.34-3-3H7c0 2.76 2.24 5 5 5s5-2.24 5-5h-2c0 1.66-1.34 3-3 3z"/></svg>
-                    Rewards
-                </div>
-                <div class="nav-item" id="nav-profile" onclick="switchTab('profile')">
-                    <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
-                    Profile
-                </div>
-            </nav>
-        </div> <!-- end view-app -->
-
-        <!-- ====== Modals (💡 移出 view-app，獨立一層) ====== -->
-        <div id="modal-virtual" class="modal-backdrop" onclick="closeModal('virtual', event)">
-            <div class="modal-sheet">
-                <button class="btn-close" onclick="forceCloseModal('virtual')">&times;</button>
-                <div class="sheet-drag"></div>
-                <h3 class="sheet-title" id="modal-v-title">兌換虛寶</h3>
-                <p class="sheet-desc" id="modal-v-desc">請輸入您的遊戲 UID 以便派發審核。</p>
-                <div class="input-box" style="background: rgba(0,0,0,0.3); margin-bottom: 24px;"><label>Game UID</label><input type="number" id="ff-uid" placeholder="例如: 123456789"></div>
-                <button class="btn-main" id="btn-submit-virtual" onclick="doRedeem('virtual', this)">確認兌換</button>
-            </div>
-        </div>
-
-        <div id="modal-physical" class="modal-backdrop" onclick="closeModal('physical', event)">
-            <div class="modal-sheet" style="text-align: center;">
-                <button class="btn-close" onclick="forceCloseModal('physical')">&times;</button>
-                <div class="sheet-drag"></div>
-                <h3 class="sheet-title" id="modal-p-title" style="text-align: left;">兌換實體周邊</h3>
-                <p class="sheet-desc" id="modal-p-desc" style="text-align: left;">請出示下方 QR Code 供客服掃描。</p>
-                <div id="qrcode-container"></div>
-                <button class="btn-main" id="btn-submit-physical" onclick="doRedeem('physical', this)">前往官方 LINE 領取</button>
-            </div>
-        </div>
-
-        <div id="modal-claim" class="modal-backdrop" onclick="closeModal('claim', event)">
-            <div class="modal-sheet">
-                <button class="btn-close" onclick="forceCloseModal('claim')">&times;</button>
-                <div class="sheet-drag"></div>
-                <h3 class="sheet-title">申請比賽補登</h3>
-                <p class="sheet-desc">填寫參賽資訊，審核通過後點數將自動匯入餘額與累積歷史中。</p>
-                <div class="input-box" style="background: rgba(0,0,0,0.3);"><label>賽事名稱</label><input type="text" id="claim-event" placeholder="例如: 2026春季盃"></div>
-                <div class="input-box" style="background: rgba(0,0,0,0.3);"><label>所屬戰隊 / 隊伍名稱</label><input type="text" id="claim-team" placeholder="填寫隊名"></div>
-                <div class="input-box" style="background: rgba(0,0,0,0.3); margin-bottom: 24px;"><label>報名負責人</label><input type="text" id="claim-leader" placeholder="填寫負責人名稱 / Gamer Tag"></div>
-                <button class="btn-main" onclick="doClaim(this)">送出審核</button>
-            </div>
-        </div>
-
-        <div id="modal-tiers" class="modal-backdrop" onclick="closeModal('tiers', event)">
-            <div class="modal-sheet">
-                <button class="btn-close" onclick="forceCloseModal('tiers')">&times;</button>
-                <div class="sheet-drag"></div>
-                <h3 class="sheet-title">會員等級制度</h3>
-                <p class="sheet-desc">等級由「歷史累積點數」決定，兌換商品不會影響升級進度。</p>
-                
-                <div style="margin-bottom: 20px;">
-                    <div class="tier-list-item"><div class="tier-circle" style="border-color: #8E8E93; background: #8E8E93;"></div><div class="tier-list-info"><div class="tier-name" style="color: #8E8E93;">CORE (核心會員)</div><div class="tier-req">註冊即取得</div></div></div>
-                    <div class="tier-list-item"><div class="tier-circle" style="border-color: #4CAF50; background: #4CAF50;"></div><div class="tier-list-info"><div class="tier-name" style="color: #4CAF50;">PRIME (菁英會員)</div><div class="tier-req">歷史累積達 500 pts</div></div></div>
-                    <div class="tier-list-item"><div class="tier-circle" style="border-color: var(--reborn-gold); background: var(--reborn-gold);"></div><div class="tier-list-info"><div class="tier-name" style="color: var(--reborn-gold);">REBORN PREMIUM</div><div class="tier-req">歷史累積達 1,000 pts</div></div></div>
-                    <div class="tier-list-item"><div class="tier-circle" style="border-color: #E0E0E0;"></div><div class="tier-list-info"><div class="tier-name" style="color: #E0E0E0;">APEX (頂峰會員)</div><div class="tier-req">歷史累積達 2,000 pts</div></div></div>
-                    <div class="tier-list-item"><div class="tier-circle" style="border-color: #FF3B30;"></div><div class="tier-list-info"><div class="tier-name" style="color: #FF3B30;">超銳能會員 (黑卡)</div><div class="tier-req">CZL FORCE 內部或特殊邀約</div></div></div>
-                </div>
-            </div>
-        </div>
-
-    </div> <!-- end app-container -->
-
-    <script>
-        // ==========================================
-        // 🚀 請換成你 Google Apps Script 最新部署的 URL
-        // ==========================================
-        // 💡 沿用你原本提供的 URL
-        const GAS_API_URL = "https://script.google.com/macros/s/AKfycbwlSJcv6ftVp5grAB2tbyqNzK1WlFZcjYdvNtfJJxooQm8hjFbhZVL2aXYIUHDX6UA/exec";
-
-        let currentUser = {}; 
-        let pendingRedeem = {}; 
-        let isQrGenerated = false;
-        let syncInterval = null; 
-
-        // 💡 觸覺震動回饋機制
-        function vibratePhone() {
-            if ("vibrate" in navigator) {
-                navigator.vibrate(50); // 短促震動 50ms
-            }
-        }
-
-        async function callGAS(payload, btnElement, isSilent = false) {
-            let originalText = "處理中...";
-            if(btnElement && !isSilent) {
-                originalText = btnElement.innerHTML;
-                btnElement.innerHTML = '<span style="opacity:0.7">連線中...</span>';
-                btnElement.disabled = true;
-            }
-            try {
-                let response = await fetch(GAS_API_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'text/plain;charset=utf-8' }, 
-                    body: JSON.stringify(payload)
-                });
-                let result = await response.json();
-                if(btnElement && !isSilent) { btnElement.innerHTML = originalText; btnElement.disabled = false; }
-                return result;
-            } catch (error) {
-                if(btnElement && !isSilent) { btnElement.innerHTML = originalText; btnElement.disabled = false; }
-                return { status: "error", message: "網路連線異常，請確認 GAS 網址是否正確。" };
-            }
-        }
-
-        // ==========================================
-        // 🌟 修正：精準的卡片等級顏色判斷邏輯
-        // ==========================================
-        function getTierClass(levelString) {
-            if (!levelString) return 'tier-core';
-            const lvl = levelString.toUpperCase();
-            if (lvl.includes('PRIME')) return 'tier-prime';
-            if (lvl.includes('PREMIUM')) return 'tier-premium';
-            if (lvl.includes('APEX')) return 'tier-apex';
-            // 抓取黑卡、超銳能、FORCE等關鍵字
-            if (lvl.includes('黑卡') || lvl.includes('超銳能') || lvl.includes('FORCE')) return 'tier-force';
-            return 'tier-core';
-        }
-
-        // ==========================================
-        // 🌟 新增：更新智慧問候語
-        // ==========================================
-        function updateGreeting() {
-            const hour = new Date().getHours();
-            let greeting = "你好";
-            if (hour >= 5 && hour < 12) greeting = "早安";
-            else if (hour >= 12 && hour < 18) greeting = "午安";
-            else greeting = "晚安";
-            
-            document.getElementById('display-greeting').innerText = `${greeting}，${currentUser.gamerTag || '玩家'}`;
-        }
-
-        // ==========================================
-        // 🌟 新增：點擊複製 UID
-        // ==========================================
-        function copyUid() {
-            if(!currentUser.uid) return;
-            navigator.clipboard.writeText(currentUser.uid).then(() => {
-                vibratePhone();
-                showToast("已複製 UID： " + currentUser.uid);
-            });
-        }
-
-        // ==========================================
-        // 背景自動同步系統
-        // ==========================================
-        function startAutoSync() {
-            if(syncInterval) clearInterval(syncInterval);
-            
-            syncInterval = setInterval(async () => {
-                if(!currentUser.uid) return;
-
-                const userRes = await callGAS({ action: "adminGetUser", uid: currentUser.uid }, null, true);
-                if(userRes.status === 'success') {
-                    currentUser.points = userRes.user.points;
-                    currentUser.level = userRes.user.level;
-                    currentUser.gamerTag = userRes.user.gamerTag;
-
-                    document.getElementById('display-points').innerHTML = currentUser.points + "<span>pts</span>";
-                    document.getElementById('display-tier-badge').innerText = currentUser.level;
-                    document.getElementById('display-profile-level').innerText = currentUser.level;
-                    updateGreeting(); // 同步更新名稱
-                    
-                    // 套用精準卡面顏色判斷
-                    const walletCard = document.getElementById('display-wallet-card');
-                    const newClass = getTierClass(currentUser.level);
-                    if(!walletCard.classList.contains(newClass)) {
-                        walletCard.className = "wallet-card";
-                        walletCard.classList.add(newClass);
-                    }
-                }
-
-                fetchHistory();
-                fetchStoreItems(true); 
-            }, 5000); 
-        }
-
-        // ==========================================
-        // 抓取商城商品 (💡 沿用你原本的實作，但修正導覽列後的佈局)
-        // ==========================================
-        async function fetchStoreItems(isSilent = false) {
-            const container = document.getElementById('store-items-container');
-            const res = await callGAS({ action: "getStoreItems" }, null, isSilent);
-            
-            if(res.status === 'success') {
-                if(res.items.length === 0) {
-                    container.innerHTML = '<div style="text-align:center; padding:40px 20px; color:var(--text-secondary); grid-column: span 2; font-size:14px;">目前尚未有上架商品</div>';
-                    return;
-                }
-                
-                let html = '';
-                res.items.forEach(item => {
-                    const typeLabel = item.type === 'physical' ? '實體周邊' : '數位虛寶';
-                    // 💡 修復 onclick 傳遞字串參數的引號問題
-                    const safeTitle = item.title.replace(/'/g, "\\'");
-                    html += `
-                    <div class="store-item-card">
-                        <img class="store-item-img" src="${item.image || 'https://via.placeholder.com/150'}">
-                        <div class="store-item-info">
-                            <div class="store-item-type">${typeLabel}</div>
-                            <div class="store-item-title">${item.title}</div>
-                            <div class="store-item-bottom">
-                                <div class="store-item-points">${item.points} <span style="font-size:10px; font-weight:normal; color:var(--text-secondary);">pts</span></div>
-                                <button class="store-item-btn" onclick="openModal('${item.type}', '${safeTitle}', ${item.points})">兌換</button>
-                            </div>
-                        </div>
-                    </div>`;
-                });
-                
-                if(container.innerHTML !== html) {
-                    container.innerHTML = html;
-                }
-            }
-        }
-
-        // ==========================================
-        // 抓取明細與計算等級進度 (已修復計算 Bug)
-        // ==========================================
-        async function fetchHistory() {
-            const res = await callGAS({ action: "getHistory", uid: currentUser.uid }, null, true);
-            if(res.status === 'success') {
-                let historyHtml = '';
-                let totalAccumulated = 0; 
-                
-                res.history.forEach(item => {
-                    let colorClass = item.amount > 0 ? 'positive' : (item.amount < 0 ? 'negative' : 'pending');
-                    let sign = item.amount > 0 ? '+' : '';
-                    let statusBadge = item.status === 'pending' ? '<span style="font-size:10px; background:rgba(229,192,123,0.2); color:var(--reborn-gold); padding:2px 6px; border-radius:4px; margin-left:6px;">審核中</span>' : '';
-                    
-                    historyHtml += `
-                    <div class="history-item">
-                        <div class="history-info">
-                            <div class="history-title">${item.action} ${statusBadge}</div>
-                            <div class="history-date">${item.date}</div>
-                        </div>
-                        <div class="history-points ${colorClass}">${sign}${item.amount}</div>
-                    </div>`;
-
-                    if(item.amount > 0 && item.status !== 'pending') {
-                        totalAccumulated += item.amount;
-                    }
-                });
-
-                if(!historyHtml) {
-                    historyHtml = '<div style="text-align:center; padding:20px; color:var(--text-secondary); font-size:13px;">目前尚無交易紀錄</div>';
-                }
-                
-                const walletList = document.getElementById('wallet-history-list');
-                if (walletList.innerHTML !== historyHtml) {
-                    walletList.innerHTML = historyHtml;
-                    document.getElementById('profile-history-list').innerHTML = historyHtml;
-                }
-
-                let basePts = Math.max(totalAccumulated, parseInt(currentUser.points) || 0);
-                updateTierProgress(basePts);
-            }
-        }
-
-        function updateTierProgress(totalPts) {
-            document.getElementById('display-history-pts').innerText = totalPts + " pts";
-            let nextTierPts = 500;
-            let progress = 0;
-
-            if(totalPts < 500) { nextTierPts = 500; progress = (totalPts / 500) * 100; }
-            else if(totalPts < 1000) { nextTierPts = 1000; progress = ((totalPts - 500) / 500) * 100; }
-            else if(totalPts < 2000) { nextTierPts = 2000; progress = ((totalPts - 1000) / 1000) * 100; }
-            else { nextTierPts = totalPts; progress = 100; document.getElementById('display-next-tier').innerHTML = "已達最高等級"; }
-
-            if(totalPts < 2000) {
-                document.getElementById('display-next-tier').innerHTML = `距下階段尚差 <strong>${nextTierPts - totalPts} pts</strong>`;
-            }
-            
-            setTimeout(() => {
-                document.getElementById('display-progress-fill').style.width = progress + '%';
-            }, 200);
-        }
-
-        // ==========================================
-        // 登入與操作功能
-        // ==========================================
-        async function doLogin(btn) {
-            vibratePhone(); // 震動回饋
-            const email = document.getElementById('login-email').value.trim();
-            const pwd = document.getElementById('login-pwd').value.trim();
-            if(!email || !pwd) return showToast("請完整輸入 Email 與密碼！");
-            
-            const res = await callGAS({ action: "login", email: email, password: pwd }, btn);
-            if(res.status === "success") {
-                vibratePhone(); // 成功時再震動一次
-                showToast("登入成功！");
-                currentUser = res.userData; 
-                
-                document.getElementById('display-uid').innerText = "UID: " + currentUser.uid;
-                document.getElementById('display-points').innerHTML = currentUser.points + "<span>pts</span>";
-                document.getElementById('display-tier-badge').innerText = currentUser.level;
-                document.getElementById('display-profile-level').innerText = currentUser.level;
-                document.getElementById('profile-name').value = currentUser.gamerTag;
-                document.getElementById('profile-email').value = email;
-                
-                updateGreeting(); // 載入問候語
-
-                const walletCard = document.getElementById('display-wallet-card');
-                walletCard.className = "wallet-card"; 
-                walletCard.classList.add(getTierClass(currentUser.level)); // 套用精準顏色判斷
-
-                document.getElementById('view-auth').style.opacity = '0';
-                setTimeout(() => {
-                    document.getElementById('view-auth').classList.add('hidden'); 
-                    document.getElementById('view-app').classList.remove('hidden');
-                    JsBarcode("#member-barcode", currentUser.uid, { format: "CODE128", displayValue: false, background: "transparent", lineColor: "#000000", height: 40, margin: 0 });
-                    
-                    fetchStoreItems();
-                    fetchHistory();
-                    startAutoSync(); 
-                }, 300);
-            } else { showToast(res.message); }
-        }
-
-        async function doRegister(btn) {
-            vibratePhone();
-            const name = document.getElementById('reg-name').value.trim();
-            const email = document.getElementById('reg-email').value.trim();
-            const pwd = document.getElementById('reg-pwd').value.trim();
-            if(!name || !email || !pwd) return showToast("請完整填寫所有註冊資料！");
-
-            const res = await callGAS({ action: "register", gamerTag: name, email: email, password: pwd }, btn);
-            if(res.status === "success") {
-                vibratePhone();
-                showToast(res.message);
-                document.getElementById('reg-pwd').value = '';
-                toggleAuth();
-            } else { showToast(res.message); }
-        }
-
-        async function doRedeem(type, btn) {
-            vibratePhone();
-            let payload = { action: "redeem", uid: currentUser.uid, itemName: pendingRedeem.name, points: pendingRedeem.points, type: type };
-            if (type === 'virtual') {
-                const gameUid = document.getElementById('ff-uid').value.trim(); 
-                if (!gameUid) return showToast('請輸入 Game UID！'); 
-                payload.gameUid = gameUid;
-            }
-            const res = await callGAS(payload, btn);
-            if(res.status === "success") {
-                vibratePhone();
-                forceCloseModal(type); 
-                showToast('申請已送出！點數已扣除。');
-                currentUser.points -= parseInt(pendingRedeem.points);
-                document.getElementById('display-points').innerHTML = currentUser.points + "<span>pts</span>";
-                
-                if(type === 'virtual') document.getElementById('ff-uid').value = ''; 
-                fetchHistory(); 
-            } else { showToast(res.message || "點數不足或發生錯誤！"); }
-        }
-
-        async function doClaim(btn) {
-            vibratePhone();
-            const eventName = document.getElementById('claim-event').value.trim();
-            const teamName = document.getElementById('claim-team').value.trim();
-            const leaderName = document.getElementById('claim-leader').value.trim();
-            if(!eventName || !teamName || !leaderName) return showToast('請完整填寫所有資訊！'); 
-            
-            const payload = { action: "claim", uid: currentUser.uid, eventName: eventName, teamName: teamName, leaderName: leaderName };
-            const res = await callGAS(payload, btn);
-            if(res.status === "success") {
-                vibratePhone();
-                document.getElementById('claim-event').value = '';
-                document.getElementById('claim-team').value = '';
-                document.getElementById('claim-leader').value = '';
-                forceCloseModal('claim');
-                showToast('已送出補登審核！');
-                fetchHistory(); 
-            } else { showToast(res.message); }
-        }
-
-        async function doUpdateProfile(btn) {
-            vibratePhone();
-            const newName = document.getElementById('profile-name').value.trim();
-            const newPwd = document.getElementById('profile-pwd').value.trim();
-            if(!newName) return showToast('暱稱不可為空！');
-            const res = await callGAS({ action: "updateProfile", uid: currentUser.uid, gamerTag: newName, newPassword: newPwd }, btn);
-            if(res.status === "success") { 
-                vibratePhone();
-                showToast('會員資料已成功更新！'); 
-                document.getElementById('profile-pwd').value = ''; 
-                currentUser.gamerTag = newName; 
-                updateGreeting(); // 更新名稱後順便更新首頁問候語
-            } 
-            else { showToast(res.message); }
-        }
-
-        function doLogout() {
-            vibratePhone();
-            if(syncInterval) clearInterval(syncInterval); 
-            currentUser = {};
-            document.getElementById('login-pwd').value = '';
-            document.getElementById('view-app').classList.add('hidden');
-            document.getElementById('view-auth').classList.remove('hidden');
-            document.getElementById('view-auth').style.opacity = '1';
-            switchTab('wallet'); 
-        }
-
-        function toggleAuth() { vibratePhone(); document.getElementById('login-form').classList.toggle('hidden'); document.getElementById('register-form').classList.toggle('hidden'); }
-        
-        function switchTab(tabName) {
-            vibratePhone();
-            ['wallet', 'store', 'profile'].forEach(tab => { document.getElementById(`tab-${tab}`).classList.add('hidden'); document.getElementById(`nav-${tab}`).classList.remove('active'); });
-            document.getElementById(`tab-${tabName}`).classList.remove('hidden'); 
-            document.getElementById(`tab-${tabName}`).classList.add('fade-in'); 
-            document.getElementById(`nav-${tabName}`).classList.add('active');
-            // 切換時捲動回頂部，避免 fixed 佈局造成奇怪的捲動位置
-            window.scrollTo(0, 0);
-        }
-
-        function openModal(type, itemName, points) {
-            vibratePhone();
-            document.getElementById(`modal-${type}`).classList.add('active');
-            if(itemName && points) pendingRedeem = { name: itemName, points: points };
-
-            if (type === 'virtual') {
-                document.getElementById('modal-v-title').innerText = `兌換 ${itemName}`; 
-                document.getElementById('modal-v-desc').innerText = `將扣除 ${points} pts。請輸入遊戲 UID。`;
-            } else if (type === 'physical') {
-                document.getElementById('modal-p-title').innerText = `兌換 ${itemName}`; 
-                document.getElementById('modal-p-desc').innerText = `將扣除 ${points} pts。請出示下方條碼。`;
-                // 💡 修正原本的 qrcode 生成邏輯，避免重複生成
-                const qrcodeContainer = document.getElementById("qrcode-container");
-                qrcodeContainer.innerHTML = ""; // 清空舊的
-                new QRCode(qrcodeContainer, { text: "REDEEM-" + currentUser.uid + "-" + itemName, width: 160, height: 160, colorDark : "#000000", colorLight : "#ffffff", correctLevel : QRCode.CorrectLevel.H }); 
-            }
-        }
-
-        function closeModal(type, event) { if (event.target.classList.contains('modal-backdrop') || event.target.classList.contains('sheet-drag')) forceCloseModal(type); }
-        function forceCloseModal(type) { vibratePhone(); document.getElementById(`modal-${type}`).classList.remove('active'); }
-        function showToast(message) { const toast = document.getElementById('toast'); toast.innerText = message; toast.classList.add('show'); setTimeout(() => { toast.classList.remove('show'); }, 3000); }
-    </script>
+let state={user:null,items:[],events:[],history:{items:[],total:0,page:1,pageSize:8,hasMore:false},tasks:{items:[],total:0,page:1,pageSize:20,hasMore:false}};
+let currentView='home',rewardFilter='all',historyMode='points',historyPage=1,historyData=null,syncing=null,profileReady=false;
+const titles={home:'會員總覽',rewards:'獎勵兌換',claim:'賽事補登',history:'我的紀錄',profile:'會員設定'};
+function showAuth(){ $('auth').hidden=false;$('app').hidden=true;profileReady=false;state.user=null; }
+function onSessionExpired(){clearToken();showAuth();modalBusy=false;closeDialog();toast('登入已逾時，請重新登入。');}
+function showApp(){ $('auth').hidden=true;$('app').hidden=false; }
+async function syncData(silent=false){
+ if(syncing)return syncing;
+ syncing=(async()=>{const res=await api('memberBootstrap');const oldEvents=JSON.stringify(state.events);state={...state,...res};renderMember();if(oldEvents!==JSON.stringify(state.events))updateClaimEvents();lastSync=Date.now();if(!silent)toast('會員資料已同步。');})();
+ try{await syncing;}finally{syncing=null;}
+}
+function renderMember(){
+ const u=state.user;if(!u)return;showApp();$('nav-avatar').textContent=u.gamerTag.slice(0,1);$('nav-name').textContent=u.gamerTag;$('nav-level').textContent=u.level;$('store-balance').textContent=num(u.points);
+ renderHome();renderRewards();renderTier();
+ if(!profileReady){$('profile-name').value=u.gamerTag;$('profile-email').value=u.email;$('profile-game-uid').value=u.gameUid||'';profileReady=true;}
+}
+function renderHome(){
+ const u=state.user,hour=Number(new Intl.DateTimeFormat('en-US',{timeZone:'Asia/Taipei',hour:'numeric',hour12:false}).format(new Date())),greeting=hour>=5&&hour<12?'早安':hour>=12&&hour<18?'午安':'晚安';
+ const pending=state.tasks.items.filter(t=>t.status==='Pending').length,cardClass=/FORCE|黑卡|超銳能/i.test(u.level)?'force':u.level==='APEX'?'apex':u.level.includes('PREMIUM')?'premium':u.level==='CORE'?'core':'';
+ $('home-content').innerHTML=`<div class="page-head"><div><div class="eyebrow">YOUR MEMBER OVERVIEW</div><h1 style="margin-top:8px">${greeting}，${esc(u.gamerTag)}</h1><p>歡迎回到銳能。準備好迎接下一場精彩了嗎？</p></div><span class="micro muted" style="text-align:right">${esc(dateLabel())}</span></div>
+ <div class="member-home-grid"><article class="wallet-card ${cardClass}"><div class="wallet-top"><span class="wallet-brand">REBORN / MEMBERSHIP</span><span class="badge" style="background:#ffffff18;color:#e7dec8">${esc(u.level)}</span></div><div class="wallet-label">當前可用點數</div><div class="wallet-points">${num(u.points)}<small>POINTS</small></div><div class="wallet-foot"><div><strong>${esc(u.gamerTag)}</strong><div class="mono" style="margin-top:5px">${esc(u.uid)}</div></div><button class="btn" data-action="member-card">${icon('scan')}出示會員卡</button></div></article>
+ <div class="stack"><div class="quick-stats"><div class="card stat"><div class="stat-label">歷史累積點數 ${icon('coins')}</div><b>${num(u.lifetimePoints)}<span style="font-size:11px;font-weight:500;color:var(--muted);margin-left:5px">點</span></b><small>兌換後，升級進度依然保留</small></div><div class="card stat"><div class="stat-label">我的申請 ${icon('tasks')}</div><b>${num(state.tasks.total)}<span style="font-size:11px;font-weight:500;color:var(--muted);margin-left:5px">筆</span></b><small>近期有 ${pending} 筆等待處理</small></div></div><button class="quick-action" data-action="view" data-view="claim">${icon('calendar')}<div class="grow"><strong>補登參賽點數</strong><p>選擇你的賽事與參賽時段</p></div>${icon('arrow')}</button><button class="quick-action" data-action="view" data-view="rewards">${icon('gift')}<div class="grow"><strong>探索會員獎勵</strong><p>鑽石虛寶、兌換券與精選周邊</p></div>${icon('arrow')}</button></div></div>
+ <div class="member-home-bottom"><article class="card"><div class="card-head"><div><h2>近期點數紀錄</h2><p>掌握每一筆累積與使用</p></div><button class="text-btn" data-action="view" data-view="history">查看全部 →</button></div>${historyHtml(state.history.items.slice(0,5))}</article><article class="card"><div class="card-head"><div><h2>開放補登的賽事</h2><p>找到你上場的那一刻</p></div>${icon('calendar')}</div>${state.events.length?state.events.slice(0,3).map(e=>`<div class="next-event"><div class="row between"><strong>${esc(e.name)}</strong><span class="badge gold">${kindName(e.type)}</span></div><p>${esc(e.slots.map(s=>`${s.date} ${s.time}`).slice(0,2).join(' · '))}${e.slots.length>2?' …':''}</p><div class="row between" style="margin-top:9px"><span class="micro muted">每次參賽 ${num(e.points)} 點</span><button class="text-btn" data-action="claim-event" data-id="${esc(e.id)}">前往補登 →</button></div></div>`).join(''):empty('目前沒有列出的賽事','過往場次仍可使用手動補登。','calendar')}</article></div>`;
+}
+function renderRewards(){
+ const items=state.items.filter(i=>rewardFilter==='all'||i.type===rewardFilter);
+ $('reward-grid').innerHTML=items.length?items.map(i=>`<article class="card product-card"><div class="product-image">${i.image?`<img src="${esc(i.image)}" alt="${esc(i.title)}" loading="lazy" referrerpolicy="no-referrer">`:icon(i.type==='virtual'?'diamond':i.type==='voucher'?'ticket':'gift')}<span class="badge">${productKind(i.type)}</span></div><h3>${esc(i.title)}</h3><p>${esc(i.description|| (i.requiresUid?'兌換時需填寫遊戲 UID':'兌換後取得專屬領取憑證'))}</p><div class="product-bottom"><span class="price">${num(i.points)}<small>點</small></span><button class="btn gold small" data-action="redeem" data-id="${esc(i.id)}">兌換</button></div></article>`).join(''):`<div class="card" style="grid-column:1/-1">${empty('獎勵準備中','主辦方上架商品後，就可以在這裡兌換。','gift')}</div>`;
+ document.querySelectorAll('#reward-filters button').forEach(b=>b.classList.toggle('active',b.dataset.filter===rewardFilter));
+}
+function renderTier(){
+ const u=state.user,total=u.lifetimePoints,base=total>=1000?1000:total>=500?500:0,next=total>=2000?0:total>=1000?2000:total>=500?1000:500,width=next?Math.min(100,(total-base)/(next-base)*100):100;
+ $('tier-panel').innerHTML=`<div class="row"><span class="avatar large">${icon('trophy')}</span><div><div class="micro muted">目前會員等級</div><h2 style="margin-top:4px">${esc(u.level)}</h2></div></div><div class="divider"></div><div class="row between micro"><span class="muted">歷史累積</span><strong>${num(total)} 點</strong></div><div class="progress"><span style="width:${width}%"></span></div><p class="micro">${/FORCE|黑卡|超銳能/i.test(u.level)?'邀約會員資格':next?`再累積 ${num(next-total)} 點，前往下一個等級。`:'已達最高累積點數等級。'}</p>`;
+}
+function switchView(view){
+ if(!titles[view])return;currentView=view;Object.keys(titles).forEach(v=>$(`page-${v}`).hidden=v!==view);document.querySelectorAll('.nav-link[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===view));$('crumb').textContent=titles[view];window.scrollTo({top:0});
+ if(view==='history')loadHistory(1);if(view==='claim'&&!$('claim-event').options.length)updateClaimEvents();
+}
+function updateClaimEvents(preselect){
+ const type=$('claim-type').value,previous=preselect||$('claim-event').value,events=state.events.filter(e=>e.type===type);
+ $('claim-event').innerHTML=events.map(e=>`<option value="${esc(e.id)}">${esc(e.name)}</option>`).join('')+'<option value="manual">未列出的過往賽事（手動填寫）</option>';
+ if([...$('claim-event').options].some(o=>o.value===previous))$('claim-event').value=previous;else if(events.length)$('claim-event').value=events[0].id;else $('claim-event').value='manual';
+ updateClaimSlots();
+}
+function updateClaimSlots(){
+ const manual=$('claim-event').value==='manual';$('claim-manual-fields').hidden=!manual;$('claim-scheduled-fields').hidden=manual;
+ ['claim-name','claim-date','claim-time','claim-manual-group'].forEach(id=>{$(id).required=manual;$(id).disabled=!manual;});['claim-slot','claim-group'].forEach(id=>{$(id).required=!manual;$(id).disabled=manual;});
+ const event=state.events.find(e=>e.id===$('claim-event').value);$('claim-points').textContent=num(event?.points||($('claim-type').value==='league'?300:50));
+ if(event){const prev=$('claim-slot').value;$('claim-slot').innerHTML=event.slots.map(s=>`<option value="${esc(s.id)}">${esc(s.date)}　${esc(s.time)}</option>`).join('');if(event.slots.some(s=>s.id===prev))$('claim-slot').value=prev;updateClaimGroups();}
+}
+function updateClaimGroups(){const event=state.events.find(e=>e.id===$('claim-event').value),slot=event?.slots.find(s=>s.id===$('claim-slot').value),prev=$('claim-group').value;$('claim-group').innerHTML='<option value="">請選擇組別</option>'+(slot?.groups||[]).map(g=>`<option value="${esc(g)}">第 ${esc(g)} 組</option>`).join('');if(slot?.groups.includes(prev))$('claim-group').value=prev;}
+async function loadHistory(page){
+ historyPage=page;const mode=historyMode;$('history-panel').innerHTML=loading();
+ try{const res=await api(mode==='points'?'getHistory':'getMyTasks',{page,pageSize:20});if(historyMode!==mode||historyPage!==page)return;historyData=mode==='points'?res.history:res.tasks;
+ if(mode==='tasks')state.tasks.items=[...new Map([...state.tasks.items,...historyData.items].map(t=>[t.id,t])).values()];
+ $('history-panel').innerHTML=(mode==='points'?historyHtml(historyData.items):historyData.items.length?historyData.items.map(t=>taskHtml(t)).join(''):empty('還沒有申請紀錄','補登或兌換後，會顯示處理進度。'))+pageButtons(historyData,'history-page');
+ }catch(e){$('history-panel').innerHTML=empty('資料尚未同步',e.message)+`<button class="btn" data-action="history-page" data-page="${page}" style="display:flex;margin:auto">重試</button>`;}
+}
+function openRedeem(id){const i=state.items.find(x=>x.id===id);if(!i)return;if(state.user.points<i.points){toast('可用點數不足，參賽補登可累積更多點數。');return;}
+ openDialog('兌換 '+i.title,`<form id="redeem-form" data-id="${esc(i.id)}"><div class="dialog-body"><div class="row between" style="margin-bottom:20px"><span class="muted micro">本次兌換</span><strong style="font-size:24px">${num(i.points)} <span class="micro muted">點</span></strong></div>${i.requiresUid?`<div class="hint" style="margin-bottom:20px">請填寫收取鑽石／虛寶的遊戲 UID，並再次核對。<br>此欄位是遊戲內的數字 ID。</div><label class="field">遊戲 UID<input id="redeem-uid" required inputmode="numeric" pattern="[0-9]{5,20}" maxlength="20" placeholder="例如：123456789" value="${esc(state.user.gameUid||'')}" autofocus></label>`:`<p class="micro">申請成功後會取得領取憑證，可出示給銳能工作人員核銷。</p>`}<label class="check-label" style="margin-top:17px"><input type="checkbox" required>我已確認兌換內容${i.requiresUid?'與遊戲 UID':''}</label><div id="redeem-error" class="inline-error" role="alert"></div></div><div class="dialog-foot"><button class="btn" type="button" data-action="close-modal">取消</button><button class="btn primary" type="submit">確認兌換</button></div></form>`);
+}
+function receipt(id){const task=state.tasks.items.find(t=>t.id===id);openDialog('兌換申請憑證',`<div class="dialog-body"><p class="dialog-sub" style="text-align:center;margin-bottom:20px">${task?esc(task.detail):'申請已送出。虛寶將由工作人員依遊戲 UID 派發。'}</p><div class="receipt-code">${qrSvg(id)}<strong class="mono" style="display:block;margin-top:12px;font-size:12px">${esc(id)}</strong><div style="margin-top:10px">${task?statusBadge(task.status):'<span class="badge pending">等待處理</span>'}</div></div>${task?.gameUid?`<p class="micro" style="margin-top:16px;text-align:center">遊戲 UID：<b class="mono">${esc(task.gameUid)}</b></p>`:''}<p class="micro" style="margin-top:15px;text-align:center">此編號是實際兌換申請，可供工作人員查詢或核銷。</p></div>`,`<div class="dialog-foot"><button class="btn" data-action="copy" data-value="${esc(id)}">${icon('copy')}複製編號</button><button class="btn primary" data-action="receipt-history">查看申請紀錄</button></div>`);}
+function handleAction(action,btn){
+ if(action==='auth-mode'){const register=btn.dataset.mode==='register';$('login-form').hidden=register;$('register-form').hidden=!register;$('auth-title').textContent=register?'開始你的銳能旅程':'歡迎回來';$('auth-sub').textContent=register?'建立你的 REBORN ID，收藏每一場精彩。':'登入會員，繼續你的賽事旅程。';document.querySelectorAll('[data-action="auth-mode"]').forEach(b=>b.classList.toggle('active',b===btn));}
+ else if(action==='view')switchView(btn.dataset.view);
+ else if(action==='reward-filter'){rewardFilter=btn.dataset.filter;renderRewards();}
+ else if(action==='history-mode'){historyMode=btn.dataset.mode;document.querySelectorAll('#history-tabs button').forEach(b=>b.classList.toggle('active',b===btn));loadHistory(1);}
+ else if(action==='history-page')loadHistory(Number(btn.dataset.page));
+ else if(action==='redeem')openRedeem(btn.dataset.id);
+ else if(action==='receipt')receipt(btn.dataset.id);
+ else if(action==='receipt-history'){closeDialog();historyMode='tasks';document.querySelectorAll('#history-tabs button').forEach(b=>b.classList.toggle('active',b.dataset.mode==='tasks'));switchView('history');}
+ else if(action==='claim-event'){const ev=state.events.find(e=>e.id===btn.dataset.id);if(ev){$('claim-type').value=ev.type;updateClaimEvents(ev.id);switchView('claim');}}
+ else if(action==='member-card'){const u=state.user;openDialog('我的 REBORN 會員卡',`<div class="dialog-body"><div class="member-card-dialog"><h3>${esc(u.gamerTag)}</h3><p class="micro" style="margin:5px 0 18px">${esc(u.level)} · ${num(u.points)} 點</p>${qrSvg(u.uid)}<div class="barcode-box">${barcodeSvg(u.uid)}</div><strong class="mono">${esc(u.uid)}</strong></div><p class="micro" style="margin-top:18px;text-align:center">出示 QR Code 或條碼，即可讓工作人員查詢會員。</p></div>`,`<div class="dialog-foot"><button class="btn primary" data-action="copy" data-value="${esc(u.uid)}">${icon('copy')}複製會員編號</button></div>`);}
+ else if(action==='logout')busy(btn,async()=>{try{await api('logout');}finally{clearToken();showAuth();$('login-password').value='';}});
+}
+document.addEventListener('change',e=>{if(e.target.id==='claim-type')updateClaimEvents();else if(e.target.id==='claim-event')updateClaimSlots();else if(e.target.id==='claim-slot')updateClaimGroups();});
+document.addEventListener('submit',e=>{
+ const form=e.target,btn=form.querySelector('[type="submit"]');if(!['login-form','register-form','claim-form','profile-form','redeem-form'].includes(form.id))return;e.preventDefault();
+ if(form.id==='login-form')busy(btn,async()=>{const res=await api('login',{email:$('login-email').value.trim(),password:$('login-password').value});rememberToken(res.token);$('login-password').value='';await syncData(true);updateClaimEvents();scheduleSync();toast('歡迎回到銳能。');},'login-error');
+ if(form.id==='register-form')busy(btn,async()=>{if($('register-password').value!==$('register-confirm').value)throw apiError('VALIDATION','兩次輸入的密碼不相同。');const res=await api('register',{gamerTag:$('register-name').value.trim(),email:$('register-email').value.trim(),password:$('register-password').value},true);$('login-email').value=$('register-email').value.trim();form.reset();document.querySelector('[data-action="auth-mode"][data-mode="login"]').click();toast(res.message);},'register-error');
+ if(form.id==='claim-form')busy(btn,async()=>{const manual=$('claim-event').value==='manual';const data={teamName:$('claim-team').value.trim(),leaderName:$('claim-leader').value.trim(),...(manual?{eventType:$('claim-type').value,eventName:$('claim-name').value.trim(),eventDate:$('claim-date').value,eventTime:$('claim-time').value,groupNo:$('claim-manual-group').value.trim()}:{eventId:$('claim-event').value,slotId:$('claim-slot').value,groupNo:$('claim-group').value})};const res=await api('claim',data,true);toast(res.message);await afterWrite();historyMode='tasks';document.querySelectorAll('#history-tabs button').forEach(b=>b.classList.toggle('active',b.dataset.mode==='tasks'));switchView('history');},'claim-error');
+ if(form.id==='profile-form')busy(btn,async()=>{const password=$('profile-password').value;if(password!==$('profile-confirm').value)throw apiError('VALIDATION','兩次輸入的新密碼不相同。');if(password&&!$('profile-current-password').value)throw apiError('VALIDATION','變更密碼時請輸入目前密碼。');const res=await api('updateProfile',{gamerTag:$('profile-name').value.trim(),gameUid:$('profile-game-uid').value.trim(),newPassword:password,currentPassword:$('profile-current-password').value},true);state.user=res.user;['profile-password','profile-confirm','profile-current-password'].forEach(id=>$(id).value='');renderMember();toast(res.message);},'profile-error');
+ if(form.id==='redeem-form')busy(btn,async()=>{const res=await api('redeem',{itemId:form.dataset.id,gameUid:$('redeem-uid')?.value.trim()||''},true);state.user=res.user;modalBusy=false;closeDialog();toast(res.message);await afterWrite();receipt(res.taskId);},'redeem-error');
+});
+document.addEventListener('error',e=>{if(e.target.tagName==='IMG'&&e.target.closest('.product-image'))e.target.closest('.product-image').innerHTML=icon('gift')+'<span class="badge">會員獎勵</span>';},true);
+document.querySelectorAll('[data-brand]').forEach(el=>el.outerHTML=brand());document.querySelectorAll('[data-mobile-brand]').forEach(el=>el.outerHTML=brand(true));
+async function boot(){if(!token){showAuth();return;}$('auth').hidden=true;$('app').hidden=false;$('home-content').innerHTML=loading();try{await syncData(true);updateClaimEvents();scheduleSync();}catch(e){if(e.code!=='UNAUTHORIZED'){showAuth();showNet(e.message);$('login-error').textContent='仍保留登入狀態，恢復連線後按「重新同步」即可。';}}}
+boot();
+</script>
 </body>
 </html>
