@@ -1,0 +1,4874 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <script>
+    // ===== Apps Script 網址設定區：兩份 HTML 都要填 =====
+    // 第 9 行：把部署後以 /exec 結尾的完整網址，貼在下方雙引號中。
+    // 使用 Apps Script 本身的 /exec 網頁時，這裡留空即可。
+    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxwFrD-K-FjsJgNudArkctTlKiZGGrHWvYaM50_qpLVqByDQyj02hQWYVY7-t7cPrYDFQ/exec";
+    // ===== 設定到這裡結束；下面不需要修改 =====
+
+    window.RN_CONFIG = {
+      apiUrl: APPS_SCRIPT_URL,
+      preview: false,
+      publicPage: "rn-scrim.html",
+      adminPage: "rn-scrim-admin.html"
+    };
+    /*__RN_BOOT__*/
+  </script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <base target="_top">
+  <meta name="theme-color" content="#000000">
+  <title>銳能娛樂｜交流賽報名</title>
+  <meta name="description" content="銳能娛樂交流賽報名中心，選擇日期與場次、填寫隊伍資料，完成匯款與入群。">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Crect width=%2264%22 height=%2264%22 rx=%2214%22 fill=%22%230c0e13%22/%3E%3Cpath d=%22M37 7L15 36h16l-5 21 23-31H33z%22 fill=%22%23ffffff%22/%3E%3C/svg%3E">
+
+  <!-- 以下為網站外觀設定，無須填寫 Apps Script 網址 -->
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #000000;
+      --panel: #161616;
+      --panel2: #1d1d1d;
+      --line: rgba(255, 255, 255, .1);
+      --ink: #f5f5f7;
+      --muted: #a7a7a7;
+      --accent: #f5f5f7;
+      --green: #f5f5f5;
+      --red: #adadad;
+      --radius: 20px;
+      --font: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--font);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased
+    }
+
+    body:before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(ellipse at 25% -15%, rgba(255, 255, 255, .12), transparent 50%);
+      z-index: -1
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit
+    }
+
+    button,
+    a,
+    input,
+    select,
+    textarea {
+      -webkit-tap-highlight-color: transparent
+    }
+
+    button {
+      cursor: pointer
+    }
+
+    button:disabled {
+      cursor: not-allowed;
+      opacity: .45
+    }
+
+    input,
+    textarea,
+    select {
+      background: #121212;
+      color: var(--ink);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      width: 100%;
+      padding: 12px 14px;
+      min-height: 48px;
+      outline: none
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(255, 255, 255, .13)
+    }
+
+    input:disabled {
+      color: var(--muted)
+    }
+
+    input[type=date],
+    input[type=time],
+    input[type=datetime-local] {
+      min-width: 0;
+      color-scheme: dark
+    }
+
+    input[type=checkbox] {
+      width: 18px;
+      height: 18px;
+      min-height: 18px;
+      accent-color: var(--accent);
+      flex-shrink: 0
+    }
+
+    textarea {
+      resize: vertical;
+      line-height: 1.8
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin: 0
+    }
+
+    h1 {
+      font-size: 36px;
+      line-height: 1.35;
+      font-weight: 750;
+      letter-spacing: -.035em
+    }
+
+    h2 {
+      font-size: 21px;
+      line-height: 1.45;
+      letter-spacing: -.02em
+    }
+
+    h3 {
+      font-size: 18px;
+      line-height: 1.5
+    }
+
+    small,
+    .small {
+      font-size: 14px
+    }
+
+    button:focus-visible,
+    a:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 4px
+    }
+
+    hr {
+      border: 0;
+      border-top: 1px solid var(--line);
+      margin: 22px 0
+    }
+
+    .hidden {
+      display: none !important
+    }
+
+    .muted {
+      color: var(--muted)
+    }
+
+    .accent {
+      color: var(--accent)
+    }
+
+    .mono {
+      font-family: "SFMono-Regular", Consolas, monospace;
+      font-variant-numeric: tabular-nums
+    }
+
+    .eyebrow {
+      font-size: 12px;
+      letter-spacing: .15em;
+      color: var(--accent);
+      font-weight: 700
+    }
+
+    .flex {
+      display: flex;
+      align-items: center;
+      gap: 12px
+    }
+
+    .between {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px
+    }
+
+    .wrap {
+      flex-wrap: wrap
+    }
+
+    .stack {
+      display: grid;
+      gap: 18px
+    }
+
+    .gap8 {
+      gap: 8px
+    }
+
+    .mb {
+      margin-bottom: 22px
+    }
+
+    .mt {
+      margin-top: 22px
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap
+    }
+
+    .shell {
+      max-width: 1200px;
+      margin: auto;
+      padding: 0 32px
+    }
+
+    .topbar {
+      height: 88px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px
+    }
+
+    .brand {
+      display: flex;
+      gap: 12px;
+      align-items: center
+    }
+
+    .brand-mark {
+      width: 40px;
+      height: 44px;
+      color: var(--accent);
+      font-size: 37px;
+      font-weight: 900;
+      line-height: 1;
+      transform: skew(-10deg);
+      letter-spacing: -.12em;
+      padding-right: 4px
+    }
+
+    .brand-name {
+      font-size: 17px;
+      font-weight: 750;
+      letter-spacing: .06em
+    }
+
+    .brand-en {
+      font-size: 10px;
+      letter-spacing: .16em;
+      color: var(--muted)
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px
+    }
+
+    .nav-button {
+      border: 0;
+      background: transparent;
+      border-radius: 10px;
+      padding: 10px 14px;
+      color: #d7d7d7;
+      font-size: 14px
+    }
+
+    .nav-button:hover {
+      background: rgba(255, 255, 255, .06)
+    }
+
+    .preview-banner {
+      margin-top: 16px;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+      background: rgba(255, 255, 255, .055);
+      border: 1px solid rgba(255, 255, 255, .15);
+      color: #bcbcbc;
+      border-radius: 12px;
+      padding: 10px 16px;
+      font-size: 13px
+    }
+
+    .preview-banner a {
+      color: var(--accent);
+      white-space: nowrap;
+      font-size: 14px
+    }
+
+    .page-head {
+      padding: 44px 0 32px;
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px
+    }
+
+    .page-head .eyebrow {
+      margin-bottom: 10px
+    }
+
+    .page-head p {
+      margin-top: 12px;
+      color: var(--muted)
+    }
+
+    .event-number {
+      font-size: 13px;
+      letter-spacing: .12em;
+      color: #7e7e7e
+    }
+
+    .dot-caption {
+      display: flex;
+      gap: 7px;
+      align-items: center;
+      font-size: 14px;
+      color: var(--muted)
+    }
+
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--green)
+    }
+
+    .main-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 418px;
+      gap: 36px;
+      align-items: start;
+      padding-bottom: 64px
+    }
+
+    .section-head {
+      margin-bottom: 18px
+    }
+
+    .section-label {
+      font-size: 15px;
+      font-weight: 650
+    }
+
+    .date-list {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      scrollbar-width: thin;
+      margin-bottom: 22px;
+      padding-bottom: 4px
+    }
+
+    .date-tab {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #131313;
+      min-width: 106px;
+      flex-shrink: 0;
+      padding: 11px 18px;
+      text-align: left;
+      color: var(--muted)
+    }
+
+    .date-tab.active {
+      background: #eeeeee;
+      color: #191919;
+      border-color: #eeeeee
+    }
+
+    .date-tab .day {
+      font-size: 22px;
+      font-weight: 700;
+      display: block;
+      line-height: 1.3;
+      font-variant-numeric: tabular-nums
+    }
+
+    .date-tab .weekday {
+      font-size: 13px;
+      display: block;
+      margin-top: 3px
+    }
+
+    .date-tab .all-day {
+      font-size: 15px;
+      line-height: 2.1
+    }
+
+    .event-list {
+      display: grid;
+      gap: 14px
+    }
+
+    .event-card {
+      position: relative;
+      width: 100%;
+      text-align: left;
+      color: inherit;
+      border: 1px solid var(--line);
+      background: linear-gradient(110deg, #191919, #141414);
+      border-radius: var(--radius);
+      padding: 24px;
+      transition: border-color .15s, background .15s;
+      overflow: hidden
+    }
+
+    .event-card:hover {
+      border-color: rgba(255, 255, 255, .25)
+    }
+
+    .event-card.selected {
+      border-color: rgba(255, 255, 255, .7);
+      background: linear-gradient(115deg, rgba(255, 255, 255, .075), #171717 65%);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .06)
+    }
+
+    .event-card.selected:before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 24px;
+      bottom: 24px;
+      width: 3px;
+      background: var(--accent);
+      border-radius: 3px
+    }
+
+    .event-card.disabled {
+      opacity: .72;
+      cursor: pointer
+    }
+
+    .session-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px
+    }
+
+    .session-tag {
+      font-size: 12px;
+      letter-spacing: .14em;
+      color: #9f9f9f
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 1.4;
+      border: 1px solid transparent;
+      border-radius: 8px;
+      padding: 5px 9px;
+      white-space: nowrap
+    }
+
+    .badge-open {
+      color: var(--green);
+      background: rgba(255, 255, 255, .07);
+      border-color: rgba(255, 255, 255, .13)
+    }
+
+    .badge-full,
+    .badge-closed,
+    .badge-cancelled {
+      color: #c0c0c0;
+      background: rgba(255, 255, 255, .07);
+      border-color: rgba(255, 255, 255, .13)
+    }
+
+    .badge-completed,
+    .badge-archived {
+      color: #b1b1b1;
+      background: rgba(255, 255, 255, .05);
+      border-color: var(--line)
+    }
+
+    .badge-scheduled {
+      color: #bbbbbb;
+      background: rgba(255, 255, 255, .08);
+      border-color: rgba(255, 255, 255, .15)
+    }
+
+    .badge-draft {
+      color: var(--muted);
+      background: #282828
+    }
+
+    .session-main {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      gap: 16px
+    }
+
+    .session-time {
+      font-size: 34px;
+      font-weight: 650;
+      line-height: 1.1;
+      letter-spacing: -.03em;
+      font-variant-numeric: tabular-nums
+    }
+
+    .session-time span {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--muted);
+      letter-spacing: 0;
+      margin-left: 9px
+    }
+
+    .session-title {
+      font-size: 14px;
+      color: #c6c6c6;
+      margin-top: 10px
+    }
+
+    .fee {
+      font-size: 25px;
+      font-weight: 650;
+      line-height: 1.2;
+      font-variant-numeric: tabular-nums
+    }
+
+    .fee small {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 400
+    }
+
+    .session-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 25px;
+      font-size: 14px;
+      gap: 16px;
+      color: var(--muted)
+    }
+
+    .capacity-track {
+      height: 3px;
+      background: rgba(255, 255, 255, .07);
+      border-radius: 3px;
+      margin-top: 13px;
+      overflow: hidden
+    }
+
+    .capacity-fill {
+      height: 100%;
+      background: var(--accent);
+      border-radius: 3px;
+      max-width: 100%;
+      opacity: .7
+    }
+
+    .session-count b {
+      color: #e6e6e6;
+      font-weight: 550
+    }
+
+    .selected-indicator {
+      width: 21px;
+      height: 21px;
+      border: 1px solid #666666;
+      border-radius: 50%;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 12px;
+      color: transparent
+    }
+
+    .selected .selected-indicator {
+      color: #191919;
+      background: var(--accent);
+      border-color: var(--accent)
+    }
+
+    .selected-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px
+    }
+
+    .notice {
+      color: var(--muted);
+      font-size: 14px;
+      border-top: 1px solid var(--line);
+      padding-top: 22px;
+      margin-top: 26px;
+      white-space: pre-wrap
+    }
+
+    .membership-note {
+      display: flex;
+      gap: 12px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 18px 20px;
+      margin-top: 18px;
+      color: #cecece;
+      font-size: 14px
+    }
+
+    .membership-note .point {
+      display: block;
+      font-size: 22px;
+      color: #fafafa;
+      font-weight: 650;
+      line-height: 1.25
+    }
+
+    .membership-note .point-unit {
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: .1em;
+      display: block;
+      margin-top: 3px
+    }
+
+    .registration-panel {
+      background: linear-gradient(145deg, rgba(255, 255, 255, .078), rgba(255, 255, 255, .025));
+      border: 1px solid rgba(255, 255, 255, .13);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, .25), inset 0 1px 0 rgba(255, 255, 255, .08);
+      border-radius: 24px;
+      padding: 28px;
+      position: sticky;
+      top: 24px;
+      backdrop-filter: blur(24px)
+    }
+
+    .panel-intro {
+      margin-bottom: 24px
+    }
+
+    .panel-intro .eyebrow {
+      margin-bottom: 7px;
+      color: #9c9c9c
+    }
+
+    .panel-intro p {
+      font-size: 14px;
+      color: var(--muted);
+      margin-top: 7px
+    }
+
+    .field {
+      display: grid;
+      gap: 7px
+    }
+
+    .field label {
+      font-size: 14px;
+      font-weight: 550;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px
+    }
+
+    .field label span {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 400
+    }
+
+    .field .help {
+      font-size: 12px;
+      color: var(--muted)
+    }
+
+    .form-fields {
+      display: grid;
+      gap: 16px
+    }
+
+    .chosen-summary {
+      border: 1px solid var(--line);
+      background: rgba(0, 0, 0, .15);
+      border-radius: 12px;
+      padding: 14px;
+      margin-bottom: 22px
+    }
+
+    .chosen-summary strong {
+      font-size: 15px
+    }
+
+    .chosen-summary .small {
+      font-size: 13px
+    }
+
+    .agreement {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin: 20px 0
+    }
+
+    .agreement input {
+      margin-top: 2px
+    }
+
+    .button {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      min-height: 45px;
+      border-radius: 11px;
+      border: 1px solid var(--line);
+      background: #262626;
+      color: var(--ink);
+      font-size: 14px;
+      font-weight: 600;
+      padding: 10px 17px;
+      line-height: 1.5;
+      transition: background .15s
+    }
+
+    .button:hover {
+      background: #343434
+    }
+
+    .button-primary {
+      background: #f5f5f5;
+      color: #141414;
+      border-color: #f5f5f5;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .2)
+    }
+
+    .button-primary:hover {
+      background: #f5f5f5
+    }
+
+    .button-white {
+      background: #f6f6f6;
+      color: #181818;
+      border-color: #f6f6f6
+    }
+
+    .button-white:hover {
+      background: #e4e4e4
+    }
+
+    .button-ghost {
+      background: transparent
+    }
+
+    .button-danger {
+      color: var(--red);
+      background: rgba(255, 255, 255, .06);
+      border-color: rgba(255, 255, 255, .2)
+    }
+
+    .button-sm {
+      padding: 7px 11px;
+      min-height: 35px;
+      font-size: 13px;
+      border-radius: 9px
+    }
+
+    .full-width {
+      width: 100%
+    }
+
+    .submit-note {
+      font-size: 12px;
+      text-align: center;
+      color: #7f7f7f;
+      margin-top: 12px
+    }
+
+    .error-box {
+      color: #c3c3c3;
+      background: rgba(255, 255, 255, .055);
+      border: 1px solid rgba(255, 255, 255, .2);
+      padding: 12px 15px;
+      border-radius: 12px;
+      font-size: 14px;
+      margin-top: 14px
+    }
+
+    .info-box {
+      border-radius: 12px;
+      padding: 13px 15px;
+      background: rgba(255, 255, 255, .05);
+      border: 1px solid rgba(255, 255, 255, .16);
+      font-size: 14px;
+      color: #bebebe
+    }
+
+    .empty {
+      border: 1px dashed rgba(255, 255, 255, .15);
+      border-radius: 18px;
+      padding: 36px 24px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 15px
+    }
+
+    .empty strong {
+      display: block;
+      color: #e6e6e6;
+      margin-bottom: 6px;
+      font-size: 18px
+    }
+
+    .footer {
+      border-top: 1px solid var(--line);
+      padding: 24px 0 30px;
+      font-size: 12px;
+      color: #737373;
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      flex-wrap: wrap
+    }
+
+    .app-dialog {
+      border: 1px solid rgba(255, 255, 255, .18);
+      border-radius: 24px;
+      background: #181818;
+      color: var(--ink);
+      max-width: calc(100vw - 28px);
+      width: 580px;
+      padding: 0;
+      max-height: 90vh;
+      box-shadow: 0 36px 90px rgba(0, 0, 0, .5);
+      overscroll-behavior: contain
+    }
+
+    .app-dialog.wide {
+      width: 860px
+    }
+
+    .app-dialog::backdrop {
+      background: rgba(0, 0, 0, .74);
+      backdrop-filter: blur(8px)
+    }
+
+    .dialog-head {
+      padding: 22px 26px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      position: sticky;
+      top: 0;
+      background: #181818;
+      z-index: 2
+    }
+
+    .dialog-head h2 {
+      font-size: 18px
+    }
+
+    .dialog-close {
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      background: #252525;
+      color: var(--muted);
+      font-size: 23px;
+      line-height: 1;
+      width: 32px;
+      height: 32px;
+      flex-shrink: 0
+    }
+
+    .dialog-body {
+      padding: 25px 26px 28px
+    }
+
+    .success-circle {
+      width: 48px;
+      height: 48px;
+      background: rgba(255, 255, 255, .1);
+      border: 1px solid rgba(255, 255, 255, .2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--green);
+      font-size: 22px;
+      margin-bottom: 14px
+    }
+
+    .success-title {
+      font-size: 27px;
+      font-weight: 650;
+      line-height: 1.4;
+      letter-spacing: -.03em
+    }
+
+    .receipt-meta {
+      font-size: 14px;
+      color: var(--muted);
+      margin: 8px 0 22px
+    }
+
+    .payment-card {
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, .25);
+      background: linear-gradient(135deg, #262626, #1b1b1b 80%);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .12);
+      padding: 24px;
+      margin: 18px 0
+    }
+
+    .payment-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: start;
+      margin-bottom: 26px
+    }
+
+    .payment-top .eyebrow {
+      font-size: 11px
+    }
+
+    .payment-price {
+      font-size: 29px;
+      line-height: 1.2;
+      font-weight: 700;
+      white-space: nowrap
+    }
+
+    .payment-price small {
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--muted)
+    }
+
+    .account-label {
+      font-size: 12px;
+      color: var(--muted)
+    }
+
+    .bank-account {
+      font-size: 24px;
+      letter-spacing: .03em;
+      margin: 5px 0;
+      overflow-wrap: anywhere
+    }
+
+    .bank-bottom {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      margin-top: 18px;
+      font-size: 14px
+    }
+
+    .bank-bottom .muted {
+      font-size: 12px;
+      margin-bottom: 3px
+    }
+
+    .receipt-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px
+    }
+
+    .details-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 14px
+    }
+
+    .details-row:last-child {
+      border: 0
+    }
+
+    .details-row .muted {
+      flex-shrink: 0
+    }
+
+    .details-row span:last-child {
+      text-align: right;
+      overflow-wrap: anywhere
+    }
+
+    .lookup-code {
+      display: block;
+      font-size: 12px;
+      word-break: break-all;
+      margin-top: 8px;
+      background: #121212;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 12px
+    }
+
+    .payment-report {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      margin-top: 10px
+    }
+
+    .payment-report input {
+      min-width: 0
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 26px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #f2f2f2;
+      color: #1b1b1b;
+      padding: 12px 21px;
+      border-radius: 13px;
+      box-shadow: 0 7px 30px rgba(0, 0, 0, .4);
+      font-size: 14px;
+      font-weight: 550;
+      z-index: 1000;
+      max-width: calc(100vw - 24px);
+      text-align: center
+    }
+
+    .image-preview {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 14px
+    }
+
+    .hp {
+      position: absolute;
+      left: -10000px;
+      top: auto;
+      width: 1px;
+      height: 1px;
+      overflow: hidden
+    }
+
+    .spinner {
+      width: 15px;
+      height: 15px;
+      border: 2px solid currentColor;
+      border-top-color: transparent;
+      display: inline-block;
+      border-radius: 50%;
+      animation: spin .7s linear infinite
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg)
+      }
+    }
+
+    /* Administration */
+    .admin-layout {
+      display: grid;
+      grid-template-columns: 230px minmax(0, 1fr);
+      min-height: 100vh
+    }
+
+    .sidebar {
+      border-right: 1px solid var(--line);
+      padding: 32px 22px;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: #0f0f0f
+    }
+
+    .sidebar .brand {
+      padding: 0 3px 32px
+    }
+
+    .sidebar-caption {
+      font-size: 11px;
+      letter-spacing: .16em;
+      color: #6c6c6c;
+      margin: 4px 14px 13px
+    }
+
+    .side-item {
+      width: 100%;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--muted);
+      padding: 13px 15px;
+      border-radius: 11px;
+      font-size: 14px;
+      font-weight: 550;
+      margin-bottom: 7px
+    }
+
+    .side-item .nav-symbol {
+      font-size: 17px;
+      line-height: 1;
+      width: 18px;
+      color: #858585;
+      text-align: center
+    }
+
+    .side-item.active {
+      background: #202020;
+      border-color: rgba(255, 255, 255, .12);
+      color: var(--accent)
+    }
+
+    .side-item.active .nav-symbol {
+      color: var(--accent)
+    }
+
+    .sidebar-foot {
+      margin-top: auto;
+      border-top: 1px solid var(--line);
+      padding-top: 18px;
+      display: grid;
+      gap: 12px
+    }
+
+    .admin-main {
+      min-width: 0;
+      padding: 0 42px 50px
+    }
+
+    .admin-topbar {
+      height: 88px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px
+    }
+
+    .breadcrumb {
+      font-size: 14px;
+      color: var(--muted)
+    }
+
+    .breadcrumb b {
+      color: #e9e9e9;
+      font-weight: 500
+    }
+
+    .admin-account {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 13px;
+      color: var(--muted)
+    }
+
+    .avatar {
+      width: 29px;
+      height: 29px;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      background: #282828;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      color: #e1e1e1
+    }
+
+    .admin-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 34px 0 26px
+    }
+
+    .admin-heading h1 {
+      font-size: 29px
+    }
+
+    .admin-heading p {
+      font-size: 14px;
+      color: var(--muted);
+      margin-top: 7px
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin-bottom: 30px
+    }
+
+    .stat-card {
+      border: 1px solid var(--line);
+      background: linear-gradient(140deg, #1a1a1a, #131313);
+      border-radius: 17px;
+      padding: 20px 22px
+    }
+
+    .stat-label {
+      font-size: 13px;
+      color: var(--muted)
+    }
+
+    .stat-value {
+      font-size: 31px;
+      font-weight: 600;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: -.03em;
+      margin-top: 9px;
+      line-height: 1.2
+    }
+
+    .stat-value span {
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 400;
+      margin-left: 6px
+    }
+
+    .stat-sub {
+      font-size: 12px;
+      color: #7e7e7e;
+      margin-top: 8px
+    }
+
+    .workspace-box {
+      background: #131313;
+      border: 1px solid var(--line);
+      border-radius: 19px;
+      overflow: hidden
+    }
+
+    .workspace-head {
+      padding: 21px 24px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px
+    }
+
+    .workspace-head h2 {
+      font-size: 17px
+    }
+
+    .toolbar {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap
+    }
+
+    .segmented {
+      display: flex;
+      padding: 4px;
+      background: #0d0d0d;
+      border: 1px solid var(--line);
+      border-radius: 11px;
+      gap: 3px
+    }
+
+    .segmented button {
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      border-radius: 7px;
+      padding: 6px 12px;
+      font-size: 13px;
+      white-space: nowrap
+    }
+
+    .segmented button.active {
+      background: #2c2c2c;
+      color: #f5f5f5
+    }
+
+    .table-scroll {
+      overflow-x: auto
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      font-size: 14px;
+      text-align: left;
+      white-space: nowrap
+    }
+
+    th {
+      font-size: 12px;
+      color: #919191;
+      font-weight: 500;
+      background: #161616;
+      padding: 13px 21px;
+      border-bottom: 1px solid var(--line)
+    }
+
+    td {
+      padding: 19px 21px;
+      border-bottom: 1px solid rgba(255, 255, 255, .055);
+      color: #e0e0e0
+    }
+
+    tbody tr:last-child td {
+      border-bottom: 0
+    }
+
+    tbody tr:hover {
+      background: rgba(255, 255, 255, .018)
+    }
+
+    .cell-title {
+      font-weight: 550;
+      font-size: 15px
+    }
+
+    .cell-sub {
+      font-size: 12px;
+      color: #848484;
+      margin-top: 5px
+    }
+
+    .cell-date {
+      font-size: 16px;
+      font-weight: 600
+    }
+
+    .table-actions {
+      display: flex;
+      gap: 7px;
+      align-items: center
+    }
+
+    .group-count {
+      font-size: 16px;
+      font-variant-numeric: tabular-nums
+    }
+
+    .group-count span {
+      font-size: 12px;
+      color: var(--muted)
+    }
+
+    .micro-track {
+      height: 3px;
+      background: #2d2d2d;
+      width: 75px;
+      border-radius: 3px;
+      margin-top: 7px;
+      overflow: hidden
+    }
+
+    .micro-track i {
+      display: block;
+      height: 3px;
+      background: var(--accent);
+      border-radius: 3px
+    }
+
+    .admin-info {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      margin-top: 16px;
+      color: #7e7e7e;
+      font-size: 12px
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 17px
+    }
+
+    .form-grid .span2 {
+      grid-column: 1/-1
+    }
+
+    .form-section {
+      font-size: 15px;
+      font-weight: 650;
+      margin: 2px 0 17px;
+      display: flex;
+      align-items: center;
+      gap: 10px
+    }
+
+    .form-section span {
+      font-size: 11px;
+      color: var(--accent);
+      border: 1px solid rgba(255, 255, 255, .22);
+      border-radius: 6px;
+      padding: 3px 6px
+    }
+
+    .publish-options {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 9px
+    }
+
+    .publish-option {
+      border: 1px solid var(--line);
+      padding: 13px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 14px;
+      background: #121212
+    }
+
+    .publish-option:has(input:checked) {
+      border-color: rgba(255, 255, 255, .6);
+      background: rgba(255, 255, 255, .06)
+    }
+
+    .publish-option input {
+      width: 16px;
+      min-height: 16px;
+      height: 16px;
+      accent-color: var(--accent)
+    }
+
+    .dialog-footer {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 10px;
+      border-top: 1px solid var(--line);
+      padding-top: 22px;
+      margin-top: 24px
+    }
+
+    .roster-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 330px;
+      gap: 22px
+    }
+
+    .roster-tools {
+      padding: 23px;
+      background: #171717;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      align-self: start;
+      position: sticky;
+      top: 20px
+    }
+
+    .roster-tools h2 {
+      font-size: 18px
+    }
+
+    .roster-text {
+      font-family: var(--font);
+      font-size: 15px;
+      line-height: 2.2;
+      background: #101010;
+      margin: 18px 0 14px;
+      min-height: 320px;
+      white-space: pre
+    }
+
+    .roster-filter {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 15px;
+      align-items: center;
+      margin-bottom: 22px
+    }
+
+    .payment-badge {
+      font-size: 12px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, .04);
+      border: 1px solid var(--line);
+      padding: 4px 7px;
+      display: inline-flex
+    }
+
+    .payment-confirmed {
+      color: var(--green);
+      background: rgba(255, 255, 255, .05);
+      border-color: rgba(255, 255, 255, .13)
+    }
+
+    .payment-reported {
+      color: #cecece;
+      background: rgba(255, 255, 255, .05);
+      border-color: rgba(255, 255, 255, .18)
+    }
+
+    .row-slot {
+      font-size: 20px;
+      color: #7e7e7e;
+      font-variant-numeric: tabular-nums
+    }
+
+    .login-shell {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 32px
+    }
+
+    .login-card {
+      width: 100%;
+      max-width: 430px;
+      background: linear-gradient(145deg, #242424, #151515);
+      border: 1px solid rgba(255, 255, 255, .13);
+      border-radius: 26px;
+      padding: 36px;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, .3)
+    }
+
+    .login-card .brand {
+      margin-bottom: 35px
+    }
+
+    .login-card h1 {
+      font-size: 29px;
+      margin-bottom: 10px
+    }
+
+    .login-card p {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 25px
+    }
+
+    .login-card .button {
+      margin-top: 22px
+    }
+
+    .login-card .login-footer {
+      font-size: 12px;
+      text-align: center;
+      color: #6e6e6e;
+      margin-top: 25px
+    }
+
+    .settings-box {
+      padding: 28px;
+      max-width: 700px
+    }
+
+    .settings-box .form-fields {
+      margin-top: 22px
+    }
+
+    .settings-box .button {
+      margin-top: 22px
+    }
+
+    .preview-tools {
+      display: flex;
+      align-items: center;
+      gap: 12px
+    }
+
+    .code-label {
+      font-size: 13px;
+      letter-spacing: .1em
+    }
+
+    .cancelled-row {
+      opacity: .6
+    }
+
+    .receipt-date {
+      font-size: 14px
+    }
+
+    @media(min-width:1400px) {
+      .admin-main {
+        max-width: 1500px
+      }
+
+      .main-grid {
+        gap: 52px;
+        grid-template-columns: minmax(0, 1fr) 430px
+      }
+    }
+
+    @media(max-width:1120px) {
+      .admin-main {
+        padding: 0 25px 38px
+      }
+
+      .admin-layout {
+        grid-template-columns: 198px minmax(0, 1fr)
+      }
+
+      .sidebar {
+        padding: 26px 15px
+      }
+
+      .roster-grid {
+        grid-template-columns: 1fr
+      }
+
+      .roster-tools {
+        position: static
+      }
+
+      .roster-text {
+        min-height: 270px
+      }
+
+      .main-grid {
+        grid-template-columns: minmax(0, 1fr) 375px;
+        gap: 24px
+      }
+
+      .registration-panel {
+        padding: 24px
+      }
+
+      .stat-card {
+        padding: 17px 18px
+      }
+    }
+
+    @media(max-width:850px) {
+      .shell {
+        padding: 0 22px
+      }
+
+      .topbar {
+        height: 76px
+      }
+
+      .page-head {
+        padding: 34px 0 27px
+      }
+
+      .main-grid {
+        grid-template-columns: 1fr;
+        gap: 28px;
+        max-width: 650px;
+        margin: auto
+      }
+
+      .registration-panel {
+        position: static
+      }
+
+      .main-grid #registration-panel {
+        scroll-margin-top: 22px
+      }
+
+      .event-card {
+        padding: 22px
+      }
+
+      .page-head p {
+        font-size: 14px
+      }
+
+      .event-number {
+        display: none
+      }
+
+      h1 {
+        font-size: 31px
+      }
+
+      .admin-layout {
+        display: block
+      }
+
+      .sidebar {
+        position: static;
+        height: auto;
+        padding: 20px 22px 13px;
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+        background: #0e0e0e
+      }
+
+      .sidebar .brand {
+        padding: 0 0 17px
+      }
+
+      .sidebar-caption {
+        display: none
+      }
+
+      .sidebar nav {
+        display: flex;
+        gap: 6px
+      }
+
+      .side-item {
+        margin: 0;
+        padding: 10px 12px;
+        justify-content: center;
+        white-space: nowrap
+      }
+
+      .sidebar-foot {
+        display: none
+      }
+
+      .admin-main {
+        padding: 0 22px 38px
+      }
+
+      .admin-topbar {
+        height: 60px
+      }
+
+      .stats-grid {
+        gap: 10px
+      }
+
+      .stat-card {
+        padding: 17px 14px
+      }
+
+      .stat-value {
+        font-size: 26px
+      }
+
+      .stat-sub {
+        display: none
+      }
+
+      .admin-heading {
+        padding: 25px 0 22px
+      }
+
+      .admin-heading h1 {
+        font-size: 27px
+      }
+
+      .roster-grid {
+        gap: 18px
+      }
+
+      .roster-tools {
+        width: 100%
+      }
+
+      .top-actions .nav-button {
+        padding: 9px 10px
+      }
+    }
+
+    @media(max-width:530px) {
+      .shell {
+        padding: 0 18px
+      }
+
+      .topbar {
+        height: 72px
+      }
+
+      .brand-name {
+        font-size: 15px
+      }
+
+      .brand-en {
+        font-size: 9px;
+        letter-spacing: .11em
+      }
+
+      .brand-mark {
+        width: 32px;
+        font-size: 32px
+      }
+
+      .brand {
+        gap: 9px
+      }
+
+      .top-actions .official-link {
+        display: none
+      }
+
+      .top-actions .nav-button {
+        font-size: 13px;
+        padding: 8px
+      }
+
+      .preview-banner {
+        font-size: 12px;
+        padding: 9px 12px;
+        align-items: start
+      }
+
+      .preview-banner a {
+        font-size: 12px
+      }
+
+      .page-head {
+        padding: 27px 0 24px
+      }
+
+      h1 {
+        font-size: 29px
+      }
+
+      .page-head p {
+        font-size: 14px;
+        margin-top: 9px
+      }
+
+      .date-tab {
+        padding: 10px 15px;
+        min-width: 92px
+      }
+
+      .date-tab .day {
+        font-size: 20px
+      }
+
+      .date-list {
+        gap: 8px
+      }
+
+      .event-card {
+        padding: 20px
+      }
+
+      .session-time {
+        font-size: 31px
+      }
+
+      .session-time span {
+        display: block;
+        margin: 8px 0 0;
+        font-size: 13px
+      }
+
+      .session-top {
+        margin-bottom: 18px
+      }
+
+      .session-title {
+        margin-top: 6px;
+        font-size: 13px
+      }
+
+      .session-bottom {
+        margin-top: 20px;
+        font-size: 13px
+      }
+
+      .fee {
+        font-size: 24px
+      }
+
+      .registration-panel {
+        padding: 23px 21px;
+        border-radius: 20px
+      }
+
+      .receipt-actions {
+        grid-template-columns: 1fr
+      }
+
+      .dialog-head {
+        padding: 18px 20px
+      }
+
+      .dialog-body {
+        padding: 22px 20px
+      }
+
+      .success-title {
+        font-size: 25px
+      }
+
+      .payment-card {
+        padding: 20px
+      }
+
+      .bank-account {
+        font-size: 22px
+      }
+
+      .app-dialog {
+        border-radius: 20px
+      }
+
+      .payment-price {
+        font-size: 26px
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr
+      }
+
+      .form-grid .span2 {
+        grid-column: auto
+      }
+
+      .publish-options {
+        grid-template-columns: 1fr
+      }
+
+      .publish-option {
+        padding: 11px 13px
+      }
+
+      .admin-main {
+        padding: 0 16px 35px
+      }
+
+      .sidebar {
+        padding: 18px 16px 12px
+      }
+
+      .side-item {
+        padding: 9px;
+        font-size: 13px;
+        gap: 8px
+      }
+
+      .side-item .nav-symbol {
+        font-size: 15px
+      }
+
+      .admin-heading {
+        align-items: start
+      }
+
+      .admin-heading h1 {
+        font-size: 25px
+      }
+
+      .admin-heading p {
+        font-size: 13px
+      }
+
+      .admin-heading .button {
+        padding: 10px 12px;
+        font-size: 13px;
+        white-space: nowrap
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        margin-bottom: 22px
+      }
+
+      .stat-value {
+        font-size: 29px
+      }
+
+      .workspace-head {
+        padding: 17px 16px;
+        align-items: start;
+        flex-wrap: wrap
+      }
+
+      .segmented button {
+        padding: 5px 10px
+      }
+
+      .admin-info {
+        display: block
+      }
+
+      .admin-info span {
+        display: block;
+        margin-top: 8px
+      }
+
+      .roster-filter {
+        grid-template-columns: 1fr
+      }
+
+      .roster-filter .toolbar {
+        justify-content: space-between
+      }
+
+      .roster-tools {
+        padding: 20px
+      }
+
+      .login-card {
+        padding: 29px
+      }
+
+      .login-shell {
+        padding: 24px
+      }
+
+      .settings-box {
+        padding: 22px
+      }
+
+      .receipt-meta {
+        font-size: 13px
+      }
+
+      .dialog-footer {
+        flex-wrap: wrap
+      }
+
+      .dialog-footer .button {
+        flex: 1
+      }
+
+      th,
+      td {
+        padding-left: 16px;
+        padding-right: 16px
+      }
+    }
+
+    @media(prefers-reduced-motion:reduce) {
+      * {
+        scroll-behavior: auto !important;
+        transition: none !important;
+        animation-duration: .001ms !important
+      }
+    }
+
+    /* Monochrome v2: clear selections, quiet chrome, one place to review price. */
+    :root {
+      --bg: #000;
+      --panel: #111;
+      --panel2: #191919;
+      --ink: #f5f5f7;
+      --muted: #a1a1a6;
+      --accent: #f5f5f7;
+      --green: #f5f5f7;
+      --red: #f5f5f7;
+      --line: rgba(255, 255, 255, .14)
+    }
+
+    body:before {
+      display: none
+    }
+
+    .shell {
+      max-width: 1220px
+    }
+
+    .topbar {
+      height: 80px
+    }
+
+    .brand-mark {
+      font-size: 38px
+    }
+
+    .brand-en {
+      font-size: 10px
+    }
+
+    .eyebrow {
+      color: #9d9da3;
+      letter-spacing: .16em;
+      font-size: 12px
+    }
+
+    .preview-banner {
+      background: #0d0d0d;
+      border-color: #232323;
+      color: #8c8c91;
+      padding: 10px 16px;
+      font-size: 12px
+    }
+
+    .preview-banner a {
+      font-size: 13px;
+      color: #f5f5f7
+    }
+
+    .page-head {
+      padding: 42px 0 38px;
+      align-items: center
+    }
+
+    .page-head h1 {
+      font-size: 48px;
+      font-weight: 650;
+      letter-spacing: -.045em
+    }
+
+    .page-head p {
+      font-size: 16px;
+      color: #9b9ba1;
+      margin-top: 9px
+    }
+
+    .flow-steps {
+      display: flex;
+      gap: 22px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      color: #808086;
+      font-size: 14px
+    }
+
+    .flow-steps li {
+      display: flex;
+      gap: 8px;
+      align-items: center
+    }
+
+    .flow-steps span {
+      border: 1px solid #444;
+      border-radius: 50%;
+      width: 25px;
+      height: 25px;
+      display: grid;
+      place-items: center;
+      font-size: 12px
+    }
+
+    .flow-steps .active {
+      color: #f5f5f7
+    }
+
+    .flow-steps .active span {
+      color: #000;
+      background: #f5f5f7;
+      border-color: #f5f5f7
+    }
+
+    .main-grid {
+      grid-template-columns: minmax(0, 1fr) 420px;
+      gap: 52px
+    }
+
+    .section-label {
+      font-size: 21px;
+      letter-spacing: -.025em;
+      font-weight: 600
+    }
+
+    .section-number {
+      font-size: 13px;
+      letter-spacing: .04em;
+      color: #77777e;
+      font-weight: 450;
+      margin-right: 10px
+    }
+
+    .section-head {
+      margin-bottom: 20px
+    }
+
+    .date-list {
+      margin-bottom: 20px;
+      gap: 9px
+    }
+
+    .date-tab {
+      border-radius: 13px;
+      background: #0a0a0a;
+      min-width: 106px;
+      padding: 11px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px
+    }
+
+    .date-tab .day {
+      font-size: 16px;
+      font-weight: 600;
+      white-space: nowrap
+    }
+
+    .date-tab .weekday {
+      font-size: 12px;
+      margin: 0
+    }
+
+    .date-tab.active {
+      background: #f5f5f7;
+      border-color: #f5f5f7;
+      color: #000
+    }
+
+    .event-list {
+      gap: 12px
+    }
+
+    .event-card {
+      background: #101010;
+      border-radius: 20px;
+      padding: 23px 25px;
+      box-shadow: none
+    }
+
+    .event-card.selected {
+      background: #191919;
+      border-color: #f5f5f7;
+      box-shadow: 0 0 0 1px #f5f5f7
+    }
+
+    .event-card.selected:before {
+      display: none
+    }
+
+    .event-card.disabled {
+      cursor: not-allowed;
+      opacity: .52
+    }
+
+    .session-top {
+      margin-bottom: 17px
+    }
+
+    .session-tag {
+      font-size: 13px;
+      letter-spacing: .02em;
+      color: #939399
+    }
+
+    .session-time {
+      font-size: 33px;
+      font-weight: 550;
+      letter-spacing: -.035em
+    }
+
+    .session-time span {
+      font-size: 17px;
+      margin-left: 10px;
+      color: #a1a1a6
+    }
+
+    .session-title {
+      font-size: 13px;
+      color: #85858b;
+      margin-top: 7px
+    }
+
+    .fee {
+      font-size: 26px;
+      font-weight: 550
+    }
+
+    .fee .small {
+      font-size: 12px;
+      text-align: right;
+      margin-top: 7px
+    }
+
+    .fee small {
+      font-size: 12px
+    }
+
+    .session-bottom {
+      margin-top: 22px;
+      font-size: 14px
+    }
+
+    .selected-meta {
+      font-size: 14px
+    }
+
+    .selected-indicator {
+      width: 23px;
+      height: 23px;
+      background: transparent;
+      border-color: #555
+    }
+
+    .selected .selected-indicator {
+      background: #f5f5f7;
+      color: #000
+    }
+
+    .badge {
+      font-size: 12px;
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-weight: 450
+    }
+
+    .badge-open {
+      color: #f5f5f7;
+      background: #252525;
+      border-color: #393939
+    }
+
+    .badge-full,
+    .badge-closed,
+    .badge-cancelled,
+    .badge-scheduled,
+    .badge-completed,
+    .badge-archived,
+    .badge-draft {
+      color: #ababaf;
+      background: #1e1e1e;
+      border-color: #333
+    }
+
+    .registration-panel {
+      background: linear-gradient(140deg, #181818, #111);
+      border: 1px solid #303030;
+      border-radius: 24px;
+      padding: 29px 30px;
+      box-shadow: none;
+      top: 24px
+    }
+
+    .panel-intro {
+      margin-bottom: 24px
+    }
+
+    .panel-intro h2 {
+      font-size: 23px;
+      font-weight: 550
+    }
+
+    .panel-intro p {
+      font-size: 14px;
+      line-height: 1.6;
+      color: #9b9ba1;
+      margin-top: 7px
+    }
+
+    .field label {
+      font-size: 14px;
+      font-weight: 450
+    }
+
+    .field .help {
+      font-size: 12px;
+      line-height: 1.6
+    }
+
+    .form-fields {
+      gap: 18px
+    }
+
+    input,
+    select,
+    textarea {
+      background: #090909;
+      border-color: #333;
+      color: #f5f5f7;
+      border-radius: 12px;
+      padding: 12px 14px
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: #75757a
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      box-shadow: 0 0 0 3px rgba(255, 255, 255, .09);
+      border-color: #fff
+    }
+
+    .order-summary {
+      padding: 20px 0 0;
+      border-top: 1px solid #333;
+      margin-top: 26px
+    }
+
+    .summary-heading {
+      font-size: 15px;
+      font-weight: 550;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 12px
+    }
+
+    .summary-heading span {
+      font-size: 13px;
+      font-weight: 400;
+      color: #99999e
+    }
+
+    .summary-line {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      color: #99999e;
+      font-size: 14px;
+      margin: 7px 0
+    }
+
+    .discount-line {
+      color: #f5f5f7
+    }
+
+    .summary-total {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 18px 0 9px;
+      padding-top: 17px;
+      border-top: 1px solid #2b2b2b;
+      font-size: 15px
+    }
+
+    .summary-total strong {
+      font-size: 28px;
+      font-weight: 550;
+      letter-spacing: -.03em
+    }
+
+    .summary-total small {
+      font-size: 12px;
+      font-weight: 450;
+      color: #98989e
+    }
+
+    .order-summary>p {
+      font-size: 12px
+    }
+
+    .agreement {
+      font-size: 12px;
+      margin: 22px 0;
+      line-height: 1.7
+    }
+
+    .button {
+      border-radius: 11px;
+      background: #262626;
+      font-weight: 500;
+      min-height: 46px;
+      font-size: 14px
+    }
+
+    .button:hover {
+      background: #333
+    }
+
+    .button-primary,
+    .button-white {
+      background: #f5f5f7;
+      color: #090909;
+      border-color: #f5f5f7;
+      box-shadow: none
+    }
+
+    .button-primary:hover,
+    .button-white:hover {
+      background: #d9d9dc;
+      color: #000
+    }
+
+    .button-ghost {
+      background: transparent
+    }
+
+    .button-sm {
+      font-size: 13px;
+      min-height: 34px
+    }
+
+    .full-width.button-primary {
+      border-radius: 14px;
+      min-height: 50px
+    }
+
+    .error-box {
+      background: #191919;
+      border-color: #999;
+      color: #f5f5f7
+    }
+
+    .info-box {
+      background: #1c1c1c;
+      color: #b9b9bf;
+      border-color: #383838
+    }
+
+    .offer-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 15px
+    }
+
+    .offer-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      text-align: left;
+      background: #111;
+      color: #f5f5f7;
+      border: 1px solid #373737;
+      border-radius: 17px;
+      padding: 19px 23px;
+      width: 100%
+    }
+
+    .offer-card:hover {
+      border-color: #888
+    }
+
+    .offer-card.chosen {
+      border-color: #f5f5f7;
+      background: #1b1b1b
+    }
+
+    .offer-card strong {
+      display: block;
+      font-size: 17px;
+      letter-spacing: -.02em;
+      margin: 3px 0
+    }
+
+    .offer-kicker {
+      display: inline-block;
+      font-size: 12px;
+      color: #d1d1d6;
+      letter-spacing: .04em
+    }
+
+    .offer-card .small {
+      font-size: 12px
+    }
+
+    .offer-price {
+      font-size: 28px;
+      font-weight: 550;
+      white-space: nowrap;
+      text-align: right;
+      letter-spacing: -.035em
+    }
+
+    .offer-price span {
+      display: block;
+      font-size: 12px;
+      letter-spacing: 0;
+      font-weight: 450;
+      color: #adadb3;
+      margin-top: 6px
+    }
+
+    .notice {
+      border-top: 0;
+      margin-top: 22px;
+      padding-top: 0;
+      font-size: 13px;
+      line-height: 1.8
+    }
+
+    .membership-note {
+      margin-top: 24px;
+      border-radius: 0;
+      border: 0;
+      border-top: 1px solid #222;
+      padding: 18px 0;
+      align-items: center;
+      color: #86868b;
+      font-size: 13px;
+      gap: 20px
+    }
+
+    .membership-note .point {
+      font-size: 22px;
+      white-space: nowrap
+    }
+
+    .membership-note .point-unit {
+      font-size: 10px;
+      letter-spacing: .04em
+    }
+
+    .footer {
+      border-top-color: #242424;
+      color: #737379
+    }
+
+    .payment-card {
+      background: #191919;
+      border-color: #444;
+      box-shadow: none
+    }
+
+    .payment-price {
+      font-weight: 550
+    }
+
+    .payment-top {
+      flex-wrap: wrap
+    }
+
+    .receipt-entry {
+      padding: 13px 0;
+      border-bottom: 1px solid #333;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center
+    }
+
+    .receipt-entry strong {
+      font-size: 15px;
+      font-weight: 500
+    }
+
+    .receipt-entry .small {
+      font-size: 12px
+    }
+
+    .group-links {
+      display: grid;
+      gap: 10px
+    }
+
+    .app-dialog,
+    .dialog-head {
+      background: #151515
+    }
+
+    .success-circle {
+      background: #252525;
+      border-color: #555;
+      color: #fff
+    }
+
+    .success-title {
+      font-weight: 550
+    }
+
+    .sidebar {
+      background: #0b0b0b;
+      border-color: #242424
+    }
+
+    .sidebar .brand {
+      padding-bottom: 36px
+    }
+
+    .side-item {
+      border-radius: 12px;
+      font-size: 14px;
+      padding: 13px 15px
+    }
+
+    .side-item.active {
+      background: #f5f5f7;
+      color: #000;
+      border-color: #f5f5f7
+    }
+
+    .side-item.active .nav-symbol {
+      color: #000
+    }
+
+    .side-item .nav-symbol {
+      color: #777
+    }
+
+    .sidebar-caption {
+      font-size: 11px;
+      color: #777;
+      letter-spacing: .12em
+    }
+
+    .sidebar-foot {
+      border-color: #252525
+    }
+
+    .admin-layout {
+      background: #000
+    }
+
+    .admin-topbar {
+      height: 78px;
+      border-color: #242424
+    }
+
+    .admin-heading h1 {
+      font-size: 32px;
+      letter-spacing: -.035em;
+      font-weight: 550
+    }
+
+    .admin-heading {
+      padding: 35px 0 27px
+    }
+
+    .stat-card {
+      background: #111;
+      border-color: #2b2b2b;
+      border-radius: 17px;
+      padding: 20px 22px
+    }
+
+    .stat-label {
+      font-size: 13px
+    }
+
+    .stat-value {
+      font-weight: 500;
+      font-size: 32px
+    }
+
+    .workspace-box {
+      background: #0d0d0d;
+      border-color: #292929;
+      border-radius: 18px
+    }
+
+    .workspace-head h2 {
+      font-weight: 500
+    }
+
+    .workspace-head {
+      border-color: #292929
+    }
+
+    .segmented {
+      background: #000;
+      border-color: #292929
+    }
+
+    .segmented button.active {
+      background: #f5f5f7;
+      color: #000
+    }
+
+    .segmented button {
+      font-size: 13px
+    }
+
+    .cell-sub {
+      color: #89898e;
+      font-size: 12px
+    }
+
+    th {
+      background: #151515;
+      color: #8c8c91;
+      font-size: 12px
+    }
+
+    td {
+      color: #dedee1
+    }
+
+    .roster-tools {
+      background: #121212;
+      border-color: #303030
+    }
+
+    .roster-text {
+      background: #080808
+    }
+
+    .payment-badge {
+      color: #adadb3;
+      border-color: #333;
+      background: #191919;
+      font-size: 12px
+    }
+
+    .payment-confirmed {
+      color: #fff;
+      border-color: #666
+    }
+
+    .payment-reported {
+      color: #ddd;
+      border-color: #444
+    }
+
+    .login-card {
+      background: linear-gradient(135deg, #1a1a1a, #0f0f0f);
+      box-shadow: none
+    }
+
+    .publish-option {
+      background: #0c0c0c
+    }
+
+    .publish-option:has(input:checked) {
+      background: #222;
+      border-color: #fff
+    }
+
+    .form-section span {
+      border-color: #555;
+      color: #bbb
+    }
+
+    .offer-admin-list {
+      display: grid;
+      gap: 15px
+    }
+
+    .offer-admin-card {
+      padding: 25px;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: center
+    }
+
+    .offer-admin-card h2 {
+      font-size: 20px;
+      margin: 5px 0 7px;
+      font-weight: 500
+    }
+
+    .offer-admin-card .toolbar {
+      justify-content: flex-end
+    }
+
+    .offer-admin-card .offer-price {
+      margin-bottom: 12px
+    }
+
+    .offer-check {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      font-size: 14px
+    }
+
+    .offer-check input {
+      width: 18px;
+      min-height: 18px
+    }
+
+    .form-hint {
+      font-size: 13px;
+      color: #9b9ba1;
+      line-height: 1.8
+    }
+
+    .booking-tag {
+      font-size: 11px;
+      color: #ddd;
+      display: inline-flex;
+      border: 1px solid #555;
+      border-radius: 5px;
+      padding: 1px 5px;
+      margin-left: 5px
+    }
+
+    .group-payment-note {
+      font-size: 13px;
+      color: #aaa;
+      line-height: 1.8;
+      background: #222;
+      padding: 12px 14px;
+      border-radius: 12px;
+      margin-bottom: 20px
+    }
+
+    .button-danger {
+      color: #fff;
+      background: #202020;
+      border-color: #777
+    }
+
+    @media(min-width:1400px) {
+      .main-grid {
+        grid-template-columns: minmax(0, 1fr) 430px;
+        gap: 60px
+      }
+    }
+
+    @media(max-width:1120px) {
+      .main-grid {
+        grid-template-columns: minmax(0, 1fr) 385px;
+        gap: 30px
+      }
+
+      .registration-panel {
+        padding: 25px
+      }
+
+      .flow-steps {
+        gap: 13px;
+        font-size: 13px
+      }
+
+      .session-time span {
+        font-size: 15px
+      }
+    }
+
+    @media(max-width:850px) {
+      .main-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        max-width: 650px
+      }
+
+      .page-head {
+        display: block;
+        max-width: 650px;
+        margin: auto;
+        padding: 32px 0
+      }
+
+      .page-head h1 {
+        font-size: 40px
+      }
+
+      .flow-steps {
+        margin-top: 21px;
+        gap: 24px
+      }
+
+      .registration-panel {
+        position: static
+      }
+
+      .session-time span {
+        font-size: 17px
+      }
+
+      .sidebar {
+        background: #0b0b0b
+      }
+
+      .sidebar .brand {
+        padding-bottom: 18px
+      }
+
+      .admin-heading h1 {
+        font-size: 29px
+      }
+    }
+
+    @media(max-width:530px) {
+      .shell {
+        padding: 0 20px
+      }
+
+      .topbar {
+        height: 70px
+      }
+
+      .page-head {
+        padding: 30px 0
+      }
+
+      .page-head h1 {
+        font-size: 37px
+      }
+
+      .page-head p {
+        font-size: 14px
+      }
+
+      .flow-steps {
+        gap: 17px;
+        font-size: 12px
+      }
+
+      .flow-steps span {
+        width: 22px;
+        height: 22px
+      }
+
+      .flow-steps li {
+        gap: 6px
+      }
+
+      .section-label {
+        font-size: 20px
+      }
+
+      .section-head .small {
+        font-size: 12px
+      }
+
+      .date-tab {
+        padding: 10px 13px;
+        min-width: 98px;
+        gap: 9px
+      }
+
+      .date-tab .day {
+        font-size: 15px
+      }
+
+      .event-card {
+        padding: 21px 20px
+      }
+
+      .session-time {
+        font-size: 29px
+      }
+
+      .session-time span {
+        font-size: 14px;
+        margin: 8px 0 0;
+        display: block
+      }
+
+      .session-top {
+        gap: 8px
+      }
+
+      .session-tag {
+        font-size: 12px
+      }
+
+      .session-bottom {
+        font-size: 13px
+      }
+
+      .selected-meta {
+        font-size: 13px
+      }
+
+      .capacity-caption {
+        display: none
+      }
+
+      .registration-panel {
+        padding: 25px 22px;
+        border-radius: 22px
+      }
+
+      .offer-card {
+        padding: 17px 18px;
+        gap: 12px
+      }
+
+      .offer-price {
+        font-size: 25px
+      }
+
+      .offer-card strong {
+        font-size: 15px
+      }
+
+      .offer-card .small {
+        font-size: 11px
+      }
+
+      .panel-intro h2 {
+        font-size: 22px
+      }
+
+      .summary-total strong {
+        font-size: 27px
+      }
+
+      .offer-admin-card {
+        align-items: start;
+        flex-wrap: wrap;
+        padding: 22px
+      }
+
+      .offer-admin-card>.toolbar {
+        width: 100%;
+        justify-content: space-between
+      }
+
+      .admin-heading h1 {
+        font-size: 27px
+      }
+
+      .side-item {
+        padding: 9px 11px;
+        gap: 6px;
+        font-size: 12px
+      }
+
+      .sidebar nav {
+        overflow-x: auto
+      }
+
+      .side-item .nav-symbol {
+        font-size: 14px
+      }
+
+      .payment-report {
+        grid-template-columns: 1fr
+      }
+
+      .receipt-actions {
+        grid-template-columns: 1fr
+      }
+
+      .preview-banner {
+        padding: 10px 12px;
+        flex-wrap: wrap
+      }
+
+      .preview-banner a {
+        font-size: 12px
+      }
+
+      .bank-account {
+        font-size: 22px
+      }
+
+      .details-row {
+        gap: 12px
+      }
+
+      .registration-panel {
+        scroll-margin-top: 16px
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="shell">
+    <div class="topbar">
+      <a class="brand" href="rn-scrim.html" id="brand-home" aria-label="銳能娛樂交流賽報名首頁">
+        <span class="brand-mark" aria-hidden="true">
+          ϟ
+        </span>
+        <div>
+          <div class="brand-name">
+            銳能娛樂
+          </div>
+          <div class="brand-en">
+            REBORN ENTERTAINMENT
+          </div>
+        </div>
+      </a>
+      <nav class="top-actions" aria-label="主要導覽">
+        <button class="nav-button" id="lookup-button">
+          我的報名
+        </button>
+        <a class="nav-button official-link hidden" id="official-line" target="_blank" rel="noopener noreferrer">
+          官方 LINE
+        </a>
+      </nav>
+    </div>
+    <div id="preview-mount">
+    </div>
+  </header>
+  <main class="shell">
+    <div class="page-head">
+      <div>
+        <div class="eyebrow">
+          FREE FIRE SCRIMS
+        </div>
+        <h1>
+          交流賽報名
+        </h1>
+        <p>
+          選擇時段，填一次資料就完成。無須註冊。
+        </p>
+      </div>
+      <ol class="flow-steps" aria-label="報名流程">
+        <li class="active">
+          <span>
+            1
+          </span>
+          選擇時段
+        </li>
+        <li>
+          <span>
+            2
+          </span>
+          隊伍資料
+        </li>
+        <li>
+          <span>
+            3
+          </span>
+          匯款入群
+        </li>
+      </ol>
+    </div>
+    <div class="main-grid">
+      <section aria-labelledby="session-heading">
+        <div class="between section-head">
+          <h2 class="section-label" id="session-heading">
+            <span class="section-number">
+              01
+            </span>
+            選擇日期與時段
+          </h2>
+          <span class="small muted">
+            最多選 2 場
+          </span>
+        </div>
+        <div class="date-list" id="date-list" role="group" aria-label="比賽日期">
+        </div>
+        <div class="event-list" id="event-list" aria-live="polite">
+          <div class="empty">
+            正在取得開放場次…
+          </div>
+        </div>
+        <div id="offer-list" class="offer-list">
+        </div>
+        <div class="error-box hidden" id="list-error">
+        </div>
+        <p class="notice" id="notice">
+        </p>
+        <div class="membership-note">
+          <span class="point">
+            50
+            <span class="point-unit">
+              POINTS / 場
+            </span>
+          </span>
+          <p>
+            參賽後可至銳能會員補登點數。
+          </p>
+        </div>
+      </section>
+      <section class="registration-panel" id="registration-panel" aria-labelledby="registration-heading">
+        <div class="panel-intro">
+          <h2 id="registration-heading">
+            <span class="section-number">
+              02
+            </span>
+            隊伍資料
+          </h2>
+          <p>
+            單場或雙時段，隊伍資料只要填一次。
+          </p>
+        </div>
+        <form id="registration-form">
+          <div class="form-fields">
+            <div class="field">
+              <label for="team-name">
+                隊伍名稱
+              </label>
+              <input id="team-name" name="teamName" autocomplete="organization" placeholder="例如 CZL" maxlength="30" required>
+            </div>
+            <div class="field">
+              <label for="line-name">
+                負責人 LINE 名稱
+              </label>
+              <input id="line-name" name="lineName" autocomplete="nickname" placeholder="例如 愷愷" maxlength="30" required>
+            </div>
+            <div class="field">
+              <label for="contact-id">
+                LINE 聯絡 ID
+              </label>
+              <input id="contact-id" name="contactId" placeholder="輸入可搜尋的 LINE ID" maxlength="60" autocomplete="off" autocapitalize="none" spellcheck="false" required>
+              <span class="help">
+                LINE ID 與顯示名稱不同，請確認可供賽務搜尋。
+              </span>
+            </div>
+          </div>
+          <div class="hp" aria-hidden="true">
+            <label>
+              Website
+              <input name="website" tabindex="-1" autocomplete="off">
+            </label>
+          </div>
+          <div class="order-summary" id="chosen-summary" aria-live="polite">
+          </div>
+          <label class="agreement">
+            <input type="checkbox" id="agree" required>
+            <span>
+              確認隊伍資料正確，並同意於期限內匯款。送出後即保留所選場次名額。
+            </span>
+          </label>
+          <button class="button button-primary full-width" id="register-submit" type="submit" disabled>
+            請先選擇時段
+          </button>
+          <div id="register-error" class="error-box hidden" role="alert">
+          </div>
+          <p class="submit-note">
+            送出後即可儲存匯款資訊、加入賽事群組
+          </p>
+        </form>
+      </section>
+    </div>
+  </main>
+  <footer class="shell">
+    <div class="footer">
+      <span>
+        © 2026 REBORN ENTERTAINMENT
+      </span>
+      <span>
+        所有時間以台灣時間為準 · 聯絡資料僅供賽事使用
+      </span>
+    </div>
+  </footer>
+  <dialog id="app-dialog" class="app-dialog" aria-labelledby="dialog-title">
+    <div class="dialog-head">
+      <h2 id="dialog-title"></h2>
+      <button type="button" id="dialog-close" class="dialog-close" aria-label="關閉視窗">×</button>
+    </div>
+    <div class="dialog-body" id="dialog-body"></div>
+  </dialog>
+  <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+
+  <!-- 以下為報名系統功能程式，無須填寫 Apps Script 網址 -->
+  <script>
+    /* Shared domain rules. Embedded into both HTML files and Code.gs. */
+    var RNCore = (function() {
+      'use strict';
+      var ADMIN = ['adminList', 'adminGetRoster', 'adminSaveEvent', 'adminSetState', 'adminPatchRegistration',
+        'adminSaveRoster', 'adminSaveSettings', 'adminSaveOffer'
+      ];
+
+      function fail(message, code) {
+        var e = new Error(message);
+        e.code = code || 'VALIDATION';
+        throw e;
+      }
+
+      function text(value, label, max, optional) {
+        var s = String(value == null ? '' : value).trim().replace(/[\t ]+/g, ' ');
+        if ((!s && !optional) || s.length > (max || 100) || /[\r\n\x00-\x08\x0B\x0C\x0E-\x1F]/.test(s)) fail(
+          label + '格式不正確');
+        return s;
+      }
+
+      function norm(s) {
+        return String(s || '').normalize('NFKC').toLowerCase().replace(/\s/g, '');
+      }
+
+      function dateOK(s) {
+        if (!/^\d{4}-\d{2}-\d{2}$/.test(s)) return false;
+        var d = new Date(s + 'T12:00:00+08:00');
+        return isFinite(d.getTime()) && new Date(d.getTime() + 8 * 3600000).toISOString().slice(0, 10) === s;
+      }
+
+      function today(now) {
+        return new Date(now + 8 * 3600000).toISOString().slice(0, 10);
+      }
+
+      function addDays(s, n) {
+        return new Date(new Date(s + 'T12:00:00+08:00').getTime() + n * 86400000 + 8 * 3600000).toISOString()
+          .slice(0, 10);
+      }
+
+      function at(date, time) {
+        if (!dateOK(date) || !/^([01]\d|2[0-3]):[0-5]\d$/.test(time)) fail('比賽日期或時間不正確');
+        return new Date(date + 'T' + time + ':00+08:00').getTime();
+      }
+
+      function https(value, label, optional) {
+        var s = text(value, label, 500, optional);
+        if (s && !/^https:\/\/[^\s<>"'\\]+$/i.test(s)) fail(label + '請填寫完整的 https:// 網址');
+        return s;
+      }
+
+      function active(db, id) {
+        return db.registrations.filter(function(r) {
+          return r.eventId === id && r.status === 'active';
+        }).sort(function(a, b) {
+          return a.slot - b.slot || a.createdAt.localeCompare(b.createdAt);
+        });
+      }
+
+      function event(db, id) {
+        var e = db.events.find(function(v) {
+          return v.id === id;
+        });
+        if (!e) fail('找不到這個場次，請重新整理', 'NOT_FOUND');
+        return e;
+      }
+
+      function state(e, count, now) {
+        if (e.date < today(now)) return 'archived';
+        if (e.manualState === 'cancelled') return 'cancelled';
+        if (!e.publishAt) return 'draft';
+        if (now < new Date(e.publishAt).getTime()) return 'scheduled';
+        if (now >= at(e.date, e.endTime)) return 'completed';
+        if (count >= Number(e.capacity)) return 'full';
+        if (e.manualState === 'closed' || now >= new Date(e.closeAt).getTime()) return 'closed';
+        return 'open';
+      }
+
+      function summary(db, e, ctx, admin) {
+        var count = active(db, e.id).length,
+          s = state(e, count, ctx.now);
+        var out = {
+          id: e.id,
+          title: e.title,
+          date: e.date,
+          startTime: e.startTime,
+          endTime: e.endTime,
+          mapCount: e.mapCount,
+          capacity: e.capacity,
+          fee: e.fee,
+          count: count,
+          remaining: Math.max(0, e.capacity - count),
+          state: s,
+          closeAt: e.closeAt,
+          hideAt: addDays(e.date, 1) + 'T00:00:00+08:00'
+        };
+        if (admin) {
+          var paidRows = active(db, e.id).filter(function(r) {
+            return r.paymentState === 'confirmed';
+          });
+          Object.assign(out, e, {
+            state: s,
+            count: count,
+            remaining: Math.max(0, e.capacity - count),
+            paid: paidRows.length,
+            income: paidRows.reduce(function(sum, r) {
+              return sum + Number(r.amount);
+            }, 0)
+          });
+        }
+        return out;
+      }
+
+      function viewReg(r) {
+        return {
+          id: r.id,
+          eventId: r.eventId,
+          createdAt: r.createdAt,
+          teamName: r.teamName,
+          lineName: r.lineName,
+          contactId: r.contactId,
+          slot: r.slot,
+          status: r.status,
+          paymentState: r.paymentState,
+          last5: r.last5 || '',
+          paymentReportedAt: r.paymentReportedAt || '',
+          confirmedAt: r.confirmedAt || '',
+          amount: r.amount,
+          memo: r.memo || '',
+          revision: r.revision,
+          bookingId: r.bookingId || r.id,
+          offerId: r.offerId || '',
+          bookingSize: r.snapshot && r.snapshot.bookingSize || (r.bookingId && Number(r.originalAmount) >
+            Number(r.amount) ? 2 : 1),
+          totalAmount: r.totalAmount === '' || r.totalAmount == null ? r.amount : Number(r.totalAmount),
+          originalAmount: r.originalAmount === '' || r.originalAmount == null ? r.amount : Number(r
+            .originalAmount)
+        };
+      }
+
+      function roster(db, e, ctx) {
+        var rows = active(db, e.id),
+          all = db.registrations.filter(function(r) {
+            return r.eventId === e.id;
+          });
+        return {
+          event: summary(db, e, ctx, true),
+          registrations: all.map(viewReg),
+          text: Array.from({
+            length: e.capacity
+          }, function(_, i) {
+            var r = rows[i];
+            return (i + 1) + '.' + (r ? r.teamName + ' @' + r.lineName : '');
+          }).join('\n'),
+          version: ctx.hash(e.revision + '|' + rows.map(function(r) {
+            return r.id + ':' + r.revision + ':' + r.slot;
+          }).join('|')),
+          paid: rows.filter(function(r) {
+            return r.paymentState === 'confirmed';
+          }).length
+        };
+      }
+
+      function snapshot(e) {
+        var o = {};
+        ['id', 'title', 'date', 'startTime', 'endTime', 'mapCount', 'fee', 'bankName', 'bankCode',
+          'bankAccount', 'bankHolder', 'transferNote', 'paymentDueAt', 'groupUrl'
+        ].forEach(function(k) {
+          o[k] = e[k] || '';
+        });
+        return o;
+      }
+
+      function bookingRows(db, r) {
+        return r.bookingId ? db.registrations.filter(function(v) {
+          return v.bookingId === r.bookingId;
+        }) : [r];
+      }
+
+      function receipt(db, r, key) {
+        var e = event(db, r.eventId),
+          v = viewReg(r);
+        var s = Object.assign({}, r.snapshot || snapshot(e), {
+          groupUrl: e.groupUrl
+        });
+        var rows = bookingRows(db, r),
+          entries = rows.map(function(v) {
+            var current = event(db, v.eventId);
+            return {
+              registration: viewReg(v),
+              event: Object.assign({}, v.snapshot || snapshot(current), {
+                groupUrl: current.groupUrl,
+                eventCancelled: current.manualState === 'cancelled'
+              })
+            };
+          }).sort(function(a, b) {
+            return a.event.startTime.localeCompare(b.event.startTime);
+          });
+        return {
+          registration: v,
+          event: s,
+          entries: entries,
+          totalAmount: entries.reduce(function(sum, x) {
+            return sum + Number(x.registration.amount);
+          }, 0),
+          originalAmount: v.originalAmount,
+          receiptKey: key,
+          lookupCode: r.id + '#' + key
+        };
+      }
+
+      function pairEvents(db, ids) {
+        if (!Array.isArray(ids) || ids.length !== 2 || ids[0] === ids[1]) fail('請選擇兩個不同時段');
+        var pair = ids.map(function(id) {
+          return event(db, id);
+        }).sort(function(a, b) {
+          return a.startTime.localeCompare(b.startTime);
+        });
+        if (pair[0].date !== pair[1].date) fail('雙時段請選擇同一天的場次');
+        if (at(pair[0].date, pair[0].endTime) > at(pair[1].date, pair[1].startTime)) fail('兩個時段不能重疊');
+        if (['bankName', 'bankCode', 'bankAccount', 'bankHolder'].some(function(k) {
+            return pair[0][k] !== pair[1][k];
+          })) fail('雙時段需使用相同匯款資料');
+        return pair;
+      }
+
+      function pairKey(ids) {
+        return ids.slice().sort().join('|');
+      }
+
+      function quote(db, ids) {
+        var pair = pairEvents(db, ids),
+          original = Number(pair[0].fee) + Number(pair[1].fee);
+        var offer = (db.offers || []).find(function(o) {
+          return o.enabled === true && pairKey(o.eventIds) === pairKey(ids);
+        });
+        var valid = offer && Number.isInteger(Number(offer.totalPrice)) && Number(offer.totalPrice) >= 0 &&
+          Number(offer.totalPrice) < original;
+        return {
+          eventIds: pair.map(function(e) {
+            return e.id;
+          }),
+          originalAmount: original,
+          totalAmount: valid ? Number(offer.totalPrice) : original,
+          offerId: valid ? offer.id : '',
+          saving: valid ? original - Number(offer.totalPrice) : 0
+        };
+      }
+
+      function pairs(db, ctx) {
+        var open = db.events.filter(function(e) {
+            return state(e, active(db, e.id).length, ctx.now) === 'open';
+          }),
+          out = [];
+        open.forEach(function(e, i) {
+          open.slice(i + 1).forEach(function(f) {
+            try {
+              out.push(quote(db, [e.id, f.id]));
+            } catch (err) {
+              if (err.code !== 'VALIDATION') throw err;
+            }
+          });
+        });
+        return out;
+      }
+
+      function saveOffer(db, p, ctx) {
+        db.offers = db.offers || [];
+        var old = p.id ? db.offers.find(function(o) {
+          return o.id === p.id;
+        }) : null;
+        if (p.id && !old) fail('找不到此優惠');
+        if (old) assertRevision(old.revision, p.revision);
+        var pair = pairEvents(db, p.eventIds),
+          total = Number(p.totalPrice),
+          original = Number(pair[0].fee) + Number(pair[1].fee);
+        if (!Number.isInteger(total) || total < 0 || total >= original) fail('雙時段優惠總價須為整數，且低於兩場原價合計');
+        if (typeof p.enabled !== 'boolean') fail('請選擇優惠是否啟用');
+        if (db.offers.some(function(o) {
+            return o.id !== (old && old.id) && pairKey(o.eventIds) === pairKey(p.eventIds);
+          })) fail('這兩個時段已有優惠，請直接編輯');
+        var next = {
+          id: old ? old.id : ctx.id('O'),
+          eventIds: pair.map(function(e) {
+            return e.id;
+          }),
+          totalPrice: total,
+          enabled: p.enabled,
+          revision: old ? old.revision + 1 : 1,
+          createdAt: old ? old.createdAt : new Date(ctx.now).toISOString(),
+          updatedAt: new Date(ctx.now).toISOString()
+        };
+        if (old) Object.assign(old, next);
+        else db.offers.push(next);
+        return next;
+      }
+
+      function proof(db, p, ctx) {
+        var id = text(p.receiptId, '報名編號', 80),
+          key = text(p.receiptKey, '查詢碼', 150),
+          r = db.registrations.find(function(v) {
+            return v.id === id;
+          });
+        if (!r || ctx.hash(key) !== r.receiptHash) fail('報名編號或查詢碼不正確', 'NOT_FOUND');
+        return r;
+      }
+
+      function team(s) {
+        s = text(s, '隊伍名稱', 30);
+        if (s.indexOf('@') >= 0) fail('隊伍名稱請勿包含 @');
+        return s;
+      }
+
+      function line(s) {
+        return text(s, '負責人 LINE 名稱', 30).replace(/^@+/, '') || fail('請填寫 LINE 名稱');
+      }
+
+      function duplicate(rows, name, contact, except) {
+        return rows.some(function(r) {
+          return r.id !== except && (norm(r.teamName) === norm(name) || norm(r.contactId) === norm(
+            contact));
+        });
+      }
+
+      function compact(db, id) {
+        active(db, id).forEach(function(r, i) {
+          if (r.slot !== i + 1) {
+            r.slot = i + 1;
+            r.revision++;
+          }
+        });
+      }
+
+      function assertRevision(actual, provided) {
+        if (Number(actual) !== Number(provided)) fail('資料已被更新，請重新載入後再儲存', 'CONFLICT');
+      }
+
+      function saveEvent(db, p, ctx) {
+        var old = p.id ? event(db, p.id) : null;
+        if (old) assertRevision(old.revision, p.revision);
+        var date = text(p.date, '日期', 10),
+          start = text(p.startTime, '開始時間', 5),
+          end = text(p.endTime, '結束時間', 5),
+          startAt = at(date, start),
+          endAt = at(date, end);
+        if (endAt <= startAt) fail('結束時間須晚於開始時間，請安排在同一個比賽日期內');
+        var capacity = Number(p.capacity),
+          fee = Number(p.fee),
+          mapCount = Number(p.mapCount);
+        if ([12, 15].indexOf(capacity) < 0) fail('組數只能選擇 12 組或 15 組');
+        if (!Number.isInteger(fee) || fee < 0 || fee > 100000) fail('報名費請填寫 0～100000 的整數');
+        if (!Number.isInteger(mapCount) || mapCount < 1 || mapCount > 20) fail('地圖數請填寫 1～20');
+        var mode = p.publishMode || 'now';
+        if (['now', 'scheduled', 'draft'].indexOf(mode) < 0) fail('請選擇上架方式');
+        var publishAt = mode === 'draft' ? '' : mode === 'now' ? (old && old.publishAt && new Date(old
+          .publishAt).getTime() <= ctx.now ? old.publishAt : new Date(ctx.now).toISOString()) : String(p
+          .publishAt || '');
+        if (mode === 'scheduled' && (!isFinite(new Date(publishAt).getTime()) || new Date(publishAt)
+          .getTime() <= ctx.now || new Date(publishAt).getTime() >= startAt)) fail('預約上架時間須在現在之後、開賽之前');
+        if (mode !== 'draft' && endAt <= ctx.now) fail('已結束的比賽無法重新上架');
+        var closeAt = String(p.closeAt || new Date(startAt).toISOString()),
+          closeMs = new Date(closeAt).getTime();
+        if (!isFinite(closeMs) || closeMs > startAt || closeMs < at(date, '00:00')) fail(
+        '報名截止時間須在比賽當日且不晚於開賽');
+        if (publishAt && new Date(publishAt).getTime() >= closeMs) fail('上架時間須早於報名截止時間');
+        var paymentDueAt = String(p.paymentDueAt || closeAt);
+        if (!isFinite(new Date(paymentDueAt).getTime()) || new Date(paymentDueAt).getTime() > endAt ||
+          new Date(paymentDueAt).getTime() < closeMs) fail('匯款期限須不早於報名截止，且不得晚於完賽時間');
+        var next = {
+          id: old ? old.id : ctx.id('E'),
+          title: text(p.title || '上帝視角交流賽', '場次名稱', 50),
+          date: date,
+          startTime: start,
+          endTime: end,
+          mapCount: mapCount,
+          capacity: capacity,
+          fee: fee,
+          publishAt: publishAt,
+          closeAt: closeAt,
+          paymentDueAt: paymentDueAt,
+          manualState: old ? old.manualState : 'active',
+          bankName: text(p.bankName, '銀行名稱', 40, mode === 'draft'),
+          bankCode: text(p.bankCode, '銀行代碼', 8, mode === 'draft'),
+          bankAccount: text(p.bankAccount, '匯款帳號', 40, mode === 'draft'),
+          bankHolder: text(p.bankHolder, '戶名', 40, mode === 'draft'),
+          transferNote: text(p.transferNote, '匯款備註', 240, true),
+          groupUrl: https(p.groupUrl, '群組連結', mode === 'draft'),
+          createdAt: old ? old.createdAt : new Date(ctx.now).toISOString(),
+          updatedAt: new Date(ctx.now).toISOString(),
+          revision: old ? Number(old.revision) + 1 : 1,
+          snapshotState: ''
+        };
+        if (mode !== 'draft' && (!/^\d{3}$/.test(next.bankCode) || !/^\d[\d -]{5,29}$/.test(next
+          .bankAccount))) fail('銀行代碼須為三位數，帳號請填寫數字');
+        if (old) {
+          var count = active(db, old.id).length;
+          if (count > capacity) fail('目前已有 ' + count + ' 隊，不能縮減至 ' + capacity + ' 組');
+          if (count)['date', 'startTime', 'endTime', 'fee', 'bankName', 'bankCode', 'bankAccount',
+            'bankHolder'].forEach(function(k) {
+            if (String(old[k]) !== String(next[k])) fail('已有隊伍報名，日期、時段、費用及銀行資料需保留；可調整名額、截止時間、備註或群組');
+          });
+          if (old.manualState === 'cancelled') next.manualState = 'cancelled';
+          Object.assign(old, next);
+        } else db.events.push(next);
+        return summary(db, next, ctx, true);
+      }
+
+      function run(db, action, p, ctx) {
+        p = p || {};
+        if (ADMIN.indexOf(action) >= 0 && !ctx.admin) fail('登入已逾時，請重新登入', 'UNAUTHORIZED');
+        if (action === 'publicList') return {
+          events: db.events.map(function(e) {
+            return summary(db, e, ctx, false);
+          }).filter(function(e) {
+            return ['draft', 'scheduled', 'archived'].indexOf(e.state) < 0;
+          }).sort(function(a, b) {
+            return (a.date + a.startTime).localeCompare(b.date + b.startTime);
+          }),
+          pairs: pairs(db, ctx),
+          settings: {
+            notice: db.settings.notice || '',
+            officialLine: db.settings.officialLine || ''
+          },
+          serverNow: new Date(ctx.now).toISOString()
+        };
+        if (action === 'register') {
+          if (p.website) fail('無法送出，請重新開啟報名頁');
+          var requestKey = text(p.requestKey, '送出識別碼', 128),
+            secret = text(p.receiptKey, '查詢碼', 128);
+          if (!/^[a-zA-Z0-9-]{32,128}$/.test(requestKey) || !/^[a-zA-Z0-9-]{32,128}$/.test(secret)) fail(
+            '送出識別碼不正確，請重新開啟網頁');
+          var same = db.registrations.find(function(r) {
+            return r.requestKey === requestKey;
+          });
+          if (same) {
+            if (same.receiptHash !== ctx.hash(secret)) fail('請重新送出報名');
+            return receipt(db, same, secret);
+          }
+          var ids = p.eventIds || [p.eventId];
+          if (!Array.isArray(ids) || ids.length < 1 || ids.length > 2 || new Set(ids).size !== ids.length)
+            fail('請選擇一個或兩個不同時段');
+          var chosen = ids.length === 2 ? pairEvents(db, ids) : [event(db, ids[0])];
+          chosen.forEach(function(e) {
+            var s = state(e, active(db, e.id).length, ctx.now);
+            if (s !== 'open') fail(s === 'full' ? '選擇的時段已額滿，兩場皆未建立報名，請重新選擇' : '選擇的時段目前未開放報名', 'NOT_OPEN');
+          });
+          var name = team(p.teamName),
+            ln = line(p.lineName),
+            contact = text(p.contactId, 'LINE 聯絡 ID', 60);
+          chosen.forEach(function(e) {
+            if (duplicate(active(db, e.id), name, contact)) fail('這支隊伍或聯絡 ID 已報名所選場次，請使用報名查詢',
+              'DUPLICATE');
+          });
+          if (p.agree !== true) fail('請勾選確認報名與匯款規則');
+          var q = chosen.length === 2 ? quote(db, ids) : {
+            totalAmount: Number(chosen[0].fee),
+            originalAmount: Number(chosen[0].fee),
+            offerId: ''
+          };
+          if (p.expectedTotal !== undefined && Number(p.expectedTotal) !== q.totalAmount) fail(
+            '優惠或費用已更新，請確認新金額再送出', 'PRICE_CHANGED');
+          var bookingId = ctx.id('B'),
+            allocated = 0,
+            newRows = chosen.map(function(e, i) {
+              var amount = i === chosen.length - 1 ? q.totalAmount - allocated : (q.originalAmount === 0 ?
+                0 : Math.floor(q.totalAmount * Number(e.fee) / q.originalAmount));
+              allocated += amount;
+              return {
+                id: ctx.id('RN'),
+                eventId: e.id,
+                createdAt: new Date(ctx.now).toISOString(),
+                teamName: name,
+                lineName: ln,
+                contactId: contact,
+                slot: active(db, e.id).length + 1,
+                status: 'active',
+                paymentState: 'pending',
+                last5: '',
+                paymentReportedAt: '',
+                confirmedAt: '',
+                amount: amount,
+                memo: '',
+                requestKey: requestKey,
+                receiptHash: ctx.hash(secret),
+                snapshot: Object.assign(snapshot(e), {
+                  bookingSize: chosen.length
+                }),
+                revision: 1,
+                bookingId: bookingId,
+                offerId: q.offerId,
+                totalAmount: q.totalAmount,
+                originalAmount: q.originalAmount
+              };
+            });
+          newRows.forEach(function(r) {
+            db.registrations.push(r);
+          });
+          return receipt(db, newRows[0], secret);
+        }
+        if (action === 'receipt') return receipt(db, proof(db, p, ctx), p.receiptKey);
+        if (action === 'reportPayment') {
+          var r = proof(db, p, ctx);
+          if (r.status !== 'active') fail('此報名已取消');
+          if (r.paymentState === 'confirmed') return receipt(db, r, p.receiptKey);
+          var last5 = text(p.last5, '匯款末五碼', 5);
+          if (!/^\d{5}$/.test(last5)) fail('請填寫五位數字的匯款帳號末五碼');
+          bookingRows(db, r).forEach(function(v) {
+            if (v.status === 'active') {
+              v.last5 = last5;
+              v.paymentState = 'reported';
+              v.paymentReportedAt = new Date(ctx.now).toISOString();
+              v.revision++;
+            }
+          });
+          return receipt(db, r, p.receiptKey);
+        }
+        if (action === 'adminList') return {
+          events: db.events.map(function(e) {
+            return summary(db, e, ctx, true);
+          }).sort(function(a, b) {
+            return (b.date + b.startTime).localeCompare(a.date + a.startTime);
+          }),
+          offers: db.offers || [],
+          settings: db.settings,
+          serverNow: new Date(ctx.now).toISOString()
+        };
+        if (action === 'adminSaveOffer') return saveOffer(db, p, ctx);
+        if (action === 'adminGetRoster') return roster(db, event(db, p.eventId), ctx);
+        if (action === 'adminSaveEvent') return saveEvent(db, p, ctx);
+        if (action === 'adminSetState') {
+          var e = event(db, p.eventId);
+          assertRevision(e.revision, p.revision);
+          if (['active', 'closed', 'cancelled'].indexOf(p.manualState) < 0) fail('狀態不正確');
+          e.manualState = p.manualState;
+          e.revision++;
+          e.updatedAt = new Date(ctx.now).toISOString();
+          return summary(db, e, ctx, true);
+        }
+        if (action === 'adminPatchRegistration') {
+          var r = db.registrations.find(function(v) {
+            return v.id === p.id;
+          });
+          if (!r) fail('找不到這筆報名');
+          assertRevision(r.revision, p.revision);
+          var rows = active(db, r.eventId),
+            name = team(p.teamName || r.teamName),
+            ln = line(p.lineName || r.lineName),
+            contact = text(p.contactId || r.contactId, '聯絡 ID', 60);
+          var related = bookingRows(db, r);
+          related.forEach(function(v) {
+            if (v.status === 'active' && duplicate(active(db, v.eventId), name, contact, v.id)) fail(
+              '隊伍名稱或聯絡 ID 與另一筆報名重複');
+          });
+          if (['pending', 'reported', 'confirmed'].indexOf(p.paymentState) < 0) fail('付款狀態不正確');
+          var memo = text(p.memo, '備註', 240, true);
+          related.forEach(function(v) {
+            Object.assign(v, {
+              teamName: name,
+              lineName: ln,
+              contactId: contact,
+              paymentState: p.paymentState,
+              memo: memo,
+              revision: v.revision + 1
+            });
+            v.confirmedAt = p.paymentState === 'confirmed' ? (v.confirmedAt || new Date(ctx.now)
+              .toISOString()) : '';
+            if (p.cancel === true) {
+              v.status = 'cancelled';
+              v.slot = 0;
+            }
+          });
+          if (p.cancel === true) related.forEach(function(v) {
+            compact(db, v.eventId);
+          });
+          return roster(db, event(db, r.eventId), ctx);
+        }
+        if (action === 'adminSaveRoster') {
+          var e = event(db, p.eventId),
+            current = roster(db, e, ctx);
+          if (current.version !== p.version) fail('隊伍明細已更新，請重新載入後再修改', 'CONFLICT');
+          var rows = active(db, e.id),
+            lines = String(p.text || '').trim() ? String(p.text).trim().split(/\r?\n/) : [];
+          if (lines.length !== e.capacity) fail('明細須保留 1～' + e.capacity + ' 組；空位請保留編號，不要刪除');
+          var seen = {},
+            parsed = lines.map(function(v, i) {
+              if (i >= rows.length) {
+                if (!new RegExp('^\\s*' + (i + 1) + '[.．、]\\s*$').test(v)) fail('第 ' + (i + 1) +
+                  ' 組尚未報名，請保留空位編號');
+                return null;
+              }
+              var m = v.match(/^\s*(\d+)[.．、]\s*(.+?)\s+@(.+)\s*$/);
+              if (!m || Number(m[1]) !== i + 1) fail('第 ' + (i + 1) + ' 行請使用「' + (i + 1) + '.隊伍名稱 @負責人」格式');
+              var name = team(m[2]),
+                ln = line(m[3]);
+              if (seen[norm(name)]) fail('隊伍名稱重複');
+              seen[norm(name)] = true;
+              return {
+                teamName: name,
+                lineName: ln
+              };
+            });
+          parsed.forEach(function(v, i) {
+            if (v) {
+              Object.assign(rows[i], v);
+              rows[i].revision++;
+            }
+          });
+          return roster(db, e, ctx);
+        }
+        if (action === 'adminSaveSettings') {
+          db.settings.notice = text(p.notice, '公告', 500, true);
+          db.settings.officialLine = https(p.officialLine, '官方 LINE', true);
+          return db.settings;
+        }
+        fail('不支援的操作', 'UNKNOWN_ACTION');
+      }
+      return {
+        run: run,
+        active: active,
+        state: state,
+        summary: summary,
+        today: today,
+        addDays: addDays,
+        at: at,
+        adminActions: ADMIN
+      };
+    })();
+
+    'use strict';
+    const $ = id => document.getElementById(id);
+    const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#39;'
+    } [c]));
+    const CFG = window.RN_CONFIG || {};
+    const NATIVE = Boolean(window.google?.script?.run);
+    const DEMO = !NATIVE && (CFG.preview === true || new URLSearchParams(location.search).get('demo') === '1');
+    const DEMO_KEY = 'rn-scrim-preview-v2';
+    const SESSION_KEY = DEMO ? 'rn-scrim-preview-auth' : 'rn-scrim-auth';
+    const HISTORY_KEY = DEMO ? 'rn-scrim-preview-receipts' : 'rn-scrim-receipts';
+    const STATE_LABEL = {
+      open: '開放報名中',
+      full: '額滿截止',
+      closed: '報名截止',
+      completed: '已完賽',
+      archived: '已下架',
+      scheduled: '預約上架',
+      draft: '草稿',
+      cancelled: '已取消'
+    };
+    const PAY_LABEL = {
+      pending: '待匯款',
+      reported: '已回報',
+      confirmed: '已確認'
+    };
+    const badge = state => `<span class="badge badge-${esc(state)}">${esc(STATE_LABEL[state]||state)}</span>`;
+    const payBadge = state =>
+      `<span class="payment-badge payment-${esc(state)}">${esc(PAY_LABEL[state]||state)}</span>`;
+    const money = v => Number(v || 0).toLocaleString('zh-TW');
+    const dateLabel = d => new Intl.DateTimeFormat('zh-TW', {
+      month: 'numeric',
+      day: 'numeric',
+      weekday: 'short',
+      timeZone: 'Asia/Taipei'
+    }).format(new Date(d + 'T12:00:00+08:00'));
+    const dateShort = d => d.slice(5).replace('-', ' / ');
+    const timeLabel = s => s ? new Intl.DateTimeFormat('zh-TW', {
+      month: 'numeric',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false,
+      timeZone: 'Asia/Taipei'
+    }).format(new Date(s)) : '';
+
+    function localValue(iso) {
+      return iso ? new Date(new Date(iso).getTime() + 8 * 3600000).toISOString().slice(0, 16) : '';
+    }
+
+    function localIso(s) {
+      return s ? new Date(s + ':00+08:00').toISOString() : '';
+    }
+
+    function randomKey() {
+      if (!crypto?.getRandomValues) throw new Error('請使用支援安全連線的瀏覽器');
+      return Array.from(crypto.getRandomValues(new Uint8Array(32)), v => v.toString(16).padStart(2, '0')).join(
+      '');
+    }
+
+    function storageRead(key, fallback) {
+      try {
+        return JSON.parse(localStorage.getItem(key)) ?? fallback;
+      } catch {
+        return fallback;
+      }
+    }
+
+    function session() {
+      try {
+        return JSON.parse(sessionStorage.getItem(SESSION_KEY) || 'null');
+      } catch {
+        return null;
+      }
+    }
+
+    function authToken() {
+      return session()?.token || '';
+    }
+    let toastTimer;
+
+    function toast(message) {
+      let box = $('toast');
+      box.textContent = message;
+      box.classList.remove('hidden');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => box.classList.add('hidden'), 3500);
+    }
+
+    function busy(button, value, label) {
+      if (!button) return;
+      if (value) {
+        button.dataset.original = button.innerHTML;
+        button.disabled = true;
+        button.innerHTML = `<span class="spinner" aria-hidden="true"></span>${esc(label||'處理中')}`;
+      } else {
+        button.disabled = false;
+        button.innerHTML = button.dataset.original || '完成';
+      }
+    }
+
+    function showDialog(title, body, wide = false) {
+      const d = $('app-dialog');
+      d.classList.toggle('wide', wide);
+      $('dialog-title').textContent = title;
+      $('dialog-body').innerHTML = body;
+      if (!d.open) d.showModal();
+      return $('dialog-body');
+    }
+
+    function closeDialog() {
+      $('app-dialog').close();
+    }
+    $('dialog-close').addEventListener('click', closeDialog);
+    $('app-dialog').addEventListener('click', e => {
+      if (e.target === $('app-dialog')) {
+        const r = e.target.getBoundingClientRect();
+        if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom)
+          closeDialog();
+      }
+    });
+    async function copyText(s) {
+      try {
+        await navigator.clipboard.writeText(s);
+      } catch {
+        const t = document.createElement('textarea');
+        t.value = s;
+        t.style.position = 'fixed';
+        t.style.opacity = '0';
+        document.body.appendChild(t);
+        t.select();
+        const ok = document.execCommand('copy');
+        t.remove();
+        if (!ok) {
+          toast('無法自動複製，請長按選取文字');
+          return;
+        }
+      }
+      toast('已複製');
+    }
+
+    function errorText(err) {
+      return err?.message || '無法完成，請稍後重試';
+    }
+
+    function seedDemo() {
+      const now = Date.now(),
+        today = RNCore.today(now),
+        day = now > RNCore.at(today, '19:00') ? RNCore.addDays(today, 1) : today;
+      const following = RNCore.addDays(day, 1);
+      const db = {
+        events: [],
+        registrations: [],
+        offers: [{
+          id: "O-DEMO-01",
+          eventIds: ["E-DEMO-01", "E-DEMO-02"],
+          totalPrice: 450,
+          enabled: true,
+          revision: 1,
+          createdAt: new Date(now).toISOString(),
+          updatedAt: new Date(now).toISOString()
+        }],
+        settings: {
+          notice: '報名後請完成匯款，並加入當日賽事群組。賽前房號、密碼及公告將於群組發布。',
+          officialLine: 'https://lin.ee/xTKnekT'
+        }
+      };
+      const specs = [
+        ['E-DEMO-01', day, '20:00', '21:40', 5, 15, 300, 9, 'open'],
+        ['E-DEMO-02', day, '21:50', '23:30', 4, 12, 200, 4, 'open'],
+        ['E-DEMO-03', following, '20:00', '21:40', 5, 12, 300, 12, 'open'],
+        ['E-DEMO-04', following, '21:50', '23:30', 4, 15, 200, 0, 'scheduled'],
+        ['E-DEMO-05', RNCore.addDays(day, 2), '20:00', '21:40', 5, 15, 300, 0, 'draft']
+      ];
+      const names = [
+        ['CZL', '愷愷'],
+        ['NOVA', '小宇'],
+        ['RUSH', '阿澤'],
+        ['ECHO', '小希'],
+        ['ORBIT', '晴天'],
+        ['VOLT', '阿翔'],
+        ['MIST', '小米'],
+        ['FIRE', '晨晨'],
+        ['AURA', '路路'],
+        ['WAVE', '小海'],
+        ['NEON', '小楓'],
+        ['RAVEN', '小凜']
+      ];
+      specs.forEach((s, idx) => {
+        const [id, date, startTime, endTime, mapCount, capacity, fee, count, mode] = s;
+        const e = {
+          id,
+          date,
+          startTime,
+          endTime,
+          mapCount,
+          capacity,
+          fee,
+          title: '上帝視角交流賽',
+          publishAt: mode === 'draft' ? '' : mode === 'scheduled' ? new Date(RNCore.at(date, '12:00'))
+            .toISOString() : new Date(now - 86400000).toISOString(),
+          closeAt: new Date(RNCore.at(date, startTime)).toISOString(),
+          paymentDueAt: new Date(RNCore.at(date, startTime)).toISOString(),
+          manualState: 'active',
+          bankName: '預覽銀行（請勿匯款）',
+          bankCode: '000',
+          bankAccount: '000000000000',
+          bankHolder: '展示資料',
+          transferNote: '這是操作預覽，所有匯款資料皆為展示用途，請勿匯款。',
+          groupUrl: 'https://line.me/',
+          createdAt: new Date(now - 86400000).toISOString(),
+          updatedAt: new Date(now).toISOString(),
+          revision: 1,
+          snapshotState: ''
+        };
+        db.events.push(e);
+        for (let i = 0; i < count; i++) {
+          const [teamName, lineName] = names[i % names.length];
+          const r = {
+            id: `RN-DEMO-${idx+1}-${String(i+1).padStart(2,'0')}`,
+            eventId: id,
+            createdAt: new Date(now - 3600000 + i * 60000).toISOString(),
+            teamName,
+            lineName,
+            contactId: `demo_${teamName.toLowerCase()}`,
+            slot: i + 1,
+            status: 'active',
+            paymentState: i < 5 ? 'confirmed' : i < 7 ? 'reported' : 'pending',
+            last5: i < 7 ? String(10201 + i) : '',
+            paymentReportedAt: '',
+            confirmedAt: i < 5 ? new Date(now - 3600000).toISOString() : '',
+            amount: fee,
+            memo: '',
+            requestKey: 'seed-' + id + '-' + i,
+            receiptHash: 'demo-unavailable',
+            snapshot: {
+              ...e
+            },
+            revision: 1
+          };
+          db.registrations.push(r);
+        }
+      });
+      return db;
+    }
+    async function demoCall(action, p) {
+      const execute = () => {
+        let db = storageRead(DEMO_KEY, null);
+        if (!db) {
+          db = seedDemo();
+          localStorage.setItem(DEMO_KEY, JSON.stringify(db));
+        }
+        if (action === 'adminLogin') return {
+          token: 'preview-' + randomKey(),
+          expiresAt: Date.now() + 6 * 3600000
+        };
+        if (action === 'adminLogout') return {};
+        const s = session();
+        const isAdmin = Boolean(s && s.token === p.token && s.expiresAt > Date.now());
+        const out = RNCore.run(db, action, p, {
+          now: Date.now(),
+          admin: isAdmin,
+          hash: s => 'demo-' + s,
+          id: prefix => prefix + '-' + RNCore.today(Date.now()).slice(2).replaceAll('-', '') + '-' +
+            randomKey().slice(0, 12).toUpperCase()
+        });
+        localStorage.setItem(DEMO_KEY, JSON.stringify(db));
+        return out;
+      };
+      return navigator.locks?.request ? await navigator.locks.request('rn-scrim-preview-data', execute) :
+        execute();
+    }
+    const Api = {
+      async call(action, payload = {}) {
+        try {
+          if (DEMO) return await demoCall(action, payload);
+          let result;
+          if (NATIVE) result = await new Promise((resolve, reject) => google.script.run.withSuccessHandler(
+            resolve).withFailureHandler(reject).rpc(action, payload));
+          else {
+            if (!CFG.apiUrl || !/^https:\/\/script\.google\.com\//.test(CFG.apiUrl)) throw new Error(
+              '尚未連接報名服務。請先依部署教學設定，或使用預覽連結體驗。');
+            const c = new AbortController(),
+              timer = setTimeout(() => c.abort(), 30000);
+            try {
+              const response = await fetch(CFG.apiUrl, {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'text/plain;charset=utf-8'
+                },
+                body: JSON.stringify({
+                  action,
+                  payload
+                }),
+                redirect: 'follow',
+                signal: c.signal
+              });
+              if (!response.ok) throw new Error('服務暫時無法連線');
+              result = await response.json();
+            } finally {
+              clearTimeout(timer);
+            }
+          }
+          if (!result?.ok) {
+            const err = new Error(result?.error?.message || '服務未回傳完整資料');
+            err.code = result?.error?.code;
+            throw err;
+          }
+          return result.data;
+        } catch (err) {
+          if (err.code === 'UNAUTHORIZED' && action !== 'adminLogin') document.dispatchEvent(new CustomEvent(
+            'rn-auth-expired'));
+          if (err.name === 'AbortError') throw new Error('送出結果尚未確認，請保留相同資料再送出一次，系統會避免重複建立。');
+          throw err;
+        }
+      }
+    };
+
+    function navigateUrl(page) {
+      const u = page === 'admin' ? (CFG.adminPage || 'rn-scrim-admin.html') : (CFG.publicPage || 'rn-scrim.html');
+      return DEMO ? u + (u.includes('?') ? '&' : '?') + 'demo=1' : u;
+    }
+
+    function previewBanner(admin = false) {
+      if (!DEMO) return '';
+      return `<div class="preview-banner"><span>操作預覽 · 資料僅保留於此裝置，請勿匯款</span><a href="${esc(navigateUrl(admin?'public':'admin'))}" target="_top">${admin?'查看報名前台':'預覽管理後台'}</a></div>`;
+    }
+
+    function rememberReceipt(data) {
+      const history = storageRead(HISTORY_KEY, []).filter(v => v.id !== data.registration.id);
+      history.unshift({
+        id: data.registration.id,
+        key: data.receiptKey,
+        teamName: data.registration.teamName,
+        date: data.event.date
+      });
+      try {
+        localStorage.setItem(HISTORY_KEY, JSON.stringify(history.slice(0, 10)));
+      } catch {}
+    }
+    let currentReceipt = null;
+
+    function receiptEntries(data) {
+      return data.entries?.length ? data.entries : [{
+        registration: data.registration,
+        event: data.event
+      }];
+    }
+
+    function paymentDetails(data) {
+      const entries = receiptEntries(data),
+        due = entries.map(x => x.event.paymentDueAt).filter(Boolean).sort();
+      return {
+        entries,
+        total: data.totalAmount ?? data.registration.amount,
+        original: data.originalAmount ?? data.registration.amount,
+        due: due[0] || data.event.paymentDueAt,
+        note: [...new Set(entries.map(x => x.event.transferNote).filter(Boolean))].join('；')
+      };
+    }
+
+    function showReceipt(data) {
+      currentReceipt = data;
+      const r = data.registration,
+        e = data.event,
+        details = paymentDetails(data),
+        cancelled = r.status !== 'active',
+        dual = details.entries.length === 2;
+      const groups = [];
+      details.entries.forEach(x => {
+        const found = groups.find(g => g.url === x.event.groupUrl);
+        if (found) found.times.push(x.event.startTime);
+        else groups.push({
+          url: x.event.groupUrl,
+          times: [x.event.startTime]
+        });
+      });
+      showDialog('報名資訊',
+        `${DEMO?'<div class="info-box mb">此為預覽資料，請勿匯款。</div>':''}<div class="success-circle" aria-hidden="true">${cancelled?'×':'✓'}</div><h3 class="success-title">${cancelled?'此報名已取消':r.paymentState==='confirmed'?'匯款已確認':dual?'雙時段報名成功':'報名成功'}</h3><p class="receipt-meta">${esc(r.teamName)} · ${esc(dateLabel(e.date))}${cancelled?'':' · 已保留名額'}</p><div class="receipt-entries">${details.entries.map(x=>`<div class="receipt-entry"><div><strong>${esc(x.event.startTime)} – ${esc(x.event.endTime)}</strong><p class="small muted">${esc(x.event.title)} · ${x.event.mapCount} 張地圖</p></div><span class="small">${x.registration.status==='active'?'第 '+x.registration.slot+' 組':'已取消'}</span></div>${x.event.eventCancelled?'<div class="info-box mt">此場次已由主辦方取消，請聯絡賽務處理。</div>':''}`).join('')}</div><div class="payment-card"><div class="payment-top"><div><div class="eyebrow">PAYMENT INFORMATION</div><h3 style="margin-top:6px">${dual?'雙時段合報總額':'應繳報名費'}</h3>${details.original>details.total?`<p class="small muted">原價 $${money(details.original)} · 已省 $${money(details.original-details.total)}</p>`:''}</div><div class="payment-price"><small>NT$</small> ${money(details.total)}</div></div><div class="account-label">${esc(e.bankName)} · ${esc(e.bankCode)}</div><div class="bank-account mono">${esc(e.bankAccount)}</div><div class="bank-bottom"><div><div class="muted">戶名</div>${esc(e.bankHolder)}</div><button type="button" class="button button-sm button-ghost" id="copy-account">複製帳號</button></div></div><div class="receipt-actions"><button class="button button-white" id="save-payment" ${cancelled?'disabled':''}>儲存匯款照片</button>${!cancelled?`<div class="group-links">${groups.map(g=>`<a class="button button-primary join-group" href="${esc(g.url)}" target="_blank" rel="noopener noreferrer">${groups.length>1?'加入 '+esc(g.times.join(' / '))+' 群組':'加入賽事群組'}</a>`).join('')}</div>`:''}</div><div class="mt"><div class="details-row"><span class="muted">報名編號</span><span class="mono">${esc(r.bookingId||r.id)}</span></div><div class="details-row"><span class="muted">付款狀態</span><span>${payBadge(r.paymentState)}</span></div><div class="details-row"><span class="muted">匯款期限</span><span>${esc(timeLabel(details.due))}</span></div></div>${details.note?`<p class="notice" style="margin-top:16px;padding-top:16px">${esc(details.note)}</p>`:''}${!cancelled&&r.paymentState!=='confirmed'?`<form id="payment-report-form" class="mt"><label for="payment-last5" class="small">已匯款？回報帳號末五碼</label><div class="payment-report"><input id="payment-last5" name="last5" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" placeholder="例如 12345" value="${esc(r.last5)}" required aria-label="匯款帳號末五碼"><button class="button" type="submit" id="report-payment">送出回報</button></div><p class="small muted" style="margin-top:8px;font-size:12px">${dual?'只需匯款一次，回報會同步至兩個時段。':'付款由賽務人員核對後更新。'}</p><div id="payment-error" class="error-box hidden"></div></form>`:''}<hr><div class="between"><div class="small">專屬報名查詢碼</div><button id="copy-receipt" class="button button-ghost button-sm">複製查詢碼</button></div><code class="lookup-code">${esc(data.lookupCode)}</code><p class="small muted" style="margin-top:9px;font-size:12px">請保存此碼，可查看${dual?'兩場':''}報名與匯款資訊。請勿公開分享。</p>`
+        );
+      $('copy-account').addEventListener('click', () => copyText(String(e.bankAccount).replace(/[ -]/g, '')));
+      $('copy-receipt').addEventListener('click', () => copyText(data.lookupCode));
+      $('save-payment').addEventListener('click', () => savePaymentImage(data));
+      if (DEMO) document.querySelectorAll('.join-group').forEach(a => a.addEventListener('click', ev => {
+        ev.preventDefault();
+        toast('預覽不加入實際群組，正式版會開啟後台設定的 LINE 群組。');
+      }));
+      $('payment-report-form')?.addEventListener('submit', async ev => {
+        ev.preventDefault();
+        const b = $('report-payment');
+        busy(b, true, '送出中');
+        try {
+          const v = await Api.call('reportPayment', {
+            receiptId: r.id,
+            receiptKey: data.receiptKey,
+            last5: $('payment-last5').value
+          });
+          showReceipt(v);
+          toast('匯款回報已送出，等待賽務確認');
+        } catch (err) {
+          $('payment-error').textContent = errorText(err);
+          $('payment-error').classList.remove('hidden');
+        } finally {
+          if (b.isConnected) busy(b, false);
+        }
+      });
+    }
+
+    function wrapCanvas(ctx, s, x, y, width, lineHeight, maxLines = 10) {
+      let line = '',
+        lines = 0;
+      for (const ch of String(s || '')) {
+        const test = line + ch;
+        if (ctx.measureText(test).width > width && line) {
+          ctx.fillText(line, x, y);
+          y += lineHeight;
+          line = ch;
+          lines++;
+          if (lines >= maxLines) return y;
+        } else line = test;
+      }
+      if (line) {
+        ctx.fillText(line, x, y);
+        y += lineHeight;
+      }
+      return y;
+    }
+    async function paymentBlob(data) {
+      const canvas = document.createElement('canvas');
+      canvas.width = 1080;
+      canvas.height = 2600;
+      const c = canvas.getContext('2d');
+      const r = data.registration,
+        e = data.event,
+        details = paymentDetails(data),
+        g = c.createLinearGradient(0, 0, 1080, 2600);
+      g.addColorStop(0, '#171717');
+      g.addColorStop(.4, '#101010');
+      g.addColorStop(1, '#000000');
+      c.fillStyle = g;
+      c.fillRect(0, 0, 1080, 2600);
+      c.strokeStyle = '#3b3c43';
+      c.lineWidth = 2;
+      const font = '-apple-system, BlinkMacSystemFont, "Noto Sans CJK TC", "Noto Sans TC", sans-serif';
+      c.fillStyle = '#f5f5f7';
+      c.font = `700 25px ${font}`;
+      c.fillText('REBORN ENTERTAINMENT', 100, 132);
+      c.fillStyle = '#f6f7fb';
+      c.font = `700 55px ${font}`;
+      c.fillText('銳能娛樂｜交流賽', 100, 215);
+      c.font = `400 28px ${font}`;
+      c.fillStyle = '#abb3c2';
+      c.fillText('匯款資訊 · 報名後請加入賽事群組', 100, 268);
+      c.fillStyle = '#f5f5f7';
+      c.font = `700 74px ${font}`;
+      c.fillText(`NT$ ${money(details.total)}`, 100, 397);
+      c.fillStyle = '#858e9e';
+      c.font = `400 25px ${font}`;
+      c.fillText(details.entries.length === 2 ? '雙時段合報總額 · 一次匯款' : '應繳報名費', 100, 439);
+      c.strokeStyle = '#333640';
+      c.beginPath();
+      c.moveTo(100, 492);
+      c.lineTo(980, 492);
+      c.stroke();
+      c.fillStyle = '#abb3c2';
+      c.font = `400 26px ${font}`;
+      let y = wrapCanvas(c, `${e.bankName}  (${e.bankCode})`, 100, 568, 870, 38, 3) + 35;
+      c.fillStyle = '#ffffff';
+      c.font = `600 47px ${font}`;
+      y = wrapCanvas(c, e.bankAccount, 100, y, 870, 62, 3);
+      c.fillStyle = '#abb3c2';
+      c.font = `400 25px ${font}`;
+      c.fillText('戶名', 100, y + 30);
+      c.fillStyle = '#f6f7fb';
+      c.font = `500 34px ${font}`;
+      y = wrapCanvas(c, e.bankHolder, 100, y + 81, 870, 44, 2) + 33;
+      c.strokeStyle = '#333640';
+      c.beginPath();
+      c.moveTo(100, y);
+      c.lineTo(980, y);
+      c.stroke();
+      y += 65;
+      c.fillStyle = '#abb3c2';
+      c.font = `400 24px ${font}`;
+      c.fillText('比賽日期 / 時段', 100, y);
+      c.fillStyle = '#f6f7fb';
+      c.font = `500 31px ${font}`;
+      y = wrapCanvas(c,
+        `${e.date}  ${details.entries.map(x=>x.event.startTime+'–'+x.event.endTime).join(' / ')}`, 100, y +
+        48, 870, 44, 3) + 58;
+      c.fillStyle = '#abb3c2';
+      c.font = `400 24px ${font}`;
+      c.fillText('報名隊伍', 100, y);
+      c.fillStyle = '#f6f7fb';
+      c.font = `500 31px ${font}`;
+      y = wrapCanvas(c, r.teamName, 100, y + 48, 850, 44, 2) + 58;
+      c.fillStyle = '#abb3c2';
+      c.font = `400 24px ${font}`;
+      c.fillText('匯款期限：' + timeLabel(details.due), 100, y);
+      y += 50;
+      c.font = `400 22px ${font}`;
+      c.fillStyle = '#a7adba';
+      y = wrapCanvas(c, details.note, 100, y, 870, 34, 24);
+      const height = Math.min(2600, Math.max(1450, y + 170));
+      c.strokeStyle = '#3b3c43';
+      c.strokeRect(55, 55, 970, height - 110);
+      c.fillStyle = DEMO ? '#f5f5f7' : '#717b8d';
+      c.font = `600 25px ${font}`;
+      c.fillText(DEMO ? '展示資料｜請勿匯款' : `報名編號：${r.id}`, 100, height - 69);
+      const result = document.createElement('canvas');
+      result.width = 1080;
+      result.height = height;
+      result.getContext('2d').drawImage(canvas, 0, 0);
+      return new Promise((resolve, reject) => result.toBlob(b => b ? resolve(b) : reject(new Error('無法生成照片')),
+        'image/png'));
+    }
+    async function savePaymentImage(data) {
+      const button = $('save-payment');
+      busy(button, true, '製作照片');
+      try {
+        const blob = await paymentBlob(data),
+          filename =
+          `銳能交流賽匯款-${data.event.date}-${receiptEntries(data).map(x=>x.event.startTime.replace(':','')).join('-')}.png`,
+          file = new File([blob], filename, {
+            type: 'image/png'
+          });
+        if (navigator.canShare?.({
+            files: [file]
+          })) {
+          try {
+            await navigator.share({
+              files: [file],
+              title: '交流賽匯款資訊'
+            });
+            return;
+          } catch (err) {
+            if (err.name === 'AbortError') return;
+          }
+        }
+        const url = URL.createObjectURL(blob);
+        showDialog('儲存匯款照片',
+          `<p class="small muted mb">iPhone 可長按圖片儲存；電腦或 Android 可使用下載按鈕。</p><img class="image-preview" src="${url}" alt="交流賽匯款資訊照片"><a class="button button-white full-width mt" href="${url}" download="${esc(filename)}" target="_blank">下載照片</a>`
+          );
+        setTimeout(() => URL.revokeObjectURL(url), 180000);
+      } catch (err) {
+        toast(errorText(err));
+      } finally {
+        if (button?.isConnected) busy(button, false);
+      }
+    }
+
+    function showLookup() {
+      const history = storageRead(HISTORY_KEY, []);
+      showDialog('查詢我的報名',
+        `<p class="small muted mb">貼上報名完成時取得的完整查詢碼，即可查看匯款資訊與付款狀態。</p><form id="lookup-form"><div class="field"><label for="lookup-code-input">報名查詢碼</label><textarea id="lookup-code-input" required rows="3" placeholder="RN-…#查詢碼" autocomplete="off"></textarea></div><button class="button button-primary full-width mt" id="lookup-submit">查詢報名</button><div id="lookup-error" class="error-box hidden"></div></form>${history.length?`<hr><h3 class="small mb">此裝置最近的報名</h3><div class="stack gap8">${history.map((h,i)=>`<button class="button button-ghost" data-history="${i}" style="justify-content:space-between"><span>${esc(h.teamName)}</span><span class="small muted">${esc(dateLabel(h.date))}</span></button>`).join('')}</div>`:''}`
+        );
+      const lookup = async code => {
+        const split = String(code).trim().split('#');
+        if (split.length !== 2) throw new Error('請貼上完整的「報名編號#查詢碼」');
+        const data = await Api.call('receipt', {
+          receiptId: split[0],
+          receiptKey: split[1]
+        });
+        showReceipt(data);
+      };
+      $('lookup-form').addEventListener('submit', async ev => {
+        ev.preventDefault();
+        const b = $('lookup-submit');
+        busy(b, true, '查詢中');
+        try {
+          await lookup($('lookup-code-input').value);
+        } catch (err) {
+          $('lookup-error').textContent = errorText(err);
+          $('lookup-error').classList.remove('hidden');
+        } finally {
+          if (b.isConnected) busy(b, false);
+        }
+      });
+      document.querySelectorAll('[data-history]').forEach(b => b.addEventListener('click', async () => {
+        busy(b, true, '查詢中');
+        try {
+          const h = history[Number(b.dataset.history)];
+          await lookup(h.id + '#' + h.key);
+        } catch (err) {
+          toast(errorText(err));
+        } finally {
+          if (b.isConnected) busy(b, false);
+        }
+      }));
+    }
+
+    function downloadBlob(blob, filename) {
+      const u = URL.createObjectURL(blob),
+        a = document.createElement('a');
+      a.href = u;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(() => URL.revokeObjectURL(u), 60000);
+    }
+
+    function csvCell(value) {
+      let s = String(value ?? '');
+      if (/^[=+\-@]/.test(s)) s = "'" + s;
+      return '"' + s.replaceAll('"', '""') + '"';
+    }
+
+    function webTools(list) {
+      const context = document.modelContext;
+      if (!context?.registerTool) return;
+      const controller = new AbortController();
+      window.addEventListener('pagehide', () => controller.abort(), {
+        once: true
+      });
+      list.forEach(tool => {
+        try {
+          Promise.resolve(context.registerTool(tool, {
+            signal: controller.signal
+          })).catch(() => {});
+        } catch {}
+      });
+    }
+
+    let events = [],
+      pairOptions = [],
+      selectedIds = [],
+      selectedDate = '',
+      loading = false,
+      submitting = false;
+    $('preview-mount').innerHTML = previewBanner();
+    $('brand-home').href = navigateUrl('public');
+    $('lookup-button').addEventListener('click', showLookup);
+
+    function selectedEvents() {
+      return selectedIds.map(id => events.find(e => e.id === id)).filter(Boolean).sort((a, b) => a.startTime
+        .localeCompare(b.startTime));
+    }
+
+    function pairFor(ids) {
+      return pairOptions.find(p => RNPairKey(p.eventIds) === RNPairKey(ids));
+    }
+
+    function RNPairKey(ids) {
+      return ids.slice().sort().join('|');
+    }
+
+    function selectionQuote() {
+      const list = selectedEvents(),
+        original = list.reduce((sum, e) => sum + Number(e.fee), 0);
+      return list.length === 2 ? (pairFor(selectedIds) || {
+        totalAmount: original,
+        originalAmount: original,
+        saving: 0
+      }) : {
+        totalAmount: original,
+        originalAmount: original,
+        saving: 0
+      };
+    }
+
+    function renderDates() {
+      const dates = [...new Set(events.map(e => e.date))].sort();
+      if (!dates.includes(selectedDate)) selectedDate = dates[0] || '';
+      $('date-list').innerHTML = dates.map(d =>
+        `<button class="date-tab ${d===selectedDate?'active':''}" data-date="${esc(d)}" aria-pressed="${d===selectedDate}"><span class="day">${esc(d.slice(5).replace('-',' / '))}</span><span class="weekday">${esc(new Intl.DateTimeFormat('zh-TW',{weekday:'short'}).format(new Date(d+'T12:00+08:00')))}</span></button>`
+        ).join('');
+      document.querySelectorAll('[data-date]').forEach(b => b.addEventListener('click', () => selectDate(b.dataset
+        .date)));
+    }
+
+    function renderCards() {
+      const list = events.filter(e => e.date === selectedDate);
+      $('event-list').innerHTML = list.length ? list.map((e, i) =>
+        `<button type="button" class="event-card ${selectedIds.includes(e.id)?'selected':''} ${e.state!=='open'?'disabled':''}" data-event="${esc(e.id)}" ${e.state!=='open'?'disabled':''} aria-pressed="${selectedIds.includes(e.id)}"><div class="session-top"><span class="session-tag">時段 ${String(i+1).padStart(2,'0')} · ${e.mapCount} 張地圖</span>${badge(e.state)}</div><div class="session-main"><div><div class="session-time">${esc(e.startTime)}<span>– ${esc(e.endTime)}</span></div><div class="session-title">${esc(e.title)}</div></div><div class="fee"><small>NT$</small> ${money(e.fee)}<div class="small muted">每隊</div></div></div><div class="session-bottom"><span class="session-count">${e.state==='open'?`剩 <b>${e.remaining}</b> 組`:`${e.count} / ${e.capacity} 組`}<span class="capacity-caption"> · 共 ${e.capacity} 組</span></span><span class="selected-meta">${selectedIds.includes(e.id)?'已選擇':e.state==='open'?'選擇此時段':STATE_LABEL[e.state]}<span class="selected-indicator" aria-hidden="true">✓</span></span></div></button>`
+        ).join('') : '<div class="empty"><strong>目前尚無場次</strong>新場次上架後會顯示在這裡。</div>';
+      document.querySelectorAll('[data-event]').forEach(b => b.addEventListener('click', () => toggleEvent(b
+        .dataset.event)));
+      const offers = pairOptions.filter(p => p.saving > 0 && p.eventIds.every(id => events.find(e => e.id === id)
+        ?.date === selectedDate));
+      $('offer-list').innerHTML = offers.map(p => {
+        const pair = p.eventIds.map(id => events.find(e => e.id === id));
+        return `<button class="offer-card ${RNPairKey(selectedIds)===RNPairKey(p.eventIds)?'chosen':''}" data-pair="${esc(p.eventIds.join('|'))}"><div><span class="offer-kicker">雙時段優惠</span><strong>${pair.map(e=>esc(e.startTime)).join(' ＋ ')}</strong><span class="small muted">原價 $${money(p.originalAmount)}，合報省 $${money(p.saving)}</span></div><div class="offer-price">$${money(p.totalAmount)}<span>${RNPairKey(selectedIds)===RNPairKey(p.eventIds)?'已選雙時段':'選擇雙時段'}</span></div></button>`;
+      }).join('');
+      document.querySelectorAll('[data-pair]').forEach(b => b.addEventListener('click', () => {
+        selectedIds = b.dataset.pair.split('|');
+        renderCards();
+        renderSelection();
+      }));
+    }
+
+    function renderSelection() {
+      const list = selectedEvents(),
+        q = selectionQuote();
+      $('chosen-summary').innerHTML = list.length ?
+        `<div class="summary-heading">${list.length===2?'雙時段報名':'單場報名'} <span>${esc(dateLabel(list[0].date))}</span></div>${list.map(e=>`<div class="summary-line"><span>${esc(e.startTime)} – ${esc(e.endTime)}</span><span>$${money(e.fee)}</span></div>`).join('')}${q.saving?`<div class="summary-line discount-line"><span>雙時段優惠</span><span>− $${money(q.saving)}</span></div>`:''}<div class="summary-total"><span>應繳總額</span><strong><small>NT$</small> ${money(q.totalAmount)}</strong></div><p class="small muted">${list.length===2?'兩場一起保留名額，只需匯款一次。':'再選一個同日時段，可一起報名。'}</p>` :
+        '<p class="muted small">請選擇一個或兩個時段，即可確認金額。</p>';
+      $('register-submit').disabled = submitting || !list.length || list.some(e => e.state !== 'open');
+      if (!submitting) $('register-submit').textContent = list.length === 2 ? '報名雙時段 · NT$ ' + money(q
+        .totalAmount) : list.length ? '送出報名 · NT$ ' + money(q.totalAmount) : '請先選擇時段';
+    }
+
+    function selectDate(d) {
+      selectedDate = d;
+      selectedIds = [];
+      renderDates();
+      renderCards();
+      renderSelection();
+    }
+
+    function toggleEvent(id) {
+      const e = events.find(e => e.id === id);
+      if (!e || e.state !== 'open') return;
+      if (selectedIds.includes(id)) selectedIds = selectedIds.filter(v => v !== id);
+      else if (selectedIds.length >= 2) {
+        toast('一次最多選擇兩個時段，請先取消已選場次');
+        return;
+      } else if (selectedIds.length === 1 && !pairFor([...selectedIds, id])) {
+        toast('這兩場無法合報，請選擇同日、不重疊且使用相同匯款資料的時段');
+        return;
+      } else selectedIds.push(id);
+      renderCards();
+      renderSelection();
+    }
+
+    function selectEvent(id) {
+      const e = events.find(e => e.id === id);
+      if (!e || e.state !== 'open') throw new Error('此時段目前無法報名');
+      selectedIds = [id];
+      selectedDate = e.date;
+      renderDates();
+      renderCards();
+      renderSelection();
+      return {
+        id: e.id,
+        date: e.date,
+        startTime: e.startTime
+      };
+    }
+    async function loadEvents(silent = false) {
+      if (loading) return;
+      loading = true;
+      try {
+        const data = await Api.call('publicList');
+        events = data.events;
+        pairOptions = data.pairs || [];
+        const dates = [...new Set(events.map(e => e.date))].sort();
+        if (!dates.includes(selectedDate)) {
+          selectedDate = events.find(e => e.state === 'open')?.date || dates[0] || '';
+          selectedIds = [];
+        }
+        selectedIds = selectedIds.filter(id => events.some(e => e.id === id && e.date === selectedDate && e
+          .state === 'open'));
+        if (selectedIds.length === 2 && !pairFor(selectedIds)) selectedIds = [];
+        renderDates();
+        renderCards();
+        renderSelection();
+        $('notice').textContent = data.settings.notice || '';
+        $('list-error').classList.add('hidden');
+        if (data.settings.officialLine) {
+          $('official-line').href = data.settings.officialLine;
+          $('official-line').classList.remove('hidden');
+        }
+      } catch (err) {
+        if (!silent || !events.length) {
+          $('list-error').textContent = errorText(err);
+          $('list-error').classList.remove('hidden');
+          if (!events.length) $('event-list').innerHTML =
+            '<div class="empty"><strong>暫時無法取得場次</strong>請稍後重新整理頁面。</div>';
+        }
+      } finally {
+        loading = false;
+      }
+    }
+    $('registration-form').addEventListener('submit', async ev => {
+      ev.preventDefault();
+      if (submitting || !ev.target.reportValidity()) return;
+      const list = selectedEvents(),
+        q = selectionQuote();
+      if (!list.length || list.some(e => e.state !== 'open')) {
+        toast('請選擇開放報名的時段');
+        return;
+      }
+      const form = new FormData(ev.target),
+        fields = {
+          eventIds: list.map(e => e.id),
+          expectedTotal: q.totalAmount,
+          teamName: String(form.get('teamName') || '').trim(),
+          lineName: String(form.get('lineName') || '').trim(),
+          contactId: String(form.get('contactId') || '').trim(),
+          website: form.get('website'),
+          agree: $('agree').checked
+        };
+      const fingerprint = JSON.stringify(fields);
+      let previous;
+      try {
+        previous = JSON.parse(sessionStorage.getItem('rn-scrim-submit') || 'null');
+      } catch {}
+      const pair = previous?.fingerprint === fingerprint ? previous : {
+        fingerprint,
+        requestKey: randomKey(),
+        receiptKey: randomKey()
+      };
+      sessionStorage.setItem('rn-scrim-submit', JSON.stringify(pair));
+      const button = $('register-submit');
+      submitting = true;
+      busy(button, true, '保留名額中');
+      $('register-error').classList.add('hidden');
+      try {
+        const data = await Api.call('register', {
+          ...fields,
+          requestKey: pair.requestKey,
+          receiptKey: pair.receiptKey
+        });
+        rememberReceipt(data);
+        sessionStorage.removeItem('rn-scrim-submit');
+        showReceipt(data);
+        ev.target.reset();
+        selectedIds = [];
+        await loadEvents(true);
+      } catch (err) {
+        $('register-error').textContent = errorText(err);
+        $('register-error').classList.remove('hidden');
+        if (['NOT_OPEN', 'DUPLICATE', 'VALIDATION', 'PRICE_CHANGED'].includes(err.code)) await loadEvents(
+          true);
+      } finally {
+        submitting = false;
+        busy(button, false);
+        renderSelection();
+      }
+    });
+    window.addEventListener('storage', e => {
+      if (DEMO && e.key === DEMO_KEY) loadEvents(true);
+    });
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden) loadEvents(true);
+    });
+    setInterval(() => {
+      if (!document.hidden) loadEvents(true);
+    }, 45000);
+    webTools([{
+      name: 'list_scrim_sessions',
+      title: '查看交流賽場次',
+      description: '讀取交流賽日期、時段、費用、名額與雙時段優惠。',
+      inputSchema: {
+        type: 'object',
+        properties: {},
+        additionalProperties: false
+      },
+      annotations: {
+        readOnlyHint: true,
+        untrustedContentHint: true
+      },
+      async execute() {
+        await loadEvents(true);
+        return {
+          events,
+          pairs: pairOptions
+        };
+      }
+    }, {
+      name: 'select_scrim_session',
+      title: '選擇報名場次',
+      description: '選擇一個開放場次，此步驟不會送出報名。',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          eventId: {
+            type: 'string'
+          }
+        },
+        required: ['eventId'],
+        additionalProperties: false
+      },
+      annotations: {
+        readOnlyHint: false,
+        untrustedContentHint: false
+      },
+      async execute(input) {
+        return selectEvent(input.eventId);
+      }
+    }]);
+    loadEvents();
+  </script>
+</body>
+</html>
