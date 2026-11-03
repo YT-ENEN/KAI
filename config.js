@@ -9,5 +9,5 @@ window.REBORN_CONFIG = {
   SESSION_KEY: 'rn_central_session',
 
   // LOGO 圖片網址。留空時會依序找：同資料夾的 logo.png → 原本的 LOGO 網址
-  LOGO_URL: ''
+  LOGO_URL: 'https://cdn.phototourl.com/member/2026-11-03-f9a95881-fcfe-4705-8082-8ec30520b7ec.png'
 };
