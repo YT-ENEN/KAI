@@ -13,7 +13,10 @@
 :root{
   --black:#000;--white:#fff;--bg:#f3f3f3;--line:#e2e2e2;--line-2:#c9c9c9;
   --ink:#000;--ink-2:#3d3d3d;--muted:#737373;--faint:#a6a6a6;--hover:#f6f6f6;--sel:#ededed;
+  /* 銳能黃：主要按鈕、選中的選單、重點數字。config.js 可用 BRAND_COLOR 換色 */
+  --brand:#FFD400;--brand-2:#F2C500;--brand-edge:#D9B000;--brand-soft:#FFF9DB;--brand-tint:#FFF1A8;
   --ok:#1e7b4a;--warn:#b26b00;--bad:#c4372b;--info:#2e64b0;
+  --chart-in:#2a78d6;--chart-out:#eb6834;
   --side:232px;--top:64px;--r:6px;--r-lg:10px;
   --font:"Barlow","Noto Sans TC",-apple-system,BlinkMacSystemFont,"PingFang TC","Microsoft JhengHei",sans-serif;
   --cond:"Barlow Condensed","Barlow","Noto Sans TC",sans-serif;
@@ -28,13 +31,14 @@ a{color:inherit}
 h1,h2,h3,h4{margin:0;font-weight:700;line-height:1.35}
 p{margin:0}
 :focus-visible{outline:2px solid var(--black);outline-offset:2px}
+.side :focus-visible,.tile:focus-visible,.band :focus-visible,.sign-now :focus-visible,.portal-top :focus-visible,.checkin :focus-visible{outline-color:var(--brand)}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 .muted{color:var(--muted)}.faint{color:var(--faint)}.small{font-size:12.5px}.strong{font-weight:600}
 .red{color:var(--bad)}.nowrap{white-space:nowrap}.right{text-align:right}.num{font-variant-numeric:tabular-nums;white-space:nowrap}
 .ico{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
 
 /* 頂部讀取線 */
-.bar{position:fixed;left:0;top:0;height:2px;width:0;background:var(--black);z-index:200;opacity:0;transition:width .3s ease,opacity .2s}
+.bar{position:fixed;left:0;top:0;height:3px;width:0;background:var(--brand);z-index:200;opacity:0;transition:width .3s ease,opacity .2s}
 .bar.on{opacity:1;width:70%;transition:width 8s cubic-bezier(.1,.6,.2,1),opacity .2s}
 
 /* LOGO */
@@ -47,8 +51,11 @@ p{margin:0}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:36px;padding:0 14px;border-radius:var(--r);border:1px solid var(--line-2);background:var(--white);font-weight:600;font-size:14px;cursor:pointer;white-space:nowrap;text-decoration:none;transition:background .12s,border-color .12s}
 .btn:hover{background:var(--hover);border-color:#b5b5b5}
 .btn:disabled{opacity:.45;cursor:not-allowed}
-.btn-pri{background:var(--black);border-color:var(--black);color:#fff}
-.btn-pri:hover{background:#2b2b2b;border-color:#2b2b2b}
+.btn-pri{background:var(--brand);border-color:var(--brand-edge);color:#000}
+.btn-pri:hover{background:var(--brand-2);border-color:var(--brand-edge)}
+.btn-dark{background:var(--black);border-color:var(--black);color:#fff}
+.btn-dark:hover{background:#2b2b2b;border-color:#2b2b2b}
+.btn-lg{height:44px;padding:0 20px;font-size:15px}
 .btn-sm{height:30px;padding:0 10px;font-size:13px}
 .btn-quiet{border-color:transparent;background:transparent}
 .btn-quiet:hover{background:var(--sel);border-color:transparent}
@@ -68,7 +75,7 @@ p{margin:0}
 .login-brand .logo b{font-size:20px}
 .login-brand h1{font-size:22px}
 .login-brand p{color:var(--muted);font-size:13px}
-.login-card{background:var(--white);border:1px solid var(--line);border-radius:var(--r-lg);padding:24px;display:grid;gap:16px}
+.login-card{background:var(--white);border:1px solid var(--line);border-top:4px solid var(--brand);border-radius:var(--r-lg);padding:24px;display:grid;gap:16px}
 .login-foot{margin-top:16px;font-size:12px;color:var(--muted);line-height:1.7}
 .preview-note{background:var(--white);border:1px dashed var(--line-2);border-radius:var(--r);padding:10px 12px;font-size:12.5px;color:var(--ink-2);margin-bottom:16px}
 
@@ -107,8 +114,8 @@ select.inp{padding-right:28px}
 .nav-i{display:flex;align-items:center;gap:11px;padding:8px 10px;border-radius:var(--r);color:#b3b3b3;text-decoration:none;font-size:14px;font-weight:500;position:relative}
 .nav-i:hover{color:#fff;background:#141414}
 .nav-i.on{color:#fff;background:#1c1c1c}
-.nav-i.on::before{content:"";position:absolute;left:-10px;top:8px;bottom:8px;width:3px;border-radius:0 2px 2px 0;background:#fff}
-.nav-i .cnt{margin-left:auto;font-size:12px;color:#fff;background:#333;border-radius:10px;padding:0 7px;line-height:18px}
+.nav-i.on::before{content:"";position:absolute;left:-10px;top:8px;bottom:8px;width:3px;border-radius:0 2px 2px 0;background:var(--brand)}
+.nav-i .cnt{margin-left:auto;font-size:12px;font-weight:600;color:#000;background:var(--brand);border-radius:10px;padding:0 7px;line-height:18px}
 .side-me{display:flex;align-items:center;gap:10px;padding:12px 14px;border-top:1px solid #1f1f1f;background:none;border-left:0;border-right:0;border-bottom:0;color:#fff;text-align:left;cursor:pointer;width:100%}
 .side-me:hover{background:#0d0d0d}
 .side-me strong{display:block;font-size:13.5px;line-height:1.3}
@@ -164,6 +171,7 @@ a.row:hover,button.row:hover,.row.click:hover{background:var(--hover);cursor:poi
 .date-chip b{display:block;font-family:var(--cond);font-size:21px;font-weight:600;line-height:1.1}
 .date-chip span{display:block;font-size:11px;color:var(--muted)}
 .date-chip.today{background:var(--black);border-color:var(--black);color:#fff}
+.date-chip.today b{color:var(--brand)}
 .date-chip.today span{color:#bdbdbd}
 
 /* 表格 */
@@ -189,7 +197,8 @@ a.row:hover,button.row:hover,.row.click:hover{background:var(--hover);cursor:poi
 .st-ok::before{background:var(--ok)}.st-bad::before{background:var(--bad)}.st-warn::before{background:var(--warn)}.st-info::before{background:var(--info)}
 .st-bad{color:var(--bad)}
 .tag{display:inline-flex;align-items:center;height:22px;padding:0 7px;border:1px solid var(--line);border-radius:4px;font-size:12px;color:var(--ink-2);white-space:nowrap;background:var(--white)}
-.tag-dark{background:var(--black);border-color:var(--black);color:#fff}
+.tag-dark{background:var(--black);border-color:var(--black);color:var(--brand)}
+.tag-brand{background:var(--brand);border-color:var(--brand-edge);color:#000}
 .tag-warn{border-color:#ecd3a8;color:var(--warn)}
 .prog{height:4px;background:#e6e6e6;border-radius:2px;overflow:hidden;min-width:60px}
 .prog i{display:block;height:100%;background:var(--black)}
@@ -211,7 +220,7 @@ button.av{border:0;padding:0;cursor:zoom-in}
 .seg{display:inline-flex;padding:2px;border:1px solid var(--line-2);border-radius:var(--r);background:var(--white);flex:none}
 .seg button{height:30px;padding:0 12px;border:0;border-radius:4px;background:none;font-size:13.5px;font-weight:500;color:var(--ink-2);cursor:pointer;white-space:nowrap}
 .seg button:hover{background:var(--hover)}
-.seg button.on{background:var(--black);color:#fff}
+.seg button.on{background:var(--black);color:var(--brand)}
 .tabs{display:flex;gap:24px;border-bottom:1px solid var(--line);margin-bottom:18px;overflow-x:auto;scrollbar-width:none}
 .tabs::-webkit-scrollbar{display:none}
 .tabs button{background:none;border:0;padding:10px 0;font-size:14px;font-weight:500;color:var(--muted);cursor:pointer;white-space:nowrap;box-shadow:inset 0 -2px transparent}
@@ -230,7 +239,7 @@ button.av{border:0;padding:0;cursor:zoom-in}
 /* 下一場賽事 */
 .band{background:var(--black);color:#fff;border-radius:var(--r-lg);padding:22px 24px;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:28px;align-items:center;margin-bottom:16px}
 .band-count{display:flex;align-items:flex-end;gap:6px;padding-right:28px;border-right:1px solid #2a2a2a;min-width:120px}
-.band-count b{font-family:var(--cond);font-size:72px;line-height:.82;font-weight:600}
+.band-count b{font-family:var(--cond);font-size:72px;line-height:.82;font-weight:600;color:var(--brand)}
 .band-count span{font-size:14px;color:#a6a6a6;padding-bottom:2px}
 .band-count.today b{font-size:56px}
 .band-main{min-width:0}
@@ -239,11 +248,11 @@ button.av{border:0;padding:0;cursor:zoom-in}
 .band-meta{display:flex;flex-wrap:wrap;gap:4px 18px;color:#cfcfcf;font-size:13.5px}
 .band-side{display:grid;gap:10px;min-width:220px}
 .band-side .prog{background:#2e2e2e}
-.band-side .prog i{background:#fff}
+.band-side .prog i{background:var(--brand)}
 .band-side .prog-row span{color:#cfcfcf}
 .band-side p{font-size:13px;color:#a6a6a6}
-.band .btn{background:#fff;color:#000;border-color:#fff}
-.band .btn:hover{background:#e6e6e6}
+.band .btn{background:var(--brand);color:#000;border-color:var(--brand)}
+.band .btn:hover{background:var(--brand-2)}
 .band-empty{display:flex;align-items:center;justify-content:space-between;gap:16px}
 .band-empty p{color:#bdbdbd}
 
@@ -304,7 +313,7 @@ button.chk:not(.on):hover .ico{opacity:.35}
 .cal-d.out{background:#fafafa;color:var(--faint)}
 .cal-d.sel{box-shadow:inset 0 0 0 2px var(--black)}
 .cal-n{width:24px;height:24px;display:grid;place-items:center;border-radius:50%;font-size:13px;font-weight:500}
-.cal-d.today .cal-n{background:var(--black);color:#fff}
+.cal-d.today .cal-n{background:var(--brand);color:#000;font-weight:700}
 .cal-e{display:block;font-size:12px;line-height:1.35;padding:2px 5px;border-radius:3px;background:#f0f0f0;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;border-left:2px solid #bdbdbd}
 .cal-e.mine{border-left-color:var(--black);background:#e6e6e6;font-weight:600}
 .cal-e.x{text-decoration:line-through;color:var(--faint)}
@@ -328,7 +337,7 @@ button.chk:not(.on):hover .ico{opacity:.35}
 .checkin{display:flex;align-items:center;justify-content:space-between;gap:14px;background:var(--black);color:#fff;border-radius:var(--r-lg);padding:14px 16px}
 .checkin p{font-size:13px;color:#bdbdbd}
 .checkin strong{display:block;font-size:15px}
-.checkin .btn{background:#fff;color:#000;border-color:#fff}
+.checkin .btn{background:var(--brand);color:#000;border-color:var(--brand)}
 .roster-i{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center;padding:10px 0;border-top:1px solid var(--line)}
 .roster-i:first-child{border-top:0}
 .roster-i select{height:30px;font-size:13px;padding:0 8px;border:1px solid var(--line-2);border-radius:var(--r);background:#fff}
@@ -381,7 +390,7 @@ button.chk:not(.on):hover .ico{opacity:.35}
 
 /* 提示 */
 .toasts{position:fixed;left:50%;top:14px;transform:translateX(-50%);z-index:300;display:grid;gap:8px;justify-items:center;pointer-events:none;width:max-content;max-width:calc(100% - 32px)}
-.toast{background:var(--black);color:#fff;padding:10px 14px;border-radius:var(--r);font-size:13.5px;max-width:380px;box-shadow:0 10px 30px rgba(0,0,0,.2);pointer-events:auto;animation:toast .18s ease}
+.toast{background:var(--black);color:#fff;padding:10px 14px;border-left:3px solid var(--brand);border-radius:var(--r);font-size:13.5px;max-width:380px;box-shadow:0 10px 30px rgba(0,0,0,.2);pointer-events:auto;animation:toast .18s ease}
 .toast.err{background:#fff;color:var(--bad);border:1px solid #efc5c0}
 @keyframes toast{from{transform:translateY(-6px);opacity:0}}
 .note{border:1px solid var(--line);background:#fafafa;border-radius:var(--r);padding:10px 12px;font-size:13px;color:var(--ink-2);line-height:1.7}
@@ -391,6 +400,196 @@ button.chk:not(.on):hover .ico{opacity:.35}
 .photo-pick{display:flex;align-items:center;gap:14px}
 .photo-pick .av{--s:64px}
 .photo-pick label{cursor:pointer}
+
+/* ═════ V6：側欄分類（點分類才展開裡面的系統） ═════ */
+.nav-home{margin:2px 0 8px}
+.nav-cat{display:flex;align-items:center;gap:11px;width:100%;padding:9px 10px;border-radius:var(--r);color:#bdbdbd;text-decoration:none;font-size:14.5px;font-weight:600;position:relative;margin-top:2px}
+.nav-cat:hover{color:#fff;background:#141414}
+.nav-cat.on{color:#fff}
+.nav-cat.on>.ico:first-child{color:var(--brand)}
+.nav-cat .chev{width:14px;height:14px;margin-left:auto;color:#555;transition:transform .15s}
+.nav-cat.open .chev{transform:rotate(90deg);color:#8c8c8c}
+.nav-cat .cnt{margin-left:auto;font-size:12px;font-weight:600;color:#000;background:var(--brand);border-radius:10px;padding:0 7px;line-height:18px}
+.nav-cat .cnt+.chev{margin-left:6px}
+.nav-sub{display:grid;gap:1px;margin:2px 0 8px 19px;padding-left:10px;border-left:1px solid #262626}
+.nav-sub .nav-i{padding:7px 10px;font-size:13.5px}
+.nav-sub .nav-i.on::before{left:-11px}
+.top-me{display:none;border:0;background:none;padding:0;cursor:pointer;border-radius:50%}
+.tabbar a{position:relative}
+.tb-dot{position:absolute;top:5px;left:calc(50% + 5px);min-width:16px;height:16px;padding:0 4px;border-radius:8px;background:var(--brand);color:#000;font-size:10px;font-weight:700;font-style:normal;line-height:16px;text-align:center}
+
+/* ═════ V6：大廳四大分類（四方格） ═════ */
+.tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:18px}
+.tile{position:relative;aspect-ratio:1/1;min-width:0;background:var(--black);color:#fff;border:2px solid var(--black);border-radius:14px;text-decoration:none;overflow:hidden;container-type:inline-size;transition:border-color .12s,transform .12s}
+.tile:hover{border-color:var(--brand)}
+.tile:active{transform:scale(.985)}
+.tile-in{position:absolute;inset:0;display:flex;flex-direction:column;padding:20px;padding:8cqw}
+.tile-ico{width:46px;height:46px;width:19cqw;height:19cqw;border-radius:11px;border-radius:4.6cqw;background:var(--brand);color:#000;display:grid;place-items:center;flex:none}
+.tile-ico .ico{width:24px;height:24px;width:10.5cqw;height:10.5cqw;stroke-width:1.7}
+.tile-badge{position:absolute;top:18px;right:18px;top:7.5cqw;right:7.5cqw;min-width:28px;height:28px;min-width:11cqw;height:11cqw;padding:0 9px;padding:0 3.4cqw;border-radius:99px;background:#fff;color:#000;font-weight:700;font-size:13px;font-size:max(11px,5.4cqw);display:grid;place-items:center}
+.tile-name{margin-top:auto;font-size:32px;font-size:14cqw;font-weight:700;line-height:1.1;letter-spacing:.06em}
+.tile-sub{margin-top:6px;font-size:12.5px;font-size:max(11px,5cqw);color:#9b9b9b;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tile-stats{display:flex;gap:18px;gap:7cqw;margin-top:12px;margin-top:5cqw;padding-top:10px;padding-top:4.5cqw;border-top:1px solid #2b2b2b;min-width:0}
+.tile-stats div{min-width:0}
+.tile-stats b{display:block;font-family:var(--cond);font-size:24px;font-size:10cqw;font-weight:600;line-height:1.05;color:var(--brand);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tile-stats span{display:block;font-size:11.5px;font-size:max(10px,4.6cqw);color:#9b9b9b;white-space:nowrap;margin-top:2px}
+
+/* ═════ V6：分類頁 ═════ */
+.hub-head{display:flex;align-items:center;gap:16px;margin-bottom:18px}
+.hub-head .tile-ico{width:52px;height:52px;border-radius:12px}
+.hub-head .tile-ico .ico{width:27px;height:27px}
+.hub-head h2{font-size:24px;letter-spacing:.04em}
+.hub-head p{color:var(--muted);font-size:13.5px}
+.mods{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.mod{background:var(--white);border:1px solid var(--line);border-radius:var(--r-lg);padding:18px;display:flex;flex-direction:column;gap:16px;text-decoration:none;color:inherit;min-height:176px;transition:border-color .12s}
+.mod:hover{border-color:var(--black)}
+.mod-h{display:flex;align-items:flex-start;gap:12px}
+.mod-ico{width:40px;height:40px;border-radius:10px;background:var(--black);color:var(--brand);display:grid;place-items:center;flex:none}
+.mod-ico .ico{width:20px;height:20px}
+.mod-h strong{display:block;font-size:16px;line-height:1.35}
+.mod-h p{font-size:12.5px;color:var(--muted);margin-top:2px;line-height:1.5}
+.mod-figs{margin-top:auto;display:flex;gap:24px;flex-wrap:wrap}
+.mod-figs b{display:inline-block;font-family:var(--cond);font-size:27px;font-weight:600;line-height:1.1;white-space:nowrap}
+.mod-figs .hot b{background:var(--brand);padding:0 6px;border-radius:4px}
+.mod-figs span{display:block;font-size:12px;color:var(--muted)}
+
+/* ═════ V6：文件簽署 ═════ */
+.doc-ico{width:34px;height:40px;border-radius:5px;border:1px solid var(--line-2);background:#fff;display:grid;place-items:center;color:var(--ink-2);flex:none}
+.doc-ico .ico{width:17px;height:17px}
+.doc-ico.done{background:var(--black);border-color:var(--black);color:var(--brand)}
+.doc-ico.todo{background:var(--brand);border-color:var(--brand-edge);color:#000}
+.row.todo{background:var(--brand-soft)}
+a.row.todo:hover{background:#fff4c2}
+.sign-now{display:flex;align-items:center;justify-content:space-between;gap:14px;background:var(--black);color:#fff;border-radius:var(--r-lg);padding:16px 18px;margin-bottom:16px;flex-wrap:wrap;border-left:5px solid var(--brand)}
+.sign-now strong{display:block;font-size:16px}
+.sign-now p{font-size:13px;color:#bdbdbd}
+.sign-now .acts{display:flex;gap:8px;flex-wrap:wrap}
+.sign-now .btn{background:#1d1d1d;border-color:#363636;color:#fff}
+.sign-now .btn:hover{background:#2a2a2a}
+.sign-now .btn-pri{background:var(--brand);border-color:var(--brand);color:#000}
+.sign-now .btn-pri:hover{background:var(--brand-2)}
+.doc-content{font-size:15px;line-height:1.9;white-space:pre-wrap;overflow-wrap:anywhere;color:var(--ink)}
+.signer{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:12px;align-items:start;padding:12px 18px;border-top:1px solid var(--line)}
+.signer:first-child{border-top:0}
+.signer.now{background:var(--brand-soft)}
+.signer.gone{opacity:.6}
+.signer .seq{width:24px;height:24px;border-radius:50%;border:1px solid var(--line-2);display:grid;place-items:center;font-size:12px;color:var(--muted);margin-top:4px;background:#fff}
+.signer.done .seq{background:var(--black);border-color:var(--black);color:var(--brand)}
+.signer .who{align-items:flex-start}
+.signer .who>div>span{white-space:normal}
+.sig-img{display:block;max-width:190px;max-height:70px;margin-top:8px;padding:4px 8px;background:#fff;border:1px solid var(--line);border-radius:6px}
+.signer-acts{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+.file-card{display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid var(--line);border-radius:var(--r);background:#fff;min-width:0}
+.file-card .file-ext{width:40px;height:48px;border-radius:4px;background:var(--black);color:var(--brand);display:grid;place-items:center;font-family:var(--cond);font-size:13px;font-weight:700;flex:none}
+.file-card .file-main{flex:1;min-width:0}
+.file-card .file-main strong{display:block;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.file-card .file-main span{font-size:12px;color:var(--muted)}
+.file-card .file-acts{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.ev{display:grid;grid-template-columns:92px minmax(0,1fr);gap:10px;padding:9px 18px;border-top:1px solid var(--line);font-size:13px;line-height:1.55}
+.ev:first-child{border-top:0}
+.ev time{color:var(--muted);font-size:12px;padding-top:1px}
+.ev b{font-weight:600}
+.sg-add{display:flex;gap:8px;flex-wrap:wrap}
+.sg-add select{flex:1;min-width:200px}
+.sg-list{list-style:none;margin:10px 0 0;padding:0;border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden}
+.sg-i{display:grid;grid-template-columns:auto auto minmax(0,1fr) auto;gap:10px;align-items:center;padding:8px 10px;border-top:1px solid var(--line);background:#fff}
+.sg-i:first-child{border-top:0}
+.sg-n{width:22px;height:22px;border-radius:50%;background:var(--black);color:var(--brand);font-size:12px;font-weight:700;display:grid;place-items:center}
+.sg-list:not(.seq) .sg-n{background:var(--sel);color:var(--muted)}
+.sg-who{min-width:0}
+.sg-who strong{display:block;font-size:13.5px}
+.sg-who span{display:block;font-size:12px;color:var(--muted)}
+.sg-acts{display:flex;gap:2px}
+.sg-acts .icon-btn{width:30px;height:30px}
+.sg-acts .icon-btn:disabled{opacity:.3;cursor:default}
+.sg-empty{margin-top:10px;padding:14px;border:1px dashed var(--line-2);border-radius:var(--r-lg);color:var(--muted);font-size:13px}
+.sig-saved{display:flex;align-items:center;gap:12px;margin-top:12px;padding:10px 12px;border:1px solid var(--line);border-radius:var(--r-lg);background:#fafafa;flex-wrap:wrap}
+.sig-saved img{height:44px;max-width:150px;object-fit:contain;background:#fff;border:1px solid var(--line);border-radius:4px;padding:2px 6px}
+.sig-saved div{flex:1;min-width:120px}
+.sig-saved strong{display:block;font-size:13.5px}
+.sig-saved span{font-size:12px;color:var(--muted)}
+
+/* 表單裡的分段按鈕不要撐滿、檔案欄位樣式 */
+.f>.seg,.form>.seg{justify-self:start}
+.f input[type=file]{font-size:13px;color:var(--ink-2);max-width:100%}
+.f input[type=file]::file-selector-button{height:32px;padding:0 12px;margin-right:10px;border:1px solid var(--line-2);border-radius:var(--r);background:#fff;font:inherit;font-weight:600;color:var(--ink);cursor:pointer}
+.f input[type=file]::file-selector-button:hover{background:var(--hover)}
+.fig b em{font-style:normal}
+.note .ico{width:16px;height:16px;vertical-align:-3px;margin-right:2px}
+.portal-on .toasts{top:calc(80px + env(safe-area-inset-top))}
+/* 簽名板 */
+.sigpad{border:1px solid var(--line-2);border-radius:var(--r-lg);background:#fff;overflow:hidden}
+.sigpad-tools{display:flex;align-items:center;gap:8px;padding:8px 10px;border-bottom:1px solid var(--line);background:#fafafa;flex-wrap:wrap}
+.sigpad-tools .grow{flex:1}
+.sigpad-tools .lbl{font-size:12.5px;color:var(--muted)}
+.swatch{width:24px;height:24px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px var(--line-2);cursor:pointer;padding:0}
+.swatch.on{box-shadow:0 0 0 2px var(--black)}
+.seg-sm button{height:26px;padding:0 10px;font-size:12.5px}
+.sigpad-area{position:relative;height:220px;touch-action:none;cursor:crosshair;user-select:none;-webkit-user-select:none}
+.sigpad-area canvas{position:absolute;inset:0;width:100%;height:100%;touch-action:none}
+.sigpad-line{position:absolute;left:28px;right:28px;bottom:54px;border-bottom:1.5px solid #d5d5d5;pointer-events:none}
+.sigpad-x{position:absolute;left:28px;bottom:58px;font-size:20px;line-height:1;color:#c2c2c2;pointer-events:none}
+.sigpad-hint{position:absolute;left:0;right:0;top:38%;text-align:center;color:var(--faint);font-size:14px;pointer-events:none}
+.sigpad.has .sigpad-hint{display:none}
+.sigpad-note{padding:6px 10px;border-top:1px solid var(--line);font-size:12px;color:var(--muted);background:#fafafa}
+
+/* ═════ V6：收支 ═════ */
+.led-period{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.led-period h2{font-size:18px;min-width:118px}
+.amt-in{color:var(--ok)}
+.tbl tr.void td{color:var(--faint);text-decoration:line-through}
+.tbl tr.void td .st,.tbl tr.void td .tag{text-decoration:none}
+.led-sum{display:flex;gap:16px;flex-wrap:wrap;font-size:12.5px;color:var(--muted);padding:10px 18px;border-bottom:1px solid var(--line)}
+.led-sum b{color:var(--ink);font-weight:600}
+.chart-box{position:relative;padding:8px 14px 14px}
+.chart-legend{display:flex;gap:16px;align-items:center;font-size:12.5px;color:var(--ink-2)}
+.chart-legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.chart-svg{display:block;width:100%;overflow:visible}
+.chart-svg .grid{stroke:#ececec;stroke-width:1}
+.chart-svg .axis{stroke:#cfcfcf;stroke-width:1}
+.chart-svg text{fill:var(--muted);font-size:11px;font-family:var(--font)}
+.chart-svg .hit{fill:transparent;cursor:default}
+.chart-svg g.col:hover .hit,.chart-svg g.col:focus .hit{fill:rgba(0,0,0,.035)}
+.chart-svg g.col:focus{outline:none}
+.chart-tip{position:absolute;z-index:5;pointer-events:none;background:#fff;border:1px solid var(--line-2);border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,.12);padding:9px 11px;font-size:12.5px;min-width:168px}
+.chart-tip strong{display:block;margin-bottom:4px}
+.chart-tip div{display:flex;align-items:center;gap:8px;justify-content:space-between}
+.chart-tip div span{display:flex;align-items:center;gap:6px;color:var(--ink-2)}
+.chart-tip div i{width:9px;height:9px;border-radius:2px;display:inline-block}
+.chart-tip div b{font-weight:600}
+.chart-tip .net{border-top:1px solid var(--line);margin-top:5px;padding-top:5px}
+.cbars{display:grid;gap:12px;padding:14px 18px}
+.cbar-t{display:flex;align-items:baseline;gap:8px;font-size:13px}
+.cbar-t span{flex:1;min-width:0}
+.cbar-t b{font-weight:600}
+.cbar-t em{font-style:normal;color:var(--muted);font-size:12px;width:38px;text-align:right}
+.cbar-bar{height:8px;margin-top:5px;border-radius:0 4px 4px 0}
+.acc-row{display:flex;justify-content:space-between;gap:12px;padding:11px 18px;border-top:1px solid var(--line)}
+.acc-row:first-child{border-top:0}
+
+/* ═════ V6：信件連結簽署頁（不用登入） ═════ */
+.portal{min-height:100vh;background:var(--bg)}
+.portal-top{display:flex;align-items:center;gap:12px;padding:12px 18px;background:var(--black);color:#fff;border-bottom:4px solid var(--brand);position:sticky;top:0;z-index:20}
+.portal-top .logo{width:36px;height:36px}
+.portal-top strong{display:block;font-size:15px;line-height:1.3}
+.portal-top span{display:block;font-size:12px;color:#9b9b9b}
+.portal-top .btn{margin-left:auto;color:#000}
+.portal-main{max-width:780px;margin:0 auto;padding:20px 16px 40px;display:grid;gap:16px}
+.portal-head{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:20px}
+.portal-head h1{font-size:22px;margin:4px 0 8px;line-height:1.4}
+.portal-state{border-radius:var(--r-lg);padding:16px 18px;display:flex;gap:14px;align-items:flex-start}
+.portal-state.ok{background:var(--black);color:#fff;border-left:5px solid var(--brand)}
+.portal-state.ok p{color:#cfcfcf}
+.portal-state.info{background:#fff;border:1px solid var(--line)}
+.portal-state.warn{background:#fdf8ef;border:1px solid #ecd3a8}
+.portal-state strong{display:block;font-size:16px;margin-bottom:2px}
+.portal-state .ico{width:24px;height:24px;flex:none;margin-top:2px}
+.portal-state.ok .ico{color:var(--brand)}
+.portal-acts{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:16px}
+.portal-acts .grow{flex:1}
+.portal-foot{max-width:780px;margin:0 auto;padding:0 16px 40px;font-size:12px;color:var(--muted)}
+.portal-msg h2{font-size:18px;margin-bottom:6px}
+.portal-msg p+p{margin-top:6px}
 
 /* 平板：側欄收成圖示列 */
 @media (max-width:1179px){
@@ -487,6 +686,51 @@ button.chk:not(.on):hover .ico{opacity:.35}
   .pk-role{width:92px}
   .ag{grid-template-columns:56px minmax(0,1fr)}
 }
+/* V6 平板 */
+@media (max-width:1179px){
+  .nav-home{margin:2px 0 6px}
+  .nav-cat{flex-direction:column;gap:3px;padding:8px 2px;font-size:11px;text-align:center;line-height:1.25}
+  .nav-cat .ico{width:20px;height:20px}
+  .nav-cat .chev{display:none}
+  .nav-cat .cnt{position:absolute;top:4px;right:8px;margin:0;font-size:10.5px;padding:0 5px;line-height:16px}
+  .nav-sub{margin:2px 0 8px;padding:4px 0;border-left:0;background:#101010;border-radius:var(--r)}
+  .nav-sub .nav-i{padding:7px 2px;font-size:10.5px}
+  .nav-sub .nav-i .ico{width:18px;height:18px}
+  .nav-sub .nav-i.on::before{left:-6px}
+}
+@media (max-width:959px){
+  .tiles{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+/* V6 手機 */
+@media (max-width:759px){
+  .top-me{display:inline-grid}
+  .tiles{gap:10px;margin-bottom:14px}
+  .tile{border-radius:12px}
+  .tile-sub{display:none}
+  .mods{grid-template-columns:1fr;gap:10px}
+  .mod{min-height:0;padding:16px;gap:12px}
+  .mod-figs b{font-size:23px}
+  .hub-head{margin-bottom:14px}
+  .hub-head h2{font-size:21px}
+  .sign-now{flex-direction:column;align-items:stretch}
+  .sign-now .acts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+  .sign-now .acts .btn{padding:0 6px}
+  .signer{grid-template-columns:auto minmax(0,1fr);padding:12px 14px}
+  .signer-acts{grid-column:2;flex-direction:row;justify-content:flex-start;align-items:center;flex-wrap:wrap}
+  .ev{grid-template-columns:1fr;gap:0;padding:9px 14px}
+  .sigpad-area{height:200px}
+  .file-card{flex-wrap:wrap}
+  .file-card .file-acts{width:100%;justify-content:flex-start}
+  .portal-head{padding:16px}
+  .portal-head h1{font-size:19px}
+  .portal-acts .btn{flex:1}
+  .portal-acts .grow{display:none}
+  .led-period h2{font-size:16px;min-width:0}
+  .tbl-cards tr{display:flex;flex-direction:column}
+  .tbl-cards td.cell-main{order:-1}
+  .tbl-cards td.empty{display:none}
+  .sg-add select{min-width:0}
+}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 </head>
@@ -506,6 +750,8 @@ button.chk:not(.on):hover .ico{opacity:.35}
   </div>
 </section>
 
+<section id="portal" class="portal" hidden></section>
+
 <div id="app" class="app" hidden>
   <aside class="side" aria-label="主選單">
     <a class="side-brand" id="sideBrand" href="#home"></a>
@@ -516,7 +762,7 @@ button.chk:not(.on):hover .ico{opacity:.35}
     <header class="top">
       <span id="topLogo"></span>
       <div class="top-title" id="topTitle"></div>
-      <div class="top-act"><div class="sync" id="sync"></div><div class="top-act" id="topAct"></div></div>
+      <div class="top-act"><div class="sync" id="sync"></div><div class="top-act" id="topAct"></div><button class="top-me" id="topMe" type="button" aria-label="我的帳號"></button></div>
     </header>
     <main id="view" class="view"></main>
   </div>
@@ -524,7 +770,7 @@ button.chk:not(.on):hover .ico{opacity:.35}
 </div>
 
 <div id="toasts" class="toasts" aria-live="polite"></div>
-<script src="config.js?v=5.0"></script>
+<script src="config.js?v=6.0"></script>
 <script>
 /* 預覽模式：config.js 沒有 API_URL 時使用的範例資料（正式上線不會用到） */
 const Mock=(()=>{
@@ -542,6 +788,44 @@ const Mock=(()=>{
   const proj=id=>db.projects.find(p=>p.id===id);
   const meUser=()=>({id:'usr1',employeeId:ME,username:'admin',role:'SUPER_ADMIN',roleName:'最高管理員',name:emp(ME).name,status:'ACTIVE',permissions:['*'],mustChangePassword:false,photoThumb:emp(ME).photoThumb});
   const log=(action,meta='')=>audit.unshift({id:uid('aud'),createdAt:now(),actorUserId:'usr1',actorName:emp(ME).name,action,target:'',result:'SUCCESS',meta});
+
+  // ── V6 預覽用：簽名圖、文件簽署流程、收支 ──
+  const sigImg=seed=>{try{const c=document.createElement('canvas');c.width=360;c.height=110;const g=c.getContext('2d');let s=seed*7919+13;const r=()=>(s=(s*9301+49297)%233280)/233280;g.strokeStyle=seed%3===0?'#1d3f9e':'#111';g.lineWidth=3.2;g.lineCap='round';g.lineJoin='round';g.beginPath();let x=24,y=62;g.moveTo(x,y);for(let i=0;i<6;i++){const nx=x+34+r()*18,ny=30+r()*52;g.bezierCurveTo(x+14,y-36*r(),nx-14,ny+36*r(),nx,ny);x=nx;y=ny}g.stroke();g.lineWidth=2.2;g.beginPath();g.moveTo(40,92);g.quadraticCurveTo(170,78+r()*16,320,86);g.stroke();return c.toDataURL('image/png')}catch(e){return ''}};
+  const demoPdf=btoa('%PDF-1.4\n1 0 obj<</Type/Catalog/Pages 2 0 R>>endobj\n2 0 obj<</Type/Pages/Kids[3 0 R]/Count 1>>endobj\n3 0 obj<</Type/Page/Parent 2 0 R/MediaBox[0 0 300 144]>>endobj\ntrailer<</Root 1 0 R>>\n%%EOF');
+  const sv=d=>{const o=Object.assign({},d);o.excerpt=String(o.content||'').replace(/\s+/g,' ').slice(0,120);delete o.content;delete o.attachData;o.hasAttachment=!!d.attachName;o.hasSignedPdf=d.status==='COMPLETED';return o};
+  const stv=s=>{const o=Object.assign({},s);o.previewToken=s.token;delete o.token;return o};
+  const lv=x=>{const o=Object.assign({},x);delete o.receiptData;delete o.receiptType;return o};
+  const sSteps=id=>db.signSteps.filter(s=>s.docId===id).sort((a,b)=>a.seq-b.seq||String(a.createdAt).localeCompare(String(b.createdAt)));
+  const sEv=(docId,stepId,actor,action,detail)=>db.signEvents.push({id:uid('sev'),docId,stepId:stepId||'',createdAt:now(),actorName:actor,action,detail:detail||''});
+  const sState=id=>({doc:sv(db.signDocs.find(d=>d.id===id)),steps:sSteps(id).map(stv)});
+  const sDoc=id=>{const d=db.signDocs.find(x=>x.id===id);if(!d)throw new Error('找不到這份文件。');return d};
+  function sAdvance(doc){
+    let q=0;const live=sSteps(doc.id).filter(s=>!['TRANSFERRED','CANCELLED'].includes(s.status));
+    if(live.length&&live.every(s=>s.status==='SIGNED')){doc.status='COMPLETED';doc.completedAt=now();sEv(doc.id,'','系統','COMPLETE','所有簽署人都已簽署，已產生簽署完成 PDF');q+=queue([...new Set([doc.issuerId,...live.map(s=>s.employeeId)])],{kind:'SIGN',subject:'【銳能】文件已完成簽署：'+doc.title}).queued}
+    else if(doc.flow==='SEQUENTIAL'&&!live.some(s=>s.status==='PENDING')){const n=live.find(s=>s.status==='WAITING');if(n){n.status='PENDING';n.notifiedAt=now();q+=queue([n.employeeId],{kind:'SIGN',subject:'【銳能】請簽署文件：'+doc.title}).queued}}
+    doc.updatedAt=now();return q;
+  }
+  function sSign(doc,s,p,channel){
+    if(doc.status!=='PENDING')throw new Error('這份文件已經不在簽署中。');if(!p.agree)throw new Error('請先勾選「我已閱讀並同意這份文件的內容」。');if(!/^data:image\/png;base64,/.test(p.signature||''))throw new Error('簽名沒有收到或格式不正確，請重新簽一次。');
+    db.signatures[s.id]=p.signature;Object.assign(s,{status:'SIGNED',signedAt:now(),channel,signNote:p.note||'',viewedAt:s.viewedAt||now(),updatedAt:now()});sEv(doc.id,s.id,s.name,'SIGN',channel==='LINK'?'透過信件連結簽署':'在中控台簽署');return sAdvance(doc);
+  }
+  function sReject(doc,s,reason,actor){
+    if(doc.status!=='PENDING')throw new Error('這份文件已經不在簽署中。');if(!String(reason||'').trim())throw new Error('請填寫退回原因，發文者才知道要怎麼修改。');
+    Object.assign(s,{status:'REJECTED',rejectReason:reason,updatedAt:now()});sSteps(doc.id).forEach(x=>{if(x!==s&&['PENDING','WAITING'].includes(x.status))x.status='CANCELLED'});Object.assign(doc,{status:'REJECTED',closedReason:s.name+' 退回：'+reason,updatedAt:now()});sEv(doc.id,s.id,actor,'REJECT',reason);
+    return queue([doc.issuerId].filter(x=>x!==s.employeeId),{kind:'SIGN',subject:'【銳能】文件被退回：'+doc.title}).queued;
+  }
+  function sTransfer(doc,s,toId,note,actor){
+    if(doc.status!=='PENDING')throw new Error('這份文件已經不在簽署中。');if(!['PENDING','WAITING'].includes(s.status))throw new Error('這個簽署步驟已經處理過，不能轉交。');
+    const e=emp(toId);if(!e||e.status!=='ACTIVE')throw new Error('請選擇一位在職的人員。');if(!e.email&&!e.hasAccount)throw new Error(e.name+' 沒有信箱也沒有中控台帳號，無法簽署。');
+    if(sSteps(doc.id).some(x=>x.employeeId===toId&&['PENDING','WAITING','SIGNED'].includes(x.status)))throw new Error(e.name+' 已經在這份文件的簽署名單裡。');
+    const ns={id:uid('sst'),docId:doc.id,seq:s.seq,employeeId:toId,name:e.name,status:s.status,viewedAt:'',signedAt:'',signNote:'',channel:'',transferredFrom:s.id,transferredTo:'',transferNote:note||'',rejectReason:'',notifiedAt:now(),createdAt:now(),updatedAt:now(),hasEmail:!!e.email};ns.token=('pv'+ns.id).replace(/[^A-Za-z0-9]/g,'');db.signSteps.push(ns);
+    Object.assign(s,{status:'TRANSFERRED',transferredTo:ns.id,transferNote:note||'',updatedAt:now()});doc.updatedAt=now();sEv(doc.id,s.id,actor,'TRANSFER',s.name+' 轉交給 '+e.name+(note?'：'+note:''));
+    return (ns.status==='PENDING'?queue([toId],{kind:'SIGN',subject:'【銳能】文件轉交給你簽署：'+doc.title}).queued:0)+queue([doc.issuerId].filter(x=>x!==ME&&x!==toId),{kind:'SIGN',subject:'【銳能】文件已轉交：'+doc.title}).queued;
+  }
+  function portalView(s){
+    const doc=db.signDocs.find(d=>d.id===s.docId),steps=sSteps(doc.id),inDoc=new Set(steps.filter(x=>['PENDING','WAITING','SIGNED'].includes(x.status)).map(x=>x.employeeId)),to=s.transferredTo?steps.find(x=>x.id===s.transferredTo):null;
+    return clone({doc:Object.assign(sv(doc),{content:doc.content}),me:{name:s.name,status:s.status,seq:s.seq,signedAt:s.signedAt,viewedAt:s.viewedAt,transferredTo:to?to.name:''},steps:steps.map(x=>({name:x.name,status:x.status,seq:x.seq,signedAt:x.signedAt,mine:x.id===s.id})),people:s.status==='PENDING'&&doc.status==='PENDING'?db.employees.filter(e=>e.status==='ACTIVE'&&!inDoc.has(e.employeeId)&&(e.email||e.hasAccount)).map(e=>({employeeId:e.employeeId,name:e.name,department:e.department,jobTitle:e.jobTitle})):[]});
+  }
 
   function seed(){
     db={};
@@ -621,6 +905,61 @@ const Mock=(()=>{
     ml('MANUAL','【銳能】冬季盃工作人員招募',['RN-2026-002','RN-2026-003','RN-2026-004','RN-2026-006','RN-2026-007'],-2);
     ml('TASK','【銳能】新任務：裁判手冊更新（新版規章）',['RN-2026-004'],-5);
     db.mailPending=0;
+    // ── V6：帳號、文件簽署、收支範例 ──
+    const acct=new Set(['RN-ADMIN-001','RN-2026-002','RN-2026-003','RN-2026-004']);
+    db.employees.forEach(e=>{e.hasAccount=acct.has(e.employeeId)});
+    db.signDocs=[];db.signSteps=[];db.signEvents=[];db.signatures={};db.savedSig='';
+    const SD=(id,o)=>{const d=Object.assign({id,docCode:'',title:'',docType:'OTHER',content:'',issuerId:ME,flow:'PARALLEL',status:'PENDING',dueDate:'',projectId:'',projectName:'',attachName:'',attachType:'',attachSize:0,attachData:'',note:'',createdAt:iso(-3,10),updatedAt:iso(-1,10),completedAt:'',closedReason:''},o);d.issuerName=emp(d.issuerId).name;if(d.projectId)d.projectName=proj(d.projectId).name;db.signDocs.push(d);return d};
+    const ST=(docId,seq,eid,status,o={})=>{const s=Object.assign({id:docId+'_s'+seq+(o.sfx||''),docId,seq,employeeId:eid,name:emp(eid).name,status,viewedAt:'',signedAt:'',signNote:'',channel:'',transferredFrom:'',transferredTo:'',transferNote:'',rejectReason:'',notifiedAt:iso(-3,10),createdAt:iso(-3,10),updatedAt:iso(-1,10),hasEmail:!!emp(eid).email},o);delete s.sfx;s.token=('pv'+s.id).replace(/[^A-Za-z0-9]/g,'');db.signSteps.push(s);if(status==='SIGNED')db.signatures[s.id]=sigImg(seq*13+eid.length*7+docId.length);return s};
+    const EV=(docId,stepId,actor,action,detail,at)=>db.signEvents.push({id:uid('sev'),docId,stepId,createdAt:at,actorName:actor,action,detail:detail||''});
+    SD('sd1',{docCode:'RN-DOC-2026-0004',title:'2026 冬季盃工作人員切結書',docType:'AFFIDAVIT',projectId:'prj1',dueDate:day(5),createdAt:iso(-2,14),updatedAt:iso(-1,21),note:'請在賽前工作會議前簽完',attachName:'冬季盃工作人員守則.pdf',attachType:'application/pdf',attachSize:182340,
+      content:'本人同意擔任 2026 銳能冬季盃賽事工作人員，並遵守以下事項：\n\n一、保密義務\n賽事期間接觸到的隊伍資料、選手個資、賽程與直播內容，未經銳能娛樂同意不得對外公開或提供給他人。\n\n二、公正執行\n擔任裁判、場控或導播時，應依賽事規章公正執行，不得協助或刻意影響任何隊伍。\n\n三、出勤與交接\n依排班時間準時出勤，需要請假請提前 3 天在中控台提出；工作結束前完成交接。\n\n四、直播與素材\n工作中產生的直播畫面、剪輯素材著作權歸銳能娛樂所有。\n\n本切結書自簽署日起至 2026 冬季盃結束後 6 個月內有效。'});
+    ST('sd1',1,'RN-2026-003','SIGNED',{signedAt:iso(-1,21),viewedAt:iso(-1,20),channel:'LINK'});
+    ST('sd1',2,'RN-2026-004','PENDING',{viewedAt:iso(-1,9)});
+    ST('sd1',3,'RN-2026-006','PENDING');
+    EV('sd1','','林知遠','CREATE','3 位簽署人，同時簽署',iso(-2,14));EV('sd1','sd1_s2','王映晴','VIEW','在中控台開啟',iso(-1,9));EV('sd1','sd1_s1','張宇翔','VIEW','透過信件連結開啟',iso(-1,20));EV('sd1','sd1_s1','張宇翔','SIGN','透過信件連結簽署',iso(-1,21));
+    SD('sd2',{docCode:'RN-DOC-2026-0005',title:'冬季盃賽評合作合約',docType:'CONTRACT',issuerId:'RN-2026-002',flow:'SEQUENTIAL',projectId:'prj1',dueDate:day(3),createdAt:iso(-1,11),updatedAt:iso(-1,11),
+      content:'甲方：銳能娛樂\n乙方：賽評\n\n一、合作內容\n乙方擔任 2026 銳能冬季盃分組賽與決賽的賽評，共 3 場直播，每場約 4 小時。\n\n二、報酬\n每場新台幣 2,500 元，於賽事結束後 14 日內匯款。\n\n三、直播素材\n乙方同意甲方將直播畫面用於官方宣傳與精華剪輯。\n\n四、其他\n本合約由營運負責人與技術負責人依序簽署後生效。'});
+    ST('sd2',1,ME,'PENDING',{notifiedAt:iso(-1,11)});
+    ST('sd2',2,'RN-2026-007','WAITING',{notifiedAt:''});
+    EV('sd2','','陳品妤','CREATE','2 位簽署人，依序簽署',iso(-1,11));
+    SD('sd3',{docCode:'RN-DOC-2026-0002',title:'2026 秋季盃工作人員勞務報酬領據',docType:'CONSENT',projectId:'prj5',status:'COMPLETED',createdAt:iso(-40,15),updatedAt:iso(-37,22),completedAt:iso(-37,22),content:'茲收到銳能娛樂 2026 秋季盃賽事勞務報酬，金額如中控台報酬紀錄所載，確認無誤。'});
+    ST('sd3',1,'RN-2026-003','SIGNED',{signedAt:iso(-39,20),viewedAt:iso(-39,20),channel:'APP'});
+    ST('sd3',2,'RN-2026-005','TRANSFERRED',{transferredTo:'sd3_s2b',transferNote:'我這週出國，請子瑜代收',notifiedAt:iso(-40,15)});
+    ST('sd3',2,'RN-2026-006','SIGNED',{sfx:'b',signedAt:iso(-37,22),viewedAt:iso(-37,21),channel:'LINK',transferredFrom:'sd3_s2',transferNote:'我這週出國，請子瑜代收'});
+    ST('sd3',3,'RN-2026-004','SIGNED',{signedAt:iso(-38,12),viewedAt:iso(-38,12),channel:'APP'});
+    EV('sd3','','林知遠','CREATE','3 位簽署人，同時簽署',iso(-40,15));EV('sd3','sd3_s1','張宇翔','SIGN','在中控台簽署',iso(-39,20));EV('sd3','sd3_s2','李承恩','TRANSFER','李承恩 轉交給 黃子瑜：我這週出國，請子瑜代收',iso(-39,9));EV('sd3','sd3_s3','王映晴','SIGN','在中控台簽署',iso(-38,12));EV('sd3','sd3_s2b','黃子瑜','SIGN','透過信件連結簽署',iso(-37,22));EV('sd3','','系統','COMPLETE','所有簽署人都已簽署，已產生簽署完成 PDF',iso(-37,22));
+    SD('sd4',{docCode:'RN-DOC-2026-0003',title:'直播素材授權同意書',docType:'CONSENT',status:'REJECTED',createdAt:iso(-9,16),updatedAt:iso(-8,10),closedReason:'吳柏諺 退回：第二條的授權期限寫成永久，跟之前談的兩年不一樣',content:'一、授權範圍\n同意銳能娛樂使用本人提供的直播畫面、剪輯素材於官方頻道與社群。\n\n二、授權期限\n永久。\n\n三、署名\n銳能娛樂使用素材時會標示原作者。'});
+    ST('sd4',1,'RN-2026-007','REJECTED',{rejectReason:'第二條的授權期限寫成永久，跟之前談的兩年不一樣',viewedAt:iso(-8,10)});
+    ST('sd4',2,'RN-2026-002','CANCELLED');
+    EV('sd4','','林知遠','CREATE','2 位簽署人，同時簽署',iso(-9,16));EV('sd4','sd4_s1','吳柏諺','REJECT','第二條的授權期限寫成永久，跟之前談的兩年不一樣',iso(-8,10));
+    SD('sd5',{docCode:'RN-DOC-2026-0006',title:'11 月交流賽場控工作說明',docType:'NOTICE',issuerId:'RN-2026-002',projectId:'prj2',dueDate:day(3),createdAt:iso(-1,9),updatedAt:iso(0,8),content:'交流賽當天 18:30 在 Discord 語音頻道集合。\n\n場控負責：開房、確認各隊出賽名單、比賽中回報異常、賽後截圖結算畫面。\n\n遇到斷線或爭議，請先暫停比賽並通知裁判。'});
+    ST('sd5',1,ME,'SIGNED',{signedAt:iso(0,8),viewedAt:iso(0,8),channel:'APP'});
+    ST('sd5',2,'RN-2026-006','PENDING');
+    EV('sd5','','陳品妤','CREATE','2 位簽署人，同時簽署',iso(-1,9));EV('sd5','sd5_s1','林知遠','SIGN','在中控台簽署',iso(0,8));
+    // 收支
+    db.ledger=[];
+    let rs=11;const rnd=()=>(rs=(rs*16807)%2147483647)/2147483647;
+    const ymdx=d=>d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
+    const mday=(m,dd)=>{const x=new Date();x.setDate(1);x.setMonth(x.getMonth()-m);x.setDate(m===0?Math.min(dd,new Date().getDate()):Math.min(dd,28));return ymdx(x)};
+    const LG=(date,kind,cat,amount,desc,o={})=>{const x=Object.assign({id:uid('led'),entryDate:date,kind,category:cat,amount,account:'銀行帳戶',projectId:'',projectName:'',counterparty:'',description:desc,invoiceNo:'',receiptName:'',hasReceipt:false,status:'CLEARED',sourceType:'',sourceId:'',createdBy:'usr1',createdByName:'林知遠',createdAt:date+'T02:00:00.000Z',updatedAt:date+'T02:00:00.000Z',voidReason:''},o);if(x.projectId)x.projectName=proj(x.projectId).name;x.hasReceipt=!!x.receiptName;db.ledger.push(x);return x};
+    for(let m=7;m>=0;m--){
+      LG(mday(m,5),'EXPENSE','SOFTWARE',690,'Discord 伺服器加成與直播軟體',{counterparty:'Discord',account:'信用卡'});
+      LG(mday(m,12),'INCOME','STREAM',Math.round(1500+rnd()*3500),'直播斗內與訂閱分潤',{counterparty:'YouTube'});
+      if(m%2===0)LG(mday(m,18),'INCOME','MERCH',Math.round(3000+rnd()*6000),'周邊商品（毛巾、貼紙）',{account:'LINE Pay'});
+      if(m%3===1)LG(mday(m,20),'EXPENSE','MARKETING',Math.round(1500+rnd()*2500),'社群廣告投放',{counterparty:'Meta'});
+    }
+    LG(day(-62),'INCOME','REG_FEE',9600,'秋季盃報名費（32 隊）',{projectId:'prj5'});
+    LG(day(-55),'INCOME','SPONSOR',30000,'秋季盃冠名贊助',{projectId:'prj5',counterparty:'極速電競周邊',invoiceNo:'AB-12345678',receiptName:'贊助合約_用印.pdf'});
+    LG(day(-47),'EXPENSE','EQUIPMENT',4200,'直播擷取卡',{projectId:'prj5',counterparty:'原價屋',receiptName:'發票.jpg'});
+    LG(day(-44),'EXPENSE','PRIZE',15000,'費用申請：秋季盃冠軍獎金',{projectId:'prj5',counterparty:'林知遠',sourceType:'EXPENSE',sourceId:'x3'});
+    LG(day(-40),'EXPENSE','LABOR',9600,'秋季盃工作人員勞務報酬',{projectId:'prj5'});
+    LG(day(-10),'INCOME','REG_FEE',2400,'11 月交流賽報名費',{projectId:'prj2',account:'LINE Pay'});
+    LG(day(-6),'INCOME','REG_FEE',6300,'冬季盃報名費（第一批 21 隊）',{projectId:'prj1'});
+    LG(day(-4),'EXPENSE','DESIGN',5000,'冬季盃主視覺設計',{projectId:'prj1',counterparty:'外包設計師',invoiceNo:'CD-87654321'});
+    LG(day(-3),'INCOME','SPONSOR',20000,'冬季盃贊助（第一期款）',{projectId:'prj1',counterparty:'極速電競周邊',status:'PENDING'});
+    LG(day(-2),'EXPENSE','MISC',380,'文具與列印',{account:'現金',status:'VOID',voidReason:'重複登記'});
+    LG(day(-1),'INCOME','REG_FEE',3300,'冬季盃報名費（第二批 11 隊）',{projectId:'prj1',status:'PENDING'});
   }
   function mailState(){return {ready:true,quota:Math.max(0,100-db.mailLog.filter(m=>m.status==='SENT'&&String(m.sentAt).slice(0,10)===day(0)).length-37),pending:db.mailLog.filter(m=>m.status==='QUEUED').length,siteUrl:'',log:db.mailLog.slice().reverse().slice(0,300).map(m=>{const o=Object.assign({},m);delete o.body;return o})}}
   function queue(eids,msg){
@@ -630,7 +969,7 @@ const Mock=(()=>{
     setTimeout(()=>rows.forEach(r=>{if(r.status==='QUEUED'){r.status='SENT';r.sentAt=now()}}),6000);
     return {batchId:b,queued:rows.length,noEmail};
   }
-  const boot=()=>{const o={me:meUser(),serverTime:now(),version:'5',today:day(0),mail:mailState()};['projects','milestones','updates','tasks','schedules','checkins','announcements','employees','leave','expenses','compensation','performance','documents','systemLinks','users','roles'].forEach(k=>o[k]=db[k]);return o};
+  const boot=()=>{const o={me:meUser(),serverTime:now(),version:'6',today:day(0),mail:mailState()};['projects','milestones','updates','tasks','schedules','checkins','announcements','employees','leave','expenses','compensation','performance','documents','systemLinks','users','roles'].forEach(k=>o[k]=db[k]);o.signDocs=db.signDocs.map(sv);o.signSteps=db.signSteps.map(stv);o.ledger=db.ledger.map(lv);return o};
   const up=(coll,rec)=>{const i=db[coll].findIndex(x=>x.id===rec.id);if(i>=0)db[coll][i]=Object.assign({},db[coll][i],rec);else db[coll].unshift(rec);return db[coll].find(x=>x.id===rec.id)};
   const need=(v,m)=>{if(!v)throw new Error(m)};
   const H={
@@ -666,12 +1005,61 @@ const Mock=(()=>{
     saveSystemLink:p=>{need(p.name&&/^https?:\/\//.test(p.url||''),'請輸入正確名稱與網址（需以 https:// 開頭）。');const x={id:uid('sys'),name:p.name,url:p.url,category:'CONTROL',description:p.description,requiredPermission:p.requiredPermission||'systems.view',active:true};db.systemLinks.push(x);return x},
     reauthVault:p=>{need(p.password,'密碼驗證失敗。');return {vaultToken:'v',expiresIn:300}},
     getVault:()=>[{name:'RAA',label:'RAA 控制台密碼',secret:'預覽-Raa2026',url:'https://www.rebormnent.com/raaback.html',note:'銳能年度大賞後台'},{name:'MEMBER',label:'銳能會員控制台密碼',secret:'預覽-Member2026',url:'https://www.rebormnent.com/rnmemberback.html',note:'會員系統後台'}],
-    createUser:p=>{need(!db.users.some(u=>u.username===p.username),'此帳號已存在。');const e=emp(p.employeeId);const r=db.roles.find(x=>x.role===p.role);const u={id:uid('usr'),employeeId:e.employeeId,employeeName:e.name,username:p.username,role:p.role,roleName:r.name,status:'ACTIVE',lastLoginAt:'',createdAt:now(),mustChangePassword:true};db.users.push(u);return u},
+    createUser:p=>{need(!db.users.some(u=>u.username===p.username),'此帳號已存在。');const e=emp(p.employeeId);const r=db.roles.find(x=>x.role===p.role);const u={id:uid('usr'),employeeId:e.employeeId,employeeName:e.name,username:p.username,role:p.role,roleName:r.name,status:'ACTIVE',lastLoginAt:'',createdAt:now(),mustChangePassword:true};db.users.push(u);e.hasAccount=true;return u},
     updateUser:p=>{const u=db.users.find(x=>x.id===p.id);if(p.role){u.role=p.role;u.roleName=db.roles.find(r=>r.role===p.role).name}if(p.status)u.status=p.status;let temp='';if(p.resetPassword){temp='Rn'+Math.random().toString(36).slice(2,12);u.mustChangePassword=true}return {user:clone(u),tempPassword:temp}},
     listAudit:()=>audit.concat([{id:'a0',createdAt:iso(-1,21),actorUserId:'usr2',actorName:'張宇翔',action:'LOGIN',target:'',result:'SUCCESS',meta:''},{id:'a00',createdAt:iso(-2,10),actorUserId:'PUBLIC',actorName:'PUBLIC',action:'LOGIN',target:'rn26009',result:'FAILED',meta:''}]),
     sendMail:p=>{need(p.employeeIds&&p.employeeIds.length,'請選擇收件人。');const r=queue(p.employeeIds,{kind:'MANUAL',subject:'【銳能】'+p.subject,body:p.body});log('SEND_MAIL',p.subject);return Object.assign(r,{mail:mailState()})},
     processMailNow:()=>{let sent=0;db.mailLog.forEach(m=>{if(m.status==='QUEUED'){m.status='SENT';m.sentAt=now();sent++}});return {sent,failed:0,left:0,mail:mailState()}},
-    getMailBatch:p=>db.mailLog.filter(m=>m.batchId===p.batchId).map(clone)
+    getMailBatch:p=>db.mailLog.filter(m=>m.batchId===p.batchId).map(clone),
+    // ── V6：文件簽署 ──
+    saveSignDoc:p=>{
+      need(String(p.title||'').trim(),'請輸入文件標題。');const ids=(p.signerIds||[]).filter((v,i,a)=>a.indexOf(v)===i);need(ids.length,'請至少指派一位簽署人。');
+      ids.forEach(id=>{const e=emp(id);need(e&&(e.email||e.hasAccount),(e?e.name:id)+' 沒有信箱也沒有中控台帳號，收不到也看不到這份文件。請先到人員資料補上信箱。')});
+      const src=p.copyAttachFrom?db.signDocs.find(d=>d.id===p.copyAttachFrom):null;
+      need(String(p.content||'').trim()||p.file||src,'請填寫文件內容，或上傳一個附件。');
+      const flow=p.flow==='SEQUENTIAL'?'SEQUENTIAL':'PARALLEL',id=uid('sdoc'),t=now(),pj=proj(p.projectId);
+      const doc={id,docCode:'RN-DOC-2026-'+String(db.signDocs.length+3).padStart(4,'0'),title:p.title,docType:p.docType||'OTHER',content:String(p.content||''),issuerId:ME,issuerName:emp(ME).name,flow,status:'PENDING',dueDate:p.dueDate||'',projectId:pj?pj.id:'',projectName:pj?pj.name:'',attachName:p.file?p.file.name:(src?src.attachName:''),attachType:p.file?p.file.type:(src?src.attachType:''),attachSize:p.file?Math.round(p.file.base64.length*.75):(src?src.attachSize:0),attachData:p.file?p.file.base64:(src?src.attachData:''),note:p.note||'',createdAt:t,updatedAt:t,completedAt:'',closedReason:''};
+      db.signDocs.unshift(doc);
+      const steps=ids.map((eid,i)=>{const s={id:uid('sst'),docId:id,seq:i+1,employeeId:eid,name:emp(eid).name,status:flow==='PARALLEL'||i===0?'PENDING':'WAITING',viewedAt:'',signedAt:'',signNote:'',channel:'',transferredFrom:'',transferredTo:'',transferNote:'',rejectReason:'',notifiedAt:t,createdAt:t,updatedAt:t,hasEmail:!!emp(eid).email};s.token=('pv'+s.id).replace(/[^A-Za-z0-9]/g,'');return s});
+      db.signSteps.push(...steps);
+      sEv(id,'',emp(ME).name,'CREATE',steps.length+' 位簽署人，'+(flow==='SEQUENTIAL'?'依序簽署':'同時簽署'));log('SIGN_CREATE',doc.title);
+      const q=queue(steps.filter(s=>s.status==='PENDING'&&s.employeeId!==ME).map(s=>s.employeeId),{kind:'SIGN',subject:'【銳能】請簽署文件：'+doc.title});
+      return Object.assign(sState(id),{mailQueued:q.queued,noEmail:q.noEmail});
+    },
+    getSignDoc:p=>{const d=sDoc(p.id);const mine=sSteps(d.id).find(s=>s.employeeId===ME&&s.status==='PENDING');if(mine&&!mine.viewedAt&&d.status==='PENDING'){mine.viewedAt=now();sEv(d.id,mine.id,mine.name,'VIEW','在中控台開啟')}
+      return {doc:Object.assign(sv(d),{content:d.content}),steps:sSteps(d.id).map(s=>Object.assign(stv(s),{signature:db.signatures[s.id]||''})),events:db.signEvents.filter(e=>e.docId===d.id).sort((a,b)=>String(a.createdAt).localeCompare(String(b.createdAt))).map(clone),mySavedSignature:db.savedSig||''}},
+    signDoc:p=>{const d=sDoc(p.id),s=sSteps(d.id).find(x=>x.employeeId===ME&&x.status==='PENDING');need(s,'這份文件目前沒有需要你處理的簽署。');const q=sSign(d,s,p,'APP');if(p.remember)db.savedSig=p.signature;log('SIGN_SIGN',d.title);return Object.assign(sState(d.id),{mailQueued:q,completed:d.status==='COMPLETED'})},
+    rejectSignDoc:p=>{const d=sDoc(p.id),s=sSteps(d.id).find(x=>x.employeeId===ME&&x.status==='PENDING');need(s,'這份文件目前沒有需要你處理的簽署。');const q=sReject(d,s,p.reason,emp(ME).name);return Object.assign(sState(d.id),{mailQueued:q})},
+    transferSignDoc:p=>{const d=sDoc(p.id),s=p.stepId?sSteps(d.id).find(x=>x.id===p.stepId):sSteps(d.id).find(x=>x.employeeId===ME&&x.status==='PENDING');need(s,'這份文件目前沒有需要你處理的簽署。');const q=sTransfer(d,s,p.toEmployeeId,p.note,emp(ME).name);return Object.assign(sState(d.id),{mailQueued:q})},
+    cancelSignDoc:p=>{const d=sDoc(p.id);need(d.status==='PENDING','只有簽署中的文件可以撤回。');const pend=sSteps(d.id).filter(s=>s.status==='PENDING');sSteps(d.id).forEach(s=>{if(['PENDING','WAITING'].includes(s.status))s.status='CANCELLED'});Object.assign(d,{status:'CANCELLED',closedReason:p.reason?'撤回：'+p.reason:'發文者撤回',updatedAt:now()});sEv(d.id,'',emp(ME).name,'CANCEL',p.reason||'');return Object.assign(sState(d.id),{mailQueued:queue(pend.map(s=>s.employeeId).filter(x=>x!==ME),{kind:'SIGN',subject:'【銳能】文件已撤回：'+d.title}).queued})},
+    remindSignDoc:p=>{const d=sDoc(p.id);need(d.status==='PENDING','這份文件已經不在簽署中。');const pend=sSteps(d.id).filter(s=>s.status==='PENDING'),due=pend.filter(s=>!s.notifiedAt||Date.now()-new Date(s.notifiedAt).getTime()>600000);need(due.length,pend.length?'剛剛已經寄過通知了，請過 10 分鐘再提醒。':'目前沒有等待簽署的人。');due.forEach(s=>s.notifiedAt=now());sEv(d.id,'',emp(ME).name,'REMIND','提醒 '+due.map(s=>s.name).join('、'));const q=queue(due.map(s=>s.employeeId),{kind:'SIGN',subject:'【銳能】提醒｜請簽署文件：'+d.title});return Object.assign(sState(d.id),{mailQueued:q.queued,reminded:due.length,noEmail:q.noEmail})},
+    getSignFile:p=>{const d=sDoc(p.id);if(p.kind==='signed'){need(d.status==='COMPLETED','簽署完成的 PDF 還沒有產生。');return {name:d.docCode+'_'+d.title+'_簽署完成.pdf',mimeType:'application/pdf',base64:demoPdf}}need(d.attachName,'這份文件沒有附件。');return {name:d.attachName,mimeType:d.attachType||'application/pdf',base64:d.attachData||demoPdf}},
+    clearMySignature:()=>{db.savedSig='';return true},
+    signPortal:p=>{const s=db.signSteps.find(x=>x.token&&x.token===p.token);need(s,'這個簽署連結已經失效或更新了，請使用最新一封信件中的按鈕。');const d=db.signDocs.find(x=>x.id===s.docId),op=p.op||'view';
+      if(op==='file'){need(d.status!=='CANCELLED','這份文件已經撤回。');return H.getSignFile({id:d.id,kind:p.kind})}
+      if(op==='view'){if(s.status==='PENDING'&&!s.viewedAt&&d.status==='PENDING'){s.viewedAt=now();sEv(d.id,s.id,s.name,'VIEW','透過信件連結開啟')}return portalView(s)}
+      need(d.status==='PENDING','這份文件已經'+({COMPLETED:'完成簽署',REJECTED:'被退回',CANCELLED:'撤回'}[d.status]||'結束')+'，不需要再處理。');need(s.status==='PENDING',s.status==='SIGNED'?'你已經簽署過這份文件了。':'這個簽署步驟已經結束。');
+      if(op==='sign')sSign(d,s,p,'LINK');else if(op==='reject')sReject(d,s,p.reason,s.name);else if(op==='transfer')sTransfer(d,s,p.toEmployeeId,p.note,s.name);else need(false,'不支援的操作。');
+      return portalView(s)},
+    // ── V6：收支 ──
+    saveLedger:p=>{need(Number(p.amount)>0,'金額必須大於 0。');need(/^\d{4}-\d{2}-\d{2}$/.test(p.entryDate||''),'請選擇日期。');need(String(p.description||'').trim()||String(p.counterparty||'').trim(),'請填寫說明或對象，之後對帳才找得到。');
+      const old=p.id?db.ledger.find(x=>x.id===p.id):null;need(!old||old.status!=='VOID','已作廢的紀錄不能修改。');const pj=proj(p.projectId);
+      const x=Object.assign({},old||{id:uid('led'),createdBy:'usr1',createdByName:emp(ME).name,createdAt:now(),sourceType:'',sourceId:'',receiptName:'',hasReceipt:false},{entryDate:p.entryDate,kind:p.kind==='INCOME'?'INCOME':'EXPENSE',category:p.category,amount:Math.round(Number(p.amount)*100)/100,account:p.account||'',projectId:pj?pj.id:'',projectName:pj?pj.name:'',counterparty:p.counterparty||'',description:p.description||'',invoiceNo:p.invoiceNo||'',status:p.status==='PENDING'?'PENDING':'CLEARED',updatedAt:now(),voidReason:''});
+      if(p.receipt){x.receiptName=p.receipt.name;x.hasReceipt=true;x.receiptData=p.receipt.base64;x.receiptType=p.receipt.type}else if(p.removeReceipt){x.receiptName='';x.hasReceipt=false;delete x.receiptData}
+      log(old?'UPDATE_LEDGER':'CREATE_LEDGER',x.description||x.counterparty);return lv(up('ledger',x))},
+    voidLedger:p=>{const x=db.ledger.find(l=>l.id===p.id);need(x,'找不到這筆收支紀錄。');need(String(p.reason||'').trim(),'請填寫作廢原因。');Object.assign(x,{status:'VOID',voidReason:p.reason,updatedAt:now()});log('VOID_LEDGER',p.reason);return lv(x)},
+    importLedger:p=>{const linked=new Set(db.ledger.filter(x=>x.status!=='VOID'&&x.sourceId).map(x=>x.sourceType+':'+x.sourceId)),created=[],skipped=[];
+      const CE={PRIZE:'PRIZE',EQUIPMENT:'EQUIPMENT',TRANSPORT:'TRANSPORT',MARKETING:'MARKETING',DESIGN:'DESIGN',EVENT:'EVENT_OPS',OTHER:'OTHER_OUT'},CC={SALARY:'LABOR',EVENT_FEE:'LABOR',PERFORMANCE_BONUS:'LABOR',BONUS:'LABOR',REIMBURSEMENT:'MISC',OTHER:'OTHER_OUT'},CL={SALARY:'薪資',EVENT_FEE:'賽事勞務報酬',PERFORMANCE_BONUS:'績效獎金',BONUS:'其他獎金',REIMBURSEMENT:'費用核銷',OTHER:'其他'};
+      (p.items||[]).forEach(it=>{const k=it.sourceType+':'+it.sourceId;if(linked.has(k)){skipped.push(it.sourceId);return}let x=null;
+        if(it.sourceType==='EXPENSE'){const e=db.expenses.find(y=>y.id===it.sourceId&&y.status==='APPROVED');if(e)x={entryDate:String(e.reviewedAt||e.createdAt).slice(0,10),category:CE[e.category]||'OTHER_OUT',amount:e.amount,projectId:e.projectId||'',projectName:e.projectName||'',counterparty:e.employeeName,description:'費用申請：'+e.title}}
+        else if(it.sourceType==='COMPENSATION'){const c=db.compensation.find(y=>y.id===it.sourceId&&y.status==='PAID');if(c){const pj=proj(c.projectId);x={entryDate:c.paidDate||now().slice(0,10),category:CC[c.compType]||'OTHER_OUT',amount:c.amount,projectId:pj?pj.id:'',projectName:pj?pj.name:'',counterparty:c.employeeName,description:(CL[c.compType]||'報酬')+'：'+(c.reference||c.employeeName)}}}
+        if(!x){skipped.push(it.sourceId);return}
+        const rec=Object.assign({id:uid('led'),kind:'EXPENSE',account:p.account||'',invoiceNo:'',receiptName:'',hasReceipt:false,status:'CLEARED',sourceType:it.sourceType,sourceId:it.sourceId,createdBy:'usr1',createdByName:emp(ME).name,createdAt:now(),updatedAt:now(),voidReason:''},x);db.ledger.unshift(rec);created.push(rec);linked.add(k)});
+      log('IMPORT_LEDGER',created.length+' 筆');return {created:created.map(lv),skipped}},
+    getLedgerReceipt:p=>{const x=db.ledger.find(l=>l.id===p.id);need(x&&x.hasReceipt,'這筆紀錄沒有憑證。');if(x.receiptData)return {name:x.receiptName,mimeType:x.receiptType||'application/octet-stream',base64:x.receiptData};
+      if(/\.pdf$/i.test(x.receiptName))return {name:x.receiptName,mimeType:'application/pdf',base64:demoPdf};
+      const xe=v=>String(v).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+      return {name:x.receiptName,mimeType:'image/svg+xml',base64:btoa(unescape(encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="420" height="560"><rect width="420" height="560" fill="#fff"/><rect x="20" y="20" width="380" height="520" fill="none" stroke="#ccc"/><text x="40" y="80" font-size="22" font-family="sans-serif">收據（預覽範例）</text><text x="40" y="130" font-size="16" fill="#555" font-family="sans-serif">${xe(x.description)}</text><text x="40" y="170" font-size="16" fill="#555" font-family="sans-serif">NT$ ${xe(x.amount)}</text></svg>`)))}}
   };
   async function call(action,p){
     await new Promise(r=>setTimeout(r,action==='bootstrap'||action==='login'?420:180));
@@ -688,7 +1076,7 @@ const Mock=(()=>{
 const DEFAULT_LOGO='https://cdn.phototourl.com/free/2026-09-22-a9f9fb68-5bf7-44c8-aeff-04af75c8bd72.png';
 const C=Object.assign({API_URL:'',SESSION_KEY:'rn_central_session',LOGO_URL:''},window.REBORN_CONFIG||{});
 const PREVIEW=!C.API_URL||/PASTE_/i.test(C.API_URL);
-const CACHE_KEY=C.SESSION_KEY+':cache:v5';
+const CACHE_KEY=C.SESSION_KEY+':cache:v6';
 const LOGO_SRCS=[C.LOGO_URL,'logo.png',DEFAULT_LOGO].filter((v,i,a)=>v&&a.indexOf(v)===i);
 
 /* ═════════════ 小工具 ═════════════ */
@@ -732,23 +1120,25 @@ const LB={DRAFT:'草稿',PLANNING:'籌備中',IN_PROGRESS:'進行中',REVIEW:'�
   QUEUED:'待寄送',SENT:'已寄出',FAILED:'失敗',SUCCESS:'成功',
   TASK:'任務指派',ANNOUNCEMENT:'公告',REVIEW_MAIL:'審核結果',PAYMENT:'付款通知',DIGEST:'每日提醒',
   SUPER_ADMIN:'最高管理員',PROJECT_MANAGER:'專案主管',EVENT_STAFF:'賽事期工讀',
-  LOGIN:'登入',LOGOUT:'登出',CHANGE_PASSWORD:'變更密碼',VIEW_VAULT:'查看機密庫',VAULT_REAUTH:'機密庫驗證',SAVE_PROJECT:'儲存專案',SAVE_MILESTONE:'儲存時程',PROJECT_UPDATE:'專案動態',SETTLE_PROJECT:'賽事結算',CREATE_TASK:'新增任務',UPDATE_TASK:'修改任務',TASK_STATUS:'任務狀態',CREATE_ANNOUNCEMENT:'發布公告',SAVE_EMPLOYEE:'儲存人員',GENERATE_PDF:'產生文件',CREATE_LEAVE:'請假申請',REVIEW_LEAVE:'審核請假',SAVE_SCHEDULE:'儲存排程',CHECK_IN:'簽到',CHECK_OUT:'簽退',MARK_ATTENDANCE:'補登出勤',CREATE_EXPENSE:'費用申請',REVIEW_EXPENSE:'審核費用',CREATE_COMPENSATION:'新增報酬',UPDATE_COMPENSATION:'更新報酬',SAVE_PERFORMANCE:'績效評核',CREATE_SYSTEM_LINK:'新增控制台',CREATE_USER:'建立帳號',UPDATE_USER:'修改帳號',SEND_MAIL:'寄信通知'};
-const MAIL_KIND={MANUAL:'手動',TASK:'任務',SCHEDULE:'排班',ANNOUNCEMENT:'公告',REVIEW:'審核',PAYMENT:'付款',DIGEST:'每日提醒'};
+  LOGIN:'登入',LOGOUT:'登出',CHANGE_PASSWORD:'變更密碼',VIEW_VAULT:'查看機密庫',VAULT_REAUTH:'機密庫驗證',SAVE_PROJECT:'儲存專案',SAVE_MILESTONE:'儲存時程',PROJECT_UPDATE:'專案動態',SETTLE_PROJECT:'賽事結算',CREATE_TASK:'新增任務',UPDATE_TASK:'修改任務',TASK_STATUS:'任務狀態',CREATE_ANNOUNCEMENT:'發布公告',SAVE_EMPLOYEE:'儲存人員',GENERATE_PDF:'產生文件',CREATE_LEAVE:'請假申請',REVIEW_LEAVE:'審核請假',SAVE_SCHEDULE:'儲存排程',CHECK_IN:'簽到',CHECK_OUT:'簽退',MARK_ATTENDANCE:'補登出勤',CREATE_EXPENSE:'費用申請',REVIEW_EXPENSE:'審核費用',CREATE_COMPENSATION:'新增報酬',UPDATE_COMPENSATION:'更新報酬',SAVE_PERFORMANCE:'績效評核',CREATE_SYSTEM_LINK:'新增控制台',CREATE_USER:'建立帳號',UPDATE_USER:'修改帳號',SEND_MAIL:'寄信通知',
+  SIGN_CREATE:'發出文件',SIGN_SIGN:'簽署文件',SIGN_REJECT:'退回文件',SIGN_TRANSFER:'轉交文件',SIGN_CANCEL:'撤回文件',SIGN_COMPLETE:'文件完成',SIGN_REMIND:'提醒簽署',CREATE_LEDGER:'新增收支',UPDATE_LEDGER:'修改收支',VOID_LEDGER:'作廢收支',IMPORT_LEDGER:'收支入帳'};
+const MAIL_KIND={MANUAL:'手動',TASK:'任務',SCHEDULE:'排班',ANNOUNCEMENT:'公告',REVIEW:'審核',PAYMENT:'付款',DIGEST:'每日提醒',SIGN:'文件簽署'};
 const L=v=>LB[String(v||'').toUpperCase()]||String(v||'—');
 const opts=(vals,cur='')=>vals.map(v=>`<option value="${esc(v)}" ${String(cur)===String(v)?'selected':''}>${esc(L(v))}</option>`).join('');
-function stCls(s){s=String(s||'').toUpperCase();if(/^(DONE|APPROVED|ACTIVE|PAID|COMPLETED|CONFIRMED|SUCCESS|SENT|ON_TIME)$/.test(s))return 'ok';if(/^(REJECTED|LEFT|FAILED|CANCELLED|ABSENT|DISABLED|AT_RISK)$/.test(s))return 'bad';if(/^(PENDING|REVIEW|LATE|WATCH|QUEUED|PAUSED)$/.test(s))return 'warn';if(/^(IN_PROGRESS|SCHEDULED|PLANNING|OPEN)$/.test(s))return 'info';return 'off'}
+function stCls(s){s=String(s||'').toUpperCase();if(/^(DONE|APPROVED|ACTIVE|PAID|COMPLETED|CONFIRMED|SUCCESS|SENT|ON_TIME|SIGNED|CLEARED)$/.test(s))return 'ok';if(/^(REJECTED|LEFT|FAILED|CANCELLED|ABSENT|DISABLED|AT_RISK|VOID)$/.test(s))return 'bad';if(/^(PENDING|REVIEW|LATE|WATCH|QUEUED|PAUSED)$/.test(s))return 'warn';if(/^(IN_PROGRESS|SCHEDULED|PLANNING|OPEN|TRANSFERRED)$/.test(s))return 'info';return 'off'}
 const st=(s,text)=>`<span class="st st-${stCls(s)}">${esc(text||L(s))}</span>`;
 
 /* ═════════════ 圖示 ═════════════ */
-const IC={home:'M3 9.5 10 3.5l7 6v7a1 1 0 0 1-1 1h-3.5v-5h-5v5H4a1 1 0 0 1-1-1z',trophy:'M6.5 3h7v4.5a3.5 3.5 0 0 1-7 0zM6.5 4.5h-3v1a3 3 0 0 0 3 3M13.5 4.5h3v1a3 3 0 0 1-3 3M10 11v3.5M7 17h6M8 17v-2.5h4V17',tasks:'M3.5 3.5h13v13h-13zM7 10l2.2 2.2L13.5 8',calendar:'M3.5 5h13v11.5h-13zM3.5 8.5h13M7 3v3.5M13 3v3.5',megaphone:'M3 8.5V12h2.5l6.5 3.5V5L5.5 8.5zM14.5 7.5a3 3 0 0 1 0 5',users:'M7.5 9a2.75 2.75 0 1 0 0-5.5 2.75 2.75 0 0 0 0 5.5zM2.5 16.5c0-2.9 2.2-4.75 5-4.75s5 1.85 5 4.75M13 3.8a2.75 2.75 0 0 1 0 5.2M14.5 12c1.8.5 3 2 3 4.5',leave:'M3.5 5h13v11.5h-13zM3.5 8.5h13M7 3v3.5M13 3v3.5M8 11l4 4M12 11l-4 4',mail:'M2.5 5h15v10.5h-15zM3 5.5l7 5.5 7-5.5',wallet:'M3 6h13.5v10.5H3zM3 6l9.5-2.5V6M12.5 11.25h1.5',receipt:'M5 2.5h10v15l-1.7-1.2-1.6 1.2-1.7-1.2-1.7 1.2-1.6-1.2L5 17.5zM7.5 7h5M7.5 10h5M7.5 13h3',grid:'M3.5 3.5h5v5h-5zM11.5 3.5h5v5h-5zM3.5 11.5h5v5h-5zM11.5 11.5h5v5h-5z',shield:'M10 2.5 16 5v4.8c0 3.6-2.6 6.4-6 7.7-3.4-1.3-6-4.1-6-7.7V5z',plus:'M10 4v12M4 10h12',search:'M8.5 14.5a6 6 0 1 0 0-12 6 6 0 0 0 0 12zM13 13l4.5 4.5',refresh:'M16 10a6 6 0 1 1-1.76-4.24M16 3.5V7h-3.5',x:'M5 5l10 10M15 5 5 15',left:'M12.5 4.5 7 10l5.5 5.5',right:'M7.5 4.5 13 10l-5.5 5.5',logout:'M8 3.5H4.5v13H8M12.5 6.5 16 10l-3.5 3.5M16 10H8',more:'M4.5 10h.01M10 10h.01M15.5 10h.01',check:'M4.5 10.5l3.5 3.5 7.5-8',ext:'M11 3.5h5.5V9M16.5 3.5 9 11M14 12v4.5H3.5V6H8',download:'M10 3v10M6 9l4 4 4-4M4 16.5h12',lock:'M5 9h10v8H5zM7 9V6.5a3 3 0 0 1 6 0V9',copy:'M7 7h9v9.5H7zM4 13V3.5h9',send:'M17.5 2.5 9 11M17.5 2.5 12 17.5l-3-6.5-6.5-3z',user:'M10 9.5a3.25 3.25 0 1 0 0-6.5 3.25 3.25 0 0 0 0 6.5zM3.5 17.5c0-3.5 2.9-5.5 6.5-5.5s6.5 2 6.5 5.5'};
-const icon=(n,extra='')=>`<svg class="ico" viewBox="0 0 20 20" aria-hidden="true" ${n==='more'?'style="stroke-width:3"':''} ${extra}><path d="${IC[n]||''}"/></svg>`;
+const IC={home:'M3 9.5 10 3.5l7 6v7a1 1 0 0 1-1 1h-3.5v-5h-5v5H4a1 1 0 0 1-1-1z',trophy:'M6.5 3h7v4.5a3.5 3.5 0 0 1-7 0zM6.5 4.5h-3v1a3 3 0 0 0 3 3M13.5 4.5h3v1a3 3 0 0 1-3 3M10 11v3.5M7 17h6M8 17v-2.5h4V17',tasks:'M3.5 3.5h13v13h-13zM7 10l2.2 2.2L13.5 8',calendar:'M3.5 5h13v11.5h-13zM3.5 8.5h13M7 3v3.5M13 3v3.5',megaphone:'M3 8.5V12h2.5l6.5 3.5V5L5.5 8.5zM14.5 7.5a3 3 0 0 1 0 5',users:'M7.5 9a2.75 2.75 0 1 0 0-5.5 2.75 2.75 0 0 0 0 5.5zM2.5 16.5c0-2.9 2.2-4.75 5-4.75s5 1.85 5 4.75M13 3.8a2.75 2.75 0 0 1 0 5.2M14.5 12c1.8.5 3 2 3 4.5',leave:'M3.5 5h13v11.5h-13zM3.5 8.5h13M7 3v3.5M13 3v3.5M8 11l4 4M12 11l-4 4',mail:'M2.5 5h15v10.5h-15zM3 5.5l7 5.5 7-5.5',wallet:'M3 6h13.5v10.5H3zM3 6l9.5-2.5V6M12.5 11.25h1.5',receipt:'M5 2.5h10v15l-1.7-1.2-1.6 1.2-1.7-1.2-1.7 1.2-1.6-1.2L5 17.5zM7.5 7h5M7.5 10h5M7.5 13h3',grid:'M3.5 3.5h5v5h-5zM11.5 3.5h5v5h-5zM3.5 11.5h5v5h-5zM11.5 11.5h5v5h-5z',shield:'M10 2.5 16 5v4.8c0 3.6-2.6 6.4-6 7.7-3.4-1.3-6-4.1-6-7.7V5z',plus:'M10 4v12M4 10h12',search:'M8.5 14.5a6 6 0 1 0 0-12 6 6 0 0 0 0 12zM13 13l4.5 4.5',refresh:'M16 10a6 6 0 1 1-1.76-4.24M16 3.5V7h-3.5',x:'M5 5l10 10M15 5 5 15',left:'M12.5 4.5 7 10l5.5 5.5',right:'M7.5 4.5 13 10l-5.5 5.5',logout:'M8 3.5H4.5v13H8M12.5 6.5 16 10l-3.5 3.5M16 10H8',more:'M4.5 10h.01M10 10h.01M15.5 10h.01',check:'M4.5 10.5l3.5 3.5 7.5-8',ext:'M11 3.5h5.5V9M16.5 3.5 9 11M14 12v4.5H3.5V6H8',download:'M10 3v10M6 9l4 4 4-4M4 16.5h12',lock:'M5 9h10v8H5zM7 9V6.5a3 3 0 0 1 6 0V9',copy:'M7 7h9v9.5H7zM4 13V3.5h9',send:'M17.5 2.5 9 11M17.5 2.5 12 17.5l-3-6.5-6.5-3z',user:'M10 9.5a3.25 3.25 0 1 0 0-6.5 3.25 3.25 0 0 0 0 6.5zM3.5 17.5c0-3.5 2.9-5.5 6.5-5.5s6.5 2 6.5 5.5',
+  briefcase:'M3 6.5h14v10H3zM7 6.5V4.5h6v2M3 10.5h14M8.5 10.5v1.5h3v-1.5',pen:'M13.4 3.6l3 3L8.2 14.8l-4 1 1-4zM11.6 5.4l3 3M3.5 17.5h13',file:'M5 2.5h7l3.5 3.5v11.5H5zM12 2.5V6h3.5M7.5 10h5M7.5 13h5',transfer:'M4 7h11.5M12.5 4l3 3-3 3M16 13H4.5M7.5 10l-3 3 3 3',undo:'M7.5 5 4 8.5 7.5 12M4 8.5h7.5a4.5 4.5 0 0 1 0 9H9',bell:'M5 13.5V9a5 5 0 0 1 10 0v4.5l1.5 2h-13zM8.5 17.5h3',ledger:'M4 3.5h11.5v13H4zM7 3.5v13M9.5 7h3.5M9.5 10h3.5',chart:'M3.5 16.5h13M6 13.5V10M10 13.5V5M14 13.5v-6',ban:'M10 17.5a7.5 7.5 0 1 0 0-15 7.5 7.5 0 0 0 0 15zM4.7 4.7l10.6 10.6',up:'M5 12.5 10 7.5l5 5',down:'M5 7.5l5 5 5-5',eye:'M2.5 10s3-5.5 7.5-5.5S17.5 10 17.5 10s-3 5.5-7.5 5.5S2.5 10 2.5 10zM10 12.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z',info:'M10 17.5a7.5 7.5 0 1 0 0-15 7.5 7.5 0 0 0 0 15zM10 9v5M10 6.2v.01'};
+const icon=(n,cls='')=>`<svg class="ico ${cls}" viewBox="0 0 20 20" aria-hidden="true" ${n==='more'?'style="stroke-width:3"':''}><path d="${IC[n]||''}"/></svg>`;
 function logoHtml(cls=''){return `<span class="logo ${cls}"><img src="${esc(LOGO_SRCS[0])}" data-i="0" alt="銳能娛樂" onerror="logoNext(this)"><b>RN</b></span>`}
 window.logoNext=img=>{const i=Number(img.dataset.i)+1;if(LOGO_SRCS[i]){img.dataset.i=i;img.src=LOGO_SRCS[i]}else img.parentNode.classList.add('fallback')};
 
 /* ═════════════ 狀態 ═════════════ */
-const COLLS=['projects','milestones','updates','tasks','schedules','checkins','announcements','employees','leave','expenses','compensation','performance','documents','systemLinks','users','roles'];
+const COLLS=['projects','milestones','updates','tasks','schedules','checkins','announcements','employees','leave','expenses','compensation','performance','documents','systemLinks','users','roles','signDocs','signSteps','ledger'];
 function emptyDb(){const o={mail:null};COLLS.forEach(k=>o[k]=[]);return o}
-const S={token:'',me:null,db:emptyDb(),idx:{emp:new Map(),proj:new Map(),sch:new Map()},syncedAt:0,syncing:false,syncErr:'',page:'home',arg:'',ui:{},drawer:null,inflight:0,dirty:false,pwPrompted:false,thumbsTried:new Set()};
+const S={token:'',me:null,db:emptyDb(),idx:{emp:new Map(),proj:new Map(),sch:new Map()},syncedAt:0,syncing:false,syncErr:'',page:'home',arg:'',ui:{},drawer:null,inflight:0,dirty:false,pwPrompted:false,thumbsTried:new Set(),docCache:{},docLoading:{},portal:null};
 const P=p=>{const ps=S.me?.permissions||[];if(ps.includes('*'))return true;return String(p).split('|').some(x=>ps.includes(x))};
 function reindex(){
   S.idx.emp=new Map(S.db.employees.map(e=>[String(e.employeeId),e]));
@@ -784,7 +1174,7 @@ async function api(action,payload={}){
     catch(e){throw new Error('連線失敗，請檢查網路後再試一次。')}
     let out;try{out=await res.json()}catch(e){throw new Error('伺服器沒有正確回應，請確認 Apps Script 已部署最新版本。')}
     if(!out.ok){
-      if(out.code==='UNAUTHORIZED'&&!['login','changePassword','reauthVault','getVault'].includes(action)){signOutLocal();throw new Error(out.message||'登入已失效，請重新登入。')}
+      if(out.code==='UNAUTHORIZED'&&!['login','changePassword','reauthVault','getVault','signPortal'].includes(action)){signOutLocal();throw new Error(out.message||'登入已失效，請重新登入。')}
       throw new Error(out.message||'系統發生錯誤');
     }
     return out.data;
@@ -797,7 +1187,7 @@ function applyBoot(d){
   // 保留本機已補好的縮圖
   const thumbs=new Map(S.db.employees.filter(e=>e.photoThumb).map(e=>[e.id,e.photoThumb]));
   db.employees.forEach(e=>{if(!e.photoThumb&&thumbs.has(e.id))e.photoThumb=thumbs.get(e.id)});
-  S.db=db;S.syncedAt=Date.now();reindex();persist();
+  S.db=db;S.syncedAt=Date.now();S.serverVersion=d.version||'';reindex();persist();
 }
 async function sync(loud=false){
   if(S.syncing||!S.token)return;S.syncing=true;syncUI();
@@ -809,6 +1199,7 @@ function isTyping(){const a=document.activeElement;return !!(a&&$('#view')?.cont
 function renderSoon(){if(isTyping()){S.dirty=true;return}render()}
 function afterSync(){
   if(S.me?.mustChangePassword&&!S.pwPrompted){S.pwPrompted=true;setTimeout(()=>passwordDrawer(true),200)}
+  if(!PREVIEW&&S.serverVersion&&Number(S.serverVersion)<6&&!S.versionWarned){S.versionWarned=true;setTimeout(()=>toast('後端還是舊版（V'+S.serverVersion+'），文件簽署與收支需要部署 V6 的 Code.gs 才能使用。','err'),600)}
   repairThumbs();
 }
 function signOutLocal(){S.token='';S.me=null;S.db=emptyDb();localStorage.removeItem(C.SESSION_KEY);localStorage.removeItem(CACHE_KEY);closeDrawer(true);showLogin()}
@@ -824,6 +1215,7 @@ async function save(action,payload,apply,ok){
 function toast(msg,type='ok'){const el=document.createElement('div');el.className='toast '+(type==='err'?'err':'');el.textContent=msg;$('#toasts').appendChild(el);setTimeout(()=>el.remove(),type==='err'?5200:3200)}
 function view(html){$('#view').innerHTML=html}
 function setHead(title,actions='',back=null){
+  if(!back&&PAGE_GROUP[S.page]){const g=GROUP[PAGE_GROUP[S.page]];back=['#'+g.id,g.name]}
   $('#topTitle').innerHTML=(back?`<a class="top-back" href="${back[0]}">${icon('left')}<span>${esc(back[1])}</span></a>`:'')+`<h1>${esc(title)}</h1>`;
   $('#topAct').innerHTML=actions;document.title=title+'｜銳能娛樂中央控制中心';
 }
@@ -900,28 +1292,38 @@ function leaveTag(eid,date){const l=leaveOn(eid,date);if(!l)return '';return ` <
 function pickerSet(pk,ids){$$('.pk',pk).forEach(r=>{const cb=$('input[type=checkbox]',r);if(ids.includes(cb.value)){cb.checked=true;r.classList.add('on')}});pickerCount(pk)}
 function pickerCount(pk){$('[data-pk-count]',pk).textContent='已選 '+$$('.pk input[type=checkbox]:checked',pk).length+' 人'}
 
-/* ═════════════ 外框與導覽 ═════════════ */
-const NAV=[
-  ['工作',[['home','總覽','dashboard.view','home'],['projects','賽事專案','projects.view','trophy'],['tasks','任務','tasks.view','tasks'],['schedule','行事曆','schedule.view','calendar'],['news','公告','announcements.view','megaphone']]],
-  ['人事',[['people','人員','employees.view','users'],['leave','請假','leave.view','leave'],['mail','寄信通知','mail.send','mail']]],
-  ['財務',[['finance','報酬','compensation.view','wallet'],['expenses','費用','expenses.view','receipt']]],
-  ['系統',[['systems','控制台','systems.view','grid'],['admin','帳號與紀錄','accounts.view|audit.view','shield']]]
+/* ═════════════ 外框與導覽：大廳 + 工作／人事／財務／系統 四大分類 ═════════════ */
+const GROUPS=[
+  {id:'work',name:'工作',icon:'briefcase',desc:'賽事專案、任務、行事曆、公告與文件簽署',items:[['projects','賽事專案','projects.view','trophy'],['tasks','任務','tasks.view','tasks'],['schedule','行事曆','schedule.view','calendar'],['news','公告','announcements.view','megaphone'],['docs','文件簽署','sign.view','pen']]},
+  {id:'hr',name:'人事',icon:'users',desc:'人員資料、請假與寄信通知',items:[['people','人員','employees.view','users'],['leave','請假','leave.view','leave'],['mail','寄信通知','mail.send','mail']]},
+  {id:'money',name:'財務',icon:'wallet',desc:'報酬、費用申請與公司收支',items:[['finance','報酬','compensation.view','wallet'],['expenses','費用','expenses.view','receipt'],['ledger','收支','ledger.view','ledger']]},
+  {id:'sys',name:'系統',icon:'grid',desc:'內部系統連結、帳號與操作紀錄',items:[['systems','控制台','systems.view','grid'],['admin','帳號與紀錄','accounts.view|audit.view','shield']]}
 ];
-const PAGE_PERM={};NAV.forEach(([,items])=>items.forEach(([id,,perm])=>PAGE_PERM[id]=perm));
-const allowed=pg=>PAGE_PERM[pg]&&(pg==='home'||P(PAGE_PERM[pg]));
+const GROUP=Object.fromEntries(GROUPS.map(g=>[g.id,g]));
+const PAGE_PERM={},PAGE_GROUP={};GROUPS.forEach(g=>g.items.forEach(([id,,perm])=>{PAGE_PERM[id]=perm;PAGE_GROUP[id]=g.id}));
+const groupItems=g=>g.items.filter(([,,perm])=>P(perm));
+const allowed=pg=>pg==='home'||(GROUP[pg]?groupItems(GROUP[pg]).length>0:!!(PAGE_PERM[pg]&&P(PAGE_PERM[pg])));
+const curGroup=()=>GROUP[S.page]?S.page:(PAGE_GROUP[S.page]||'');
 function navCount(id){
   const me=S.me?.employeeId;
   if(id==='tasks')return S.db.tasks.filter(t=>t.assigneeId===me&&t.status!=='DONE').length;
+  if(id==='docs')return myTodoDocs().length;
   if(id==='leave'&&P('leave.review'))return S.db.leave.filter(l=>l.status==='PENDING').length;
   if(id==='expenses'&&P('expenses.review'))return S.db.expenses.filter(x=>x.status==='PENDING').length;
   return 0;
 }
+const groupCount=g=>groupItems(g).reduce((s,[id])=>s+navCount(id),0);
 function renderChrome(){
-  $('#nav').innerHTML=NAV.map(([g,items])=>{const vis=items.filter(([id])=>allowed(id));if(!vis.length)return '';return `<div class="nav-g">${esc(g)}</div>`+vis.map(([id,t,,ic])=>{const n=navCount(id);return `<a class="nav-i ${S.page===id?'on':''}" href="#${id}" ${S.page===id?'aria-current="page"':''}>${icon(ic)}<span>${esc(t)}</span>${n?`<b class="cnt">${n}</b>`:''}</a>`}).join('')}).join('');
+  const cg=curGroup();
+  $('#nav').innerHTML=`<a class="nav-i nav-home ${S.page==='home'?'on':''}" href="#home" ${S.page==='home'?'aria-current="page"':''}>${icon('home')}<span>大廳</span></a>`+GROUPS.map(g=>{
+    const items=groupItems(g);if(!items.length)return '';
+    const open=cg===g.id,n=groupCount(g);
+    return `<a class="nav-cat ${open?'on open':''}" href="#${g.id}" ${S.page===g.id?'aria-current="page"':''} aria-expanded="${open}">${icon(g.icon)}<span>${esc(g.name)}</span>${!open&&n?`<b class="cnt">${n}</b>`:''}${icon('right','chev')}</a>`+
+      (open?`<div class="nav-sub">${items.map(([id,t,,ic])=>{const c=navCount(id);return `<a class="nav-i ${S.page===id?'on':''}" href="#${id}" ${S.page===id?'aria-current="page"':''}>${icon(ic)}<span>${esc(t)}</span>${c?`<b class="cnt">${c}</b>`:''}</a>`}).join('')}</div>`:'');
+  }).join('');
   $('#sideMe').innerHTML=`${avatar(S.me,32)}<div><strong>${esc(S.me.name)}</strong><span>${esc(S.me.roleName||L(S.me.role))}</span></div>`;
-  const mob=['home','projects','schedule','tasks'].filter(allowed).slice(0,4);
-  const moreOn=!mob.includes(S.page);
-  $('#tabbar').innerHTML=mob.map(id=>{const it=NAV.flatMap(g=>g[1]).find(x=>x[0]===id);return `<a href="#${id}" class="${S.page===id?'on':''}">${icon(it[3])}<span>${it[1]==='賽事專案'?'賽事':it[1]}</span></a>`}).join('')+`<button type="button" data-act="moreMenu" class="${moreOn?'on':''}">${icon('more')}<span>更多</span></button>`;
+  $('#topMe').innerHTML=avatar(S.me,30);
+  $('#tabbar').innerHTML=`<a href="#home" class="${S.page==='home'?'on':''}">${icon('home')}<span>大廳</span></a>`+GROUPS.filter(g=>groupItems(g).length).map(g=>{const n=groupCount(g);return `<a href="#${g.id}" class="${cg===g.id?'on':''}">${icon(g.icon)}<span>${esc(g.name)}</span>${n?`<i class="tb-dot">${n>99?'99+':n}</i>`:''}</a>`}).join('');
 }
 function syncUI(){
   const el=$('#sync');if(!el)return;
@@ -930,11 +1332,11 @@ function syncUI(){
   el.className='sync'+(S.syncing?' spin':'')+(S.syncErr&&!S.syncing?' err':'');
   el.innerHTML=`<span>${esc(label)}</span><button class="icon-btn" data-act="sync" aria-label="重新整理資料" title="重新整理資料">${icon('refresh')}</button>`;
 }
-const PAGES={home:vHome,projects:vProjects,tasks:vTasks,schedule:vSchedule,news:vNews,people:vPeople,leave:vLeave,mail:vMail,finance:vFinance,expenses:vExpenses,systems:vSystems,admin:vAdmin};
+const PAGES={home:vHome,work:()=>vHub('work'),hr:()=>vHub('hr'),money:()=>vHub('money'),sys:()=>vHub('sys'),projects:vProjects,tasks:vTasks,schedule:vSchedule,news:vNews,docs:vDocs,people:vPeople,leave:vLeave,mail:vMail,finance:vFinance,expenses:vExpenses,ledger:vLedger,systems:vSystems,admin:vAdmin};
 function route(){
   if(!S.me)return;
   let [pg,arg]=decodeURIComponent(location.hash.slice(1)||'home').split('/');
-  if(pg==='dashboard')pg='home';if(pg==='compensation')pg='finance';if(pg==='announcements')pg='news';if(pg==='employees')pg='people';
+  if(pg==='dashboard')pg='home';if(pg==='compensation')pg='finance';if(pg==='announcements')pg='news';if(pg==='employees')pg='people';if(pg==='documents'||pg==='sign')pg='docs';
   if(!allowed(pg))pg='home';
   const changed=pg!==S.page||arg!==S.arg;S.page=pg;S.arg=arg||'';
   render();if(changed)window.scrollTo(0,0);
@@ -948,20 +1350,78 @@ function render(){
   if(model){const el=$(`[data-model="${model}"]`);if(el){el.focus();try{el.setSelectionRange(pos,pos)}catch(e){}}}
   S.dirty=false;
 }
-function showLogin(){$('#app').hidden=true;$('#login').hidden=false;$('#loginBrand').innerHTML=logoHtml()+'<div><h1>中央控制中心</h1><p>銳能娛樂內部工作系統</p></div>';$('#previewNote').hidden=!PREVIEW;setTimeout(()=>$('#lu')?.focus(),50)}
-function showApp(){$('#login').hidden=true;$('#app').hidden=false;$('#sideBrand').innerHTML=logoHtml()+'<div><strong>銳能娛樂</strong><span>中央控制中心</span></div>';$('#topLogo').outerHTML=logoHtml('top-logo').replace('class="logo top-logo"','class="logo top-logo" id="topLogo"')}
+function showLogin(){$('#app').hidden=true;$('#portal').hidden=true;$('#login').hidden=false;$('#loginBrand').innerHTML=logoHtml()+'<div><h1>中央控制中心</h1><p>銳能娛樂內部工作系統</p></div>';$('#previewNote').hidden=!PREVIEW;setTimeout(()=>$('#lu')?.focus(),50)}
+function showApp(){$('#login').hidden=true;$('#portal').hidden=true;$('#app').hidden=false;$('#sideBrand').innerHTML=logoHtml()+'<div><strong>銳能娛樂</strong><span>中央控制中心</span></div>';$('#topLogo').outerHTML=logoHtml('top-logo').replace('class="logo top-logo"','class="logo top-logo" id="topLogo"')}
 
 /* ═════════════ 總覽 ═════════════ */
 function vHome(){
-  setHead('總覽');
+  setHead('大廳');
   const t=todayYmd(),now=new Date(),h=now.getHours();
   const left=[],right=[];
+  if(P('sign.view')){const b=signTodoBox();if(b)left.push(b)}
   if(P('schedule.view'))left.push(myShiftsBox(t));
   if(P('tasks.view'))left.push(myTasksBox(t));
   if(P('leave.review')||P('expenses.review'))right.push(approvalsBox());
+  if(P('ledger.view'))right.push(ledgerHomeBox());
   if(P('compensation.create'))right.push(payoutBox());
   if(P('announcements.view'))right.push(newsBox());
-  view(`<div class="hello"><h2>${h<11?'早安':h<18?'午安':'晚安'}，${esc(S.me.name)}</h2><span>${now.getMonth()+1} 月 ${now.getDate()} 日 星期${WD[now.getDay()]}</span></div>${bandHtml(t)}<div class="cols"><div class="stack">${left.join('')}</div><div class="stack">${right.join('')}</div></div>`);
+  const tiles=GROUPS.filter(g=>groupItems(g).length).map(tileHtml).join('');
+  view(`<div class="hello"><h2>${h<11?'早安':h<18?'午安':'晚安'}，${esc(S.me.name)}</h2><span>${now.getMonth()+1} 月 ${now.getDate()} 日 星期${WD[now.getDay()]}</span></div><nav class="tiles" aria-label="四大分類">${tiles}</nav>${bandHtml(t)}<div class="cols"><div class="stack">${left.join('')}</div><div class="stack">${right.join('')}</div></div>`);
+}
+/* 大廳四方格：每格顯示分類名稱、裡面有哪些系統、兩個關鍵數字；右上角是待處理數 */
+function compact(n){n=Math.round(num(n));const a=Math.abs(n);if(a>=1e8)return (n/1e8).toFixed(a>=1e9?0:1).replace(/\.0$/,'')+'億';if(a>=1e4)return (n/1e4).toFixed(a>=1e5?0:1).replace(/\.0$/,'')+'萬';return n.toLocaleString('zh-TW')}
+function groupStats(gid){
+  const me=S.me.employeeId,t=todayYmd(),out=[];
+  if(gid==='work'){
+    if(P('tasks.view'))out.push([S.db.tasks.filter(x=>x.assigneeId===me&&x.status!=='DONE').length,'待辦任務']);
+    if(P('sign.view'))out.push([myTodoDocs().length,'待我簽署']);
+    if(P('schedule.view'))out.push([S.db.schedules.filter(s=>isMine(s)&&s.status!=='CANCELLED'&&ymd(s.startDate)<=t&&ymd(s.endDate||s.startDate)>=t).length,'今天排班']);
+    if(P('projects.view'))out.push([S.db.projects.filter(p=>!isDoneProj(p)).length,'進行中專案']);
+  }else if(gid==='hr'){
+    if(P('leave.review'))out.push([S.db.leave.filter(l=>l.status==='PENDING').length,'待審請假']);
+    if(P('employees.view'))out.push([S.db.employees.filter(e=>e.status==='ACTIVE').length,'在職人員']);
+    else if(P('leave.view'))out.push([S.db.leave.filter(l=>l.employeeId===me&&l.status==='PENDING').length,'請假申請中']);
+    if(P('mail.send')&&S.db.mail)out.push([S.db.mail.quota??'—','今日寄信額度']);
+  }else if(gid==='money'){
+    if(P('ledger.view')){const ym=t.slice(0,7),cl=S.db.ledger.filter(x=>x.status==='CLEARED'&&String(x.entryDate).slice(0,7)===ym),net=sumKind(cl,'INCOME')-sumKind(cl,'EXPENSE');out.push([(net<0?'−':'')+compact(Math.abs(net)),'本月淨額'])}
+    if(P('compensation.view')){const pend=S.db.compensation.filter(c=>c.status==='PENDING'&&(P('compensation.create')||c.employeeId===me));out.push([compact(pend.reduce((s,c)=>s+num(c.amount),0)),P('compensation.create')?'待付款報酬':'待入帳報酬'])}
+    if(P('expenses.review'))out.push([S.db.expenses.filter(x=>x.status==='PENDING').length,'待審費用']);
+    else if(P('expenses.view'))out.push([S.db.expenses.filter(x=>x.employeeId===me&&x.status==='PENDING').length,'費用審核中']);
+  }else if(gid==='sys'){
+    if(P('systems.view'))out.push([S.db.systemLinks.length,'內部系統']);
+    if(P('accounts.view'))out.push([S.db.users.filter(u=>u.status==='ACTIVE').length,'啟用帳號']);
+  }
+  return out.slice(0,2);
+}
+function tileHtml(g){
+  const items=groupItems(g),n=groupCount(g),stats=groupStats(g.id),names=items.map(i=>i[1]).join('、');
+  return `<a class="tile" href="#${g.id}" aria-label="${esc(g.name)}：${esc(names)}${n?`，${n} 項待處理`:''}"><div class="tile-in"><span class="tile-ico">${icon(g.icon)}</span>${n?`<span class="tile-badge">${n>99?'99+':n}</span>`:''}<span class="tile-name">${esc(g.name)}</span><span class="tile-sub">${esc(names)}</span>${stats.length?`<div class="tile-stats">${stats.map(([v,l])=>`<div><b>${esc(v)}</b><span>${esc(l)}</span></div>`).join('')}</div>`:''}</div></a>`;
+}
+/* 分類頁：點進四方格後才列出這個分類的系統 */
+const MOD_DESC={projects:'季盃、交流賽與年度大賞的籌備進度',tasks:'指派與追蹤每個人的待辦',schedule:'排班、會議與簽到',news:'內部公告與置頂消息',docs:'發文、手寫簽名、轉交與歸檔',people:'工作人員資料、照片與合作條件',leave:'請假與無法排班的申請',mail:'寄信給工作人員、查看寄送紀錄',finance:'勞務報酬、薪資與績效獎金',expenses:'費用申請與審核',ledger:'公司收入、支出與帳戶餘額',systems:'內部後台連結與機密庫',admin:'帳號、角色與操作紀錄'};
+function modFigs(id){
+  const me=S.me.employeeId,t=todayYmd();
+  switch(id){
+    case 'projects':{const act=S.db.projects.filter(p=>!isDoneProj(p)),next=act.filter(p=>p.category==='EVENT_PROJECT'&&projDate(p)&&projDate(p)>=t).sort((a,b)=>projDate(a).localeCompare(projDate(b)))[0];const dd=next?daysBetween(t,projDate(next)):0;return [[act.length,'進行中'],next?[dd===0?'今天':dd+' 天後',next.name]:null]}
+    case 'tasks':{const mine=S.db.tasks.filter(x=>x.assigneeId===me&&x.status!=='DONE'),over=mine.filter(x=>ymd(x.dueDate)&&ymd(x.dueDate)<t).length;return [[mine.length,'我的待辦',mine.length>0],[over,'已逾期',over>0]]}
+    case 'schedule':{const today=S.db.schedules.filter(s=>s.status!=='CANCELLED'&&ymd(s.startDate)<=t&&ymd(s.endDate||s.startDate)>=t),wk=ymdOf(addDays(new Date(),7)),mine=S.db.schedules.filter(s=>isMine(s)&&s.status!=='CANCELLED'&&ymd(s.startDate)>=t&&ymd(s.startDate)<=wk);return [[today.length,'今天的排程'],[mine.length,'我未來 7 天的班']]}
+    case 'news':return [[S.db.announcements.length,'則公告'],[S.db.announcements.filter(pinned).length,'置頂']];
+    case 'docs':{const todo=myTodoDocs().length;return [[todo,'待我簽署',todo>0],[S.db.signDocs.filter(d=>d.status==='PENDING').length,'簽署中']]}
+    case 'people':{const act=S.db.employees.filter(e=>e.status==='ACTIVE');return [[act.length,'在職人員'],[act.filter(e=>'email' in e&&!e.email).length,'沒有信箱']]}
+    case 'leave':{const pend=S.db.leave.filter(l=>l.status==='PENDING'&&(P('leave.review')||l.employeeId===me));return [[pend.length,P('leave.review')?'待審核':'申請中',P('leave.review')&&pend.length>0]]}
+    case 'mail':{const m=S.db.mail;return m?[[m.quota??'—','今日剩餘額度'],[m.pending||0,'待寄送']]:[]}
+    case 'finance':{const pend=S.db.compensation.filter(c=>c.status==='PENDING');return [[compact(pend.reduce((s,c)=>s+num(c.amount),0)),'待付款（元）',P('compensation.create')&&pend.length>0],[pend.length,'筆待付款']]}
+    case 'expenses':{const pend=S.db.expenses.filter(x=>x.status==='PENDING');return [[pend.length,P('expenses.review')?'待審核':'審核中',P('expenses.review')&&pend.length>0],[compact(pend.reduce((s,x)=>s+num(x.amount),0)),'金額（元）']]}
+    case 'ledger':{const ym=t.slice(0,7),cl=S.db.ledger.filter(x=>x.status==='CLEARED'&&String(x.entryDate).slice(0,7)===ym),net=sumKind(cl,'INCOME')-sumKind(cl,'EXPENSE'),c=P('ledger.edit')?ledgerCandidates().length:0;return [[(net<0?'−':'')+compact(Math.abs(net)),'本月淨額（元）'],P('ledger.edit')?[c,'筆待入帳',c>0]:null]}
+    case 'systems':return [[S.db.systemLinks.length,'個系統連結']];
+    case 'admin':return P('accounts.view')?[[S.db.users.filter(u=>u.status==='ACTIVE').length,'啟用帳號'],[S.db.users.filter(u=>u.mustChangePassword).length,'未改暫時密碼']]:[];
+  }
+  return [];
+}
+function vHub(gid){
+  const g=GROUP[gid],items=groupItems(g);
+  setHead(g.name,'',['#home','大廳']);
+  view(`<div class="hub-head"><span class="tile-ico">${icon(g.icon)}</span><div><h2>${esc(g.name)}</h2><p>${esc(g.desc)}</p></div></div><div class="mods">${items.map(([id,name,,ic])=>{const f=modFigs(id).filter(Boolean);return `<a class="mod" href="#${id}"><div class="mod-h"><span class="mod-ico">${icon(ic)}</span><div><strong>${esc(name)}</strong><p>${esc(MOD_DESC[id]||'')}</p></div></div>${f.length?`<div class="mod-figs">${f.map(([v,l,hot])=>`<div class="${hot?'hot':''}"><b>${esc(v)}</b><span>${esc(l)}</span></div>`).join('')}</div>`:''}</a>`}).join('')}</div>`);
 }
 function bandHtml(t){
   if(!P('projects.view'))return '';
@@ -1004,6 +1464,15 @@ function approvalsBox(){
 function payoutBox(){
   const pend=S.db.compensation.filter(c=>c.status==='PENDING');
   return box('待付款報酬',`<div class="box-b"><div style="font-size:24px;font-weight:600">${money(pend.reduce((s,c)=>s+num(c.amount),0))}</div><p class="muted small">${pend.length} 筆待付款${pend.length?`，涉及 ${new Set(pend.map(c=>c.employeeId)).size} 位人員`:''}</p></div>`,'<a class="link small" href="#finance">前往報酬</a>');
+}
+function signTodoBox(){
+  const list=myTodoDocs();
+  if(!list.length)return '';
+  return box('等你簽署',`<div class="rows">${list.slice(0,5).map(d=>`<a class="row todo" href="#docs/${esc(d.id)}"><span class="doc-ico todo">${icon('pen')}</span><div class="row-main"><span class="row-t">${esc(d.title)}</span><div class="row-sub"><span>發文 ${esc(d.issuerName)}</span>${ymd(d.dueDate)?`<span class="${ymd(d.dueDate)<todayYmd()?'red':''}">期限 ${fmtD(d.dueDate,false)}</span>`:''}</div></div><span class="btn btn-sm btn-pri">簽署</span></a>`).join('')}</div>`,`<span class="muted">${list.length} 份</span>`);
+}
+function ledgerHomeBox(){
+  const ym=todayYmd().slice(0,7),cl=S.db.ledger.filter(x=>x.status==='CLEARED'&&String(x.entryDate).slice(0,7)===ym),inc=sumKind(cl,'INCOME'),exp=sumKind(cl,'EXPENSE'),net=inc-exp;
+  return box('本月收支',`<div class="box-b"><div style="font-size:24px;font-weight:600" class="num ${net<0?'red':''}">${net<0?'−':'+'}${money(Math.abs(net))}</div><p class="muted small">收入 ${money(inc)}，支出 ${money(exp)}</p></div>`,'<a class="link small" href="#ledger">前往收支</a>');
 }
 function newsBox(){
   const list=S.db.announcements.slice(0,4);
@@ -1263,7 +1732,7 @@ function openPerson(id){
     ${P('schedule.view')?`<div class="dw-sec"><h4>接下來的排班</h4>${up.length?`<div class="rows">${up.map(shiftLine).join('')}</div>`:'<p class="muted small">沒有排班。</p>'}</div>${past.length?`<div class="dw-sec"><h4>最近出勤</h4><div class="rows">${past.map(shiftLine).join('')}</div></div>`:''}`:''}
     ${P('compensation.create')&&comp.length?`<div class="dw-sec"><h4>報酬紀錄</h4><div class="rows">${comp.map(c=>`<div class="row"><div class="row-main"><span class="row-t">${esc(c.reference||L(c.compType))}</span><div class="row-sub"><span>${L(c.compType)}</span><span>${fmtD(c.paidDate||c.createdAt,false)}</span></div></div><span class="num">${money(c.amount)}</span>${st(c.status,c.status==='PENDING'?'待付款':'')}</div>`).join('')}</div></div>`:''}
     ${P('documents.view')?`<div class="dw-sec"><h4>文件</h4>${docs.length?`<div class="rows">${docs.map(d=>`<button class="row" data-act="downloadDoc" data-id="${esc(d.id)}"><div class="row-main"><span class="row-t">${esc(d.title)}</span><div class="row-sub"><span>${esc(d.documentCode)}</span><span>${fmtDT(d.createdAt)}</span></div></div>${icon('download')}</button>`).join('')}</div>`:'<p class="muted small">還沒有產生文件。</p>'}</div>`:''}`,
-    foot:`${P('documents.create')?'<button class="btn" data-pdf>產生任用確認書</button>':''}${P('accounts.create')&&!u?'<button class="btn" data-acc>建立帳號</button>':''}<span class="grow"></span>${P('employees.edit')?'<button class="btn btn-pri" data-edit>編輯</button>':'<button class="btn" data-dw-close>關閉</button>'}`});
+    foot:`${P('sign.create')&&e.status!=='LEFT'?`<button class="btn" data-act="sendAgreement" data-id="${esc(e.id)}">${icon('pen')}送簽任用確認書</button>`:''}${P('documents.create')?'<button class="btn" data-pdf>產生任用確認書</button>':''}${P('accounts.create')&&!u?'<button class="btn" data-acc>建立帳號</button>':''}<span class="grow"></span>${P('employees.edit')?'<button class="btn btn-pri" data-edit>編輯</button>':'<button class="btn" data-dw-close>關閉</button>'}`});
   $$('[data-dw-close]',root).forEach(b=>b.addEventListener('click',()=>closeDrawer()));
   $('[data-edit]',root)?.addEventListener('click',()=>personForm(e));
   $('[data-acc]',root)?.addEventListener('click',()=>userForm(e.employeeId));
@@ -1301,8 +1770,11 @@ async function showPhoto(id){
   if(!e.photoFileId||!P('employees.view'))return;
   try{if(!S.photoCache)S.photoCache=new Map();let src=S.photoCache.get(e.photoFileId);if(!src){src=(await api('getEmployeePhoto',{fileId:e.photoFileId})).dataUrl;S.photoCache.set(e.photoFileId,src)}if(w.isConnected)w.innerHTML=`<img src="${esc(src)}" alt="${esc(e.name)}">`}catch(err){if(w.isConnected&&!e.photoThumb)w.innerHTML=`<p>${esc(err.message)}</p>`}
 }
+function b64Blob(d){const bin=atob(d.base64),u8=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)u8[i]=bin.charCodeAt(i);return new Blob([u8],{type:d.mimeType||'application/octet-stream'})}
+function saveFile(d,fallback='file'){const url=URL.createObjectURL(b64Blob(d));const a=document.createElement('a');a.href=url;a.download=d.name||fallback;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),30000)}
+function showImage(d,alt=''){const w=document.createElement('div');w.className='lightbox';w.innerHTML=`<img src="data:${esc(d.mimeType)};base64,${d.base64}" alt="${esc(alt)}">`;w.onclick=()=>w.remove();document.body.appendChild(w)}
 async function downloadDoc(id){
-  try{const d=await api('getDocumentFile',{id});const bin=atob(d.base64),u8=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)u8[i]=bin.charCodeAt(i);const url=URL.createObjectURL(new Blob([u8],{type:d.mimeType||'application/pdf'}));const a=document.createElement('a');a.href=url;a.download=d.name||'document.pdf';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),30000)}catch(e){toast(e.message,'err')}
+  try{saveFile(await api('getDocumentFile',{id}),'document.pdf')}catch(e){toast(e.message,'err')}
 }
 
 /* ═════════════ 請假 ═════════════ */
@@ -1329,6 +1801,338 @@ async function review(kind,id,status){
   const r=await ask({title:ok?'核准申請':'退回申請',text:kind==='leave'?`${x.employeeName}　${L(x.leaveType)}　${fmtRange(x.startDate,x.endDate)}`:`${x.employeeName}　${x.title}　${money(x.amount)}`,ok:ok?'核准':'退回',danger:!ok,input:{label:'審核備註（會寄給申請人，可留空）',type:'textarea',placeholder:ok?'':'例如：請改到下週再申請'}});
   if(!r)return;
   try{await save(kind==='leave'?'reviewLeave':'reviewExpense',{id,status,reviewNote:r.value},d=>upsert(kind==='leave'?'leave':'expenses',d),ok?'已核准，並寄信通知申請人':'已退回，並寄信通知申請人')}catch(e){toast(e.message,'err')}
+}
+
+/* ═════════════ 文件簽署 ═════════════ */
+const DOC_TYPE={CONTRACT:'合約',CONSENT:'同意書',AFFIDAVIT:'切結書',HR:'人事文件',NOTICE:'公文通知',OTHER:'其他'};
+const DOC_L={PENDING:'簽署中',COMPLETED:'已完成',REJECTED:'已退回',CANCELLED:'已撤回'};
+const STEP_L={PENDING:'待簽署',WAITING:'等前一位簽完',SIGNED:'已簽署',REJECTED:'已退回',TRANSFERRED:'已轉交',CANCELLED:'已停止'};
+const EV_L={CREATE:'建立並送出',VIEW:'開啟文件',SIGN:'簽署',REJECT:'退回',TRANSFER:'轉交',REMIND:'寄出提醒',CANCEL:'撤回',COMPLETE:'完成簽署',PDF_ERROR:'PDF 產生失敗'};
+const docSt=d=>st(d.status,DOC_L[d.status]||d.status);
+const stepSt=s=>st(s.status==='WAITING'?'OFF':s.status,STEP_L[s.status]||s.status);
+const docSteps=id=>S.db.signSteps.filter(s=>s.docId===id).sort((a,b)=>num(a.seq)-num(b.seq)||String(a.createdAt).localeCompare(String(b.createdAt)));
+const liveSteps=id=>docSteps(id).filter(s=>!['TRANSFERRED','CANCELLED'].includes(s.status));
+const myStep=(docId,status)=>S.db.signSteps.find(s=>s.docId===docId&&s.employeeId===S.me.employeeId&&(!status||s.status===status));
+const myTodoDocs=()=>S.db.signDocs.filter(d=>d.status==='PENDING'&&myStep(d.id,'PENDING'));
+const canReach=e=>!!(e&&(e.email||e.hasEmail||e.hasAccount));
+function reachTag(e){if(!e||e.email||e.hasEmail)return '';return e.hasAccount?' <em class="tag">沒有信箱，只能在中控台簽</em>':' <em class="tag tag-warn">沒有信箱也沒有帳號</em>'}
+function docProgress(id){const live=liveSteps(id);return {done:live.filter(s=>s.status==='SIGNED').length,total:live.length}}
+function fileExt(name){const m=String(name||'').match(/\.([a-z0-9]{1,5})$/i);return m?m[1].toUpperCase():'檔案'}
+function fileSize(n){n=num(n);if(!n)return '';return n>=1048576?(n/1048576).toFixed(1)+' MB':Math.max(1,Math.round(n/1024))+' KB'}
+const MIME_BY_EXT={pdf:'application/pdf',png:'image/png',jpg:'image/jpeg',jpeg:'image/jpeg',webp:'image/webp',gif:'image/gif',doc:'application/msword',docx:'application/vnd.openxmlformats-officedocument.wordprocessingml.document',xls:'application/vnd.ms-excel',xlsx:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',ppt:'application/vnd.ms-powerpoint',pptx:'application/vnd.openxmlformats-officedocument.presentationml.presentation'};
+const guessType=name=>MIME_BY_EXT[fileExt(name).toLowerCase()]||'';
+function fileB64(f){return new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(String(r.result).split(',')[1]||'');r.onerror=()=>rej(new Error('無法讀取這個檔案，請重新選擇。'));r.readAsDataURL(f)})}
+
+function vDocs(){
+  if(S.arg)return vDoc(S.arg);
+  setHead('文件簽署',P('sign.create')?btnPri('newDoc','發文','pen'):'');
+  const me=S.me.employeeId,todo=myTodoDocs(),sent=S.db.signDocs.filter(d=>d.issuerId===me),mine=S.db.signDocs.filter(d=>d.issuerId!==me&&docSteps(d.id).some(s=>s.employeeId===me));
+  const tl=[['todo','待我簽署',todo.length],['sent','我發出的',sent.length],['mine','與我有關',mine.length]];
+  if(P('sign.manage'))tl.push(['all','全部文件',S.db.signDocs.length]);
+  const tab=S.ui.dt&&tl.some(x=>x[0]===S.ui.dt)?S.ui.dt:(todo.length?'todo':sent.length?'sent':'mine');
+  let list=tab==='todo'?todo:tab==='sent'?sent:tab==='mine'?mine:S.db.signDocs.slice();
+  const f=tab==='todo'?'':(S.ui.df||''),q=(S.ui.dq||'').trim().toLowerCase();
+  if(f)list=list.filter(d=>d.status===f);
+  if(q)list=list.filter(d=>[d.title,d.docCode,d.issuerName,d.excerpt,d.projectName,DOC_TYPE[d.docType],...docSteps(d.id).map(s=>s.name)].join(' ').toLowerCase().includes(q));
+  list=list.slice().sort((a,b)=>String(b.updatedAt||b.createdAt).localeCompare(String(a.updatedAt||a.createdAt)));
+  const emptyText=q||f?'沒有符合條件的文件。':tab==='todo'?'目前沒有等你簽署的文件。':tab==='sent'?'你還沒有發出文件。':'這裡還沒有文件。';
+  view(`${tabs('dt',tl,tab)}<div class="toolbar">${tab!=='todo'?seg('df',[['','全部'],['PENDING','簽署中'],['COMPLETED','已完成'],['REJECTED','已退回'],['CANCELLED','已撤回']],f):''}<span class="grow"></span>${searchBox('dq','搜尋標題、編號、簽署人')}</div>
+  <section class="box">${list.length?`<div class="rows">${list.map(docRow).join('')}</div>`:empty(emptyText,P('sign.create')&&tab==='sent'&&!q&&!f?'<button class="btn" data-act="newDoc">發出第一份文件</button>':'')}</section>`);
+}
+function docRow(d){
+  const p=docProgress(d.id),mine=d.status==='PENDING'&&!!myStep(d.id,'PENDING'),over=d.status==='PENDING'&&ymd(d.dueDate)&&ymd(d.dueDate)<todayYmd();
+  return `<a class="row ${mine?'todo':''}" href="#docs/${esc(d.id)}"><span class="doc-ico ${mine?'todo':d.status==='COMPLETED'?'done':''}">${icon(mine?'pen':d.status==='COMPLETED'?'check':d.status==='PENDING'?'file':'ban')}</span><div class="row-main"><span class="row-t">${esc(d.title)}</span><div class="row-sub"><span>${esc(d.docCode)}</span><span>${esc(DOC_TYPE[d.docType]||'其他')}</span><span>發文 ${esc(d.issuerName)}</span><span>${fmtD(d.createdAt,false)}</span>${ymd(d.dueDate)&&d.status==='PENDING'?`<span class="${over?'red':''}">${over?'已逾期，':''}期限 ${fmtD(d.dueDate,false)}</span>`:''}</div></div><div class="row-end">${mine?'<span class="tag tag-dark">輪到你</span>':''}<span class="small muted nowrap hide-m">${p.done}/${p.total} 已簽</span>${docSt(d)}</div></a>`;
+}
+function applyDocState(r){
+  if(!r||!r.doc)return;
+  const v=Object.assign({},r.doc);if('content' in v){v.excerpt=String(v.content||'').replace(/\s+/g,' ').slice(0,120);delete v.content}
+  upsert('signDocs',v);
+  if(Array.isArray(r.steps))S.db.signSteps=S.db.signSteps.filter(s=>s.docId!==r.doc.id).concat(r.steps.map(s=>{const o=Object.assign({},s);delete o.signature;return o}));
+  persist();
+}
+async function loadDoc(id){
+  if(S.docLoading[id])return;S.docLoading[id]=true;
+  try{const r=await api('getSignDoc',{id});S.docCache[id]={at:Date.now(),data:r};applyDocState(r)}
+  catch(e){S.docCache[id]={at:Date.now(),data:S.docCache[id]?.data||null,err:e.message}}
+  finally{S.docLoading[id]=false;if(S.page==='docs'&&S.arg===id)renderSoon()}
+}
+async function docMutate(action,payload,okMsg){
+  const r=await api(action,payload);
+  applyDocState(r);
+  if(S.docCache[payload.id])S.docCache[payload.id].at=0;
+  render();
+  let m=typeof okMsg==='function'?okMsg(r):okMsg;if(r&&r.mailQueued)m+=`，已排入 ${r.mailQueued} 封通知信`;toast(m);
+  if(r&&r.mailQueued&&P('mail.send'))setTimeout(()=>sync(),4000);
+  return r;
+}
+function vDoc(id){
+  const base=S.db.signDocs.find(x=>x.id===id),cache=S.docCache[id],full=cache&&cache.data;
+  if(!base&&!full){
+    setHead('文件簽署','',['#docs','文件簽署']);
+    if(!cache&&!S.docLoading[id]){loadDoc(id);view('<div class="loading">正在開啟文件…</div>');return}
+    view(S.docLoading[id]?'<div class="loading">正在開啟文件…</div>':`<div class="box">${empty(cache&&cache.err?cache.err:'找不到這份文件，可能已被移除或你沒有權限查看。')}</div>`);return;
+  }
+  if(!cache||Date.now()-cache.at>60000||(base&&full&&String(base.updatedAt||'')!==String(full.doc.updatedAt||'')))loadDoc(id);
+  const doc=Object.assign({},full?full.doc:{},base||{}),sigMap={};if(full)full.steps.forEach(s=>{if(s.signature)sigMap[s.id]=s.signature});
+  if(full&&full.doc.content!=null)doc.content=full.doc.content;
+  const fresh=docSteps(id),steps=(fresh.length?fresh:(full?full.steps:[])).map(s=>Object.assign({},s,{signature:sigMap[s.id]||''}));
+  const me=S.me.employeeId,mine=steps.find(s=>s.employeeId===me&&s.status==='PENDING'&&doc.status==='PENDING'),isIssuer=doc.issuerId===me,manage=P('sign.manage'),canAdmin=(isIssuer||manage)&&doc.status==='PENDING';
+  const acts=[canAdmin?`<button class="btn" data-act="remindDoc" data-id="${esc(id)}">${icon('bell')}<span class="btn-label">提醒</span></button>`:'',canAdmin?`<button class="btn btn-quiet btn-bad" data-act="cancelDoc" data-id="${esc(id)}">${icon('ban')}<span class="btn-label">撤回</span></button>`:'',(isIssuer||manage)&&['REJECTED','CANCELLED'].includes(doc.status)&&P('sign.create')?`<button class="btn" data-act="reissueDoc" data-id="${esc(id)}">${icon('pen')}<span class="btn-label">重新發文</span></button>`:'',doc.hasSignedPdf?`<button class="btn btn-pri" data-act="docFile" data-id="${esc(id)}" data-kind="signed">${icon('download')}<span class="btn-label">簽署完成 PDF</span></button>`:''].join('');
+  setHead(doc.title||'文件',acts,['#docs','文件簽署']);
+  const live=steps.filter(s=>!['TRANSFERRED','CANCELLED'].includes(s.status)),done=live.filter(s=>s.status==='SIGNED').length,over=doc.status==='PENDING'&&ymd(doc.dueDate)&&ymd(doc.dueDate)<todayYmd();
+  const head=`<div class="p-head"><div><div class="p-meta" style="margin:0 0 4px"><span>${esc(DOC_TYPE[doc.docType]||'其他')}</span><span>${esc(doc.docCode||'')}</span>${docSt(doc)}</div><h2>${esc(doc.title)}</h2><div class="p-meta"><span>發文 <b>${esc(doc.issuerName||'')}</b></span><span>${fmtDT(doc.createdAt)}</span>${ymd(doc.dueDate)?`<span class="${over?'red':''}">期限 <b>${fmtD(doc.dueDate)}</b>${over?'（已逾期）':''}</span>`:''}${doc.projectName?`<span>專案 <b>${esc(doc.projectName)}</b></span>`:''}<span>${doc.flow==='SEQUENTIAL'?'依序簽署':'同時簽署'}，${done}/${live.length} 已簽</span></div></div></div>`;
+  const now=mine?`<section class="sign-now"><div><strong>輪到你簽署了</strong><p>${doc.note?esc('發文者備註：'+doc.note):'讀完內容後按「簽署」，用手指或滑鼠寫下簽名。'}</p></div><div class="acts"><button class="btn" data-act="rejectDoc" data-id="${esc(id)}">退回</button><button class="btn" data-act="transferDoc" data-id="${esc(id)}">${icon('transfer')}轉交</button><button class="btn btn-pri" data-act="signDoc" data-id="${esc(id)}">${icon('pen')}簽署</button></div></section>`:'';
+  const closed=['REJECTED','CANCELLED'].includes(doc.status)&&doc.closedReason?`<div class="note warn" style="margin-bottom:16px">${esc(doc.closedReason)}</div>`:doc.status==='COMPLETED'?`<div class="note" style="margin-bottom:16px">${icon('check')} 所有人在 ${fmtDT(doc.completedAt)} 完成簽署${doc.hasSignedPdf?'，簽署完成的 PDF 已寄給發文者與所有簽署人。':'。'}</div>`:'';
+  const content=full?(doc.content?`<div class="box-b"><div class="doc-content">${esc(doc.content)}</div></div>`:empty('這份文件沒有內文，請看附件。')):(cache&&cache.err?empty(cache.err):'<div class="loading" style="padding:28px 0">載入內容中…</div>');
+  const attach=doc.hasAttachment?box('附件',`<div class="box-b"><div class="file-card"><span class="file-ext">${esc(fileExt(doc.attachName))}</span><div class="file-main"><strong>${esc(doc.attachName||'附件')}</strong><span>${esc(fileSize(doc.attachSize))}</span></div><div class="file-acts">${/^image\//.test(doc.attachType||'')?`<button class="btn btn-sm" data-act="docPreview" data-id="${esc(id)}">${icon('eye')}預覽</button>`:''}<button class="btn btn-sm" data-act="docFile" data-id="${esc(id)}" data-kind="attachment">${icon('download')}下載</button></div></div></div>`):'';
+  const signerHtml=steps.map(s=>signerRow(s,doc,steps,canAdmin)).join('');
+  const evs=full&&full.events?full.events.slice().reverse():[];
+  view(head+now+closed+`<div class="cols"><div class="stack">${box('內容',content+(mine&&full?`<div class="box-b" style="border-top:1px solid var(--line);display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap"><button class="btn" data-act="transferDoc" data-id="${esc(id)}">${icon('transfer')}轉交</button><button class="btn btn-pri" data-act="signDoc" data-id="${esc(id)}">${icon('pen')}簽署這份文件</button></div>`:''))}${attach}</div>
+  <div class="stack">${box('簽署進度',`<div>${signerHtml}</div>`,`<span class="muted">${done}/${live.length}</span>`)}${box('紀錄',evs.length?`<div>${evs.map(e=>`<div class="ev"><time>${fmtDT(e.createdAt)}</time><div><b>${esc(e.actorName||'')}</b> ${esc(EV_L[e.action]||e.action)}${e.detail?`<span class="muted">：${esc(e.detail)}</span>`:''}</div></div>`).join('')}</div>`:(full?empty('還沒有紀錄。'):'<div class="loading" style="padding:20px 0">載入中…</div>'))}</div></div>`);
+}
+function signerRow(s,doc,steps,canAdmin){
+  const e=emp(s.employeeId)||{name:s.name},now=s.status==='PENDING'&&doc.status==='PENDING',gone=['TRANSFERRED','CANCELLED'].includes(s.status);
+  const from=s.transferredFrom?steps.find(x=>x.id===s.transferredFrom):null,to=s.transferredTo?steps.find(x=>x.id===s.transferredTo):null;
+  const lines=[];
+  if(s.status==='SIGNED')lines.push(`簽署於 ${fmtDT(s.signedAt)}（${s.channel==='LINK'?'信件連結':'中控台'}）`);
+  else if(s.status==='PENDING')lines.push(s.viewedAt?`已開啟 ${fmtDT(s.viewedAt)}`:(s.notifiedAt?`已通知 ${fmtDT(s.notifiedAt)}，還沒開啟`:'還沒開啟'));
+  else if(s.status==='TRANSFERRED'&&to)lines.push(`轉交給 ${to.name}${s.transferNote?'：'+s.transferNote:''}`);
+  else if(s.status==='REJECTED')lines.push(`退回原因：${s.rejectReason||'—'}`);
+  if(from)lines.push(`由 ${from.name} 轉交${s.transferNote&&s.status!=='TRANSFERRED'?'：'+s.transferNote:''}`);
+  if(s.signNote&&s.status==='SIGNED')lines.push(`備註：${s.signNote}`);
+  const acts=[];
+  if(canAdmin&&['PENDING','WAITING'].includes(s.status)&&s.employeeId!==S.me.employeeId)acts.push(`<button class="btn btn-sm btn-quiet" data-act="transferDoc" data-id="${esc(doc.id)}" data-step="${esc(s.id)}">改派</button>`);
+  if(PREVIEW&&now&&s.previewToken&&s.employeeId!==S.me.employeeId)acts.push(`<button class="btn btn-sm btn-quiet" data-act="previewPortal" data-token="${esc(s.previewToken)}">看對方的簽署頁</button>`);
+  return `<div class="signer ${now?'now':''} ${s.status==='SIGNED'?'done':''} ${gone?'gone':''}"><span class="seq">${s.status==='SIGNED'?icon('check'):esc(doc.flow==='SEQUENTIAL'?s.seq:'•')}</span><div class="who">${avatar(e,30)}<div><strong>${esc(s.name)}</strong><span>${lines.map(esc).join('<br>')}${!s.hasEmail&&['PENDING','WAITING'].includes(s.status)?'<br>沒有信箱，請提醒他登入中控台簽署':''}</span>${s.signature?`<img class="sig-img" src="${esc(s.signature)}" alt="${esc(s.name)} 的簽名">`:''}</div></div><div class="signer-acts">${stepSt(s)}${acts.join('')}</div></div>`;
+}
+
+/* 發文：選簽署人、順序、附件 */
+function docForm(pre={}){
+  const signers=(pre.signerIds||[]).filter(id=>emp(id));
+  let flow=pre.flow==='SEQUENTIAL'?'SEQUENTIAL':'PARALLEL';
+  const root=formDrawer({title:pre.reissue?'重新發文':'發文',wide:true,submit:'送出並通知',body:`
+    ${field('title','文件標題 *',pre.title||'','text','required maxlength="120" placeholder="例如：2026 冬季盃工作人員切結書"')}
+    <div class="grid3">${selectF('docType','類型',Object.entries(DOC_TYPE).map(([v,t])=>`<option value="${v}" ${v===(pre.docType||'CONTRACT')?'selected':''}>${t}</option>`).join(''))}${field('dueDate','簽署期限',ymd(pre.dueDate)||'','date')}${selectF('projectId','賽事專案',projOptions(pre.projectId||''))}</div>
+    ${areaF('content','文件內容',pre.content||'','rows="10" placeholder="直接貼上條文或說明；也可以只上傳附件"')}
+    <div class="f"><span>附件<em>PDF、圖片、Word、Excel、PowerPoint，10MB 以內</em></span>${pre.copyAttachFrom&&pre.attachName?checkF('keepAttach','沿用原本的附件：'+pre.attachName,true):''}<input type="file" name="file" accept=".pdf,.png,.jpg,.jpeg,.webp,.gif,.doc,.docx,.xls,.xlsx,.ppt,.pptx"></div>
+    <div class="f"><span>簽署方式</span><div class="seg" data-flow style="align-self:flex-start">${[['PARALLEL','同時簽署'],['SEQUENTIAL','依序簽署']].map(([v,t])=>`<button type="button" data-v="${v}" class="${flow===v?'on':''}">${t}</button>`).join('')}</div><small data-flow-hint></small></div>
+    <div class="f"><span>簽署人 *</span><div data-sg></div></div>
+    ${field('note','給簽署人的備註',pre.note||'','text','maxlength="300" placeholder="會寫在通知信裡，例如：請在週五前簽完"')}
+    <p class="note" data-send-hint></p>`,
+    onSubmit:async(d,form)=>{
+      if(!d.title.trim())throw new Error('請輸入文件標題。');
+      if(!signers.length)throw new Error('請至少加入一位簽署人。');
+      const f=$('input[name=file]',form).files[0];
+      const payload={title:d.title,docType:d.docType,dueDate:d.dueDate,projectId:d.projectId,content:d.content,note:d.note,flow,signerIds:signers.slice()};
+      if(f){if(f.size>10*1024*1024)throw new Error('附件不能超過 10MB。');const type=f.type||guessType(f.name);if(!type)throw new Error('這個附件格式不支援，請改用 PDF、圖片或 Office 檔。');payload.file={name:f.name,type,base64:await fileB64(f)}}
+      else if(pre.copyAttachFrom&&d.keepAttach)payload.copyAttachFrom=pre.copyAttachFrom;
+      if(!String(payload.content).trim()&&!payload.file&&!payload.copyAttachFrom)throw new Error('請填寫文件內容，或上傳一個附件。');
+      const r=await api('saveSignDoc',payload);
+      applyDocState(r);render();
+      toast(`已送出「${r.doc.title}」${r.mailQueued?`，已排入 ${r.mailQueued} 封通知信`:''}`);
+      if(r.noEmail&&r.noEmail.length)setTimeout(()=>toast(`${r.noEmail.join('、')} 沒有信箱，請提醒他登入中控台簽署`,'err'),400);
+      if(r.mailQueued&&P('mail.send'))setTimeout(()=>sync(),4000);
+      setTimeout(()=>go('docs/'+r.doc.id),0);
+    }});
+  const host=$('[data-sg]',root);
+  function draw(){
+    const opts=activeEmps().filter(e=>!signers.includes(e.employeeId));
+    host.innerHTML=`<div class="sg-add"><select class="inp" data-sg-add aria-label="加入簽署人"><option value="">＋ 加入簽署人…</option>${opts.map(e=>`<option value="${esc(e.employeeId)}" ${canReach(e)?'':'disabled'}>${esc(e.name)}${e.jobTitle?'（'+esc(e.jobTitle)+'）':''}${canReach(e)?'':'－沒有信箱也沒有帳號'}</option>`).join('')}</select>${!signers.includes(S.me.employeeId)?'<button type="button" class="btn btn-sm" data-sg-me>加入我自己</button>':''}</div>
+    ${signers.length?`<ol class="sg-list ${flow==='SEQUENTIAL'?'seq':''}">${signers.map((id,i)=>{const e=emp(id)||{name:id};return `<li class="sg-i"><span class="sg-n">${flow==='SEQUENTIAL'?i+1:'•'}</span>${avatar(e,30)}<div class="sg-who"><strong>${esc(e.name)}${id===S.me.employeeId?'（我）':''}</strong><span>${esc([L(e.department),e.jobTitle].filter(x=>x&&x!=='—').join('／'))}${reachTag(e)}</span></div><div class="sg-acts">${flow==='SEQUENTIAL'?`<button type="button" class="icon-btn" data-sg-up="${i}" ${i===0?'disabled':''} aria-label="往前">${icon('up')}</button><button type="button" class="icon-btn" data-sg-down="${i}" ${i===signers.length-1?'disabled':''} aria-label="往後">${icon('down')}</button>`:''}<button type="button" class="icon-btn" data-sg-del="${i}" aria-label="移除 ${esc(e.name)}">${icon('x')}</button></div></li>`}).join('')}</ol>`:'<div class="sg-empty">還沒有簽署人，從上面的選單加入。</div>'}`;
+    $('[data-flow-hint]',root).textContent=flow==='SEQUENTIAL'?'照順序一位簽完才通知下一位，可以用箭頭調整順序。':'所有簽署人會同時收到通知，各自簽署。';
+    const first=(flow==='SEQUENTIAL'?signers.slice(0,1):signers).filter(id=>id!==S.me.employeeId).map(id=>emp(id)?.name).filter(Boolean);
+    $('[data-send-hint]',root).textContent=!signers.length?'加入簽署人後，這裡會顯示誰會先收到通知。':first.length?`送出後會立刻寄信給 ${first.join('、')}。信裡的按鈕可以直接開啟文件，用手指或滑鼠簽名，不需要登入。`:'你是第一位簽署人，送出後就能在文件頁簽署。';
+  }
+  host.addEventListener('change',e=>{if(e.target.matches('[data-sg-add]')&&e.target.value){signers.push(e.target.value);draw();$('[data-sg-add]',host)?.focus()}});
+  host.addEventListener('click',e=>{
+    const b=e.target.closest('button');if(!b)return;
+    if(b.hasAttribute('data-sg-me')){signers.push(S.me.employeeId);draw();return}
+    const up=b.dataset.sgUp,down=b.dataset.sgDown,del=b.dataset.sgDel;
+    if(up!=null){const i=+up;[signers[i-1],signers[i]]=[signers[i],signers[i-1]]}
+    else if(down!=null){const i=+down;[signers[i+1],signers[i]]=[signers[i],signers[i+1]]}
+    else if(del!=null)signers.splice(+del,1);
+    else return;
+    draw();
+  });
+  $$('[data-flow] button',root).forEach(b=>b.onclick=()=>{flow=b.dataset.v;$$('[data-flow] button',root).forEach(z=>z.classList.toggle('on',z===b));draw()});
+  draw();
+}
+function agreementText(e){
+  const LBL={FULL_TIME:'正職',EVENT_PART_TIME:'賽事期工讀',CONTRACTOR:'合作人員',MONTHLY:'月薪',DAILY:'日薪',PER_EVENT:'按場次',ONE_TIME:'單次勞務',HOURLY:'時薪'};
+  return [`員工編號：${e.employeeId}`,`姓名：${e.name}`,`人員類型：${LBL[e.employeeType]||e.employeeType||'—'}`,`部門／職稱：${L(e.department)} / ${e.jobTitle||'—'}`,`合作期間：${ymd(e.startDate)||'—'} 至 ${ymd(e.endDate)||'未定'}`,`報酬方式：${LBL[e.payType]||e.payType||'—'}`,`約定基本報酬：${money(e.payRate)}`,'','雙方確認以上任用與勞務報酬內容無誤。實際勞務、薪資、稅務及保險事項仍依雙方約定及適用法令辦理。'].join('\n');
+}
+
+/* 簽名板：Pointer Events（滑鼠、手指、觸控筆都能用），筆跡平滑、觸控筆有壓力感應，輸出透明背景 PNG */
+function SigPad(host,{height}={}){
+  host.innerHTML=`<div class="sigpad"><div class="sigpad-tools"><span class="lbl">筆色</span><button type="button" class="swatch on" data-c="#111111" style="background:#111" aria-label="黑色"></button><button type="button" class="swatch" data-c="#1d3f9e" style="background:#1d3f9e" aria-label="藍色"></button><span class="lbl" style="margin-left:6px">粗細</span><div class="seg seg-sm">${[['1.8','細'],['2.8','中'],['4','粗']].map(([w,t],i)=>`<button type="button" data-w="${w}" class="${i===1?'on':''}">${t}</button>`).join('')}</div><span class="grow"></span><button type="button" class="btn btn-sm btn-quiet" data-undo>${icon('undo')}復原</button><button type="button" class="btn btn-sm btn-quiet" data-clear>清除</button></div><div class="sigpad-area" ${height?`style="height:${height}px"`:''}><span class="sigpad-x">×</span><span class="sigpad-line"></span><span class="sigpad-hint">請在這裡簽名</span><canvas aria-label="簽名區，用手指、觸控筆或滑鼠書寫" role="img"></canvas></div></div>`;
+  const wrap=$('.sigpad',host),area=$('.sigpad-area',host),cv=$('canvas',host),g=cv.getContext('2d');
+  let strokes=[],cur=null,color='#111111',base=2.8,preset=null,presetImg=null,dpr=1;
+  const pts2=(s,k,ox,oy)=>s.pts.map(p=>({x:(p.x-ox)*k,y:(p.y-oy)*k,w:p.w*k}));
+  function paint(ctx,s,k=1,ox=0,oy=0){
+    const P=pts2(s,k,ox,oy);if(!P.length)return;
+    ctx.strokeStyle=s.color;ctx.fillStyle=s.color;ctx.lineCap='round';ctx.lineJoin='round';
+    if(P.length===1){ctx.beginPath();ctx.arc(P[0].x,P[0].y,Math.max(.8,P[0].w*.6),0,Math.PI*2);ctx.fill();return}
+    if(P.length===2){ctx.lineWidth=P[1].w;ctx.beginPath();ctx.moveTo(P[0].x,P[0].y);ctx.lineTo(P[1].x,P[1].y);ctx.stroke();return}
+    let m={x:P[0].x,y:P[0].y};
+    for(let i=1;i<P.length-1;i++){const n={x:(P[i].x+P[i+1].x)/2,y:(P[i].y+P[i+1].y)/2};ctx.lineWidth=Math.max(.7,P[i].w);ctx.beginPath();ctx.moveTo(m.x,m.y);ctx.quadraticCurveTo(P[i].x,P[i].y,n.x,n.y);ctx.stroke();m=n}
+    const L=P[P.length-1];ctx.lineWidth=Math.max(.7,L.w);ctx.beginPath();ctx.moveTo(m.x,m.y);ctx.lineTo(L.x,L.y);ctx.stroke();
+  }
+  function redraw(){
+    g.setTransform(1,0,0,1,0,0);g.clearRect(0,0,cv.width,cv.height);g.setTransform(dpr,0,0,dpr,0,0);
+    if(presetImg&&presetImg.complete){const W=cv.width/dpr,H=cv.height/dpr,k=Math.min(1,(W-60)/presetImg.width,(H-50)/presetImg.height);const w=presetImg.width*k,h=presetImg.height*k;g.drawImage(presetImg,(W-w)/2,H-54-h*.85,w,h)}
+    strokes.forEach(s=>paint(g,s));
+  }
+  function size(){const r=area.getBoundingClientRect();if(!r.width)return;dpr=Math.max(1,Math.min(3,window.devicePixelRatio||1));cv.width=Math.round(r.width*dpr);cv.height=Math.round(r.height*dpr);redraw()}
+  function point(e){
+    const r=cv.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top,t=e.timeStamp||performance.now(),last=cur.pts[cur.pts.length-1];let w;
+    if(e.pointerType==='pen'&&e.pressure>0&&e.pressure!==.5)w=cur.base*(.4+e.pressure*1.2);
+    else if(last){const d=Math.hypot(x-last.x,y-last.y),dt=Math.max(1,t-last.t);if(d<.7)return;const v=d/dt;cur.v=cur.v==null?v:cur.v*.65+v*.35;w=cur.base*Math.max(.55,Math.min(1.3,1.35-cur.v*.32))}
+    else w=cur.base;
+    if(last)w=last.w*.6+w*.4;
+    cur.pts.push({x,y,t,w});
+  }
+  const changed=()=>wrap.classList.toggle('has',!!preset||strokes.length>0);
+  cv.addEventListener('pointerdown',e=>{if(e.button>0)return;e.preventDefault();try{cv.setPointerCapture(e.pointerId)}catch(_){}if(preset){preset=null;presetImg=null;strokes=[]}cur={color,base,pts:[],v:null};strokes.push(cur);point(e);redraw();changed()});
+  cv.addEventListener('pointermove',e=>{if(!cur)return;e.preventDefault();const list=e.getCoalescedEvents?e.getCoalescedEvents():null;(list&&list.length?list:[e]).forEach(point);redraw()});
+  const end=()=>{if(!cur)return;cur=null;redraw()};
+  cv.addEventListener('pointerup',end);cv.addEventListener('pointercancel',end);cv.addEventListener('lostpointercapture',end);
+  $$('.swatch',host).forEach(b=>b.onclick=()=>{color=b.dataset.c;$$('.swatch',host).forEach(z=>z.classList.toggle('on',z===b))});
+  $$('[data-w]',host).forEach(b=>b.onclick=()=>{base=+b.dataset.w;$$('[data-w]',host).forEach(z=>z.classList.toggle('on',z===b))});
+  $('[data-undo]',host).onclick=()=>{if(preset){preset=null;presetImg=null}else strokes.pop();redraw();changed()};
+  $('[data-clear]',host).onclick=()=>{strokes=[];preset=null;presetImg=null;redraw();changed()};
+  const ro=window.ResizeObserver?new ResizeObserver(()=>size()):null;ro?ro.observe(area):window.addEventListener('resize',size);
+  requestAnimationFrame(size);setTimeout(size,260);
+  const ink=()=>strokes.reduce((L,s)=>{for(let i=1;i<s.pts.length;i++)L+=Math.hypot(s.pts[i].x-s.pts[i-1].x,s.pts[i].y-s.pts[i-1].y);return L},0);
+  return {
+    isEmpty:()=>!preset&&ink()<24,
+    isPreset:()=>!!preset,
+    usePreset(url){if(!url)return;preset=url;strokes=[];presetImg=new Image();presetImg.onload=redraw;presetImg.src=url;changed()},
+    toDataURL(){
+      if(preset)return preset;
+      let a=1e9,b=1e9,c=-1e9,d=-1e9;strokes.forEach(s=>s.pts.forEach(p=>{a=Math.min(a,p.x-p.w);b=Math.min(b,p.y-p.w);c=Math.max(c,p.x+p.w);d=Math.max(d,p.y+p.w)}));
+      const pad=8,W=c-a+pad*2,H=d-b+pad*2;let k=Math.min(2,600/W,220/H);
+      for(let i=0;i<6;i++){const x=document.createElement('canvas');x.width=Math.max(24,Math.ceil(W*k));x.height=Math.max(12,Math.ceil(H*k));const ctx=x.getContext('2d');strokes.forEach(s=>paint(ctx,s,k,a-pad,b-pad));const url=x.toDataURL('image/png');if(url.length<45000)return url;k*=.75}
+      return null;
+    },
+    destroy(){ro&&ro.disconnect()}
+  };
+}
+function signDrawer(id){
+  const cache=S.docCache[id]&&S.docCache[id].data,d=(cache&&cache.doc)||S.db.signDocs.find(x=>x.id===id);if(!d)return;
+  let saved=cache&&cache.mySavedSignature||'';
+  const root=drawer({title:'簽署文件',wide:true,body:`<p class="small muted" style="margin-bottom:10px">${esc(d.docCode||'')}　${esc(d.title)}</p><div data-pad></div><div data-saved></div>
+    <div class="form" style="margin-top:16px"><label class="f"><span>備註<em>選填，會記在簽署紀錄</em></span><input class="inp" data-note maxlength="200"></label>${checkF('agree','我已閱讀並同意這份文件的內容')}${checkF('remember','記住這個簽名，下次可以直接使用',false)}</div>`,
+    foot:`<span class="grow"></span><button class="btn" data-dw-close>取消</button><button class="btn btn-pri" data-go>${icon('pen')}確認簽署</button>`,onClose:()=>pad&&pad.destroy()});
+  $$('[data-dw-close]',root).forEach(b=>b.addEventListener('click',()=>closeDrawer()));
+  const pad=SigPad($('[data-pad]',root));
+  const drawSaved=()=>{$('[data-saved]',root).innerHTML=saved?`<div class="sig-saved"><img src="${esc(saved)}" alt="已儲存的簽名"><div><strong>已儲存的簽名</strong><span>直接使用上次記住的簽名</span></div><button type="button" class="btn btn-sm" data-use-saved>使用這個簽名</button><button type="button" class="btn btn-sm btn-quiet" data-clear-saved>刪除</button></div>`:''};
+  drawSaved();
+  $('[data-saved]',root).addEventListener('click',async e=>{
+    if(e.target.closest('[data-use-saved]'))pad.usePreset(saved);
+    if(e.target.closest('[data-clear-saved]')){try{await api('clearMySignature');saved='';if(cache)cache.mySavedSignature='';drawSaved();toast('已刪除儲存的簽名')}catch(err){toast(err.message,'err')}}
+  });
+  $('[data-go]',root).onclick=async ev=>{
+    const b=ev.currentTarget;
+    if(pad.isEmpty()){toast('請先在框裡簽名。','err');return}
+    if(!$('input[name=agree]',root).checked){toast('請勾選「我已閱讀並同意這份文件的內容」。','err');return}
+    const sig=pad.toDataURL();if(!sig){toast('簽名太複雜了，請簽小一點再試一次。','err');return}
+    b.disabled=true;b.textContent='送出中…';
+    try{await docMutate('signDoc',{id,signature:sig,agree:true,remember:$('input[name=remember]',root).checked&&!pad.isPreset(),note:$('[data-note]',root).value},r=>r.completed?'已完成簽署，所有人都簽好了，簽署完成的 PDF 會寄給大家':'已完成簽署');closeDrawer()}
+    catch(err){toast(err.message,'err');b.disabled=false;b.innerHTML=icon('pen')+'確認簽署'}
+  };
+}
+function transferDrawer(id,stepId=''){
+  const steps=docSteps(id),inDoc=new Set(steps.filter(s=>['PENDING','WAITING','SIGNED'].includes(s.status)).map(s=>s.employeeId)),target=stepId?steps.find(s=>s.id===stepId):null;
+  const list=activeEmps().filter(e=>!inDoc.has(e.employeeId)&&canReach(e));
+  formDrawer({title:stepId?'改派簽署人':'轉交給其他人',submit:'轉交',body:`<p class="note">${stepId?`把「${esc(target?target.name:'')}」的簽署改給另一位人員，對方會收到通知信。`:'把你的簽署轉交給另一位人員處理，對方會收到通知信，發文者也會收到轉交通知。'}</p>
+    ${selectF('toEmployeeId','轉交給 *',`<option value="">請選擇</option>`+list.map(e=>`<option value="${esc(e.employeeId)}">${esc(e.name)}${e.jobTitle?'（'+esc(e.jobTitle)+'）':''}</option>`).join(''),'required')}
+    ${areaF('note','轉交說明','','rows="3" maxlength="300" placeholder="例如：我那天不在，請你代表部門簽署"')}`,
+    onSubmit:async d=>{if(!d.toEmployeeId)throw new Error('請選擇要轉交的人。');await docMutate('transferSignDoc',{id,stepId,toEmployeeId:d.toEmployeeId,note:d.note},'已轉交')}});
+}
+async function rejectDoc(id){
+  const r=await ask({title:'退回這份文件',text:'退回後文件會停止簽署，發文者會收到通知信。',ok:'退回',danger:true,input:{label:'退回原因（必填）',type:'textarea',placeholder:'例如：第三條的金額跟討論的不一樣'}});
+  if(!r)return;if(!r.value.trim()){toast('請填寫退回原因。','err');return}
+  try{await docMutate('rejectSignDoc',{id,reason:r.value},'已退回，發文者會收到通知')}catch(e){toast(e.message,'err')}
+}
+async function cancelDoc(id){
+  const r=await ask({title:'撤回這份文件',text:'撤回後還沒簽的人就不能再簽了，系統會寄信告訴他們。',ok:'撤回文件',danger:true,input:{label:'撤回原因（選填，會寫在通知信裡）',type:'textarea'}});
+  if(!r)return;
+  try{await docMutate('cancelSignDoc',{id,reason:r.value},'已撤回')}catch(e){toast(e.message,'err')}
+}
+async function remindDoc(id){try{await docMutate('remindSignDoc',{id},r=>`已提醒 ${r.reminded||0} 位簽署人`)}catch(e){toast(e.message,'err')}}
+async function docFile(id,kind){try{saveFile(await api('getSignFile',{id,kind}))}catch(e){toast(e.message,'err')}}
+async function docPreview(id){try{const d=await api('getSignFile',{id,kind:'attachment'});showImage(d,d.name)}catch(e){toast(e.message,'err')}}
+async function reissueDoc(id){
+  let full=S.docCache[id]&&S.docCache[id].data;
+  if(!full){try{full=await api('getSignDoc',{id});S.docCache[id]={at:Date.now(),data:full}}catch(e){toast(e.message,'err');return}}
+  const d=full.doc,people=full.steps.filter(s=>!['TRANSFERRED'].includes(s.status)).map(s=>s.employeeId).filter((v,i,a)=>a.indexOf(v)===i);
+  docForm({title:d.title,docType:d.docType,dueDate:'',projectId:d.projectId,content:d.content,note:d.note,flow:d.flow,signerIds:people,copyAttachFrom:d.hasAttachment?d.id:'',attachName:d.attachName,reissue:true});
+}
+
+/* ═════════════ 信件連結簽署頁（不用登入） ═════════════ */
+async function showPortal(token,inline=false){
+  S.portal={token,inline,data:null,err:''};
+  $('#login').hidden=true;$('#app').hidden=true;$('#portal').hidden=false;document.body.classList.remove('no-scroll');document.body.classList.add('portal-on');
+  document.title='文件簽署｜銳能娛樂';
+  renderPortal();
+  try{S.portal.data=await api('signPortal',{token,op:'view'})}catch(e){S.portal.err=e.message}
+  renderPortal();
+}
+function closePortal(){
+  const P0=S.portal;S.portal=null;if(P0&&P0.pad)P0.pad.destroy();$('#portal').hidden=true;$('#portal').innerHTML='';document.body.classList.remove('portal-on');document.title='銳能娛樂｜中央控制中心';
+  if(P0&&P0.inline){S.docCache={};$('#app').hidden=false;sync()}
+}
+function renderPortal(){
+  const P0=S.portal,el=$('#portal');if(!P0)return;
+  if(P0.pad){P0.pad.destroy();P0.pad=null}
+  const shell=inner=>`<header class="portal-top">${logoHtml()}<div><strong>銳能娛樂</strong><span>文件簽署</span></div>${P0.inline?'<button class="btn btn-sm" data-p-close>關閉預覽</button>':''}</header><main class="portal-main">${P0.inline?'<div class="note">預覽：這是簽署人點開通知信後看到的頁面，不需要登入。</div>':''}${inner}</main><footer class="portal-foot">這是銳能娛樂中央控制中心的文件簽署頁。如果你不是這封信的收件人，請關閉頁面並通知發文者。</footer>`;
+  if(!P0.data&&!P0.err){el.innerHTML=shell('<div class="loading">正在開啟文件…</div>');bindPortal();return}
+  if(!P0.data){el.innerHTML=shell(`<section class="box"><div class="box-b portal-msg"><h2>無法開啟這個簽署連結</h2><p>${esc(P0.err)}</p><p class="small muted">如果你剛收到新的提醒信，請改用最新一封信裡的按鈕。</p></div></section>`);bindPortal();return}
+  const {doc,me,steps}=P0.data,live=steps.filter(s=>!['TRANSFERRED','CANCELLED'].includes(s.status)),done=live.filter(s=>s.status==='SIGNED').length;
+  let state='';
+  if(doc.status==='CANCELLED')state=`<div class="portal-state warn">${icon('ban')}<div><strong>這份文件已經撤回</strong><p>${esc(doc.closedReason||'發文者撤回了這份文件，你不需要再簽署。')}</p></div></div>`;
+  else if(doc.status==='REJECTED'&&me.status!=='REJECTED')state=`<div class="portal-state warn">${icon('ban')}<div><strong>這份文件已經停止簽署</strong><p>${esc(doc.closedReason||'')}</p></div></div>`;
+  else if(me.status==='REJECTED')state=`<div class="portal-state info">${icon('info')}<div><strong>你已經退回這份文件</strong><p>發文者已收到通知。</p></div></div>`;
+  else if(me.status==='TRANSFERRED')state=`<div class="portal-state info">${icon('transfer')}<div><strong>你已經轉交給 ${esc(me.transferredTo||'其他人')}</strong><p>對方會收到通知信，你不需要再簽署。</p></div></div>`;
+  else if(me.status==='SIGNED')state=`<div class="portal-state ok">${icon('check')}<div><strong>你已在 ${fmtDT(me.signedAt)} 完成簽署</strong><p>${doc.status==='COMPLETED'?'所有人都簽好了，簽署完成的 PDF 已經寄到你的信箱。':`目前 ${done}/${live.length} 位已簽署，全部完成後會再寄信給你。`}</p></div></div>`;
+  else if(me.status==='WAITING')state=`<div class="portal-state info">${icon('info')}<div><strong>還沒輪到你簽署</strong><p>這份文件依順序簽署，前面的人簽好後會再寄信通知你。</p></div></div>`;
+  const canAct=me.status==='PENDING'&&doc.status==='PENDING';
+  const head=`<section class="portal-head"><div class="p-meta" style="margin:0"><span>${esc(DOC_TYPE[doc.docType]||'其他')}</span><span>${esc(doc.docCode)}</span>${docSt(doc)}</div><h1>${esc(doc.title)}</h1><div class="p-meta" style="margin:0"><span>發文 <b>${esc(doc.issuerName)}</b></span><span>${fmtDT(doc.createdAt)}</span>${ymd(doc.dueDate)?`<span>期限 <b>${fmtD(doc.dueDate)}</b></span>`:''}<span>給 <b>${esc(me.name||'')}</b></span></div>${doc.note?`<p class="note" style="margin-top:12px">發文者備註：${esc(doc.note)}</p>`:''}</section>`;
+  const body=box('內容',doc.content?`<div class="box-b"><div class="doc-content">${esc(doc.content)}</div></div>`:empty('這份文件沒有內文，請看附件。'));
+  const attach=doc.hasAttachment&&doc.status!=='CANCELLED'?box('附件',`<div class="box-b"><div class="file-card"><span class="file-ext">${esc(fileExt(doc.attachName))}</span><div class="file-main"><strong>${esc(doc.attachName||'附件')}</strong><span>${esc(fileSize(doc.attachSize))}</span></div><div class="file-acts"><button class="btn btn-sm" data-p-file="attachment">${icon('download')}下載附件</button></div></div></div>`):'';
+  const signed=doc.hasSignedPdf?`<section class="box"><div class="box-b" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap"><div style="flex:1;min-width:200px"><strong>簽署完成 PDF</strong><p class="small muted">內含文件內容、所有人的簽名與紀錄。</p></div><button class="btn btn-pri" data-p-file="signed">${icon('download')}下載 PDF</button></div></section>`:'';
+  const prog=box('簽署進度',`<div>${steps.filter(s=>s.status!=='CANCELLED'||s.mine).map(s=>`<div class="signer ${s.mine?'now':''} ${s.status==='SIGNED'?'done':''} ${s.status==='TRANSFERRED'?'gone':''}"><span class="seq">${s.status==='SIGNED'?icon('check'):esc(doc.flow==='SEQUENTIAL'?s.seq:'•')}</span><div class="who"><div><strong>${esc(s.name)}${s.mine?'（你）':''}</strong><span>${s.signedAt?'簽署於 '+fmtDT(s.signedAt):''}</span></div></div><div class="signer-acts">${stepSt(s)}</div></div>`).join('')}</div>`,`<span class="muted">${done}/${live.length}</span>`);
+  const form=canAct?`<section class="box" id="portalSign"><div class="box-h"><h2>你的簽名</h2></div><div class="box-b"><div data-p-pad></div><div class="form" style="margin-top:14px"><label class="f"><span>備註<em>選填，會記在簽署紀錄</em></span><input class="inp" data-p-note maxlength="200"></label>${checkF('agree','我已閱讀並同意這份文件的內容')}</div><div class="portal-acts"><button class="btn btn-pri btn-lg" data-p-sign>${icon('pen')}確認簽署</button><span class="grow"></span><button class="btn" data-p-transfer>${icon('transfer')}轉交給其他人</button><button class="btn btn-quiet btn-bad" data-p-reject>退回</button></div></div></section>`:'';
+  el.innerHTML=shell(head+state+body+attach+signed+form+prog);
+  if(canAct)P0.pad=SigPad($('[data-p-pad]',el));
+  bindPortal();
+}
+function bindPortal(){
+  const el=$('#portal'),P0=S.portal;if(!P0)return;
+  const call=async(op,extra,okMsg)=>{const d=await api('signPortal',Object.assign({token:P0.token,op},extra||{}));P0.data=d;renderPortal();window.scrollTo(0,0);if(okMsg)toast(okMsg);return d};
+  $('[data-p-close]',el)?.addEventListener('click',closePortal);
+  $$('[data-p-file]',el).forEach(b=>b.onclick=async()=>{try{saveFile(await api('signPortal',{token:P0.token,op:'file',kind:b.dataset.pFile}))}catch(e){toast(e.message,'err')}});
+  const sb=$('[data-p-sign]',el);
+  if(sb)sb.onclick=async()=>{
+    if(!P0.pad||P0.pad.isEmpty()){toast('請先在框裡簽名。','err');$('[data-p-pad]',el).scrollIntoView({behavior:'smooth',block:'center'});return}
+    if(!$('input[name=agree]',el).checked){toast('請勾選「我已閱讀並同意這份文件的內容」。','err');return}
+    const sig=P0.pad.toDataURL();if(!sig){toast('簽名太複雜了，請簽小一點再試一次。','err');return}
+    sb.disabled=true;sb.textContent='送出中…';
+    try{await call('sign',{signature:sig,agree:true,note:$('[data-p-note]',el).value},'已完成簽署，謝謝你')}catch(e){toast(e.message,'err');sb.disabled=false;sb.innerHTML=icon('pen')+'確認簽署'}
+  };
+  const tb=$('[data-p-transfer]',el);
+  if(tb)tb.onclick=()=>{
+    const people=P0.data.people||[];
+    if(!people.length){toast('目前沒有可以轉交的人員。','err');return}
+    formDrawer({title:'轉交給其他人',submit:'轉交',body:`<p class="note">對方會收到通知信，改由他簽署；發文者也會收到通知。</p>${selectF('toEmployeeId','轉交給 *',`<option value="">請選擇</option>`+people.map(p=>`<option value="${esc(p.employeeId)}">${esc(p.name)}${p.jobTitle?'（'+esc(p.jobTitle)+'）':''}</option>`).join(''),'required')}${areaF('note','轉交說明','','rows="3" maxlength="300"')}`,
+      onSubmit:async d=>{if(!d.toEmployeeId)throw new Error('請選擇要轉交的人。');await call('transfer',{toEmployeeId:d.toEmployeeId,note:d.note},'已轉交')}});
+  };
+  const rb=$('[data-p-reject]',el);
+  if(rb)rb.onclick=async()=>{
+    const r=await ask({title:'退回這份文件',text:'退回後文件會停止簽署，發文者會收到通知信。',ok:'退回',danger:true,input:{label:'退回原因（必填）',type:'textarea'}});
+    if(!r)return;if(!r.value.trim()){toast('請填寫退回原因。','err');return}
+    try{await call('reject',{reason:r.value},'已退回，發文者會收到通知')}catch(e){toast(e.message,'err')}
+  };
 }
 
 /* ═════════════ 寄信通知 ═════════════ */
@@ -1433,6 +2237,164 @@ function expenseForm(pid=''){
     onSubmit:async d=>{if(!d.title.trim()||!(num(d.amount)>0))throw new Error('請輸入用途與正確金額。');await save('saveExpense',d,r=>upsert('expenses',r),'已送出費用申請')}});
 }
 
+/* ═════════════ 收支（只有最高管理員、行政管理員、財務看得到） ═════════════ */
+const LCATS={INCOME:['REG_FEE','SPONSOR','MERCH','STREAM','MEMBER','OTHER_IN'],EXPENSE:['PRIZE','LABOR','VENUE','EQUIPMENT','MARKETING','DESIGN','SOFTWARE','TRANSPORT','EVENT_OPS','MISC','OTHER_OUT']};
+const LCAT={REG_FEE:'報名費',SPONSOR:'贊助',MERCH:'周邊銷售',STREAM:'直播收益',MEMBER:'會員收入',OTHER_IN:'其他收入',PRIZE:'獎金獎品',LABOR:'人事勞務',VENUE:'場地',EQUIPMENT:'設備器材',MARKETING:'行銷廣告',DESIGN:'美術設計',SOFTWARE:'系統軟體',TRANSPORT:'交通',EVENT_OPS:'賽事營運',MISC:'雜支',OTHER_OUT:'其他支出'};
+const LSTAT={CLEARED:'已入帳',PENDING:'待收付',VOID:'已作廢'};
+const LKIND={INCOME:'收入',EXPENSE:'支出'};
+const ACCOUNTS_DEFAULT=['銀行帳戶','現金','LINE Pay','街口支付'];
+function sumKind(list,kind){return list.filter(x=>x.kind===kind).reduce((s,x)=>s+num(x.amount),0)}
+const signedMoney=x=>(x.kind==='INCOME'?'+':'−')+money(x.amount);
+const netText=n=>(n<0?'−':'')+money(Math.abs(n));
+function ymShift(ym,n){const [y,m]=ym.split('-').map(Number);const d=new Date(y,m-1+n,1);return d.getFullYear()+'-'+pad(d.getMonth()+1)}
+function ledgerPeriod(){
+  const mode=S.ui.lp||'month',t=todayYmd();
+  if(mode==='year'){const y=S.ui.ly||t.slice(0,4);return {mode,key:y,label:`${y} 年`,test:d=>String(d).slice(0,4)===y}}
+  if(mode==='all')return {mode,key:'all',label:'全部期間',test:()=>true};
+  const ym=S.ui.lym||t.slice(0,7);return {mode:'month',key:ym,label:`${ym.slice(0,4)} 年 ${Number(ym.slice(5))} 月`,test:d=>String(d).slice(0,7)===ym};
+}
+function ledgerCandidates(){
+  const linked=new Set(S.db.ledger.filter(x=>x.status!=='VOID'&&x.sourceId).map(x=>x.sourceType+':'+x.sourceId));
+  const ex=S.db.expenses.filter(x=>x.status==='APPROVED'&&!linked.has('EXPENSE:'+x.id)).map(x=>({type:'EXPENSE',id:x.id,date:ymd(x.reviewedAt)||ymd(x.createdAt),title:x.title,who:x.employeeName,project:x.projectName||'',amount:num(x.amount),label:'費用申請'}));
+  const cp=S.db.compensation.filter(c=>c.status==='PAID'&&!linked.has('COMPENSATION:'+c.id)).map(c=>({type:'COMPENSATION',id:c.id,date:ymd(c.paidDate)||ymd(c.updatedAt),title:c.reference||L(c.compType),who:c.employeeName,project:c.projectId&&proj(c.projectId)?proj(c.projectId).name:'',amount:num(c.amount),label:L(c.compType)}));
+  return [...ex,...cp].sort((a,b)=>String(b.date).localeCompare(String(a.date)));
+}
+function vLedger(){
+  const edit=P('ledger.edit');
+  setHead('收支',`<button class="btn" data-act="ledCsv">${icon('download')}<span class="btn-label">匯出 CSV</span></button>`+(edit?btnPri('newLedger','記一筆'):''));
+  const per=ledgerPeriod(),inPer=S.db.ledger.filter(x=>per.test(x.entryDate)),live=inPer.filter(x=>x.status!=='VOID');
+  const cl=live.filter(x=>x.status==='CLEARED'),pend=live.filter(x=>x.status==='PENDING'),inc=sumKind(cl,'INCOME'),exp=sumKind(cl,'EXPENSE'),net=inc-exp;
+  const cands=edit?ledgerCandidates():[];
+  const tl=[['list','明細',inPer.filter(x=>x.status!=='VOID').length],['analysis','分析']];if(edit)tl.push(['import','待入帳',cands.length]);
+  const tab=tl.some(x=>x[0]===S.ui.lt)?S.ui.lt:'list';
+  const bar=`<div class="led-period">${per.mode!=='all'?`<button class="icon-btn" data-act="ledMove" data-n="-1" aria-label="上一期">${icon('left')}</button>`:''}<h2>${esc(per.label)}</h2>${per.mode!=='all'?`<button class="icon-btn" data-act="ledMove" data-n="1" aria-label="下一期">${icon('right')}</button>`:''}${per.mode==='month'&&per.key!==todayYmd().slice(0,7)?'<button class="btn btn-sm" data-act="ledNow">本月</button>':''}</div>`;
+  const fg=figs([['收入',money(inc),`${cl.filter(x=>x.kind==='INCOME').length} 筆已入帳`],['支出',money(exp),`${cl.filter(x=>x.kind==='EXPENSE').length} 筆已入帳`],['淨額',`<em class="${net<0?'red':''}">${netText(net)}</em>`,net>=0?'收入大於支出':'支出大於收入'],['待收付',`${pend.length} 筆`,pend.length?`待收 ${money(sumKind(pend,'INCOME'))}，待付 ${money(sumKind(pend,'EXPENSE'))}`:'沒有未結的款項']]);
+  const body=tab==='analysis'?ledgerAnalysis(per,cl):tab==='import'?ledgerImport(cands):ledgerList(inPer);
+  view(`<div class="toolbar">${bar}<span class="grow"></span>${seg('lp',[['month','月'],['year','年'],['all','全部']],per.mode)}</div>${fg}${tabs('lt',tl,tab)}${body}`);
+  if(tab==='analysis')mountLedgerChart();
+}
+function ledgerFiltered(inPer){
+  const k=S.ui.lk||'',c=S.ui.lc||'',pj=S.ui.lpj||'',q=(S.ui.lq||'').trim().toLowerCase(),showVoid=!!S.ui.lv;
+  let list=inPer.filter(x=>showVoid||x.status!=='VOID');
+  if(k)list=list.filter(x=>x.kind===k);
+  if(c)list=list.filter(x=>x.category===c);
+  if(pj)list=list.filter(x=>pj==='_none'?!x.projectId:x.projectId===pj);
+  if(q)list=list.filter(x=>[x.description,x.counterparty,x.account,x.invoiceNo,x.projectName,LCAT[x.category],x.createdByName].join(' ').toLowerCase().includes(q));
+  return list.sort((a,b)=>String(b.entryDate).localeCompare(String(a.entryDate))||String(b.createdAt).localeCompare(String(a.createdAt)));
+}
+function ledgerList(inPer){
+  const k=S.ui.lk||'',list=ledgerFiltered(inPer),live=list.filter(x=>x.status!=='VOID');
+  const cats=k?LCATS[k]:[...LCATS.INCOME,...LCATS.EXPENSE];
+  const pjs=[...new Set(S.db.ledger.map(x=>x.projectId).filter(Boolean))].map(id=>({id,name:proj(id)?proj(id).name:(S.db.ledger.find(x=>x.projectId===id)||{}).projectName||id}));
+  const filters=`<div class="toolbar">${seg('lk',[['','全部'],['INCOME','收入'],['EXPENSE','支出']],k)}<select class="inp" data-model="lc" style="width:auto" aria-label="分類"><option value="">所有分類</option>${cats.map(c=>`<option value="${c}" ${S.ui.lc===c?'selected':''}>${LCAT[c]}</option>`).join('')}</select><select class="inp" data-model="lpj" style="width:auto;max-width:220px" aria-label="專案"><option value="">所有專案</option><option value="_none" ${S.ui.lpj==='_none'?'selected':''}>不屬於專案</option>${pjs.map(p=>`<option value="${esc(p.id)}" ${S.ui.lpj===p.id?'selected':''}>${esc(p.name)}</option>`).join('')}</select><label class="check" style="font-size:13px"><input type="checkbox" data-led-void ${S.ui.lv?'checked':''}><span>顯示已作廢</span></label><span class="grow"></span>${searchBox('lq','搜尋說明、對象、發票')}</div>`;
+  const rows=list.map(x=>`<tr class="click ${x.status==='VOID'?'void':''}" data-act="editLedger" data-id="${esc(x.id)}"><td data-label="日期" class="nowrap">${fmtD(x.entryDate,false)}</td><td class="cell-main"><span class="t-main">${esc(x.description||x.counterparty||'—')}</span><span class="t-sub">${[x.description&&x.counterparty?x.counterparty:'',x.invoiceNo?'發票 '+x.invoiceNo:'',x.hasReceipt?'有憑證':'',x.sourceType?'由'+(x.sourceType==='EXPENSE'?'費用申請':'報酬')+'帶入':''].filter(Boolean).map(esc).join('，')}</span></td><td data-label="分類"><span><span class="tag">${LKIND[x.kind]}</span> ${esc(LCAT[x.category]||x.category)}</span></td><td data-label="專案" class="${x.projectName?'':'empty'}">${esc(x.projectName||'—')}</td><td data-label="帳戶" class="${x.account?'':'empty'}">${esc(x.account||'—')}</td><td data-label="金額" class="right num strong ${x.kind==='INCOME'?'amt-in':''}">${signedMoney(x)}</td><td data-label="狀態">${st(x.status,LSTAT[x.status])}</td></tr>`).join('');
+  return filters+`<section class="box">${list.length?`<div class="led-sum"><span>共 <b>${list.length}</b> 筆</span><span>收入 <b>${money(sumKind(live,'INCOME'))}</b></span><span>支出 <b>${money(sumKind(live,'EXPENSE'))}</b></span><span>淨額 <b class="${sumKind(live,'INCOME')-sumKind(live,'EXPENSE')<0?'red':''}">${netText(sumKind(live,'INCOME')-sumKind(live,'EXPENSE'))}</b></span></div><div class="tbl-wrap"><table class="tbl tbl-cards"><thead><tr><th>日期</th><th>說明</th><th>分類</th><th>專案</th><th>帳戶</th><th class="right">金額</th><th>狀態</th></tr></thead><tbody>${rows}</tbody></table></div>`:empty(S.db.ledger.length?'這段期間沒有符合條件的紀錄。':'還沒有任何收支紀錄。',P('ledger.edit')&&!S.db.ledger.length?'<button class="btn" data-act="newLedger">記第一筆</button>':'')}</section>`;
+}
+function ledgerMonths(per){
+  const t=todayYmd().slice(0,7);
+  const end=per.mode==='month'?per.key:per.mode==='year'?(per.key===t.slice(0,4)?t:per.key+'-12'):t;
+  const cl=S.db.ledger.filter(x=>x.status==='CLEARED'),out=[];
+  for(let i=11;i>=0;i--){const ym=ymShift(end,-i),m=cl.filter(x=>String(x.entryDate).slice(0,7)===ym);out.push({ym,inc:sumKind(m,'INCOME'),exp:sumKind(m,'EXPENSE')})}
+  return out;
+}
+function catBars(list,kind){
+  const by={};list.filter(x=>x.kind===kind).forEach(x=>by[x.category]=(by[x.category]||0)+num(x.amount));
+  const rows=Object.entries(by).sort((a,b)=>b[1]-a[1]),max=rows.length?rows[0][1]:1,total=rows.reduce((s,r)=>s+r[1],0);
+  if(!rows.length)return empty(kind==='INCOME'?'這段期間沒有已入帳的收入。':'這段期間沒有已入帳的支出。');
+  return `<div class="cbars">${rows.map(([c,v])=>`<div><div class="cbar-t"><span>${esc(LCAT[c]||c)}</span><b class="num">${money(v)}</b><em>${Math.round(v/total*100)}%</em></div><div class="cbar-bar" style="width:${Math.max(1.5,v/max*100)}%;background:var(${kind==='INCOME'?'--chart-in':'--chart-out'})"></div></div>`).join('')}</div>`;
+}
+function ledgerAnalysis(per,cl){
+  S.ledMonths=ledgerMonths(per);
+  const mode=S.ui.lch||'chart';
+  const tableView=`<div class="tbl-wrap"><table class="tbl"><thead><tr><th>月份</th><th class="right">收入</th><th class="right">支出</th><th class="right">淨額</th></tr></thead><tbody>${S.ledMonths.map(m=>`<tr><td>${m.ym.slice(0,4)} 年 ${Number(m.ym.slice(5))} 月</td><td class="right num">${money(m.inc)}</td><td class="right num">${money(m.exp)}</td><td class="right num ${m.inc-m.exp<0?'red':''}">${netText(m.inc-m.exp)}</td></tr>`).join('')}</tbody></table></div>`;
+  const trend=box('近 12 個月收支',mode==='chart'?`<div class="chart-box"><div class="chart-legend"><span><i style="background:var(--chart-in)"></i>收入</span><span><i style="background:var(--chart-out)"></i>支出</span><span class="muted small">只計已入帳，滑過長條看金額</span></div><div id="ledChart" style="position:relative"></div></div>`:tableView,seg('lch',[['chart','圖表'],['table','表格']],mode));
+  const pm={};cl.forEach(x=>{const k=x.projectId||'_none',r=pm[k]||(pm[k]={name:x.projectId?(proj(x.projectId)?proj(x.projectId).name:(x.projectName||'（已刪除的專案）')):'不屬於專案',inc:0,exp:0});r[x.kind==='INCOME'?'inc':'exp']+=num(x.amount)});
+  const prows=Object.values(pm).sort((a,b)=>(b.inc+b.exp)-(a.inc+a.exp));
+  const pl=box(`賽事專案損益（${per.label}）`,prows.length?`<div class="tbl-wrap"><table class="tbl tbl-cards"><thead><tr><th>專案</th><th class="right">收入</th><th class="right">支出</th><th class="right">淨額</th></tr></thead><tbody>${prows.map(r=>`<tr><td class="cell-main"><span class="t-main">${esc(r.name)}</span></td><td data-label="收入" class="right num">${money(r.inc)}</td><td data-label="支出" class="right num">${money(r.exp)}</td><td data-label="淨額" class="right num strong ${r.inc-r.exp<0?'red':''}">${netText(r.inc-r.exp)}</td></tr>`).join('')}</tbody></table></div>`:empty('這段期間沒有已入帳的紀錄。'));
+  const acc={};S.db.ledger.filter(x=>x.status==='CLEARED').forEach(x=>{const k=x.account||'未指定帳戶';acc[k]=(acc[k]||0)+(x.kind==='INCOME'?1:-1)*num(x.amount)});
+  const accs=Object.entries(acc).sort((a,b)=>b[1]-a[1]);
+  const ab=box('各帳戶結餘（全部已入帳）',accs.length?`<div>${accs.map(([k,v])=>`<div class="acc-row"><span>${esc(k)}</span><b class="num ${v<0?'red':''}">${netText(v)}</b></div>`).join('')}</div>`:empty('還沒有已入帳的紀錄。'));
+  return `<div class="stack">${trend}<div class="cols-even">${box(`收入分類（${per.label}）`,catBars(cl,'INCOME'))}${box(`支出分類（${per.label}）`,catBars(cl,'EXPENSE'))}</div><div class="cols">${pl}${ab}</div></div>`;
+}
+function niceStep(max,count=4){const raw=max/count,mag=Math.pow(10,Math.floor(Math.log10(raw||1))),n=raw/mag;return (n<=1?1:n<=2?2:n<=2.5?2.5:n<=5?5:10)*mag}
+function axisLabel(v,big){if(!v)return '0';return big?(v/1e4).toLocaleString('zh-TW',{maximumFractionDigits:1})+'萬':Math.round(v).toLocaleString('zh-TW')}
+function mountLedgerChart(){
+  const el=$('#ledChart');if(!el||!S.ledMonths)return;
+  if(S.ledRO){S.ledRO.disconnect();S.ledRO=null}
+  const draw=()=>{
+    const months=S.ledMonths,W=Math.max(280,el.clientWidth),H=W<480?220:250,ml=W<480?40:52,mr=8,mt=14,mb=26,iw=W-ml-mr,ih=H-mt-mb;
+    const max=Math.max(1,...months.map(m=>Math.max(m.inc,m.exp))),step=niceStep(max),top=Math.max(step,Math.ceil(max/step)*step),big=top>=1e4;
+    const y=v=>mt+ih-(v/top)*ih,band=iw/months.length,bw=Math.max(3,Math.min(18,(band-8)/2));
+    const bar=(x,v,fill)=>{const h=(v/top)*ih;if(h<.5)return '';const yy=mt+ih-h,r=Math.min(4,h,bw/2);return `<path d="M${x},${mt+ih}V${yy+r}Q${x},${yy} ${x+r},${yy}H${x+bw-r}Q${x+bw},${yy} ${x+bw},${yy+r}V${mt+ih}Z" fill="${fill}"/>`};
+    let grid='';for(let v=0;v<=top+1e-9;v+=step){grid+=`<line class="grid" x1="${ml}" x2="${W-mr}" y1="${y(v)}" y2="${y(v)}"/><text x="${ml-6}" y="${y(v)+4}" text-anchor="end">${axisLabel(v,big)}</text>`}
+    const every=W<480?2:1;
+    const cols=months.map((m,i)=>{const cx=ml+band*i+band/2;return `<g class="col" data-i="${i}" tabindex="0" role="img" aria-label="${m.ym.slice(0,4)} 年 ${Number(m.ym.slice(5))} 月，收入 ${money(m.inc)}，支出 ${money(m.exp)}"><rect class="hit" x="${ml+band*i}" y="${mt}" width="${band}" height="${ih}"/>${bar(cx-bw-1,m.inc,'var(--chart-in)')}${bar(cx+1,m.exp,'var(--chart-out)')}${i%every===(months.length-1)%every?`<text x="${cx}" y="${H-8}" text-anchor="middle">${Number(m.ym.slice(5))}月</text>`:''}</g>`}).join('');
+    el.innerHTML=`<svg class="chart-svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">${grid}<line class="axis" x1="${ml}" x2="${W-mr}" y1="${mt+ih}" y2="${mt+ih}"/>${cols}</svg><div class="chart-tip" hidden></div>`;
+    const tip=$('.chart-tip',el);
+    const show=g=>{const i=+g.dataset.i,m=months[i],cx=ml+band*i+band/2;tip.innerHTML=`<strong>${m.ym.slice(0,4)} 年 ${Number(m.ym.slice(5))} 月</strong><div><span><i style="background:var(--chart-in)"></i>收入</span><b>${money(m.inc)}</b></div><div><span><i style="background:var(--chart-out)"></i>支出</span><b>${money(m.exp)}</b></div><div class="net"><span>淨額</span><b class="${m.inc-m.exp<0?'red':''}">${netText(m.inc-m.exp)}</b></div>`;tip.hidden=false;const tw=tip.offsetWidth;let left=cx+12;if(left+tw>W)left=cx-tw-12;tip.style.left=Math.max(0,left)+'px';tip.style.top=Math.max(0,y(Math.max(m.inc,m.exp))-20)+'px'};
+    $$('g.col',el).forEach(g=>{g.addEventListener('pointerenter',()=>show(g));g.addEventListener('focus',()=>show(g));g.addEventListener('pointerleave',()=>tip.hidden=true);g.addEventListener('blur',()=>tip.hidden=true)});
+  };
+  draw();
+  let lastW=el.clientWidth;
+  if(window.ResizeObserver){S.ledRO=new ResizeObserver(()=>{if(Math.abs(el.clientWidth-lastW)>4){lastW=el.clientWidth;draw()}});S.ledRO.observe(el)}
+}
+function ledgerImport(cands){
+  const sel=S.ui.limp||(S.ui.limp=new Set());[...sel].forEach(k=>{if(!cands.some(c=>c.type+':'+c.id===k))sel.delete(k)});
+  const accs=[...new Set([...ACCOUNTS_DEFAULT,...S.db.ledger.map(l=>l.account).filter(Boolean)])];
+  if(!cands.length)return `<section class="box">${empty('沒有需要入帳的項目。已核准的費用申請、已付款的報酬會出現在這裡。')}</section>`;
+  return `<p class="note" style="margin-bottom:14px">已核准的費用申請、已付款的報酬可以一鍵記成支出；已經入帳的不會再出現，也不會重複記。</p><section class="box"><div class="tbl-wrap"><table class="tbl tbl-cards"><thead><tr><th style="width:36px"><input type="checkbox" data-imp-all ${sel.size===cands.length?'checked':''} aria-label="全選" style="width:16px;height:16px;accent-color:#000"></th><th>項目</th><th>來源</th><th>人員</th><th>專案</th><th>日期</th><th class="right">金額</th></tr></thead><tbody>${cands.map(c=>{const k=c.type+':'+c.id;return `<tr><td data-label=""><input type="checkbox" data-imp="${esc(k)}" ${sel.has(k)?'checked':''} aria-label="選取 ${esc(c.title)}" style="width:16px;height:16px;accent-color:#000"></td><td class="cell-main"><span class="t-main">${esc(c.title)}</span></td><td data-label="來源"><span class="tag">${esc(c.label)}</span></td><td data-label="人員">${esc(c.who||'—')}</td><td data-label="專案">${esc(c.project||'—')}</td><td data-label="日期" class="nowrap">${fmtD(c.date,false)}</td><td data-label="金額" class="right num strong">${money(c.amount)}</td></tr>`}).join('')}</tbody></table></div>
+  <div class="dw-f" style="border-radius:0 0 10px 10px"><span id="impSum" class="strong">${impSumText(cands)}</span><span class="grow"></span><input class="inp" data-imp-account list="accList2" placeholder="記到哪個帳戶（選填）" style="width:200px;height:36px" value="${esc(S.ui.limpAcc||'')}"><datalist id="accList2">${accs.map(a=>`<option value="${esc(a)}">`).join('')}</datalist><button class="btn btn-pri" data-act="ledImport">入帳所選</button></div></section>`;
+}
+function impSumText(cands){const sel=S.ui.limp||new Set(),list=(cands||ledgerCandidates()).filter(c=>sel.has(c.type+':'+c.id));return list.length?`已選 ${list.length} 筆，合計 ${money(list.reduce((s,c)=>s+c.amount,0))}`:'勾選要入帳的項目'}
+async function ledgerImportNow(){
+  const sel=S.ui.limp||new Set(),items=[...sel].map(k=>{const i=k.indexOf(':');return {sourceType:k.slice(0,i),sourceId:k.slice(i+1)}});
+  if(!items.length){toast('請先勾選要入帳的項目。','err');return}
+  try{await save('importLedger',{items,account:S.ui.limpAcc||''},d=>{d.created.forEach(c=>upsert('ledger',c));S.ui.limp=new Set()},d=>`已入帳 ${d.created.length} 筆${d.skipped.length?`，略過 ${d.skipped.length} 筆已入帳的`:''}`)}catch(e){toast(e.message,'err')}
+}
+function ledgerCsv(){
+  const per=ledgerPeriod(),list=ledgerFiltered(S.db.ledger.filter(x=>per.test(x.entryDate)));
+  if(!list.length){toast('這段期間沒有可以匯出的紀錄。','err');return}
+  const q=v=>{let s=String(v??'');if(typeof v==='string'&&/^[=+\-@\t]/.test(s))s="'"+s;return /[",\n\r]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s};
+  const head=['日期','類型','分類','收入','支出','帳戶','賽事專案','對象','說明','發票／收據號碼','狀態','來源','記錄人','作廢原因'];
+  const rows=list.map(x=>[x.entryDate,LKIND[x.kind],LCAT[x.category]||x.category,x.kind==='INCOME'?x.amount:'',x.kind==='EXPENSE'?x.amount:'',x.account,x.projectName,x.counterparty,x.description,x.invoiceNo,LSTAT[x.status]||x.status,x.sourceType==='EXPENSE'?'費用申請':x.sourceType==='COMPENSATION'?'報酬':'',x.createdByName,x.voidReason]);
+  const csv='﻿'+[head,...rows].map(r=>r.map(q).join(',')).join('\r\n');
+  const url=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'})),a=document.createElement('a');
+  a.href=url;a.download=`銳能收支_${per.mode==='all'?'全部':per.key}.csv`;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),30000);
+  toast(`已匯出 ${list.length} 筆`);
+}
+async function viewReceipt(id){try{const d=await api('getLedgerReceipt',{id});if(/^image\//.test(d.mimeType))showImage(d,d.name);else saveFile(d)}catch(e){toast(e.message,'err')}}
+function ledgerForm(x={}){
+  if(x.status==='VOID'){
+    drawer({title:'已作廢的紀錄',body:`<p class="note warn">已作廢：${esc(x.voidReason||'')}</p><dl class="dl" style="margin-top:16px"><dt>日期</dt><dd>${fmtD(x.entryDate)}</dd><dt>類型</dt><dd>${LKIND[x.kind]}　${esc(LCAT[x.category]||'')}</dd><dt>金額</dt><dd class="num">${signedMoney(x)}</dd><dt>說明</dt><dd>${esc(x.description||'—')}</dd><dt>對象</dt><dd>${esc(x.counterparty||'—')}</dd><dt>帳戶</dt><dd>${esc(x.account||'—')}</dd><dt>記錄人</dt><dd>${esc(x.createdByName||'—')}</dd></dl>`});return;
+  }
+  const isNew=!x.id,edit=P('ledger.edit');let kind=x.kind||'EXPENSE';
+  if(!edit&&!isNew){drawer({title:'收支紀錄',body:`<dl class="dl"><dt>日期</dt><dd>${fmtD(x.entryDate)}</dd><dt>類型</dt><dd>${LKIND[x.kind]}　${esc(LCAT[x.category]||'')}</dd><dt>金額</dt><dd class="num">${signedMoney(x)}</dd><dt>說明</dt><dd>${esc(x.description||'—')}</dd><dt>對象</dt><dd>${esc(x.counterparty||'—')}</dd><dt>帳戶</dt><dd>${esc(x.account||'—')}</dd><dt>狀態</dt><dd>${LSTAT[x.status]}</dd></dl>${x.hasReceipt?`<button class="btn" style="margin-top:16px" data-act="viewReceipt" data-id="${esc(x.id)}">查看憑證</button>`:''}`});return}
+  const accs=[...new Set([...ACCOUNTS_DEFAULT,...S.db.ledger.map(l=>l.account).filter(Boolean)])];
+  const root=formDrawer({title:isNew?'記一筆收支':'編輯收支',submit:isNew?'記錄':'儲存變更',extraFoot:!isNew?'<button type="button" class="btn btn-quiet btn-bad" data-void>作廢</button>':'',body:`
+    <div class="seg" data-kind style="align-self:flex-start">${[['EXPENSE','支出'],['INCOME','收入']].map(([v,t])=>`<button type="button" data-v="${v}" class="${kind===v?'on':''}">${t}</button>`).join('')}</div>
+    <div class="grid2">${field('entryDate','日期 *',ymd(x.entryDate)||todayYmd(),'date','required')}${field('amount','金額（元）*',x.amount||'','number','min="1" step="any" inputmode="decimal" required')}
+    ${selectF('category','分類','','data-cat')}${selectF('status','狀態',`<option value="CLEARED" ${x.status!=='PENDING'?'selected':''}>已入帳</option><option value="PENDING" ${x.status==='PENDING'?'selected':''}>待收付（還沒收到或還沒付）</option>`)}
+    ${field('account','帳戶',x.account||'','text','list="accList" placeholder="銀行帳戶、現金…"')}${selectF('projectId','賽事專案',projOptions(x.projectId||'','不屬於專案'))}
+    <div class="span2">${field('description','說明',x.description||'','text','maxlength="200" placeholder="例如：冬季盃報名費（32 隊）"')}</div>
+    ${field('counterparty','對象',x.counterparty||'','text','maxlength="80" placeholder="廠商、贊助商、付款人"')}${field('invoiceNo','發票／收據號碼',x.invoiceNo||'','text','maxlength="40"')}</div>
+    <div class="f"><span>憑證<em>收據、發票照片或 PDF，5MB 以內</em></span>${x.hasReceipt?`<div class="file-card"><span class="file-ext">${esc(fileExt(x.receiptName))}</span><div class="file-main"><strong>${esc(x.receiptName||'憑證')}</strong><span>已上傳</span></div><div class="file-acts"><button type="button" class="btn btn-sm" data-view-receipt>查看</button><label class="check" style="font-size:13px"><input type="checkbox" name="removeReceipt"><span>移除</span></label></div></div>`:''}<input type="file" name="receipt" accept="image/*,.pdf"></div>
+    ${x.sourceType?`<p class="note">這筆是從${x.sourceType==='EXPENSE'?'費用申請':'報酬'}帶入的。</p>`:''}
+    ${!isNew?`<p class="small muted">由 ${esc(x.createdByName||'')} 在 ${fmtDT(x.createdAt)} 記錄${x.updatedAt&&x.updatedAt!==x.createdAt?`，最後修改 ${fmtDT(x.updatedAt)}`:''}</p>`:''}
+    <datalist id="accList">${accs.map(a=>`<option value="${esc(a)}">`).join('')}</datalist>`,
+    onSubmit:async(d,form)=>{
+      if(!(num(d.amount)>0))throw new Error('金額必須大於 0。');
+      if(!d.description.trim()&&!d.counterparty.trim())throw new Error('請填寫說明或對象，之後對帳才找得到。');
+      const payload=Object.assign({},d,{id:x.id||'',kind});
+      const f=$('input[name=receipt]',form).files[0];
+      if(f){if(f.size>5*1024*1024)throw new Error('憑證不能超過 5MB。');if(/^image\//.test(f.type)&&f.size>900*1024){const url=URL.createObjectURL(f);try{const img=await loadImage(url);const full=drawJpeg(img,1800,.86);payload.receipt={name:f.name.replace(/\.[^.]+$/,'')+'.jpg',type:'image/jpeg',base64:full.split(',')[1]}}finally{URL.revokeObjectURL(url)}}else{const type=f.type||guessType(f.name);if(!/^(application\/pdf|image\/(png|jpeg|webp))$/.test(type))throw new Error('憑證只能是 PDF 或圖片。');payload.receipt={name:f.name,type,base64:await fileB64(f)}}}
+      await save('saveLedger',payload,r=>upsert('ledger',r),isNew?'已記錄':'已儲存');
+    }});
+  const fill=()=>{$('[data-cat]',root).innerHTML=LCATS[kind].map(c=>`<option value="${c}" ${c===x.category?'selected':''}>${LCAT[c]}</option>`).join('')};fill();
+  $$('[data-kind] button',root).forEach(b=>b.onclick=()=>{kind=b.dataset.v;$$('[data-kind] button',root).forEach(z=>z.classList.toggle('on',z===b));fill()});
+  $('[data-view-receipt]',root)?.addEventListener('click',()=>viewReceipt(x.id));
+  $('[data-void]',root)?.addEventListener('click',async()=>{const r=await ask({title:'作廢這筆紀錄',text:`${fmtD(x.entryDate,false)}　${x.description||x.counterparty}　${signedMoney(x)}\n作廢後不會計入收支，但會保留紀錄。`,ok:'作廢',danger:true,input:{label:'作廢原因（必填）',type:'textarea'}});if(!r)return;if(!r.value.trim()){toast('請填寫作廢原因。','err');return}try{await save('voidLedger',{id:x.id,reason:r.value},d=>upsert('ledger',d),'已作廢');closeDrawer()}catch(e){toast(e.message,'err')}});
+}
+
 /* ═════════════ 控制台 ═════════════ */
 function vSystems(){
   setHead('控制台',P('systems.edit')?btnPri('newLink','新增連結'):'');
@@ -1493,13 +2455,6 @@ function meDrawer(){
   $('[data-sync]',root).onclick=()=>{closeDrawer();sync(true)};
   $('[data-out]',root).onclick=async()=>{try{await api('logout')}catch(e){}signOutLocal()};
 }
-function moreMenu(){
-  const root=drawer({title:'選單',body:`<div class="person-head" style="margin-bottom:8px">${avatar(S.me,44)}<div><h3 style="font-size:17px">${esc(S.me.name)}</h3><span class="muted small">${esc(S.me.roleName||L(S.me.role))}</span></div></div>${NAV.map(([g,items])=>{const vis=items.filter(([id])=>allowed(id));if(!vis.length)return '';return `<div class="dw-sec" style="margin-top:16px"><h4 class="muted" style="font-weight:500;font-size:13px">${esc(g)}</h4><div class="rows">${vis.map(([id,t,,ic])=>{const n=navCount(id);return `<a class="row" href="#${id}" data-dw-close>${icon(ic)}<div class="row-main"><span class="row-t">${esc(t)}</span></div>${n?`<span class="tag tag-dark">${n}</span>`:''}</a>`}).join('')}</div></div>`}).join('')}`,
-    foot:`<button class="btn" data-me>${icon('user')}我的帳號</button><button class="btn btn-bad" data-out>${icon('logout')}登出</button>`});
-  $$('[data-dw-close]',root).forEach(a=>a.addEventListener('click',()=>closeDrawer()));
-  $('[data-me]',root).onclick=meDrawer;
-  $('[data-out]',root).onclick=async()=>{try{await api('logout')}catch(e){}signOutLocal()};
-}
 function passwordDrawer(force){
   formDrawer({title:force?'請先設定新密碼':'變更密碼',locked:force,submit:'更新密碼',body:`${force?'<p class="note">這是第一次登入或密碼剛被重設。請把暫時密碼換成只有你知道的密碼。</p>':''}${field('currentPassword',force?'暫時密碼':'目前密碼','','password','autocomplete="current-password" required')}${field('newPassword','新密碼（至少 8 碼）','','password','autocomplete="new-password" required minlength="8"')}${field('confirmPassword','再輸入一次新密碼','','password','autocomplete="new-password" required')}`,
     onSubmit:async d=>{if(d.newPassword.length<8)throw new Error('新密碼至少 8 碼。');if(d.newPassword!==d.confirmPassword)throw new Error('兩次輸入的新密碼不一樣。');await api('changePassword',{currentPassword:d.currentPassword,newPassword:d.newPassword});S.me.mustChangePassword=false;persist();toast('已更新密碼')}});
@@ -1507,7 +2462,7 @@ function passwordDrawer(force){
 
 /* ═════════════ 事件 ═════════════ */
 const ACT={
-  go:d=>go(d.h),sync:()=>sync(true),ui:d=>{S.ui[d.k]=d.v;render()},moreMenu,
+  go:d=>go(d.h),sync:()=>sync(true),ui:d=>{S.ui[d.k]=d.v;render()},
   newProject:()=>projectForm(),editProject:d=>projectForm(proj(d.id)||{}),
   newTask:d=>taskForm({},d.pid||''),openTask:d=>openTask(d.id),toggleTask:d=>toggleTask(d.id),
   newSchedule:d=>scheduleForm({},{pid:d.pid||'',date:d.date||''}),openSchedule:d=>openSchedule(d.id),checkIn:d=>checkIn(d.id).catch(()=>{}),checkOut:d=>checkOut(d.id).catch(()=>{}),
@@ -1526,7 +2481,12 @@ const ACT={
   newComp:()=>compForm(),newPerf:()=>perfForm(),compStatus:d=>compStatus(d.id,d.status),
   newExpense:d=>expenseForm(d.pid||''),
   newLink:()=>linkForm(),vault:()=>vaultDrawer(),
-  newUser:()=>userForm(),editUser:d=>userEdit(d.id)
+  newUser:()=>userForm(),editUser:d=>userEdit(d.id),
+  newDoc:()=>docForm(),signDoc:d=>signDrawer(d.id),transferDoc:d=>transferDrawer(d.id,d.step||''),rejectDoc:d=>rejectDoc(d.id),cancelDoc:d=>cancelDoc(d.id),remindDoc:d=>remindDoc(d.id),reissueDoc:d=>reissueDoc(d.id),docFile:d=>docFile(d.id,d.kind),docPreview:d=>docPreview(d.id),previewPortal:d=>showPortal(d.token,true),
+  sendAgreement:d=>{const e=S.db.employees.find(x=>x.id===d.id);if(!e)return;closeDrawer(true);docForm({title:`${e.name} 人員任用暨勞務報酬確認書`,docType:'HR',content:agreementText(e),signerIds:[e.employeeId,S.me.employeeId].filter((v,i,a)=>a.indexOf(v)===i),flow:'SEQUENTIAL'})},
+  newLedger:()=>ledgerForm(),editLedger:d=>ledgerForm(S.db.ledger.find(x=>x.id===d.id)||{}),viewReceipt:d=>viewReceipt(d.id),ledCsv:()=>ledgerCsv(),ledImport:()=>ledgerImportNow(),
+  ledMove:d=>{const per=ledgerPeriod();if(per.mode==='month')S.ui.lym=ymShift(per.key,Number(d.n));else if(per.mode==='year')S.ui.ly=String(Number(per.key)+Number(d.n));render()},
+  ledNow:()=>{S.ui.lym=todayYmd().slice(0,7);render()}
 };
 function bindGlobal(){
   document.addEventListener('click',e=>{const a=e.target.closest('[data-act]');if(!a)return;const fn=ACT[a.dataset.act];if(!fn)return;e.preventDefault();fn(a.dataset,a,e)});
@@ -1545,13 +2505,17 @@ function bindGlobal(){
     if(el.dataset.model&&el.tagName==='SELECT'){S.ui[el.dataset.model]=el.value;render();return}
     if(el.type==='checkbox'&&el.closest('.pk')){el.closest('.pk').classList.toggle('on',el.checked);pickerCount(el.closest('.picker'));if(el.checked){const ri=$('.pk-role',el.closest('.pk'));if(ri&&window.innerWidth>760)ri.focus()}return}
     if(el.dataset.settlePick){const pid=S.arg;const stt=S.ui['settle_'+pid];if(stt){stt.picks[el.dataset.settlePick]=el.checked;settleSum(pid)}}
+    if(el.hasAttribute('data-led-void')){S.ui.lv=el.checked;render();return}
+    if(el.dataset.imp){const sel=S.ui.limp||(S.ui.limp=new Set());el.checked?sel.add(el.dataset.imp):sel.delete(el.dataset.imp);const all=$('[data-imp-all]');if(all)all.checked=$$('[data-imp]').every(c=>c.checked);const t=$('#impSum');if(t)t.textContent=impSumText();return}
+    if(el.hasAttribute('data-imp-all')){const sel=S.ui.limp||(S.ui.limp=new Set());$$('[data-imp]').forEach(c=>{c.checked=el.checked;el.checked?sel.add(c.dataset.imp):sel.delete(c.dataset.imp)});const t=$('#impSum');if(t)t.textContent=impSumText();return}
+    if(el.hasAttribute('data-imp-account')){S.ui.limpAcc=el.value;return}
   });
   document.addEventListener('click',e=>{const b=e.target.closest('[data-pk-clear]');if(!b)return;const pk=b.closest('.picker');$$('.pk input[type=checkbox]',pk).forEach(c=>{c.checked=false;c.closest('.pk').classList.remove('on')});pickerCount(pk)});
   document.addEventListener('focusout',()=>{if(S.dirty)setTimeout(()=>{if(S.dirty&&!isTyping())render()},150)});
   window.addEventListener('hashchange',route);
   document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&S.token&&Date.now()-S.syncedAt>120000)sync()});
   setInterval(()=>{if(document.visibilityState==='visible'&&S.token&&Date.now()-S.syncedAt>300000)sync()},60000);
-  $('#sideMe').onclick=meDrawer;
+  $('#sideMe').onclick=meDrawer;$('#topMe').onclick=meDrawer;
   $('#loginForm').onsubmit=async e=>{
     e.preventDefault();const b=$('#loginBtn');b.disabled=true;b.textContent='登入中…';
     try{const d=await api('login',{username:$('#lu').value.trim(),password:$('#lp').value});S.token=d.token;localStorage.setItem(C.SESSION_KEY,d.token);S.pwPrompted=false;applyBoot(d.boot||{me:d.user});showApp();if(!location.hash||location.hash==='#')history.replaceState(null,'','#home');route();afterSync();$('#lp').value=''}
@@ -1559,7 +2523,11 @@ function bindGlobal(){
   };
 }
 function boot(){
+  if(/^#[0-9a-f]{6}$/i.test(String(C.BRAND_COLOR||'')))document.documentElement.style.setProperty('--brand',C.BRAND_COLOR);
   bindGlobal();
+  // 信件裡的簽署連結：?sign=金鑰，不用登入
+  const signToken=new URLSearchParams(location.search).get('sign');
+  if(signToken){showPortal(signToken);return}
   S.token=localStorage.getItem(C.SESSION_KEY)||'';
   if(!S.token){showLogin();return}
   if(restore()){showApp();route();sync();return}
