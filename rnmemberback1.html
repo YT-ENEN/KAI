@@ -143,7 +143,7 @@ dialog{width:min(540px,calc(100% - 32px));max-height:calc(100dvh - 48px);border:
 <script>
 const ROLE = 'admin';
 // 將這一行改成「最新部署」的 /exec 網址；兩個 HTML 必須使用同一個後端。
-const GAS_API_URL = 'https://script.google.com/macros/s/AKfycbytPnUBkbJ4jFW3VnTYqT6VEkxE_k9Eyy7kl43TeSoCBt-nRZipdMGLnU4hwRCUFqpW/exec';
+const GAS_API_URL = 'https://script.google.com/macros/s/AKfycbwlSJcv6ftVp5grAB2tbyqNzK1WlFZcjYdvNtfJJxooQm8hjFbhZVL2aXYIUHDX6UA/exec';
 const API_VERSION = '5.1';
 const $ = id => document.getElementById(id);
 const esc = v => String(v ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -225,7 +225,7 @@ async function apiFetch(action,data,mutation){
  for(let attempt=0;attempt<3;attempt++){
    if(!navigator.onLine){setConnection('bad','目前離線');throw apiError('OFFLINE',mutation?'目前離線，請恢復連線後再次送出。':'目前離線，請恢復連線後重試。');}
    setConnection('busy',attempt?'正在重新連線…':'正在同步…');
-   const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),45000);
+   const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),mutation?45000:/Bootstrap$/.test(action)?25000:15000);
    try{
      const response=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload),mode:'cors',credentials:'omit',redirect:'follow',signal:controller.signal});
      if([429,502,503,504].includes(response.status))throw apiError('SERVER_ERROR','後端目前繁忙，正在重新連線。');
@@ -241,7 +241,7 @@ async function apiFetch(action,data,mutation){
      if(mutation){persistRemove(sessionStorage,pendingKey);pendingMemory.delete(pendingKey);}
      setConnection('ok','資料已更新');return result;
    }catch(e){
-     lastError=e.code?e:apiError(e.name==='AbortError'?'TIMEOUT':'NETWORK',e.name==='AbortError'?'連線逾時。':'無法連上後端。');
+     lastError=typeof e.code==='string'?e:apiError(e.name==='AbortError'?'TIMEOUT':'NETWORK',e.name==='AbortError'?'連線逾時。':'無法連上後端。');
      if(!['TIMEOUT','NETWORK','BUSY','SERVER_ERROR'].includes(lastError.code))throw lastError;
      setConnection('bad',lastError.code==='BUSY'?'伺服器處理中':'連線中斷');
      if(attempt<2)await new Promise(resolve=>setTimeout(resolve,800*(attempt+1)));
