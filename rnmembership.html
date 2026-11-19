@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#f5f5f7">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>銳能會員中心 | REBORN ENTERTAINMENT</title>
-<!-- REBORN v5.0 單檔（會員 × 交流賽報名 × 電子郵件）。只在下方 GAS_API_URL 維護服務網址，使用者看不到設定入口。 -->
+<!-- REBORN v5.1 單檔（會員 × 交流賽／聯賽報名 × 多選補登 × 電子郵件）。只在下方 GAS_API_URL 維護服務網址，使用者看不到設定入口。 -->
 <style>
 :root{--bg:#f5f5f7;--paper:#fff;--ink:#1d1d1f;--muted:#6e6e73;--gold:#b87c00;--yellow:#ffd21c;--gold-light:#fff6d4;--line:#e8e8ed;--green:#23804b;--red:#b62d2d;--radius:24px;--shadow:0 8px 32px rgba(0,0,0,.025);--font:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.6 var(--font);-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}button,input,select,textarea{font:inherit}button{cursor:pointer}button,a,input,select,textarea{touch-action:manipulation}button:disabled{cursor:default;opacity:.45}a{color:inherit;text-decoration:none}h1,h2,h3,p{margin:0}h1{font-size:40px;letter-spacing:-1.6px;line-height:1.25;font-weight:700}h2{font-size:21px;line-height:1.4;letter-spacing:-.5px}h3{font-size:16px;line-height:1.5}p{color:var(--muted)}svg.icon{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.65;stroke-linecap:round;stroke-linejoin:round;flex:none}button:focus-visible,a:focus-visible{outline:3px solid #c58c00;outline-offset:4px}input:focus,select:focus,textarea:focus{outline:0;border-color:#b98b00;box-shadow:0 0 0 4px #ffd21c26}[hidden],.hidden{display:none!important}.muted{color:var(--muted)}.micro{font-size:12px}.eyebrow{font-size:11px;font-weight:600;letter-spacing:1.5px;color:var(--muted)}.mono{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.1px}.stack{display:grid;gap:20px}.row{display:flex;align-items:center;gap:12px}.between{justify-content:space-between}.wrap{flex-wrap:wrap}.end{justify-content:flex-end}.grow{flex:1;min-width:0}.gap8{gap:8px}.break-text{overflow-wrap:anywhere}.brand{display:flex;align-items:center;gap:10px;flex:none}.brand-mark{width:32px;height:34px;display:grid;place-items:center;flex:none}.brand-mark svg{width:23px;height:29px;fill:currentColor}.brand-mark img{width:100%;height:100%;object-fit:contain;filter:brightness(0)}.brand-name{font-size:16px;font-weight:800;letter-spacing:1px;line-height:1.2}.brand small{display:block;font-size:8px;letter-spacing:1.3px;color:var(--muted);font-weight:500;margin-top:3px}.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--line);border-radius:100px;background:var(--paper);padding:10px 19px;color:var(--ink);font-weight:500;transition:background .18s,transform .18s,border-color .18s;white-space:nowrap;min-height:42px}.btn:hover{background:#f5f5f7;border-color:#d3d3d7}.btn.primary{background:var(--ink);color:#fff;border-color:var(--ink)}.btn.primary:hover{background:#3a3a3c}.btn.gold{background:var(--yellow);color:var(--ink);border-color:var(--yellow)}.btn.gold:hover{background:#f2c600}.btn.danger{background:#fff0f0;color:var(--red);border-color:#f6d4d4}.btn.good{background:#edf8f1;color:var(--green);border-color:#d8efdf}.btn.small{padding:6px 13px;font-size:12px;min-height:34px}.btn.square{width:38px;height:38px;padding:0;min-height:38px}.btn.full{width:100%;padding:13px;min-height:48px}.text-btn{padding:0;color:#976800;font-weight:500;background:none;border:0;font-size:13px}.text-btn:hover{text-decoration:underline}.btn .icon{width:17px;height:17px}.card{padding:28px;background:var(--paper);border:1px solid transparent;border-radius:var(--radius);box-shadow:var(--shadow);min-width:0}.card-head{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:24px}.card-head p{margin-top:5px;font-size:12px}.section-label{font-size:11px;color:var(--muted);font-weight:500;margin-bottom:12px}.badge{display:inline-flex;align-items:center;gap:5px;font-size:11px;line-height:1.5;padding:5px 10px;border-radius:100px;white-space:nowrap;background:#f5f5f7;color:#646469;font-weight:500}.badge.pending,.badge.gold{background:var(--gold-light);color:#8d6200}.badge.completed{background:#edf8f1;color:var(--green)}.badge.rejected{background:#fff0f0;color:var(--red)}.badge.dark{background:var(--ink);color:#fff}.avatar{width:36px;height:36px;border-radius:50%;background:#f5f5f7;color:#4b4b50;display:grid;place-items:center;font-size:13px;font-weight:600;flex:none}.avatar.large{width:64px;height:64px;font-size:24px;background:var(--gold-light)}.field{display:grid;gap:8px;font-size:12px;font-weight:500;margin-bottom:18px;color:#4b4b50}.field input,.field select,.field textarea{width:100%;min-width:0;background:#fff;border:1px solid #d5d5d9;border-radius:12px;padding:13px 14px;color:var(--ink);font-weight:400;min-height:48px}.field input:disabled,.field select:disabled{background:#f5f5f7;color:var(--muted)}.field small{font-size:11px;font-weight:400;color:var(--muted)}.field textarea{resize:vertical;min-height:85px}.fields2{display:grid;grid-template-columns:1fr 1fr;gap:16px}.fields2 .field{margin-bottom:0}.field.last{margin-bottom:0}.inline-error{font-size:12px;color:var(--red);background:#fff0f0;padding:12px 14px;border-radius:12px;margin:12px 0;white-space:pre-wrap}.inline-error:empty{display:none}.hint{border:1px solid #f6eac0;border-radius:16px;background:#fffae9;color:#836100;padding:15px 18px;font-size:12px}.hint p{color:inherit}.empty{padding:40px 16px;text-align:center;color:var(--muted);font-size:13px}.empty .icon{width:30px;height:30px;color:#a5a5aa;margin-bottom:12px}.empty strong{display:block;font-size:14px;color:#4b4b50;margin-bottom:5px}.tabs{display:flex;gap:3px;padding:4px;background:#ececef;border-radius:100px;max-width:100%;overflow-x:auto}.tabs button{background:none;color:var(--muted);border:0;border-radius:100px;padding:8px 16px;white-space:nowrap;font-size:12px;font-weight:500}.tabs button.active{background:#fff;color:var(--ink);box-shadow:0 1px 5px #0000000c}.progress{height:5px;border-radius:8px;background:#eeeeef;overflow:hidden;margin:16px 0}.progress span{display:block;height:100%;background:var(--yellow);border-radius:8px;transition:width .3s}.line-item{padding:18px 0;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px}.line-item:last-child{border-bottom:0}.line-item strong{font-size:13px;font-weight:500;overflow-wrap:anywhere}.line-item p{font-size:11px;margin-top:4px}.amount{font-size:15px;font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap}.positive{color:var(--green)}.negative{color:var(--red)}.table-wrap{overflow-x:auto}table{border-collapse:collapse;width:100%;text-align:left;white-space:nowrap;font-size:13px}th{font-weight:500;color:var(--muted);font-size:11px;padding:14px 16px;background:#fafafa;border-bottom:1px solid var(--line)}td{padding:18px 16px;border-bottom:1px solid var(--line)}tr:last-child td{border-bottom:0}td:first-child,th:first-child{padding-left:24px}td strong{font-weight:500}.table-card{padding:0;overflow:hidden}.table-card .card-head{padding:24px;margin-bottom:0}.table-card tbody tr:hover{background:#fdfbf3}.pagination{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:16px 24px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}.search{position:relative;display:flex;align-items:center;max-width:360px;min-width:150px}.search>.icon{position:absolute;left:14px;width:16px;height:16px;color:#a1a1a7}.search input{width:100%;padding:11px 13px 11px 40px;border:1px solid #dcdce0;border-radius:100px;background:white;font-size:13px;min-width:0;min-height:42px}.toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:22px;flex-wrap:wrap}.page-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:36px}.page-head p{margin-top:12px;font-size:14px}.two-col{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}.three-col{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}.divider{height:1px;background:var(--line);margin:24px 0}.footer-note{text-align:center;font-size:10px;color:#8e8e93;margin:56px 0 0;letter-spacing:.2px}.check-label{display:flex;align-items:flex-start;gap:10px;font-size:12px;color:var(--muted)}input[type=checkbox]{accent-color:#a87800;width:17px;height:17px;flex:none;margin:2px 0}.connection{font-size:10px;color:var(--muted);display:flex;align-items:center;gap:7px;white-space:nowrap}.dot{width:5px;height:5px;border-radius:50%;background:#53a66a;flex:none}.connection.busy .dot{background:#c79700}.connection.bad .dot{background:#d44b4b}.net-banner{padding:12px 20px;background:#fff7d6;color:#715400;display:flex;align-items:center;justify-content:center;gap:16px;font-size:12px;position:relative;z-index:90}.net-banner button{background:none;border:0;color:inherit;text-decoration:underline;white-space:nowrap}.mobile-brand{display:none}
@@ -110,6 +110,93 @@ dialog{width:min(540px,calc(100% - 32px));max-height:calc(100dvh - 48px);border:
  .news-grid{grid-template-columns:1fr;gap:16px}.session-card{padding:20px}.session-time{font-size:28px}.session-time span{display:block;margin:6px 0 0;font-size:13px}.session-fee{font-size:21px}
  .offer-card{padding:16px 18px}.offer-card .price{font-size:22px}.pay-card .acct{font-size:19px}.news-thumb{width:72px;height:54px}.member-ui .nav-link .dot-badge{position:absolute;top:2px;right:8px;margin:0}
  .booking-row{flex-wrap:wrap}.booking-row>.btn{margin-left:70px}}
+/* v5.1：賽事分頁、聯賽（預約／直接報名）、我的報名、多選補登 */
+.event-switch{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:-12px 0 30px}
+.event-switch button{display:flex;align-items:center;gap:14px;text-align:left;background:#fff;border:1.5px solid transparent;border-radius:22px;padding:16px 20px;box-shadow:var(--shadow);color:var(--muted);transition:border-color .15s,box-shadow .15s}
+.event-switch button:hover{border-color:#ead58a}
+.event-switch .ev-ico{width:46px;height:46px;border-radius:15px;background:#f2f2f4;display:grid;place-items:center;color:#6e6e73;flex:none;transition:background .15s}
+.event-switch .ev-ico .icon{width:22px;height:22px}
+.event-switch b{display:flex;align-items:center;gap:6px;font-size:17px;color:var(--ink);font-weight:650;letter-spacing:-.3px}
+.event-switch small{font-size:11px;display:block;margin-top:2px}
+.event-switch button.active{border-color:var(--ink);box-shadow:0 0 0 4px #ffd21c55}
+.event-switch button.active .ev-ico{background:var(--yellow);color:var(--ink)}
+.dot-badge.gold-dot{background:var(--yellow);color:var(--ink)}
+.league-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.league-card{background:#fff;border-radius:26px;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column;min-width:0}
+.league-cover{position:relative;aspect-ratio:16/7;background:#1d1d1f;border:0;padding:0;display:block;width:100%;overflow:hidden;cursor:pointer}
+.league-cover img,.league-hero img,.lp-img img{width:100%;height:100%;object-fit:cover;display:block}
+.league-cover img{transition:transform .5s}.league-card:hover .league-cover img{transform:scale(1.03)}
+.league-cover .ribbon{position:absolute;left:16px;top:16px}.league-cover .ribbon .badge{box-shadow:0 4px 14px #0003}
+.league-cover .ribbon .badge:not(.gold):not(.pending):not(.dark):not(.rejected){background:#fff}
+.cover-fallback{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;gap:4px;padding:22px 24px;background:radial-gradient(circle at 88% 12%,#ffd21c66,transparent 42%),radial-gradient(circle at 70% 120%,#ffd21c33,transparent 50%),linear-gradient(135deg,#2c2c2e,#0f0f10);color:#fff;text-align:left}
+.cover-fallback span{color:#ffd21c;font-size:11px;letter-spacing:2px;font-weight:600}.cover-fallback b{font-size:28px;letter-spacing:-.8px;line-height:1.2}
+.league-body{padding:22px 24px 24px;display:flex;flex-direction:column;gap:12px;flex:1}
+.league-body h3{font-size:22px;letter-spacing:-.5px;overflow-wrap:anywhere}.league-sub{font-size:13px;margin-top:-6px}
+.league-meta{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:12px;color:var(--muted)}.league-meta span{display:inline-flex;align-items:center;gap:6px}.league-meta .icon{width:15px;height:15px}
+.mode-chips{display:grid;gap:8px}
+.mode-chip{display:flex;justify-content:space-between;align-items:center;gap:10px;border:1px solid var(--line);border-radius:14px;padding:10px 14px;font-size:11px;color:var(--muted)}
+.mode-chip b{display:block;font-size:13px;color:var(--ink);font-weight:600}.mode-chip .fee{font-weight:650;color:var(--ink);white-space:nowrap;font-size:14px}
+.mode-chip.live{border-color:#e8c94d;background:#fffaf0}
+.league-body>.btn{margin-top:auto}
+.seat-meter{display:grid;gap:12px}.cap-line{display:flex;justify-content:space-between;font-size:11px;color:var(--muted)}.cap-line b{color:var(--ink)}
+.seat-meter .cap-track{margin-top:6px}.cap-track.wait i{background:#c7c7cc}
+.back-link{display:inline-flex;align-items:center;gap:6px;font-size:13px}.back-link .icon{transform:scaleX(-1);width:16px;height:16px}
+.league-hero{border-radius:28px;overflow:hidden;aspect-ratio:16/6;background:#1d1d1f;position:relative;margin:14px 0 26px}
+.league-hero .cover-fallback b{font-size:44px}
+.league-title{margin-bottom:22px}.league-title h1{font-size:36px;letter-spacing:-1.2px;margin-top:12px;overflow-wrap:anywhere}.league-title p{font-size:15px;margin-top:6px}
+.league-facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:28px}
+.fact{background:#fff;border-radius:20px;padding:18px 20px;box-shadow:var(--shadow);min-width:0}
+.fact span{font-size:11px;color:var(--muted);display:flex;gap:6px;align-items:center}.fact .icon{width:15px;height:15px}
+.fact b{display:block;font-size:16px;margin-top:7px;letter-spacing:-.3px;overflow-wrap:anywhere}.fact small{font-size:11px;color:var(--muted);font-weight:500}
+.league-layout{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:28px;align-items:start}
+.league-section{margin-bottom:20px}.league-section h2{font-size:19px;margin-bottom:14px}
+.rich{font-size:14px;line-height:1.9;color:#3a3a3c;overflow-wrap:anywhere}.rich p{margin:0 0 10px;color:#3a3a3c;font-size:inherit}
+.rich h4{font-size:15px;margin:16px 0 6px;color:var(--ink)}.rich h4:first-child{margin-top:0}
+.rich ul,.rich ol{padding-left:22px;margin:4px 0 12px}.rich li{margin:3px 0}.rich li::marker{color:#a78500}.rich a{color:#8d6400;text-decoration:underline}.rich b{color:var(--ink)}
+.league-side{position:sticky;top:132px}
+.mode-row{border:1.5px solid var(--line);border-radius:20px;padding:18px;margin-bottom:12px}
+.mode-row.live{border-color:var(--ink);box-shadow:0 0 0 4px #ffd21c40}
+.mode-top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.mode-name{font-size:16px;font-weight:650}.mode-fee{font-size:24px;font-weight:650;letter-spacing:-.6px;white-space:nowrap}
+.mode-when{font-size:12px;color:var(--muted);margin:6px 0 12px;display:flex;align-items:center;gap:6px}.mode-when .icon{width:14px;height:14px}
+.mode-note{font-size:11px;color:#8d6400;margin:-6px 0 12px}
+.my-reg{border-radius:18px;background:var(--gold-light);padding:16px 18px;margin-top:16px}
+.reg-mode-head{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 20px;background:#1d1d1f;color:#fff;border-radius:18px;margin-bottom:20px}
+.reg-mode-head .eyebrow{color:#ffd21c}.reg-mode-head strong{font-size:18px;color:#fff;display:block;margin-top:4px}.reg-mode-head .fee{font-size:26px;font-weight:700;white-space:nowrap}
+.notes-box{max-height:190px;overflow:auto;border:1px solid var(--line);border-radius:14px;padding:14px 16px;background:#fafafa;margin:0 0 14px;font-size:12px;line-height:1.8}
+.notes-box p{font-size:12px}
+.field-label{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:12px;font-weight:500;color:#4b4b50;margin-bottom:8px}
+.join-box{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;border-radius:18px;background:var(--gold-light);padding:16px 18px;margin-bottom:6px}
+.join-box strong{font-size:14px}.join-box p{font-size:11px;margin-top:3px;color:#836100}
+.cancel-link{display:block;margin:18px auto 0;color:var(--red);font-size:12px}
+.booking-date.league{background:#1d1d1f;color:#ffd21c}
+.league-promo{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);border-radius:26px;overflow:hidden;background:#1d1d1f;color:#fff;margin-top:24px;border:0;width:100%;text-align:left;cursor:pointer;padding:0}
+.lp-img{position:relative;min-height:210px;display:block}
+.lp-body{padding:28px 30px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:8px}
+.lp-body .eyebrow{color:#ffd21c}.lp-title{font-size:26px;font-weight:650;letter-spacing:-.7px;line-height:1.25}.lp-text{font-size:13px;color:#c7c7cc}.lp-body .btn{margin-top:10px}
+.select-all{display:inline-flex;align-items:center;gap:10px;font-size:12px;color:var(--muted);margin-bottom:12px;cursor:pointer}
+.select-all input,.claim-card input,.slot-pick input{width:19px;height:19px;accent-color:#1d1d1f;flex:none}
+.claim-card.selectable{cursor:pointer;border:1.5px solid transparent;transition:border-color .15s,opacity .15s}
+.claim-card.selectable:not(.on){opacity:.62;background:#f7f7f8}.claim-card.selectable.on{border-color:var(--ink)}
+.claim-sub{display:block;font-size:11px;margin-top:4px;color:var(--muted)}
+.claim-pts{font-size:18px;font-weight:650;color:#8d6400;white-space:nowrap}
+.claim-bar{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin-top:18px;padding-top:18px;border-top:1px solid var(--line)}
+.claim-bar b{color:#8d6400;font-size:14px}
+.slot-pick-list{display:grid;gap:8px;margin-bottom:18px;max-height:340px;overflow:auto;padding:2px}
+.slot-pick{display:flex;align-items:center;gap:10px;border:1px solid #d5d5d9;border-radius:14px;padding:7px 7px 7px 14px;background:#fff;transition:border-color .15s,background .15s}
+.slot-pick.on{border-color:var(--ink);background:#fffaf0}
+.slot-pick label{display:flex;align-items:center;gap:10px;flex:1;font-size:12px;color:var(--muted);cursor:pointer;min-width:0}
+.slot-pick label b{color:var(--ink);font-size:14px;margin-left:8px;font-variant-numeric:tabular-nums}
+.slot-pick select{width:118px;border:1px solid #d5d5d9;border-radius:10px;padding:8px 10px;min-height:40px;background:#fff;color:var(--ink);flex:none}
+.manual-row{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr) minmax(0,.8fr) 40px;gap:8px;margin-bottom:8px;align-items:center}
+.manual-row input{width:100%;min-width:0;border:1px solid #d5d5d9;border-radius:12px;padding:10px 12px;min-height:44px;background:#fff;color:var(--ink)}
+@media(max-width:1150px){.league-layout{grid-template-columns:minmax(0,1fr) 340px}.league-facts{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:850px){.league-grid{grid-template-columns:1fr}.league-layout{grid-template-columns:1fr}.league-side{position:static;order:-1}.league-promo{grid-template-columns:1fr}.lp-img{aspect-ratio:16/7;min-height:0}}
+@media(max-width:640px){.event-switch{gap:10px;margin:-16px 0 24px}.event-switch button{padding:13px 14px;gap:10px;border-radius:18px}.event-switch .ev-ico{width:38px;height:38px;border-radius:12px}.event-switch small{display:none}.event-switch b{font-size:15px}
+ .league-hero{aspect-ratio:16/8;border-radius:22px;margin:12px 0 20px}.league-hero .cover-fallback b{font-size:28px}.league-title h1{font-size:28px}.league-facts{gap:10px}.fact{padding:14px 16px;border-radius:16px}.fact b{font-size:14px}
+ .league-body{padding:18px 20px 20px}.cover-fallback b{font-size:22px}.lp-body{padding:22px}.lp-title{font-size:21px}
+ .reg-mode-head{padding:16px}.reg-mode-head .fee{font-size:21px}.manual-row{grid-template-columns:1fr 1fr;}.manual-row .m-group{grid-column:1}.manual-row .btn{justify-self:end}
+ .claim-card{gap:12px;padding:16px}.claim-pts{margin-left:auto}}
 
 </style>
 </head>
@@ -126,7 +213,12 @@ dialog{width:min(540px,calc(100% - 32px));max-height:calc(100dvh - 48px);border:
    <section id="page-home"><div id="home-content"></div></section>
 
    <section id="page-scrims" hidden>
-    <div class="page-head"><div><div class="eyebrow">FREE FIRE SCRIMS</div><h1 style="margin-top:8px">交流賽報名</h1><p>選時段、填一次隊伍資料。報名後自動寄出確認信，賽後一鍵補登點數。</p></div><button class="btn" data-action="goto-bookings"><span data-icon="tasks"></span>我的報名</button></div>
+    <div class="page-head"><div><div class="eyebrow">REBORN EVENTS</div><h1 style="margin-top:8px">賽事報名</h1><p>交流賽天天開打，季盃聯賽定期登場。報名後自動寄出確認信，賽後一鍵補登點數。</p></div><button class="btn" data-action="goto-bookings"><span data-icon="tasks"></span>我的報名</button></div>
+    <div class="event-switch" role="tablist" aria-label="賽事類型">
+     <button class="active" role="tab" aria-selected="true" data-action="event-tab" data-tab="scrims"><span class="ev-ico"><span data-icon="ticket"></span></span><span class="grow"><b>交流賽</b><small>每日場次 · 雙時段優惠</small></span></button>
+     <button role="tab" aria-selected="false" data-action="event-tab" data-tab="leagues"><span class="ev-ico"><span data-icon="trophy"></span></span><span class="grow"><b>聯賽<span class="dot-badge gold-dot" id="league-open-badge" hidden></span></b><small id="league-tab-sub">季盃聯賽 · 預約／直接報名</small></span></button>
+    </div>
+    <div id="tab-scrims">
     <div class="hint" id="scrim-notice" hidden style="margin-bottom:24px;white-space:pre-wrap"></div>
     <div class="scrim-layout">
      <section aria-labelledby="scrim-step1"><h2 class="step-label" id="scrim-step1"><span>01</span>選擇日期與時段 <small class="micro muted" style="font-weight:400;margin-left:auto">最多選 2 場</small></h2><div class="date-tabs" id="date-tabs" role="group" aria-label="比賽日期"></div><div class="session-list" id="session-list"></div><div class="offer-list" id="offer-list"></div>
@@ -142,16 +234,19 @@ dialog{width:min(540px,calc(100% - 32px));max-height:calc(100dvh - 48px);border:
        <p class="micro muted" style="text-align:center;margin-top:12px">確認信會寄到 <b id="scrim-email">你的會員信箱</b></p>
       </form></article>
     </div>
-    <article class="card" id="bookings-card" style="margin-top:28px;scroll-margin-top:130px"><div class="card-head"><div><h2>我的報名</h2><p>匯款資訊、群組連結與付款狀態都在這裡</p></div><span data-icon="tasks"></span></div><div id="bookings-panel"></div></article>
+    </div>
+    <div id="tab-leagues" hidden><div id="league-list"></div><div id="league-detail" hidden></div></div>
+    <article class="card" id="bookings-card" style="margin-top:28px;scroll-margin-top:130px"><div class="card-head"><div><h2>我的報名</h2><p>交流賽與聯賽的匯款資訊、社群連結與報名狀態都在這裡</p></div><span data-icon="tasks"></span></div><div id="bookings-panel"></div></article>
    </section>
 
-   <section id="page-claim" hidden><div class="page-head"><div><div class="eyebrow">MATCH PARTICIPATION</div><h1 style="margin-top:8px">記下這一次上場</h1><p>報名過的交流賽會自動帶入，一鍵就能補登。</p></div><button class="btn gold" data-action="view" data-view="scrims">報名交流賽<span data-icon="arrow"></span></button></div>
-    <article class="card" style="margin-bottom:24px"><div class="card-head"><div><h2>可一鍵補登的場次</h2><p>系統已帶入你報名過、已開賽且仍在補登期限內的交流賽</p></div><span class="badge gold" id="claimable-count">0 場</span></div><div id="claimables-panel"></div></article>
-    <div class="two-col"><article class="card"><div class="card-head"><div><h2>其他賽事補登</h2><p>聯賽、改名前的場次或未列出的過往賽事</p></div><span class="badge">送審</span></div><form id="claim-form">
-     <label class="field">賽事類型<select id="claim-type" required><option value="exchange">交流賽</option><option value="league">聯賽</option></select></label><label class="field">選擇賽事<select id="claim-event" required></select></label><div id="claim-manual-fields" hidden><label class="field">過往賽事名稱<input id="claim-name" maxlength="100" placeholder="例如：2026 銳能秋季盃"></label><div class="fields2"><label class="field">比賽日期<input id="claim-date" type="date"></label><label class="field">比賽時間<input id="claim-time" type="time"></label></div><label class="field" style="margin-top:16px">參賽組別<input id="claim-manual-group" maxlength="30" placeholder="例如：3 或 A"></label></div>
-     <div id="claim-scheduled-fields"><label class="field">日期與時段<select id="claim-slot" required></select></label><label class="field">參賽組別<select id="claim-group" required></select></label></div>
-     <div class="fields2"><label class="field">隊伍名稱<input id="claim-team" required maxlength="80" placeholder="填寫當時報名的隊名"></label><label class="field">報名負責人<input id="claim-leader" required maxlength="80" placeholder="填寫負責人名稱"></label></div><div id="claim-error" class="inline-error" role="alert"></div><div class="row between" style="margin-top:22px"><span class="micro muted">審核通過後可獲得 <b id="claim-points" style="color:var(--gold)">50</b> 點</span><button class="btn primary" type="submit">送出補登<span data-icon="arrow"></span></button></div>
-    </form></article><div class="stack" style="align-content:start"><article class="card"><div class="card-head"><h2>補登流程</h2><span data-icon="tasks"></span></div><div class="claim-steps"><div><span>01</span><div><strong>會員報名，自動帶入</strong><p>在「賽事報名」報名的交流賽，開賽後會出現在上方清單。</p></div></div><div><span>02</span><div><strong>一鍵送出</strong><p>隊伍、組別與場次都已填好，按一下就完成。</p></div></div><div><span>03</span><div><strong>等待主辦單位審核</strong><p>通過後，點數與參賽紀錄會自動更新。</p></div></div></div><div class="divider"></div><p class="micro">同一場次、時段與組別只需申請一次。若被駁回，可依備註修正後重新申請。</p></article><div class="hint"><strong>改過名或找不到以前的場次？</strong><p style="margin-top:5px">在左側選「未列出的過往賽事（手動填寫）」，填上當時的隊名與日期，主辦方會人工審核。</p></div><button class="btn" data-action="view" data-view="history">查看我的申請紀錄<span data-icon="arrow"></span></button></div></div>
+   <section id="page-claim" hidden><div class="page-head"><div><div class="eyebrow">MATCH PARTICIPATION</div><h1 style="margin-top:8px">記下這一次上場</h1><p>報名過的交流賽與聯賽會自動帶入，可以一次勾選多場、一鍵補登。</p></div><button class="btn gold" data-action="view" data-view="scrims">報名賽事<span data-icon="arrow"></span></button></div>
+    <article class="card" style="margin-bottom:24px"><div class="card-head"><div><h2>可一鍵補登的場次</h2><p>系統已帶入你報名過、已開賽且仍在補登期限內的交流賽與聯賽</p></div><span class="badge gold" id="claimable-count">0 場</span></div><div id="claimables-panel"></div></article>
+    <div class="two-col claim-cols"><article class="card"><div class="card-head"><div><h2>其他賽事補登</h2><p>可一次勾選多個日期與時段，或手動填寫多場過往賽事</p></div><span class="badge">送審</span></div><form id="claim-form" novalidate>
+     <div class="fields2"><label class="field">賽事類型<select id="claim-type"><option value="exchange">交流賽</option><option value="league">聯賽</option></select></label><label class="field">選擇賽事<select id="claim-event"></select></label></div>
+     <div id="claim-scheduled-fields" style="margin-top:18px"><div class="field-label"><span>日期與時段（可多選，每個時段選一個組別）</span><button type="button" class="text-btn" data-action="claim-clear-slots">清除</button></div><div class="slot-pick-list" id="claim-slot-list"></div></div>
+     <div id="claim-manual-fields" hidden style="margin-top:18px"><label class="field">過往賽事名稱<input id="claim-name" maxlength="100" placeholder="例如：2026 銳能秋季盃"></label><div class="field-label"><span>參賽場次（日期／開始時間／組別）</span><span class="micro muted" id="claim-row-count"></span></div><div id="claim-manual-rows"></div><button type="button" class="btn small" data-action="claim-add-row" style="margin:4px 0 18px"><span data-icon="plus"></span>再加一個場次</button></div>
+     <div class="fields2"><label class="field">隊伍名稱<input id="claim-team" required maxlength="80" placeholder="填寫當時報名的隊名"></label><label class="field">報名負責人<input id="claim-leader" required maxlength="80" placeholder="填寫負責人名稱"></label></div><div id="claim-error" class="inline-error" role="alert"></div><div class="claim-bar"><span class="micro muted">已選 <b id="claim-count">0</b> 場 · 審核通過後可獲得 <b id="claim-points">0</b> 點</span><button class="btn primary" type="submit" id="claim-submit">送出補登<span data-icon="arrow"></span></button></div>
+    </form></article><div class="stack" style="align-content:start"><article class="card"><div class="card-head"><h2>補登流程</h2><span data-icon="tasks"></span></div><div class="claim-steps"><div><span>01</span><div><strong>會員報名，自動帶入</strong><p>在「賽事報名」報名的交流賽與聯賽，開賽後會出現在上方清單。</p></div></div><div><span>02</span><div><strong>勾選多場，一次送出</strong><p>隊伍、組別與場次都已填好，全選後按一下就完成。</p></div></div><div><span>03</span><div><strong>等待主辦單位審核</strong><p>通過後，點數與參賽紀錄會自動更新。</p></div></div></div><div class="divider"></div><p class="micro">同一場次、時段與組別只需申請一次。若被駁回，可依備註修正後重新申請。</p></article><div class="hint"><strong>改過名或找不到以前的場次？</strong><p style="margin-top:5px">在左側選「未列出的過往賽事（手動填寫）」，可以一次填寫多個日期，主辦方會人工審核。</p></div><button class="btn" data-action="view" data-view="history">查看我的申請紀錄<span data-icon="arrow"></span></button></div></div>
    </section>
 
    <section id="page-rewards" hidden><div class="page-head"><div><div class="eyebrow">REWARDS COLLECTION</div><h1 style="margin-top:8px">每一點，都有新可能</h1><p>用參賽累積的點數，兌換喜歡的獎勵。</p></div><span class="badge gold"><span data-icon="coins"></span><span id="store-balance">—</span> 點</span></div><div class="toolbar"><div class="tabs" id="reward-filters"><button class="active" data-action="reward-filter" data-filter="all">所有獎勵</button><button data-action="reward-filter" data-filter="virtual">鑽石／虛寶</button><button data-action="reward-filter" data-filter="voucher">兌換券</button><button data-action="reward-filter" data-filter="physical">實體商品</button></div></div><div id="reward-grid" class="three-col"></div></section>
@@ -160,7 +255,7 @@ dialog{width:min(540px,calc(100% - 32px));max-height:calc(100dvh - 48px);border:
 
    <section id="page-history" hidden><div class="page-head"><div><div class="eyebrow">YOUR REBORN JOURNEY</div><h1 style="margin-top:8px">我的紀錄</h1><p>每一筆點數、每一場參賽，都留在這裡。</p></div></div><div class="toolbar"><div class="tabs" id="history-tabs"><button class="active" data-action="history-mode" data-mode="points">點數明細</button><button data-action="history-mode" data-mode="tasks">補登與兌換申請</button></div></div><article class="card" id="history-panel"></article></section>
 
-   <section id="page-profile" hidden><div class="page-head"><div><div class="eyebrow">MEMBERSHIP & ACCOUNT</div><h1 style="margin-top:8px">會員設定</h1><p>保持資料更新，讓每次報名與兌換都更順利。</p></div></div><div class="two-col"><article class="card"><div class="card-head"><h2>帳號資料</h2><span data-icon="user"></span></div><form id="profile-form"><label class="field">遊戲暱稱<input id="profile-name" required maxlength="60" autocomplete="nickname"></label><label class="field">電子信箱<input id="profile-email" type="email" disabled><small>報名確認信、收據與補登提醒都會寄到這個信箱。</small></label><label class="field">遊戲 UID<input id="profile-game-uid" inputmode="numeric" pattern="[0-9]{5,20}" maxlength="20" placeholder="選填，虛寶兌換時可自動帶入"><small>這是遊戲內的數字 UID，與 REBORN 會員編號不同。</small></label><div class="fields2"><label class="field">報名負責人 LINE 名稱<input id="profile-line" maxlength="30" placeholder="選填"></label><label class="field">LINE ID<input id="profile-line-id" maxlength="60" placeholder="選填" autocapitalize="none" spellcheck="false"></label></div><p class="micro muted" style="margin:10px 0 0">填寫後，報名交流賽時會自動帶入。</p><div class="divider"></div><div id="password-fields"><h3 style="margin-bottom:16px">變更密碼 <span class="micro muted" style="font-weight:400">不修改請留白</span></h3><label class="field">目前密碼<input id="profile-current-password" type="password" autocomplete="current-password" maxlength="128"></label><label class="field">新密碼<input id="profile-password" type="password" minlength="6" maxlength="128" autocomplete="new-password" placeholder="至少 6 個字元"></label><label class="field">確認新密碼<input id="profile-confirm" type="password" minlength="6" maxlength="128" autocomplete="new-password"></label></div><div id="google-only-note" class="hint" hidden style="margin-bottom:18px">目前以 Google 登入。如需新增會員密碼，可聯絡官方 LINE 協助設定。</div><div id="profile-error" class="inline-error" role="alert"></div><button class="btn primary" type="submit">儲存變更<span data-icon="check"></span></button></form></article>
+   <section id="page-profile" hidden><div class="page-head"><div><div class="eyebrow">MEMBERSHIP & ACCOUNT</div><h1 style="margin-top:8px">會員設定</h1><p>保持資料更新，讓每次報名與兌換都更順利。</p></div></div><div class="two-col"><article class="card"><div class="card-head"><h2>帳號資料</h2><span data-icon="user"></span></div><form id="profile-form"><label class="field">遊戲暱稱<input id="profile-name" required maxlength="60" autocomplete="nickname"></label><label class="field">電子信箱<input id="profile-email" type="email" disabled><small>報名確認信、收據與補登提醒都會寄到這個信箱。</small></label><label class="field">遊戲 UID<input id="profile-game-uid" inputmode="numeric" pattern="[0-9]{5,20}" maxlength="20" placeholder="選填，虛寶兌換時可自動帶入"><small>這是遊戲內的數字 UID，與 REBORN 會員編號不同。</small></label><div class="fields2"><label class="field">報名負責人 LINE 名稱<input id="profile-line" maxlength="30" placeholder="選填"></label><label class="field">LINE ID<input id="profile-line-id" maxlength="60" placeholder="選填" autocapitalize="none" spellcheck="false"></label></div><p class="micro muted" style="margin:10px 0 0">填寫後，報名交流賽與聯賽時會自動帶入。</p><div class="divider"></div><div id="password-fields"><h3 style="margin-bottom:16px">變更密碼 <span class="micro muted" style="font-weight:400">不修改請留白</span></h3><label class="field">目前密碼<input id="profile-current-password" type="password" autocomplete="current-password" maxlength="128"></label><label class="field">新密碼<input id="profile-password" type="password" minlength="6" maxlength="128" autocomplete="new-password" placeholder="至少 6 個字元"></label><label class="field">確認新密碼<input id="profile-confirm" type="password" minlength="6" maxlength="128" autocomplete="new-password"></label></div><div id="google-only-note" class="hint" hidden style="margin-bottom:18px">目前以 Google 登入。如需新增會員密碼，可聯絡官方 LINE 協助設定。</div><div id="profile-error" class="inline-error" role="alert"></div><button class="btn primary" type="submit">儲存變更<span data-icon="check"></span></button></form></article>
     <div class="stack" style="align-content:start"><article class="card" id="subscribe-panel"></article><article class="card" id="google-account-panel"></article><article class="card" id="tier-panel"></article><article class="card"><div class="card-head"><h2>會員等級制度</h2><span data-icon="trophy"></span></div><div class="tier-line"><span class="badge">CORE</span><span>註冊即取得</span></div><div class="tier-line"><span class="badge completed">PRIME</span><span>累積 500 點</span></div><div class="tier-line"><span class="badge gold">REBORN PREMIUM</span><span>累積 1,000 點</span></div><div class="tier-line"><span class="badge dark">APEX</span><span>累積 2,000 點</span></div><p class="micro" style="margin-top:18px">累積點數由後端統一計算；兌換商品不影響升級進度。超銳能黑卡依特殊邀約資格保留。</p></article></div></div></section>
    <div class="footer-note">© 2026 REBORN ENTERTAINMENT · 每一場參賽，都值得被記住。</div>
   </main>
@@ -174,8 +269,8 @@ dialog{width:min(540px,calc(100% - 32px));max-height:calc(100dvh - 48px);border:
 <script>
 const ROLE = 'member';
 // 將這一行改成「最新部署」的 /exec 網址；兩個 HTML 必須使用同一個後端。
-const GAS_API_URL = 'https://script.google.com/macros/s/AKfycbytPnUBkbJ4jFW3VnTYqT6VEkxE_k9Eyy7kl43TeSoCBt-nRZipdMGLnU4hwRCUFqpW/exec';
-const API_VERSION = '5.0';
+const GAS_API_URL = 'https://script.google.com/macros/s/AKfycbwlSJcv6ftVp5grAB2tbyqNzK1WlFZcjYdvNtfJJxooQm8hjFbhZVL2aXYIUHDX6UA/exec';
+const API_VERSION = '5.1';
 const $ = id => document.getElementById(id);
 const esc = v => String(v ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const num = n => Number(n||0).toLocaleString('zh-TW');
@@ -220,7 +315,8 @@ const iconPaths = {
  external:'M14 4h6v6 M20 4l-9 9 M18 14v6H4V6h6',
  trash:'M4 7h16 M9 7V4h6v3 M6 7l1 13h10l1-13',
  send:'M22 2 11 13 M22 2l-7 20-4-9-9-4Z',
- megaphone:'M3 11v2a1 1 0 0 0 1 1h3l6 4V6L7 10H4a1 1 0 0 0-1 1 M17 9a4 4 0 0 1 0 6 M7 14l1 5h3'
+ megaphone:'M3 11v2a1 1 0 0 0 1 1h3l6 4V6L7 10H4a1 1 0 0 0-1 1 M17 9a4 4 0 0 1 0 6 M7 14l1 5h3',
+ pin:'M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11Z M12 7.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5'
 };
 function icon(name){return `<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="${iconPaths[name]||iconPaths.gift}"/></svg>`;}
 function fillIcons(){document.querySelectorAll('[data-icon]').forEach(el=>el.innerHTML=icon(el.dataset.icon));}
@@ -301,7 +397,7 @@ async function busy(btn,fn,errorId){
 }
 function openDialog(title,body,footer='',wide=false){
  $('modal').classList.toggle('wide',wide);$('modal').innerHTML=`<div class="dialog-head"><h2 id="dialog-title">${esc(title)}</h2><button class="btn square" data-action="close-modal" aria-label="關閉">${icon('close')}</button></div>${body}${footer}`;
- if(!$('modal').open)$('modal').showModal();
+ if(!$('modal').open)$('modal').showModal();$('modal').scrollTop=0;
 }
 function closeDialog(){if(!modalBusy)$('modal').close();}
 async function copyText(v){try{await navigator.clipboard.writeText(v);toast('已複製。');}catch{openDialog('複製編號',`<div class="dialog-body"><input aria-label="編號" readonly value="${esc(v)}" style="width:100%;padding:14px;border:1px solid var(--line);border-radius:10px" onclick="this.select()"><p class="micro" style="margin-top:12px">點選編號後，可長按複製。</p></div>`);}}
@@ -342,13 +438,14 @@ function qrSvg(value){
 }
 
 
-// ===================== v5.0 會員中心：大廳 × 報名 × 補登 × 消息 =====================
-let state={user:null,items:[],events:[],history:{items:[],total:0,page:1,pageSize:8,hasMore:false},tasks:{items:[],total:0,page:1,pageSize:20,hasMore:false},scrims:[],pairs:[],bookings:[],claimables:[],news:[],banners:[],unreadNews:0,settings:{}};
+// ===================== v5.1 會員中心：大廳 × 交流賽／聯賽報名 × 多選補登 × 消息 =====================
+let state={user:null,items:[],events:[],history:{items:[],total:0,page:1,pageSize:8,hasMore:false},tasks:{items:[],total:0,page:1,pageSize:20,hasMore:false},scrims:[],pairs:[],bookings:[],claimables:[],leagues:[],leagueRegs:[],news:[],banners:[],unreadNews:0,settings:{}};
 let currentView='home',rewardFilter='all',historyMode='points',historyPage=1,historyData=null,syncing=null,profileReady=false,scrimFormReady=false;
 let selectedDate='',selectedIds=[],carouselTimer=null,carouselIndex=0,seenRequested=false;
+let eventTab='scrims',leagueId=null,claimSel=new Set(),claimKnown=new Set(),claimPicks={},claimPickEvent='',manualRows=[{date:'',time:'',group:''}];
 const titles={home:'大廳',scrims:'賽事報名',claim:'賽事補登',rewards:'獎勵兌換',news:'最新消息',history:'我的紀錄',profile:'會員設定'};
 const SCRIM_STATE={open:'開放報名',full:'額滿',closed:'報名截止',completed:'已完賽',cancelled:'已取消'};
-const PAY={pending:'待匯款',reported:'已回報匯款',confirmed:'已確認收款'};
+const PAY={pending:'待匯款',reported:'已回報匯款',confirmed:'已確認收款',free:'免報名費'};
 const tw=(iso,opt)=>{const d=new Date(iso);return iso&&!isNaN(d)?new Intl.DateTimeFormat('zh-TW',Object.assign({timeZone:'Asia/Taipei'},opt)).format(d):'';};
 const fmtDT=iso=>tw(iso,{month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit',hour12:false});
 const fmtDay=iso=>tw(iso,{year:'numeric',month:'numeric',day:'numeric'});
@@ -368,7 +465,7 @@ async function syncData(silent=false){
 function renderMember(){
  const u=state.user;if(!u)return;showApp();$('nav-avatar').textContent=u.gamerTag.slice(0,1);$('nav-name').textContent=u.gamerTag;$('nav-level').textContent=u.level;$('store-balance').textContent=num(u.points);
  const cb=$('claim-badge'),nb=$('news-badge');cb.hidden=!state.claimables.length;cb.textContent=state.claimables.length;nb.hidden=!state.unreadNews;nb.textContent=state.unreadNews>9?'9+':state.unreadNews;
- renderHome();renderScrims();renderClaimables();renderRewards();renderNews();renderTier();renderGoogleAccount();renderSubscribe();
+ renderHome();renderScrims();renderLeagues();renderClaimables();renderRewards();renderNews();renderTier();renderGoogleAccount();renderSubscribe();
  if(!profileReady){$('profile-name').value=u.gamerTag;$('profile-email').value=u.email;$('profile-game-uid').value=u.gameUid||'';$('profile-line').value=u.lineName||'';$('profile-line-id').value=u.lineId||'';profileReady=true;}
  if(!scrimFormReady){const last=state.bookings.find(b=>b.teamName);$('scrim-team').value=last?last.teamName:'';$('scrim-line').value=u.lineName||last?.lineName||'';$('scrim-line-id').value=u.lineId||last?.lineId||'';scrimFormReady=true;}
  $('scrim-email').textContent=u.email;$('scrim-points').textContent=num(state.settings?.scrimPoints||50);
@@ -396,13 +493,14 @@ function newsItemHtml(n){return `<button class="news-item" data-action="open-new
 function renderHome(){
  const u=state.user,hour=Number(new Intl.DateTimeFormat('en-US',{timeZone:'Asia/Taipei',hour:'numeric',hour12:false}).format(new Date())),greeting=hour>=5&&hour<12?'早安':hour>=12&&hour<18?'午安':'晚安';
  const pending=state.tasks.items.filter(t=>t.status==='Pending').length,cardClass=/FORCE|黑卡|超銳能/i.test(u.level)?'force':'';
- const next=nextScrim(),unpaid=state.bookings.filter(b=>b.status==='active'&&b.paymentState==='pending').length;
+ const next=nextScrim(),unpaid=state.bookings.filter(b=>b.status==='active'&&b.paymentState==='pending').length+state.leagueRegs.filter(r=>r.status==='active'&&r.paymentState==='pending').length;
  $('home-content').innerHTML=`<div class="page-head"><div><div class="eyebrow">REBORN LOBBY</div><h1 style="margin-top:8px">${greeting}，${esc(u.gamerTag)}</h1><p>歡迎回到銳能。準備好迎接下一場精彩了嗎？</p></div><span class="micro muted" style="text-align:right">${esc(dateLabel())}</span></div>
  ${carouselHtml(state.banners)}
  ${unpaid?`<div class="hint row between wrap" style="margin-bottom:22px"><span><strong>你有 ${unpaid} 筆報名尚未匯款。</strong> 完成匯款並回報末五碼，名額才算確定。</span><button class="text-btn" data-action="goto-bookings">查看匯款資訊 →</button></div>`:''}
  <div class="member-home-grid"><article class="wallet-card ${cardClass}"><div class="wallet-top"><span class="wallet-brand">REBORN / MEMBERSHIP</span><span class="badge" style="background:#ffffff40;color:inherit">${esc(u.level)}</span></div><div class="wallet-label">當前可用點數</div><div class="wallet-points">${num(u.points)}<small>POINTS</small></div><div class="wallet-foot"><div><strong>${esc(u.gamerTag)}</strong><div class="mono" style="margin-top:5px">${esc(u.uid)}</div></div><button class="btn" data-action="member-card">${icon('scan')}出示會員卡</button></div></article>
  <div class="stack"><div class="quick-stats"><div class="card stat"><div class="stat-label">歷史累積點數 ${icon('coins')}</div><b>${num(u.lifetimePoints)}<span style="font-size:11px;font-weight:500;color:var(--muted);margin-left:5px">點</span></b><small>兌換後，升級進度依然保留</small></div><div class="card stat"><div class="stat-label">我的申請 ${icon('tasks')}</div><b>${num(state.tasks.total)}<span style="font-size:11px;font-weight:500;color:var(--muted);margin-left:5px">筆</span></b><small>近期有 ${pending} 筆等待處理</small></div></div><button class="quick-action" data-action="view" data-view="claim">${icon('calendar')}<div class="grow"><strong>${state.claimables.length?`有 ${state.claimables.length} 場可以一鍵補登`:'補登參賽點數'}</strong><p>${state.claimables.length?'報名過的場次已自動帶入':'選擇你的賽事與參賽時段'}</p></div>${icon('arrow')}</button><button class="quick-action" data-action="view" data-view="rewards">${icon('gift')}<div class="grow"><strong>探索會員獎勵</strong><p>鑽石虛寶、兌換券與精選周邊</p></div>${icon('arrow')}</button></div></div>
  <button class="scrim-banner" style="width:100%;border:0;text-align:left;cursor:pointer" data-action="view" data-view="scrims"><div><div class="eyebrow">YOUR NEXT MATCH</div><h2>${next?`${esc(dayLabel(next.date))} ${esc(next.startTime)} 開放報名中`:'下一場精彩，即將公布。'}</h2><p>${next?`${esc(next.title)} · ${money(next.fee)} / 隊 · 剩 ${next.remaining} 組`:'查看所有交流賽場次，報名後自動寄出確認信。'}</p></div><span class="btn">${next?'立即報名':'查看場次'} ${icon('arrow')}</span></button>
+ ${leaguePromoHtml()}
  <div class="member-home-bottom"><article class="card"><div class="card-head"><div><h2>最新消息</h2><p>賽事公告與會員活動</p></div><button class="text-btn" data-action="view" data-view="news">全部消息 →</button></div>${state.news.length?state.news.slice(0,4).map(newsItemHtml).join(''):empty('目前還沒有消息','新的賽事與活動公布後會出現在這裡。','bell')}</article><article class="card"><div class="card-head"><div><h2>近期點數紀錄</h2><p>掌握每一筆累積與使用</p></div><button class="text-btn" data-action="view" data-view="history">查看全部 →</button></div>${historyHtml(state.history.items.slice(0,5))}</article></div>`;
  initCarousel();
 }
@@ -439,9 +537,11 @@ function toggleScrim(id){
  renderScrims();if(window.innerWidth<=850&&selectedIds.length)$('scrim-step2').scrollIntoView({behavior:'smooth',block:'start'});
 }
 function renderBookings(){
- const list=state.bookings;
- $('bookings-panel').innerHTML=list.length?list.map(b=>{const d=b.entries[0]||{};return `<div class="booking-row"><div class="booking-date"><div><b>${esc((d.date||'').slice(8))}</b><span>${esc((d.date||'').slice(5,7))} 月</span></div></div><div class="grow"><strong>${esc(b.teamName)} · ${b.entries.map(e=>esc(e.startTime)).join(' / ')}</strong><p>${esc(dayLabel(d.date))} · ${esc(d.title||'交流賽')} · ${money(b.totalAmount)}${b.entries.some(e=>e.status==='active'&&e.slot)?' · 第 '+b.entries.filter(e=>e.status==='active').map(e=>e.slot).join(' / ')+' 組':''}</p></div>${payBadge(b.paymentState,b.status)}<button class="btn small" data-action="open-booking" data-id="${esc(b.bookingId)}">${b.status==='active'&&b.paymentState!=='confirmed'?'匯款資訊':'查看'}</button></div>`;}).join(''):empty('還沒有報名紀錄','選好時段、填寫隊伍資料，就能完成第一次報名。','ticket');
+ const rows=[...state.bookings.map(b=>({at:b.createdAt,html:bookingRowHtml(b)})),...state.leagueRegs.map(r=>({at:r.createdAt,html:lregRowHtml(r)}))].sort((a,b)=>String(b.at).localeCompare(String(a.at)));
+ $('bookings-panel').innerHTML=rows.length?rows.map(x=>x.html).join(''):empty('還沒有報名紀錄','選好交流賽時段或聯賽，填寫隊伍資料就能完成第一次報名。','ticket');
 }
+function bookingRowHtml(b){const d=b.entries[0]||{};return `<div class="booking-row"><div class="booking-date"><div><b>${esc((d.date||'').slice(8))}</b><span>${esc((d.date||'').slice(5,7))} 月</span></div></div><div class="grow"><strong>${esc(b.teamName)} · ${b.entries.map(e=>esc(e.startTime)).join(' / ')}</strong><p>交流賽 · ${esc(dayLabel(d.date))} · ${esc(d.title||'交流賽')} · ${money(b.totalAmount)}${b.entries.some(e=>e.status==='active'&&e.slot)?' · 第 '+b.entries.filter(e=>e.status==='active').map(e=>e.slot).join(' / ')+' 組':''}</p></div>${payBadge(b.paymentState,b.status)}<button class="btn small" data-action="open-booking" data-id="${esc(b.bookingId)}">${b.status==='active'&&b.paymentState!=='confirmed'?'匯款資訊':'查看'}</button></div>`;}
+function lregRowHtml(r){const d=r.matchStart||'';return `<div class="booking-row"><div class="booking-date league"><div><b>${esc(d.slice(8))}</b><span>${esc(d.slice(5,7))} 月</span></div></div><div class="grow"><strong>${esc(r.teamName)} · ${esc(r.title)}</strong><p>聯賽 · ${esc(r.modeLabel)} · ${esc(r.matchStart===r.matchEnd?dayLabel(r.matchStart):dayLabel(r.matchStart)+' 起')}${r.status==='active'?' · 正取第 '+r.slot+' 組':''}${r.amount?' · '+money(r.amount):''}</p></div>${lregBadge(r)}<button class="btn small" data-action="open-lreg" data-id="${esc(r.id)}">${r.status==='active'&&r.paymentState==='pending'?'匯款資訊':'查看'}</button></div>`;}
 function showBooking(id){
  const b=state.bookings.find(x=>x.bookingId===id);if(!b)return toast('找不到這筆報名，請重新同步。');
  const active=b.status==='active',paid=b.paymentState==='confirmed',dual=b.entries.length===2,groups=[...new Set(b.entries.map(e=>e.groupUrl).filter(Boolean))];
@@ -452,16 +552,154 @@ function showBooking(id){
  ${active&&groups.length?`<div class="group-buttons" style="margin-bottom:18px">${groups.map((g,i)=>`<a class="btn gold full" href="${esc(g)}" target="_blank" rel="noopener">${icon('users')}${groups.length>1?'加入賽事群組 '+(i+1):'加入賽事群組'}</a>`).join('')}</div>`:''}
  <div class="review-summary"><div class="review-line"><span>報名編號</span><strong class="mono micro">${esc(b.bookingId)}</strong></div><div class="review-line"><span>負責人</span><strong>${esc(b.lineName)}${b.lineId?'（'+esc(b.lineId)+'）':''}</strong></div><div class="review-line"><span>付款狀態</span><strong>${payBadge(b.paymentState,b.status)}</strong></div>${b.last5?`<div class="review-line"><span>回報末五碼</span><strong class="mono">${esc(b.last5)}</strong></div>`:''}</div>
  ${b.transferNote&&active?`<p class="micro" style="white-space:pre-wrap;margin-bottom:16px">${esc(b.transferNote)}</p>`:''}
- ${active&&!paid?`<form id="report-form" data-id="${esc(b.bookingId)}"><label class="field">已匯款？回報帳號末五碼<input id="report-last5" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" required placeholder="例如 12345" value="${esc(b.last5||'')}"><small>${dual?'只需匯款一次，回報會同步到兩個時段。':'賽務核對後會寄出電子收據。'}</small></label><div id="report-error" class="inline-error" role="alert"></div><button class="btn primary full" type="submit">${b.last5?'更新回報':'送出匯款回報'}</button></form>`:''}</div>`);
+ ${active&&!paid?`<form id="report-form" data-id="${esc(b.bookingId)}"><label class="field">已匯款？回報帳號末五碼<input id="report-last5" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" required placeholder="例如 12345" value="${esc(b.last5||'')}"><small>${dual?'只需匯款一次，回報會同步到兩個時段。':'賽務核對後會寄出電子收據。'}</small></label><div id="report-error" class="inline-error" role="alert"></div><button class="btn primary full" type="submit">${b.last5?'更新回報':'送出匯款回報'}</button></form>`:''}${b.canCancel?`<button class="text-btn cancel-link" data-action="cancel-reg" data-kind="scrim" data-id="${esc(b.bookingId)}">取消這筆報名</button>`:''}</div>`);
 }
-// ---------- 補登 ----------
+// ---------- v5.1 聯賽報名（預約報名／直接報名、正取＋候補） ----------
+const LEAGUE_STATE={reserve:'預約報名中',open:'開放報名中',waitlist:'候補報名中',full:'正取與候補已額滿',upcoming:'即將開放報名',closed:'報名已截止',ongoing:'比賽進行中',ended:'賽事已結束',cancelled:'賽事已取消'};
+const LEAGUE_BADGE={reserve:'gold',open:'gold',waitlist:'pending',ongoing:'dark',cancelled:'rejected'};
+const leagueBadge=s=>`<span class="badge ${LEAGUE_BADGE[s]||''}">${esc(LEAGUE_STATE[s]||s)}</span>`;
+const leagueDays=l=>l.matchStart===l.matchEnd?dayLabel(l.matchStart):`${dayLabel(l.matchStart)} – ${dayLabel(l.matchEnd)}`;
+const joinable=l=>['reserve','open','waitlist'].includes(l.state);
+const modeWhen=m=>`${fmtDT(m.start)} – ${fmtDT(m.end)}`;
+const lregBadge=r=>r.status==='cancelled'?'<span class="badge rejected">已取消</span>':r.status==='waitlist'?`<span class="badge pending">候補第 ${r.waitNo} 位</span>`:payBadge(r.paymentState,r.status);
+function richText(src){
+ const out=[];let list=null;
+ const inline=t=>esc(t).replace(/\*\*(.+?)\*\*/g,'<b>$1</b>').replace(/(https:\/\/[^\s<]+)/g,'<a href="$1" target="_blank" rel="noopener">$1</a>');
+ const close=()=>{if(list){out.push(`</${list}>`);list=null;}};
+ String(src||'').replace(/\r/g,'').split('\n').forEach(raw=>{const t=raw.trim();let m;
+  if(!t){close();return;}
+  if((m=t.match(/^#{1,3}\s+(.+)/))){close();out.push(`<h4>${inline(m[1])}</h4>`);return;}
+  if((m=t.match(/^(?:[-•・]\s*|\*\s+)(.+)/))){if(list!=='ul'){close();out.push('<ul>');list='ul';}out.push(`<li>${inline(m[1])}</li>`);return;}
+  if((m=t.match(/^\d{1,2}[.、)]\s*(.+)/))){if(list!=='ol'){close();out.push('<ol>');list='ol';}out.push(`<li>${inline(m[1])}</li>`);return;}
+  close();out.push(`<p>${inline(t)}</p>`);});
+ close();return out.join('');
+}
+function coverHtml(l,eager){return safeImg(l.banner)?`<img src="${esc(l.banner)}" alt="${esc(l.title)}" ${eager?'':'loading="lazy"'} referrerpolicy="no-referrer">`:coverFallback(l.title,l.season);}
+const coverFallback=(title,season)=>`<span class="cover-fallback"><span>${esc(season||'REBORN LEAGUE')}</span><b>${esc(title||'')}</b></span>`;
+function myLeagueReg(id){return state.leagueRegs.find(r=>r.leagueId===id&&r.status!=='cancelled');}
+function seatHtml(l){return `<div class="seat-meter"><div><div class="cap-line"><span>正取名額</span><span><b>${l.count}</b> / ${l.capacity} 組</span></div><div class="cap-track"><i style="width:${Math.min(100,l.count/Math.max(1,l.capacity)*100)}%"></i></div></div>${l.waitlist?`<div><div class="cap-line"><span>候補名額</span><span><b>${l.waitCount}</b> / ${l.waitlist} 組</span></div><div class="cap-track wait"><i style="width:${Math.min(100,l.waitCount/Math.max(1,l.waitlist)*100)}%"></i></div></div>`:''}</div>`;}
+function setEventTab(tab){
+ eventTab=tab;document.querySelectorAll('.event-switch button').forEach(b=>{const on=b.dataset.tab===tab;b.classList.toggle('active',on);b.setAttribute('aria-selected',String(on));});
+ $('tab-scrims').hidden=tab!=='scrims';$('tab-leagues').hidden=tab!=='leagues';if(tab==='leagues')renderLeagues();
+}
+function openLeague(id){leagueId=id;if(currentView!=='scrims')switchView('scrims');setEventTab('leagues');window.scrollTo({top:0});}
+function renderLeagues(){
+ const list=state.leagues,openN=list.filter(joinable).length,b=$('league-open-badge');
+ b.hidden=!openN;b.textContent=openN;$('league-tab-sub').textContent=openN?`${openN} 個聯賽開放報名中`:'季盃聯賽 · 預約／直接報名';
+ if(leagueId&&!list.some(l=>l.id===leagueId))leagueId=null;
+ $('league-list').hidden=!!leagueId;$('league-detail').hidden=!leagueId;
+ if(leagueId){renderLeagueDetail();return;}
+ $('league-list').innerHTML=list.length?`<div class="league-grid">${list.map(leagueCardHtml).join('')}</div>`:`<div class="card">${empty('目前沒有開放中的聯賽','季盃公布後會出現在這裡；訂閱最新消息就能第一時間收到通知。','trophy')}</div>`;
+}
+function leagueCardHtml(l){
+ const mine=myLeagueReg(l.id),cta=joinable(l)&&!mine;
+ return `<article class="league-card"><button class="league-cover" data-cover data-action="open-league" data-id="${esc(l.id)}" aria-label="${esc(l.title)}">${coverHtml(l)}<span class="ribbon">${leagueBadge(l.state)}</span></button><div class="league-body"><div class="row gap8 wrap">${l.season?`<span class="micro muted">${esc(l.season)}</span>`:''}${mine?`<span class="badge completed">${mine.status==='waitlist'?'你已登記候補':'你已報名'}</span>`:''}</div><h3>${esc(l.title)}</h3>${l.subtitle?`<p class="league-sub">${esc(l.subtitle)}</p>`:''}<div class="league-meta"><span>${icon('calendar')}${esc(leagueDays(l))}</span>${l.venue?`<span>${icon('pin')}${esc(l.venue)}</span>`:''}</div><div class="mode-chips">${l.modes.map(m=>`<div class="mode-chip ${m.open?'live':''}"><div><b>${esc(m.label)}</b><span>${m.open?'進行中 · ':m.upcoming?'即將開放 · ':m.ended?'已截止 · ':''}${esc(modeWhen(m))}</span></div><span class="fee">${m.fee?money(m.fee):'免費'}</span></div>`).join('')}</div>${seatHtml(l)}<button class="btn ${cta?'primary':''} full" data-action="open-league" data-id="${esc(l.id)}">${cta?(l.state==='waitlist'?'登記候補':'查看詳情並報名'):'查看賽事資訊'}${icon('arrow')}</button></div></article>`;
+}
+function modeRowHtml(l,m,mine){
+ let btn;
+ if(mine)btn=`<button class="btn full" disabled>已報名</button>`;
+ else if(m.open)btn=`<button class="btn ${l.state==='waitlist'?'gold':'primary'} full" data-action="league-join" data-id="${esc(l.id)}" data-mode="${esc(m.mode)}">${l.state==='waitlist'?'登記候補':m.mode==='reserve'?'立即預約':'立即報名'}${icon('arrow')}</button>`;
+ else if(m.upcoming&&!['cancelled','closed','ongoing','ended'].includes(l.state))btn=`<button class="btn full" disabled>${esc(fmtDT(m.start))} 開放</button>`;
+ else btn=`<button class="btn full" disabled>${m.ended?'已截止':l.state==='full'?'已額滿':esc(LEAGUE_STATE[l.state]||'未開放')}</button>`;
+ return `<div class="mode-row ${m.open&&!mine?'live':''}"><div class="mode-top"><span class="mode-name">${esc(m.label)}</span><span class="mode-fee">${m.fee?money(m.fee):'免費'}</span></div><div class="mode-when">${icon('clock')}${esc(modeWhen(m))}</div>${m.note?`<div class="mode-note">${esc(m.note)}</div>`:''}${btn}</div>`;
+}
+function renderLeagueDetail(){
+ const l=state.leagues.find(x=>x.id===leagueId);if(!l)return;
+ const mine=myLeagueReg(l.id),sections=[['賽事介紹',l.intro],['賽事資訊',l.info],['賽程',l.schedule],['注意事項',l.notes]].filter(x=>String(x[1]||'').trim());
+ $('league-detail').innerHTML=`<button class="text-btn back-link" data-action="league-back">${icon('arrow')}所有聯賽</button>
+ <div class="league-hero" data-cover>${coverHtml(l,true)}</div>
+ <div class="league-title"><div class="row gap8 wrap">${leagueBadge(l.state)}${l.season?`<span class="badge">${esc(l.season)}</span>`:''}</div><h1>${esc(l.title)}</h1>${l.subtitle?`<p>${esc(l.subtitle)}</p>`:''}</div>
+ <div class="league-facts"><div class="fact"><span>${icon('calendar')}比賽日期</span><b>${esc(leagueDays(l))}</b></div><div class="fact"><span>${icon('pin')}比賽形式</span><b>${esc(l.venue||'詳見賽事資訊')}</b></div><div class="fact"><span>${icon('users')}參賽名額</span><b>${l.capacity} 組${l.waitlist?`<small> ＋候補 ${l.waitlist}</small>`:''}</b></div><div class="fact"><span>${icon('coins')}完賽補登</span><b>+${num(l.points)} 點</b></div></div>
+ <div class="league-layout"><div class="league-main">${sections.length?sections.map(([t,v])=>`<article class="card league-section"><h2>${esc(t)}</h2><div class="rich">${richText(v)}</div></article>`).join(''):`<article class="card">${empty('詳細資訊準備中','主辦方公布後會更新在這裡。','trophy')}</article>`}</div>
+ <aside class="card league-side"><div class="card-head" style="margin-bottom:16px"><div><h2>報名方式</h2><p>${l.modes.length>1?'預約報名結束後，只剩直接報名':'在開放期間內完成報名'}</p></div>${icon('ticket')}</div>${l.modes.map(m=>modeRowHtml(l,m,mine)).join('')}${seatHtml(l)}<p class="micro muted" style="margin-top:12px">${l.state==='waitlist'?'正取已滿，現在送出會登記為候補，有名額時依順序自動遞補並寄信通知。':l.waitlist?`正取額滿後開放 ${l.waitlist} 組候補，有名額釋出時依順序遞補。`:'名額有限，額滿即停止報名。'}</p>${mine?`<div class="my-reg"><div class="row between"><strong>你的報名</strong>${lregBadge(mine)}</div><p class="micro" style="margin:6px 0 12px">${esc(mine.teamName)} · ${esc(mine.modeLabel)}${mine.status==='active'?' · 正取第 '+mine.slot+' 組':''}</p><button class="btn small" data-action="open-lreg" data-id="${esc(mine.id)}">查看報名與匯款資訊</button></div>`:''}</aside></div>`;
+}
+function openLeagueJoin(id,mode){
+ const l=state.leagues.find(x=>x.id===id),m=l?.modes.find(x=>x.mode===mode);if(!l||!m)return;
+ if(!m.open)return toast('這個報名方式目前未開放，請重新整理。');
+ const u=state.user,last=state.leagueRegs[0]||{},lastB=state.bookings.find(b=>b.teamName)||{},wait=l.state==='waitlist',pay=m.fee&&!wait;
+ openDialog(`${m.label}｜${l.title}`,`<form id="league-form" data-id="${esc(l.id)}" data-mode="${esc(m.mode)}" data-fee="${m.fee}"><div class="dialog-body">
+ <div class="reg-mode-head"><div><div class="eyebrow">${esc(m.label)} · ${esc(leagueDays(l))}</div><strong>${esc(l.title)}</strong></div><div class="fee">${m.fee?money(m.fee):'免費'}</div></div>
+ ${wait?`<div class="hint" style="margin-bottom:18px"><strong>正取已滿，送出後會登記為候補第 ${l.waitCount+1} 順位。</strong> 候補期間不需匯款；有名額時系統依順序自動遞補，並寄信通知你。</div>`:''}
+ <div class="fields2"><label class="field">隊伍名稱<input id="lg-team" required maxlength="30" value="${esc(last.teamName||lastB.teamName||'')}" placeholder="例如 CZL" autocomplete="organization"></label><label class="field">負責人 LINE 名稱<input id="lg-line" required maxlength="30" value="${esc(u.lineName||last.lineName||'')}" placeholder="LINE 顯示名稱"></label></div>
+ <label class="field" style="margin-top:18px">LINE ID<input id="lg-line-id" required maxlength="60" value="${esc(u.lineId||last.lineId||'')}" placeholder="可供賽務搜尋的 LINE ID" autocapitalize="none" spellcheck="false"><small>賽務會用 LINE ID 聯絡負責人，請確認可以被搜尋到。</small></label>
+ <label class="field">隊員名單${l.requireRoster?'':'（選填）'}<textarea id="lg-roster" maxlength="1500" ${l.requireRoster?'required':''} placeholder="每行一位：遊戲暱稱／遊戲 UID"></textarea></label>
+ <label class="field">備註（選填）<input id="lg-note" maxlength="300" placeholder="想讓主辦方知道的事"></label>
+ <label class="check-label" style="margin-bottom:16px"><input type="checkbox" id="lg-save" checked>記住負責人資料，下次自動帶入</label>
+ ${l.notes?`<div class="field-label"><span>注意事項（請閱讀後勾選同意）</span></div><div class="notes-box rich">${richText(l.notes)}</div>`:''}
+ <label class="check-label"><input type="checkbox" id="lg-agree" required><span>我已閱讀並同意${l.notes?'上方':''}注意事項，確認隊伍資料正確${pay?'，並會在期限內完成匯款':''}。</span></label>
+ <div id="league-error" class="inline-error" role="alert"></div><p class="micro muted" style="margin-top:10px">報名結果與賽事社群連結會寄到 <b>${esc(u.email)}</b></p></div>
+ <div class="dialog-foot"><button class="btn" type="button" data-action="close-modal">取消</button><button class="btn primary" type="submit">${wait?'登記候補':`確認${esc(m.label)}`}${pay?' · '+money(m.fee):''}</button></div></form>`,'',true);
+}
+function showLeagueReg(id,fresh){
+ const r=state.leagueRegs.find(x=>x.id===id);if(!r)return toast('找不到這筆報名，請重新同步。');
+ const active=r.status==='active',wait=r.status==='waitlist',fee=Number(r.amount)>0,paid=r.paymentState==='confirmed'||r.paymentState==='free';
+ const head=r.status==='cancelled'?'此報名已取消':wait?`候補第 ${r.waitNo} 順位`:paid?'名額確定，準備上場！':`${r.modeLabel}成功，名額已保留`;
+ openDialog(fresh?(wait?'候補登記成功':'報名成功'):'我的聯賽報名',`<div class="dialog-body"><div class="success-mark">${icon(r.status==='cancelled'?'close':wait?'clock':'check')}</div><h2 style="font-size:24px">${esc(head)}</h2><p class="micro" style="margin:6px 0 16px">${esc(r.teamName)} · ${esc(r.title)}${fresh?' · 通知信已寄到 '+esc(state.user.email):''}</p>
+ ${r.leagueCancelled?'<div class="hint" style="margin-bottom:16px;background:#fff0f0;border-color:#f6d4d4;color:var(--red)"><strong>主辦方已取消這個聯賽。</strong> 退款與後續安排請留意官方 LINE 公告。</div>':''}
+ ${active&&r.groupUrl?`<div class="join-box"><div><strong>第一步：加入賽事社群</strong><p>賽程、分組、房號與所有公告都會在社群發布。</p></div><a class="btn gold" href="${esc(r.groupUrl)}" target="_blank" rel="noopener">${icon('users')}加入賽事社群</a></div>`:''}
+ ${active&&fee&&!paid?`<div class="pay-card"><div class="row between" style="position:relative;z-index:1"><div><div class="eyebrow">PAYMENT · ${esc(r.modeLabel)}</div><div class="amount-big">${money(r.amount)}</div></div><span class="badge" style="background:#ffd21c;color:#1d1d1f">${esc(PAY[r.paymentState])}</span></div><div style="position:relative;z-index:1;margin-top:18px"><div class="micro">${esc(r.bankName)} · 代碼 ${esc(r.bankCode)}</div><div class="acct">${esc(r.bankAccount)}</div><div class="row between"><span class="micro">戶名 <b style="color:#fff">${esc(r.bankHolder)}</b></span><button class="btn small" data-action="copy" data-value="${esc(String(r.bankAccount).replace(/[ -]/g,''))}">${icon('copy')}複製帳號</button></div>${r.dueAt?`<div class="micro" style="color:#ffd21c;margin-top:14px">請於 ${esc(fmtDT(r.dueAt))} 前完成匯款</div>`:''}</div></div>`:''}
+ ${active&&r.paymentState==='confirmed'?`<div class="hint" style="margin:0 0 18px;background:#edf8f1;border-color:#d8efdf;color:var(--green)"><strong>已確認收到 ${money(r.amount)}。</strong> 電子收據已寄到你的信箱，賽後記得回來一鍵補登點數。</div>`:''}
+ ${wait?`<div class="hint" style="margin-bottom:18px">有隊伍釋出名額時，系統會依候補順序<b>自動遞補</b>並寄信通知你加入社群${fee?'與匯款':''}；候補期間不需要匯款。</div>`:''}
+ <div class="review-summary"><div class="review-line"><span>比賽日期</span><strong>${esc(r.matchStart===r.matchEnd?dayLabel(r.matchStart):dayLabel(r.matchStart)+' – '+dayLabel(r.matchEnd))}</strong></div>${r.venue?`<div class="review-line"><span>比賽形式</span><strong>${esc(r.venue)}</strong></div>`:''}<div class="review-line"><span>報名方式</span><strong>${esc(r.modeLabel)}${fee?' · '+money(r.amount):' · 免報名費'}</strong></div><div class="review-line"><span>名額</span><strong>${active?'正取第 '+r.slot+' 組':wait?'候補第 '+r.waitNo+' 位':'已取消'}</strong></div><div class="review-line"><span>負責人</span><strong>${esc(r.lineName)}${r.lineId?'（'+esc(r.lineId)+'）':''}</strong></div>${r.roster?`<div class="review-line"><span>隊員</span><strong style="white-space:pre-line;text-align:right">${esc(r.roster)}</strong></div>`:''}<div class="review-line"><span>報名編號</span><strong class="mono micro">${esc(r.id)}</strong></div>${r.last5?`<div class="review-line"><span>回報末五碼</span><strong class="mono">${esc(r.last5)}</strong></div>`:''}${r.cancelReason?`<div class="review-line"><span>取消原因</span><strong>${esc(r.cancelReason)}</strong></div>`:''}</div>
+ ${r.transferNote&&active&&fee&&!paid?`<p class="micro" style="white-space:pre-wrap;margin-bottom:16px">${esc(r.transferNote)}</p>`:''}
+ ${active&&fee&&r.paymentState!=='confirmed'?`<form id="lreport-form" data-id="${esc(r.id)}"><label class="field">已匯款？回報帳號末五碼<input id="lreport-last5" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" required placeholder="例如 12345" value="${esc(r.last5||'')}"><small>賽務核對後會寄出電子收據。</small></label><div id="lreport-error" class="inline-error" role="alert"></div><button class="btn primary full" type="submit">${r.last5?'更新回報':'送出匯款回報'}</button></form>`:''}
+ ${r.canCancel?`<button class="text-btn cancel-link" data-action="cancel-reg" data-kind="league" data-id="${esc(r.id)}">${wait?'取消候補登記':'取消這筆報名'}</button>`:''}</div>`);
+}
+function confirmCancel(kind,id){
+ const r=kind==='league'?state.leagueRegs.find(x=>x.id===id):null,b=kind==='scrim'?state.bookings.find(x=>x.bookingId===id):null;
+ const name=r?`${r.title}（${r.teamName}）`:b?`${dayLabel(b.entries[0]?.date)} ${b.entries.map(e=>e.startTime).join(' / ')}（${b.teamName}）`:'這筆報名';
+ openDialog('取消報名',`<div class="dialog-body"><p style="font-size:15px;color:var(--ink);font-weight:600">確定要取消 ${esc(name)} 嗎？</p><p class="micro" style="margin-top:10px">${r&&r.status==='waitlist'?'取消後會移出候補名單，之後如要參加需要重新報名。':`取消後名額會立即釋出${r?'並由候補隊伍遞補':''}，如要再參加需重新報名。`}</p><div id="cancel-error" class="inline-error" role="alert"></div></div>`,`<div class="dialog-foot"><button class="btn" data-action="${r?'open-lreg':'open-booking'}" data-id="${esc(id)}">返回</button><button class="btn danger" data-action="do-cancel" data-kind="${esc(kind)}" data-id="${esc(id)}">確認取消</button></div>`);
+}
+function leaguePromoHtml(){
+ const l=state.leagues.find(x=>joinable(x)&&!myLeagueReg(x.id))||state.leagues.find(x=>x.state==='upcoming');if(!l)return '';
+ const live=l.modes.find(m=>m.open),next=l.modes.find(m=>m.upcoming);
+ return `<button class="league-promo" data-action="open-league" data-id="${esc(l.id)}"><span class="lp-img" data-cover>${coverHtml(l)}</span><span class="lp-body"><span class="eyebrow">SEASON LEAGUE · ${esc(LEAGUE_STATE[l.state])}</span><span class="lp-title">${esc(l.title)}</span><span class="lp-text">${esc(leagueDays(l))}${l.venue?' · '+esc(l.venue):''}</span><span class="lp-text">${live?`${esc(live.label)}中 · ${live.fee?money(live.fee):'免報名費'} · ${l.state==='waitlist'?'正取已滿，開放候補':'剩 '+l.remaining+' 組'}`:next?`${esc(next.label)} ${esc(fmtDT(next.start))} 開放`:''}</span><span class="btn gold">${l.state==='upcoming'?'查看賽事資訊':'立即報名'} ${icon('arrow')}</span></span></button>`;
+}
+// ---------- v5.1 補登：一次多選 ----------
+const claimWhen=c=>c.kind==='league'?(c.dateEnd&&c.dateEnd!==c.date?`${dayLabel(c.date)}–${dayLabel(c.dateEnd)}`:dayLabel(c.date)):`${dayLabel(c.date)} ${c.startTime}`;
 function renderClaimables(){
- const list=state.claimables;$('claimable-count').textContent=list.length+' 場';
- $('claimables-panel').innerHTML=list.length?list.map(c=>`<div class="claim-card"><span class="avatar" style="background:#fff">${icon('trophy')}</span><div class="grow" style="min-width:180px"><strong>${esc(dayLabel(c.date))} ${esc(c.startTime)} · ${esc(c.title)}</strong><p>${esc(c.teamName)} · 第 ${c.slot} 組 · ${c.claimUntil?'補登截止 '+esc(fmtDT(c.claimUntil)):'不限期'}${c.rejected?' · <b style="color:var(--red)">上次申請被駁回，可重新送出</b>':''}</p></div>${c.paymentState!=='confirmed'?`<span class="badge pending">${esc(PAY[c.paymentState])}</span>`:''}<button class="btn primary small" data-action="quick-claim" data-id="${esc(c.regId)}">一鍵補登 +${num(c.points)}</button></div>`).join(''):empty('目前沒有待補登的場次','用會員報名交流賽，開賽後場次會自動出現在這裡。','calendar');
+ const list=state.claimables,ids=new Set(list.map(c=>c.regId));
+ list.forEach(c=>{if(!claimKnown.has(c.regId)){claimKnown.add(c.regId);claimSel.add(c.regId);}});
+ [...claimSel].forEach(id=>{if(!ids.has(id))claimSel.delete(id);});
+ $('claimable-count').textContent=list.length+' 場';
+ if(!list.length){$('claimables-panel').innerHTML=empty('目前沒有待補登的場次','用會員報名交流賽或聯賽，開賽後場次會自動出現在這裡。','calendar');return;}
+ const sel=list.filter(c=>claimSel.has(c.regId)),pts=sel.reduce((n,c)=>n+Number(c.points||0),0);
+ $('claimables-panel').innerHTML=`${list.length>1?`<label class="select-all"><input type="checkbox" id="claim-all" ${sel.length===list.length?'checked':''}>全選（${list.length} 場）</label>`:''}<div class="claim-list">${list.map(c=>`<label class="claim-card selectable ${claimSel.has(c.regId)?'on':''}"><input type="checkbox" class="claim-pick" value="${esc(c.regId)}" ${claimSel.has(c.regId)?'checked':''}><span class="avatar" style="background:#fff">${icon(c.kind==='league'?'trophy':'ticket')}</span><span class="grow" style="min-width:170px"><strong>${esc(claimWhen(c))} · ${esc(c.title)}</strong><span class="claim-sub">${c.kind==='league'?'聯賽':'交流賽'} · ${esc(c.teamName)} · 第 ${c.slot} 組 · ${c.claimUntil?'補登截止 '+esc(fmtDT(c.claimUntil)):'不限期'}${c.rejected?' · <b style="color:var(--red)">上次申請被駁回，可重新送出</b>':''}</span></span>${c.paymentState&&!['confirmed','free'].includes(c.paymentState)?`<span class="badge pending">${esc(PAY[c.paymentState])}</span>`:''}<span class="claim-pts">+${num(c.points)}</span></label>`).join('')}</div><div class="claim-bar"><span class="micro muted">已選 <b>${sel.length}</b> 場 · 審核通過後共可獲得 <b>${num(pts)}</b> 點</span><button class="btn primary" data-action="bulk-claim" ${sel.length?'':'disabled'}>${sel.length>1?`一鍵補登 ${sel.length} 場`:'一鍵補登'}${icon('arrow')}</button></div>`;
 }
-function quickClaim(id){
- const c=state.claimables.find(x=>x.regId===id);if(!c)return;
- openDialog('一鍵補登',`<div class="dialog-body"><div class="review-summary"><div class="review-line"><span>賽事</span><strong>${esc(c.title)}</strong></div><div class="review-line"><span>場次</span><strong>${esc(dayLabel(c.date))} ${esc(c.startTime)}–${esc(c.endTime)}</strong></div><div class="review-line"><span>隊伍 / 組別</span><strong>${esc(c.teamName)} · 第 ${c.slot} 組</strong></div><div class="review-line"><span>負責人</span><strong>${esc(c.lineName)}</strong></div></div><p class="micro">資料來自你的報名紀錄，送出後由主辦單位審核，通過即發放 <b style="color:var(--gold)">${num(c.points)} 點</b>。</p><div id="quick-claim-error" class="inline-error" role="alert"></div></div>`,`<div class="dialog-foot"><button class="btn" data-action="close-modal">取消</button><button class="btn primary" data-action="confirm-quick-claim" data-id="${esc(id)}">確認送出</button></div>`);
+function bulkClaim(){
+ const sel=state.claimables.filter(c=>claimSel.has(c.regId));if(!sel.length)return;
+ const pts=sel.reduce((n,c)=>n+Number(c.points||0),0);
+ openDialog(sel.length>1?`一次補登 ${sel.length} 場`:'一鍵補登',`<div class="dialog-body"><div class="review-summary">${sel.map(c=>`<div class="review-line"><span>${esc(claimWhen(c))}</span><strong>${esc(c.title)} · 第 ${c.slot} 組 · +${num(c.points)}</strong></div>`).join('')}<div class="review-line" style="border-top:1px solid #e3e3e6;margin-top:6px;padding-top:12px"><span>合計</span><strong style="color:#8d6400">+${num(pts)} 點</strong></div></div><p class="micro">隊伍與組別資料來自你的報名紀錄，送出後由主辦單位審核，通過即發放點數。</p><div id="quick-claim-error" class="inline-error" role="alert"></div></div>`,`<div class="dialog-foot"><button class="btn" data-action="close-modal">取消</button><button class="btn primary" data-action="confirm-bulk-claim">確認送出${sel.length>1?' '+sel.length+' 場':''}</button></div>`);
+}
+function updateClaimEvents(preselect){
+ const type=$('claim-type').value,previous=preselect||$('claim-event').value,events=state.events.filter(e=>e.type===type);
+ $('claim-event').innerHTML=events.map(e=>`<option value="${esc(e.id)}">${esc(e.name)}</option>`).join('')+'<option value="manual">未列出的過往賽事（手動填寫）</option>';
+ // 切換類型時優先帶入該類型的第一個賽事；只有明確選擇或沒有賽事時才停在手動填寫。
+ $('claim-event').value=events.some(e=>e.id===previous)||(previous==='manual'&&preselect)?previous:events.length?events[0].id:'manual';
+ updateClaimSlots();
+}
+function updateClaimSlots(){
+ const id=$('claim-event').value,manual=id==='manual';$('claim-manual-fields').hidden=!manual;$('claim-scheduled-fields').hidden=manual;
+ if(claimPickEvent!==id){claimPicks={};claimPickEvent=id;}
+ const ev=state.events.find(e=>e.id===id);
+ if(ev){
+  const slots=ev.slots.slice().sort((a,b)=>(b.date+b.time).localeCompare(a.date+a.time));Object.keys(claimPicks).forEach(k=>{if(!slots.some(s=>s.id===k))delete claimPicks[k];});
+  $('claim-slot-list').innerHTML=slots.length?slots.map(s=>{const p=claimPicks[s.id]||{};return `<div class="slot-pick ${p.on?'on':''}"><label><input type="checkbox" class="slot-check" data-slot="${esc(s.id)}" ${p.on?'checked':''}><span>${esc(dayLabel(s.date))}<b>${esc(s.time)}</b></span></label><select class="slot-group" data-slot="${esc(s.id)}" aria-label="${esc(s.date+' '+s.time)} 參賽組別"><option value="">選擇組別</option>${s.groups.map(g=>`<option value="${esc(g)}" ${p.group===g?'selected':''}>第 ${esc(g)} 組</option>`).join('')}</select></div>`;}).join(''):empty('這個賽事沒有時段','請改選其他賽事或手動填寫。','calendar');
+ }else renderManualRows();
+ updateClaimSummary();
+}
+function renderManualRows(){
+ $('claim-manual-rows').innerHTML=manualRows.map((r,i)=>`<div class="manual-row" data-row="${i}"><input type="date" class="m-date" aria-label="第 ${i+1} 場比賽日期" value="${esc(r.date)}"><input type="time" class="m-time" aria-label="第 ${i+1} 場開始時間" value="${esc(r.time)}"><input class="m-group" maxlength="30" aria-label="第 ${i+1} 場參賽組別" placeholder="組別" value="${esc(r.group)}"><button type="button" class="btn square" data-action="claim-remove-row" data-row="${i}" aria-label="移除第 ${i+1} 場" ${manualRows.length<2?'disabled':''}>${icon('close')}</button></div>`).join('');
+}
+function claimEntries(){
+ const id=$('claim-event').value;
+ if(id==='manual')return manualRows.filter(r=>r.date||r.time||String(r.group).trim()).map(r=>({eventType:$('claim-type').value,eventName:$('claim-name').value.trim(),eventDate:r.date,eventTime:r.time,groupNo:String(r.group).trim()}));
+ return Object.entries(claimPicks).filter(([,p])=>p.on).map(([slotId,p])=>({eventId:id,slotId,groupNo:p.group||''}));
+}
+function updateClaimSummary(){
+ const ev=state.events.find(e=>e.id===$('claim-event').value),n=claimEntries().length,per=ev?.points||($('claim-type').value==='league'?300:50),btn=$('claim-submit');
+ $('claim-count').textContent=n;$('claim-points').textContent=num(n*per);$('claim-row-count').textContent=`${manualRows.length} / 20 場`;
+ if(!btn.disabled)btn.innerHTML=(n>1?`送出 ${n} 場補登`:'送出補登')+icon('arrow');
 }
 // ---------- 最新消息 ----------
 function renderNews(){
@@ -499,19 +737,6 @@ function renderTier(){
  const u=state.user,total=u.lifetimePoints,base=total>=1000?1000:total>=500?500:0,next=total>=2000?0:total>=1000?2000:total>=500?1000:500,width=next?Math.min(100,(total-base)/(next-base)*100):100;
  $('tier-panel').innerHTML=`<div class="row"><span class="avatar large">${icon('trophy')}</span><div><div class="micro muted">目前會員等級</div><h2 style="margin-top:4px">${esc(u.level)}</h2></div></div><div class="divider"></div><div class="row between micro"><span class="muted">歷史累積</span><strong>${num(total)} 點</strong></div><div class="progress"><span style="width:${width}%"></span></div><p class="micro">${/FORCE|黑卡|超銳能/i.test(u.level)?'邀約會員資格':next?`再累積 ${num(next-total)} 點，前往下一個等級。`:'已達最高累積點數等級。'}</p>`;
 }
-function updateClaimEvents(preselect){
- const type=$('claim-type').value,previous=preselect||$('claim-event').value,events=state.events.filter(e=>e.type===type);
- $('claim-event').innerHTML=events.map(e=>`<option value="${esc(e.id)}">${esc(e.name)}</option>`).join('')+'<option value="manual">未列出的過往賽事（手動填寫）</option>';
- if([...$('claim-event').options].some(o=>o.value===previous))$('claim-event').value=previous;else if(events.length)$('claim-event').value=events[0].id;else $('claim-event').value='manual';
- updateClaimSlots();
-}
-function updateClaimSlots(){
- const manual=$('claim-event').value==='manual';$('claim-manual-fields').hidden=!manual;$('claim-scheduled-fields').hidden=manual;
- ['claim-name','claim-date','claim-time','claim-manual-group'].forEach(id=>{$(id).required=manual;$(id).disabled=!manual;});['claim-slot','claim-group'].forEach(id=>{$(id).required=!manual;$(id).disabled=manual;});
- const event=state.events.find(e=>e.id===$('claim-event').value);$('claim-points').textContent=num(event?.points||($('claim-type').value==='league'?300:50));
- if(event){const prev=$('claim-slot').value;$('claim-slot').innerHTML=event.slots.map(s=>`<option value="${esc(s.id)}">${esc(s.date)}　${esc(s.time)}</option>`).join('');if(event.slots.some(s=>s.id===prev))$('claim-slot').value=prev;updateClaimGroups();}
-}
-function updateClaimGroups(){const event=state.events.find(e=>e.id===$('claim-event').value),slot=event?.slots.find(s=>s.id===$('claim-slot').value),prev=$('claim-group').value;$('claim-group').innerHTML='<option value="">請選擇組別</option>'+(slot?.groups||[]).map(g=>`<option value="${esc(g)}">第 ${esc(g)} 組</option>`).join('');if(slot?.groups.includes(prev))$('claim-group').value=prev;}
 async function loadHistory(page){
  historyPage=page;const mode=historyMode;$('history-panel').innerHTML=loading();
  try{const res=await api(mode==='points'?'getHistory':'getMyTasks',{page,pageSize:20});if(historyMode!==mode||historyPage!==page)return;historyData=mode==='points'?res.history:res.tasks;
@@ -531,6 +756,7 @@ function switchView(view){
 function routeHash(){
  const h=location.hash.slice(1);if(!h||!state.user)return;
  if(h==='bookings'){switchView('scrims');setTimeout(()=>$('bookings-card').scrollIntoView({behavior:'smooth'}),80);return;}
+ if(h==='leagues'){switchView('scrims');setEventTab('leagues');if(state.leagueRegs.length)setTimeout(()=>$('bookings-card').scrollIntoView({behavior:'smooth'}),80);return;}
  if(titles[h])switchView(h);
 }
 window.addEventListener('hashchange',routeHash);
@@ -544,8 +770,18 @@ function handleAction(action,btn){
  else if(action==='toggle-scrim')toggleScrim(btn.dataset.id);
  else if(action==='choose-pair'){selectedIds=btn.dataset.ids.split('|');renderScrims();}
  else if(action==='open-booking')showBooking(btn.dataset.id);
- else if(action==='quick-claim')quickClaim(btn.dataset.id);
- else if(action==='confirm-quick-claim')busy(btn,async()=>{const res=await api('claim',{registrationId:btn.dataset.id},true);modalBusy=false;closeDialog();toast(res.message);await afterWrite();},'quick-claim-error');
+ else if(action==='bulk-claim')bulkClaim();
+ else if(action==='confirm-bulk-claim')busy(btn,async()=>{const ids=state.claimables.filter(c=>claimSel.has(c.regId)).map(c=>c.regId);const res=await api('claim',{registrationIds:ids},true);modalBusy=false;closeDialog();toast(res.message);ids.forEach(id=>claimSel.delete(id));await afterWrite();},'quick-claim-error');
+ else if(action==='event-tab'){if(btn.dataset.tab==='leagues'&&eventTab==='leagues')leagueId=null;setEventTab(btn.dataset.tab);}
+ else if(action==='open-league')openLeague(btn.dataset.id);
+ else if(action==='league-back'){leagueId=null;renderLeagues();window.scrollTo({top:0});}
+ else if(action==='league-join')openLeagueJoin(btn.dataset.id,btn.dataset.mode);
+ else if(action==='open-lreg')showLeagueReg(btn.dataset.id);
+ else if(action==='cancel-reg')confirmCancel(btn.dataset.kind,btn.dataset.id);
+ else if(action==='do-cancel')busy(btn,async()=>{const res=await api('cancelMyRegistration',{kind:btn.dataset.kind,id:btn.dataset.id},true);modalBusy=false;closeDialog();toast(res.message);await afterWrite();},'cancel-error');
+ else if(action==='claim-add-row'){if(manualRows.length>=20)return toast('一次最多補登 20 個場次。');const last=manualRows[manualRows.length-1]||{};manualRows.push({date:'',time:last.time||'',group:last.group||''});renderManualRows();updateClaimSummary();$('claim-manual-rows').lastElementChild?.querySelector('.m-date')?.focus();}
+ else if(action==='claim-remove-row'){manualRows.splice(Number(btn.dataset.row),1);if(!manualRows.length)manualRows=[{date:'',time:'',group:''}];renderManualRows();updateClaimSummary();}
+ else if(action==='claim-clear-slots'){claimPicks={};updateClaimSlots();}
  else if(action==='open-news')openNews(btn.dataset.id);
  else if(action==='optin')setOptIn(btn.dataset.value==='1',btn);
  else if(action==='reward-filter'){rewardFilter=btn.dataset.filter;renderRewards();}
@@ -558,14 +794,29 @@ function handleAction(action,btn){
  else if(action==='logout')busy(btn,async()=>{try{await api('logout');}finally{window.google?.accounts?.id.disableAutoSelect();googleTicket=null;clearToken();showAuth();$('login-password').value='';}});
 }
 document.addEventListener('change',e=>{
- if(e.target.id==='claim-type')updateClaimEvents();else if(e.target.id==='claim-event')updateClaimSlots();else if(e.target.id==='claim-slot')updateClaimGroups();
- else if(e.target.id==='optin-toggle')setOptIn(e.target.checked);
+ const t=e.target;
+ if(t.id==='claim-type')updateClaimEvents();else if(t.id==='claim-event')updateClaimSlots();
+ else if(t.classList.contains('slot-check')){const p=claimPicks[t.dataset.slot]||(claimPicks[t.dataset.slot]={});p.on=t.checked;t.closest('.slot-pick').classList.toggle('on',t.checked);if(t.checked&&!p.group)t.closest('.slot-pick').querySelector('select').focus();updateClaimSummary();}
+ else if(t.classList.contains('slot-group')){const p=claimPicks[t.dataset.slot]||(claimPicks[t.dataset.slot]={});p.group=t.value;if(t.value&&!p.on){p.on=true;const c=t.closest('.slot-pick');c.classList.add('on');c.querySelector('.slot-check').checked=true;}updateClaimSummary();}
+ else if(t.classList.contains('claim-pick')){if(t.checked)claimSel.add(t.value);else claimSel.delete(t.value);renderClaimables();}
+ else if(t.id==='claim-all'){state.claimables.forEach(c=>{if(t.checked)claimSel.add(c.regId);else claimSel.delete(c.regId);});renderClaimables();}
+ else if(t.id==='optin-toggle')setOptIn(t.checked);
 });
+document.addEventListener('input',e=>{const row=e.target.closest('.manual-row');if(!row)return;const r=manualRows[Number(row.dataset.row)];if(!r)return;const c=e.target.classList;if(c.contains('m-date'))r.date=e.target.value;else if(c.contains('m-time'))r.time=e.target.value;else if(c.contains('m-group'))r.group=e.target.value;updateClaimSummary();});
 document.addEventListener('submit',e=>{
- const form=e.target,btn=form.querySelector('[type="submit"]');if(!['login-form','register-form','claim-form','profile-form','redeem-form','scrim-form','report-form'].includes(form.id))return;e.preventDefault();
+ const form=e.target,btn=form.querySelector('[type="submit"]');if(!['login-form','register-form','claim-form','profile-form','redeem-form','scrim-form','report-form','league-form','lreport-form'].includes(form.id))return;e.preventDefault();
  if(form.id==='login-form')busy(btn,async()=>{const res=await api('login',{email:$('login-email').value.trim(),password:$('login-password').value});rememberToken(res.token);$('login-password').value='';await syncData(true);updateClaimEvents();scheduleSync();routeHash();toast('歡迎回到銳能。');},'login-error');
  if(form.id==='register-form')busy(btn,async()=>{if($('register-password').value!==$('register-confirm').value)throw apiError('VALIDATION','兩次輸入的密碼不相同。');const res=await api('register',{gamerTag:$('register-name').value.trim(),email:$('register-email').value.trim(),password:$('register-password').value,newsOptIn:$('register-optin').checked},true);$('login-email').value=$('register-email').value.trim();form.reset();document.querySelector('[data-action="auth-mode"][data-mode="login"]').click();persistSet(sessionStorage,'rn_optin_asked','1');toast(res.message);},'register-error');
- if(form.id==='claim-form')busy(btn,async()=>{const manual=$('claim-event').value==='manual';const data={teamName:$('claim-team').value.trim(),leaderName:$('claim-leader').value.trim(),...(manual?{eventType:$('claim-type').value,eventName:$('claim-name').value.trim(),eventDate:$('claim-date').value,eventTime:$('claim-time').value,groupNo:$('claim-manual-group').value.trim()}:{eventId:$('claim-event').value,slotId:$('claim-slot').value,groupNo:$('claim-group').value})};const res=await api('claim',data,true);toast(res.message);await afterWrite();historyMode='tasks';document.querySelectorAll('#history-tabs button').forEach(b=>b.classList.toggle('active',b.dataset.mode==='tasks'));switchView('history');},'claim-error');
+ if(form.id==='claim-form')busy(btn,async()=>{
+  const entries=claimEntries(),manual=$('claim-event').value==='manual';
+  if(!entries.length)throw apiError('VALIDATION',manual?'請至少填寫一個場次的日期、時間與組別。':'請至少勾選一個日期時段。');
+  if(entries.length>20)throw apiError('VALIDATION','一次最多補登 20 個場次，請分批送出。');
+  if(manual&&!$('claim-name').value.trim())throw apiError('VALIDATION','請填寫過往賽事名稱。');
+  const bad=entries.findIndex(x=>manual?!(x.eventDate&&x.eventTime&&x.groupNo):!x.groupNo);
+  if(bad>=0)throw apiError('VALIDATION',manual?`第 ${bad+1} 個場次請填完整的日期、時間與組別。`:'勾選的每個時段都需要選擇參賽組別。');
+  if(!$('claim-team').value.trim()||!$('claim-leader').value.trim())throw apiError('VALIDATION','請填寫隊伍名稱與報名負責人。');
+  const res=await api('claim',{teamName:$('claim-team').value.trim(),leaderName:$('claim-leader').value.trim(),entries},true);
+  toast(res.message);claimPicks={};manualRows=[{date:'',time:'',group:''}];$('claim-name').value='';updateClaimSlots();await afterWrite();historyMode='tasks';document.querySelectorAll('#history-tabs button').forEach(b=>b.classList.toggle('active',b.dataset.mode==='tasks'));switchView('history');},'claim-error');
  if(form.id==='profile-form')busy(btn,async()=>{const password=$('profile-password').value;if(password!==$('profile-confirm').value)throw apiError('VALIDATION','兩次輸入的新密碼不相同。');if(password&&!$('profile-current-password').value)throw apiError('VALIDATION','變更密碼時請輸入目前密碼。');const res=await api('updateProfile',{gamerTag:$('profile-name').value.trim(),gameUid:$('profile-game-uid').value.trim(),lineName:$('profile-line').value.trim(),lineId:$('profile-line-id').value.trim(),newPassword:password,currentPassword:$('profile-current-password').value},true);state.user=res.user;['profile-password','profile-confirm','profile-current-password'].forEach(id=>$(id).value='');renderMember();toast(res.message);},'profile-error');
  if(form.id==='redeem-form')busy(btn,async()=>{const res=await api('redeem',{itemId:form.dataset.id,gameUid:$('redeem-uid')?.value.trim()||''},true);state.user=res.user;modalBusy=false;closeDialog();toast(res.message);await afterWrite();receipt(res.taskId);},'redeem-error');
  if(form.id==='scrim-form'){
@@ -575,9 +826,13 @@ document.addEventListener('submit',e=>{
    selectedIds=[];$('scrim-agree').checked=false;toast(res.message);state.bookings=[res.booking,...state.bookings.filter(b=>b.bookingId!==res.booking.bookingId)];showBooking(res.booking.bookingId);await afterWrite();}
    catch(err){if(['NOT_OPEN','DUPLICATE','PRICE_CHANGED'].includes(err.code))afterWrite();throw err;}finally{delete btn.dataset.busy;}},'scrim-error').then(()=>renderScrimSummary());
  }
+ if(form.id==='league-form')busy(btn,async()=>{try{const res=await api('leagueRegister',{leagueId:form.dataset.id,mode:form.dataset.mode,expectedFee:Number(form.dataset.fee),teamName:$('lg-team').value.trim(),lineName:$('lg-line').value.trim(),lineId:$('lg-line-id').value.trim(),roster:$('lg-roster').value.trim(),note:$('lg-note').value.trim(),saveProfile:$('lg-save').checked,agree:$('lg-agree').checked},true);
+   state.leagueRegs=[res.registration,...state.leagueRegs.filter(r=>r.id!==res.registration.id)];modalBusy=false;toast(res.message);showLeagueReg(res.registration.id,true);renderLeagues();renderBookings();afterWrite();}
+   catch(err){if(['NOT_OPEN','DUPLICATE','PRICE_CHANGED'].includes(err.code))afterWrite();throw err;}},'league-error');
+ if(form.id==='lreport-form')busy(btn,async()=>{const res=await api('leagueReportPayment',{registrationId:form.dataset.id,last5:$('lreport-last5').value.trim()},true);state.leagueRegs=state.leagueRegs.map(r=>r.id===res.registration.id?res.registration:r);modalBusy=false;showLeagueReg(res.registration.id);renderBookings();toast(res.message);},'lreport-error');
  if(form.id==='report-form')busy(btn,async()=>{const res=await api('scrimReportPayment',{bookingId:form.dataset.id,last5:$('report-last5').value.trim()},true);state.bookings=state.bookings.map(b=>b.bookingId===res.booking.bookingId?res.booking:b);modalBusy=false;showBooking(res.booking.bookingId);renderBookings();toast(res.message);},'report-error');
 });
-document.addEventListener('error',e=>{if(e.target.tagName==='IMG'&&e.target.closest('.product-image'))e.target.closest('.product-image').innerHTML=icon('gift')+'<span class="badge">會員獎勵</span>';if(e.target.tagName==='IMG'&&(e.target.closest('.news-thumb')||e.target.closest('.cover')))e.target.replaceWith(document.createRange().createContextualFragment(icon('bell')));},true);
+document.addEventListener('error',e=>{if(e.target.tagName==='IMG'&&e.target.closest('.product-image'))e.target.closest('.product-image').innerHTML=icon('gift')+'<span class="badge">會員獎勵</span>';if(e.target.tagName==='IMG'&&(e.target.closest('.news-thumb')||e.target.closest('.cover')))e.target.replaceWith(document.createRange().createContextualFragment(icon('bell')));if(e.target.tagName==='IMG'&&e.target.closest('[data-cover]'))e.target.replaceWith(document.createRange().createContextualFragment(coverFallback(e.target.alt,'')));},true);
 document.querySelectorAll('[data-brand]').forEach(el=>el.outerHTML=brand());document.querySelectorAll('[data-mobile-brand]').forEach(el=>el.outerHTML=brand(true));
 async function boot(){if(!token){showAuth();return;}$('auth').hidden=true;$('app').hidden=false;$('home-content').innerHTML=loading();try{await syncData(true);updateClaimEvents();scheduleSync();routeHash();}catch(e){if(e.code!=='UNAUTHORIZED'){showAuth();showNet(e.message);$('login-error').textContent='仍保留登入狀態，恢復連線後按「重新同步」即可。';}}}
 boot();
