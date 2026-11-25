@@ -7,7 +7,7 @@
 <meta name="description" content="REBORN ENTERTAINMENT（銳能娛樂）第三賽季《銳能冬季盃 2027》Garena Free Fire 賽事：24 隊、1/9～1/31 七個比賽日，凍感全場啦！">
 <meta property="og:type" content="website">
 <meta property="og:title" content="銳能冬季盃 2027｜REBORN WINTER CUP 2027">
-<meta property="og:description" content="24 隊爭奪冬季冠軍，總獎勵新台幣 14,500 元＋65,000 鑽石。1/9 開打，凍感全場啦！">
+<meta property="og:description" content="24 隊爭奪冬季冠軍，總獎勵新台幣 14,500 元＋70,000 鑽石。1/9 開打，凍感全場啦！">
 <meta name="theme-color" content="#141518">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -222,6 +222,11 @@ main{overflow-x:clip}
 .prow div{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 20px;background:var(--sf)}
 .prow b{font-size:17px}
 .prow span{display:flex;align-items:center;gap:6px;font-family:var(--num);font-size:24px;font-weight:800;color:var(--ice)}
+.award{display:flex;align-items:center;gap:14px;margin-top:12px;padding:16px 20px;background:var(--sf);border-left:4px solid var(--gold)}
+.award b{font-size:17px}
+.award small{font-size:14px;color:var(--mute)}
+.award span{margin-left:auto;display:flex;align-items:center;gap:6px;font-family:var(--num);font-size:24px;font-weight:800;color:var(--gold)}
+@media (max-width:640px){.award{flex-wrap:wrap;row-gap:4px}.award small{order:3;flex-basis:100%}}
 .prize-note{margin:16px 0 0;font-size:14.5px;color:var(--mute)}
 .prize-note b{color:var(--ink);font-family:var(--num);font-size:18px}
 
@@ -611,12 +616,15 @@ const EVENT = {
   org: 'REBORN ENTERTAINMENT（銳能娛樂）', sponsor: '源吉工程公司', game: 'Garena Free Fire',
   season: '銳能娛樂第三賽季', theme: '冬季嘉年華', slogan: '凍感全場啦',
   prizes: [
-    { rank: 1, title: '冠軍', cash: 7000, dia: 25200, extra: '冠軍獎牌' },
-    { rank: 2, title: '亞軍', cash: 4500, dia: 16200 },
-    { rank: 3, title: '季軍', cash: 3000, dia: 10800 },
-    { rank: 4, title: '第四名', dia: 7200 },
-    { rank: 5, title: '第五名', dia: 3600 },
-    { rank: 6, title: '第六名', dia: 2000 },
+    { rank: 1, title: '冠軍', cash: 7000, dia: 24000, extra: '冠軍獎牌' },
+    { rank: 2, title: '亞軍', cash: 4500, dia: 18000 },
+    { rank: 3, title: '季軍', cash: 3000, dia: 12000 },
+    { rank: 4, title: '殿軍', dia: 7200 },
+    { rank: 5, title: '第五名', dia: 4800 },
+    { rank: 6, title: '第六名', dia: 3000 },
+  ],
+  awards: [
+    { title: '冠軍衝刺擊殺王', dia: 1000, desc: '總決賽冠軍衝刺擊殺數最多' },
   ],
 };
 const STAGES = {
@@ -1276,6 +1284,7 @@ function scheduleOf(stage) { return S.pub.schedule.filter(d => d.stage === stage
 function daysLabel(stage) { return scheduleOf(stage).map(d => fmtMD(d.date)).join('、'); }
 function shortDays(stage) { return scheduleOf(stage).map(d => { const p = twParts(twTime(d.date)); return `${p.mo}/${p.d}`; }).join('、'); }
 function rangeDays(codes) { const ds = S.pub.schedule.filter(d => codes.includes(d.stage)).map(d => twTime(d.date)).sort((a, b) => a - b); if (!ds.length) return ''; const a = twParts(ds[0]), b = twParts(ds[ds.length - 1]); return `${a.mo}/${a.d} – ${b.mo}/${b.d}`; }
+function totalDiamonds() { return EVENT.prizes.concat(EVENT.awards || []).reduce((a, p) => a + p.dia, 0); }
 function timeOf(stage) { const d = scheduleOf(stage)[0]; return d && d.time ? d.time : ''; }
 function nextEvent() {
   const r = S.pub.reg || {}, s = S.pub.settings, t = now();
@@ -1312,7 +1321,7 @@ function tickerItems() {
   const first = S.pub.schedule[0], last = S.pub.schedule[S.pub.schedule.length - 1];
   if (first) items.push(`${fmtMD(first.date)} ${first.time || ''} ${first.title.replace('｜第一天', '')}開打`);
   items.push('每個比賽日下午 4 點開賽');
-  items.push(`總獎勵 NT$${nf(EVENT.prizes.reduce((a, p) => a + (p.cash || 0), 0))}＋${nf(EVENT.prizes.reduce((a, p) => a + p.dia, 0))} 鑽石`);
+  items.push(`總獎勵 NT$${nf(EVENT.prizes.reduce((a, p) => a + (p.cash || 0), 0))}＋${nf(totalDiamonds())} 鑽石`);
   if (last) items.push(`${fmtMD(last.date)} 總決賽，${s.scoring.threshold} 分賽點後吃雞奪冠`);
   if (S.pub.news[0]) items.push(S.pub.news[0].title);
   items.push(`贊助廠商 ${EVENT.sponsor}`);
@@ -1325,7 +1334,7 @@ function pageHome() {
   const items = tickerItems();
   const tk = items.map(x => `<span>${esc(x)}${IC.snow}</span>`).join('');
   const stubState = r.phase === 'loading' ? '…' : r.open ? '開放中' : r.full ? '已額滿' : r.phase === 'soon' ? '即將開放' : r.phase === 'tbd' ? '確認中' : '已截止';
-  const totalCash = EVENT.prizes.reduce((a, p) => a + (p.cash || 0), 0), totalDia = EVENT.prizes.reduce((a, p) => a + p.dia, 0);
+  const totalCash = EVENT.prizes.reduce((a, p) => a + (p.cash || 0), 0), totalDia = totalDiamonds();
   return `
   <section class="cover" aria-label="${EVENT.name} 封面">${/^(https?:|data:)/.test(cover) || !cover ? `<img src="${esc(cover)}" alt="${EVENT.name}｜${EVENT.slogan}" fetchpriority="high">` : logoSlot(cover, 'cover-img', EVENT.name + '｜' + EVENT.slogan, '')}</section>
   <div class="ticker" aria-label="賽事快訊"><div class="tk-track">${tk}${tk}</div></div>
@@ -1376,6 +1385,7 @@ function pageHome() {
       <div class="sec-h"><h2>賽事獎勵</h2><span class="rule"></span></div>
       <div class="podium">${EVENT.prizes.slice(0, 3).map(p => `<div class="pd p${p.rank}"><span class="rk">${p.rank}</span><span class="tt">${p.title}</span><span class="cash"><small>NT$</small>${nf(p.cash)}</span><span class="dia">${IC.dia}${nf(p.dia)} 鑽石</span>${p.extra ? `<span class="medal">${p.extra}</span>` : ''}</div>`).join('')}</div>
       <div class="prow">${EVENT.prizes.slice(3).map(p => `<div><b>${p.title}</b><span>${IC.dia}${nf(p.dia)}</span></div>`).join('')}</div>
+      ${(EVENT.awards || []).map(a => `<div class="award"><b>${a.title}</b><small>${a.desc}</small><span>${IC.dia}${nf(a.dia)}</span></div>`).join('')}
       <p class="prize-note">鑽石數量為每隊合計。總獎勵 <b>NT$${nf(totalCash)}</b>＋<b>${nf(totalDia)}</b> 鑽石＋冠軍獎牌；發放方式見<a href="#/rules/notes">參賽注意事項</a>。</p>
     </section>
 
@@ -1447,7 +1457,7 @@ function stageModal(k) {
     breakout: ['突圍賽', '', [row('參賽隊伍', 'A、B 兩組第 5～10 名，共 12 隊'), row('比賽時間', `${esc(daysLabel('BR'))} ${esc(timeOf('BR'))}`), row('場數', `${S.pub.stages.BR.matches.length} 場`), row('晉級', '總積分前 4 名晉級 12 強總決賽')], 'breakout'],
     points: ['積分衝刺賽', '', [row('參賽隊伍', 'A、B 兩組前 4 名＋突圍賽前 4 名，共 12 隊'), row('比賽時間', `${esc(daysLabel('PR'))} ${esc(timeOf('PR'))}`), row('場數', `${S.pub.stages.PR.matches.length} 場`), row('初始積分', sc.bonus.map((b, i) => `第 ${i + 1} 名 ${b} 分`).join('、') + '，帶進冠軍衝刺')], 'final'],
     rush: ['冠軍衝刺', 'gold', [row('比賽時間', `${esc(daysLabel('CR'))} ${esc(timeOf('CR'))}，最多 ${S.pub.stages.CR.matches.length} 場`), row('賽點', `任一場結束後總積分達 ${sc.threshold} 分，從下一場起取得冠軍資格`), row('奪冠', '取得賽點後在之後的場次吃雞，立即奪冠、比賽結束'), row('沒有冠軍時', `打完 ${S.pub.stages.CR.matches.length} 張地圖仍未產生冠軍，依總積分排名`)], 'final'],
-    cup: ['冬季冠軍', 'gold', EVENT.prizes.map(p => row(p.title, `${p.cash ? 'NT$' + nf(p.cash) + '＋' : ''}${nf(p.dia)} 鑽石${p.extra ? '＋' + p.extra : ''}`)), 'prize'],
+    cup: ['冬季冠軍', 'gold', EVENT.prizes.map(p => row(p.title, `${p.cash ? 'NT$' + nf(p.cash) + '＋' : ''}${nf(p.dia)} 鑽石${p.extra ? '＋' + p.extra : ''}`)).concat((EVENT.awards || []).map(a => row(a.title, `${nf(a.dia)} 鑽石（${a.desc}）`))), 'prize'],
   }[k];
   if (!M) return;
   openModal(`<span class="k">賽制</span><h3>${M[0]}</h3><div class="scroll-x"><table class="data"><tbody>${M[2].join('')}</tbody></table></div>
@@ -1521,7 +1531,7 @@ function pageRules() {
     ${rule('points', '積分計算', `<p style="margin-top:0">單場積分＝<b>排名分</b>＋<b>擊殺分</b>（每擊殺 1 人得 ${sc.kill} 分）。分組賽、突圍賽與積分衝刺賽以各賽段所有場次的總積分排名。</p><div class="two">${placeTable(0, half)}${placeTable(half, sc.place.length)}</div>`)}
     ${rule('tie', '同分判定', `<p style="margin-top:0">總積分相同時，依下列順序決定名次：</p><ol><li>吃雞（Booyah）次數較多者</li><li>總擊殺數較多者</li><li>最後一場名次較高者</li></ol><p class="muted" style="font-size:14px">同分處理以主辦單位公告的完整賽事規章為準。</p>`)}
     ${rule('maps', '比賽地圖', `<p style="margin-top:0">地圖池：<b>${esc((s.maps || MAPS).join('、'))}</b>。一天 5 張地圖輪流打；冠軍衝刺最多 8 張地圖。各場地圖以「<a href="#/schedule">賽程查詢</a>」公布為準。</p>`)}
-    ${rule('prize', '賽事獎勵', `<div class="scroll-x"><table class="data"><thead><tr><th>名次</th><th>獎金</th><th>鑽石（每隊）</th><th>其他</th></tr></thead><tbody>${EVENT.prizes.map(p => `<tr><td>${p.title}</td><td class="n">${p.cash ? 'NT$' + nf(p.cash) : '—'}</td><td class="n">${nf(p.dia)}</td><td>${p.extra || '—'}</td></tr>`).join('')}</tbody></table></div>`)}
+    ${rule('prize', '賽事獎勵', `<div class="scroll-x"><table class="data"><thead><tr><th>名次</th><th>獎金</th><th>鑽石（每隊）</th><th>其他</th></tr></thead><tbody>${EVENT.prizes.map(p => `<tr><td>${p.title}</td><td class="n">${p.cash ? 'NT$' + nf(p.cash) : '—'}</td><td class="n">${nf(p.dia)}</td><td>${p.extra || '—'}</td></tr>`).join('')}${(EVENT.awards || []).map(a => `<tr><td>${a.title}</td><td class="n">—</td><td class="n">${nf(a.dia)}</td><td>${a.desc}</td></tr>`).join('')}</tbody></table></div>`)}
     ${rule('notes', '參賽注意事項', `<div class="md">${md(S.pub.texts.notes || DEFAULT_NOTES)}</div>`)}
     ${s.rulebookUrl ? `<p style="margin-top:20px"><a class="btn line" href="${esc(s.rulebookUrl)}" target="_blank" rel="noopener">查看完整賽事規章</a></p>` : ''}
     <p class="muted" style="font-size:14px;margin-top:20px">本頁內容如有未盡事宜，或與主辦單位公告的完整賽事規章不一致時，以最新公告為準。</p>
