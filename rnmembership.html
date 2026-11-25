@@ -6,7 +6,8 @@
 <meta name="theme-color" content="#f5f5f7">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>銳能會員中心 | REBORN ENTERTAINMENT</title>
-<!-- REBORN v5.1 單檔（會員 × 交流賽／聯賽報名 × 多選補登 × 電子郵件）。只在下方 GAS_API_URL 維護服務網址，使用者看不到設定入口。 -->
+<!-- REBORN v5.2 單檔（會員 × 交流賽／聯賽報名 × 多選補登 × 銳能 PASS × 電子郵件）。只在下方 GAS_API_URL 維護服務網址，使用者看不到設定入口。 -->
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#f5f5f7;--paper:#fff;--ink:#1d1d1f;--muted:#6e6e73;--gold:#b87c00;--yellow:#ffd21c;--gold-light:#fff6d4;--line:#e8e8ed;--green:#23804b;--red:#b62d2d;--radius:24px;--shadow:0 8px 32px rgba(0,0,0,.025);--font:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.6 var(--font);-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}button,input,select,textarea{font:inherit}button{cursor:pointer}button,a,input,select,textarea{touch-action:manipulation}button:disabled{cursor:default;opacity:.45}a{color:inherit;text-decoration:none}h1,h2,h3,p{margin:0}h1{font-size:40px;letter-spacing:-1.6px;line-height:1.25;font-weight:700}h2{font-size:21px;line-height:1.4;letter-spacing:-.5px}h3{font-size:16px;line-height:1.5}p{color:var(--muted)}svg.icon{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.65;stroke-linecap:round;stroke-linejoin:round;flex:none}button:focus-visible,a:focus-visible{outline:3px solid #c58c00;outline-offset:4px}input:focus,select:focus,textarea:focus{outline:0;border-color:#b98b00;box-shadow:0 0 0 4px #ffd21c26}[hidden],.hidden{display:none!important}.muted{color:var(--muted)}.micro{font-size:12px}.eyebrow{font-size:11px;font-weight:600;letter-spacing:1.5px;color:var(--muted)}.mono{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.1px}.stack{display:grid;gap:20px}.row{display:flex;align-items:center;gap:12px}.between{justify-content:space-between}.wrap{flex-wrap:wrap}.end{justify-content:flex-end}.grow{flex:1;min-width:0}.gap8{gap:8px}.break-text{overflow-wrap:anywhere}.brand{display:flex;align-items:center;gap:10px;flex:none}.brand-mark{width:32px;height:34px;display:grid;place-items:center;flex:none}.brand-mark svg{width:23px;height:29px;fill:currentColor}.brand-mark img{width:100%;height:100%;object-fit:contain;filter:brightness(0)}.brand-name{font-size:16px;font-weight:800;letter-spacing:1px;line-height:1.2}.brand small{display:block;font-size:8px;letter-spacing:1.3px;color:var(--muted);font-weight:500;margin-top:3px}.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--line);border-radius:100px;background:var(--paper);padding:10px 19px;color:var(--ink);font-weight:500;transition:background .18s,transform .18s,border-color .18s;white-space:nowrap;min-height:42px}.btn:hover{background:#f5f5f7;border-color:#d3d3d7}.btn.primary{background:var(--ink);color:#fff;border-color:var(--ink)}.btn.primary:hover{background:#3a3a3c}.btn.gold{background:var(--yellow);color:var(--ink);border-color:var(--yellow)}.btn.gold:hover{background:#f2c600}.btn.danger{background:#fff0f0;color:var(--red);border-color:#f6d4d4}.btn.good{background:#edf8f1;color:var(--green);border-color:#d8efdf}.btn.small{padding:6px 13px;font-size:12px;min-height:34px}.btn.square{width:38px;height:38px;padding:0;min-height:38px}.btn.full{width:100%;padding:13px;min-height:48px}.text-btn{padding:0;color:#976800;font-weight:500;background:none;border:0;font-size:13px}.text-btn:hover{text-decoration:underline}.btn .icon{width:17px;height:17px}.card{padding:28px;background:var(--paper);border:1px solid transparent;border-radius:var(--radius);box-shadow:var(--shadow);min-width:0}.card-head{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:24px}.card-head p{margin-top:5px;font-size:12px}.section-label{font-size:11px;color:var(--muted);font-weight:500;margin-bottom:12px}.badge{display:inline-flex;align-items:center;gap:5px;font-size:11px;line-height:1.5;padding:5px 10px;border-radius:100px;white-space:nowrap;background:#f5f5f7;color:#646469;font-weight:500}.badge.pending,.badge.gold{background:var(--gold-light);color:#8d6200}.badge.completed{background:#edf8f1;color:var(--green)}.badge.rejected{background:#fff0f0;color:var(--red)}.badge.dark{background:var(--ink);color:#fff}.avatar{width:36px;height:36px;border-radius:50%;background:#f5f5f7;color:#4b4b50;display:grid;place-items:center;font-size:13px;font-weight:600;flex:none}.avatar.large{width:64px;height:64px;font-size:24px;background:var(--gold-light)}.field{display:grid;gap:8px;font-size:12px;font-weight:500;margin-bottom:18px;color:#4b4b50}.field input,.field select,.field textarea{width:100%;min-width:0;background:#fff;border:1px solid #d5d5d9;border-radius:12px;padding:13px 14px;color:var(--ink);font-weight:400;min-height:48px}.field input:disabled,.field select:disabled{background:#f5f5f7;color:var(--muted)}.field small{font-size:11px;font-weight:400;color:var(--muted)}.field textarea{resize:vertical;min-height:85px}.fields2{display:grid;grid-template-columns:1fr 1fr;gap:16px}.fields2 .field{margin-bottom:0}.field.last{margin-bottom:0}.inline-error{font-size:12px;color:var(--red);background:#fff0f0;padding:12px 14px;border-radius:12px;margin:12px 0;white-space:pre-wrap}.inline-error:empty{display:none}.hint{border:1px solid #f6eac0;border-radius:16px;background:#fffae9;color:#836100;padding:15px 18px;font-size:12px}.hint p{color:inherit}.empty{padding:40px 16px;text-align:center;color:var(--muted);font-size:13px}.empty .icon{width:30px;height:30px;color:#a5a5aa;margin-bottom:12px}.empty strong{display:block;font-size:14px;color:#4b4b50;margin-bottom:5px}.tabs{display:flex;gap:3px;padding:4px;background:#ececef;border-radius:100px;max-width:100%;overflow-x:auto}.tabs button{background:none;color:var(--muted);border:0;border-radius:100px;padding:8px 16px;white-space:nowrap;font-size:12px;font-weight:500}.tabs button.active{background:#fff;color:var(--ink);box-shadow:0 1px 5px #0000000c}.progress{height:5px;border-radius:8px;background:#eeeeef;overflow:hidden;margin:16px 0}.progress span{display:block;height:100%;background:var(--yellow);border-radius:8px;transition:width .3s}.line-item{padding:18px 0;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px}.line-item:last-child{border-bottom:0}.line-item strong{font-size:13px;font-weight:500;overflow-wrap:anywhere}.line-item p{font-size:11px;margin-top:4px}.amount{font-size:15px;font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap}.positive{color:var(--green)}.negative{color:var(--red)}.table-wrap{overflow-x:auto}table{border-collapse:collapse;width:100%;text-align:left;white-space:nowrap;font-size:13px}th{font-weight:500;color:var(--muted);font-size:11px;padding:14px 16px;background:#fafafa;border-bottom:1px solid var(--line)}td{padding:18px 16px;border-bottom:1px solid var(--line)}tr:last-child td{border-bottom:0}td:first-child,th:first-child{padding-left:24px}td strong{font-weight:500}.table-card{padding:0;overflow:hidden}.table-card .card-head{padding:24px;margin-bottom:0}.table-card tbody tr:hover{background:#fdfbf3}.pagination{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:16px 24px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}.search{position:relative;display:flex;align-items:center;max-width:360px;min-width:150px}.search>.icon{position:absolute;left:14px;width:16px;height:16px;color:#a1a1a7}.search input{width:100%;padding:11px 13px 11px 40px;border:1px solid #dcdce0;border-radius:100px;background:white;font-size:13px;min-width:0;min-height:42px}.toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:22px;flex-wrap:wrap}.page-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:36px}.page-head p{margin-top:12px;font-size:14px}.two-col{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}.three-col{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}.divider{height:1px;background:var(--line);margin:24px 0}.footer-note{text-align:center;font-size:10px;color:#8e8e93;margin:56px 0 0;letter-spacing:.2px}.check-label{display:flex;align-items:flex-start;gap:10px;font-size:12px;color:var(--muted)}input[type=checkbox]{accent-color:#a87800;width:17px;height:17px;flex:none;margin:2px 0}.connection{font-size:10px;color:var(--muted);display:flex;align-items:center;gap:7px;white-space:nowrap}.dot{width:5px;height:5px;border-radius:50%;background:#53a66a;flex:none}.connection.busy .dot{background:#c79700}.connection.bad .dot{background:#d44b4b}.net-banner{padding:12px 20px;background:#fff7d6;color:#715400;display:flex;align-items:center;justify-content:center;gap:16px;font-size:12px;position:relative;z-index:90}.net-banner button{background:none;border:0;color:inherit;text-decoration:underline;white-space:nowrap}.mobile-brand{display:none}
@@ -198,6 +199,117 @@ dialog{width:min(540px,calc(100% - 32px));max-height:calc(100dvh - 48px);border:
  .reg-mode-head{padding:16px}.reg-mode-head .fee{font-size:21px}.manual-row{grid-template-columns:1fr 1fr;}.manual-row .m-group{grid-column:1}.manual-row .btn{justify-self:end}
  .claim-card{gap:12px;padding:16px}.claim-pts{margin-left:auto}}
 
+/* v5.2 會員卡（閃電卡面）、PASS 認證徽章、訂閱頁 */
+.pbadge{display:inline-block;vertical-align:-3px;margin-left:5px;flex:none;filter:drop-shadow(0 1px 1px #0002)}
+.rcard{--rx:0deg;--ry:0deg;--mx:50%;--my:30%;--foil:linear-gradient(100deg,#fff3a6,#e9b630 45%,#fff1b8 60%,#b98510);position:relative;isolation:isolate;overflow:hidden;border-radius:26px;min-height:336px;padding:30px;display:flex;flex-direction:column;
+ font-family:var(--font);transform:perspective(1000px) rotateX(var(--rx)) rotateY(var(--ry));transition:transform .5s cubic-bezier(.2,.8,.2,1),box-shadow .4s;will-change:transform}
+.rcard.is-hover{transition:transform .08s linear,box-shadow .4s}
+.rcard>*{position:relative;z-index:2}
+.rcard .rc-bolt,.rcard .rc-streaks,.rcard .rc-glare{position:absolute;z-index:0;pointer-events:none}
+.rc-bolt{right:-9%;top:-12%;height:132%;width:auto;transform:rotate(9deg)}
+.rc-bolt--line{z-index:1;fill:none}
+.rc-streaks{inset:0}.rc-streaks i{position:absolute;left:-30%;width:170%;height:1px;transform:rotate(-23deg);transform-origin:left}
+.rc-streaks i:nth-child(1){top:38%}.rc-streaks i:nth-child(2){top:58%;opacity:.6}.rc-streaks i:nth-child(3){top:82%;opacity:.35}
+.rc-glare{inset:0;opacity:0;transition:opacity .35s;background:radial-gradient(circle at var(--mx) var(--my),#ffffff40,transparent 46%)}
+.rcard.is-hover .rc-glare{opacity:1}
+.rc-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.rc-logo{font:600 13px/1 "Chakra Petch",var(--font);letter-spacing:3px}.rc-logo b{margin-left:7px;font-weight:700}
+.rc-tier{font:700 13px/1.2 "Chakra Petch",var(--font);letter-spacing:2.5px;text-align:right}.rc-tier i{display:block;font:500 11px/1.6 var(--font);letter-spacing:.5px;font-style:normal;opacity:.75;margin-top:3px}
+.rc-level{font-size:11px;letter-spacing:1.5px;padding:6px 11px;border-radius:999px;background:#ffffff4d}
+.rc-mid{margin-top:auto;padding-top:34px}.rc-mid small{font-size:12px;opacity:.72}
+.rc-mid strong{display:block;font:600 62px/1.05 "Chakra Petch",var(--font);letter-spacing:-1px;margin-top:6px;font-variant-numeric:tabular-nums}
+.rc-foot{display:flex;justify-content:space-between;align-items:flex-end;gap:14px;margin-top:22px}
+.rc-name{display:flex;align-items:center;font-size:15px;font-weight:600}.rc-uid{display:block;font:500 11px/1.4 "Chakra Petch",ui-monospace,monospace;letter-spacing:1.5px;opacity:.62;margin-top:4px}
+.rc-valid{text-align:right}.rc-valid small{display:block;font-size:10px;opacity:.62}.rc-valid b{font:600 16px/1.3 "Chakra Petch",var(--font);letter-spacing:1px}
+.rc-btn{background:#ffffff4a;border-color:#ffffff73;color:inherit;font-size:11px;min-height:37px;padding:8px 13px;backdrop-filter:blur(10px)}
+.rc-founder{position:absolute!important;right:30px;top:70px;font:700 10px/1 "Chakra Petch",var(--font);letter-spacing:2.5px;padding:6px 9px;border-radius:7px;border:1px solid currentColor;opacity:.9}
+/* 一般會員：銳能黃 */
+.rcard--base{background:linear-gradient(118deg,#ffe774 0%,#ffd21c 46%,#f3b904 100%);color:#2f2600;box-shadow:inset 0 1px 1px #fffa,0 16px 30px #c79a0018}
+.rcard--base .rc-bolt{fill:#c38f00;opacity:.17}.rcard--base .rc-bolt--line{stroke:#7a5b00;stroke-width:.12;opacity:.3}
+.rcard--base .rc-streaks i{background:linear-gradient(90deg,transparent,#7a5b0040 40%,transparent)}
+.rcard--base .rc-logo b{color:#000}
+/* 超銳能：黑卡 */
+.rcard--force{background:radial-gradient(120% 90% at 90% 0%,#3b3416 0%,transparent 55%),linear-gradient(125deg,#2b2b2e,#141416);color:#ffe07b;box-shadow:0 18px 34px #0003}
+.rcard--force .rc-bolt{fill:#ffd21c;opacity:.16}.rcard--force .rc-bolt--line{stroke:#ffd21c;stroke-width:.12;opacity:.55}
+.rcard--force .rc-streaks i{background:linear-gradient(90deg,transparent,#ffd21c33 40%,transparent)}.rcard--force .rc-level{background:#ffd21c26}
+/* 銳能 PASS：金／銀／銅 */
+.rcard--gold,.rcard--silver,.rcard--bronze{color:#f4f4f5;box-shadow:0 20px 40px #0000003d,inset 0 0 0 1px var(--edge)}
+.rcard--gold{--edge:#e9b63066;--glow:#f5c542;background:radial-gradient(110% 80% at 88% 6%,#4a3709 0%,transparent 58%),radial-gradient(60% 50% at 0% 100%,#2a1f05 0%,transparent 70%),linear-gradient(140deg,#1d180c,#0f0d08)}
+.rcard--silver{--edge:#c9d1da59;--glow:#e6ebf0;--foil:linear-gradient(100deg,#ffffff,#aeb7c2 45%,#f6f8fa 60%,#78838f);background:radial-gradient(110% 80% at 88% 6%,#3a424c 0%,transparent 58%),radial-gradient(60% 50% at 0% 100%,#1c2127 0%,transparent 70%),linear-gradient(140deg,#191c20,#0d0f11)}
+.rcard--bronze{--edge:#d08a5c66;--glow:#e3a27a;--foil:linear-gradient(100deg,#ffd9bf,#c97b48 45%,#ffc8a3 60%,#8a4520);background:radial-gradient(110% 80% at 88% 6%,#4d2a16 0%,transparent 58%),radial-gradient(60% 50% at 0% 100%,#2a160b 0%,transparent 70%),linear-gradient(140deg,#1e140e,#100b08)}
+.rcard--gold .rc-bolt{fill:url(#pb-gold)}.rcard--silver .rc-bolt{fill:url(#pb-silver)}.rcard--bronze .rc-bolt{fill:url(#pb-bronze)}
+.rcard--gold .rc-bolt,.rcard--silver .rc-bolt,.rcard--bronze .rc-bolt{opacity:.26}
+.rcard--gold .rc-bolt--line,.rcard--silver .rc-bolt--line,.rcard--bronze .rc-bolt--line{stroke:var(--glow);stroke-width:.13;opacity:.6;fill:none}
+.rcard--gold .rc-streaks i,.rcard--silver .rc-streaks i,.rcard--bronze .rc-streaks i{background:linear-gradient(90deg,transparent,var(--edge) 40%,transparent)}
+.rcard--gold .rc-logo b,.rcard--silver .rc-logo b,.rcard--bronze .rc-logo b,.rcard--gold .rc-tier,.rcard--silver .rc-tier,.rcard--bronze .rc-tier{background:var(--foil);-webkit-background-clip:text;background-clip:text;color:transparent}
+.rcard--gold .rc-founder,.rcard--silver .rc-founder,.rcard--bronze .rc-founder{color:var(--glow);border-color:var(--edge);background:#000000a6;backdrop-filter:blur(6px)}
+.rcard--gold .rc-tier i,.rcard--silver .rc-tier i,.rcard--bronze .rc-tier i{color:#f4f4f5;-webkit-text-fill-color:#f4f4f5;opacity:.7}
+.rcard--gold .rc-glare,.rcard--silver .rc-glare,.rcard--bronze .rc-glare{background:radial-gradient(circle at var(--mx) var(--my),#ffffff2e,transparent 42%),conic-gradient(from 200deg at var(--mx) var(--my),#ff5c8a1a,#ffd21c1f,#3ee6c41a,#6b8cff1f,#ff5c8a1a);mix-blend-mode:screen}
+.rcard--gold::after,.rcard--silver::after,.rcard--bronze::after{content:"";position:absolute;inset:-40% -60%;z-index:1;pointer-events:none;background:linear-gradient(105deg,transparent 42%,#ffffff1f 49%,#ffffff08 53%,transparent 58%);transform:translateX(-60%);animation:rc-sheen 9s ease-in-out 2.4s infinite}
+@keyframes rc-sheen{0%,72%{transform:translateX(-60%)}100%{transform:translateX(60%)}}
+/* 開通後第一次看到卡片：閃電描邊、亮起一次 */
+.rcard.is-charging .rc-bolt--line path{stroke-dasharray:100;animation:rc-draw .9s cubic-bezier(.6,0,.3,1) both}
+.rcard.is-charging .rc-bolt:not(.rc-bolt--line){animation:rc-flash 1.5s ease-out both}
+.rcard.is-charging{animation:rc-glow 1.5s ease-out both}
+@keyframes rc-draw{from{stroke-dashoffset:100;opacity:1;stroke-width:.4}to{stroke-dashoffset:0}}
+@keyframes rc-flash{0%,45%{opacity:0}62%{opacity:.75;filter:drop-shadow(0 0 6px var(--glow))}100%{opacity:.26}}
+@keyframes rc-glow{55%{box-shadow:0 20px 50px #0000004d,0 0 0 1px var(--edge),0 0 38px -6px var(--glow)}}
+.rcard--compact{min-height:238px;padding:24px;border-radius:22px}.rcard--compact .rc-mid strong{font-size:44px}.rcard--compact .rc-founder{top:58px;right:24px}
+@media(prefers-reduced-motion:reduce){.rcard{transition:none;transform:none!important}.rcard::after,.rcard.is-charging,.rcard.is-charging *{animation:none!important}}
+/* PASS 頁 */
+.pass-hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,460px);gap:44px;align-items:center;margin:4px 0 34px}
+.pass-hero h1{font-size:44px;letter-spacing:-1.6px;line-height:1.1;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.pass-hero-copy>p{margin-top:12px;font-size:15px;max-width:34em}
+.pass-lede{font-size:16px!important;line-height:1.75;color:#3a3a3c}
+.pass-founder{display:flex;align-items:center;gap:8px;font-size:13px!important;color:#7a5600!important;background:var(--gold-light);border-radius:14px;padding:10px 14px;margin:18px 0!important;max-width:620px}
+.pass-founder .icon{width:16px;height:16px;flex:none}.pass-founder b{font-size:15px;margin:0 2px}
+.pass-hero-copy .btn{margin-top:6px}
+.pass-dates{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:20px 0 14px}
+.pass-dates div{background:#fff;border-radius:16px;padding:14px 16px;box-shadow:var(--shadow)}
+.pass-dates dt{font-size:11px;color:var(--muted)}.pass-dates dd{margin:4px 0 0;font:600 18px/1.3 "Chakra Petch",var(--font);letter-spacing:.5px}.pass-dates dd.hl{color:#9a6a00}
+.pass-hero-card .rcard{min-height:300px}
+.pass-plans{scroll-margin-top:120px;margin-bottom:28px}
+.plan-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.plan{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:6px;text-align:left;background:#fff;border:1.5px solid var(--line);border-radius:22px;padding:22px 22px 20px;color:var(--ink);cursor:pointer;transition:border-color .15s,box-shadow .15s}
+.plan:hover{border-color:#d4d4d9}
+.plan.on{border-color:var(--ink);box-shadow:0 0 0 4px #ffd21c59}
+.plan-flag{position:absolute;top:-11px;right:18px;background:var(--ink);color:var(--yellow);font-size:11px;font-weight:600;padding:4px 10px;border-radius:999px}
+.plan-name{display:flex;align-items:center;gap:2px;font-size:16px;font-weight:650}.plan-name .pbadge{margin:0 6px 0 0}
+.plan-price{font:600 40px/1.1 "Chakra Petch",var(--font);letter-spacing:-.5px;margin-top:6px}.plan-price small{font-size:14px;margin-right:4px;letter-spacing:0;color:var(--muted)}
+.plan-meta{font-size:12px;color:var(--muted)}
+.plan-cta{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin-top:16px;padding:14px 16px 14px 22px;background:#fff;border-radius:18px;box-shadow:var(--shadow)}
+.plan-cta span{font-size:13px;font-weight:600}
+.pass-cols{margin-bottom:24px}
+.perk-list,.pass-steps{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:14px}
+.perk-list li,.pass-steps li{display:grid;gap:3px;padding-left:16px;border-left:2px solid var(--yellow)}
+.perk-list b,.pass-steps b{font-size:14px}.perk-list span,.pass-steps span{font-size:12px;color:var(--muted);line-height:1.7}
+.pass-steps{counter-reset:s}.pass-steps li{counter-increment:s;border-left:0;padding-left:38px;position:relative}
+.pass-steps li::before{content:counter(s);position:absolute;left:0;top:0;width:26px;height:26px;border-radius:50%;background:var(--ink);color:var(--yellow);display:grid;place-items:center;font:600 12px "Chakra Petch",var(--font)}
+.pass-terms{margin-top:24px}.pass-terms summary{cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between}.pass-terms summary::-webkit-details-marker{display:none}
+.pass-terms summary::after{content:"展開";font-size:12px;color:var(--muted)}.pass-terms[open] summary::after{content:"收合"}.pass-terms h2{font-size:17px}.pass-terms .rich{margin-top:14px;font-size:13px}
+.pay-methods{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pay-method{display:flex;gap:10px;align-items:flex-start;border:1.5px solid var(--line);border-radius:16px;padding:14px;cursor:pointer}
+.pay-method:has(input:checked){border-color:var(--ink);background:#fffaf0}
+.pay-method input{margin-top:3px;accent-color:#1d1d1f}.pay-method b{display:block;font-size:13px}.pay-method small{display:block;font-size:11px;color:var(--muted);margin-top:3px;line-height:1.5}
+.pass-head--gold{background:linear-gradient(135deg,#2a2209,#0f0d08)}.pass-head--silver{background:linear-gradient(135deg,#262b31,#0d0f11)}.pass-head--bronze{background:linear-gradient(135deg,#2c1a10,#100b08)}
+.booking-date.pass-date{background:#f5f5f7;display:grid;place-items:center}.booking-date.pass-date .pbadge{margin:0}
+.btn.danger-outline{background:#fff;color:var(--red);border-color:#efc9c9}
+.claim-boost{display:inline-block;font-size:10px;font-weight:700;color:#7a5600;background:var(--gold-light);border-radius:6px;padding:2px 6px;margin-left:6px;vertical-align:2px}
+.claim-pts s{font-size:12px;color:var(--muted);font-weight:500;margin-right:4px}
+.pass-note{display:flex;align-items:center;gap:8px;font-size:12px;color:#7a5600;background:var(--gold-light);border-radius:12px;padding:9px 12px;margin-top:10px}
+@media(max-width:1000px){.pass-hero{grid-template-columns:1fr;gap:26px}.pass-hero-card{max-width:460px}}
+@media(max-width:760px){.plan-grid{grid-template-columns:1fr}.pass-dates{grid-template-columns:1fr 1fr}.pay-methods{grid-template-columns:1fr}}
+@media(max-width:640px){.rcard{min-height:292px;padding:24px;border-radius:24px}.rc-mid strong{font-size:52px}.rc-founder{top:60px;right:24px}.pass-hero h1{font-size:34px}.plan-price{font-size:34px}.rc-logo{letter-spacing:2px}}
+.rcard[role="button"]{cursor:pointer}.rcard[role="button"]:focus-visible{outline:3px solid var(--yellow);outline-offset:4px}
+.pass-promo{display:flex;align-items:center;gap:18px;width:100%;margin:18px 0 22px;padding:20px 24px;border:0;border-radius:22px;text-align:left;cursor:pointer;color:#f4f4f5;
+ background:radial-gradient(80% 140% at 100% 0%,#4a3709 0%,transparent 60%),linear-gradient(120deg,#1d180c,#0f0d08);box-shadow:inset 0 0 0 1px #e9b6304d}
+.pass-promo .pp-bolt{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;background:#e9b63024;flex:none}.pass-promo .pp-bolt svg{width:18px;height:24px;fill:url(#pb-gold)}
+.pass-promo strong{display:block;font-size:16px}.pass-promo .grow>span{display:block;font-size:12px;color:#c9c3b0;margin-top:3px}
+.pass-promo .btn{background:#e9b630;border-color:#e9b630;color:#1d1d1f}
+button.pass-note{border:0;width:100%;text-align:left;cursor:pointer}
+.nav-link[data-view="pass"] .icon{color:#c99400}
+@media(max-width:640px){.pass-promo{flex-wrap:wrap;padding:18px}.pass-promo .btn{width:100%;justify-content:center}}
+
 </style>
 </head>
 <body class="member-ui">
@@ -206,7 +318,7 @@ dialog{width:min(540px,calc(100% - 32px));max-height:calc(100dvh - 48px);border:
 <div id="auth" class="auth-page"><header class="auth-nav"><div data-brand></div><nav class="auth-nav-links"><a href="https://www.rebormnent.com/" target="_blank" rel="noopener">銳能官網</a><a href="https://lin.ee/xTKnekT" target="_blank" rel="noopener">官方 LINE ↗</a></nav></header><div class="auth-layout"><section class="auth-hero"><div class="eyebrow">銳能娛樂 · 會員中心</div><h1>每一次上場，<br>都有<em>新的可能。</em></h1><p>報名、參賽、累積、兌換。<br>一個帳號，串起你的銳能旅程。</p><div class="hero-card-stage" aria-hidden="true"><div class="hero-member-card"><svg class="hero-card-symbol" viewBox="0 0 22 30"><path d="M13 0 1 17h8L7 30l14-19h-9Z"/></svg><div class="hero-card-label">REBORN ENTERTAINMENT</div><div class="hero-card-title">MEMBERSHIP</div><div class="hero-card-sub">EVERY MOMENT COUNTS.</div><div class="hero-card-bottom"><span>YOUR NEXT CHAPTER.</span><span class="hero-card-tier">CORE MEMBER</span></div></div></div><div class="auth-features"><div><span data-icon="ticket"></span><strong>線上報名交流賽</strong><p>確認信、收據自動寄送</p></div><div><span data-icon="calendar"></span><strong>每場都能累積</strong><p>參賽補登，持續進階</p></div><div><span data-icon="gift"></span><strong>點數變成獎勵</strong><p>兌換喜歡的虛寶與好禮</p></div></div></section><section class="auth-box"><div class="eyebrow">REBORN ID</div><h2 id="auth-title">歡迎回來。</h2><p id="auth-sub">登入，讓精彩繼續。</p><div id="google-login-button" class="google-button"></div><div class="auth-or">或使用會員帳號</div><div class="tabs"><button class="active" data-action="auth-mode" data-mode="login">會員登入</button><button data-action="auth-mode" data-mode="register">建立帳號</button></div><form id="login-form"><label class="field">電子信箱<input type="email" id="login-email" required maxlength="254" placeholder="name@example.com" autocomplete="username"></label><label class="field">密碼<input type="password" id="login-password" required maxlength="128" placeholder="輸入會員密碼" autocomplete="current-password"></label><div id="login-error" class="inline-error" role="alert"></div><button class="btn primary full" type="submit">登入會員<span data-icon="arrow"></span></button><p class="micro muted" style="text-align:center;margin-top:16px">忘記密碼？<a class="text-btn micro" href="https://lin.ee/xTKnekT" target="_blank" rel="noopener">聯絡官方 LINE</a></p></form><form id="register-form" hidden><label class="field">遊戲暱稱<input id="register-name" required maxlength="60" placeholder="你在遊戲中的名字" autocomplete="nickname"></label><label class="field">電子信箱<input id="register-email" type="email" required maxlength="254" placeholder="name@example.com" autocomplete="email"></label><label class="field">密碼<input id="register-password" type="password" required minlength="6" maxlength="128" autocomplete="new-password" placeholder="至少 6 個字元"></label><label class="field">確認密碼<input id="register-confirm" type="password" required minlength="6" maxlength="128" autocomplete="new-password" placeholder="再輸入一次密碼"></label><label class="check-label" style="margin:4px 0 14px"><input type="checkbox" id="register-optin"><span>我想收到銳能最新消息（新場次、季盃與會員活動，隨時可取消）</span></label><div id="register-error" class="inline-error" role="alert"></div><button class="btn primary full" type="submit">建立 REBORN ID<span data-icon="arrow"></span></button></form><div class="auth-note">首次建立會員，即享 <b style="color:#8d6400">50 點</b> 迎新紅利。<br>已有 Gmail 會員？使用同一 Google 帳號，確認原密碼即可綁定。</div><div class="auth-footer">© 2026 REBORN ENTERTAINMENT</div></section></div><div class="auth-legal">為你的下一次上場，準備更多精彩。 <a href="rn-member-privacy.html" target="_blank" rel="noopener" class="text-btn micro">會員隱私說明</a></div></div>
 <div id="app" hidden>
  <aside class="sidebar"><div data-brand></div><div class="nav-caption">MEMBER CENTER</div><nav class="nav-links" aria-label="會員中心導覽">
-  <button class="nav-link active" data-action="view" data-view="home"><span data-icon="home"></span>大廳</button><button class="nav-link" data-action="view" data-view="scrims"><span data-icon="ticket"></span>賽事報名</button><button class="nav-link" data-action="view" data-view="claim"><span data-icon="calendar"></span>賽事補登<span class="dot-badge" id="claim-badge" hidden></span></button><button class="nav-link" data-action="view" data-view="rewards"><span data-icon="gift"></span>獎勵兌換</button><button class="nav-link" data-action="view" data-view="news"><span data-icon="bell"></span>最新消息<span class="dot-badge" id="news-badge" hidden></span></button><button class="nav-link" data-action="view" data-view="history"><span data-icon="history"></span>我的紀錄</button><button class="nav-link" data-action="view" data-view="profile"><span data-icon="user"></span>會員設定</button>
+  <button class="nav-link active" data-action="view" data-view="home"><span data-icon="home"></span>大廳</button><button class="nav-link" data-action="view" data-view="scrims"><span data-icon="ticket"></span>賽事報名</button><button class="nav-link" data-action="view" data-view="claim"><span data-icon="calendar"></span>賽事補登<span class="dot-badge" id="claim-badge" hidden></span></button><button class="nav-link" data-action="view" data-view="pass"><span data-icon="bolt"></span>銳能 PASS</button><button class="nav-link" data-action="view" data-view="rewards"><span data-icon="gift"></span>獎勵兌換</button><button class="nav-link" data-action="view" data-view="news"><span data-icon="bell"></span>最新消息<span class="dot-badge" id="news-badge" hidden></span></button><button class="nav-link" data-action="view" data-view="history"><span data-icon="history"></span>我的紀錄</button><button class="nav-link" data-action="view" data-view="profile"><span data-icon="user"></span>會員設定</button>
  </nav><div class="sidebar-foot"><div class="row"><span class="avatar" id="nav-avatar">R</span><div><strong id="nav-name" style="font-size:12px">銳能會員</strong><p id="nav-level" class="micro">REBORN ID</p></div></div><button class="nav-link" data-action="logout"><span data-icon="logout"></span>登出帳號</button><span class="micro muted" style="font-size:9px;letter-spacing:1px">REBORN · EVERY MOMENT COUNTS</span></div></aside>
  <div class="workspace"><header class="topbar"><div class="desktop-crumb micro muted">銳能娛樂 <span style="margin:0 10px;color:#c1c6bb">/</span> <span id="crumb">大廳</span></div><div data-mobile-brand></div><div class="row"><div class="connection"><span class="dot"></span>正在連線…</div><button class="btn square" data-action="view" data-view="news" title="最新消息" aria-label="最新消息"><span data-icon="bell"></span></button><button class="btn square" data-action="sync" title="重新同步" aria-label="重新同步"><span data-icon="refresh"></span></button><button class="btn square" data-action="logout" title="登出" aria-label="登出"><span data-icon="logout"></span></button></div></header>
   <main class="content">
@@ -249,6 +361,8 @@ dialog{width:min(540px,calc(100% - 32px));max-height:calc(100dvh - 48px);border:
     </form></article><div class="stack" style="align-content:start"><article class="card"><div class="card-head"><h2>補登流程</h2><span data-icon="tasks"></span></div><div class="claim-steps"><div><span>01</span><div><strong>會員報名，自動帶入</strong><p>在「賽事報名」報名的交流賽與聯賽，開賽後會出現在上方清單。</p></div></div><div><span>02</span><div><strong>勾選多場，一次送出</strong><p>隊伍、組別與場次都已填好，全選後按一下就完成。</p></div></div><div><span>03</span><div><strong>等待主辦單位審核</strong><p>通過後，點數與參賽紀錄會自動更新。</p></div></div></div><div class="divider"></div><p class="micro">同一場次、時段與組別只需申請一次。若被駁回，可依備註修正後重新申請。</p></article><div class="hint"><strong>改過名或找不到以前的場次？</strong><p style="margin-top:5px">在左側選「未列出的過往賽事（手動填寫）」，可以一次填寫多個日期，主辦方會人工審核。</p></div><button class="btn" data-action="view" data-view="history">查看我的申請紀錄<span data-icon="arrow"></span></button></div></div>
    </section>
 
+   <section id="page-pass" hidden><div id="pass-content"></div></section>
+
    <section id="page-rewards" hidden><div class="page-head"><div><div class="eyebrow">REWARDS COLLECTION</div><h1 style="margin-top:8px">每一點，都有新可能</h1><p>用參賽累積的點數，兌換喜歡的獎勵。</p></div><span class="badge gold"><span data-icon="coins"></span><span id="store-balance">—</span> 點</span></div><div class="toolbar"><div class="tabs" id="reward-filters"><button class="active" data-action="reward-filter" data-filter="all">所有獎勵</button><button data-action="reward-filter" data-filter="virtual">鑽石／虛寶</button><button data-action="reward-filter" data-filter="voucher">兌換券</button><button data-action="reward-filter" data-filter="physical">實體商品</button></div></div><div id="reward-grid" class="three-col"></div></section>
 
    <section id="page-news" hidden><div class="page-head"><div><div class="eyebrow">REBORN NEWSROOM</div><h1 style="margin-top:8px">最新消息</h1><p>賽事公告、活動與會員好康，第一時間掌握。</p></div><button class="btn" data-action="view" data-view="profile"><span data-icon="bell"></span>訂閱設定</button></div><div id="news-grid" class="news-grid"></div></section>
@@ -256,7 +370,7 @@ dialog{width:min(540px,calc(100% - 32px));max-height:calc(100dvh - 48px);border:
    <section id="page-history" hidden><div class="page-head"><div><div class="eyebrow">YOUR REBORN JOURNEY</div><h1 style="margin-top:8px">我的紀錄</h1><p>每一筆點數、每一場參賽，都留在這裡。</p></div></div><div class="toolbar"><div class="tabs" id="history-tabs"><button class="active" data-action="history-mode" data-mode="points">點數明細</button><button data-action="history-mode" data-mode="tasks">補登與兌換申請</button></div></div><article class="card" id="history-panel"></article></section>
 
    <section id="page-profile" hidden><div class="page-head"><div><div class="eyebrow">MEMBERSHIP & ACCOUNT</div><h1 style="margin-top:8px">會員設定</h1><p>保持資料更新，讓每次報名與兌換都更順利。</p></div></div><div class="two-col"><article class="card"><div class="card-head"><h2>帳號資料</h2><span data-icon="user"></span></div><form id="profile-form"><label class="field">遊戲暱稱<input id="profile-name" required maxlength="60" autocomplete="nickname"></label><label class="field">電子信箱<input id="profile-email" type="email" disabled><small>報名確認信、收據與補登提醒都會寄到這個信箱。</small></label><label class="field">遊戲 UID<input id="profile-game-uid" inputmode="numeric" pattern="[0-9]{5,20}" maxlength="20" placeholder="選填，虛寶兌換時可自動帶入"><small>這是遊戲內的數字 UID，與 REBORN 會員編號不同。</small></label><div class="fields2"><label class="field">報名負責人 LINE 名稱<input id="profile-line" maxlength="30" placeholder="選填"></label><label class="field">LINE ID<input id="profile-line-id" maxlength="60" placeholder="選填" autocapitalize="none" spellcheck="false"></label></div><p class="micro muted" style="margin:10px 0 0">填寫後，報名交流賽與聯賽時會自動帶入。</p><div class="divider"></div><div id="password-fields"><h3 style="margin-bottom:16px">變更密碼 <span class="micro muted" style="font-weight:400">不修改請留白</span></h3><label class="field">目前密碼<input id="profile-current-password" type="password" autocomplete="current-password" maxlength="128"></label><label class="field">新密碼<input id="profile-password" type="password" minlength="6" maxlength="128" autocomplete="new-password" placeholder="至少 6 個字元"></label><label class="field">確認新密碼<input id="profile-confirm" type="password" minlength="6" maxlength="128" autocomplete="new-password"></label></div><div id="google-only-note" class="hint" hidden style="margin-bottom:18px">目前以 Google 登入。如需新增會員密碼，可聯絡官方 LINE 協助設定。</div><div id="profile-error" class="inline-error" role="alert"></div><button class="btn primary" type="submit">儲存變更<span data-icon="check"></span></button></form></article>
-    <div class="stack" style="align-content:start"><article class="card" id="subscribe-panel"></article><article class="card" id="google-account-panel"></article><article class="card" id="tier-panel"></article><article class="card"><div class="card-head"><h2>會員等級制度</h2><span data-icon="trophy"></span></div><div class="tier-line"><span class="badge">CORE</span><span>註冊即取得</span></div><div class="tier-line"><span class="badge completed">PRIME</span><span>累積 500 點</span></div><div class="tier-line"><span class="badge gold">REBORN PREMIUM</span><span>累積 1,000 點</span></div><div class="tier-line"><span class="badge dark">APEX</span><span>累積 2,000 點</span></div><p class="micro" style="margin-top:18px">累積點數由後端統一計算；兌換商品不影響升級進度。超銳能黑卡依特殊邀約資格保留。</p></article></div></div></section>
+    <div class="stack" style="align-content:start"><article class="card" id="pass-settings-panel"></article><article class="card" id="subscribe-panel"></article><article class="card" id="google-account-panel"></article><article class="card" id="tier-panel"></article><article class="card"><div class="card-head"><h2>會員等級制度</h2><span data-icon="trophy"></span></div><div class="tier-line"><span class="badge">CORE</span><span>註冊即取得</span></div><div class="tier-line"><span class="badge completed">PRIME</span><span>累積 500 點</span></div><div class="tier-line"><span class="badge gold">REBORN PREMIUM</span><span>累積 1,000 點</span></div><div class="tier-line"><span class="badge dark">APEX</span><span>累積 2,000 點</span></div><p class="micro" style="margin-top:18px">累積點數由後端統一計算；兌換商品不影響升級進度。超銳能黑卡依特殊邀約資格保留。</p></article></div></div></section>
    <div class="footer-note">© 2026 REBORN ENTERTAINMENT · 每一場參賽，都值得被記住。</div>
   </main>
  </div>
@@ -270,7 +384,7 @@ dialog{width:min(540px,calc(100% - 32px));max-height:calc(100dvh - 48px);border:
 const ROLE = 'member';
 // 將這一行改成「最新部署」的 /exec 網址；兩個 HTML 必須使用同一個後端。
 const GAS_API_URL = 'https://script.google.com/macros/s/AKfycbw0TWezzlxmtk_ZVFaRktdsJg_j-Sx8VGWYkZ8myG4lJWpr4-hjkrS-u7IsFzhOWBR-/exec';
-const API_VERSION = '5.1';
+const API_VERSION = '5.2';
 const $ = id => document.getElementById(id);
 const esc = v => String(v ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const num = n => Number(n||0).toLocaleString('zh-TW');
@@ -316,7 +430,9 @@ const iconPaths = {
  trash:'M4 7h16 M9 7V4h6v3 M6 7l1 13h10l1-13',
  send:'M22 2 11 13 M22 2l-7 20-4-9-9-4Z',
  megaphone:'M3 11v2a1 1 0 0 0 1 1h3l6 4V6L7 10H4a1 1 0 0 0-1 1 M17 9a4 4 0 0 1 0 6 M7 14l1 5h3',
- pin:'M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11Z M12 7.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5'
+ pin:'M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11Z M12 7.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5',
+ bolt:'M13 2 4 14h7l-1 8 9-12h-7Z',
+ star:'M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9Z'
 };
 function icon(name){return `<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="${iconPaths[name]||iconPaths.gift}"/></svg>`;}
 function fillIcons(){document.querySelectorAll('[data-icon]').forEach(el=>el.innerHTML=icon(el.dataset.icon));}
@@ -341,6 +457,26 @@ function api(action,data={},mutation=false){
  const run=()=>apiFetch(action,data,mutation);
  const result=requestQueue.then(run,run);requestQueue=result.catch(()=>{});return result;
 }
+// v5.1.2：後端偶爾整筆卡住不回應時，4～8 秒後補送同一請求（最多 3 次），採用最先回來的結果。
+// 寫入類請求帶同一個 requestId，後端在鎖內去重，重送不會重複扣點、發點或寄信；上傳與 Google 驗證不補送。
+function hedgedPost(body,hedgeMs,deadline,maxShots){
+ return new Promise((resolve,reject)=>{
+  const ctrls=[];let done=false,shots=0,fails=0,lastErr=null,timer=null;
+  const finish=(fn,v)=>{if(done)return;done=true;clearTimeout(timer);clearTimeout(killer);ctrls.forEach(c=>{try{c.abort();}catch{}});fn(v);};
+  const next=delay=>{clearTimeout(timer);if(!done&&shots<maxShots)timer=setTimeout(shoot,delay);};
+  const shoot=()=>{
+   if(done||shots>=maxShots)return;shots++;if(shots>1)setConnection('busy','連線較慢，正在重試…');
+   const c=new AbortController();ctrls.push(c);
+   fetch(endpoint,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body,mode:'cors',credentials:'omit',redirect:'follow',signal:c.signal})
+    .then(r=>{if([429,502,503,504].includes(r.status))throw apiError('SERVER_ERROR','後端目前繁忙，正在重新連線。');return r.text();})
+    .then(t=>finish(resolve,t))
+    .catch(e=>{if(done)return;lastErr=e;fails++;if(fails>=maxShots)finish(reject,lastErr);else next(700*fails);});
+   if(hedgeMs)next(hedgeMs);
+  };
+  const killer=setTimeout(()=>finish(reject,lastErr&&typeof lastErr.code==='string'?lastErr:Object.assign(new Error('timeout'),{name:'AbortError'})),deadline);
+  shoot();
+ });
+}
 async function apiFetch(action,data,mutation){
  if(!/^https:\/\/script\.google\.com\/macros\/s\/[A-Za-z0-9_-]+\/exec$/.test(endpoint))throw apiError('ENDPOINT','會員服務暫時無法使用，請聯絡官方 LINE。');
  const payload={...data,action};if(token&&!['health','getEvents','getStoreItems','login','register','adminLogin'].includes(action))payload.token=token;
@@ -348,32 +484,33 @@ async function apiFetch(action,data,mutation){
  if(mutation){
    let id=persistGet(sessionStorage,pendingKey)||pendingMemory.get(pendingKey);if(!id){id=crypto.randomUUID?crypto.randomUUID():`RN-${Date.now()}-${Math.random().toString(36).slice(2)}-${Math.random().toString(36).slice(2)}`;persistSet(sessionStorage,pendingKey,id);}pendingMemory.set(pendingKey,id);payload.requestId=id;
  }
- let lastError;
- for(let attempt=0;attempt<3;attempt++){
+ const upload=action==='adminUploadFile',oneShot=upload||/^google(Verify|Finish)$/.test(action);
+ const hedgeMs=oneShot?0:mutation?8000:/Bootstrap$/.test(action)?6000:4000;
+ const deadline=upload?90000:mutation?40000:/Bootstrap$/.test(action)?30000:25000;
+ const body=JSON.stringify(payload);let lastError;
+ for(let round=0;round<3;round++){
    if(!navigator.onLine){setConnection('bad','目前離線');throw apiError('OFFLINE',mutation?'目前離線，請恢復連線後再次送出。':'目前離線，請恢復連線後重試。');}
-   setConnection('busy',attempt?'正在重新連線…':'正在同步…');
-   const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),mutation?45000:/Bootstrap$/.test(action)?25000:15000);
+   setConnection('busy',round?'正在重新連線…':'正在同步…');
    try{
-     const response=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload),mode:'cors',credentials:'omit',redirect:'follow',signal:controller.signal});
-     if([429,502,503,504].includes(response.status))throw apiError('SERVER_ERROR','後端目前繁忙，正在重新連線。');
-     const raw=await response.text();let result;
+     const raw=await hedgedPost(body,hedgeMs,deadline,oneShot?2:3);let result;
      try{result=JSON.parse(raw);}catch{throw apiError('BAD_DEPLOYMENT','後端未回傳資料。請確認存取權為「所有人」，並使用最新版本的 /exec 網址。');}
      if(result.apiVersion!==API_VERSION)throw apiError('OLD_BACKEND','目前連到舊版後端。請先貼上 Code.gs、執行 setupReborn，並部署新版本。');
      if(result.status!=='success'){
        const e=apiError(result.code||'SERVER_ERROR',friendlyMessage(result.code,result.message||'操作失敗。'));
        if(e.code==='BUSY'||e.code==='SERVER_ERROR')throw e;
        if(mutation){persistRemove(sessionStorage,pendingKey);pendingMemory.delete(pendingKey);}
-       setConnection('ok','資料已更新');if(e.code==='UNAUTHORIZED')onSessionExpired();throw e;
+       setConnection('ok','資料已更新');if(e.code==='UNAUTHORIZED')onSessionExpired();else if(e.code==='BANNED'&&ROLE!=='admin'&&token){clearToken();showAuth();modalBusy=false;closeDialog();toast(e.message);}throw e;
      }
      if(mutation){persistRemove(sessionStorage,pendingKey);pendingMemory.delete(pendingKey);}
      setConnection('ok','資料已更新');return result;
    }catch(e){
      lastError=typeof e.code==='string'?e:apiError(e.name==='AbortError'?'TIMEOUT':'NETWORK',e.name==='AbortError'?'連線逾時。':'無法連上後端。');
-     if(!['TIMEOUT','NETWORK','BUSY','SERVER_ERROR'].includes(lastError.code))throw lastError;
-     setConnection('bad',lastError.code==='BUSY'?'伺服器處理中':'連線中斷');
-     if(attempt<2)await new Promise(resolve=>setTimeout(resolve,800*(attempt+1)));
-   }finally{clearTimeout(timeout);}
+     if(!['BUSY','SERVER_ERROR'].includes(lastError.code)||round===2)break;
+     setConnection('bad','伺服器處理中');await new Promise(resolve=>setTimeout(resolve,900*(round+1)));
+   }
  }
+ if(!['TIMEOUT','NETWORK','BUSY','SERVER_ERROR'].includes(lastError.code))throw lastError;
+ setConnection('bad','連線中斷');
  const message=mutation?'尚未確認操作結果，請保持原填寫內容再次送出。系統會沿用同一請求編號，避免重複扣點或發點。':'更新失敗，請按「重新同步」，或稍後再試。';
  showNet(message);throw apiError(lastError.code,message);
 }
@@ -438,12 +575,12 @@ function qrSvg(value){
 }
 
 
-// ===================== v5.1 會員中心：大廳 × 交流賽／聯賽報名 × 多選補登 × 消息 =====================
-let state={user:null,items:[],events:[],history:{items:[],total:0,page:1,pageSize:8,hasMore:false},tasks:{items:[],total:0,page:1,pageSize:20,hasMore:false},scrims:[],pairs:[],bookings:[],claimables:[],leagues:[],leagueRegs:[],news:[],banners:[],unreadNews:0,settings:{}};
+// ===================== v5.2 會員中心：大廳 × 交流賽／聯賽報名 × 多選補登 × 消息 × 銳能 PASS =====================
+let state={user:null,items:[],events:[],history:{items:[],total:0,page:1,pageSize:8,hasMore:false},tasks:{items:[],total:0,page:1,pageSize:20,hasMore:false},scrims:[],pairs:[],bookings:[],claimables:[],leagues:[],leagueRegs:[],pass:{},passOrders:[],passPlans:[],passInfo:{},news:[],banners:[],unreadNews:0,settings:{}};
 let currentView='home',rewardFilter='all',historyMode='points',historyPage=1,historyData=null,syncing=null,profileReady=false,scrimFormReady=false;
 let selectedDate='',selectedIds=[],carouselTimer=null,carouselIndex=0,seenRequested=false;
 let eventTab='scrims',leagueId=null,claimSel=new Set(),claimKnown=new Set(),claimPicks={},claimPickEvent='',manualRows=[{date:'',time:'',group:''}];
-const titles={home:'大廳',scrims:'賽事報名',claim:'賽事補登',rewards:'獎勵兌換',news:'最新消息',history:'我的紀錄',profile:'會員設定'};
+const titles={home:'大廳',scrims:'賽事報名',claim:'賽事補登',pass:'銳能 PASS',rewards:'獎勵兌換',news:'最新消息',history:'我的紀錄',profile:'會員設定'};
 const SCRIM_STATE={open:'開放報名',full:'額滿',closed:'報名截止',completed:'已完賽',cancelled:'已取消'};
 const PAY={pending:'待匯款',reported:'已回報匯款',confirmed:'已確認收款',free:'免報名費'};
 const tw=(iso,opt)=>{const d=new Date(iso);return iso&&!isNaN(d)?new Intl.DateTimeFormat('zh-TW',Object.assign({timeZone:'Asia/Taipei'},opt)).format(d):'';};
@@ -463,9 +600,9 @@ async function syncData(silent=false){
  try{await syncing;}finally{syncing=null;}
 }
 function renderMember(){
- const u=state.user;if(!u)return;showApp();$('nav-avatar').textContent=u.gamerTag.slice(0,1);$('nav-name').textContent=u.gamerTag;$('nav-level').textContent=u.level;$('store-balance').textContent=num(u.points);
+ const u=state.user;if(!u)return;showApp();passDefs();$('nav-avatar').textContent=u.gamerTag.slice(0,1);$('nav-name').innerHTML=esc(u.gamerTag)+passBadge(myPass()?.tier,14);$('nav-level').textContent=u.level;$('store-balance').textContent=num(u.points);
  const cb=$('claim-badge'),nb=$('news-badge');cb.hidden=!state.claimables.length;cb.textContent=state.claimables.length;nb.hidden=!state.unreadNews;nb.textContent=state.unreadNews>9?'9+':state.unreadNews;
- renderHome();renderScrims();renderLeagues();renderClaimables();renderRewards();renderNews();renderTier();renderGoogleAccount();renderSubscribe();
+ renderHome();renderScrims();renderLeagues();renderClaimables();renderRewards();renderNews();renderTier();renderGoogleAccount();renderSubscribe();renderPass();renderPassSettings();
  if(!profileReady){$('profile-name').value=u.gamerTag;$('profile-email').value=u.email;$('profile-game-uid').value=u.gameUid||'';$('profile-line').value=u.lineName||'';$('profile-line-id').value=u.lineId||'';profileReady=true;}
  if(!scrimFormReady){const last=state.bookings.find(b=>b.teamName);$('scrim-team').value=last?last.teamName:'';$('scrim-line').value=u.lineName||last?.lineName||'';$('scrim-line-id').value=u.lineId||last?.lineId||'';scrimFormReady=true;}
  $('scrim-email').textContent=u.email;$('scrim-points').textContent=num(state.settings?.scrimPoints||50);
@@ -494,13 +631,14 @@ function renderHome(){
  const u=state.user,hour=Number(new Intl.DateTimeFormat('en-US',{timeZone:'Asia/Taipei',hour:'numeric',hour12:false}).format(new Date())),greeting=hour>=5&&hour<12?'早安':hour>=12&&hour<18?'午安':'晚安';
  const pending=state.tasks.items.filter(t=>t.status==='Pending').length,cardClass=/FORCE|黑卡|超銳能/i.test(u.level)?'force':'';
  const next=nextScrim(),unpaid=state.bookings.filter(b=>b.status==='active'&&b.paymentState==='pending').length+state.leagueRegs.filter(r=>r.status==='active'&&r.paymentState==='pending').length;
- $('home-content').innerHTML=`<div class="page-head"><div><div class="eyebrow">REBORN LOBBY</div><h1 style="margin-top:8px">${greeting}，${esc(u.gamerTag)}</h1><p>歡迎回到銳能。準備好迎接下一場精彩了嗎？</p></div><span class="micro muted" style="text-align:right">${esc(dateLabel())}</span></div>
+ $('home-content').innerHTML=`<div class="page-head"><div><div class="eyebrow">REBORN LOBBY</div><h1 style="margin-top:8px">${greeting}，${esc(u.gamerTag)}${passBadge(myPass()?.tier,26)}</h1><p>歡迎回到銳能。準備好迎接下一場精彩了嗎？</p></div><span class="micro muted" style="text-align:right">${esc(dateLabel())}</span></div>
  ${carouselHtml(state.banners)}
  ${unpaid?`<div class="hint row between wrap" style="margin-bottom:22px"><span><strong>你有 ${unpaid} 筆報名尚未匯款。</strong> 完成匯款並回報末五碼，名額才算確定。</span><button class="text-btn" data-action="goto-bookings">查看匯款資訊 →</button></div>`:''}
- <div class="member-home-grid"><article class="wallet-card ${cardClass}"><div class="wallet-top"><span class="wallet-brand">REBORN / MEMBERSHIP</span><span class="badge" style="background:#ffffff40;color:inherit">${esc(u.level)}</span></div><div class="wallet-label">當前可用點數</div><div class="wallet-points">${num(u.points)}<small>POINTS</small></div><div class="wallet-foot"><div><strong>${esc(u.gamerTag)}</strong><div class="mono" style="margin-top:5px">${esc(u.uid)}</div></div><button class="btn" data-action="member-card">${icon('scan')}出示會員卡</button></div></article>
+ <div class="member-home-grid">${memberCardHtml()}
  <div class="stack"><div class="quick-stats"><div class="card stat"><div class="stat-label">歷史累積點數 ${icon('coins')}</div><b>${num(u.lifetimePoints)}<span style="font-size:11px;font-weight:500;color:var(--muted);margin-left:5px">點</span></b><small>兌換後，升級進度依然保留</small></div><div class="card stat"><div class="stat-label">我的申請 ${icon('tasks')}</div><b>${num(state.tasks.total)}<span style="font-size:11px;font-weight:500;color:var(--muted);margin-left:5px">筆</span></b><small>近期有 ${pending} 筆等待處理</small></div></div><button class="quick-action" data-action="view" data-view="claim">${icon('calendar')}<div class="grow"><strong>${state.claimables.length?`有 ${state.claimables.length} 場可以一鍵補登`:'補登參賽點數'}</strong><p>${state.claimables.length?'報名過的場次已自動帶入':'選擇你的賽事與參賽時段'}</p></div>${icon('arrow')}</button><button class="quick-action" data-action="view" data-view="rewards">${icon('gift')}<div class="grow"><strong>探索會員獎勵</strong><p>鑽石虛寶、兌換券與精選周邊</p></div>${icon('arrow')}</button></div></div>
  <button class="scrim-banner" style="width:100%;border:0;text-align:left;cursor:pointer" data-action="view" data-view="scrims"><div><div class="eyebrow">YOUR NEXT MATCH</div><h2>${next?`${esc(dayLabel(next.date))} ${esc(next.startTime)} 開放報名中`:'下一場精彩，即將公布。'}</h2><p>${next?`${esc(next.title)} · ${money(next.fee)} / 隊 · 剩 ${next.remaining} 組`:'查看所有交流賽場次，報名後自動寄出確認信。'}</p></div><span class="btn">${next?'立即報名':'查看場次'} ${icon('arrow')}</span></button>
  ${leaguePromoHtml()}
+ ${!myPass()&&state.passInfo?.open?`<button class="pass-promo" data-action="view" data-view="pass"><span class="pp-bolt" aria-hidden="true"><svg viewBox="0 0 22 30"><path d="${BOLT}"/></svg></span><span class="grow"><strong>銳能 PASS：補登點數 1.5 倍</strong><span>月票 NT$ ${num(state.passPlans.find(p=>p.id==='month')?.price||150)} 起，加上認證徽章與閃電會員卡${state.passInfo.founderLeft?`，創始會員剩 ${state.passInfo.founderLeft} 位`:''}。</span></span><span class="btn">了解 PASS ${icon('arrow')}</span></button>`:''}
  <div class="member-home-bottom"><article class="card"><div class="card-head"><div><h2>最新消息</h2><p>賽事公告與會員活動</p></div><button class="text-btn" data-action="view" data-view="news">全部消息 →</button></div>${state.news.length?state.news.slice(0,4).map(newsItemHtml).join(''):empty('目前還沒有消息','新的賽事與活動公布後會出現在這裡。','bell')}</article><article class="card"><div class="card-head"><div><h2>近期點數紀錄</h2><p>掌握每一筆累積與使用</p></div><button class="text-btn" data-action="view" data-view="history">查看全部 →</button></div>${historyHtml(state.history.items.slice(0,5))}</article></div>`;
  initCarousel();
 }
@@ -555,11 +693,11 @@ function showBooking(id){
  ${active&&!paid?`<form id="report-form" data-id="${esc(b.bookingId)}"><label class="field">已匯款？回報帳號末五碼<input id="report-last5" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" required placeholder="例如 12345" value="${esc(b.last5||'')}"><small>${dual?'只需匯款一次，回報會同步到兩個時段。':'賽務核對後會寄出電子收據。'}</small></label><div id="report-error" class="inline-error" role="alert"></div><button class="btn primary full" type="submit">${b.last5?'更新回報':'送出匯款回報'}</button></form>`:''}${b.canCancel?`<button class="text-btn cancel-link" data-action="cancel-reg" data-kind="scrim" data-id="${esc(b.bookingId)}">取消這筆報名</button>`:''}</div>`);
 }
 // ---------- v5.1 聯賽報名（預約報名／直接報名、正取＋候補） ----------
-const LEAGUE_STATE={reserve:'預約報名中',open:'開放報名中',waitlist:'候補報名中',full:'正取與候補已額滿',upcoming:'即將開放報名',closed:'報名已截止',ongoing:'比賽進行中',ended:'賽事已結束',cancelled:'賽事已取消'};
-const LEAGUE_BADGE={reserve:'gold',open:'gold',waitlist:'pending',ongoing:'dark',cancelled:'rejected'};
+const LEAGUE_STATE={reserve:'預約報名中',open:'開放報名中',pass:'PASS 優先報名中',waitlist:'候補報名中',full:'正取與候補已額滿',upcoming:'即將開放報名',closed:'報名已截止',ongoing:'比賽進行中',ended:'賽事已結束',cancelled:'賽事已取消'};
+const LEAGUE_BADGE={reserve:'gold',open:'gold',pass:'gold',waitlist:'pending',ongoing:'dark',cancelled:'rejected'};
 const leagueBadge=s=>`<span class="badge ${LEAGUE_BADGE[s]||''}">${esc(LEAGUE_STATE[s]||s)}</span>`;
 const leagueDays=l=>l.matchStart===l.matchEnd?dayLabel(l.matchStart):`${dayLabel(l.matchStart)} – ${dayLabel(l.matchEnd)}`;
-const joinable=l=>['reserve','open','waitlist'].includes(l.state);
+const joinable=l=>['reserve','open','waitlist','pass'].includes(l.state);
 const modeWhen=m=>`${fmtDT(m.start)} – ${fmtDT(m.end)}`;
 const lregBadge=r=>r.status==='cancelled'?'<span class="badge rejected">已取消</span>':r.status==='waitlist'?`<span class="badge pending">候補第 ${r.waitNo} 位</span>`:payBadge(r.paymentState,r.status);
 function richText(src){
@@ -593,12 +731,12 @@ function renderLeagues(){
 }
 function leagueCardHtml(l){
  const mine=myLeagueReg(l.id),cta=joinable(l)&&!mine;
- return `<article class="league-card"><button class="league-cover" data-cover data-action="open-league" data-id="${esc(l.id)}" aria-label="${esc(l.title)}">${coverHtml(l)}<span class="ribbon">${leagueBadge(l.state)}</span></button><div class="league-body"><div class="row gap8 wrap">${l.season?`<span class="micro muted">${esc(l.season)}</span>`:''}${mine?`<span class="badge completed">${mine.status==='waitlist'?'你已登記候補':'你已報名'}</span>`:''}</div><h3>${esc(l.title)}</h3>${l.subtitle?`<p class="league-sub">${esc(l.subtitle)}</p>`:''}<div class="league-meta"><span>${icon('calendar')}${esc(leagueDays(l))}</span>${l.venue?`<span>${icon('pin')}${esc(l.venue)}</span>`:''}</div><div class="mode-chips">${l.modes.map(m=>`<div class="mode-chip ${m.open?'live':''}"><div><b>${esc(m.label)}</b><span>${m.open?'進行中 · ':m.upcoming?'即將開放 · ':m.ended?'已截止 · ':''}${esc(modeWhen(m))}</span></div><span class="fee">${m.fee?money(m.fee):'免費'}</span></div>`).join('')}</div>${seatHtml(l)}<button class="btn ${cta?'primary':''} full" data-action="open-league" data-id="${esc(l.id)}">${cta?(l.state==='waitlist'?'登記候補':'查看詳情並報名'):'查看賽事資訊'}${icon('arrow')}</button></div></article>`;
+ return `<article class="league-card"><button class="league-cover" data-cover data-action="open-league" data-id="${esc(l.id)}" aria-label="${esc(l.title)}">${coverHtml(l)}<span class="ribbon">${leagueBadge(l.state)}</span></button><div class="league-body"><div class="row gap8 wrap">${l.season?`<span class="micro muted">${esc(l.season)}</span>`:''}${mine?`<span class="badge completed">${mine.status==='waitlist'?'你已登記候補':'你已報名'}</span>`:''}</div><h3>${esc(l.title)}</h3>${l.subtitle?`<p class="league-sub">${esc(l.subtitle)}</p>`:''}<div class="league-meta"><span>${icon('calendar')}${esc(leagueDays(l))}</span>${l.venue?`<span>${icon('pin')}${esc(l.venue)}</span>`:''}</div><div class="mode-chips">${l.modes.map(m=>`<div class="mode-chip ${m.open?'live':''}"><div><b>${esc(m.label)}</b><span>${m.passEarly?'PASS 優先中 · ':m.open?'進行中 · ':m.upcoming?'即將開放 · ':m.ended?'已截止 · ':''}${esc(modeWhen(m))}</span></div><span class="fee">${m.fee?money(m.fee):'免費'}</span></div>`).join('')}</div>${seatHtml(l)}<button class="btn ${cta?'primary':''} full" data-action="open-league" data-id="${esc(l.id)}">${cta?(l.state==='waitlist'?'登記候補':'查看詳情並報名'):'查看賽事資訊'}${icon('arrow')}</button></div></article>`;
 }
 function modeRowHtml(l,m,mine){
  let btn;
  if(mine)btn=`<button class="btn full" disabled>已報名</button>`;
- else if(m.open)btn=`<button class="btn ${l.state==='waitlist'?'gold':'primary'} full" data-action="league-join" data-id="${esc(l.id)}" data-mode="${esc(m.mode)}">${l.state==='waitlist'?'登記候補':m.mode==='reserve'?'立即預約':'立即報名'}${icon('arrow')}</button>`;
+ else if(m.open)btn=`<button class="btn ${l.state==='waitlist'?'gold':'primary'} full" data-action="league-join" data-id="${esc(l.id)}" data-mode="${esc(m.mode)}">${l.state==='waitlist'?'登記候補':m.passEarly?'PASS 優先報名':m.mode==='reserve'?'立即預約':'立即報名'}${icon('arrow')}</button>`;
  else if(m.upcoming&&!['cancelled','closed','ongoing','ended'].includes(l.state))btn=`<button class="btn full" disabled>${esc(fmtDT(m.start))} 開放</button>`;
  else btn=`<button class="btn full" disabled>${m.ended?'已截止':l.state==='full'?'已額滿':esc(LEAGUE_STATE[l.state]||'未開放')}</button>`;
  return `<div class="mode-row ${m.open&&!mine?'live':''}"><div class="mode-top"><span class="mode-name">${esc(m.label)}</span><span class="mode-fee">${m.fee?money(m.fee):'免費'}</span></div><div class="mode-when">${icon('clock')}${esc(modeWhen(m))}</div>${m.note?`<div class="mode-note">${esc(m.note)}</div>`:''}${btn}</div>`;
@@ -611,7 +749,7 @@ function renderLeagueDetail(){
  <div class="league-title"><div class="row gap8 wrap">${leagueBadge(l.state)}${l.season?`<span class="badge">${esc(l.season)}</span>`:''}</div><h1>${esc(l.title)}</h1>${l.subtitle?`<p>${esc(l.subtitle)}</p>`:''}</div>
  <div class="league-facts"><div class="fact"><span>${icon('calendar')}比賽日期</span><b>${esc(leagueDays(l))}</b></div><div class="fact"><span>${icon('pin')}比賽形式</span><b>${esc(l.venue||'詳見賽事資訊')}</b></div><div class="fact"><span>${icon('users')}參賽名額</span><b>${l.capacity} 組${l.waitlist?`<small> ＋候補 ${l.waitlist}</small>`:''}</b></div><div class="fact"><span>${icon('coins')}完賽補登</span><b>+${num(l.points)} 點</b></div></div>
  <div class="league-layout"><div class="league-main">${sections.length?sections.map(([t,v])=>`<article class="card league-section"><h2>${esc(t)}</h2><div class="rich">${richText(v)}</div></article>`).join(''):`<article class="card">${empty('詳細資訊準備中','主辦方公布後會更新在這裡。','trophy')}</article>`}</div>
- <aside class="card league-side"><div class="card-head" style="margin-bottom:16px"><div><h2>報名方式</h2><p>${l.modes.length>1?'預約報名結束後，只剩直接報名':'在開放期間內完成報名'}</p></div>${icon('ticket')}</div>${l.modes.map(m=>modeRowHtml(l,m,mine)).join('')}${seatHtml(l)}<p class="micro muted" style="margin-top:12px">${l.state==='waitlist'?'正取已滿，現在送出會登記為候補，有名額時依順序自動遞補並寄信通知。':l.waitlist?`正取額滿後開放 ${l.waitlist} 組候補，有名額釋出時依順序遞補。`:'名額有限，額滿即停止報名。'}</p>${mine?`<div class="my-reg"><div class="row between"><strong>你的報名</strong>${lregBadge(mine)}</div><p class="micro" style="margin:6px 0 12px">${esc(mine.teamName)} · ${esc(mine.modeLabel)}${mine.status==='active'?' · 正取第 '+mine.slot+' 組':''}</p><button class="btn small" data-action="open-lreg" data-id="${esc(mine.id)}">查看報名與匯款資訊</button></div>`:''}</aside></div>`;
+ <aside class="card league-side"><div class="card-head" style="margin-bottom:16px"><div><h2>報名方式</h2><p>${l.modes.length>1?'預約報名結束後，只剩直接報名':'在開放期間內完成報名'}</p></div>${icon('ticket')}</div>${l.modes.map(m=>modeRowHtml(l,m,mine)).join('')}${seatHtml(l)}${l.passWindow?`<button class="pass-note" data-action="view" data-view="pass">${passBadge('gold',16)}銳能 PASS 會員已開放優先報名，比一般報名早 ${l.passEarlyHours} 小時。了解 PASS</button>`:''}<p class="micro muted" style="margin-top:12px">${l.state==='waitlist'?'正取已滿，現在送出會登記為候補，有名額時依順序自動遞補並寄信通知。':l.waitlist?`正取額滿後開放 ${l.waitlist} 組候補，有名額釋出時依順序遞補。`:'名額有限，額滿即停止報名。'}</p>${mine?`<div class="my-reg"><div class="row between"><strong>你的報名</strong>${lregBadge(mine)}</div><p class="micro" style="margin:6px 0 12px">${esc(mine.teamName)} · ${esc(mine.modeLabel)}${mine.status==='active'?' · 正取第 '+mine.slot+' 組':''}</p><button class="btn small" data-action="open-lreg" data-id="${esc(mine.id)}">查看報名與匯款資訊</button></div>`:''}</aside></div>`;
 }
 function openLeagueJoin(id,mode){
  const l=state.leagues.find(x=>x.id===id),m=l?.modes.find(x=>x.mode===mode);if(!l||!m)return;
@@ -664,7 +802,7 @@ function renderClaimables(){
  $('claimable-count').textContent=list.length+' 場';
  if(!list.length){$('claimables-panel').innerHTML=empty('目前沒有待補登的場次','用會員報名交流賽或聯賽，開賽後場次會自動出現在這裡。','calendar');return;}
  const sel=list.filter(c=>claimSel.has(c.regId)),pts=sel.reduce((n,c)=>n+Number(c.points||0),0);
- $('claimables-panel').innerHTML=`${list.length>1?`<label class="select-all"><input type="checkbox" id="claim-all" ${sel.length===list.length?'checked':''}>全選（${list.length} 場）</label>`:''}<div class="claim-list">${list.map(c=>`<label class="claim-card selectable ${claimSel.has(c.regId)?'on':''}"><input type="checkbox" class="claim-pick" value="${esc(c.regId)}" ${claimSel.has(c.regId)?'checked':''}><span class="avatar" style="background:#fff">${icon(c.kind==='league'?'trophy':'ticket')}</span><span class="grow" style="min-width:170px"><strong>${esc(claimWhen(c))} · ${esc(c.title)}</strong><span class="claim-sub">${c.kind==='league'?'聯賽':'交流賽'} · ${esc(c.teamName)} · 第 ${c.slot} 組 · ${c.claimUntil?'補登截止 '+esc(fmtDT(c.claimUntil)):'不限期'}${c.rejected?' · <b style="color:var(--red)">上次申請被駁回，可重新送出</b>':''}</span></span>${c.paymentState&&!['confirmed','free'].includes(c.paymentState)?`<span class="badge pending">${esc(PAY[c.paymentState])}</span>`:''}<span class="claim-pts">+${num(c.points)}</span></label>`).join('')}</div><div class="claim-bar"><span class="micro muted">已選 <b>${sel.length}</b> 場 · 審核通過後共可獲得 <b>${num(pts)}</b> 點</span><button class="btn primary" data-action="bulk-claim" ${sel.length?'':'disabled'}>${sel.length>1?`一鍵補登 ${sel.length} 場`:'一鍵補登'}${icon('arrow')}</button></div>`;
+ $('claimables-panel').innerHTML=`${myPass()?`<div class="pass-note" style="margin:0 0 14px">${passBadge(myPass().tier,16)}銳能 PASS 加成適用於 ${esc(ymd(state.pass.startDate))} 起完賽的場次，補登送出時自動 ×${state.passInfo?.multiplier||1.5}。</div>`:''}${list.length>1?`<label class="select-all"><input type="checkbox" id="claim-all" ${sel.length===list.length?'checked':''}>全選（${list.length} 場）</label>`:''}<div class="claim-list">${list.map(c=>`<label class="claim-card selectable ${claimSel.has(c.regId)?'on':''}"><input type="checkbox" class="claim-pick" value="${esc(c.regId)}" ${claimSel.has(c.regId)?'checked':''}><span class="avatar" style="background:#fff">${icon(c.kind==='league'?'trophy':'ticket')}</span><span class="grow" style="min-width:170px"><strong>${esc(claimWhen(c))} · ${esc(c.title)}${c.passBoost?'<span class="claim-boost">PASS ×1.5</span>':''}</strong><span class="claim-sub">${c.kind==='league'?'聯賽':'交流賽'} · ${esc(c.teamName)} · 第 ${c.slot} 組 · ${c.claimUntil?'補登截止 '+esc(fmtDT(c.claimUntil)):'不限期'}${c.rejected?' · <b style="color:var(--red)">上次申請被駁回，可重新送出</b>':''}</span></span>${c.paymentState&&!['confirmed','free'].includes(c.paymentState)?`<span class="badge pending">${esc(PAY[c.paymentState])}</span>`:''}<span class="claim-pts">${c.passBoost?`<s>+${num(c.basePoints)}</s>`:''}+${num(c.points)}</span></label>`).join('')}</div><div class="claim-bar"><span class="micro muted">已選 <b>${sel.length}</b> 場 · 審核通過後共可獲得 <b>${num(pts)}</b> 點</span><button class="btn primary" data-action="bulk-claim" ${sel.length?'':'disabled'}>${sel.length>1?`一鍵補登 ${sel.length} 場`:'一鍵補登'}${icon('arrow')}</button></div>`;
 }
 function bulkClaim(){
  const sel=state.claimables.filter(c=>claimSel.has(c.regId));if(!sel.length)return;
@@ -697,8 +835,9 @@ function claimEntries(){
  return Object.entries(claimPicks).filter(([,p])=>p.on).map(([slotId,p])=>({eventId:id,slotId,groupNo:p.group||''}));
 }
 function updateClaimSummary(){
- const ev=state.events.find(e=>e.id===$('claim-event').value),n=claimEntries().length,per=ev?.points||($('claim-type').value==='league'?300:50),btn=$('claim-submit');
- $('claim-count').textContent=n;$('claim-points').textContent=num(n*per);$('claim-row-count').textContent=`${manualRows.length} / 20 場`;
+ const ev=state.events.find(e=>e.id===$('claim-event').value),list=claimEntries(),n=list.length,per=ev?.points||($('claim-type').value==='league'?300:50),btn=$('claim-submit');
+ const total=list.reduce((t,x)=>t+boostPts(x.slotId?(ev?.slots.find(s=>s.id===x.slotId)||{}).date:x.eventDate,per),0),boosted=total>n*per;
+ $('claim-count').textContent=n;$('claim-points').textContent=num(total)+(boosted?'（含 PASS 加成）':'');$('claim-row-count').textContent=`${manualRows.length} / 20 場`;
  if(!btn.disabled)btn.innerHTML=(n>1?`送出 ${n} 場補登`:'送出補登')+icon('arrow');
 }
 // ---------- 最新消息 ----------
@@ -790,7 +929,7 @@ function handleAction(action,btn){
  else if(action==='redeem')openRedeem(btn.dataset.id);
  else if(action==='receipt')receipt(btn.dataset.id);
  else if(action==='receipt-history'){closeDialog();historyMode='tasks';document.querySelectorAll('#history-tabs button').forEach(b=>b.classList.toggle('active',b.dataset.mode==='tasks'));switchView('history');}
- else if(action==='member-card'){const u=state.user;openDialog('我的 REBORN 會員卡',`<div class="dialog-body"><div class="member-card-dialog"><h3>${esc(u.gamerTag)}</h3><p class="micro" style="margin:5px 0 18px">${esc(u.level)} · ${num(u.points)} 點</p>${qrSvg(u.uid)}<div class="barcode-box">${barcodeSvg(u.uid)}</div><strong class="mono">${esc(u.uid)}</strong></div><p class="micro" style="margin-top:18px;text-align:center">出示 QR Code 或條碼，即可讓工作人員查詢會員。</p></div>`,`<div class="dialog-foot"><button class="btn primary" data-action="copy" data-value="${esc(u.uid)}">${icon('copy')}複製會員編號</button></div>`);}
+ else if(action==='member-card'){const u=state.user;openDialog('我的 REBORN 會員卡',`<div class="dialog-body"><div class="member-card-dialog"><h3>${esc(u.gamerTag)}${passBadge(myPass()?.tier,20)}</h3><p class="micro" style="margin:5px 0 18px">${esc(u.level)} · ${num(u.points)} 點${myPass()?` · 銳能 PASS ${esc(myPass().planLabel)}，有效至 ${esc(ymd(myPass().expiresDate))}`:''}</p>${qrSvg(u.uid)}<div class="barcode-box">${barcodeSvg(u.uid)}</div><strong class="mono">${esc(u.uid)}</strong></div><p class="micro" style="margin-top:18px;text-align:center">出示 QR Code 或條碼，即可讓工作人員查詢會員。</p></div>`,`<div class="dialog-foot"><button class="btn primary" data-action="copy" data-value="${esc(u.uid)}">${icon('copy')}複製會員編號</button></div>`);}
  else if(action==='logout')busy(btn,async()=>{try{await api('logout');}finally{window.google?.accounts?.id.disableAutoSelect();googleTicket=null;clearToken();showAuth();$('login-password').value='';}});
 }
 document.addEventListener('change',e=>{
@@ -836,6 +975,154 @@ document.addEventListener('error',e=>{if(e.target.tagName==='IMG'&&e.target.clos
 document.querySelectorAll('[data-brand]').forEach(el=>el.outerHTML=brand());document.querySelectorAll('[data-mobile-brand]').forEach(el=>el.outerHTML=brand(true));
 async function boot(){if(!token){showAuth();return;}$('auth').hidden=true;$('app').hidden=false;$('home-content').innerHTML=loading();try{await syncData(true);updateClaimEvents();scheduleSync();routeHash();}catch(e){if(e.code!=='UNAUTHORIZED'){showAuth();showNet(e.message);$('login-error').textContent='仍保留登入狀態，恢復連線後按「重新同步」即可。';}}}
 boot();
+
+// ===================== v5.2 銳能 PASS：會員卡、認證徽章、訂閱與續訂 =====================
+const TIER={gold:{name:'GOLD',zh:'金'},silver:{name:'SILVER',zh:'銀'},bronze:{name:'BRONZE',zh:'銅'}};
+const BOLT='M13 0 1 17h8L7 30l14-19h-9Z';
+const SEAL=(()=>{const p=[];for(let i=0;i<24;i++){const r=i%2?9.2:11.2,a=Math.PI*2*i/24-Math.PI/2;p.push((12+r*Math.cos(a)).toFixed(2)+' '+(12+r*Math.sin(a)).toFixed(2));}return 'M'+p.join('L')+'Z';})();
+let passPick='season',cardCharged=false;
+function passDefs(){
+ if($('pass-defs'))return;
+ document.body.insertAdjacentHTML('beforeend',`<svg id="pass-defs" width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+ <linearGradient id="pb-gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff1a8"/><stop offset=".45" stop-color="#e9b630"/><stop offset="1" stop-color="#9c6b06"/></linearGradient>
+ <linearGradient id="pb-silver" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset=".5" stop-color="#b9c2cc"/><stop offset="1" stop-color="#6c7682"/></linearGradient>
+ <linearGradient id="pb-bronze" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffd2b0"/><stop offset=".5" stop-color="#c97b48"/><stop offset="1" stop-color="#7a3c18"/></linearGradient></defs></svg>`);
+}
+const myPass=()=>state.pass&&state.pass.active?state.pass:null;
+function passBadge(tier,size=16){
+ if(!tier||!TIER[tier])return '';
+ return `<svg class="pbadge" width="${size}" height="${size}" viewBox="0 0 24 24" role="img" aria-label="${TIER[tier].zh}色 PASS 認證"><path d="${SEAL}" fill="url(#pb-${tier})" stroke="${tier==='silver'?'#8b95a1':'none'}" stroke-width=".6" stroke-linejoin="round"/><path d="M7.4 12.4l3.1 3 6.1-6.4" fill="none" stroke="${tier==='silver'?'#2b3138':'#fff'}" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+}
+const tierOfPlan=id=>(state.passPlans||[]).find(p=>p.id===id)?.tier||'silver';
+const ymd=d=>d?String(d).replace(/-/g,'/'):'—';
+// 會員卡：一般會員為銳能黃；超銳能為黑卡；PASS 依方案換成金／銀／銅閃電卡。
+function memberCardHtml(opt={}){
+ const u=state.user,p=opt.preview?{tier:opt.tier,planLabel:opt.planLabel,expiresDate:'',founder:0,preview:true}:myPass();
+ const force=/FORCE|黑卡|超銳能/i.test(u.level),kind=p?p.tier:force?'force':'base';
+ const top=p?`<span class="rc-logo">REBORN<b>PASS</b></span><span class="rc-tier">${TIER[p.tier].name}<i>${esc(p.planLabel||'')}</i></span>`:`<span class="rc-logo">REBORN<b>MEMBER</b></span><span class="rc-tier rc-level">${esc(u.level)}</span>`;
+ const right=p?(p.preview?`<div class="rc-valid"><small>訂閱後</small><b>專屬外觀</b></div>`:`<div class="rc-valid"><small>有效至</small><b>${esc(ymd(p.expiresDate))}</b></div>`):`<button class="btn rc-btn" data-action="member-card">${icon('scan')}出示會員卡</button>`;
+ return `<article class="rcard rcard--${kind}${opt.compact?' rcard--compact':''}" data-tilt${p&&!p.preview?' data-action="member-card" role="button" tabindex="0"':''} aria-label="${p?'銳能 PASS '+TIER[p.tier].zh+'色會員卡':'REBORN 會員卡'}">
+  <svg class="rc-bolt" viewBox="0 0 22 30" aria-hidden="true"><path d="${BOLT}"/></svg>
+  <svg class="rc-bolt rc-bolt--line" viewBox="0 0 22 30" aria-hidden="true"><path d="${BOLT}" pathLength="100"/></svg>
+  <span class="rc-streaks" aria-hidden="true"><i></i><i></i><i></i></span><span class="rc-glare" aria-hidden="true"></span>
+  <div class="rc-top">${top}</div>
+  <div class="rc-mid"><small>可用點數</small><strong>${num(u.points)}</strong></div>
+  <div class="rc-foot"><div class="rc-who"><span class="rc-name">${esc(u.gamerTag)}${p?passBadge(p.tier,18):''}</span><span class="rc-uid">${esc(u.uid)}</span></div>${right}</div>
+  ${p&&p.founder?`<span class="rc-founder">FOUNDER ${String(p.founder).padStart(2,'0')}</span>`:''}
+ </article>`;
+}
+function chargeCards(root){
+ if(cardCharged||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+ const c=(root||document).querySelector('.rcard:not(.rcard--base):not(.rcard--force)');if(!c)return;
+ cardCharged=true;c.classList.add('is-charging');setTimeout(()=>c.classList.remove('is-charging'),1600);
+}
+// 指標移動時讓卡片微微傾斜並帶出反光（觸控裝置不啟用）。
+document.addEventListener('pointermove',e=>{
+ if(e.pointerType!=='mouse')return;const c=e.target.closest&&e.target.closest('[data-tilt]');if(!c)return;
+ const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;
+ c.style.setProperty('--rx',((.5-y)*7).toFixed(2)+'deg');c.style.setProperty('--ry',((x-.5)*9).toFixed(2)+'deg');c.style.setProperty('--mx',(x*100).toFixed(1)+'%');c.style.setProperty('--my',(y*100).toFixed(1)+'%');c.classList.add('is-hover');
+});
+document.addEventListener('pointerout',e=>{const c=e.target.closest&&e.target.closest('[data-tilt]');if(c&&!c.contains(e.relatedTarget)){c.classList.remove('is-hover');c.style.removeProperty('--rx');c.style.removeProperty('--ry');}});
+document.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.matches&&e.target.matches('.rcard[role="button"]')){e.preventDefault();e.target.click();}});
+const passOn=date=>{const p=state.pass;return !!(p&&p.ever&&p.startDate&&date&&date>=p.startDate&&date<=p.expiresDate);};
+const boostPts=(date,base)=>passOn(date)?Math.round(base*(state.passInfo?.multiplier||1.5)):base;
+// ---------- PASS 頁 ----------
+function renderPass(){
+ const el=$('pass-content');if(!el)return;
+ const p=myPass(),info=state.passInfo||{},plans=state.passPlans||[],open=(state.passOrders||[]).find(o=>o.status==='pending'||o.status==='reported');
+ if(!plans.some(x=>x.id===passPick))passPick=plans.find(x=>x.featured)?.id||plans[0]?.id||'season';
+ const pick=plans.find(x=>x.id===passPick)||{};
+ const hero=p?`<div class="pass-hero"><div class="pass-hero-copy"><h1>你的銳能 PASS ${passBadge(p.tier,30)}</h1><p>${esc(p.planLabel)}${p.founder?` · 創始會員 No.${String(p.founder).padStart(2,'0')}`:''}${p.cancelled?' · 已取消續訂':''}</p>
+   <dl class="pass-dates"><div><dt>到期日</dt><dd>${esc(ymd(p.expiresDate))}</dd></div><div><dt>續訂補款日</dt><dd class="hl">${esc(ymd(p.renewBy))} 前</dd></div><div><dt>剩餘</dt><dd>${p.daysLeft} 天</dd></div></dl>
+   <p class="micro muted">${p.cancelled?'已取消訂閱：福利照常使用到到期日，到期後恢復一般會員，已付款項不退還。':`想不中斷，請在續訂補款日前完成續訂付款，新的效期會接在 ${esc(ymd(p.expiresDate))} 之後。PASS 不會自動扣款。`}</p>
+   <div class="row gap8 wrap">${p.groupUrl?`<a class="btn gold" href="${esc(p.groupUrl)}" target="_blank" rel="noopener">${icon('users')}PASS 專屬社群</a>`:''}${open?'':`<a class="btn primary" href="#pass-plans">${p.cancelled?'重新續訂':'提前續訂'}</a>`}<button class="btn" data-action="view" data-view="profile">管理訂閱</button></div></div>
+   <div class="pass-hero-card">${memberCardHtml()}</div></div>`
+  :`<div class="pass-hero"><div class="pass-hero-copy"><h1>銳能 PASS</h1><p class="pass-lede">給每週都在打的你。PASS 有效期間內完賽的場次，補登點數自動 ${info.multiplier||1.5} 倍，名字旁多一枚認證徽章，會員卡換上閃電外觀。</p>
+   ${info.founderLeft?`<p class="pass-founder">${icon('star')}<span>創始會員名額剩<b>${info.founderLeft}</b>/ ${info.founderLimit} 位，前 ${info.founderLimit} 位訂閱者永久保留創始會員編號。</span></p>`:''}
+   ${info.open?`<a class="btn primary" href="#pass-plans">選擇方案</a>`:`<div class="hint">銳能 PASS 目前暫停訂閱，開放時會在最新消息公告。</div>`}</div>
+   <div class="pass-hero-card" id="pass-preview">${memberCardHtml({preview:true,tier:pick.tier||'silver',planLabel:pick.label})}</div></div>`;
+ const planHtml=`<section class="pass-plans" id="pass-plans" aria-labelledby="pp-title"><div class="card-head"><div><h2 id="pp-title">${p?'續訂方案':'選擇方案'}</h2><p>${p?`續訂的效期會接在 ${esc(ymd(p.expiresDate))} 之後`:'有效期間從開通當天起算，不會自動續訂'}</p></div></div>
+  <div class="plan-grid" role="radiogroup" aria-label="PASS 方案">${plans.map(x=>`<button class="plan ${x.id===passPick?'on':''} plan--${x.tier}" role="radio" aria-checked="${x.id===passPick}" data-action="pass-pick" data-id="${esc(x.id)}">${x.featured?'<span class="plan-flag">最多人選</span>':''}<span class="plan-name">${passBadge(x.tier,20)}${esc(x.label)}</span><span class="plan-price"><small>NT$</small>${num(x.price)}</span><span class="plan-meta">${x.days} 天 · 平均每月 NT$ ${num(x.monthly)}</span></button>`).join('')}</div>
+  ${open?`<div class="hint" style="margin-top:16px">你有一筆${esc(open.planLabel)}訂單${open.status==='reported'?'正在等待銳能確認收款':'等待付款'}，完成後才能再下新訂單。<button class="text-btn" data-action="pass-order-open" data-id="${esc(open.id)}">查看訂單</button></div>`
+   :info.open?`<div class="plan-cta"><span>${esc(pick.label||'')} · NT$ ${num(pick.price||0)} · ${pick.days||0} 天</span><button class="btn primary" data-action="pass-subscribe">${p?'續訂':'訂閱'}${esc(pick.label||'')}</button></div>`:''}</section>`;
+ const perks=`<section class="card pass-perks"><h2>PASS 會員福利</h2><ul class="perk-list">
+  <li><b>補登點數 ${info.multiplier||1.5} 倍</b><span>交流賽每場 50 → 75 點，聯賽 300 → 450 點。以 PASS 有效期間內完賽的場次計算，補登送出時自動加成。</span></li>
+  <li><b>認證徽章</b><span>依方案顯示 ${passBadge('gold',16)} 金（年票）、${passBadge('silver',16)} 銀（季票）、${passBadge('bronze',16)} 銅（月票）徽章。</span></li>
+  <li><b>閃電會員卡</b><span>大廳的會員卡換成專屬 PASS 外觀，創始會員另有編號。</span></li>
+  <li><b>季盃、聯賽優先報名</b><span>比一般會員提早 24 小時開放報名，名額仍依各賽事上限。</span></li>
+  <li><b>PASS 專屬社群</b><span>優先得知賽事消息，不定期舉辦 PASS 限定活動。</span></li></ul></section>`;
+ const how=`<section class="card"><h2>怎麼付款</h2><ol class="pass-steps"><li><b>選方案下單</b><span>選擇銀行匯款或 ATM 無卡存款。</span></li><li><b>${info.payDays||3} 天內付款</b><span>匯款帳號會顯示在訂單，也會寄到你的信箱。</span></li><li><b>回報付款</b><span>匯款填帳號末五碼；無卡存款填明細表上的交易序號與存款時間。</span></li><li><b>確認後開通</b><span>銳能確認收款就立即開通，並寄送開通通知與電子收據。</span></li></ol></section>`;
+ const orders=(state.passOrders||[]).length?`<section class="card"><div class="card-head"><h2>我的 PASS 訂單</h2></div>${state.passOrders.map(o=>`<div class="booking-row"><div class="booking-date pass-date">${passBadge(o.tier,26)}</div><div class="grow"><strong>${esc(o.planLabel)} · NT$ ${num(o.price)}</strong><p>${esc(o.methodLabel)} · ${esc(shortDate(o.createdAt))}${o.status==='confirmed'?` · ${esc(ymd(o.startDate))} – ${esc(ymd(o.endDate))}`:''}${o.overdue?' · 已超過付款期限':''}</p></div><span class="badge ${o.status==='confirmed'?'completed':o.status==='reported'?'reported':o.status==='pending'?'pending':'rejected'}">${esc(o.statusLabel)}</span><button class="btn small" data-action="pass-order-open" data-id="${esc(o.id)}">${o.status==='pending'?'付款資訊':'查看'}</button></div>`).join('')}</section>`:'';
+ const terms=`<details class="card pass-terms"><summary><h2>銳能 PASS 會員條款</h2></summary><div class="rich">${richText(PASS_TERMS())}</div></details>`;
+ el.innerHTML=hero+planHtml+`<div class="two-col pass-cols">${perks}${how}</div>`+orders+terms;
+ chargeCards(el);
+}
+const PASS_TERMS=()=>`## 付款與開通
+1. 採銀行匯款或 ATM 無卡存款。銳能確認收款後開通 PASS，並寄送電子收據。
+2. 有效期間自開通當日起算：月票 30 天、季票 90 天、年票 365 天，到期日當天 23:59 前有效。
+3. PASS 不會自動續訂。到期前 ${state.passInfo?.remindDays||7} 天會寄信提醒；在續訂補款日（到期日前 ${state.passInfo?.renewLeadDays||3} 天）前完成付款，新的效期接在原到期日之後。
+4. 未滿 18 歲者訂閱，應經法定代理人同意。
+## 取消與退款
+1. 可隨時在「會員設定」取消訂閱。取消後不退還已付款項，PASS 福利照常使用到到期日，到期後恢復一般會員。
+2. 取消前可改變心意，在到期日前恢復訂閱。
+## 福利使用
+1. PASS 只限本人使用，不得轉讓、出借或買賣。
+2. 點數加成只適用於 PASS 有效期間內完賽的場次。
+3. 優先報名只是提早開放報名，不保證取得名額。
+4. 違反「銳能娛樂 會員使用規範」者，銳能得終止 PASS 資格，已付費用不退還。
+5. 銳能得調整福利內容，調整後的內容至少在生效前 14 天公告，已付費的會員在當期到期前不受影響。${state.passInfo?.notice?'\n## 其他公告\n'+state.passInfo.notice:''}`;
+function passSubscribe(){
+ const plan=(state.passPlans||[]).find(x=>x.id===passPick),p=myPass();if(!plan)return;
+ openDialog(`${p?'續訂':'訂閱'}銳能 PASS ${plan.label}`,`<form id="pass-form" data-plan="${esc(plan.id)}" data-price="${plan.price}"><div class="dialog-body">
+  <div class="reg-mode-head pass-head--${plan.tier}"><div><div class="eyebrow">${passBadge(plan.tier,16)} ${TIER[plan.tier].name} · ${plan.days} 天</div><strong>銳能 PASS ${esc(plan.label)}</strong></div><div class="fee">NT$ ${num(plan.price)}</div></div>
+  ${p?`<div class="hint" style="margin-bottom:16px">續訂的效期從 ${esc(ymd(p.expiresDate))} 隔天開始，原本的福利不會中斷。</div>`:''}
+  <div class="field-label"><span>付款方式</span></div>
+  <div class="pay-methods"><label class="pay-method"><input type="radio" name="pass-method" value="transfer" checked><span><b>銀行匯款／轉帳</b><small>網銀、行動銀行或臨櫃，回報帳號末五碼</small></span></label><label class="pay-method"><input type="radio" name="pass-method" value="cardless"><span><b>ATM 無卡存款</b><small>到 ATM 存現金，回報明細表交易序號</small></span></label></div>
+  <div class="field-label" style="margin-top:16px"><span>會員條款</span></div><div class="notes-box rich">${richText(PASS_TERMS())}</div>
+  <label class="check-label"><input type="checkbox" id="pass-agree" required><span>我已閱讀並同意銳能 PASS 會員條款，了解<b>取消訂閱不退還已付款項</b>，PASS 會使用到到期日。</span></label>
+  <div id="pass-error" class="inline-error" role="alert"></div><p class="micro muted" style="margin-top:10px">送出後會顯示付款資訊，並寄到 <b>${esc(state.user.email)}</b>，請在 ${state.passInfo?.payDays||3} 天內完成付款。</p></div>
+  <div class="dialog-foot"><button type="button" class="btn" data-action="close-modal">取消</button><button class="btn primary" type="submit">建立訂單 · NT$ ${num(plan.price)}</button></div></form>`,'',true);
+}
+function passOrderDialog(id,fresh){
+ const o=(state.passOrders||[]).find(x=>x.id===id);if(!o)return toast('找不到這筆訂單，請重新同步。');
+ const open=o.status==='pending'||o.status==='reported',cardless=o.method==='cardless',b=o.bank||{};
+ openDialog(fresh?'訂單已成立':'PASS 訂單',`<div class="dialog-body">${fresh?`<div class="success-mark">${icon('check')}</div><h2 style="font-size:23px">完成付款，就差最後一步</h2><p class="micro" style="margin:6px 0 16px">付款資訊也已寄到 ${esc(state.user.email)}</p>`:''}
+  ${open&&o.bank?`<div class="pay-card"><div class="row between" style="position:relative;z-index:1"><div><div class="eyebrow">${esc(o.methodLabel)}</div><div class="amount-big">NT$ ${num(o.price)}</div></div><span class="badge" style="background:#ffd21c;color:#1d1d1f">${esc(o.statusLabel)}</span></div><div style="position:relative;z-index:1;margin-top:18px"><div class="micro">${esc(b.name)} · 代碼 ${esc(b.code)}</div><div class="acct">${esc(b.account)}</div><div class="row between"><span class="micro">戶名 <b style="color:#fff">${esc(b.holder)}</b></span><button class="btn small" data-action="copy" data-value="${esc(String(b.account).replace(/[ -]/g,''))}">${icon('copy')}複製帳號</button></div>${cardless?`<p class="micro" style="color:#d1d1d6;margin-top:12px">${esc(b.cardlessNote)}</p>`:''}${o.status==='pending'?`<div class="micro" style="color:#ffd21c;margin-top:14px">請於 ${esc(fmtDT(o.dueAt))} 前完成付款${o.overdue?'（已超過期限，仍可付款後回報）':''}</div>`:''}</div></div>`:''}
+  <div class="review-summary"><div class="review-line"><span>方案</span><strong>${passBadge(o.tier,16)} 銳能 PASS ${esc(o.planLabel)}（${o.days} 天）</strong></div><div class="review-line"><span>金額</span><strong>NT$ ${num(o.price)}</strong></div><div class="review-line"><span>付款方式</span><strong>${esc(o.methodLabel)}</strong></div><div class="review-line"><span>狀態</span><strong>${esc(o.statusLabel)}</strong></div>${o.reference?`<div class="review-line"><span>${cardless?'交易序號':'帳號末五碼'}</span><strong class="mono">${esc(o.reference)}</strong></div>`:''}${o.status==='confirmed'?`<div class="review-line"><span>本期效期</span><strong>${esc(ymd(o.startDate))} – ${esc(ymd(o.endDate))}</strong></div>`:''}${o.rejectReason?`<div class="review-line"><span>退回原因</span><strong>${esc(o.rejectReason)}</strong></div>`:''}<div class="review-line"><span>訂單編號</span><strong class="mono micro">${esc(o.id)}</strong></div></div>
+  ${open?`<form id="pass-report-form" data-id="${esc(o.id)}" data-method="${esc(o.method)}">${cardless?`<div class="fields2"><label class="field">交易序號<input id="pr-ref" maxlength="20" required placeholder="明細表上的交易序號" value="${esc(o.reference||'')}" autocapitalize="characters"></label><label class="field">存款時間<input id="pr-time" type="datetime-local" required></label></div>`:`<label class="field">已付款？回報帳號末五碼<input id="pr-ref" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" required placeholder="例如 12345" value="${esc(o.reference||'')}"></label>`}<div id="pass-report-error" class="inline-error" role="alert"></div><button class="btn primary full" type="submit">${o.status==='reported'?'更新付款回報':'送出付款回報'}</button></form>`:''}
+  ${o.status==='pending'?`<button class="text-btn cancel-link" data-action="pass-cancel-order" data-id="${esc(o.id)}">取消這筆訂單</button>`:''}</div>`);
+}
+// ---------- 會員設定：PASS 訂閱管理 ----------
+function renderPassSettings(){
+ const el=$('pass-settings-panel');if(!el)return;const p=myPass(),open=(state.passOrders||[]).find(o=>o.status==='pending'||o.status==='reported');
+ el.innerHTML=`<div class="card-head"><div><h2>銳能 PASS 訂閱</h2><p>${p?`${esc(p.planLabel)} · 有效至 ${esc(ymd(p.expiresDate))}`:'目前是一般會員'}</p></div>${p?passBadge(p.tier,26):icon('star')}</div>
+ ${p?`<div class="review-summary"><div class="review-line"><span>狀態</span><strong>${p.cancelled?'已取消續訂（使用到到期日）':'訂閱中'}</strong></div><div class="review-line"><span>到期日</span><strong>${esc(ymd(p.expiresDate))}</strong></div><div class="review-line"><span>續訂補款日</span><strong>${esc(ymd(p.renewBy))} 前</strong></div></div>
+  ${p.cancelled?`<button class="btn full" data-action="pass-resume">恢復訂閱</button>`:`<button class="btn full danger-outline" data-action="pass-cancel">取消訂閱</button><p class="micro muted" style="margin-top:10px">取消後不退還已付款項，PASS 會使用到 ${esc(ymd(p.expiresDate))}。</p>`}`
+  :open?`<p class="micro">你有一筆${esc(open.planLabel)}訂單${esc(open.statusLabel)}。</p><button class="btn full" data-action="pass-order-open" data-id="${esc(open.id)}">查看訂單</button>`
+  :`<p class="micro" style="margin-bottom:14px">補登點數 1.5 倍、認證徽章與閃電會員卡。</p><button class="btn gold full" data-action="view" data-view="pass">了解銳能 PASS</button>`}`;
+}
+function passCancelDialog(){
+ const p=myPass();if(!p)return;
+ openDialog('取消銳能 PASS 訂閱',`<div class="dialog-body"><p style="font-size:15px;color:var(--ink);font-weight:600">確定要取消訂閱嗎？</p><ul class="micro" style="margin:12px 0 16px;padding-left:18px;line-height:1.9"><li>已付款項<b>不會退還</b>。</li><li>PASS 福利照常使用到 <b>${esc(ymd(p.expiresDate))}</b>，之後自動恢復一般會員。</li><li>到期前都可以在這裡恢復訂閱。</li></ul><label class="check-label"><input type="checkbox" id="pass-cancel-ok"><span>我了解取消後不退款</span></label><div id="pass-cancel-error" class="inline-error" role="alert"></div></div>`,`<div class="dialog-foot"><button class="btn" data-action="close-modal">保留訂閱</button><button class="btn danger" data-action="pass-cancel-confirm">確認取消</button></div>`);
+}
+document.addEventListener('click',e=>{
+ const b=e.target.closest('[data-action]');if(!b||b.disabled)return;const a=b.dataset.action;
+ if(a==='pass-pick'){passPick=b.dataset.id;const plan=(state.passPlans||[]).find(x=>x.id===passPick);document.querySelectorAll('.plan').forEach(x=>{const on=x.dataset.id===passPick;x.classList.toggle('on',on);x.setAttribute('aria-checked',String(on));});const pv=$('pass-preview');if(pv&&plan){pv.innerHTML=memberCardHtml({preview:true,tier:plan.tier,planLabel:plan.label});}const cta=document.querySelector('.plan-cta');if(cta&&plan)cta.innerHTML=`<span>${esc(plan.label)} · NT$ ${num(plan.price)} · ${plan.days} 天</span><button class="btn primary" data-action="pass-subscribe">${myPass()?'續訂':'訂閱'}${esc(plan.label)}</button>`;}
+ else if(a==='pass-subscribe')passSubscribe();
+ else if(a==='pass-order-open')passOrderDialog(b.dataset.id);
+ else if(a==='pass-cancel-order')busy(b,async()=>{const res=await api('passCancelOrder',{orderId:b.dataset.id},true);modalBusy=false;closeDialog();toast(res.message);await afterWrite();});
+ else if(a==='pass-cancel')passCancelDialog();
+ else if(a==='pass-cancel-confirm'){if(!$('pass-cancel-ok').checked){$('pass-cancel-error').textContent='請先勾選「我了解取消後不退款」。';return;}busy(b,async()=>{const res=await api('passCancel',{confirm:true},true);modalBusy=false;closeDialog();toast(res.message);await afterWrite();},'pass-cancel-error');}
+ else if(a==='pass-resume')busy(b,async()=>{const res=await api('passResume',{},true);toast(res.message);await afterWrite();});
+});
+document.addEventListener('submit',e=>{
+ const f=e.target;if(f.id!=='pass-form'&&f.id!=='pass-report-form')return;e.preventDefault();const b=f.querySelector('[type="submit"]');
+ if(f.id==='pass-form')busy(b,async()=>{try{const res=await api('passOrder',{plan:f.dataset.plan,expectedPrice:Number(f.dataset.price),method:f.querySelector('[name="pass-method"]:checked').value,agree:$('pass-agree').checked},true);
+   state.passOrders=[res.order,...(state.passOrders||[]).filter(o=>o.id!==res.order.id)];modalBusy=false;renderPass();renderPassSettings();passOrderDialog(res.order.id,true);afterWrite();}
+   catch(err){if(['PRICE_CHANGED','NOT_OPEN','DUPLICATE'].includes(err.code))afterWrite();throw err;}},'pass-error');
+ if(f.id==='pass-report-form')busy(b,async()=>{const t=$('pr-time');const res=await api('passReport',{orderId:f.dataset.id,reference:$('pr-ref').value.trim(),paidAt:t&&t.value?new Date(t.value).toISOString():''},true);
+   state.passOrders=(state.passOrders||[]).map(o=>o.id===res.order.id?res.order:o);modalBusy=false;passOrderDialog(res.order.id);renderPass();renderPassSettings();toast(res.message);},'pass-report-error');
+});
 
 
 // Google 按鈕由官方 GIS 產生；Client ID 自後端讀取，無須放 Client Secret。
