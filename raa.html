@@ -3,360 +3,913 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#060607">
-<meta name="description" content="RAA 2026｜REBORN ANNUAL AWARDS 銳能年度大賞。為 2026 春季盃、秋季盃、冬季盃寫下年度終章。">
+<meta name="theme-color" content="#050506">
+<meta name="description" content="RAA 2026｜REBORN ANNUAL AWARDS 銳能年度大賞。為 2026 春季盃、秋季盃、冬季盃寫下年度終章。正式入圍、觀眾投票、最終得獎名單。">
+<meta property="og:title" content="RAA 2026｜銳能年度大賞">
+<meta property="og:description" content="春季盃・秋季盃・冬季盃的年度終章。正式入圍名單與觀眾投票進行中。">
+<meta property="og:image" content="https://www.rebormnent.com/RAALOGO.png">
 <title>RAA 2026｜銳能年度大賞</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+TC:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="icon" href="RAALOGO.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg:#050506;--panel:#0b0c0f;--panel2:#101116;--gold:#f1c66b;--gold2:#b98a32;--cream:#fff2cf;
-  --text:#f7f5ef;--muted:#9d9a91;--line:rgba(241,198,107,.18);--line2:rgba(255,255,255,.08);--goldline:rgba(241,198,107,.22);
-  --danger:#ff7777;--ok:#7fe0ad;--warn:#f2c86d;--shadow:0 24px 80px rgba(0,0,0,.45);
-}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:'Inter','Noto Sans TC',sans-serif;overflow-x:hidden}button,input,textarea,select{font:inherit}button,a{color:inherit}a{text-decoration:none}img{max-width:100%;display:block}
-#particleCanvas{position:fixed;inset:0;width:100%;height:100%;z-index:-3;background:radial-gradient(circle at 50% 0%,rgba(188,130,38,.13),transparent 38%),linear-gradient(#070708,#040405 65%,#020203)}
-.tech-grid{position:fixed;inset:0;z-index:-2;pointer-events:none;opacity:.32;background-image:linear-gradient(rgba(241,198,107,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(241,198,107,.045) 1px,transparent 1px);background-size:64px 64px;mask-image:linear-gradient(to bottom,black,transparent 86%)}
-.scan{position:fixed;left:0;right:0;height:1px;z-index:-1;pointer-events:none;background:linear-gradient(90deg,transparent,rgba(241,198,107,.52),transparent);filter:blur(.2px);animation:scan 8s linear infinite}@keyframes scan{from{top:-2%}to{top:102%}}
-.wrap{width:min(1180px,calc(100% - 40px));margin:auto}.eyebrow{font-size:12px;font-weight:800;letter-spacing:.24em;color:var(--gold);text-transform:uppercase}.muted{color:var(--muted)}
-.topbar{position:fixed;top:0;left:0;right:0;z-index:200;background:linear-gradient(to bottom,rgba(4,4,5,.88),rgba(4,4,5,.28),transparent);backdrop-filter:blur(10px);transition:.25s}.topbar.scrolled{background:rgba(5,5,6,.86);border-bottom:1px solid var(--line2)}
-.nav{height:82px;display:flex;align-items:center;justify-content:space-between}.brand{display:flex;align-items:center;gap:12px;font-weight:800;font-size:12px;letter-spacing:.13em}.brand img{width:70px;max-height:36px;object-fit:contain}.brand small{color:#aaa;font-size:10px}.hamb{width:48px;height:48px;background:rgba(255,255,255,.035);border:1px solid var(--line2);border-radius:4px;display:grid;place-items:center;cursor:pointer;transition:.2s}.hamb:hover{border-color:var(--gold);transform:skewX(-4deg)}.hamb i,.hamb i:before,.hamb i:after{display:block;width:21px;height:1px;background:white;content:"";position:relative}.hamb i:before{position:absolute;top:-7px}.hamb i:after{position:absolute;top:7px}
-.drawerShade{position:fixed;inset:0;background:rgba(0,0,0,.68);z-index:400;opacity:0;pointer-events:none;transition:.28s}.drawerShade.on{opacity:1;pointer-events:auto}.drawer{position:fixed;right:0;top:0;height:100dvh;width:min(440px,92vw);z-index:410;background:rgba(8,8,10,.97);border-left:1px solid var(--line);padding:28px;transform:translateX(105%);transition:.34s cubic-bezier(.2,.8,.2,1);backdrop-filter:blur(24px)}.drawer.on{transform:none}.drawerHead{display:flex;justify-content:space-between;align-items:center;padding-bottom:24px;border-bottom:1px solid var(--line2)}.drawerHead img{width:110px}.iconBtn{width:42px;height:42px;background:none;border:1px solid var(--line2);color:white;font-size:25px;cursor:pointer}.drawerNav{padding-top:14px}.drawerNav a,.drawerNav button{width:100%;display:flex;align-items:center;justify-content:space-between;padding:16px 6px;border:0;border-bottom:1px solid var(--line2);background:none;color:#eee;text-align:left;cursor:pointer;font-weight:700}.drawerNav span{color:var(--gold);font-size:11px;letter-spacing:.1em}.drawerNav a:hover,.drawerNav button:hover{padding-left:14px;color:var(--gold)}
-.hero{min-height:100dvh;display:flex;align-items:center;position:relative;overflow:hidden;padding:120px 0 70px}.hero:after{content:"";position:absolute;left:7%;right:7%;bottom:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.4}.heroStage{position:absolute;inset:0;pointer-events:none}.heroStage:before{content:"";position:absolute;width:600px;height:600px;left:50%;top:54%;transform:translate(-50%,-50%);border:1px solid rgba(241,198,107,.13);border-radius:50%;box-shadow:0 0 160px rgba(241,198,107,.07),inset 0 0 120px rgba(241,198,107,.035)}.heroStage:after{content:"";position:absolute;width:900px;height:2px;left:50%;top:55%;transform:translate(-50%,-50%) rotate(-13deg);background:linear-gradient(90deg,transparent,rgba(241,198,107,.18),transparent)}
-.heroContent{position:relative;z-index:2;text-align:center}.heroLogo{width:min(470px,78vw);margin:12px auto 12px;filter:drop-shadow(0 0 28px rgba(241,198,107,.12))}.hero h1{font-size:clamp(34px,6vw,76px);line-height:1;margin:0;font-weight:900;letter-spacing:.04em}.hero h1 .slant{display:inline-block;transform:skewX(-9deg)}.hero .sub{font-size:clamp(13px,1.5vw,17px);max-width:720px;margin:22px auto;color:#bdb8aa;line-height:1.8}.heroMeta{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:28px 0}.pill{border:1px solid var(--line);background:rgba(241,198,107,.04);padding:10px 14px;font-size:12px;color:#d7c79f;clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%)}
-.actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}.btn{appearance:none;border:1px solid var(--line2);padding:13px 18px;background:#101116;color:white;cursor:pointer;font-weight:800;letter-spacing:.02em;transition:.2s;clip-path:polygon(9px 0,100% 0,calc(100% - 9px) 100%,0 100%)}.btn:hover{transform:translateY(-2px);border-color:var(--gold)}.btn.gold{background:linear-gradient(100deg,#f0cc79,#c28e34);color:#15100a;border-color:transparent}.btn.ghost{background:rgba(255,255,255,.025)}.btn.danger{border-color:rgba(255,119,119,.35);color:#ff9f9f;background:rgba(255,119,119,.06)}.btn.small{padding:8px 11px;font-size:12px}.btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
-section{padding:100px 0}.sectionHead{display:flex;align-items:end;justify-content:space-between;gap:30px;margin-bottom:34px}.sectionTitle{font-size:clamp(31px,5vw,62px);line-height:1.02;margin:10px 0 0;font-weight:900;letter-spacing:-.04em}.sectionLead{max-width:520px;color:var(--muted);line-height:1.75}.stage{position:relative;background:linear-gradient(180deg,rgba(255,255,255,.015),rgba(241,198,107,.018),transparent);border-top:1px solid var(--line2);border-bottom:1px solid var(--line2)}
-.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.card{position:relative;border:1px solid var(--line2);background:linear-gradient(145deg,rgba(18,19,23,.92),rgba(7,8,10,.92));padding:24px;min-height:170px;overflow:hidden;box-shadow:inset 0 1px rgba(255,255,255,.02)}.card:before{content:"";position:absolute;left:0;top:0;width:40px;height:1px;background:var(--gold);box-shadow:0 0 20px rgba(241,198,107,.5)}.card h3{font-size:21px;margin:10px 0}.card p{color:var(--muted);line-height:1.7;font-size:14px}.cardCode{font-size:10px;font-weight:900;color:var(--gold);letter-spacing:.18em}.tag{display:inline-flex;align-items:center;gap:7px;padding:7px 10px;border:1px solid var(--line);font-size:11px;color:#d9c28a;margin-top:8px}.tag:before{content:"";width:5px;height:5px;background:var(--gold);border-radius:50%;box-shadow:0 0 10px var(--gold)}
-.juryNote{margin-top:18px;padding:20px 22px;border:1px solid rgba(241,198,107,.22);background:linear-gradient(90deg,rgba(241,198,107,.08),rgba(241,198,107,.02));display:flex;gap:14px;align-items:flex-start}.juryNote b{color:var(--cream)}
-.timeline{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line2)}.step{padding:25px;border-right:1px solid var(--line2);min-height:170px}.step:last-child{border-right:0}.step b{font-size:10px;letter-spacing:.15em;color:var(--gold)}.step h3{margin:30px 0 8px}.step p{font-size:13px;line-height:1.6;color:var(--muted)}
-.nomineeFilters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}.filterBtn{padding:10px 13px;background:#0d0e11;border:1px solid var(--line2);color:#aaa;cursor:pointer}.filterBtn.active{color:#120e08;background:var(--gold);border-color:var(--gold);font-weight:800}.nomineeGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.nomineeCard{min-height:210px;display:flex;flex-direction:column;justify-content:space-between}.nomineeAvatar{width:68px;height:68px;border:1px solid var(--line);background:linear-gradient(135deg,#17181c,#09090b);display:grid;place-items:center;font-weight:900;font-size:23px;color:var(--gold);overflow:hidden;clip-path:polygon(9px 0,100% 0,100% calc(100% - 9px),calc(100% - 9px) 100%,0 100%,0 9px)}.nomineeAvatar img{width:100%;height:100%;object-fit:cover}.nomineeName{font-size:22px;font-weight:900;margin-top:18px}.nomineeMeta{font-size:12px;color:#a9a59b;margin-top:6px}.emptyState{grid-column:1/-1;border:1px dashed var(--line);padding:45px;text-align:center;color:var(--muted)}
-.teamArchive{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.teamCard{padding:18px;border:1px solid var(--line2);background:rgba(12,13,16,.74);position:relative;min-height:118px}.teamCard h4{margin:0 0 12px;font-size:17px}.seasonDots{display:flex;gap:5px;flex-wrap:wrap}.seasonChip{font-size:10px;padding:5px 7px;border:1px solid var(--line);color:#cfbd91}.teamCard p{font-size:11px;color:var(--muted);margin:10px 0 0}.archiveFoot{margin-top:20px;color:#918b7d;font-size:13px;line-height:1.7}
-.liveBox{display:grid;grid-template-columns:1.2fr .8fr;min-height:300px;border:1px solid var(--line2);overflow:hidden}.liveMain{padding:40px;background:radial-gradient(circle at 20% 30%,rgba(241,198,107,.1),transparent 35%),#0b0c0e}.liveSide{border-left:1px solid var(--line2);padding:32px;display:flex;flex-direction:column;justify-content:space-between}.liveDot{display:inline-flex;align-items:center;gap:8px;color:#c6c0b5;font-size:12px}.liveDot i{width:8px;height:8px;background:#dc534f;border-radius:50%;box-shadow:0 0 16px #dc534f}
-.footer{padding:40px 0 50px;border-top:1px solid var(--line2);font-size:11px;color:#6f6c66}.footerLine{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}.footer img{width:85px;opacity:.75;margin-bottom:14px}
-/* hidden portal */
-.portal{position:fixed;inset:0;z-index:1000;background:rgba(4,4,5,.985);display:none;overflow:auto}.portal.open{display:block}.portalTop{position:sticky;top:0;z-index:30;background:rgba(5,5,6,.88);backdrop-filter:blur(22px);border-bottom:1px solid var(--line2)}.portalNav{height:76px;display:flex;align-items:center;justify-content:space-between}.portalNav img{width:92px}.portalBody{padding:48px 0 90px}.portalIntro{text-align:center;max-width:760px;margin:0 auto 36px}.portalIntro h2{font-size:clamp(34px,6vw,66px);margin:8px 0}.roleGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;max-width:900px;margin:0 auto}.roleCard{position:relative;text-align:left;min-height:260px;padding:28px;border:1px solid var(--line2);background:linear-gradient(145deg,#111216,#08090b);cursor:pointer;overflow:hidden}.roleCard:after{content:"";position:absolute;right:-80px;bottom:-130px;width:260px;height:260px;border:1px solid rgba(241,198,107,.15);transform:rotate(35deg)}.roleCard:hover{border-color:var(--gold)}.roleCard .no{font-size:58px;font-weight:900;color:rgba(241,198,107,.11);position:absolute;right:18px;top:12px}.roleCard h3{font-size:30px;margin:55px 0 8px}.roleCard p{max-width:420px;color:var(--muted);line-height:1.7}.portalPane{display:none}.portalPane.active{display:block}.paneHead{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:24px}.paneHead h3{font-size:34px;margin:0}.backLink{background:none;border:0;color:var(--gold);cursor:pointer;font-weight:800}.formGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.field{margin-bottom:16px}.field.full{grid-column:1/-1}.field label{display:block;font-size:11px;font-weight:800;letter-spacing:.08em;margin-bottom:8px;color:#c8c3b7}.field input,.field select,.field textarea{width:100%;border:1px solid var(--line2);background:#0b0c0f;color:white;padding:14px 14px;outline:none;border-radius:0}.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--gold);box-shadow:0 0 0 2px rgba(241,198,107,.06)}.field small{color:#77736a;display:block;margin-top:6px;line-height:1.5}.checks{display:flex;gap:8px;flex-wrap:wrap}.check{position:relative}.check input{position:absolute;opacity:0;pointer-events:none}.check span{display:block;border:1px solid var(--line2);padding:10px 12px;color:#aaa;cursor:pointer}.check input:checked+span{border-color:var(--gold);background:rgba(241,198,107,.08);color:var(--cream)}
-.identityCard{max-width:800px;margin:0 auto}.identityOk{display:none;max-width:1000px;margin:0 auto}.identityOk.show{display:block}.portalTabs{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0}.portalTab{border:1px solid var(--line2);background:#0d0e11;color:#aaa;padding:10px 13px;cursor:pointer}.portalTab.active{background:var(--gold);color:#160f07;border-color:var(--gold);font-weight:800}.portalPanel{display:none}.portalPanel.active{display:block}.searchResults{display:grid;gap:8px;margin-top:10px}.candidateBtn{text-align:left;width:100%;border:1px solid var(--line2);padding:13px;background:#0d0e11;color:white;cursor:pointer}.candidateBtn:hover,.candidateBtn.selected{border-color:var(--gold);background:rgba(241,198,107,.06)}.selectedCandidate{border-left:2px solid var(--gold);padding:11px 14px;background:rgba(241,198,107,.06);margin:12px 0;color:#d8c496}.statusList{display:grid;gap:10px}.statusRow{border:1px solid var(--line2);padding:14px;display:flex;justify-content:space-between;gap:15px;align-items:center}.statusBadge{font-size:11px;font-weight:800;padding:6px 8px;border:1px solid}.statusBadge.pending{color:var(--warn);border-color:rgba(242,200,109,.3)}.statusBadge.approved{color:var(--ok);border-color:rgba(127,224,173,.3)}.statusBadge.rejected{color:var(--danger);border-color:rgba(255,119,119,.3)}
-.toast{position:fixed;z-index:2000;left:50%;bottom:30px;transform:translate(-50%,20px);opacity:0;pointer-events:none;transition:.25s;background:#15161a;border:1px solid var(--line);box-shadow:var(--shadow);padding:13px 17px;max-width:min(520px,90vw);font-size:13px}.toast.show{opacity:1;transform:translate(-50%,0)}
-.loading{opacity:.55;pointer-events:none}.announcement{position:relative;z-index:3;background:rgba(241,198,107,.06);border-bottom:1px solid var(--line);padding:9px 15px;text-align:center;font-size:11px;color:#d7c698;letter-spacing:.04em}.noDisplay{display:none!important}
-@media(max-width:900px){.grid3,.nomineeGrid{grid-template-columns:repeat(2,1fr)}.teamArchive{grid-template-columns:repeat(2,1fr)}.timeline{grid-template-columns:repeat(2,1fr)}.step:nth-child(2){border-right:0}.step:nth-child(-n+2){border-bottom:1px solid var(--line2)}.liveBox{grid-template-columns:1fr}.liveSide{border-left:0;border-top:1px solid var(--line2)}.sectionHead{display:block}.sectionLead{margin-top:18px}.heroStage:before{width:430px;height:430px}}
-@media(max-width:640px){.wrap{width:min(100% - 24px,1180px)}.nav{height:70px}.brand small{display:none}.hero{padding-top:105px}.heroMeta{gap:6px}.pill{padding:8px 9px}.grid3,.grid2,.nomineeGrid,.teamArchive,.roleGrid,.formGrid{grid-template-columns:1fr}.timeline{grid-template-columns:1fr}.step{border-right:0!important;border-bottom:1px solid var(--line2)}.step:last-child{border-bottom:0}.sectionTitle{font-size:38px}.sectionHead{margin-bottom:25px}section{padding:74px 0}.card{padding:20px}.juryNote{display:block}.portalBody{padding-top:30px}.paneHead h3{font-size:28px}.portalNav{height:68px}.statusRow{align-items:flex-start;flex-direction:column}.heroLogo{width:min(390px,86vw)}}
-
-/* V3 voting center UX */
-.portalNavRight{display:flex;align-items:center;gap:12px}.portalLive{font-size:10px;letter-spacing:.16em;color:var(--gold);font-weight:900}.resumeCard{display:flex;justify-content:space-between;align-items:center;gap:18px;border:1px solid var(--goldline);background:linear-gradient(120deg,rgba(241,198,107,.1),rgba(255,255,255,.02));padding:18px 20px;margin:0 0 18px}.resumeCard b{display:block;font-size:18px;margin-top:5px}.resumeCard p{margin:6px 0 0}.authShell{max-width:780px;margin:0 auto;border:1px solid var(--line);background:rgba(11,12,15,.9);padding:24px}.authIntro h3{font-size:28px;margin:7px 0}.authIntro p{line-height:1.7}.authTabs{display:flex;border-bottom:1px solid var(--line);margin:22px 0 20px}.authTab{flex:1;border:0;border-bottom:2px solid transparent;background:none;color:var(--muted);padding:13px;cursor:pointer;font-weight:900}.authTab.active{color:var(--gold);border-bottom-color:var(--gold);background:linear-gradient(180deg,transparent,rgba(241,198,107,.04))}.authPanel{display:none}.authPanel.active{display:block}.quickUid{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:end}.quickUid .field{margin:0}.quickUid .btn{min-height:47px}.authHint{margin-top:14px;padding:12px 14px;border-left:2px solid var(--gold);background:rgba(241,198,107,.04);font-size:12px;color:var(--muted);line-height:1.7}.workspaceHead{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;margin-bottom:18px;padding-bottom:18px;border-bottom:1px solid var(--line)}.workspaceHead h3{font-size:28px;margin:6px 0}.selfVoteNote{display:flex;gap:10px;align-items:center;border:1px solid rgba(241,198,107,.22);background:rgba(241,198,107,.06);padding:13px 15px;margin-bottom:16px;font-size:12px}.selfVoteNote b{color:var(--gold);white-space:nowrap}.ballotShell{display:grid;gap:14px}.ballotOverview{display:flex;justify-content:space-between;align-items:center;gap:14px;border:1px solid var(--line);padding:15px 16px;background:rgba(255,255,255,.018)}.ballotOverview b{font-size:20px}.voteProgress{min-width:170px}.progressTrack{height:5px;background:#08090b;border:1px solid var(--line);margin-top:7px;overflow:hidden}.progressFill{height:100%;background:linear-gradient(90deg,#b88631,#f1c66b);transition:.25s}.awardVoteTabs{display:flex;gap:8px;overflow:auto;padding-bottom:3px}.awardVoteTab{flex:1;min-width:160px;border:1px solid var(--line);background:#0d0e12;color:#9c998f;padding:12px 14px;text-align:left;cursor:pointer;transition:.18s}.awardVoteTab b{display:block;color:#eee;margin-bottom:4px}.awardVoteTab.active{border-color:var(--gold);background:rgba(241,198,107,.07)}.awardVoteTab.done{border-color:rgba(116,220,167,.28)}.awardVoteTab.done:after{content:'✓ 已投票';display:block;margin-top:7px;color:#7edbad;font-size:10px;font-weight:900}.ballotAwardHead{display:flex;justify-content:space-between;align-items:end;gap:15px;margin:8px 0 2px}.ballotAwardHead h4{font-size:24px;margin:0}.candidateGridV3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.candidateCardV3{position:relative;border:1px solid var(--line);background:linear-gradient(145deg,#111216,#090a0d);padding:16px;min-height:240px;display:flex;flex-direction:column;transition:.18s}.candidateCardV3:hover{transform:translateY(-2px);border-color:rgba(241,198,107,.38)}.candidateAvatarV3{width:64px;height:64px;border:1px solid var(--goldline);background:#17171a;display:grid;place-items:center;font-size:18px;font-weight:900;color:var(--gold);overflow:hidden;margin-bottom:15px}.candidateAvatarV3 img{width:100%;height:100%;object-fit:cover}.candidateCardV3 h5{font-size:18px;margin:0 0 5px}.candidateMetaV3{font-size:11px;color:var(--muted);line-height:1.6}.candidateSeasonsV3{display:flex;gap:5px;flex-wrap:wrap;margin:10px 0 14px}.candidateCardV3 .btn{margin-top:auto;width:100%}.candidateCardV3.voted{border-color:rgba(116,220,167,.35);background:linear-gradient(145deg,rgba(116,220,167,.07),#090a0d)}.voteDonePill{position:absolute;right:12px;top:12px;font-size:9px;font-weight:900;color:#80dfb0;border:1px solid rgba(116,220,167,.3);padding:5px 7px}.voteConfirm{position:fixed;inset:0;z-index:1200;display:none;place-items:center;background:rgba(0,0,0,.76);backdrop-filter:blur(10px);padding:20px}.voteConfirm.open{display:grid}.voteConfirmBox{width:min(520px,100%);border:1px solid var(--goldline);background:#0d0e11;padding:26px;box-shadow:0 30px 120px rgba(0,0,0,.7)}.voteConfirmBox h3{font-size:28px;margin:8px 0 18px}.confirmCandidate{border:1px solid var(--line);padding:15px;background:#08090b;font-size:16px;font-weight:900}.confirmActions{display:flex;justify-content:flex-end;gap:10px;margin-top:20px}.applicationCard{border:1px solid var(--line);background:rgba(10,11,14,.65);padding:20px}.btn.ok{color:var(--ok);border-color:rgba(127,224,173,.28);background:rgba(127,224,173,.06)}
-@media(max-width:850px){.candidateGridV3{grid-template-columns:repeat(2,1fr)}.quickUid{grid-template-columns:1fr}.resumeCard,.workspaceHead,.ballotOverview,.ballotAwardHead{align-items:stretch;flex-direction:column}.portalLive{display:none}.selfVoteNote{align-items:flex-start;flex-direction:column}.voteProgress{width:100%}}
-@media(max-width:560px){.candidateGridV3{grid-template-columns:1fr}.authShell{padding:17px}.candidateCardV3{min-height:210px}.awardVoteTabs{margin-right:-18px}.awardVoteTab{min-width:150px}.portalBody{padding-left:14px!important;padding-right:14px!important}.roleGrid{grid-template-columns:1fr!important}}
-
-
-/* V4 public UX · live votes · application review · announcements */
-.announcement{position:fixed!important;top:0;left:0;right:0;z-index:220!important;height:34px;padding:0!important;overflow:hidden;white-space:nowrap;background:rgba(13,11,7,.96)!important;backdrop-filter:blur(14px)}.announcementTrack{height:34px;display:inline-flex;align-items:center;gap:24px;min-width:max-content;padding-left:100vw;animation:raaTicker 24s linear infinite;font-size:11px;font-weight:800;color:#ead49d;letter-spacing:.06em}.announcementTrack:before{content:'RAA · LIVE';color:var(--gold);font-size:9px;letter-spacing:.18em;border:1px solid var(--goldline);padding:4px 7px}@keyframes raaTicker{to{transform:translateX(-100%)}}.topbar{top:34px!important}.drawerPhase{margin:16px 0 4px;padding:15px 16px;border:1px solid var(--goldline);background:linear-gradient(110deg,rgba(241,198,107,.1),rgba(255,255,255,.015));position:relative;overflow:hidden}.drawerPhase:after{content:'';position:absolute;right:-25px;top:-42px;width:95px;height:95px;border:1px solid rgba(241,198,107,.13);transform:rotate(34deg)}.phaseTop{display:flex;align-items:center;gap:8px;font-size:9px;font-weight:900;letter-spacing:.18em;color:var(--gold)}.phaseDot{width:7px;height:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 14px var(--gold);animation:phasePulse 1.6s ease-in-out infinite}@keyframes phasePulse{50%{opacity:.35;transform:scale(.75)}}.drawerPhase b{display:block;font-size:18px;margin-top:9px}.drawerPhase p{font-size:11px;color:#9e998d;line-height:1.55;margin:6px 0 0;max-width:320px}.liveVotePanel{margin-top:15px;border-top:1px solid var(--line2);padding-top:13px}.liveVoteTop{display:flex;align-items:flex-end;justify-content:space-between;gap:10px}.liveVoteTop span{font-size:9px;letter-spacing:.13em;color:var(--gold);font-weight:900}.liveVoteTop b{font-size:24px;color:var(--cream)}.liveVoteTrack{height:4px;background:#07080a;border:1px solid var(--line2);margin-top:8px;overflow:hidden}.liveVoteFill{height:100%;background:linear-gradient(90deg,#aa7827,#f1c66b);box-shadow:0 0 14px rgba(241,198,107,.24)}.liveVoteMeta{display:flex;justify-content:space-between;margin-top:6px;font-size:9px;color:#817c72}.candidateLiveCount{margin:-3px 0 12px;padding:8px 9px;border:1px solid rgba(241,198,107,.14);background:rgba(241,198,107,.035);display:flex;align-items:center;justify-content:space-between;font-size:10px;color:#9e998c}.candidateLiveCount b{font-size:15px;color:var(--gold)}
-.uploadZone{border:1px dashed rgba(241,198,107,.28);background:rgba(241,198,107,.025);padding:15px;display:grid;grid-template-columns:92px 1fr;gap:15px;align-items:center}.photoPreview{width:92px;height:92px;border:1px solid var(--line);background:#08090b;display:grid;place-items:center;overflow:hidden;color:#6e695f;font-size:10px;text-align:center;padding:8px}.photoPreview img{width:100%;height:100%;object-fit:cover}.uploadZone input[type=file]{padding:9px;background:#08090b}.consentBox{margin:18px 0;border:1px solid var(--goldline);background:linear-gradient(110deg,rgba(241,198,107,.07),rgba(255,255,255,.015));padding:16px}.consentCheck{display:flex;gap:11px;align-items:flex-start;cursor:pointer;font-size:13px;line-height:1.7}.consentCheck input{margin-top:5px;accent-color:#d8a746;flex:0 0 auto}.consentBox button{border:0;background:none;color:var(--gold);padding:8px 0 0;cursor:pointer;font-size:11px;font-weight:900}.overlayModal{position:fixed;inset:0;z-index:1250;display:none;place-items:center;background:rgba(0,0,0,.8);backdrop-filter:blur(12px);padding:18px}.overlayModal.open{display:grid}.overlayBox{width:min(720px,100%);max-height:90dvh;overflow:auto;border:1px solid var(--goldline);background:linear-gradient(145deg,#111216,#08090b);box-shadow:0 32px 120px rgba(0,0,0,.72);padding:26px}.overlayHead{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;border-bottom:1px solid var(--line);padding-bottom:17px;margin-bottom:18px}.overlayHead img{width:104px}.overlayHead h3{font-size:27px;margin:7px 0 0}.termsBody{display:grid;gap:12px}.termItem{border-left:2px solid var(--gold);padding:10px 13px;background:rgba(255,255,255,.018)}.termItem b{font-size:13px}.termItem p{font-size:12px;color:var(--muted);line-height:1.7;margin:6px 0 0}.profileReview{display:grid;grid-template-columns:180px 1fr;gap:20px}.profilePhoto{width:180px;aspect-ratio:1;border:1px solid var(--goldline);background:#090a0c;overflow:hidden}.profilePhoto img{width:100%;height:100%;object-fit:cover}.reviewGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.reviewItem{border:1px solid var(--line2);padding:11px 12px;background:#090a0c}.reviewItem span{display:block;font-size:9px;color:#77736b;letter-spacing:.1em;margin-bottom:5px}.reviewItem b{font-size:13px}.reviewItem.full{grid-column:1/-1}.reviewAwards{display:flex;gap:6px;flex-wrap:wrap}.reviewAgree{margin-top:14px;padding:11px 13px;border:1px solid rgba(127,224,173,.22);color:#91deb7;background:rgba(127,224,173,.035);font-size:11px}.overlayActions{display:flex;justify-content:flex-end;gap:9px;margin-top:20px}
-.announcePopup{position:fixed;inset:0;z-index:2600;display:none;place-items:center;background:rgba(0,0,0,.76);backdrop-filter:blur(15px);padding:20px}.announcePopup.open{display:grid}.announceCard{width:min(560px,100%);border:1px solid var(--goldline);background:radial-gradient(circle at 80% 0,rgba(241,198,107,.12),transparent 33%),#0c0d10;box-shadow:0 35px 130px rgba(0,0,0,.76);padding:28px;position:relative;overflow:hidden}.announceCard:after{content:'';position:absolute;right:-100px;bottom:-150px;width:300px;height:300px;border:1px solid rgba(241,198,107,.1);transform:rotate(30deg)}.announceLogo{width:138px;margin-bottom:24px;position:relative;z-index:1}.announceCard h3{font-size:30px;margin:8px 0 14px;position:relative;z-index:1}.announceMessage{font-size:15px;line-height:1.85;color:#e5ddca;white-space:pre-wrap;position:relative;z-index:1}.announceMeta{font-size:10px;color:#767168;margin-top:18px;position:relative;z-index:1}.announceClose{margin-top:24px;width:100%;position:relative;z-index:1}
-@media(max-width:640px){.profileReview{grid-template-columns:1fr}.profilePhoto{width:120px}.reviewGrid{grid-template-columns:1fr}.reviewItem.full{grid-column:auto}.uploadZone{grid-template-columns:72px 1fr}.photoPreview{width:72px;height:72px}.announceCard{padding:22px}.announceCard h3{font-size:25px}}
-
-
-/* V4.1 hotfix · restored historical team score/rank */
-.teamCard{min-height:210px!important;display:flex;flex-direction:column}
-.teamCardTop{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
-.teamRankBadge{min-width:54px;text-align:center;border:1px solid var(--goldline);background:rgba(241,198,107,.06);padding:7px 8px}
-.teamRankBadge span{display:block;font-size:8px;color:#847d70;letter-spacing:.12em}
-.teamRankBadge b{display:block;margin-top:3px;font-size:20px;color:var(--gold)}
-.teamScoreTotal{margin-top:14px;border-top:1px solid var(--line2);border-bottom:1px solid var(--line2);padding:10px 0;display:flex;justify-content:space-between;align-items:end}
-.teamScoreTotal span{font-size:9px;color:#7f796f;letter-spacing:.1em}
-.teamScoreTotal b{font-size:22px;color:var(--cream)}
-.teamSeasonResults{display:grid;gap:6px;margin-top:10px}
-.teamSeasonResult{display:grid;grid-template-columns:58px 1fr 1fr;gap:6px;align-items:center;font-size:9px}
-.teamSeasonResult span{color:#817c72}
-.teamSeasonResult b{font-size:10px;color:#cfc7b6;font-weight:700}
-.teamCard .teamNote{margin-top:auto!important;padding-top:12px}
-
-
-/* V4.2 · classified team archive + restored podium/top3 visuals */
-.archiveControls{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:0 0 18px;flex-wrap:wrap}.archiveTabs{display:flex;gap:8px;flex-wrap:wrap}.archiveTab{border:1px solid var(--line2);background:#0d0e11;color:#aaa;padding:10px 13px;cursor:pointer;font-weight:800}.archiveTab.active{background:var(--gold);color:#15100a;border-color:var(--gold)}.archiveSummary{font-size:11px;color:var(--muted)}
-.teamPodium{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:18px}.podiumCard{position:relative;min-height:190px;border:1px solid var(--line2);background:#0c0d10;padding:18px;overflow:hidden;display:flex;align-items:center;gap:16px}.podiumCard:after{content:'';position:absolute;inset:-40%;filter:blur(42px);opacity:.13;pointer-events:none}.podiumCard.rank1{border-color:rgba(255,211,97,.42);background:linear-gradient(145deg,rgba(255,198,61,.10),#0c0d10)}.podiumCard.rank1:after{background:#ffbf35}.podiumCard.rank2{border-color:rgba(213,221,233,.30);background:linear-gradient(145deg,rgba(210,220,235,.08),#0c0d10)}.podiumCard.rank2:after{background:#dfe7f2}.podiumCard.rank3{border-color:rgba(205,136,78,.32);background:linear-gradient(145deg,rgba(202,126,63,.09),#0c0d10)}.podiumCard.rank3:after{background:#cd844a}.podiumPlace{font-size:42px;font-weight:900;line-height:1;color:var(--gold);min-width:52px}.podiumLogo{width:76px;height:76px;border:1px solid var(--goldline);background:#08090b;object-fit:cover;position:relative;z-index:1}.podiumFallback{width:76px;height:76px;border:1px solid var(--goldline);display:grid;place-items:center;background:#08090b;color:var(--gold);font-weight:900;position:relative;z-index:1}.podiumInfo{position:relative;z-index:1;min-width:0}.podiumInfo h4{font-size:19px;margin:0 0 8px;overflow-wrap:anywhere}.podiumInfo p{font-size:11px;color:var(--muted);margin:0}.podiumScore{margin-top:10px;font-size:20px;font-weight:900}
-.teamIdentityPublic{display:flex;align-items:center;gap:12px;min-width:0}.teamLogoPublic{width:58px;height:58px;flex:0 0 58px;border:1px solid var(--goldline);background:#090a0c;object-fit:cover}.teamLogoFallbackPublic{width:58px;height:58px;flex:0 0 58px;border:1px solid var(--goldline);display:grid;place-items:center;background:linear-gradient(145deg,rgba(241,198,107,.07),#090a0c);color:var(--gold);font-weight:900}.teamCard.rank1{border-color:rgba(255,211,97,.36);background:linear-gradient(145deg,rgba(255,198,61,.085),rgba(12,13,16,.86));box-shadow:inset 0 0 50px rgba(255,195,45,.035)}.teamCard.rank2{border-color:rgba(205,216,232,.27);background:linear-gradient(145deg,rgba(205,216,232,.06),rgba(12,13,16,.86))}.teamCard.rank3{border-color:rgba(202,126,63,.3);background:linear-gradient(145deg,rgba(202,126,63,.07),rgba(12,13,16,.86))}.teamCard .placeFlag{position:absolute;right:12px;top:12px;font-size:9px;font-weight:900;letter-spacing:.09em;border:1px solid var(--line);padding:5px 7px;color:#aaa}.teamCard.rank1 .placeFlag{color:#ffd86c;border-color:rgba(255,216,108,.34)}.teamCard.rank2 .placeFlag{color:#d9e0e9;border-color:rgba(217,224,233,.3)}.teamCard.rank3 .placeFlag{color:#d89a66;border-color:rgba(216,154,102,.32)}
-.nomineeCard.voteRank1{border-color:rgba(255,211,97,.42);background:linear-gradient(145deg,rgba(255,198,61,.09),rgba(7,8,10,.92))}.nomineeCard.voteRank2{border-color:rgba(210,220,235,.29);background:linear-gradient(145deg,rgba(210,220,235,.06),rgba(7,8,10,.92))}.nomineeCard.voteRank3{border-color:rgba(202,126,63,.32);background:linear-gradient(145deg,rgba(202,126,63,.07),rgba(7,8,10,.92))}.liveRankFlag{position:absolute;right:14px;top:14px;padding:5px 7px;border:1px solid var(--line);font-size:9px;font-weight:900;z-index:2}.voteRank1 .liveRankFlag{color:#ffd96d;border-color:rgba(255,217,109,.34)}.voteRank2 .liveRankFlag{color:#dce4ef;border-color:rgba(220,228,239,.28)}.voteRank3 .liveRankFlag{color:#d79761;border-color:rgba(215,151,97,.3)}
-@media(max-width:900px){.teamPodium{grid-template-columns:1fr}.teamArchive{grid-template-columns:repeat(2,1fr)}}@media(max-width:640px){.teamArchive{grid-template-columns:1fr}.podiumCard{min-height:150px}.podiumLogo,.podiumFallback{width:62px;height:62px}.archiveControls{align-items:flex-start}}
-
-
-/* V4.4 · winner reveal + rank overlap fixes */
-.teamCardTop{display:grid!important;grid-template-columns:minmax(0,1fr) auto;align-items:start;gap:14px}.teamRankBadge{position:static!important;align-self:start;justify-self:end;min-width:72px;flex:0 0 auto}.teamCard .placeFlag{display:none!important}.teamIdentityPublic{min-width:0}.teamIdentityPublic>div{min-width:0}.teamIdentityPublic h4{overflow-wrap:anywhere;padding-right:4px}.liveRankFlag{position:static!important;display:inline-flex!important;align-items:center;width:max-content;margin:0 0 12px auto;padding:5px 8px}.nomineeCard{position:relative}
-.winnerSection{display:none}.winnerSection.show{display:block}.winnerHeroNote{border:1px solid var(--goldline);background:linear-gradient(145deg,rgba(241,198,107,.07),rgba(8,9,11,.8));padding:14px 16px;margin-bottom:18px;font-size:12px;color:#bdb6a7;line-height:1.7}.winnerGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.winnerCard{position:relative;overflow:hidden;border:1px solid var(--goldline);background:linear-gradient(145deg,rgba(241,198,107,.08),rgba(7,8,10,.94));min-height:330px;padding:18px;display:flex;flex-direction:column}.winnerCard:before{content:'';position:absolute;width:180px;height:180px;border:1px solid rgba(241,198,107,.08);right:-75px;top:-75px;transform:rotate(35deg)}.winnerCardTop{display:flex;align-items:center;justify-content:space-between;gap:10px;position:relative;z-index:1}.winnerAward{font-size:11px;color:var(--gold);font-weight:900;letter-spacing:.08em}.winnerMethod{font-size:9px;border:1px solid var(--line);padding:5px 7px;color:#a9a398}.winnerImage{height:150px;margin:16px 0 14px;border:1px solid var(--line);background:#08090b;display:grid;place-items:center;overflow:hidden;color:var(--gold);font-size:28px;font-weight:900;position:relative;z-index:1}.winnerImage img{width:100%;height:100%;object-fit:cover}.winnerName{font-size:24px;font-weight:900;position:relative;z-index:1;overflow-wrap:anywhere}.winnerMeta{font-size:11px;color:var(--muted);line-height:1.7;margin-top:7px;position:relative;z-index:1}.winnerNote{margin-top:auto;padding-top:14px;border-top:1px solid var(--line);font-size:11px;color:#b9b2a3;line-height:1.7;position:relative;z-index:1}.winnerSeal{position:absolute;right:14px;bottom:14px;font-size:9px;color:rgba(241,198,107,.38);letter-spacing:.12em;font-weight:900}
-@media(max-width:900px){.winnerGrid{grid-template-columns:1fr 1fr}}@media(max-width:620px){.winnerGrid{grid-template-columns:1fr}.teamCardTop{grid-template-columns:1fr}.teamRankBadge{justify-self:start;margin-top:8px}.liveRankFlag{margin-left:0}}
-
+:root{--bg:#050506;--panel:#0c0d10;--panel2:#111217;--gold:#f1c66b;--gold2:#b98a32;--cream:#fff2cf;--text:#f5f2ea;--muted:#9d998f;--dim:#6f6b63;--line:rgba(255,255,255,.08);--goldline:rgba(241,198,107,.24);--danger:#ff7b7b;--ok:#7fe0ad;--warn:#f2c86d;--r:2px;--ease:cubic-bezier(.2,.8,.2,1);--safe-b:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:120px}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,'Noto Sans TC',system-ui,sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+button,input,textarea,select{font:inherit;color:inherit}a{color:inherit;text-decoration:none}img{max-width:100%;display:block}[hidden]{display:none!important}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+#bgCanvas{position:fixed;inset:0;z-index:-3;width:100%;height:100%;background:radial-gradient(circle at 50% -10%,rgba(188,130,38,.16),transparent 42%),linear-gradient(#070708,#040405 70%)}
+.grid-bg{position:fixed;inset:0;z-index:-2;pointer-events:none;opacity:.3;background-image:linear-gradient(rgba(241,198,107,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(241,198,107,.045) 1px,transparent 1px);background-size:64px 64px;mask-image:linear-gradient(#000,transparent 85%)}
+.wrap{width:min(1180px,calc(100% - 40px));margin:auto}
+.eyebrow{font-size:11px;font-weight:800;letter-spacing:.24em;color:var(--gold);text-transform:uppercase}.muted{color:var(--muted)}.small{font-size:12px}
+.btn{appearance:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--line);padding:13px 20px;background:#101116;color:#fff;cursor:pointer;font-weight:800;letter-spacing:.02em;transition:transform .18s var(--ease),border-color .18s,background .18s,opacity .18s;clip-path:polygon(9px 0,100% 0,calc(100% - 9px) 100%,0 100%);white-space:nowrap}
+.btn:hover{transform:translateY(-1px);border-color:var(--gold)}.btn:active{transform:translateY(0)}
+.btn.gold{background:linear-gradient(100deg,#f3d083,#c28e34);color:#15100a;border-color:transparent}.btn.ghost{background:rgba(255,255,255,.03)}.btn.ok{color:var(--ok);border-color:rgba(127,224,173,.3);background:rgba(127,224,173,.06)}.btn.danger{color:#ffa3a3;border-color:rgba(255,123,123,.32);background:rgba(255,123,123,.05)}
+.btn.sm{padding:9px 13px;font-size:12px}.btn.block{width:100%}.btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.btn .spin{width:14px;height:14px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:spin .7s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border:1px solid var(--goldline);font-size:11px;color:#dcc690;background:rgba(241,198,107,.04)}
+.chip.medal{color:var(--gold);border-color:rgba(241,198,107,.4)}.chip.medal:before{content:'';width:9px;height:9px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fff1c4,#d9a443 55%,#8a5d17);box-shadow:0 0 8px rgba(241,198,107,.6)}
+.chip.merch{color:#d8d2c4;border-color:rgba(255,255,255,.14)}.chip.merch:before{content:'◆';font-size:8px;color:var(--gold)}
+.chip.seasons{border-color:var(--line);color:#bdb6a6}
+.tag{font-size:10px;font-weight:800;letter-spacing:.14em;color:var(--gold)}
+/* preview banner + ticker + header */
+.previewBar{position:fixed;left:0;right:0;bottom:0;z-index:2500;background:#2a1f08;border-top:1px solid var(--gold2);color:#ffe2a0;font-size:12px;padding:8px 14px calc(8px + var(--safe-b));display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap}.previewBar button,.previewBar a{border:1px solid rgba(255,226,160,.4);background:none;color:#ffe2a0;padding:4px 9px;cursor:pointer;font-size:11px}
+body.has-preview .ballotBar{bottom:calc(46px + var(--safe-b))}
+.ticker{position:fixed;top:0;left:0;right:0;z-index:220;height:34px;overflow:hidden;white-space:nowrap;background:rgba(13,11,7,.96);border-bottom:1px solid var(--goldline);backdrop-filter:blur(14px)}
+.tickerTrack{display:inline-flex;align-items:center;gap:26px;height:34px;padding-left:100vw;animation:tick 26s linear infinite;font-size:12px;font-weight:700;color:#ead49d;letter-spacing:.05em}.tickerTrack b{font-size:9px;letter-spacing:.2em;color:var(--gold);border:1px solid var(--goldline);padding:4px 7px}
+@keyframes tick{to{transform:translateX(-100%)}}
+.topbar{position:fixed;top:34px;left:0;right:0;z-index:200;transition:background .25s,border-color .25s;border-bottom:1px solid transparent}.topbar.solid{background:rgba(5,5,6,.88);border-color:var(--line);backdrop-filter:blur(14px)}
+.nav{height:72px;display:flex;align-items:center;gap:20px}.brand{display:flex;align-items:center;gap:12px}.brand small{font-size:10px;font-weight:800;letter-spacing:.16em;color:#a9a497}
+.navLinks{display:flex;gap:4px;margin-left:auto}.navLinks a{padding:10px 12px;font-size:13px;font-weight:700;color:#c9c4b8;border-bottom:1px solid transparent}.navLinks a:hover{color:var(--gold);border-color:var(--gold)}
+.navRight{display:flex;align-items:center;gap:10px}.acctBtn{display:flex;align-items:center;gap:9px;border:1px solid var(--goldline);background:rgba(241,198,107,.05);padding:6px 12px 6px 6px;cursor:pointer;font-weight:800;font-size:13px;max-width:220px}.acctBtn img,.acctBtn .av{width:28px;height:28px;border-radius:50%;object-fit:cover;flex:0 0 28px;display:grid;place-items:center;background:#1a1a1f;color:var(--gold);font-size:12px}.acctBtn span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.acctBtn.guest{padding:9px 14px}
+.hamb{width:44px;height:44px;border:1px solid var(--line);background:rgba(255,255,255,.03);display:none;place-items:center;cursor:pointer}.hamb i,.hamb i:before,.hamb i:after{display:block;width:20px;height:1px;background:#fff;position:relative;content:''}.hamb i:before{position:absolute;top:-6px}.hamb i:after{position:absolute;top:6px}
+.shade{position:fixed;inset:0;background:rgba(0,0,0,.66);z-index:400;opacity:0;pointer-events:none;transition:opacity .25s}.shade.on{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;height:100dvh;width:min(420px,90vw);z-index:410;background:rgba(9,9,11,.98);border-left:1px solid var(--goldline);padding:24px;transform:translateX(105%);transition:transform .32s var(--ease);overflow:auto}.drawer.on{transform:none}
+.drawerHead{display:flex;justify-content:space-between;align-items:center;padding-bottom:18px;border-bottom:1px solid var(--line)}
+.x{width:40px;height:40px;border:1px solid var(--line);background:none;color:#fff;font-size:22px;cursor:pointer;line-height:1}
+.phaseCard{margin:16px 0 6px;padding:15px 16px;border:1px solid var(--goldline);background:linear-gradient(110deg,rgba(241,198,107,.1),rgba(255,255,255,.015))}.phaseCard .live{display:flex;align-items:center;gap:8px;font-size:9px;font-weight:900;letter-spacing:.2em;color:var(--gold)}.dot{width:7px;height:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 12px var(--gold);animation:pulse 1.6s ease-in-out infinite}@keyframes pulse{50%{opacity:.35;transform:scale(.75)}}.phaseCard b{display:block;font-size:18px;margin-top:8px}.phaseCard p{font-size:12px;color:var(--muted);margin:6px 0 0;line-height:1.6}
+.drawerNav a,.drawerNav button{display:flex;justify-content:space-between;width:100%;padding:15px 4px;border:0;border-bottom:1px solid var(--line);background:none;text-align:left;cursor:pointer;font-weight:700;color:#e8e4da}.drawerNav span{color:var(--gold);font-size:11px;letter-spacing:.1em}.drawerNav a:hover,.drawerNav button:hover{color:var(--gold);padding-left:10px}
+/* hero */
+.hero{min-height:100dvh;display:flex;align-items:center;position:relative;padding:130px 0 70px;overflow:hidden}.hero:before{content:'';position:absolute;width:640px;height:640px;left:50%;top:55%;transform:translate(-50%,-50%);border:1px solid rgba(241,198,107,.13);border-radius:50%;box-shadow:0 0 160px rgba(241,198,107,.07),inset 0 0 120px rgba(241,198,107,.035)}
+.hero:after{content:'';position:absolute;left:7%;right:7%;bottom:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.4}
+.heroIn{position:relative;z-index:2;text-align:center}.heroLogo{margin:14px auto;filter:drop-shadow(0 0 30px rgba(241,198,107,.14));animation:rise .9s var(--ease) both}
+.hero h1{font-size:clamp(34px,6vw,74px);line-height:1;margin:0;font-weight:900;letter-spacing:.04em}.hero h1 span{display:inline-block;transform:skewX(-9deg)}
+.hero .sub{font-size:clamp(14px,1.6vw,17px);max-width:700px;margin:20px auto;color:#bdb8aa;line-height:1.8}
+.heroMeta{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin:22px 0}.pill{border:1px solid var(--goldline);background:rgba(241,198,107,.04);padding:9px 14px;font-size:12px;color:#dccb9f;clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%)}.pill.now{color:#15100a;background:var(--gold);font-weight:800}
+.heroActions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+/* sections */
+section{padding:96px 0}.stage{background:linear-gradient(180deg,rgba(255,255,255,.012),rgba(241,198,107,.02),transparent);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.head{display:flex;align-items:flex-end;justify-content:space-between;gap:30px;margin-bottom:30px}.title{font-size:clamp(30px,4.6vw,58px);line-height:1.04;margin:10px 0 0;font-weight:900;letter-spacing:-.03em}.lead{max-width:520px;color:var(--muted);line-height:1.75;font-size:14px}
+.card{position:relative;border:1px solid var(--line);background:linear-gradient(145deg,rgba(18,19,23,.94),rgba(7,8,10,.94));padding:22px;overflow:hidden}.card:before{content:'';position:absolute;left:0;top:0;width:40px;height:1px;background:var(--gold);box-shadow:0 0 18px rgba(241,198,107,.5)}
+/* progress */
+.progress{padding:34px 0 0}.steps{display:grid;grid-template-columns:repeat(7,1fr);border:1px solid var(--line);background:rgba(10,11,13,.7)}.stepItem{position:relative;padding:16px 12px;border-right:1px solid var(--line);min-height:88px}.stepItem:last-child{border-right:0}.stepItem b{display:block;font-size:13px;margin-top:8px}.stepItem small{font-size:9px;letter-spacing:.16em;color:var(--dim);font-weight:800}.stepItem.done{color:#8f8a7f}.stepItem.done small{color:#5f7a6b}.stepItem.done small:after{content:' ✓';color:var(--ok)}.stepItem.now{background:linear-gradient(180deg,rgba(241,198,107,.14),rgba(241,198,107,.03));box-shadow:inset 0 2px 0 var(--gold)}.stepItem.now small{color:var(--gold)}.stepItem.now b{color:var(--cream)}
+.progressNote{display:flex;gap:10px;align-items:center;margin-top:12px;font-size:13px;color:#cbbf9f}.progressNote .dot{flex:0 0 7px}
+/* awards */
+.awardGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.awardCard{min-height:230px;display:flex;flex-direction:column;cursor:pointer;transition:border-color .2s,transform .2s}.awardCard:hover{border-color:var(--goldline);transform:translateY(-2px)}
+.awardCard .code{font-size:10px;font-weight:900;letter-spacing:.18em;color:var(--gold)}.awardCard h3{font-size:22px;margin:12px 0 8px}.awardCard p{color:var(--muted);font-size:13px;line-height:1.7;margin:0 0 14px}
+.rewardChips{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}.awardFoot{display:flex;justify-content:space-between;align-items:center;margin-top:14px;padding-top:12px;border-top:1px solid var(--line);font-size:11px;color:var(--muted)}.awardFoot b{color:var(--gold);font-size:12px}
+.globalRewards{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}.globalRewards>div{border:1px solid var(--goldline);background:linear-gradient(90deg,rgba(241,198,107,.07),rgba(241,198,107,.015));padding:16px 18px}.globalRewards b{display:block;font-size:14px;margin-bottom:10px}
+.juryNote{margin-top:14px;padding:16px 18px;border:1px solid var(--line);background:rgba(255,255,255,.02);font-size:13px;color:var(--muted);line-height:1.7}.juryNote b{color:var(--cream)}
+/* nominees */
+.toolbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:18px}.tabs{display:flex;gap:6px;flex-wrap:wrap}.tab{padding:10px 14px;background:#0d0e11;border:1px solid var(--line);color:#aaa49a;cursor:pointer;font-weight:700;font-size:13px}.tab.on{background:var(--gold);color:#140f07;border-color:var(--gold);font-weight:900}.tab em{font-style:normal;font-size:10px;opacity:.7;margin-left:4px}
+.search{margin-left:auto;display:flex;align-items:center;border:1px solid var(--line);background:#0b0c0f;min-width:240px}.search input{border:0;background:none;padding:11px 12px;outline:none;width:100%}.search:focus-within{border-color:var(--gold)}.search span{padding-left:12px;color:var(--dim)}
+.groupHead{display:flex;justify-content:space-between;align-items:baseline;margin:28px 0 12px;padding-bottom:10px;border-bottom:1px solid var(--line)}.groupHead h3{margin:0;font-size:20px}.groupHead:first-child{margin-top:0}
+.nomGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.nom{position:relative;border:1px solid var(--line);background:linear-gradient(150deg,#111217,#08090b);padding:16px;display:flex;flex-direction:column;min-height:280px;transition:border-color .2s,transform .2s,box-shadow .2s}.nom:hover{border-color:rgba(241,198,107,.3)}
+.nom.r1{border-color:rgba(255,211,97,.45);background:linear-gradient(150deg,rgba(255,198,61,.09),#08090b)}.nom.r2{border-color:rgba(210,220,235,.3)}.nom.r3{border-color:rgba(202,126,63,.34)}
+.nom.picked{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold),0 14px 40px rgba(241,198,107,.12);transform:translateY(-3px)}.nom.mine{border-color:rgba(127,224,173,.45);background:linear-gradient(150deg,rgba(127,224,173,.07),#08090b)}
+.nom.flash{animation:flash 1.6s ease 2}@keyframes flash{50%{box-shadow:0 0 0 2px var(--gold),0 0 40px rgba(241,198,107,.35)}}
+.nomTop{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}.ava{width:70px;height:70px;border:1px solid var(--goldline);background:linear-gradient(135deg,#17181c,#09090b);display:grid;place-items:center;font-weight:900;font-size:22px;color:var(--gold);overflow:hidden;flex:0 0 auto;clip-path:polygon(9px 0,100% 0,100% calc(100% - 9px),calc(100% - 9px) 100%,0 100%,0 9px)}.ava img{width:100%;height:100%;object-fit:cover}
+.rankFlag{font-size:10px;font-weight:900;padding:5px 7px;border:1px solid var(--line);color:#aaa}.r1 .rankFlag{color:#ffd96d;border-color:rgba(255,217,109,.4)}.r2 .rankFlag{color:#dce4ef}.r3 .rankFlag{color:#d79761}
+.nom h4{font-size:19px;margin:14px 0 4px;line-height:1.3;overflow-wrap:anywhere}.nomMeta{font-size:12px;color:#a8a397}.nomIntro{font-size:12px;color:#cfc6b0;margin-top:8px;line-height:1.55}
+.votesBar{margin:12px 0 0;padding-top:10px;border-top:1px solid var(--line)}.votesTop{display:flex;justify-content:space-between;align-items:baseline;font-size:10px;color:var(--muted)}.votesTop b{font-size:17px;color:var(--cream)}.track{height:4px;background:#07080a;border:1px solid var(--line);margin-top:7px;overflow:hidden}.fill{height:100%;background:linear-gradient(90deg,#a87726,#f1c66b);transition:width .6s var(--ease)}
+.nomActions{display:flex;gap:6px;margin-top:auto;padding-top:14px}.nomActions .btn{flex:1;padding:11px 10px;font-size:13px}.shareBtn{flex:0 0 42px!important;padding:0!important}
+.emptyState{grid-column:1/-1;border:1px dashed var(--goldline);padding:42px;text-align:center;color:var(--muted);line-height:1.7}
+.skel{background:linear-gradient(90deg,#0e0f12,#17181c,#0e0f12);background-size:200% 100%;animation:sk 1.2s infinite;border:1px solid var(--line);min-height:280px}@keyframes sk{to{background-position:-200% 0}}
+/* winners */
+.winGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.win{position:relative;overflow:hidden;border:1px solid var(--goldline);background:radial-gradient(circle at 50% 0,rgba(241,198,107,.16),transparent 55%),linear-gradient(160deg,#141209,#07080a);padding:22px 18px 38px;text-align:center;min-height:360px;display:flex;flex-direction:column;align-items:center}
+.win .award{font-size:12px;letter-spacing:.2em;color:var(--gold);font-weight:900}.win .img{width:140px;height:140px;margin:18px 0 14px;border:1px solid var(--goldline);display:grid;place-items:center;overflow:hidden;background:#08090b;font-size:30px;font-weight:900;color:var(--gold)}.win .img img{width:100%;height:100%;object-fit:cover}
+.win h4{font-size:24px;margin:0;overflow-wrap:anywhere}.win .meta{font-size:12px;color:var(--muted);margin-top:6px}.win .note{font-size:12px;color:#c9c0ac;margin-top:12px;line-height:1.6}.win .rewardChips{justify-content:center;margin-top:14px}.win:after{content:'WINNER 2026';position:absolute;right:12px;bottom:10px;font-size:9px;letter-spacing:.2em;color:rgba(241,198,107,.35);font-weight:900}
+.claim{margin-top:16px;padding:14px 16px;border-left:2px solid var(--gold);background:rgba(241,198,107,.05);font-size:13px;color:#cfc6b2;line-height:1.7}
+/* how */
+.how{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line)}.how>div{padding:24px;border-right:1px solid var(--line)}.how>div:last-child{border-right:0}.how b{font-size:10px;letter-spacing:.16em;color:var(--gold)}.how h3{margin:24px 0 8px;font-size:18px}.how p{font-size:13px;color:var(--muted);line-height:1.65;margin:0}
+/* teams */
+.podium{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:14px}.pod{position:relative;display:flex;align-items:center;gap:14px;padding:18px;border:1px solid var(--line);background:#0c0d10;min-height:150px;overflow:hidden}.pod.p1{border-color:rgba(255,211,97,.42);background:linear-gradient(145deg,rgba(255,198,61,.1),#0c0d10)}.pod.p2{border-color:rgba(213,221,233,.3);background:linear-gradient(145deg,rgba(210,220,235,.07),#0c0d10)}.pod.p3{border-color:rgba(205,136,78,.32);background:linear-gradient(145deg,rgba(202,126,63,.08),#0c0d10)}
+.pod .place{font-size:40px;font-weight:900;color:var(--gold);min-width:50px}.logoBox{width:70px;height:70px;flex:0 0 70px;border:1px solid var(--goldline);background:#08090b;display:grid;place-items:center;overflow:hidden;color:var(--gold);font-weight:900}.logoBox img{width:100%;height:100%;object-fit:cover}.pod h4{margin:0 0 6px;font-size:18px;overflow-wrap:anywhere}.pod .score{font-size:20px;font-weight:900;margin-top:8px}
+.teamGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.team{border:1px solid var(--line);background:rgba(12,13,16,.8);padding:16px;display:flex;flex-direction:column;gap:12px}.teamTop{display:flex;gap:12px;align-items:center}.teamTop .logoBox{width:54px;height:54px;flex-basis:54px}.teamTop h4{margin:0 0 6px;font-size:16px;overflow-wrap:anywhere}.rankBadge{margin-left:auto;text-align:center;border:1px solid var(--goldline);padding:6px 8px;min-width:58px}.rankBadge span{display:block;font-size:8px;color:var(--dim);letter-spacing:.12em}.rankBadge b{font-size:18px;color:var(--gold)}
+.seasonRows{display:grid;gap:5px;font-size:11px}.seasonRows div{display:grid;grid-template-columns:60px 1fr 1fr;gap:6px}.seasonRows span{color:var(--dim)}.teamTotal{display:flex;justify-content:space-between;border-top:1px solid var(--line);padding-top:10px;font-size:10px;color:var(--dim);letter-spacing:.1em}.teamTotal b{font-size:18px;color:var(--cream);letter-spacing:0}
+.archiveFoot{margin-top:18px;color:#8e887b;font-size:12px;line-height:1.7}
+/* live */
+.liveBox{display:grid;grid-template-columns:1.2fr .8fr;border:1px solid var(--line)}.liveMain{padding:40px;background:radial-gradient(circle at 20% 30%,rgba(241,198,107,.1),transparent 35%),#0b0c0e}.liveSide{border-left:1px solid var(--line);padding:32px;display:flex;flex-direction:column;justify-content:space-between;gap:20px}.liveDot{display:inline-flex;align-items:center;gap:8px;color:#c6c0b5;font-size:12px}.liveDot i{width:8px;height:8px;background:#dc534f;border-radius:50%;box-shadow:0 0 16px #dc534f}
+footer{padding:40px 0 calc(60px + var(--safe-b));border-top:1px solid var(--line);font-size:11px;color:#6f6c66}footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}footer img{opacity:.8;margin-bottom:12px}
+/* ballot bar */
+.ballotBar{position:fixed;left:50%;bottom:calc(16px + var(--safe-b));transform:translate(-50%,140%);z-index:300;width:min(720px,calc(100% - 24px));background:rgba(17,16,12,.96);border:1px solid var(--gold);box-shadow:0 20px 60px rgba(0,0,0,.6),0 0 40px rgba(241,198,107,.1);padding:12px 12px 12px 18px;display:flex;align-items:center;gap:14px;transition:transform .35s var(--ease);backdrop-filter:blur(14px)}.ballotBar.on{transform:translate(-50%,0)}
+.ballotBar .info{flex:1;min-width:0}.ballotBar b{display:block;font-size:14px}.ballotBar small{display:block;font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:3px}.ballotBar .count{width:38px;height:38px;border-radius:50%;background:var(--gold);color:#140f07;display:grid;place-items:center;font-weight:900;flex:0 0 38px}
+/* modal / sheet */
+.modal{position:fixed;inset:0;z-index:1500;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.74);backdrop-filter:blur(10px);padding:18px}.modal.open{display:flex;animation:fade .2s}@keyframes fade{from{opacity:0}}
+.box{width:min(560px,100%);max-height:92dvh;overflow:auto;border:1px solid var(--goldline);background:linear-gradient(150deg,#121318,#08090b);box-shadow:0 34px 120px rgba(0,0,0,.75);padding:26px;position:relative;animation:pop .28s var(--ease)}@keyframes pop{from{transform:translateY(14px) scale(.98);opacity:0}}
+.box.wide{width:min(760px,100%)}.boxHead{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;margin-bottom:18px}.boxHead h3{font-size:25px;margin:6px 0 0}.boxHead img{margin-bottom:10px}
+.boxActions{display:flex;gap:10px;justify-content:flex-end;margin-top:20px;flex-wrap:wrap}
+.field{margin-bottom:14px}.field label{display:block;font-size:11px;font-weight:800;letter-spacing:.06em;margin-bottom:7px;color:#cbc6b9}.field input,.field select,.field textarea{width:100%;border:1px solid var(--line);background:#0a0b0e;padding:13px;outline:none;border-radius:0;color:#fff}.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--gold)}.field small{display:block;color:var(--dim);margin-top:6px;line-height:1.5;font-size:11px}.field input[readonly]{color:#9d998f;background:#08090b}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}.full{grid-column:1/-1}
+.checks{display:flex;gap:8px;flex-wrap:wrap}.check{position:relative}.check input{position:absolute;opacity:0;pointer-events:none}.check span{display:block;border:1px solid var(--line);padding:10px 13px;color:#aaa;cursor:pointer;font-size:13px}.check input:checked+span{border-color:var(--gold);background:rgba(241,198,107,.09);color:var(--cream)}.check input:disabled+span{opacity:.4;cursor:not-allowed}
+.seg{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line)}.seg label{position:relative}.seg input{position:absolute;opacity:0}.seg span{display:block;padding:14px;text-align:center;cursor:pointer;font-weight:800;font-size:14px;color:#aaa}.seg span small{display:block;font-weight:500;font-size:11px;color:var(--dim);margin-top:4px}.seg input:checked+span{background:rgba(241,198,107,.1);color:var(--cream);box-shadow:inset 0 -2px 0 var(--gold)}
+.gArea{display:flex;flex-direction:column;align-items:center;gap:12px;padding:18px 0 6px}.gBtn{min-height:44px;display:flex;justify-content:center}
+.pickList{display:grid;gap:8px}.pickRow{display:flex;align-items:center;gap:12px;border:1px solid var(--line);padding:10px;background:#0a0b0e}.pickRow .ava{width:46px;height:46px;font-size:15px}.pickRow b{display:block}.pickRow small{color:var(--muted);font-size:11px}.pickRow button{margin-left:auto}
+.pickRow.res-ok{border-color:rgba(127,224,173,.4)}.pickRow.res-bad{border-color:rgba(255,123,123,.4)}
+.doneMark{width:74px;height:74px;margin:6px auto 14px;border-radius:50%;border:2px solid var(--gold);display:grid;place-items:center;font-size:34px;color:var(--gold);box-shadow:0 0 40px rgba(241,198,107,.25);animation:pop .4s var(--ease)}
+.previewAcc{display:grid;gap:8px;width:100%}.previewAcc button{text-align:left;border:1px solid var(--line);background:#0b0c0f;padding:12px 14px;cursor:pointer}.previewAcc button:hover{border-color:var(--gold)}.previewAcc b{display:block}.previewAcc small{color:var(--muted)}
+/* portal */
+.portal{position:fixed;inset:0;z-index:1000;background:rgba(5,5,6,.985);display:none;overflow:auto}.portal.open{display:block;animation:fade .2s}
+.pTop{position:sticky;top:0;z-index:20;background:rgba(6,6,7,.92);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}.pNav{height:68px;display:flex;align-items:center;gap:14px}.pNav .who{margin-left:auto;display:flex;align-items:center;gap:10px;font-size:12px;color:var(--muted)}.pNav .who img{width:30px;height:30px;border-radius:50%}
+.pTabs{display:flex;gap:2px;overflow:auto;scrollbar-width:none}.pTabs::-webkit-scrollbar{display:none}.pTab{padding:14px 16px;border:0;border-bottom:2px solid transparent;background:none;color:var(--muted);font-weight:800;cursor:pointer;white-space:nowrap;font-size:14px}.pTab.on{color:var(--gold);border-color:var(--gold)}.pTab em{font-style:normal;font-size:10px;background:var(--gold);color:#140f07;border-radius:9px;padding:1px 6px;margin-left:6px}
+.pBody{padding:30px 0 120px}.pane{display:none}.pane.on{display:block}
+.notice{border:1px solid var(--goldline);background:rgba(241,198,107,.05);padding:14px 16px;font-size:13px;line-height:1.7;color:#d9cfb5;margin-bottom:16px}.notice.bad{border-color:rgba(255,123,123,.3);background:rgba(255,123,123,.05);color:#ffc2c2}.notice.ok{border-color:rgba(127,224,173,.3);background:rgba(127,224,173,.05);color:#bdf0d3}
+.ballotHead{display:flex;justify-content:space-between;align-items:center;gap:16px;border:1px solid var(--goldline);padding:16px 18px;background:rgba(255,255,255,.02);margin-bottom:12px}.ballotHead b{font-size:20px}.prog{min-width:180px}.prog .track{height:6px}
+.awardTabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px}.aTab{border:1px solid var(--line);background:#0d0e12;padding:12px 14px;text-align:left;cursor:pointer;color:#9c998f}.aTab b{display:block;color:#eee;margin-bottom:4px}.aTab small{font-size:11px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.aTab.on{border-color:var(--gold);background:rgba(241,198,107,.07)}.aTab.done small{color:var(--ok)}.aTab.picked small{color:var(--gold)}
+/* wizard */
+.wiz{max-width:860px;margin:0 auto}.wSteps{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:20px}.wStep{border-top:2px solid var(--line);padding-top:8px;font-size:12px;color:var(--dim);font-weight:700}.wStep.on{border-color:var(--gold);color:var(--gold)}.wStep.done{border-color:rgba(127,224,173,.5);color:#9ed9b9}
+.awardPick{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.ap{position:relative;border:1px solid var(--line);background:#0c0d10;padding:16px;cursor:pointer;min-height:130px;display:flex;flex-direction:column}.ap input{position:absolute;opacity:0}.ap b{font-size:16px}.ap small{color:var(--muted);font-size:12px;margin-top:6px;line-height:1.5}.ap .state{margin-top:auto;font-size:11px;font-weight:800;padding-top:10px}.ap.sel{border-color:var(--gold);background:rgba(241,198,107,.07)}.ap.sel:after{content:'✓';position:absolute;right:12px;top:10px;color:var(--gold);font-weight:900}.ap.dis{opacity:.55;cursor:not-allowed}.state.ok{color:var(--ok)}.state.wait{color:var(--warn)}.state.av{color:var(--gold)}
+.drop{display:grid;grid-template-columns:120px 1fr;gap:16px;align-items:center;border:1px dashed var(--goldline);background:rgba(241,198,107,.025);padding:16px;cursor:pointer;transition:background .2s;margin-bottom:12px}.drop.over{background:rgba(241,198,107,.09)}.drop .pv{width:120px;height:120px;border:1px solid var(--line);background:#08090b;display:grid;place-items:center;overflow:hidden;color:var(--dim);font-size:11px;text-align:center}.drop .pv img{width:100%;height:100%;object-fit:cover}.drop b{display:block;margin-bottom:6px}
+.summary{display:grid;grid-template-columns:150px 1fr;gap:18px;border:1px solid var(--line);padding:16px;background:#0a0b0e}.summary .imgs{display:grid;gap:8px}.summary .imgs img{width:150px;aspect-ratio:1;object-fit:cover;border:1px solid var(--goldline)}.kv{display:grid;grid-template-columns:1fr 1fr;gap:8px}.kv div{border:1px solid var(--line);padding:9px 11px}.kv span{display:block;font-size:10px;color:var(--dim);letter-spacing:.08em;margin-bottom:4px}.kv .full{grid-column:1/-1}
+.consent{margin:16px 0;border:1px solid var(--goldline);background:rgba(241,198,107,.05);padding:14px 16px}.consent label{display:flex;gap:10px;align-items:flex-start;cursor:pointer;font-size:13px;line-height:1.7}.consent input{margin-top:5px;accent-color:#d8a746}.linkBtn{border:0;background:none;color:var(--gold);cursor:pointer;font-weight:800;font-size:12px;padding:6px 0 0}
+.wizNav{display:flex;justify-content:space-between;gap:10px;margin-top:20px}
+/* status */
+.appList{display:grid;gap:12px;max-width:860px;margin:0 auto}.appCard{border:1px solid var(--line);background:#0b0c0f;padding:16px;display:grid;grid-template-columns:72px 1fr auto;gap:14px;align-items:start}.appCard img{width:72px;height:72px;object-fit:cover;border:1px solid var(--goldline)}.appCard h4{margin:0 0 4px;font-size:17px}
+.tl{display:flex;gap:0;margin-top:12px;font-size:11px}.tl span{flex:1;padding-top:8px;border-top:2px solid var(--line);color:var(--dim)}.tl span.on{border-color:var(--gold);color:var(--gold)}.tl span.ok{border-color:var(--ok);color:var(--ok)}.tl span.bad{border-color:var(--danger);color:var(--danger)}
+.badge{font-size:11px;font-weight:800;padding:6px 9px;border:1px solid;white-space:nowrap}.badge.wait{color:var(--warn);border-color:rgba(242,200,109,.35)}.badge.ok{color:var(--ok);border-color:rgba(127,224,173,.35)}.badge.bad{color:var(--danger);border-color:rgba(255,123,123,.35)}.badge.off{color:var(--dim);border-color:var(--line)}
+.reviewNote{margin-top:10px;padding:10px 12px;background:rgba(255,123,123,.06);border-left:2px solid var(--danger);font-size:12px;color:#ffd0d0}
+.profileCard{max-width:720px;margin:0 auto}.acctRow{display:flex;align-items:center;gap:14px;border:1px solid var(--line);padding:14px;margin-bottom:18px;background:#0b0c0f}.acctRow img,.acctRow .av{width:46px;height:46px;border-radius:50%;object-fit:cover;background:#1a1a1f;display:grid;place-items:center;color:var(--gold);font-weight:900}.acctRow .btn{margin-left:auto}
+.terms{display:grid;gap:10px}.terms div{border-left:2px solid var(--gold);padding:10px 13px;background:rgba(255,255,255,.02)}.terms b{font-size:13px}.terms p{font-size:12px;color:var(--muted);line-height:1.7;margin:6px 0 0}
+.annBox{text-align:center}.annBox img{margin:0 auto 14px}.annMsg{font-size:16px;line-height:1.85;color:#e8dfca;white-space:pre-wrap;text-align:left}
+.toast{position:fixed;z-index:3000;left:50%;bottom:calc(30px + var(--safe-b));transform:translate(-50%,20px);opacity:0;pointer-events:none;transition:.25s;background:#16171b;border:1px solid var(--goldline);box-shadow:0 20px 60px rgba(0,0,0,.5);padding:13px 18px;max-width:min(540px,92vw);font-size:13px;line-height:1.6}.toast.show{opacity:1;transform:translate(-50%,0)}.toast.bad{border-color:rgba(255,123,123,.5)}
+.logoText{font-weight:900;letter-spacing:.18em;color:var(--gold)}
+/* RAALOGO 是正方形、上下有透明留白：正方形檔案自動裁成橫幅顯示，橫式 LOGO 則完整顯示 */
+img[data-logo]{object-fit:contain;aspect-ratio:12/5;height:auto}img[data-logo].logoSq{object-fit:cover}
+.brand img[data-logo]{width:96px;height:40px}.drawerHead img[data-logo]{width:120px;height:50px}.pNav img[data-logo]{width:96px;height:40px}.boxHead img[data-logo]{width:110px;height:46px}footer img[data-logo]{width:130px;height:54px}.annBox img[data-logo]{width:160px;height:67px}
+.heroLogo[data-logo]{width:min(520px,86vw);aspect-ratio:2/1}
+.ballotBar.on~.toast{bottom:calc(110px + var(--safe-b))}
+@media(max-width:1000px){.nomGrid{grid-template-columns:repeat(3,1fr)}.teamGrid{grid-template-columns:repeat(3,1fr)}.navLinks{display:none}.hamb{display:grid}}
+@media(max-width:860px){.awardGrid,.winGrid{grid-template-columns:repeat(2,1fr)}.steps{grid-template-columns:repeat(4,1fr)}.stepItem:nth-child(4){border-right:0}.stepItem:nth-child(-n+4){border-bottom:1px solid var(--line)}.how{grid-template-columns:1fr 1fr}.how>div:nth-child(2){border-right:0}.how>div:nth-child(-n+2){border-bottom:1px solid var(--line)}.liveBox{grid-template-columns:1fr}.liveSide{border-left:0;border-top:1px solid var(--line)}.head{display:block}.lead{margin-top:14px}.podium{grid-template-columns:1fr}.teamGrid{grid-template-columns:1fr 1fr}.awardPick{grid-template-columns:1fr 1fr}.globalRewards{grid-template-columns:1fr}.brand small{display:none}}
+@media(max-width:640px){.wrap{width:calc(100% - 24px)}section{padding:70px 0}.nomGrid{grid-template-columns:1fr 1fr;gap:8px}.nom{padding:12px;min-height:250px}.ava{width:56px;height:56px}.nom h4{font-size:16px}.awardGrid,.winGrid,.teamGrid,.awardPick,.grid2{grid-template-columns:1fr}.full{grid-column:auto}.steps{grid-template-columns:1fr 1fr 1fr}.stepItem{min-height:70px;padding:12px 10px;border-right:1px solid var(--line)!important;border-bottom:1px solid var(--line)}.stepItem b{font-size:12px}.how{grid-template-columns:1fr}.how>div{border-right:0!important;border-bottom:1px solid var(--line)}.search{min-width:0;width:100%;margin-left:0}.awardTabs{grid-template-columns:1fr 1fr 1fr;gap:5px}.aTab{padding:10px 8px}.aTab b{font-size:12px}.ballotHead{flex-direction:column;align-items:stretch}.drop{grid-template-columns:84px 1fr}.drop .pv{width:84px;height:84px}.summary{grid-template-columns:1fr}.summary .imgs{grid-template-columns:repeat(2,100px)}.summary .imgs img{width:100px}.appCard{grid-template-columns:56px 1fr}.appCard img{width:56px;height:56px}.appCard .badge{grid-column:2;justify-self:start}.acctBtn span{display:none}.acctBtn{padding:6px}.acctBtn.guest span{display:inline}.box{padding:20px}.wSteps .wStep{font-size:10px}.kv{grid-template-columns:1fr}.hero{padding-top:118px}.nav{height:62px}}
+@media(max-width:640px){.previewBar span{display:none}.previewBar{gap:6px;padding:6px 10px calc(6px + var(--safe-b))}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
-<canvas id="particleCanvas" aria-hidden="true"></canvas><div class="tech-grid"></div><div class="scan"></div>
-<div id="announcement" class="announcement"><span class="announcementTrack" id="announcementTrack">RAA 2026｜REBORN ANNUAL AWARDS</span></div>
+<canvas id="bgCanvas" aria-hidden="true"></canvas><div class="grid-bg"></div>
+
+<div class="ticker" id="ticker"><span class="tickerTrack" id="tickerTrack"><b>RAA · LIVE</b><span>RAA 2026｜REBORN ANNUAL AWARDS 銳能年度大賞</span></span></div>
 <header class="topbar" id="topbar">
   <div class="wrap nav">
-    <a class="brand" href="#top"><img src="https://cdn.phototourl.com/free/2026-09-19-e17e160e-82da-4792-aef8-db041c70ffa0.png" alt="RAA Logo"><small>REBORN ANNUAL AWARDS · 2026</small></a>
-    <button class="hamb" id="openMenu" aria-label="開啟選單"><i></i></button>
+    <a class="brand" href="#top"><img data-logo src="RAALOGO.png" alt="RAA 銳能年度大賞"><small>REBORN ANNUAL AWARDS · 2026</small></a>
+    <nav class="navLinks"><a href="#nominees">正式入圍</a><a href="#awards">獎項與獎勵</a><a href="#teams">歷屆隊伍</a><a href="#live">典禮直播</a></nav>
+    <div class="navRight"><button class="acctBtn guest" id="acctBtn" type="button"><span>登入</span></button><button class="hamb" id="hamb" aria-label="選單"><i></i></button></div>
   </div>
 </header>
-<div class="drawerShade" id="drawerShade"></div>
-<aside class="drawer" id="drawer">
-  <div class="drawerHead"><img src="https://cdn.phototourl.com/free/2026-09-19-e17e160e-82da-4792-aef8-db041c70ffa0.png" alt="RAA"><button class="iconBtn" id="closeMenu" aria-label="關閉">×</button></div>
-  <div class="drawerPhase" id="drawerPhase"><div class="phaseTop"><i class="phaseDot"></i> NOW · 進行中</div><b id="currentPhase">入圍申請中</b><p id="currentPhaseDetail">參賽隊伍可提交公開票選獎項入圍申請</p></div>
-  <nav class="drawerNav">
-    <a href="#info" data-close>頒獎典禮資訊 <span>01</span></a>
-    <a href="#awards" data-close>典禮規則・獎項 <span>02</span></a>
-    <a href="#voting" data-close>投票制度 <span>03</span></a>
-    <a href="#nominees" data-close>入圍名單 <span>04</span></a>
-    <button type="button" class="openParticipantStatus" data-close>入圍狀態 <span>05</span></button>
-    <a href="#winners" data-close id="winnerNavLink" style="display:none">最終得獎名單 <span>06</span></a>
-    <a href="#teams" data-close>歷屆參賽隊伍 <span>07</span></a>
-    <button type="button" class="openPortal" data-close>我要投票／參選 <span>08</span></button>
-    <a href="#about" data-close>關於 RAA <span>09</span></a>
-    <a href="#live" data-close>典禮直播 <span>10</span></a>
+<div class="shade" id="shade"></div>
+<aside class="drawer" id="drawer" aria-label="選單">
+  <div class="drawerHead"><img data-logo src="RAALOGO.png" alt="RAA"><button class="x" data-close-drawer aria-label="關閉">×</button></div>
+  <div class="phaseCard"><div class="live"><i class="dot"></i>NOW · 進行中</div><b data-phase>RAA 2026</b><p data-phase-detail></p></div>
+  <nav class="drawerNav" id="drawerNav">
+    <button type="button" data-go="vote">我要投票 <span>VOTE</span></button>
+    <button type="button" data-go="apply">申請入圍 <span>APPLY</span></button>
+    <button type="button" data-go="status">我的申請 <span>STATUS</span></button>
+    <a href="#winners" data-close-drawer data-win-link hidden>最終得獎名單 <span>WINNERS</span></a>
+    <a href="#nominees" data-close-drawer>正式入圍名單 <span>01</span></a>
+    <a href="#awards" data-close-drawer>獎項與獎勵 <span>02</span></a>
+    <a href="#how" data-close-drawer>投票方式 <span>03</span></a>
+    <a href="#teams" data-close-drawer>歷屆參賽隊伍 <span>04</span></a>
+    <a href="#live" data-close-drawer>典禮直播 <span>05</span></a>
+    <a href="#about" data-close-drawer>關於 RAA <span>06</span></a>
   </nav>
 </aside>
+
 <main id="top">
 <section class="hero">
-  <div class="heroStage"></div>
-  <div class="wrap heroContent">
+  <div class="wrap heroIn">
     <div class="eyebrow">THE FINAL CHAPTER OF REBORN 2026</div>
-    <img class="heroLogo" src="https://cdn.phototourl.com/free/2026-09-19-e17e160e-82da-4792-aef8-db041c70ffa0.png" alt="RAA 銳能年度大賞 Logo">
-    <h1><span class="slant">銳能年度大賞</span></h1>
-    <p class="sub">REBORN ANNUAL AWARDS。春季盃、秋季盃、冬季盃的勝負、名字與記憶，在冬季盃總決賽之後走上同一座年度舞台。</p>
-    <div class="heroMeta"><span class="pill">2026 SEASON FINALE</span><span class="pill">SPRING · AUTUMN · WINTER</span><span class="pill" id="heroCeremony">冬季盃總決賽後</span></div>
-    <div class="actions"><a href="#nominees" class="btn gold">查看正式入圍</a><button class="btn ghost openPortal" type="button">進入投票中心</button></div>
+    <img class="heroLogo" data-logo src="RAALOGO.png" alt="RAA 銳能年度大賞 LOGO">
+    <h1><span>銳能年度大賞</span></h1>
+    <p class="sub">春季盃、秋季盃、冬季盃的勝負、名字與記憶，在冬季盃總決賽之後走上同一座年度舞台。</p>
+    <div class="heroMeta" id="heroMeta"><span class="pill now" data-phase>RAA 2026</span><span class="pill" id="heroCeremony">冬季盃總決賽後</span></div>
+    <div class="heroActions" id="heroActions"><a class="btn gold" href="#nominees">查看正式入圍</a></div>
   </div>
 </section>
-<section id="info">
+
+<div class="wrap progress"><div class="steps" id="steps"></div><div class="progressNote"><i class="dot"></i><span data-phase-detail></span></div></div>
+
+<section id="winners" hidden>
   <div class="wrap">
-    <div class="sectionHead"><div><div class="eyebrow">CEREMONY INFORMATION</div><h2 class="sectionTitle">2026 最後一幕，<br>不是另一場比賽。</h2></div><p class="sectionLead">RAA 將接續銳能冬季盃總決賽直播舉行。它不是單純把冠軍再念一次，而是把三個賽季裡的隊伍、選手、主播與觀眾重新聚回同一座舞台。</p></div>
-    <div class="grid3"><article class="card"><div class="cardCode">WHEN / 01</div><h3 id="ceremonyCard">冬季盃總決賽後</h3><p>總決賽結束後直接進入 RAA 年度大賞，讓冬季賽事與年度典禮成為一個完整收尾。</p></article><article class="card"><div class="cardCode">WHERE / 02</div><h3>銳能官方直播舞台</h3><p>得獎名單與主辦方指定獎項將於典禮中依流程揭曉，直播連結會於活動前同步更新。</p></article><article class="card"><div class="cardCode">RANGE / 03</div><h3>春季盃・秋季盃・冬季盃</h3><p>2026 RAA 的年度範圍固定以三個賽季為基礎，歷屆參賽紀錄也會成為主辦方評選的重要依據。</p></article></div>
+    <div class="head"><div><div class="eyebrow">2026 FINAL RESULTS</div><h2 class="title">最終得獎名單。</h2></div><p class="lead">六座年度獎項的正式得主。公開票選獎依有效票統計，主辦方評選獎由大會依年度紀錄決定。</p></div>
+    <div class="winGrid" id="winGrid"></div>
+    <div class="claim" id="claimText" hidden></div>
   </div>
 </section>
-<section class="stage" id="awards">
-  <div class="wrap">
-    <div class="sectionHead"><div><div class="eyebrow">AWARD CATEGORIES</div><h2 class="sectionTitle">六座年度獎項。</h2></div><p class="sectionLead">三座公開票選獎，三座主辦方評選獎。公開票選必須先通過入圍審核；主辦方評選則直接從符合資格的年度參賽紀錄中評估。</p></div>
-    <div class="grid3" id="awardGrid">
-      <article class="card"><div class="cardCode">PUBLIC VOTE 01</div><h3>最佳戰隊獎</h3><p>年度賽事中最受觀眾肯定的戰隊表現。</p><span class="tag">觀眾投票</span></article>
-      <article class="card"><div class="cardCode">PUBLIC VOTE 02</div><h3>最佳選手獎</h3><p>正式入圍選手會直接排列展示，登入後即可從名單中選擇投票。</p><span class="tag">觀眾投票</span></article>
-      <article class="card"><div class="cardCode">PUBLIC VOTE 03</div><h3>人氣戰隊獎</h3><p>記錄年度最具社群支持度與人氣的參賽隊伍。</p><span class="tag">觀眾投票</span></article>
-      <article class="card"><div class="cardCode">JURY AWARD 04</div><h3>精神總錦標獎</h3><p>綜合賽事態度、參與精神與年度互動，由主辦方評選。</p><span class="tag">主辦方決定</span></article>
-      <article class="card"><div class="cardCode">JURY AWARD 05</div><h3>年度隊伍獎</h3><p>依春、秋、冬三季參賽紀錄與年度表現，由主辦方評選。</p><span class="tag">主辦方決定</span></article>
-      <article class="card"><div class="cardCode">JURY AWARD 06</div><h3>年度主播獎</h3><p>表揚陪伴年度賽事並提升直播觀賽體驗的主播。</p><span class="tag">主辦方決定</span></article>
-    </div>
-    <div class="juryNote"><span class="tag">IMPORTANT</span><div><b>主辦方決定的獎項不需要自行申請入圍。</b><div class="muted" style="margin-top:7px;line-height:1.7">歷屆符合資格的參賽隊伍、相關選手與主播皆可能納入主辦方評選範圍；最終提名與得獎名單由 RAA 主辦方依年度紀錄決定。</div></div></div>
-  </div>
-</section>
-<section id="voting">
-  <div class="wrap">
-    <div class="sectionHead"><div><div class="eyebrow">VOTING SYSTEM</div><h2 class="sectionTitle">每一票，都有身份。</h2></div><p class="sectionLead">觀眾與參賽選手／負責人使用各自身份進入投票中心；首次註冊後，之後只要輸入遊戲 UID 就能快速登入。</p></div>
-    <div class="timeline"><div class="step"><b>STEP 01</b><h3>選擇身份</h3><p>觀眾，或參賽選手／隊伍負責人。</p></div><div class="step"><b>STEP 02</b><h3>登入或註冊</h3><p>第一次建立身份；之後只需遊戲 UID 即可快速登入。</p></div><div class="step"><b>STEP 03</b><h3>直接選擇</h3><p>正式入圍者會完整排列，不需要另外搜尋候選人。</p></div><div class="step"><b>STEP 04</b><h3>確認投票</h3><p>每個 UID 在每個公開獎項各有一票，參賽者也可以投給自己。</p></div></div>
-  </div>
-</section>
+
 <section class="stage" id="nominees">
   <div class="wrap">
-    <div class="sectionHead"><div><div class="eyebrow">OFFICIAL NOMINEES</div><h2 class="sectionTitle">正式入圍名單。</h2></div><p class="sectionLead">公開申請送出後仍需人工審核；只有狀態成為「正式入圍」才會顯示。公開票選獎項同步顯示目前有效票數與票率。</p></div>
-    <div class="nomineeFilters" id="nomineeFilters"></div>
-    <div class="nomineeGrid" id="nomineeGrid"><div class="emptyState">正在讀取 RAA 正式入圍名單…</div></div>
+    <div class="head"><div><div class="eyebrow">OFFICIAL NOMINEES</div><h2 class="title">正式入圍名單。</h2></div><p class="lead" id="nomLead">通過人工審核的入圍者才會出現在這裡。投票開放時，直接按「投給他」選好每個獎項，再一次送出。</p></div>
+    <div class="toolbar"><div class="tabs" id="nomTabs"></div><label class="search"><span>⌕</span><input id="nomSearch" type="search" placeholder="搜尋隊伍、選手或 UID" autocomplete="off"></label></div>
+    <div id="nomList"><div class="nomGrid"><div class="skel"></div><div class="skel"></div><div class="skel"></div><div class="skel"></div></div></div>
   </div>
 </section>
-<section class="stage winnerSection" id="winners"><div class="wrap"><div class="sectionHead"><div><div class="eyebrow">2026 FINAL RESULTS</div><h2 class="sectionTitle">最終得獎名單。</h2></div><p class="sectionLead">六座年度獎項的正式得主。名單僅在主辦方完成確認並正式公開後顯示。</p></div><div class="winnerHeroNote">RAA 2026 最終結果以主辦方正式公布內容為準。公開票選獎依有效票統計確認；主辦方評選獎由大會依年度紀錄與評選機制決定。</div><div class="winnerGrid" id="winnerGrid"></div></div></section>
+
+<section id="awards">
+  <div class="wrap">
+    <div class="head"><div><div class="eyebrow">AWARDS & REWARDS</div><h2 class="title">六座年度獎項，<br>獎牌與銳能周邊。</h2></div><p class="lead">三座公開票選獎由觀眾投票決定，三座主辦方評選獎依年度紀錄評選。每座獎都有專屬獎牌與銳能周邊，點獎項看完整內容。</p></div>
+    <div class="awardGrid" id="awardGrid"></div>
+    <div class="globalRewards" id="globalRewards" hidden></div>
+    <div class="juryNote"><b>主辦方評選獎不需要自行申請。</b>歷屆符合資格的參賽隊伍、選手與主播都在評選範圍內，最終提名與得獎名單由 RAA 主辦方依年度紀錄決定。</div>
+  </div>
+</section>
+
+<section class="stage" id="how">
+  <div class="wrap">
+    <div class="head"><div><div class="eyebrow">HOW TO VOTE</div><h2 class="title">每一票，都有身份。</h2></div><p class="lead">用 Google 帳號登入、綁定遊戲 UID，一個 UID 在每個公開票選獎項各有一票。申請入圍、審核結果、得獎通知都會寄到你的 Gmail。</p></div>
+    <div class="how"><div><b>STEP 01</b><h3>Google 登入</h3><p>一鍵登入，不用記密碼。之後回來也是同一個帳號。</p></div><div><b>STEP 02</b><h3>綁定遊戲 UID</h3><p>第一次登入時填 UID 與遊戲名稱，參賽者再補隊伍與賽季。</p></div><div><b>STEP 03</b><h3>選好每個獎項</h3><p>在入圍名單按「投給他」，三個獎項可以一起選好。</p></div><div><b>STEP 04</b><h3>一次送出</h3><p>確認後送出，選票立即生效。參賽者也可以投給自己。</p></div></div>
+  </div>
+</section>
+
 <section id="teams">
   <div class="wrap">
-    <div class="sectionHead"><div><div class="eyebrow">TEAM ARCHIVE</div><h2 class="sectionTitle">歷屆參賽隊伍。</h2></div><p class="sectionLead">依年度總覽、春季盃、秋季盃、冬季盃分類查看。前三名保留金／銀／銅特殊視覺，戰隊 LOGO、分數與名次會同步由後台更新。</p></div>
-    <div class="archiveControls"><div class="archiveTabs" id="teamArchiveTabs"></div><div class="archiveSummary" id="teamArchiveSummary">正在整理歷屆隊伍…</div></div>
-    <div class="teamPodium" id="teamPodium"></div>
-    <div class="teamArchive" id="teamArchive"><div class="emptyState">歷屆參賽隊伍資料將由主辦方後台匯入。</div></div>
-    <div class="archiveFoot">※ 歷屆參賽隊伍不代表已入圍公開票選獎項；公開票選獎仍需經申請與人工審核。主辦方指定獎項則不需自行提出入圍申請。</div>
+    <div class="head"><div><div class="eyebrow">TEAM ARCHIVE</div><h2 class="title">歷屆參賽隊伍。</h2></div><p class="lead">依年度總覽、春季盃、秋季盃、冬季盃分類查看，前三名保留金、銀、銅視覺。</p></div>
+    <div class="toolbar"><div class="tabs" id="teamTabs"></div><span class="muted small" id="teamSummary" style="margin-left:auto"></span></div>
+    <div class="podium" id="podium"></div>
+    <div class="teamGrid" id="teamGrid"><div class="emptyState">歷屆參賽隊伍讀取中…</div></div>
+    <div class="archiveFoot">※ 歷屆參賽隊伍不代表已入圍公開票選獎項；公開票選獎仍需經申請與人工審核。</div>
   </div>
 </section>
-<section class="stage" id="about"><div class="wrap"><div class="sectionHead"><div><div class="eyebrow">ABOUT RAA</div><h2 class="sectionTitle">REBORN<br>ANNUAL AWARDS.</h2></div><p class="sectionLead">RAA 是銳能娛樂的年度賽事總結。2026 首屆 RAA 以三個賽季為核心，不只記錄冠軍，也記錄長期參與、人氣、賽事精神與直播陪伴，讓一年真正留下完整結尾。</p></div></div></section>
-<section id="live"><div class="wrap"><div class="sectionHead"><div><div class="eyebrow">CEREMONY LIVE</div><h2 class="sectionTitle">典禮直播。</h2></div><p class="sectionLead">冬季盃總決賽結束後，直播流程將直接接續 RAA。公開票選獎項於入圍名單同步更新有效票數；最終得獎結果與主辦方評選獎項仍於典禮正式揭曉。</p></div><div class="liveBox"><div class="liveMain"><div class="liveDot"><i></i> LIVE CHANNEL</div><h3 style="font-size:34px;margin:65px 0 10px">RAA 2026 CEREMONY</h3><p class="muted" id="liveText">直播連結尚未公開。</p></div><div class="liveSide"><div><div class="cardCode">STREAM ACCESS</div><h3>銳能官方直播</h3><p class="muted" style="line-height:1.7">總決賽後不換台，直接進入年度頒獎典禮。</p></div><a id="streamBtn" href="#" target="_blank" rel="noopener" class="btn ghost">COMING SOON</a></div></div></div></section>
-</main>
-<footer class="footer"><div class="wrap footerLine"><div><img src="https://cdn.phototourl.com/free/2026-09-19-e17e160e-82da-4792-aef8-db041c70ffa0.png" alt="RAA"><div>© 2026 REBORN · REBORN ANNUAL AWARDS.</div></div><div>SPRING CUP · AUTUMN CUP · WINTER CUP<br>THE FINAL CHAPTER OF 2026</div></div></footer>
 
-<!-- Single-file voting / participant portal -->
-<div class="portal" id="portal" aria-hidden="true">
-  <div class="portalTop"><div class="wrap portalNav"><img src="https://cdn.phototourl.com/free/2026-09-19-e17e160e-82da-4792-aef8-db041c70ffa0.png" alt="RAA"><div class="portalNavRight"><span class="portalLive">RAA VOTING CENTER</span><button class="iconBtn" id="closePortal" aria-label="離開投票中心">×</button></div></div></div>
-  <div class="wrap portalBody">
-    <div id="roleChooser">
-      <div class="portalIntro"><div class="eyebrow">RAA 2026 · OFFICIAL VOTING</div><h2>年度大賞投票中心</h2><p class="muted">選擇你的身份。首次使用先註冊，之後只要輸入遊戲 UID 就能快速回到投票中心。</p></div>
-      <div class="resumeCard" id="recentSession" hidden><div><div class="cardCode">WELCOME BACK</div><b id="recentSessionText">最近使用的身份</b><p class="muted">這台裝置保留了最近登入紀錄，可以直接繼續。</p></div><button class="btn gold" id="resumeSession" type="button">一鍵繼續</button></div>
-      <div class="roleGrid">
-        <button class="roleCard" type="button" data-role="audience"><div class="no">01</div><div class="cardCode">AUDIENCE</div><h3>我是觀眾</h3><p>登入後直接查看三個公開票選獎項與完整候選名單，每個獎項各有一票。</p><span class="tag">觀眾入口 →</span></button>
-        <button class="roleCard" type="button" data-role="participant"><div class="no">02</div><div class="cardCode">PARTICIPANT</div><h3>我是參賽選手</h3><p>可正常參與投票，也能申請公開票選獎項、查看人工審核進度。</p><span class="tag">選手入口 →</span></button>
-      </div>
-    </div>
-
-    <section class="portalPane" id="audiencePane">
-      <div class="paneHead"><button class="backLink" type="button" data-back>← 返回身份選擇</button><h3>觀眾中心</h3><span></span></div>
-      <div class="authShell" id="audienceAuth">
-        <div class="authIntro"><div class="cardCode">AUDIENCE ACCESS</div><h3>歡迎回來</h3><p class="muted">已經註冊過就直接用 UID 登入；第一次使用再建立身份即可。</p></div>
-        <div class="authTabs"><button class="authTab active" type="button" data-auth-role="audience" data-auth-mode="login">登入</button><button class="authTab" type="button" data-auth-role="audience" data-auth-mode="register">首次註冊</button></div>
-        <div class="authPanel active" data-auth-panel="audience-login"><form id="audienceLoginForm"><div class="quickUid"><div class="field"><label>遊戲 UID</label><input name="gameUid" inputmode="numeric" pattern="[0-9]*" maxlength="30" required placeholder="輸入 UID 即可登入" autocomplete="username"></div><button class="btn gold" type="submit">登入投票中心</button></div></form><div class="authHint">忘記自己是否註冊過？直接輸入 UID 試試看，沒有資料時系統會提示你前往註冊。</div></div>
-        <div class="authPanel" data-auth-panel="audience-register"><form id="audienceIdentityForm"><div class="formGrid"><div class="field"><label>遊戲 UID *</label><input name="gameUid" inputmode="numeric" pattern="[0-9]*" maxlength="30" required placeholder="例如：1234567890"></div><div class="field"><label>遊戲名稱／暱稱 *</label><input name="playerName" maxlength="40" required placeholder="你的遊戲名稱"></div></div><button class="btn gold" type="submit">建立觀眾身份</button></form></div>
-      </div>
-      <div class="identityOk" id="audienceWorkspace">
-        <div class="workspaceHead"><div><div class="cardCode">AUDIENCE BALLOT</div><h3 id="audienceHello">觀眾投票</h3><p class="muted">三個公開獎項各一票，送出後即記錄為有效票。</p></div><button class="btn ghost small" type="button" data-portal-logout="audience">切換帳號</button></div>
-        <div id="audienceBallot"></div>
-      </div>
-    </section>
-
-    <section class="portalPane" id="participantPane">
-      <div class="paneHead"><button class="backLink" type="button" data-back>← 返回身份選擇</button><h3>參賽選手／負責人</h3><span></span></div>
-      <div class="authShell" id="participantAuth">
-        <div class="authIntro"><div class="cardCode">PARTICIPANT ACCESS</div><h3>參賽者身份驗證</h3><p class="muted">已註冊的參賽者只需 UID 登入。首次使用才需要填寫隊伍、身份與參賽賽季。</p></div>
-        <div class="authTabs"><button class="authTab active" type="button" data-auth-role="participant" data-auth-mode="login">登入</button><button class="authTab" type="button" data-auth-role="participant" data-auth-mode="register">首次註冊</button></div>
-        <div class="authPanel active" data-auth-panel="participant-login"><form id="participantLoginForm"><div class="quickUid"><div class="field"><label>遊戲 UID</label><input name="gameUid" inputmode="numeric" pattern="[0-9]*" maxlength="30" required placeholder="輸入 UID 即可登入" autocomplete="username"></div><button class="btn gold" type="submit">登入參賽者中心</button></div></form><div class="authHint">參賽者登入後一樣可以正常投票，包括投給自己或自己的隊伍。</div></div>
-        <div class="authPanel" data-auth-panel="participant-register"><form id="participantIdentityForm"><div class="formGrid"><div class="field"><label>遊戲 UID *</label><input name="gameUid" inputmode="numeric" pattern="[0-9]*" maxlength="30" required></div><div class="field"><label>遊戲名稱／選手暱稱 *</label><input name="playerName" maxlength="40" required></div><div class="field"><label>參賽隊伍名稱 *</label><input name="teamName" maxlength="60" list="teamSuggestions" required placeholder="輸入歷屆參賽隊名"><datalist id="teamSuggestions"></datalist></div><div class="field"><label>身份 *</label><select name="participantRole" required><option value="">請選擇</option><option>參賽選手</option><option>隊伍負責人</option><option>選手兼負責人</option></select></div><div class="field full"><label>2026 參加賽季 *（可複選）</label><div class="checks"><label class="check"><input type="checkbox" name="seasons" value="春季盃"><span>春季盃</span></label><label class="check"><input type="checkbox" name="seasons" value="秋季盃"><span>秋季盃</span></label><label class="check"><input type="checkbox" name="seasons" value="冬季盃"><span>冬季盃</span></label></div></div></div><button class="btn gold" type="submit">建立參賽者身份</button></form></div>
-      </div>
-      <div class="identityOk" id="participantWorkspace">
-        <div class="workspaceHead"><div><div class="cardCode">PARTICIPANT CENTER</div><h3 id="participantHello">參賽者中心</h3><p class="muted">投票、申請入圍與審核狀態都集中在這裡。</p></div><button class="btn ghost small" type="button" data-portal-logout="participant">切換帳號</button></div>
-        <div class="portalTabs"><button class="portalTab active" data-ptab="participantVote">我要投票</button><button class="portalTab" data-ptab="participantApply">申請入圍</button><button class="portalTab" data-ptab="participantStatus">申請狀態</button></div>
-        <div class="portalPanel active" id="participantVote"><div class="selfVoteNote"><b>你可以投給自己。</b><span>RAA 不限制參賽者支持自己或自己的隊伍；規則仍是一個 UID、每個公開獎項一票。</span></div><div id="participantBallot"></div></div>
-        <div class="portalPanel" id="participantApply">
-          <form id="applicationForm" class="applicationCard">
-            <div class="formGrid">
-              <div class="field"><label>選手暱稱</label><input name="playerName" readonly></div>
-              <div class="field"><label>隊伍名稱</label><input name="teamName" readonly></div>
-              <div class="field full"><label>申請公開票選獎項 *（可複選）</label><div class="checks"><label class="check"><input type="checkbox" name="awards" value="最佳戰隊獎"><span>最佳戰隊獎</span></label><label class="check"><input type="checkbox" name="awards" value="最佳選手獎"><span>最佳選手獎</span></label><label class="check"><input type="checkbox" name="awards" value="人氣戰隊獎"><span>人氣戰隊獎</span></label></div><small>精神總錦標獎、年度隊伍獎、年度主播獎由主辦方決定，不需要自行申請入圍。</small></div>
-              <div class="field full"><label>候選照片／戰隊 LOGO *</label><div class="uploadZone"><div class="photoPreview" id="applicationPhotoPreview">尚未選擇圖片</div><div><input id="applicationPhoto" type="file" accept="image/png,image/jpeg,image/webp" required><small>最佳選手獎建議使用選手照片；戰隊獎建議使用戰隊 LOGO。送審前會再讓你確認一次。</small></div></div></div>
-              <div class="field full"><label>年度代表成績／補充說明</label><textarea name="note" rows="6" maxlength="1200" placeholder="可填寫三季參賽經歷、代表賽事、隊伍故事或希望主辦方審核時參考的資訊。"></textarea></div>
-            </div>
-            <div class="consentBox"><label class="consentCheck"><input type="checkbox" name="agreementAccepted" required><span>我已閱讀並同意遵循 RAA 銳能年度大賞之活動規章、審核制度、投票規範與素材使用說明，並確認送審資料為本人／隊伍授權提交。</span></label><button type="button" id="openTerms">查看大會規章與同意事項 →</button></div>
-            <button class="btn gold" type="submit">預覽資料並確認送審</button>
-          </form>
-        </div>
-        <div class="portalPanel" id="participantStatus"><div class="actions" style="justify-content:flex-start;margin-bottom:16px"><button class="btn ghost small" id="refreshStatus" type="button">重新整理</button></div><div class="statusList" id="statusList"><div class="muted">讀取中…</div></div></div>
-      </div>
-    </section>
+<section class="stage" id="live">
+  <div class="wrap">
+    <div class="head"><div><div class="eyebrow">CEREMONY LIVE</div><h2 class="title">典禮直播。</h2></div><p class="lead">冬季盃總決賽結束後不換台，直接進入 RAA 年度頒獎典禮。</p></div>
+    <div class="liveBox"><div class="liveMain"><div class="liveDot"><i></i> LIVE CHANNEL</div><h3 style="font-size:32px;margin:60px 0 10px">RAA 2026 CEREMONY</h3><p class="muted" id="liveText">直播連結尚未公開。</p></div><div class="liveSide"><div><div class="tag">STREAM ACCESS</div><h3>銳能官方直播</h3><p class="muted small" style="line-height:1.7" id="liveCeremony">冬季盃總決賽結束後舉行</p></div><a id="streamBtn" class="btn ghost" href="#live" aria-disabled="true">COMING SOON</a></div></div>
   </div>
+</section>
 
-  <div class="voteConfirm" id="voteConfirm" aria-hidden="true"><div class="voteConfirmBox"><div class="cardCode">CONFIRM YOUR VOTE</div><h3 id="voteConfirmTitle">確認投票</h3><div class="confirmCandidate" id="voteConfirmCandidate"></div><p class="muted">送出後，此 UID 在這個獎項就會完成一張有效票。</p><div class="confirmActions"><button class="btn ghost" type="button" id="cancelVote">返回</button><button class="btn gold" type="button" id="confirmVote">確認送出這一票</button></div></div></div>
-  <div class="overlayModal" id="termsModal" aria-hidden="true"><div class="overlayBox"><div class="overlayHead"><div><div class="cardCode">RAA PARTICIPATION AGREEMENT</div><h3>大會規章與同意事項</h3></div><button class="iconBtn" type="button" data-close-overlay="termsModal">×</button></div><div class="termsBody"><div class="termItem"><b>01 · 資料真實</b><p>送審者確認 UID、暱稱、隊伍、參賽賽季及報名獎項等資料正確；若資料有誤，主辦方得要求補件或退回。</p></div><div class="termItem"><b>02 · 遵循活動規範</b><p>參賽者同意遵循 RAA 公告之審核、投票、公平競爭與社群行為規範，不以不正當方式干擾票選或活動進行。</p></div><div class="termItem"><b>03 · 圖片與素材授權</b><p>送審者確認上傳之選手照片或戰隊 LOGO 具使用權，並同意銳能娛樂於 RAA 官網、直播、入圍視覺及活動宣傳中使用。</p></div><div class="termItem"><b>04 · 人工審核</b><p>送出申請不代表正式入圍。主辦方將依資格與資料完整性人工審核，並保留要求更正、下架或取消資格之權利。</p></div><div class="termItem"><b>05 · 投票有效性</b><p>公開票選依系統有效票紀錄計算；若發現重複、異常或違反規範之票券，主辦方得依紀錄作廢並保留說明。</p></div></div><div class="overlayActions"><button class="btn gold" type="button" id="acceptTermsBtn">我已閱讀並同意</button></div></div></div>
-  <div class="overlayModal" id="applicationConfirm" aria-hidden="true"><div class="overlayBox"><div class="overlayHead"><div><div class="cardCode">FINAL APPLICATION REVIEW</div><h3>最後確認送審資料</h3></div><button class="iconBtn" type="button" data-close-overlay="applicationConfirm">×</button></div><div id="applicationReviewContent"></div><div class="reviewAgree">✓ 已勾選同意遵循 RAA 大會規章。請再次確認名稱、報名獎項與照片／LOGO 是否正確。</div><div class="overlayActions"><button class="btn ghost" type="button" data-close-overlay="applicationConfirm">返回修改</button><button class="btn gold" type="button" id="confirmApplication">確認無誤，正式送審</button></div></div></div>
+<section id="about"><div class="wrap"><div class="head"><div><div class="eyebrow">ABOUT RAA</div><h2 class="title">REBORN<br>ANNUAL AWARDS.</h2></div><p class="lead">RAA 是銳能娛樂的年度賽事總結。2026 首屆 RAA 以三個賽季為核心，不只記錄冠軍，也記錄長期參與、人氣、賽事精神與直播陪伴。<span id="contactLine"></span></p></div></div></section>
+</main>
+<footer><div class="wrap"><div><img data-logo src="RAALOGO.png" alt="RAA"><div>© 2026 REBORN ENTERTAINMENT · REBORN ANNUAL AWARDS</div></div><div>SPRING CUP · AUTUMN CUP · WINTER CUP<br>THE FINAL CHAPTER OF 2026</div></div></footer>
+
+<div class="ballotBar" id="ballotBar" role="region" aria-label="選票"><span class="count" id="bbCount">0</span><div class="info"><b id="bbTitle">已選 0 個獎項</b><small id="bbSub"></small></div><button class="btn ghost sm" id="bbClear" type="button">清除</button><button class="btn gold" id="bbSubmit" type="button">送出選票</button></div>
+
+<!-- 我的 RAA -->
+<div class="portal" id="portal" aria-hidden="true">
+  <div class="pTop">
+    <div class="wrap pNav"><img data-logo src="RAALOGO.png" alt="RAA"><div class="tag">我的 RAA</div><div class="who" id="pWho"></div><button class="x" id="pClose" aria-label="關閉">×</button></div>
+    <div class="wrap pTabs" id="pTabs"><button class="pTab on" data-pane="vote">投票</button><button class="pTab" data-pane="apply">申請入圍</button><button class="pTab" data-pane="status">我的申請</button><button class="pTab" data-pane="profile">個人資料</button></div>
+  </div>
+  <div class="wrap pBody">
+    <div class="pane on" id="pane-vote"></div>
+    <div class="pane" id="pane-apply"></div>
+    <div class="pane" id="pane-status"></div>
+    <div class="pane" id="pane-profile"></div>
+  </div>
 </div>
-<div class="announcePopup" id="announcementPopup" aria-hidden="true"><div class="announceCard"><img class="announceLogo" src="https://cdn.phototourl.com/free/2026-09-19-e17e160e-82da-4792-aef8-db041c70ffa0.png" alt="RAA"><div class="cardCode">RAA · OFFICIAL UPDATE</div><h3>銳能年度大賞即時公告</h3><div class="announceMessage" id="announcementPopupMessage"></div><div class="announceMeta" id="announcementPopupMeta"></div><button class="btn gold announceClose" type="button" id="closeAnnouncementPopup">我知道了</button></div></div>
-<div class="toast" id="toast"></div>
-<script>
-/* ========= CONFIG =========
-   Deploy Code.gs as a Google Apps Script Web App, then paste the /exec URL here.
-*/
-const RAA_CONFIG={
-  API_URL:'https://script.google.com/macros/s/AKfycbzQAGZ3paoNy-yDd-YoIKaV60z954ZKcmysVphpRFPHaDhTEdXmtwoIS2sIcyTnzW2McA/exec',
-  LOGO_URL:'https://cdn.phototourl.com/free/2026-09-19-e17e160e-82da-4792-aef8-db041c70ffa0.png'
-};
-const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
-const escapeHTML=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
-let bootstrap={settings:{},awards:[],nominees:[],teams:[],seasons:['春季盃','秋季盃','冬季盃']};
-let identity={audience:null,participant:null};
-let ballotState={audience:{nominees:[],votes:[],activeAward:''},participant:{nominees:[],votes:[],activeAward:''}};
-const SESSION_KEY='raaVoterSessionV4';
-const ANNOUNCEMENT_SEEN_KEY='raaSeenAnnouncementIdsV4';
-let currentNomineeFilter='全部', currentTeamFilter='年度總覽', pendingApplication=null, applicationPhotoData='';
-function toast(msg){const el=$('#toast');el.textContent=msg;el.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>el.classList.remove('show'),3200)}
-async function api(action,data={}){if(!RAA_CONFIG.API_URL||RAA_CONFIG.API_URL.includes('PASTE_'))throw new Error('尚未設定 Apps Script API_URL');const res=await fetch(RAA_CONFIG.API_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action,...data}),redirect:'follow'});const out=await res.json();if(!out.ok)throw new Error(out.message||'伺服器錯誤');return out}
-function formDataObject(form){const fd=new FormData(form),obj={};for(const [k,v] of fd.entries()){if(obj[k]!==undefined)obj[k]=Array.isArray(obj[k])?[...obj[k],v]:[obj[k],v];else obj[k]=v}return obj}
-function openMenu(){ $('#drawer').classList.add('on');$('#drawerShade').classList.add('on') }
-function closeMenu(){ $('#drawer').classList.remove('on');$('#drawerShade').classList.remove('on') }
-$('#openMenu').onclick=openMenu;$('#closeMenu').onclick=closeMenu;$('#drawerShade').onclick=closeMenu;$$('[data-close]').forEach(x=>x.addEventListener('click',closeMenu));
-window.addEventListener('scroll',()=>$('#topbar').classList.toggle('scrolled',scrollY>30));
 
-function getSavedSession(){try{return JSON.parse(localStorage.getItem(SESSION_KEY)||'null')}catch(_){return null}}
-function saveSession(role,uid){localStorage.setItem(SESSION_KEY,JSON.stringify({role,uid,at:Date.now()}));renderRecentSession()}
-function clearSavedSession(){localStorage.removeItem(SESSION_KEY);renderRecentSession()}
-function renderRecentSession(){const s=getSavedSession(),card=$('#recentSession');if(!s||!s.uid){card.hidden=true;return}card.hidden=false;$('#recentSessionText').textContent=`${s.role==='participant'?'參賽者':'觀眾'} · UID ${s.uid}`}
-function openPortal(){closeMenu();$('#portal').classList.add('open');$('#portal').setAttribute('aria-hidden','false');document.body.style.overflow='hidden';resetPortalView();renderRecentSession()}
-function closePortal(){ $('#portal').classList.remove('open');$('#portal').setAttribute('aria-hidden','true');document.body.style.overflow='';closeVoteConfirm(); }
-$$('.openPortal').forEach(b=>b.onclick=openPortal);$('#closePortal').onclick=closePortal;
-function resetPortalView(){ $('#roleChooser').style.display='block';$$('.portalPane').forEach(x=>x.classList.remove('active'));closeVoteConfirm() }
-$$('[data-back]').forEach(b=>b.onclick=resetPortalView);
-function enterRole(role){$('#roleChooser').style.display='none';$$('.portalPane').forEach(x=>x.classList.remove('active'));$('#'+role+'Pane').classList.add('active');if(identity[role])showWorkspace(role);else showAuth(role,'login')}
-$$('[data-role]').forEach(b=>b.onclick=()=>enterRole(b.dataset.role));
-$$('[data-auth-role]').forEach(b=>b.onclick=()=>showAuth(b.dataset.authRole,b.dataset.authMode));
-function showAuth(role,mode='login'){$('#'+role+'Auth').style.display='block';$('#'+role+'Workspace').classList.remove('show');$$(`[data-auth-role="${role}"]`).forEach(x=>x.classList.toggle('active',x.dataset.authMode===mode));$$(`[data-auth-panel^="${role}-"]`).forEach(x=>x.classList.toggle('active',x.dataset.authPanel===`${role}-${mode}`))}
-$('#resumeSession').onclick=async()=>{const s=getSavedSession();if(!s)return;try{const r=await api('loginIdentity',{role:s.role,gameUid:s.uid});identity[s.role]=r.profile;enterRole(s.role);toast('已恢復上次登入身份')}catch(e){clearSavedSession();toast(e.message)}};
-$$('[data-portal-logout]').forEach(b=>b.onclick=()=>{const role=b.dataset.portalLogout;identity[role]=null;ballotState[role]={nominees:[],votes:[],activeAward:''};const saved=getSavedSession();if(saved&&saved.role===role)clearSavedSession();showAuth(role,'login');toast('已切換帳號')});
-$$('.openParticipantStatus').forEach(b=>b.onclick=async()=>{openPortal();const saved=getSavedSession();if(identity.participant){enterRole('participant');activateParticipantTab('participantStatus');return}if(saved?.role==='participant'){try{const r=await api('loginIdentity',{role:'participant',gameUid:saved.uid});identity.participant=r.profile;enterRole('participant');activateParticipantTab('participantStatus')}catch(e){enterRole('participant');toast(e.message)}}else enterRole('participant')});
-async function loadBootstrap(){
-  try{
-    bootstrap=await api('publicBootstrap');
-    renderPublic();
-  }catch(e){
-    console.warn(e);toast(e.message);
-    renderPublic();
+<!-- 登入 -->
+<div class="modal" id="loginModal" role="dialog" aria-modal="true" aria-labelledby="loginTitle"><div class="box">
+  <div class="boxHead"><div><img data-logo src="RAALOGO.png" alt="RAA"><div class="eyebrow">SIGN IN</div><h3 id="loginTitle">登入 RAA 2026</h3></div><button class="x" data-close aria-label="關閉">×</button></div>
+  <p class="muted" style="line-height:1.75;margin:0" id="loginWhy">使用 Google 帳號登入。一個帳號綁定一個遊戲 UID，確保一人一票；入圍審核與得獎通知也會寄到這個信箱。</p>
+  <div class="gArea"><div class="gBtn" data-gbtn></div><div id="previewPicker" class="previewAcc" hidden></div><div class="muted small" id="gHint"></div></div>
+</div></div>
+
+<!-- 首次設定身份 -->
+<div class="modal" id="profileModal" role="dialog" aria-modal="true"><div class="box">
+  <div class="boxHead"><div><div class="eyebrow">ONE MORE STEP</div><h3>設定你的 RAA 身份</h3><p class="muted small" id="pmEmail" style="margin:8px 0 0"></p></div><button class="x" data-close aria-label="關閉">×</button></div>
+  <form id="profileForm" novalidate></form>
+</div></div>
+
+<!-- 送出選票 -->
+<div class="modal" id="voteModal" role="dialog" aria-modal="true"><div class="box" id="voteBox"></div></div>
+<!-- 獎項詳情 -->
+<div class="modal" id="awardModal" role="dialog" aria-modal="true"><div class="box wide" id="awardBox"></div></div>
+<!-- 規章 -->
+<div class="modal" id="termsModal" role="dialog" aria-modal="true"><div class="box wide">
+  <div class="boxHead"><div><div class="eyebrow">RAA PARTICIPATION AGREEMENT</div><h3>大會規章與同意事項</h3></div><button class="x" data-close aria-label="關閉">×</button></div>
+  <div class="terms"><div><b>01 · 資料真實</b><p>送審者確認 UID、暱稱、隊伍、參賽賽季及報名獎項等資料正確；若資料有誤，主辦方得要求補件或退回。</p></div><div><b>02 · 遵循活動規範</b><p>參賽者同意遵循 RAA 公告之審核、投票、公平競爭與社群行為規範，不以不正當方式干擾票選或活動進行。</p></div><div><b>03 · 圖片與素材授權</b><p>送審者確認上傳之選手照片或戰隊 LOGO 具使用權，並同意銳能娛樂於 RAA 官網、直播、入圍視覺及活動宣傳中使用。</p></div><div><b>04 · 人工審核</b><p>送出申請不代表正式入圍。主辦方將依資格與資料完整性人工審核，並保留要求更正、下架或取消資格之權利。</p></div><div><b>05 · 投票有效性</b><p>公開票選依系統有效票紀錄計算；若發現重複、異常或違反規範之票券，主辦方得依紀錄作廢並保留說明。</p></div><div><b>06 · 獎勵</b><p>獎牌與銳能周邊依各獎項公告內容提供，實際品項、數量與領取方式以主辦方通知為準。</p></div></div>
+  <div class="boxActions"><button class="btn gold" type="button" id="acceptTerms">我已閱讀並同意</button></div>
+</div></div>
+<!-- 公告 -->
+<div class="modal" id="annModal" role="dialog" aria-modal="true"><div class="box annBox"><img data-logo src="RAALOGO.png" alt="RAA"><div class="eyebrow">RAA · OFFICIAL UPDATE</div><h3 style="font-size:26px;margin:8px 0 16px">銳能年度大賞即時公告</h3><div class="annMsg" id="annMsg"></div><div class="muted small" id="annMeta" style="margin-top:16px;text-align:left"></div><button class="btn gold block" style="margin-top:22px" id="annClose" type="button">我知道了</button></div></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* ================= 設定 =================
+   API_URL：Apps Script 部署後的 /exec 網址。留空 = 預覽模式（會載入同資料夾的 raa-preview.js，資料只存在你的瀏覽器）
+   GOOGLE_CLIENT_ID：Google 登入用戶端 ID；留空時自動向後端取得
+   LOGO：RAA LOGO 檔名（和這個網頁放在同一個 GitHub 資料夾，自動嘗試 .png .webp .svg .jpg） */
+const RAA_CONFIG = {
+  API_URL: 'https://script.google.com/macros/s/AKfycbya-2HhC9Bq_uHFTRmZs4Gg07WEZT_Zqs-c7Cx60MW8pEh07TnHITKI-hOQdm2ZvhWg_A/exec',
+  GOOGLE_CLIENT_ID: '184134743553-rvi9meactqmjjqomfj1hh1tfnr74plkm.apps.googleusercontent.com',
+  LOGO: 'RAALOGO',
+  LOGO_FALLBACK: 'https://www.rebormnent.com/RAALOGO.png',
+  ADMIN_PAGE: 'raaback.html',
+  PREVIEW_SCRIPT: 'raa-preview.js'
+};
+const PREVIEW = !RAA_CONFIG.API_URL;
+const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const esc = s => String(s ?? '').replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+const initials = s => String(s || '?').trim().slice(0, 2).toUpperCase();
+const nf = n => Number(n || 0).toLocaleString();
+const S = { boot: null, session: '', account: null, profile: null, votes: [], applications: [], eligibility: [], picks: {}, filter: '', q: '', teamFilter: '年度總覽', pendingAfterLogin: null, gis: false, pane: 'vote', wiz: null, meLoaded: false };
+
+/* ---------- LOGO（GitHub → 備用網址 → 文字） ---------- */
+const LOGO_CANDIDATES = ['.png', '.webp', '.svg', '.jpg'].map(x => RAA_CONFIG.LOGO + x).concat([RAA_CONFIG.LOGO_FALLBACK]);
+let logoResolved = null;
+function logoFail(img) {
+  const i = Number(img.dataset.try || 0) + 1;
+  img.dataset.try = i;
+  if (i < LOGO_CANDIDATES.length) img.src = LOGO_CANDIDATES[i];
+  else { const t = document.createElement('span'); t.className = 'logoText ' + img.className; t.textContent = 'RAA'; t.style.fontSize = img.classList.contains('heroLogo') ? '72px' : '20px'; img.replaceWith(t); }
+}
+function wireLogos(root = document) {
+  $$('img[data-logo]', root).forEach(img => {
+    if (img.dataset.wired) return; img.dataset.wired = 1;
+    img.addEventListener('error', () => logoFail(img));
+    if (logoResolved) img.src = logoResolved;
+    const fit = () => { if (img.naturalWidth) img.classList.toggle('logoSq', img.naturalWidth / img.naturalHeight < 1.4); if (!logoResolved) logoResolved = img.currentSrc || img.src; };
+    if (img.complete && img.naturalWidth) fit(); else img.addEventListener('load', fit);
+  });
+}
+wireLogos();
+/* 雲端硬碟圖片備援：thumbnail → lh3 → 文字 */
+function imgErr(el) {
+  const src = el.getAttribute('src') || '';
+  const m = src.match(/[?&]id=([A-Za-z0-9_-]{10,})/);
+  if (m && !el.dataset.alt) { el.dataset.alt = 1; el.src = `https://lh3.googleusercontent.com/d/${m[1]}=w1200`; return; }
+  const box = el.parentElement; if (box) box.textContent = el.dataset.fb || '';
+}
+const imgTag = (url, fb, alt = '') => url ? `<img src="${esc(url)}" alt="${esc(alt)}" loading="lazy" data-fb="${esc(fb)}" onerror="imgErr(this)">` : esc(fb);
+
+/* ---------- UI 小工具 ---------- */
+function toast(msg, bad) { const el = $('#toast'); el.textContent = msg; el.classList.toggle('bad', !!bad); el.classList.add('show'); clearTimeout(toast.t); toast.t = setTimeout(() => el.classList.remove('show'), bad ? 5200 : 3400); }
+function openModal(id) { const m = $('#' + id); m.classList.add('open'); m.setAttribute('aria-hidden', 'false'); setTimeout(() => { const f = m.querySelector('input:not([readonly]):not([type=hidden]),button.btn.gold'); if (f && window.innerWidth > 700) f.focus(); }, 60); }
+function closeModal(id) { const m = $('#' + id); m.classList.remove('open'); m.setAttribute('aria-hidden', 'true'); if (id === 'loginModal' && !S.session) S.pendingAfterLogin = null; }
+document.addEventListener('click', e => {
+  const c = e.target.closest('[data-close]'); if (c) closeModal(c.closest('.modal').id);
+  if (e.target.classList.contains('modal')) closeModal(e.target.id);
+});
+document.addEventListener('keydown', e => {
+  if (e.key !== 'Escape') return;
+  const open = $$('.modal.open'); if (open.length) { closeModal(open[open.length - 1].id); return; }
+  if ($('#drawer').classList.contains('on')) return drawer(false);
+  if ($('#portal').classList.contains('open')) closePortal();
+});
+async function busy(btn, fn) { if (!btn) return fn(); const html = btn.innerHTML; btn.disabled = true; btn.innerHTML = '<i class="spin"></i>' + html; try { return await fn(); } finally { btn.disabled = false; btn.innerHTML = html; } }
+function drawer(on) { $('#drawer').classList.toggle('on', on); $('#shade').classList.toggle('on', on); }
+$('#hamb').onclick = () => drawer(true); $('#shade').onclick = () => drawer(false);
+$$('[data-close-drawer]').forEach(x => x.addEventListener('click', () => drawer(false)));
+$$('[data-go]').forEach(b => b.onclick = () => { drawer(false); openPortal(b.dataset.go); });
+addEventListener('scroll', () => $('#topbar').classList.toggle('solid', scrollY > 30), { passive: true });
+
+/* ---------- API ---------- */
+let previewLoading = null;
+function loadPreview() {
+  if (window.RAA_PREVIEW) return Promise.resolve();
+  if (!previewLoading) previewLoading = new Promise((res, rej) => { const s = document.createElement('script'); s.src = RAA_CONFIG.PREVIEW_SCRIPT; s.onload = res; s.onerror = () => rej(new Error('預覽模式需要和網頁放在同一個資料夾的 raa-preview.js，或在 RAA_CONFIG.API_URL 填入後端網址')); document.head.appendChild(s); });
+  return previewLoading;
+}
+async function api(action, data = {}) {
+  const body = { action, ...data };
+  if (S.session && !body.session) body.session = S.session;
+  let out;
+  if (PREVIEW) { await loadPreview(); await sleep(120); out = window.RAA_PREVIEW.call(body); }
+  else {
+    let res;
+    try { res = await fetch(RAA_CONFIG.API_URL, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(body), redirect: 'follow' }); }
+    catch (e) { throw new Error('連線失敗，請檢查網路後再試一次'); }
+    try { out = await res.json(); } catch (e) { throw new Error('伺服器沒有正確回應，請稍後再試'); }
+  }
+  if (!out.ok) {
+    const err = new Error(out.message || '伺服器錯誤'); err.code = out.code;
+    if (out.code === 'AUTH' && action !== 'authGoogle') { clearSession(); renderAccount(); }
+    throw err;
+  }
+  return out;
+}
+
+/* ---------- 登入狀態 ---------- */
+const SESSION_KEY = 'raaSessionV5';
+function saveSession(r) { S.session = r.session; S.account = r.account; try { localStorage.setItem(SESSION_KEY, JSON.stringify({ session: r.session, account: r.account, exp: r.expiresAt })); } catch (e) {} }
+function clearSession() { S.session = ''; S.account = null; S.profile = null; S.votes = []; S.applications = []; S.eligibility = []; S.meLoaded = false; try { localStorage.removeItem(SESSION_KEY); } catch (e) {} }
+(function restore() { try { const s = JSON.parse(localStorage.getItem(SESSION_KEY) || 'null'); if (s && s.session && (!s.exp || s.exp > Date.now() + 60000)) { S.session = s.session; S.account = s.account; } } catch (e) {} })();
+
+function renderAccount() {
+  const b = $('#acctBtn');
+  if (!S.session) { b.className = 'acctBtn guest'; b.innerHTML = '<span>Google 登入</span>'; }
+  else {
+    const name = S.profile?.playerName || S.account?.name || S.account?.email || '我的 RAA';
+    b.className = 'acctBtn';
+    b.innerHTML = `${S.account?.picture ? `<img src="${esc(S.account.picture)}" alt="" referrerpolicy="no-referrer">` : `<i class="av">${esc(initials(name))}</i>`}<span>${esc(name)}</span>`;
+  }
+  $('#pWho').innerHTML = S.session ? `${S.account?.picture ? `<img src="${esc(S.account.picture)}" alt="" referrerpolicy="no-referrer">` : ''}<span>${esc(S.account?.email || '')}</span>` : '';
+}
+$('#acctBtn').onclick = () => S.session ? openPortal(S.pane || 'vote') : requireLogin(() => openPortal('vote'));
+
+async function requireLogin(then, why) {
+  if (S.session && !S.meLoaded) await loadMe();
+  if (S.session && S.profile) return then();
+  S.pendingAfterLogin = then;
+  if (S.session) return openProfileSetup();
+  $('#loginWhy').textContent = why || '使用 Google 帳號登入。一個帳號綁定一個遊戲 UID，確保一人一票；入圍審核與得獎通知也會寄到這個信箱。';
+  openModal('loginModal');
+  setupGoogle();
+}
+function runPending() { const f = S.pendingAfterLogin; S.pendingAfterLogin = null; if (f) f(); }
+
+async function setupGoogle() {
+  if (PREVIEW) return renderPreviewPicker();
+  const cid = RAA_CONFIG.GOOGLE_CLIENT_ID || S.boot?.googleClientId;
+  if (!cid) { $('#gHint').textContent = '登入功能設定中（後端尚未設定 Google 用戶端 ID），請稍後再試。'; return; }
+  if (!window.google?.accounts?.id) {
+    if (!$('#gsiScript')) { const s = document.createElement('script'); s.id = 'gsiScript'; s.src = 'https://accounts.google.com/gsi/client'; s.async = true; s.onload = setupGoogle; s.onerror = () => { $('#gHint').textContent = 'Google 登入載入失敗，請關閉廣告阻擋或換個瀏覽器再試。'; }; document.head.appendChild(s); }
+    return;
+  }
+  if (!S.gis) { google.accounts.id.initialize({ client_id: cid, callback: r => onCredential(r.credential), cancel_on_tap_outside: true, use_fedcm_for_prompt: true }); S.gis = true; }
+  $$('[data-gbtn]').forEach(el => { if (el.dataset.done) return; el.dataset.done = 1; google.accounts.id.renderButton(el, { theme: 'filled_black', size: 'large', shape: 'pill', text: 'continue_with', locale: 'zh-TW', width: 300 }); });
+  $('#gHint').textContent = '登入即表示同意 RAA 使用你的 Google 名稱與 Email 寄送活動通知。';
+}
+function renderPreviewPicker() {
+  loadPreview().then(() => {
+    const box = $('#previewPicker'); box.hidden = false;
+    box.innerHTML = '<div class="notice" style="margin:0">預覽模式：選一個測試帳號模擬 Google 登入。</div>' + window.RAA_PREVIEW.accounts.site.map(a => `<button type="button" data-pv="${esc(a.email)}" data-name="${esc(a.name)}"><b>${esc(a.name)}</b><small>${esc(a.email)} · ${esc(a.note)}</small></button>`).join('')
+      + `<div class="field" style="margin:4px 0 0"><input id="pvEmail" type="email" placeholder="或輸入任意 Gmail 測試"></div><button type="button" class="btn ghost" id="pvGo">用這個 Gmail 登入</button>`;
+    $$('[data-pv]', box).forEach(b => b.onclick = () => onCredential(window.RAA_PREVIEW.credential(b.dataset.pv, b.dataset.name)));
+    $('#pvGo').onclick = () => { const e = $('#pvEmail').value.trim(); if (!/@/.test(e)) return toast('請輸入 Email', 1); onCredential(window.RAA_PREVIEW.credential(e)); };
+  }).catch(e => toast(e.message, 1));
+}
+async function onCredential(credential) {
+  try {
+    const r = await api('authGoogle', { credential });
+    saveSession(r); S.profile = r.profile; S.prefill = r.prefill;
+    closeModal('loginModal'); renderAccount();
+    toast(`已登入 ${r.account.email}`);
+    if (!r.profile) { S.meLoaded = true; openProfileSetup(); return; }
+    await loadMe(); runPending();
+  } catch (e) { toast(e.message, 1); }
+}
+function logout() {
+  clearSession(); S.picks = {}; renderAccount(); renderBallotBar(); renderNominees(); closePortal();
+  if (!PREVIEW && window.google?.accounts?.id) google.accounts.id.disableAutoSelect();
+  toast('已登出');
+}
+
+async function loadMe() {
+  if (!S.session) return;
+  try {
+    const r = await api('me');
+    S.account = r.account; S.profile = r.profile; S.votes = r.votes || []; S.applications = r.applications || []; S.eligibility = r.eligibility || []; S.prefill = r.prefill; S.meLoaded = true;
+    // 已投過的獎項不能再選
+    S.votes.forEach(v => delete S.picks[v.award]);
+    renderAccount(); renderNominees(); renderBallotBar(); if (portalOpen()) renderPane();
+  } catch (e) { if (e.code !== 'AUTH') toast(e.message, 1); }
+}
+
+/* ---------- 身份設定 ---------- */
+function seasonChecks(name, selected = []) { return `<div class="checks">${(S.boot?.seasons || ['春季盃', '秋季盃', '冬季盃']).map(s => `<label class="check"><input type="checkbox" name="${name}" value="${s}" ${selected.includes(s) ? 'checked' : ''}><span>${s}</span></label>`).join('')}</div>`; }
+function teamDatalist() { return `<datalist id="teamList">${(S.boot?.teams || []).map(t => `<option value="${esc(t.teamName)}">`).join('')}</datalist>`; }
+function profileFields(p, opts = {}) {
+  p = p || {}; const pre = S.prefill || {};
+  const role = opts.forceParticipant ? 'participant' : (p.role || 'audience');
+  return `<div class="field"><label>我的身份</label><div class="seg"><label><input type="radio" name="role" value="audience" ${role !== 'participant' ? 'checked' : ''} ${p.role === 'participant' ? 'disabled' : ''}><span>觀眾<small>投票支持喜歡的隊伍</small></span></label><label><input type="radio" name="role" value="participant" ${role === 'participant' ? 'checked' : ''}><span>參賽選手／負責人<small>投票＋申請入圍</small></span></label></div></div>
+  <div class="grid2"><div class="field"><label>遊戲 UID *</label><input name="gameUid" inputmode="numeric" maxlength="30" value="${esc(p.gameUid || pre.gameUid || '')}" ${p.gameUid ? 'readonly' : ''} placeholder="5–30 位數字" required><small>${p.gameUid ? 'UID 綁定後無法自行修改，需要更換請聯絡主辦方' : '一個 Google 帳號綁定一個 UID'}</small></div>
+  <div class="field"><label>遊戲名稱／暱稱 *</label><input name="playerName" maxlength="40" value="${esc(p.playerName || pre.playerName || S.account?.name || '')}" required></div></div>
+  <div data-part ${role === 'participant' ? '' : 'hidden'}><div class="grid2"><div class="field"><label>參賽隊伍名稱 *</label><input name="teamName" maxlength="60" list="teamList" value="${esc(p.teamName || '')}" placeholder="輸入或選擇歷屆隊名">${teamDatalist()}</div>
+  <div class="field"><label>參賽身份 *</label><select name="participantRole"><option value="">請選擇</option>${['參賽選手', '隊伍負責人', '選手兼負責人'].map(r => `<option ${p.participantRole === r ? 'selected' : ''}>${r}</option>`).join('')}</select></div></div>
+  <div class="field"><label>2026 參加賽季 *（可複選）</label>${seasonChecks('seasons', p.seasons || [])}</div></div>`;
+}
+function wireProfileForm(form) {
+  $$('[name=role]', form).forEach(r => r.onchange = () => { $('[data-part]', form).hidden = $('[name=role]:checked', form).value !== 'participant'; });
+  $('[name=gameUid]', form).addEventListener('input', e => { e.target.value = e.target.value.replace(/\D/g, ''); });
+}
+function readProfileForm(form) {
+  const d = { role: $('[name=role]:checked', form)?.value || 'audience', gameUid: form.gameUid.value.trim(), playerName: form.playerName.value.trim(), teamName: form.teamName?.value.trim() || '', participantRole: form.participantRole?.value || '', seasons: $$('[name=seasons]:checked', form).map(x => x.value) };
+  if (!/^\d{5,30}$/.test(d.gameUid)) throw new Error('UID 請輸入 5–30 位數字');
+  if (!d.playerName) throw new Error('請填寫遊戲名稱或暱稱');
+  if (d.role === 'participant' && (!d.teamName || !d.participantRole || !d.seasons.length)) throw new Error('參賽身份需填寫隊伍、身份與至少一個參賽賽季');
+  return d;
+}
+function openProfileSetup(opts = {}) {
+  const f = $('#profileForm');
+  $('#pmEmail').textContent = `已用 ${S.account?.email || ''} 登入。第一次使用請綁定遊戲 UID。`;
+  f.innerHTML = profileFields(S.profile, opts) + `${S.prefill?.gameUid ? '<div class="notice ok">已從銳能會員資料帶入 UID 與暱稱，確認後送出即可。</div>' : ''}<div class="boxActions"><button class="btn gold block" type="submit">完成設定</button></div>`;
+  wireProfileForm(f);
+  f.onsubmit = async e => {
+    e.preventDefault();
+    try {
+      const d = readProfileForm(f);
+      await busy(e.submitter, async () => { const r = await api('saveProfile', d); S.profile = r.profile; });
+      closeModal('profileModal'); toast(S.profile.role === 'participant' ? '參賽者身份設定完成' : '身份設定完成，可以開始投票了');
+      await loadMe(); runPending();
+    } catch (err) { toast(err.message, 1); }
+  };
+  openModal('profileModal');
+}
+
+/* ---------- 公開資料 ---------- */
+const BOOT_KEY = 'raaBootV5';
+async function loadBoot(first) {
+  if (first) { try { const c = JSON.parse(localStorage.getItem(BOOT_KEY) || 'null'); if (c && c.data && Date.now() - c.at < 864e5) { S.boot = c.data; renderAll(); } } catch (e) {} }
+  try {
+    const b = await api('bootstrap');
+    S.boot = b; renderAll();
+    try { localStorage.setItem(BOOT_KEY, JSON.stringify({ at: Date.now(), data: b })); } catch (e) {}
+  } catch (e) { if (first) { toast(e.message, 1); if (!S.boot) renderAll(); } }
+}
+function set(k) { return S.boot?.settings?.[k] ?? ''; }
+const on = k => String(set(k)).toUpperCase() === 'TRUE';
+function voteAwards() { return (S.boot?.awards || []).filter(a => a.publicVote); }
+function renderAll() {
+  renderPhase(); renderHero(); renderTicker(); renderAwards(); renderNomTabs(); renderNominees(); renderWinners(); renderTeams(); renderLive(); renderBallotBar();
+  // 只自動更新投票頁（票數），避免打斷正在填寫的申請／個人資料
+  if (portalOpen() && S.pane === 'vote' && !$('#voteModal').classList.contains('open')) paneVote();
+}
+function renderPhase() {
+  const phase = set('currentPhase') || 'RAA 2026', detail = set('currentPhaseDetail');
+  $$('[data-phase]').forEach(x => x.textContent = phase); $$('[data-phase-detail]').forEach(x => x.textContent = detail);
+  const list = S.boot?.phases || []; const idx = list.findIndex(p => p.name === phase);
+  $('#steps').innerHTML = list.map((p, i) => `<div class="stepItem ${i < idx ? 'done' : i === idx ? 'now' : ''}"><small>STAGE ${String(i + 1).padStart(2, '0')}</small><b>${esc(p.name)}</b></div>`).join('');
+}
+function renderHero() {
+  const meta = [`<span class="pill now">${esc(set('currentPhase') || 'RAA 2026')}</span>`];
+  if (on('votingOpen') && set('voteDeadline')) meta.push(`<span class="pill">投票截止 ${esc(set('voteDeadline'))}</span>`);
+  if (on('registrationOpen') && set('registrationDeadline')) meta.push(`<span class="pill">申請截止 ${esc(set('registrationDeadline'))}</span>`);
+  meta.push(`<span class="pill">${esc(set('ceremonyText') || '冬季盃總決賽後')}</span>`);
+  $('#heroMeta').innerHTML = meta.join('');
+  const a = [];
+  if (on('winnersPublic') && S.boot?.winners?.length) a.push('<a class="btn gold" href="#winners">查看最終得獎名單</a>');
+  if (on('votingOpen')) a.push('<button class="btn gold" data-hero="vote">立即投票</button>');
+  if (on('registrationOpen')) a.push(`<button class="btn ${a.length ? 'ghost' : 'gold'}" data-hero="apply">申請入圍</button>`);
+  a.push(`<a class="btn ghost" href="#nominees">${on('votingOpen') ? '看即時票數' : '查看正式入圍'}</a>`);
+  $('#heroActions').innerHTML = a.join('');
+  $$('[data-hero]').forEach(b => b.onclick = () => openPortal(b.dataset.hero));
+}
+function renderTicker() {
+  const ann = S.boot?.activeAnnouncement;
+  const text = ann?.message || set('announcement') || 'RAA 2026｜REBORN ANNUAL AWARDS 銳能年度大賞';
+  $('#tickerTrack').innerHTML = `<b>RAA · LIVE</b><span>${esc(text)}</span>${on('votingOpen') ? '<b>VOTE</b><span>觀眾投票進行中，登入 Google 帳號即可投票</span>' : ''}`;
+  if (ann?.id) { let seen = []; try { seen = JSON.parse(localStorage.getItem('raaSeenAnnV5') || '[]'); } catch (e) {} if (!seen.includes(ann.id) && !$('#annModal').classList.contains('open')) { $('#annMsg').textContent = ann.message; $('#annMeta').textContent = '公告時間｜' + (ann.publishAt || ''); $('#annClose').dataset.id = ann.id; openModal('annModal'); } }
+}
+$('#annClose').onclick = () => { const id = $('#annClose').dataset.id; try { const s = JSON.parse(localStorage.getItem('raaSeenAnnV5') || '[]'); if (!s.includes(id)) s.push(id); localStorage.setItem('raaSeenAnnV5', JSON.stringify(s.slice(-50))); } catch (e) {} closeModal('annModal'); };
+function rewardChips(list, max = 4) {
+  if (!list?.length) return '';
+  const chips = list.slice(0, max).map(r => `<span class="chip ${r.type === '獎牌' ? 'medal' : 'merch'}">${esc(r.name)}${r.quantity && r.quantity !== '1' ? ' ×' + esc(r.quantity) : ''}</span>`);
+  if (list.length > max) chips.push(`<span class="chip">+${list.length - max}</span>`);
+  return `<div class="rewardChips">${chips.join('')}</div>`;
+}
+function renderAwards() {
+  const awards = S.boot?.awards || [];
+  if (!awards.length) return;
+  const counts = {}; (S.boot.nominees || []).forEach(n => counts[n.award] = (counts[n.award] || 0) + 1);
+  $('#awardGrid').innerHTML = awards.map((a, i) => `<article class="card awardCard" data-award="${esc(a.award)}" tabindex="0"><div class="code">${a.method === '觀眾投票' ? 'PUBLIC VOTE' : 'JURY AWARD'} ${String(i + 1).padStart(2, '0')}</div><h3>${esc(a.award)}</h3><p>${esc(a.description || '')}</p>${rewardChips(a.rewards)}<div class="awardFoot"><span>${esc(a.method)}${a.publicApply ? ' · 開放申請' : ''}</span><b>${counts[a.award] ? counts[a.award] + ' 位入圍 →' : '查看 →'}</b></div></article>`).join('');
+  $$('.awardCard').forEach(c => { c.onclick = () => openAward(c.dataset.award); c.onkeydown = e => { if (e.key === 'Enter') openAward(c.dataset.award); }; });
+  const g = S.boot.globalRewards || {};
+  const parts = [];
+  if (g.winners?.length) parts.push(`<div><b>所有得獎者另得</b>${rewardChips(g.winners, 8)}</div>`);
+  if (g.nominees?.length) parts.push(`<div><b>所有正式入圍者可獲得</b>${rewardChips(g.nominees, 8)}</div>`);
+  $('#globalRewards').innerHTML = parts.join(''); $('#globalRewards').hidden = !parts.length;
+}
+function rewardList(list) { return list?.length ? `<div class="pickList">${list.map(r => `<div class="pickRow"><div class="ava">${r.imageUrl ? imgTag(r.imageUrl, r.type === '獎牌' ? '🏅' : '◆') : (r.type === '獎牌' ? '🏅' : '◆')}</div><div><b>${esc(r.name)}${r.quantity ? ` <span class="muted">× ${esc(r.quantity)}</span>` : ''}</b><small>${esc(r.type)}${r.note ? ' · ' + esc(r.note) : ''}</small></div></div>`).join('')}</div>` : '<p class="muted">獎勵內容將於近期公布。</p>'; }
+function openAward(award) {
+  const a = (S.boot?.awards || []).find(x => x.award === award); if (!a) return;
+  const noms = (S.boot.nominees || []).filter(n => n.award === award);
+  $('#awardBox').innerHTML = `<div class="boxHead"><div><div class="eyebrow">${a.method === '觀眾投票' ? 'PUBLIC VOTE AWARD' : 'JURY AWARD'}</div><h3>${esc(a.award)}</h3></div><button class="x" data-close aria-label="關閉">×</button></div><p class="muted" style="line-height:1.75">${esc(a.description || '')}</p>
+  <div class="eyebrow" style="margin:20px 0 10px">REWARDS · 獎勵</div>${rewardList([...(a.rewards || []), ...(S.boot.globalRewards?.winners || [])])}
+  <div class="eyebrow" style="margin:22px 0 10px">NOMINEES · 正式入圍（${noms.length}）</div>${noms.length ? `<div class="pickList">${noms.map(n => `<div class="pickRow"><div class="ava">${imgTag(n.imageUrl, initials(n.displayName))}</div><div><b>${esc(n.displayName)}</b><small>${esc(n.teamName && n.teamName !== n.displayName ? n.teamName : (n.intro || ''))}</small></div>${a.publicVote && on('votingOpen') ? `<button class="btn sm ${S.picks[award] === n.id ? 'gold' : 'ghost'}" data-pick="${esc(n.id)}">${S.picks[award] === n.id ? '已選' : '投給他'}</button>` : ''}</div>`).join('')}</div>` : `<p class="muted">${a.publicApply ? '入圍名單審核中，通過後會出現在這裡。' : '由主辦方評選，將於典禮公布。'}</p>`}
+  <div class="boxActions">${a.publicApply && on('registrationOpen') ? '<button class="btn ghost" data-go-apply>申請這個獎項</button>' : ''}<button class="btn gold" data-show-noms>在入圍名單查看</button></div>`;
+  $$('[data-pick]', $('#awardBox')).forEach(b => b.onclick = () => { pick(b.dataset.pick); openAward(award); });
+  $('[data-show-noms]', $('#awardBox')).onclick = () => { closeModal('awardModal'); S.filter = award; renderNomTabs(); renderNominees(); $('#nominees').scrollIntoView({ behavior: 'smooth' }); };
+  const ga = $('[data-go-apply]', $('#awardBox')); if (ga) ga.onclick = () => { closeModal('awardModal'); openPortal('apply', { preselect: award }); };
+  openModal('awardModal');
+}
+
+/* ---------- 入圍名單 ---------- */
+function renderNomTabs() {
+  const noms = S.boot?.nominees || [];
+  const awards = (S.boot?.awards || []).filter(a => noms.some(n => n.award === a.award));
+  if (S.filter && S.filter !== '*' && !awards.some(a => a.award === S.filter)) S.filter = '';
+  if (!S.filter && awards.length) S.filter = (voteAwards().find(a => noms.some(n => n.award === a.award)) || awards[0]).award;
+  $('#nomTabs').innerHTML = awards.map(a => `<button class="tab ${a.award === S.filter ? 'on' : ''}" data-tab="${esc(a.award)}">${esc(a.award)}<em>${noms.filter(n => n.award === a.award).length}</em></button>`).join('') + (awards.length > 1 ? `<button class="tab ${S.filter === '*' ? 'on' : ''}" data-tab="*">全部</button>` : '');
+  $$('[data-tab]').forEach(b => b.onclick = () => { S.filter = b.dataset.tab; renderNomTabs(); renderNominees(); });
+  const lead = on('votingOpen') ? '投票開放中！直接按「投給他」選好每個獎項，再一次送出。每個 UID 在每個獎項各一票，參賽者也可以投給自己。' : (on('nomineePublic') ? '通過人工審核的入圍者才會出現在這裡。' : '正式入圍名單將於審核完成後公布。');
+  $('#nomLead').textContent = lead;
+}
+$('#nomSearch').addEventListener('input', e => { S.q = e.target.value.trim().toLowerCase(); renderNominees(); });
+function ranks(noms) { const m = {}; const byA = {}; noms.forEach(n => { if (n.voteCount !== null && n.voteCount !== undefined) (byA[n.award] = byA[n.award] || []).push(n); }); Object.values(byA).forEach(list => list.slice().sort((a, b) => b.voteCount - a.voteCount).forEach((n, i) => { if (n.voteCount > 0 && i < 3) m[n.id] = i + 1; })); return m; }
+function nomCard(n, rank) {
+  const a = (S.boot.awards || []).find(x => x.award === n.award) || {};
+  const voted = S.votes.find(v => v.award === n.award);
+  const mine = voted && voted.nomineeId === n.id, picked = S.picks[n.award] === n.id;
+  const canVote = a.publicVote && on('votingOpen');
+  const showCount = n.voteCount !== null && n.voteCount !== undefined && a.publicVote;
+  let btn = '';
+  if (canVote) {
+    if (voted) btn = `<button class="btn ${mine ? 'ok' : 'ghost'}" disabled>${mine ? '✓ 你投給他' : '此獎項已投票'}</button>`;
+    else btn = `<button class="btn ${picked ? 'gold' : 'ghost'}" data-pick="${esc(n.id)}">${picked ? '✓ 已選擇' : '投給他'}</button>`;
+  }
+  return `<article class="nom ${rank ? 'r' + rank : ''} ${picked ? 'picked' : ''} ${mine ? 'mine' : ''}" id="nom-${esc(n.id)}">
+  <div class="nomTop"><div class="ava">${imgTag(n.imageUrl, initials(n.displayName), n.displayName)}</div>${rank && showCount ? `<span class="rankFlag">目前 #${rank}</span>` : ''}</div>
+  <h4>${esc(n.displayName)}</h4><div class="nomMeta">${S.filter === '*' ? esc(n.award) + ' · ' : ''}${n.teamName && n.teamName !== n.displayName ? esc(n.teamName) : (n.gameUid ? 'UID ' + esc(n.gameUid) : 'RAA 2026 NOMINEE')}</div>
+  ${n.intro ? `<div class="nomIntro">${esc(n.intro)}</div>` : ''}
+  ${showCount ? `<div class="votesBar"><div class="votesTop"><span>有效票 ${n.votePercent !== null ? Number(n.votePercent).toFixed(1) + '%' : ''}</span><b>${nf(n.voteCount)}</b></div><div class="track"><div class="fill" style="width:${Math.min(100, n.votePercent || 0)}%"></div></div></div>` : ''}
+  <div class="nomActions">${btn}<button class="btn ghost shareBtn" data-share="${esc(n.id)}" aria-label="分享 ${esc(n.displayName)}" title="分享投票連結">↗</button></div></article>`;
+}
+function renderNominees() {
+  const root = $('#nomList');
+  if (!S.boot) return;
+  const all = S.boot.nominees || [];
+  if (!all.length) { root.innerHTML = `<div class="nomGrid"><div class="emptyState">${on('nomineePublic') ? '目前還沒有正式入圍者。通過人工審核後會自動出現在這裡。' : '正式入圍名單將於審核完成後公布，敬請期待。'}${on('registrationOpen') ? '<br><br><button class="btn gold" data-go-apply>我要申請入圍</button>' : ''}</div></div>`; const g = $('[data-go-apply]', root); if (g) g.onclick = () => openPortal('apply'); return; }
+  const r = ranks(all);
+  const match = n => !S.q || [n.displayName, n.teamName, n.gameUid, n.intro].some(v => String(v || '').toLowerCase().includes(S.q));
+  let html = '';
+  if (S.filter === '*' || S.q) {
+    const awards = (S.boot.awards || []).filter(a => all.some(n => n.award === a.award && match(n)));
+    html = awards.map(a => `<div class="groupHead"><h3>${esc(a.award)}</h3><span class="muted small">${esc(a.method)}</span></div><div class="nomGrid">${all.filter(n => n.award === a.award && match(n)).map(n => nomCard(n, r[n.id])).join('')}</div>`).join('') || '<div class="nomGrid"><div class="emptyState">找不到符合的入圍者</div></div>';
+  } else {
+    const list = all.filter(n => n.award === S.filter);
+    html = `<div class="nomGrid">${list.map(n => nomCard(n, r[n.id])).join('')}</div>`;
+  }
+  root.innerHTML = html;
+  $$('[data-pick]', root).forEach(b => b.onclick = () => pick(b.dataset.pick));
+  $$('[data-share]', root).forEach(b => b.onclick = () => share(b.dataset.share));
+}
+async function share(id) {
+  const n = (S.boot.nominees || []).find(x => x.id === id); if (!n) return;
+  const url = location.origin + location.pathname + '#nominee=' + encodeURIComponent(id);
+  const text = `幫 ${n.displayName} 在 RAA 2026「${n.award}」投一票！`;
+  try { if (navigator.share) { await navigator.share({ title: 'RAA 2026 銳能年度大賞', text, url }); return; } } catch (e) { if (e.name === 'AbortError') return; }
+  try { await navigator.clipboard.writeText(text + ' ' + url); toast('投票連結已複製，貼給朋友吧！'); } catch (e) { prompt('複製這個連結', url); }
+}
+
+/* ---------- 選票 ---------- */
+function pick(id) {
+  const n = (S.boot.nominees || []).find(x => x.id === id); if (!n) return;
+  if (!on('votingOpen')) return toast('目前未開放投票', 1);
+  requireLogin(() => {
+    if (S.profile?.blocked) return toast('此 UID 已被主辦方限制使用', 1);
+    if (S.votes.some(v => v.award === n.award)) return toast(`你已經投過 ${n.award}`, 1);
+    if (S.picks[n.award] === id) delete S.picks[n.award]; else S.picks[n.award] = id;
+    renderNominees(); renderBallotBar(); if (portalOpen()) renderPane();
+    const left = voteAwards().filter(a => !S.picks[a.award] && !S.votes.some(v => v.award === a.award) && (S.boot.nominees || []).some(x => x.award === a.award));
+    if (S.picks[n.award] && left.length && !portalOpen()) toast(`已選 ${n.displayName}。還可以選：${left.map(a => a.award).join('、')}`);
+  }, '投票前請先用 Google 帳號登入，並綁定你的遊戲 UID。');
+}
+function renderBallotBar() {
+  const keys = Object.keys(S.picks);
+  const bar = $('#ballotBar');
+  bar.classList.toggle('on', keys.length > 0 && !$('#voteModal').classList.contains('open'));
+  if (!keys.length) return;
+  const noms = S.boot?.nominees || [];
+  $('#bbCount').textContent = keys.length;
+  $('#bbTitle').textContent = `已選 ${keys.length} 個獎項，尚未送出`;
+  $('#bbSub').textContent = keys.map(a => `${a}：${noms.find(n => n.id === S.picks[a])?.displayName || ''}`).join('　');
+}
+$('#bbClear').onclick = () => { S.picks = {}; renderBallotBar(); renderNominees(); if (portalOpen()) renderPane(); };
+$('#bbSubmit').onclick = () => openVoteConfirm();
+function openVoteConfirm() {
+  const noms = S.boot?.nominees || [];
+  const keys = Object.keys(S.picks); if (!keys.length) return toast('還沒有選擇任何候選人', 1);
+  const left = voteAwards().filter(a => !S.picks[a.award] && !S.votes.some(v => v.award === a.award) && noms.some(n => n.award === a.award));
+  $('#voteBox').innerHTML = `<div class="boxHead"><div><div class="eyebrow">CONFIRM YOUR BALLOT</div><h3>確認送出選票</h3></div><button class="x" data-close aria-label="關閉">×</button></div>
+  <div class="pickList">${keys.map(a => { const n = noms.find(x => x.id === S.picks[a]) || {}; return `<div class="pickRow"><div class="ava">${imgTag(n.imageUrl, initials(n.displayName))}</div><div><small>${esc(a)}</small><b>${esc(n.displayName || '')}</b></div><button class="btn ghost sm" data-unpick="${esc(a)}">移除</button></div>`; }).join('')}</div>
+  ${left.length ? `<div class="notice" style="margin-top:12px">你還可以投：${left.map(a => esc(a.award)).join('、')}。也可以先送出這幾票，之後再回來投。</div>` : ''}
+  <p class="muted small" style="line-height:1.7">送出後就是有效票，無法修改。投票身份：${esc(S.profile?.playerName || '')}（UID ${esc(S.profile?.gameUid || '')}）</p>
+  <div class="boxActions">${left.length ? '<button class="btn ghost" data-close>繼續選</button>' : ''}<button class="btn gold" id="voteGo">確認送出 ${keys.length} 張選票</button></div>`;
+  $$('[data-unpick]', $('#voteBox')).forEach(b => b.onclick = () => { delete S.picks[b.dataset.unpick]; renderNominees(); if (!Object.keys(S.picks).length) { closeModal('voteModal'); renderBallotBar(); } else openVoteConfirm(); });
+  $('#voteGo').onclick = e => submitVotes(e.currentTarget);
+  openModal('voteModal'); renderBallotBar();
+}
+const voteObs = new MutationObserver(() => renderBallotBar()); voteObs.observe($('#voteModal'), { attributes: true, attributeFilter: ['class'] });
+async function submitVotes(btn) {
+  const picks = Object.entries(S.picks).map(([award, nomineeId]) => ({ award, nomineeId }));
+  try {
+    const r = await busy(btn, () => api('vote', { picks }));
+    S.votes = r.votes || S.votes;
+    if (r.counts) (S.boot.nominees || []).forEach(n => { n.voteCount = r.counts.perNominee[n.id] || 0; n.awardVoteTotal = r.counts.perAward[n.award] || 0; n.votePercent = n.awardVoteTotal ? Math.round(n.voteCount / n.awardVoteTotal * 1000) / 10 : 0; });
+    const okList = r.results.filter(x => x.ok), bad = r.results.filter(x => !x.ok);
+    S.picks = {};
+    $('#voteBox').innerHTML = `<div style="text-align:center"><div class="doneMark">✓</div><div class="eyebrow">BALLOT CONFIRMED</div><h3 style="font-size:26px;margin:8px 0 6px">${okList.length ? '投票完成！' : '這次沒有送出任何選票'}</h3><p class="muted">${okList.length ? '你的選票已記錄為有效票。' : ''}</p></div>
+    <div class="pickList">${r.results.map(x => `<div class="pickRow ${x.ok ? 'res-ok' : 'res-bad'}"><div><small>${esc(x.award)}</small><b>${x.ok ? '✓ ' + esc(x.nomineeName) : esc(x.message)}</b></div></div>`).join('')}</div>
+    <div class="boxActions"><button class="btn ghost" id="shareVote">分享給朋友</button><button class="btn gold" data-close>完成</button></div>`;
+    $('#shareVote').onclick = () => { const first = okList[0]; const n = first && (S.boot.nominees || []).find(x => x.displayName === first.nomineeName && x.award === first.award); if (n) share(n.id); else share((S.boot.nominees || [])[0]?.id); };
+    renderNominees(); if (portalOpen()) renderPane();
+    if (bad.length && okList.length) toast(bad.map(x => `${x.award}：${x.message}`).join('；'), 1);
+    if (PREVIEW) toast('預覽模式：投票只存在這個瀏覽器');
+  } catch (e) { toast(e.message, 1); if (e.code === 'PROFILE') { closeModal('voteModal'); openProfileSetup(); } }
+}
+
+/* ---------- 得獎 ---------- */
+function renderWinners() {
+  const list = S.boot?.winners || [];
+  const show = on('winnersPublic') && list.length > 0;
+  $('#winners').hidden = !show; $$('[data-win-link]').forEach(x => x.hidden = !show);
+  if (!show) return;
+  const order = (S.boot.awards || []).map(a => a.award);
+  const sec = $('#winners'), prog = $('.progress');
+  if (prog.nextElementSibling !== sec) prog.after(sec);
+  $('#winGrid').innerHTML = list.slice().sort((a, b) => order.indexOf(a.award) - order.indexOf(b.award)).map(w => {
+    const a = (S.boot.awards || []).find(x => x.award === w.award) || {};
+    return `<article class="win"><div class="award">${esc(w.award)}</div><div class="img">${imgTag(w.imageUrl, initials(w.winnerName), w.winnerName)}</div><h4>${esc(w.winnerName)}</h4><div class="meta">${esc(w.method || '')}${w.teamName && w.teamName !== w.winnerName ? ' · ' + esc(w.teamName) : ''}</div>${w.note ? `<div class="note">${esc(w.note)}</div>` : ''}${rewardChips(a.rewards, 3)}</article>`;
+  }).join('');
+  const claim = set('rewardClaimText'); $('#claimText').hidden = !claim; $('#claimText').textContent = claim;
+}
+
+/* ---------- 歷屆隊伍 ---------- */
+const metric = (t, f) => f === '春季盃' ? { rank: t.springRank, score: t.springScore, label: 'SPRING CUP' } : f === '秋季盃' ? { rank: t.autumnRank, score: t.autumnScore, label: 'AUTUMN CUP' } : f === '冬季盃' ? { rank: t.winterRank, score: t.winterScore, label: 'WINTER CUP' } : { rank: t.annualRank, score: t.totalScore, label: 'ANNUAL' };
+const blank = v => v === '' || v === null || v === undefined;
+const logoBox = t => `<div class="logoBox">${imgTag(t.logoUrl, initials(t.teamName), t.teamName + ' LOGO')}</div>`;
+function renderTeams() {
+  const tabs = ['年度總覽', '春季盃', '秋季盃', '冬季盃'];
+  $('#teamTabs').innerHTML = tabs.map(x => `<button class="tab ${x === S.teamFilter ? 'on' : ''}" data-tf="${x}">${x}</button>`).join('');
+  $$('[data-tf]').forEach(b => b.onclick = () => { S.teamFilter = b.dataset.tf; renderTeams(); });
+  if (!S.boot) return;
+  const f = S.teamFilter, all = S.boot.teams || [];
+  const list = (f === '年度總覽' ? all : all.filter(t => (t.seasons || []).includes(f))).slice().sort((a, b) => { const A = metric(a, f), B = metric(b, f); const ar = blank(A.rank) ? 9999 : +A.rank, br = blank(B.rank) ? 9999 : +B.rank; return ar - br || (+B.score || 0) - (+A.score || 0) || String(a.teamName).localeCompare(String(b.teamName), 'zh-Hant'); });
+  $('#teamSummary').textContent = `${f} · ${list.length} 支隊伍`;
+  if (!list.length) { $('#podium').innerHTML = ''; $('#teamGrid').innerHTML = `<div class="emptyState">${on('teamArchivePublic') ? '這個分類目前沒有隊伍資料。' : '歷屆參賽隊伍將由主辦方整理後公開。'}</div>`; return; }
+  const top = [1, 2, 3].map(r => list.find(t => +metric(t, f).rank === r)).filter(Boolean);
+  $('#podium').innerHTML = top.map(t => { const m = metric(t, f); return `<article class="pod p${m.rank}"><div class="place">#${m.rank}</div>${logoBox(t)}<div><div class="tag">${m.label}</div><h4>${esc(t.teamName)}</h4><div class="muted small">${(t.seasons || []).map(esc).join(' · ')}</div><div class="score">${blank(m.score) ? '—' : nf(m.score) + ' 分'}</div></div></article>`; }).join('');
+  const ids = new Set(top.map(t => t.id));
+  const row = (l, s, r) => `<div><span>${l}</span><b>${blank(s) ? '—' : nf(s) + ' 分'}</b><b>${blank(r) ? '—' : '第 ' + r + ' 名'}</b></div>`;
+  $('#teamGrid').innerHTML = list.filter(t => !ids.has(t.id)).map(t => { const m = metric(t, f); return `<article class="team"><div class="teamTop">${logoBox(t)}<div style="min-width:0"><h4>${esc(t.teamName)}</h4><div class="checks">${(t.seasons || []).map(s => `<span class="chip seasons">${esc(s)}</span>`).join('')}</div></div><div class="rankBadge"><span>${f === '年度總覽' ? 'ANNUAL' : 'SEASON'}</span><b>${blank(m.rank) ? '—' : '#' + m.rank}</b></div></div><div class="seasonRows">${f === '年度總覽' ? row('春季盃', t.springScore, t.springRank) + row('秋季盃', t.autumnScore, t.autumnRank) + row('冬季盃', t.winterScore, t.winterRank) : row(f, m.score, m.rank)}</div><div class="teamTotal"><span>YEAR TOTAL</span><b>${blank(t.totalScore) ? '—' : nf(t.totalScore) + ' 分'}</b></div>${t.note ? `<div class="muted small">${esc(t.note)}</div>` : ''}</article>`; }).join('');
+}
+function renderLive() {
+  const url = set('streamUrl'), c = set('ceremonyText');
+  if (c) { $('#heroCeremony') && ($('#heroCeremony').textContent = c); $('#liveCeremony').textContent = c; }
+  const b = $('#streamBtn');
+  if (/^https?:\/\//.test(url)) { b.href = url; b.target = '_blank'; b.rel = 'noopener'; b.textContent = '前往典禮直播'; b.className = 'btn gold'; b.removeAttribute('aria-disabled'); $('#liveText').textContent = '直播入口已公開，點擊按鈕前往官方直播。'; }
+  const contact = set('contactUrl'); $('#contactLine').innerHTML = /^https?:/.test(contact) ? ` <a href="${esc(contact)}" target="_blank" rel="noopener" style="color:var(--gold)">聯絡主辦方 →</a>` : '';
+}
+
+/* ---------- 我的 RAA ---------- */
+const portalOpen = () => $('#portal').classList.contains('open');
+function openPortal(pane = 'vote', opts = {}) {
+  if (!S.session || !S.profile) return requireLogin(() => openPortal(pane, opts), pane === 'apply' ? '申請入圍前請先用 Google 登入，並設定參賽身份。' : undefined);
+  S.pane = pane; if (opts.preselect) S.preselect = opts.preselect;
+  if (!portalOpen()) { $('#portal').classList.add('open'); $('#portal').setAttribute('aria-hidden', 'false'); document.body.style.overflow = 'hidden'; history.pushState({ portal: 1 }, '', '#' + pane); }
+  else history.replaceState({ portal: 1 }, '', '#' + pane);
+  renderPane(); renderBallotBar();
+  if (!S.meLoaded) loadMe();
+}
+function closePortal() { if (!portalOpen()) return; $('#portal').classList.remove('open'); $('#portal').setAttribute('aria-hidden', 'true'); document.body.style.overflow = ''; if (history.state?.portal) history.back(); else history.replaceState(null, '', location.pathname); renderBallotBar(); }
+$('#pClose').onclick = closePortal;
+addEventListener('popstate', () => { if (portalOpen() && !history.state?.portal) { $('#portal').classList.remove('open'); document.body.style.overflow = ''; renderBallotBar(); } });
+$$('.pTab').forEach(b => b.onclick = () => { S.pane = b.dataset.pane; history.replaceState({ portal: 1 }, '', '#' + S.pane); renderPane(); $('#portal').scrollTo({ top: 0 }); });
+function renderPane() {
+  const isP = S.profile?.role === 'participant';
+  const pending = S.applications.filter(a => a.status === '待審核').length;
+  $$('.pTab').forEach(b => { b.classList.toggle('on', b.dataset.pane === S.pane); if (b.dataset.pane === 'status') b.innerHTML = '我的申請' + (pending ? `<em>${pending}</em>` : ''); });
+  $$('.pane').forEach(p => p.classList.toggle('on', p.id === 'pane-' + S.pane));
+  ({ vote: paneVote, apply: paneApply, status: paneStatus, profile: paneProfile })[S.pane]?.();
+}
+function paneVote() {
+  const root = $('#pane-vote');
+  const awards = voteAwards(), noms = S.boot?.nominees || [];
+  if (S.profile?.blocked) { root.innerHTML = `<div class="notice bad">此 UID 已被主辦方限制使用${S.profile.blockReason ? '：' + esc(S.profile.blockReason) : ''}。如有疑問請聯絡主辦方。</div>`; return; }
+  const done = awards.filter(a => S.votes.some(v => v.award === a.award)).length;
+  if (!S.voteTab || !awards.some(a => a.award === S.voteTab)) S.voteTab = (awards.find(a => !S.votes.some(v => v.award === a.award)) || awards[0])?.award;
+  const act = S.voteTab, voted = S.votes.find(v => v.award === act), list = noms.filter(n => n.award === act);
+  const r = ranks(noms);
+  root.innerHTML = `${!on('votingOpen') ? `<div class="notice">目前${set('currentPhase') ? '是「' + esc(set('currentPhase')) + '」階段，' : ''}投票尚未開放或已截止。${S.votes.length ? '以下是你的投票紀錄。' : ''}</div>` : ''}
+  <div class="ballotHead"><div><div class="tag">YOUR BALLOT</div><b>${done} / ${awards.length} 個獎項已投票</b><div class="muted small" style="margin-top:4px">${esc(S.profile?.playerName || '')} · UID ${esc(S.profile?.gameUid || '')}${set('voteDeadline') ? ' · 截止 ' + esc(set('voteDeadline')) : ''}</div></div><div class="prog"><div class="muted small">投票進度</div><div class="track"><div class="fill" style="width:${awards.length ? done / awards.length * 100 : 0}%"></div></div></div></div>
+  <div class="awardTabs">${awards.map(a => { const v = S.votes.find(x => x.award === a.award), p = S.picks[a.award]; return `<button class="aTab ${a.award === act ? 'on' : ''} ${v ? 'done' : p ? 'picked' : ''}" data-at="${esc(a.award)}"><b>${esc(a.award)}</b><small>${v ? '✓ 已投 ' + esc(v.nomineeName) : p ? '已選 ' + esc(noms.find(n => n.id === p)?.displayName || '') : '選擇候選人'}</small></button>`; }).join('')}</div>
+  ${voted ? `<div class="notice ok">你在「${esc(act)}」已投給 <b>${esc(voted.nomineeName)}</b>（${esc(voted.createdAt)}）。</div>` : ''}
+  <div class="nomGrid">${list.length ? list.map(n => nomCard(n, r[n.id])).join('') : '<div class="emptyState">這個獎項目前還沒有正式入圍者。</div>'}</div>`;
+  $$('[data-at]', root).forEach(b => b.onclick = () => { S.voteTab = b.dataset.at; paneVote(); });
+  $$('[data-pick]', root).forEach(b => b.onclick = () => { const n = noms.find(x => x.id === b.dataset.pick); pick(b.dataset.pick); if (S.picks[n.award]) { const next = awards.find(a => !S.picks[a.award] && !S.votes.some(v => v.award === a.award) && noms.some(x => x.award === a.award)); if (next) setTimeout(() => { S.voteTab = next.award; paneVote(); toast(`接著選「${next.award}」，或直接按下方「送出選票」`); }, 380); } });
+  $$('[data-share]', root).forEach(b => b.onclick = () => share(b.dataset.share));
+}
+
+/* ---- 申請入圍（4 步驟） ---- */
+const DRAFT_KEY = 'raaApplyDraftV5';
+function wizState() {
+  if (!S.wiz) { let d = {}; try { d = JSON.parse(localStorage.getItem(DRAFT_KEY) || '{}'); } catch (e) {} S.wiz = { step: 1, awards: d.awards || [], intro: d.intro || '', note: d.note || '', images: {}, agree: false }; }
+  if (S.preselect) { if (!S.wiz.awards.includes(S.preselect)) S.wiz.awards.push(S.preselect); S.preselect = null; S.wiz.step = 1; }
+  return S.wiz;
+}
+function saveDraft() { const w = S.wiz; try { localStorage.setItem(DRAFT_KEY, JSON.stringify({ awards: w.awards, intro: w.intro, note: w.note })); } catch (e) {} }
+function paneApply() {
+  const root = $('#pane-apply');
+  const p = S.profile;
+  if (p?.role !== 'participant') {
+    root.innerHTML = `<div class="profileCard"><div class="notice">申請入圍需要<b>參賽身份</b>。填好隊伍、身份與參賽賽季，就能為隊伍或自己申請公開票選獎項。</div><form id="upgradeForm" novalidate>${profileFields(p, { forceParticipant: true })}<button class="btn gold block" type="submit">切換為參賽身份</button></form></div>`;
+    const f = $('#upgradeForm'); wireProfileForm(f);
+    f.onsubmit = async e => { e.preventDefault(); try { const d = readProfileForm(f); if (d.role !== 'participant') throw new Error('請選擇「參賽選手／負責人」'); await busy(e.submitter, async () => { const r = await api('saveProfile', d); S.profile = r.profile; }); toast('已切換為參賽身份'); await loadMe(); } catch (err) { toast(err.message, 1); } };
+    return;
+  }
+  if (!on('registrationOpen')) { root.innerHTML = `<div class="notice">目前未開放入圍申請${set('currentPhase') ? '（' + esc(set('currentPhase')) + '）' : ''}。已送出的申請可以在「我的申請」查看進度。</div>`; return; }
+  const w = wizState();
+  const elig = S.eligibility.length ? S.eligibility : (S.boot?.awards || []).filter(a => a.publicApply).map(a => ({ award: a.award, nomineeType: a.nomineeType, state: 'available' }));
+  w.awards = w.awards.filter(a => elig.some(e => e.award === a && e.state === 'available'));
+  const types = [...new Set(w.awards.map(a => (elig.find(e => e.award === a) || {}).nomineeType === 'person' ? 'person' : 'team'))];
+  const steps = ['選擇獎項', '照片／LOGO', '介紹', '確認送出'];
+  let body = '';
+  if (w.step === 1) {
+    body = `<p class="muted" style="margin-top:0">勾選要申請的公開票選獎項，可以一次申請多個。隊伍獎每隊只要一位負責人申請；個人獎每位選手各自申請。</p><div class="awardPick">${elig.map(e => { const a = (S.boot.awards || []).find(x => x.award === e.award) || {}; const sel = w.awards.includes(e.award); const st = e.state === 'available' ? `<span class="state av">${e.nomineeType === 'person' ? '個人獎 · 可申請' : '隊伍獎 · 可申請'}</span>` : e.state === 'pending' ? `<span class="state wait">審核中 · ${esc(e.detail)}</span>` : `<span class="state ok">✓ 已入圍 · ${esc(e.detail || '')}</span>`; return `<label class="ap ${sel ? 'sel' : ''} ${e.state !== 'available' ? 'dis' : ''}"><input type="checkbox" value="${esc(e.award)}" ${sel ? 'checked' : ''} ${e.state !== 'available' ? 'disabled' : ''}><b>${esc(e.award)}</b><small>${esc(a.description || '')}</small>${st}</label>`; }).join('')}</div>`;
+  } else if (w.step === 2) {
+    const zone = t => `<div class="drop" data-drop="${t}"><div class="pv">${w.images[t] ? `<img src="${w.images[t]}" alt="">` : '點選或拖曳<br>圖片到這裡'}</div><div><b>${t === 'person' ? '選手照片' : '戰隊 LOGO'} *</b><div class="muted small" style="line-height:1.6">${t === 'person' ? '用於「' + w.awards.filter(a => (elig.find(e => e.award === a) || {}).nomineeType === 'person').join('、') + '」，建議清楚的正面照，會裁成正方形顯示。' : '用於「' + w.awards.filter(a => (elig.find(e => e.award === a) || {}).nomineeType !== 'person').join('、') + '」，建議正方形、背景乾淨的 LOGO。'}<br>JPG／PNG／WEBP，8MB 以內，上傳前自動壓縮。</div><input type="file" accept="image/png,image/jpeg,image/webp" hidden></div></div>`;
+    body = types.map(zone).join('');
+  } else if (w.step === 3) {
+    body = `<div class="field"><label>公開介紹（選填，40 字內）</label><input id="wIntro" maxlength="40" value="${esc(w.intro)}" placeholder="例如：三季全勤的冬季盃冠軍"><small>通過審核後會顯示在入圍卡片上，讓觀眾一眼認識你。</small></div><div class="field"><label>給主辦方的補充說明（選填）</label><textarea id="wNote" rows="6" maxlength="1200" placeholder="三季參賽經歷、代表成績、隊伍故事，或其他希望審核時參考的資訊。">${esc(w.note)}</textarea><small>只有主辦方看得到。</small></div>`;
+  } else {
+    body = `<div class="summary"><div class="imgs">${types.map(t => `<img src="${w.images[t]}" alt="${t === 'person' ? '選手照片' : '戰隊 LOGO'}">`).join('')}</div><div class="kv"><div><span>申請人</span><b>${esc(p.playerName)}</b></div><div><span>UID</span><b>${esc(p.gameUid)}</b></div><div><span>隊伍</span><b>${esc(p.teamName)}</b></div><div><span>身份</span><b>${esc(p.participantRole)}</b></div><div class="full"><span>參加賽季</span><b>${(p.seasons || []).map(esc).join(' · ')}</b></div><div class="full"><span>申請獎項</span><b>${w.awards.map(esc).join('、')}</b></div>${w.intro ? `<div class="full"><span>公開介紹</span><b>${esc(w.intro)}</b></div>` : ''}${w.note ? `<div class="full"><span>補充說明</span><b style="font-weight:500">${esc(w.note)}</b></div>` : ''}</div></div>
+    <div class="consent"><label><input type="checkbox" id="wAgree" ${w.agree ? 'checked' : ''}><span>我已閱讀並同意遵循 RAA 銳能年度大賞之活動規章、審核制度、投票規範與素材使用說明，並確認送審資料為本人／隊伍授權提交。</span></label><button type="button" class="linkBtn" id="openTerms">查看大會規章 →</button></div><p class="muted small">審核結果會寄到 ${esc(S.account?.email || '')}。隊伍資料要修改請到「個人資料」。</p>`;
+  }
+  root.innerHTML = `<div class="wiz"><div class="wSteps">${steps.map((s, i) => `<div class="wStep ${i + 1 === w.step ? 'on' : i + 1 < w.step ? 'done' : ''}">${i + 1}. ${s}</div>`).join('')}</div>${body}<div class="wizNav"><button class="btn ghost" id="wBack" ${w.step === 1 ? 'hidden' : ''}>上一步</button><span></span><button class="btn gold" id="wNext">${w.step === 4 ? '確認無誤，正式送審' : '下一步'}</button></div></div>`;
+  if (w.step === 1) $$('.ap input', root).forEach(c => c.onchange = () => { w.awards = $$('.ap input:checked', root).map(x => x.value); saveDraft(); paneApply(); });
+  if (w.step === 2) $$('[data-drop]', root).forEach(z => {
+    const input = $('input', z), t = z.dataset.drop;
+    const take = async file => { if (!file) return; try { $('.pv', z).innerHTML = '<i class="spin" style="color:var(--gold)"></i>'; w.images[t] = await fileToDataUrl(file); paneApply(); } catch (err) { toast(err.message, 1); paneApply(); } };
+    z.onclick = () => input.click(); input.onchange = () => take(input.files[0]);
+    z.ondragover = e => { e.preventDefault(); z.classList.add('over'); }; z.ondragleave = () => z.classList.remove('over');
+    z.ondrop = e => { e.preventDefault(); z.classList.remove('over'); take(e.dataTransfer.files[0]); };
+  });
+  if (w.step === 3) { $('#wIntro').oninput = e => { w.intro = e.target.value; saveDraft(); }; $('#wNote').oninput = e => { w.note = e.target.value; saveDraft(); }; }
+  if (w.step === 4) { $('#wAgree').onchange = e => w.agree = e.target.checked; $('#openTerms').onclick = () => openModal('termsModal'); }
+  $('#wBack').onclick = () => { w.step--; paneApply(); };
+  $('#wNext').onclick = async e => {
+    if (w.step === 1 && !w.awards.length) return toast('請至少選擇一個獎項', 1);
+    if (w.step === 2 && types.some(t => !w.images[t])) return toast(types.includes('person') && !w.images.person ? '請上傳選手照片' : '請上傳戰隊 LOGO', 1);
+    if (w.step < 4) { w.step++; paneApply(); $('#portal').scrollTo({ top: 0, behavior: 'smooth' }); return; }
+    if (!w.agree) return toast('請先勾選同意大會規章', 1);
+    try {
+      const r = await busy(e.currentTarget, () => api('apply', { awards: w.awards, images: Object.fromEntries(types.map(t => [t, w.images[t]])), intro: w.intro, note: w.note, agreementAccepted: true }));
+      S.applications = r.applications; S.eligibility = r.eligibility; S.wiz = null; try { localStorage.removeItem(DRAFT_KEY); } catch (x) {}
+      toast(r.message); S.pane = 'status'; history.replaceState({ portal: 1 }, '', '#status'); renderPane();
+    } catch (err) { toast(err.message, 1); if (err.code === 'PROFILE') { S.pane = 'profile'; renderPane(); } }
+  };
+}
+$('#acceptTerms').onclick = () => { if (S.wiz) S.wiz.agree = true; closeModal('termsModal'); if (S.pane === 'apply') paneApply(); };
+async function fileToDataUrl(file) {
+  if (!/^image\/(png|jpe?g|webp)$/i.test(file.type)) throw new Error('請選擇 JPG、PNG 或 WEBP 圖片');
+  if (file.size > 8 * 1024 * 1024) throw new Error('圖片請勿超過 8MB');
+  const raw = await new Promise((res, rej) => { const r = new FileReader(); r.onload = () => res(r.result); r.onerror = () => rej(new Error('圖片讀取失敗')); r.readAsDataURL(file); });
+  const img = await new Promise((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = () => rej(new Error('圖片格式無法讀取')); i.src = raw; });
+  const max = 1200, sc = Math.min(1, max / Math.max(img.width, img.height)), w = Math.max(1, Math.round(img.width * sc)), h = Math.max(1, Math.round(img.height * sc));
+  const c = document.createElement('canvas'); c.width = w; c.height = h; c.getContext('2d').drawImage(img, 0, 0, w, h);
+  let out = c.toDataURL('image/webp', .86);
+  if (!out.startsWith('data:image/webp')) out = /png/i.test(file.type) ? c.toDataURL('image/png') : c.toDataURL('image/jpeg', .88);
+  if (out.length > 4.2 * 1024 * 1024) throw new Error('圖片壓縮後仍過大，請換一張較小的圖片');
+  return out;
+}
+function paneStatus() {
+  const root = $('#pane-status');
+  if (S.profile?.role !== 'participant') { root.innerHTML = '<div class="notice">觀眾身份不需要申請入圍。想為隊伍或自己申請，請到「申請入圍」切換為參賽身份。</div>'; return; }
+  const list = S.applications;
+  if (!list.length) { root.innerHTML = `<div class="emptyState" style="max-width:860px;margin:auto">還沒有入圍申請紀錄。${on('registrationOpen') ? '<br><br><button class="btn gold" data-to-apply>開始申請</button>' : ''}</div>`; const b = $('[data-to-apply]', root); if (b) b.onclick = () => { S.pane = 'apply'; renderPane(); }; return; }
+  const cls = s => s === '審核通過' ? 'ok' : s === '審核未通過' ? 'bad' : s === '已撤回' ? 'off' : 'wait';
+  root.innerHTML = `<div class="appList"><div class="muted small" style="display:flex;justify-content:space-between;align-items:center">共 ${list.length} 筆申請，結果會寄到 ${esc(S.account?.email || '')}<button class="btn ghost sm" id="refreshApps">重新整理</button></div>${list.map(a => {
+    const s = a.status, tl = s === '審核通過' ? ['ok', 'ok', 'ok'] : s === '審核未通過' ? ['ok', 'ok', 'bad'] : s === '已撤回' ? ['ok', '', ''] : ['ok', 'on', ''];
+    return `<div class="appCard"><img src="${esc(a.imageUrl)}" alt="" onerror="this.style.opacity=.2"><div><h4>${esc(a.award)}</h4><div class="muted small">${esc(a.teamName)} · 送出於 ${esc(a.createdAt)}</div><div class="tl"><span class="${tl[0]}">送出申請</span><span class="${tl[1]}">人工審核</span><span class="${tl[2]}">${s === '審核未通過' ? '未通過' : '正式入圍'}</span></div>${a.reviewNote && s === '審核未通過' ? `<div class="reviewNote">審核說明：${esc(a.reviewNote)}</div>` : ''}${s === '審核通過' ? '<div class="notice ok" style="margin:10px 0 0;padding:9px 12px">已列入正式入圍名單，快把投票連結分享出去！</div>' : ''}${s === '待審核' ? `<button class="linkBtn" data-withdraw="${esc(a.id)}">撤回這筆申請</button>` : ''}</div><span class="badge ${cls(s)}">${esc(s)}</span></div>`;
+  }).join('')}</div>`;
+  $('#refreshApps').onclick = e => busy(e.currentTarget, loadMe);
+  $$('[data-withdraw]', root).forEach(b => b.onclick = async () => { if (!confirm('確定撤回這筆申請？撤回後可以重新申請。')) return; try { const r = await api('withdrawApplication', { id: b.dataset.withdraw }); S.applications = r.applications; S.eligibility = r.eligibility; toast('已撤回'); paneStatus(); } catch (e) { toast(e.message, 1); } });
+}
+function paneProfile() {
+  const root = $('#pane-profile'), p = S.profile;
+  root.innerHTML = `<div class="profileCard"><div class="acctRow">${S.account?.picture ? `<img src="${esc(S.account.picture)}" alt="" referrerpolicy="no-referrer">` : `<i class="av">${esc(initials(S.account?.name || S.account?.email))}</i>`}<div><b>${esc(S.account?.name || '')}</b><div class="muted small">${esc(S.account?.email || '')}</div></div><button class="btn ghost sm" id="logoutBtn">登出</button></div>
+  <form id="profEdit" novalidate>${profileFields(p)}<button class="btn gold" type="submit">儲存個人資料</button></form>
+  <p class="muted small" style="margin-top:18px;line-height:1.7">入圍審核、得獎通知會寄到上方的 Gmail。${S.votes.length ? `你已投 ${S.votes.length} 票。` : ''}</p></div>`;
+  $('#logoutBtn').onclick = logout;
+  const f = $('#profEdit'); wireProfileForm(f);
+  f.onsubmit = async e => { e.preventDefault(); try { const d = readProfileForm(f); await busy(e.submitter, async () => { const r = await api('saveProfile', d); S.profile = r.profile; }); toast('個人資料已儲存'); await loadMe(); } catch (err) { toast(err.message, 1); } };
+}
+
+/* ---------- 網址導向 ---------- */
+function handleHash() {
+  const h = decodeURIComponent(location.hash.slice(1));
+  if (['vote', 'apply', 'status', 'profile'].includes(h)) { if (!portalOpen()) { history.replaceState(null, '', location.pathname); openPortal(h); } return; }
+  const m = h.match(/^nominee=(.+)$/);
+  if (m && S.boot) {
+    const n = (S.boot.nominees || []).find(x => x.id === m[1]); if (!n) return;
+    S.filter = n.award; S.q = ''; $('#nomSearch').value = ''; renderNomTabs(); renderNominees();
+    setTimeout(() => { const el = $('#nom-' + CSS.escape(n.id)); if (el) { el.scrollIntoView({ behavior: 'smooth', block: 'center' }); el.classList.add('flash'); } }, 150);
   }
 }
-function renderPublic(){
-  const s=bootstrap.settings||{};
-  renderPhase();applyAnnouncement(bootstrap.activeAnnouncement,s.announcement);
-  if(s.ceremonyText){$('#heroCeremony').textContent=s.ceremonyText;$('#ceremonyCard').textContent=s.ceremonyText}
-  if(s.streamUrl && /^https?:\/\//.test(s.streamUrl)){const btn=$('#streamBtn');btn.href=s.streamUrl;btn.textContent='前往典禮直播';$('#liveText').textContent='直播入口已公開，點擊右側按鈕前往官方直播。'}
-  renderAwards();renderNomineeFilters(currentNomineeFilter);renderWinners();renderTeams();fillTeamSuggestions();
+addEventListener('hashchange', handleHash);
+
+/* ---------- 背景粒子 ---------- */
+(() => { const c = $('#bgCanvas'), x = c.getContext('2d'); if (matchMedia('(prefers-reduced-motion: reduce)').matches) return; let w, h, pts = [], run = true; function rs() { const d = Math.min(devicePixelRatio || 1, 2); w = innerWidth; h = innerHeight; c.width = w * d; c.height = h * d; x.setTransform(d, 0, 0, d, 0, 0); pts = Array.from({ length: Math.max(30, Math.min(80, Math.floor(w * h / 24000))) }, () => ({ x: Math.random() * w, y: Math.random() * h, vx: (Math.random() - .5) * .16, vy: (Math.random() - .5) * .16, r: Math.random() * 1.2 + .3, a: Math.random() * .5 + .12 })); } function draw() { if (!run) return; x.clearRect(0, 0, w, h); for (const p of pts) { p.x += p.vx; p.y += p.vy; if (p.x < 0 || p.x > w) p.vx *= -1; if (p.y < 0 || p.y > h) p.vy *= -1; x.beginPath(); x.fillStyle = `rgba(241,198,107,${p.a})`; x.arc(p.x, p.y, p.r, 0, 7); x.fill(); } for (let i = 0; i < pts.length; i++) for (let j = i + 1; j < pts.length; j++) { const a = pts[i], b = pts[j], d = Math.hypot(a.x - b.x, a.y - b.y); if (d < 110) { x.strokeStyle = `rgba(241,198,107,${(1 - d / 110) * .07})`; x.lineWidth = .6; x.beginPath(); x.moveTo(a.x, a.y); x.lineTo(b.x, b.y); x.stroke(); } } requestAnimationFrame(draw); } addEventListener('resize', rs); document.addEventListener('visibilitychange', () => { run = !document.hidden; if (run) draw(); }); rs(); draw(); })();
+
+/* ---------- 啟動 ---------- */
+if (PREVIEW) {
+  document.body.classList.add('has-preview');
+  const bar = document.createElement('div'); bar.className = 'previewBar';
+  bar.innerHTML = '<b>預覽模式</b><span>資料只存在這個瀏覽器，不寄信、不上傳。正式上線請在 RAA_CONFIG.API_URL 填入後端網址。</span><a href="' + RAA_CONFIG.ADMIN_PAGE + '" target="_blank">開啟後台預覽</a><button type="button" id="pvReset">重設預覽資料</button>';
+  document.body.appendChild(bar);
+  $('#pvReset').onclick = async () => { if (!confirm('重設所有預覽資料（投票、申請、登入）？')) return; await loadPreview(); window.RAA_PREVIEW.reset(); clearSession(); localStorage.removeItem(BOOT_KEY); location.reload(); };
 }
-function renderPhase(){const s=bootstrap.settings||{};$('#currentPhase').textContent=s.currentPhase||'RAA 2026 進行中';$('#currentPhaseDetail').textContent=s.currentPhaseDetail||'請留意官方最新活動流程。'}
-function seenAnnouncementIds(){try{return JSON.parse(localStorage.getItem(ANNOUNCEMENT_SEEN_KEY)||'[]')}catch(_){return []}}
-function markAnnouncementSeen(id){if(!id)return;const ids=seenAnnouncementIds();if(!ids.includes(id))ids.push(id);localStorage.setItem(ANNOUNCEMENT_SEEN_KEY,JSON.stringify(ids.slice(-100)))}
-function applyAnnouncement(item,fallback){const text=item?.message||fallback||'RAA 2026｜REBORN ANNUAL AWARDS';$('#announcementTrack').textContent=text;if(!item?.id)return;if(!seenAnnouncementIds().includes(item.id)&&!$('#announcementPopup').classList.contains('open')){$('#announcementPopupMessage').textContent=item.message;$('#announcementPopupMeta').textContent=`公告時間｜${item.publishAt||''}`;$('#announcementPopup').classList.add('open');$('#announcementPopup').setAttribute('aria-hidden','false')}}
-$('#closeAnnouncementPopup').onclick=()=>{const item=bootstrap.activeAnnouncement;if(item?.id)markAnnouncementSeen(item.id);$('#announcementPopup').classList.remove('open');$('#announcementPopup').setAttribute('aria-hidden','true')};
-function renderAwards(){
-  if(!bootstrap.awards?.length)return;
-  $('#awardGrid').innerHTML=bootstrap.awards.map((a,i)=>`<article class="card"><div class="cardCode">${escapeHTML(a.method==='觀眾投票'?'PUBLIC VOTE':'JURY AWARD')} ${String(i+1).padStart(2,'0')}</div><h3>${escapeHTML(a.award)}</h3><p>${escapeHTML(a.description||'')}</p><span class="tag">${escapeHTML(a.method)}</span></article>`).join('');
-}
-function renderNomineeFilters(active){
-  const awards=['全部',...new Set((bootstrap.nominees||[]).map(x=>x.award))];
-  const root=$('#nomineeFilters');root.innerHTML=awards.map(a=>`<button class="filterBtn ${a===active?'active':''}" data-award="${escapeHTML(a)}">${escapeHTML(a)}</button>`).join('');
-  $$('.filterBtn',root).forEach(b=>b.onclick=()=>{currentNomineeFilter=b.dataset.award;renderNomineeFilters(currentNomineeFilter)});currentNomineeFilter=active;renderNominees(active);
-}
-function renderNominees(filter='全部'){
-  const all=bootstrap.nominees||[];const list=filter==='全部'?all:all.filter(x=>x.award===filter);const root=$('#nomineeGrid');
-  if(!list.length){root.innerHTML='<div class="emptyState">目前尚無公開的正式入圍名單。通過人工審核後會自動顯示於此。</div>';return}
-  const rankMap={};[...new Set(all.filter(n=>n.publicVote&&n.voteCount!==null).map(n=>n.award))].forEach(a=>{const arr=all.filter(n=>n.award===a&&n.publicVote&&n.voteCount!==null).sort((x,y)=>Number(y.voteCount||0)-Number(x.voteCount||0)||String(x.displayName).localeCompare(String(y.displayName),'zh-Hant'));arr.forEach((n,i)=>rankMap[n.id]=i+1)});
-  root.innerHTML=list.map(n=>{const initial=(n.displayName||'?').slice(0,2);const img=n.imageUrl?`<img src="${escapeHTML(n.imageUrl)}" alt="" onerror="this.style.opacity='.15'">`:escapeHTML(initial);const live=n.publicVote&&n.voteCount!==null?`<div class="liveVotePanel"><div class="liveVoteTop"><span>LIVE VALID VOTES</span><b>${Number(n.voteCount||0).toLocaleString()} 票</b></div><div class="liveVoteTrack"><div class="liveVoteFill" style="width:${Math.min(100,Number(n.votePercent||0))}%"></div></div><div class="liveVoteMeta"><span>${Number(n.votePercent||0).toFixed(1)}%</span><span>本獎項共 ${Number(n.awardVoteTotal||0).toLocaleString()} 張有效票</span></div></div>`:'';const rank=rankMap[n.id]||0;const rankClass=rank>=1&&rank<=3?` voteRank${rank}`:'';const rankFlag=rank>=1&&rank<=3&&n.voteCount!==null?`<div class="liveRankFlag">目前 #${rank}</div>`:'';return `<article class="card nomineeCard${rankClass}">${rankFlag}<div><div class="nomineeAvatar">${img}</div><div class="nomineeName">${escapeHTML(n.displayName)}</div><div class="nomineeMeta">${escapeHTML(n.award)}${n.teamName?' · '+escapeHTML(n.teamName):''}</div></div><div><div class="seasonDots">${(n.seasons||[]).map(s=>`<span class="seasonChip">${escapeHTML(s)}</span>`).join('')}</div>${n.gameUid?`<div class="nomineeMeta" style="margin-top:10px">UID ${escapeHTML(n.gameUid)}</div>`:''}${live}</div></article>`}).join('');
-}
-function renderWinners(){const section=$('#winners'),nav=$('#winnerNavLink'),root=$('#winnerGrid');const list=bootstrap.winners||[];const visible=String(bootstrap.settings?.winnersPublic||'').toUpperCase()==='TRUE'&&list.length>0;section.classList.toggle('show',visible);if(nav)nav.style.display=visible?'':'none';if(!visible){root.innerHTML='';return}const order=['最佳戰隊獎','最佳選手獎','人氣戰隊獎','精神總錦標獎','年度隊伍獎','年度主播獎'];const sorted=[...list].sort((a,b)=>order.indexOf(a.award)-order.indexOf(b.award));root.innerHTML=sorted.map(w=>{const initial=String(w.winnerName||'?').trim().slice(0,2);const image=w.imageUrl?`<img src="${escapeHTML(w.imageUrl)}" alt="${escapeHTML(w.winnerName)}">`:escapeHTML(initial);return `<article class="winnerCard"><div class="winnerCardTop"><div class="winnerAward">${escapeHTML(w.award)}</div><span class="winnerMethod">${escapeHTML(w.method||'RAA 2026')}</span></div><div class="winnerImage">${image}</div><div class="winnerName">${escapeHTML(w.winnerName)}</div><div class="winnerMeta">${w.teamName?`隊伍｜${escapeHTML(w.teamName)}<br>`:''}${w.gameUid?`UID｜${escapeHTML(w.gameUid)}`:''}</div>${w.note?`<div class="winnerNote">${escapeHTML(w.note)}</div>`:''}<div class="winnerSeal">REBORN ANNUAL AWARDS</div></article>`}).join('')}
-
-function teamPublicResult(label,score,rank){const scoreText=score===''||score===null||score===undefined?'—':`${Number(score).toLocaleString()} 分`;const rankText=rank===''||rank===null||rank===undefined?'—':`第 ${Number(rank)} 名`;return `<div class="teamSeasonResult"><span>${label}</span><b>${scoreText}</b><b>${rankText}</b></div>`}
-function teamLogoPublic(t,cls='teamLogoPublic'){const initial=String(t.teamName||'?').trim().slice(0,2).toUpperCase();return t.logoUrl?`<img class="${cls}" src="${escapeHTML(t.logoUrl)}" alt="${escapeHTML(t.teamName)} LOGO" onerror="this.style.opacity='.15'">`:`<div class="${cls==='podiumLogo'?'podiumFallback':'teamLogoFallbackPublic'}">${escapeHTML(initial)}</div>`}
-function teamMetric(t,filter){if(filter==='春季盃')return {rank:t.springRank,score:t.springScore,label:'SPRING CUP'};if(filter==='秋季盃')return {rank:t.autumnRank,score:t.autumnScore,label:'AUTUMN CUP'};if(filter==='冬季盃')return {rank:t.winterRank,score:t.winterScore,label:'WINTER CUP'};return {rank:t.annualRank,score:t.totalScore,label:'ANNUAL'}}
-function teamSorted(list,filter){return [...list].sort((a,b)=>{const A=teamMetric(a,filter),B=teamMetric(b,filter);const ar=A.rank===''||A.rank===null||A.rank===undefined?9999:Number(A.rank),br=B.rank===''||B.rank===null||B.rank===undefined?9999:Number(B.rank);if(ar!==br)return ar-br;return Number(B.score||0)-Number(A.score||0)||String(a.teamName).localeCompare(String(b.teamName),'zh-Hant')})}
-function renderTeamArchiveTabs(){const tabs=['年度總覽','春季盃','秋季盃','冬季盃'];const root=$('#teamArchiveTabs');if(!root)return;root.innerHTML=tabs.map(x=>`<button class="archiveTab ${x===currentTeamFilter?'active':''}" data-team-filter="${x}">${x}</button>`).join('');$$('[data-team-filter]',root).forEach(b=>b.onclick=()=>{currentTeamFilter=b.dataset.teamFilter;renderTeams()})}
-function renderTeamPodium(list,filter){const root=$('#teamPodium');if(!root)return new Set();const top=[1,2,3].map(rank=>list.find(t=>Number(teamMetric(t,filter).rank)===rank)).filter(Boolean);if(!top.length){root.innerHTML='';return new Set()}root.innerHTML=top.map(t=>{const m=teamMetric(t,filter);const r=Number(m.rank);const score=m.score===''||m.score===null||m.score===undefined?'—':`${Number(m.score).toLocaleString()} 分`;return `<article class="podiumCard rank${r}"><div class="podiumPlace">#${r}</div>${teamLogoPublic(t,'podiumLogo')}<div class="podiumInfo"><div class="cardCode">${m.label}</div><h4>${escapeHTML(t.teamName)}</h4><p>${(t.seasons||[]).map(escapeHTML).join(' · ')}</p><div class="podiumScore">${score}</div></div></article>`}).join('');return new Set(top.map(t=>t.id))}
-function renderTeams(){renderTeamArchiveTabs();const all=bootstrap.teams||[];const filter=currentTeamFilter;const list=teamSorted(filter==='年度總覽'?all:all.filter(t=>(t.seasons||[]).includes(filter)),filter);const root=$('#teamArchive');const summary=$('#teamArchiveSummary');if(summary)summary.textContent=`${filter} · ${list.length} 支隊伍`;if(!list.length){renderTeamPodium([],filter);root.innerHTML='<div class="emptyState">這個分類目前沒有歷屆參賽隊伍資料。</div>';return}const podiumIds=renderTeamPodium(list,filter);const displayList=list.filter(t=>!podiumIds.has(t.id));if(!displayList.length){root.innerHTML='';return}root.innerHTML=displayList.map(t=>{const metric=teamMetric(t,filter);const rank=metric.rank===''||metric.rank===null||metric.rank===undefined?'—':Number(metric.rank);const total=t.totalScore===''||t.totalScore===null||t.totalScore===undefined?'—':Number(t.totalScore).toLocaleString();const detail=filter==='年度總覽'?`${teamPublicResult('春季盃',t.springScore,t.springRank)}${teamPublicResult('秋季盃',t.autumnScore,t.autumnRank)}${teamPublicResult('冬季盃',t.winterScore,t.winterRank)}`:filter==='春季盃'?teamPublicResult('春季盃',t.springScore,t.springRank):filter==='秋季盃'?teamPublicResult('秋季盃',t.autumnScore,t.autumnRank):teamPublicResult('冬季盃',t.winterScore,t.winterRank);return `<article class="teamCard"><div class="teamCardTop"><div class="teamIdentityPublic">${teamLogoPublic(t)}<div><h4>${escapeHTML(t.teamName)}</h4><div class="seasonDots">${(t.seasons||[]).map(s=>`<span class="seasonChip">${escapeHTML(s)}</span>`).join('')}</div></div></div><div class="teamRankBadge"><span>${filter==='年度總覽'?'ANNUAL':'SEASON'}</span><b>${rank==='—'?'—':'#'+rank}</b></div></div><div class="teamScoreTotal"><span>YEAR TOTAL SCORE</span><b>${total==='—'?'—':total+' 分'}</b></div><div class="teamSeasonResults">${detail}</div>${t.note?`<p class="teamNote">${escapeHTML(t.note)}</p>`:''}</article>`}).join('')}
-function fillTeamSuggestions(){const dl=$('#teamSuggestions');dl.innerHTML=(bootstrap.teams||[]).map(t=>`<option value="${escapeHTML(t.teamName)}"></option>`).join('')}
-
-async function loginRole(role,form){const btn=form.querySelector('button[type="submit"]');btn.disabled=true;try{const d=formDataObject(form);const r=await api('loginIdentity',{role,gameUid:d.gameUid});identity[role]=r.profile;saveSession(role,r.profile.gameUid);showWorkspace(role);toast('登入成功')}catch(err){toast(err.message)}finally{btn.disabled=false}}
-$('#audienceLoginForm').onsubmit=e=>{e.preventDefault();loginRole('audience',e.target)};
-$('#participantLoginForm').onsubmit=e=>{e.preventDefault();loginRole('participant',e.target)};
-$('#audienceIdentityForm').onsubmit=async e=>{e.preventDefault();const btn=e.submitter;btn.disabled=true;try{const d=formDataObject(e.target);const r=await api('registerIdentity',{role:'audience',...d});identity.audience=r.profile;saveSession('audience',r.profile.gameUid);showWorkspace('audience');toast('觀眾身份建立完成')}catch(err){toast(err.message)}finally{btn.disabled=false}};
-$('#participantIdentityForm').onsubmit=async e=>{e.preventDefault();const btn=e.submitter;btn.disabled=true;try{const d=formDataObject(e.target);d.seasons=[...e.target.querySelectorAll('[name="seasons"]:checked')].map(x=>x.value);if(!d.seasons.length)throw new Error('請至少選擇一個參賽賽季');const r=await api('registerIdentity',{role:'participant',...d});identity.participant=r.profile;saveSession('participant',r.profile.gameUid);showWorkspace('participant');toast('參賽者身份建立完成')}catch(err){toast(err.message)}finally{btn.disabled=false}};
-
-async function showWorkspace(role){const p=identity[role];if(!p)return showAuth(role,'login');$('#'+role+'Auth').style.display='none';$('#'+role+'Workspace').classList.add('show');if(role==='audience')$('#audienceHello').textContent=`${p.playerName} · UID ${p.gameUid}`;else{ $('#participantHello').textContent=`${p.teamName} · ${p.playerName}`;const af=$('#applicationForm');af.playerName.value=p.playerName;af.teamName.value=p.teamName; }await loadBallotState(role);if(role==='participant')loadStatus()}
-async function loadBallotState(role){const p=identity[role];if(!p)return;const root=$(role==='audience'?'#audienceBallot':'#participantBallot');root.innerHTML='<div class="emptyState">正在整理正式入圍名單與你的投票紀錄…</div>';try{const r=await api('ballotData',{uid:p.gameUid});ballotState[role].nominees=r.nominees||[];ballotState[role].votes=r.votes||[];ballotState[role].votingOpen=r.votingOpen;const awards=(bootstrap.awards||[]).filter(a=>a.publicVote).map(a=>a.award);if(!ballotState[role].activeAward||!awards.includes(ballotState[role].activeAward)){ballotState[role].activeAward=awards.find(a=>!ballotState[role].votes.some(v=>v.award===a))||awards[0]||''}renderBallot(role)}catch(e){root.innerHTML='';toast(e.message)}}
-function renderBallot(role){const state=ballotState[role],root=$(role==='audience'?'#audienceBallot':'#participantBallot');const awards=(bootstrap.awards||[]).filter(a=>a.publicVote).map(a=>a.award);const done=state.votes.filter(v=>awards.includes(v.award)).length;const active=state.activeAward||awards[0]||'';const vote=state.votes.find(v=>v.award===active);const list=state.nominees.filter(n=>n.award===active);root.innerHTML=`<div class="ballotShell"><div class="ballotOverview"><div><div class="cardCode">YOUR BALLOT</div><b>${done} / ${awards.length} 個獎項已完成</b><div class="muted" style="font-size:12px;margin-top:5px">${state.votingOpen?'投票開放中':'目前投票尚未開放或已結束'}</div></div><div class="voteProgress"><div class="muted" style="font-size:10px">VOTING PROGRESS</div><div class="progressTrack"><div class="progressFill" style="width:${awards.length?done/awards.length*100:0}%"></div></div></div></div><div class="awardVoteTabs">${awards.map(a=>{const v=state.votes.find(x=>x.award===a);return `<button type="button" class="awardVoteTab ${a===active?'active':''} ${v?'done':''}" data-vote-award="${escapeHTML(a)}"><b>${escapeHTML(a)}</b><span>${v?`已投給 ${escapeHTML(v.nomineeName)}`:'選擇候選人'}</span></button>`}).join('')}</div><div class="ballotAwardHead"><div><div class="eyebrow">OFFICIAL NOMINEES</div><h4>${escapeHTML(active)}</h4></div><div class="muted" style="font-size:11px">${vote?`此獎項已投給：${escapeHTML(vote.nomineeName)}`:`共 ${list.length} 名正式入圍`}</div></div><div class="candidateGridV3">${list.length?list.map(n=>candidateCard(n,vote,state.votingOpen)).join(''):'<div class="emptyState" style="grid-column:1/-1">此獎項目前尚無正式入圍候選。</div>'}</div></div>`;$$('[data-vote-award]',root).forEach(b=>b.onclick=()=>{state.activeAward=b.dataset.voteAward;renderBallot(role)});$$('[data-vote-nominee]',root).forEach(b=>b.onclick=()=>{const n=state.nominees.find(x=>x.id===b.dataset.voteNominee);if(n)openVoteConfirm(role,active,n)})}
-function candidateCard(n,vote,votingOpen){const initial=(n.displayName||'?').slice(0,2);const img=n.imageUrl?`<img src="${escapeHTML(n.imageUrl)}" alt="">`:escapeHTML(initial);const chosen=vote&&vote.nomineeId===n.id;const live=n.voteCount!==null&&n.voteCount!==undefined?`<div class="candidateLiveCount"><span>目前有效票</span><b>${Number(n.voteCount||0).toLocaleString()}</b></div>`:'';return `<article class="candidateCardV3 ${chosen?'voted':''}">${chosen?'<span class="voteDonePill">YOUR VOTE</span>':''}<div class="candidateAvatarV3">${img}</div><h5>${escapeHTML(n.displayName)}</h5><div class="candidateMetaV3">${n.teamName?escapeHTML(n.teamName):'RAA OFFICIAL NOMINEE'}${n.gameUid?`<br>UID ${escapeHTML(n.gameUid)}`:''}</div><div class="candidateSeasonsV3">${(n.seasons||[]).map(x=>`<span class="seasonChip">${escapeHTML(x)}</span>`).join('')}</div>${live}${vote?`<button class="btn ${chosen?'ok':''}" type="button" disabled>${chosen?'✓ 已投給此候選':'此獎項已完成'}</button>`:`<button class="btn gold" type="button" data-vote-nominee="${escapeHTML(n.id)}" ${votingOpen?'':'disabled'}>${votingOpen?'投給 '+escapeHTML(n.displayName):'投票未開放'}</button>`}</article>`}
-let pendingVote=null;
-function openVoteConfirm(role,award,nominee){pendingVote={role,award,nominee};$('#voteConfirmTitle').textContent=`${award} · 確認投票`;$('#voteConfirmCandidate').innerHTML=`${escapeHTML(nominee.displayName)}${nominee.teamName?`<div class="muted" style="font-size:12px;margin-top:5px">${escapeHTML(nominee.teamName)}</div>`:''}`;$('#voteConfirm').classList.add('open');$('#voteConfirm').setAttribute('aria-hidden','false')}
-function closeVoteConfirm(){pendingVote=null;$('#voteConfirm')?.classList.remove('open');$('#voteConfirm')?.setAttribute('aria-hidden','true')}
-$('#cancelVote').onclick=closeVoteConfirm;
-$('#voteConfirm').addEventListener('click',e=>{if(e.target===$('#voteConfirm'))closeVoteConfirm()});
-$('#confirmVote').onclick=async()=>{if(!pendingVote)return;const {role,award,nominee}=pendingVote,p=identity[role],btn=$('#confirmVote');if(!p)return;btn.disabled=true;try{const r=await api('submitVote',{voterUid:p.gameUid,voterName:p.playerName,role,teamName:p.teamName||'',participantRole:p.participantRole||'',seasons:p.seasons||[],award,nomineeId:nominee.id});closeVoteConfirm();toast(r.message);await loadBallotState(role)}catch(e){toast(e.message)}finally{btn.disabled=false}};
-
-function activateParticipantTab(id){$$('.portalTab').forEach(x=>x.classList.toggle('active',x.dataset.ptab===id));$$('.portalPanel').forEach(x=>x.classList.toggle('active',x.id===id));if(id==='participantStatus')loadStatus();if(id==='participantVote')loadBallotState('participant')}$$('.portalTab').forEach(b=>b.onclick=()=>activateParticipantTab(b.dataset.ptab));
-async function fileToOptimizedDataUrl(file){if(!file)throw new Error('請選擇候選照片或戰隊 LOGO');if(file.size>8*1024*1024)throw new Error('原始圖片請勿超過 8MB');const raw=await new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=()=>reject(new Error('圖片讀取失敗'));r.readAsDataURL(file)});const img=await new Promise((resolve,reject)=>{const i=new Image();i.onload=()=>resolve(i);i.onerror=()=>reject(new Error('圖片格式無法讀取'));i.src=raw});const max=1200,scale=Math.min(1,max/Math.max(img.width,img.height)),w=Math.max(1,Math.round(img.width*scale)),h=Math.max(1,Math.round(img.height*scale));const c=document.createElement('canvas');c.width=w;c.height=h;const ctx=c.getContext('2d');ctx.drawImage(img,0,0,w,h);const out=c.toDataURL('image/webp',.86);if(out.length>4.2*1024*1024)throw new Error('圖片處理後仍過大，請換一張較小的圖片');return out}
-$('#applicationPhoto').onchange=async e=>{const file=e.target.files?.[0];if(!file){applicationPhotoData='';$('#applicationPhotoPreview').textContent='尚未選擇圖片';return}try{applicationPhotoData=await fileToOptimizedDataUrl(file);$('#applicationPhotoPreview').innerHTML=`<img src="${applicationPhotoData}" alt="候選圖片預覽">`}catch(err){applicationPhotoData='';e.target.value='';$('#applicationPhotoPreview').textContent='尚未選擇圖片';toast(err.message)}};
-function openOverlay(id){$('#'+id).classList.add('open');$('#'+id).setAttribute('aria-hidden','false')}
-function closeOverlay(id){$('#'+id).classList.remove('open');$('#'+id).setAttribute('aria-hidden','true')}
-$$('[data-close-overlay]').forEach(b=>b.onclick=()=>closeOverlay(b.dataset.closeOverlay));$$('.overlayModal').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)closeOverlay(m.id)}));
-$('#openTerms').onclick=()=>openOverlay('termsModal');$('#acceptTermsBtn').onclick=()=>{const box=$('#applicationForm')?.querySelector('[name="agreementAccepted"]');if(box)box.checked=true;closeOverlay('termsModal');toast('已同意 RAA 大會規章')};
-$('#applicationForm').onsubmit=async e=>{e.preventDefault();const p=identity.participant;if(!p)return toast('請先完成參賽身份登記');const awards=[...e.target.querySelectorAll('[name="awards"]:checked')].map(x=>x.value);if(!awards.length)return toast('至少選擇一個要申請的公開票選獎項');if(!e.target.agreementAccepted.checked)return toast('請先閱讀並勾選同意大會規章');if(!applicationPhotoData)return toast('請先上傳候選照片或戰隊 LOGO');pendingApplication={gameUid:p.gameUid,playerName:p.playerName,teamName:p.teamName,participantRole:p.participantRole,seasons:p.seasons,awards,note:e.target.note.value,agreementAccepted:true,imageData:applicationPhotoData};$('#applicationReviewContent').innerHTML=`<div class="profileReview"><div class="profilePhoto"><img src="${applicationPhotoData}" alt="送審圖片"></div><div class="reviewGrid"><div class="reviewItem"><span>遊戲名稱／選手</span><b>${escapeHTML(p.playerName)}</b></div><div class="reviewItem"><span>UID</span><b>${escapeHTML(p.gameUid)}</b></div><div class="reviewItem"><span>隊伍名稱</span><b>${escapeHTML(p.teamName)}</b></div><div class="reviewItem"><span>送審身份</span><b>${escapeHTML(p.participantRole||'參賽者')}</b></div><div class="reviewItem full"><span>參加賽季</span><b>${(p.seasons||[]).map(escapeHTML).join(' · ')}</b></div><div class="reviewItem full"><span>申請獎項</span><div class="reviewAwards">${awards.map(a=>`<span class="tag">${escapeHTML(a)}</span>`).join('')}</div></div>${e.target.note.value?`<div class="reviewItem full"><span>補充說明</span><b style="font-weight:500;line-height:1.7">${escapeHTML(e.target.note.value)}</b></div>`:''}</div></div>`;openOverlay('applicationConfirm')};
-$('#confirmApplication').onclick=async()=>{if(!pendingApplication)return;const btn=$('#confirmApplication');btn.disabled=true;btn.textContent='資料送審中…';try{const r=await api('applyNomination',pendingApplication);closeOverlay('applicationConfirm');toast(r.message);const f=$('#applicationForm');f.querySelectorAll('[name="awards"]').forEach(x=>x.checked=false);f.note.value='';f.agreementAccepted.checked=false;f.querySelector('#applicationPhoto').value='';applicationPhotoData='';$('#applicationPhotoPreview').textContent='尚未選擇圖片';pendingApplication=null;loadStatus();activateParticipantTab('participantStatus')}catch(err){toast(err.message)}finally{btn.disabled=false;btn.textContent='確認無誤，正式送審'}};
-async function loadStatus(){const p=identity.participant;if(!p)return;const root=$('#statusList');root.innerHTML='<div class="muted">查詢中…</div>';try{const r=await api('applicationStatus',{uid:p.gameUid});const activeAwards=new Set((r.items||[]).filter(x=>x.status!=='審核未通過').map(x=>x.award));$('#applicationForm').querySelectorAll('[name="awards"]').forEach(c=>{c.disabled=activeAwards.has(c.value);c.closest('.check')?.classList.toggle('disabled',c.disabled)});if(!r.items.length){root.innerHTML='<div class="muted">目前沒有這個 UID 的入圍申請紀錄。</div>';return}root.innerHTML=r.items.map(x=>`<div class="statusRow"><div><b>${escapeHTML(x.award)}</b><div class="muted" style="margin-top:5px;font-size:12px">${escapeHTML(x.teamName)} · ${(x.seasons||[]).map(escapeHTML).join(' / ')}</div>${x.reviewNote?`<div style="margin-top:7px;font-size:12px">審核備註：${escapeHTML(x.reviewNote)}</div>`:''}</div><span class="statusBadge ${x.status==='待審核'?'pending':x.status==='審核通過'?'approved':'rejected'}">${escapeHTML(x.status)}</span></div>`).join('')}catch(e){root.innerHTML='';toast(e.message)}}
-$('#refreshStatus').onclick=loadStatus;
-
-/* tech particle canvas */
-(()=>{const c=$('#particleCanvas'),ctx=c.getContext('2d');let w,h,dpr,pts=[];function resize(){dpr=Math.min(devicePixelRatio||1,2);w=innerWidth;h=innerHeight;c.width=w*dpr;c.height=h*dpr;c.style.width=w+'px';c.style.height=h+'px';ctx.setTransform(dpr,0,0,dpr,0,0);const count=Math.max(38,Math.min(90,Math.floor(w*h/22000)));pts=Array.from({length:count},()=>({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-.5)*.18,vy:(Math.random()-.5)*.18,r:Math.random()*1.3+.35,a:Math.random()*.55+.12}))}function draw(){ctx.clearRect(0,0,w,h);for(const p of pts){p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>w)p.vx*=-1;if(p.y<0||p.y>h)p.vy*=-1;ctx.beginPath();ctx.fillStyle=`rgba(241,198,107,${p.a})`;ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill()}for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){const a=pts[i],b=pts[j],dx=a.x-b.x,dy=a.y-b.y,d=Math.hypot(dx,dy);if(d<115){ctx.strokeStyle=`rgba(241,198,107,${(1-d/115)*.07})`;ctx.lineWidth=.6;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke()}}requestAnimationFrame(draw)}addEventListener('resize',resize);resize();draw()})();
-async function refreshLivePublic(){try{const fresh=await api('publicBootstrap');bootstrap=fresh;renderPhase();applyAnnouncement(fresh.activeAnnouncement,fresh.settings?.announcement);renderNominees(currentNomineeFilter);renderWinners();renderTeams();if(identity.audience)loadBallotState('audience');if(identity.participant)loadBallotState('participant')}catch(_){}}
-setInterval(refreshLivePublic,30000);
-renderRecentSession();
-loadBootstrap();
+renderAccount(); renderTeams();
+(async () => {
+  await loadBoot(true);
+  if (S.session) await loadMe();
+  handleHash();
+})();
+setInterval(() => { if (!document.hidden) loadBoot(false); }, 30000);
+document.addEventListener('visibilitychange', () => { if (!document.hidden && S.boot) loadBoot(false); });
 </script>
 </body>
 </html>
