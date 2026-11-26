@@ -4,14 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>REBORN Entertainment 銳能娛樂｜電競賽事主辦・直播製播・品牌整合</title>
-<meta name="description" content="REBORN Entertainment 銳能娛樂，以 Free Fire 電競賽事為核心的娛樂整合團隊。賽事主辦與承辦、直播製播、賽事視覺、品牌整合、會員與社群營運，一個團隊全線到位。2026 銳能冬季盃即將登場。">
+<meta name="description" content="REBORN Entertainment 銳能娛樂，以 Free Fire 電競賽事為核心的娛樂整合團隊。賽事主辦與承辦、直播製播、賽事視覺、品牌整合、會員與社群營運，一個團隊全線到位。銳能冬季盃 2027 報名開放中，1/9 開戰。">
 <meta name="theme-color" content="#FFFFFF">
 <link rel="canonical" href="https://www.rebormnent.com/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="REBORN Entertainment 銳能娛樂">
 <meta property="og:url" content="https://www.rebormnent.com/">
 <meta property="og:title" content="REBORN Entertainment 銳能娛樂">
-<meta property="og:description" content="讓每一場比賽，都值得被看見。電競賽事主辦・直播製播・賽事視覺・品牌整合。2026 銳能冬季盃即將登場。">
+<meta property="og:description" content="讓每一場比賽，都值得被看見。電競賽事主辦・直播製播・賽事視覺・品牌整合。銳能冬季盃 2027 報名開放中。">
 <meta property="og:image" content="https://www.rebormnent.com/%E9%8A%B3%E8%83%BD%E5%86%AC%E5%AD%A3%E7%9B%83.png">
 <meta name="twitter:card" content="summary_large_image">
 
@@ -41,6 +41,20 @@
       "alternateName": "銳能娛樂",
       "url": "https://www.rebormnent.com/",
       "publisher": { "@id": "https://www.rebormnent.com/#organization" }
+    },
+    {
+      "@type": "SportsEvent",
+      "@id": "https://www.rebormnent.com/rnwintercup.html#event",
+      "name": "銳能冬季盃 2027｜REBORN WINTER CUP 2027",
+      "description": "銳能娛樂第三賽季 Free Fire 電競賽事：24 隊、7 個比賽日，總獎勵 NT$14,500＋70,000 鑽石。",
+      "url": "https://www.rebormnent.com/rnwintercup.html",
+      "image": "https://www.rebormnent.com/%E9%8A%B3%E8%83%BD%E5%86%AC%E5%AD%A3%E7%9B%83.png",
+      "startDate": "2027-01-09T16:00:00+08:00",
+      "endDate": "2027-01-31",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode",
+      "location": { "@type": "VirtualLocation", "url": "https://www.rebormnent.com/rnwintercup.html" },
+      "organizer": { "@id": "https://www.rebormnent.com/#organization" }
     }
   ]
 }
@@ -70,7 +84,8 @@ var IMG_DIRS = ["", "images/"];
 var IMG_EXTS = [".png", ".jpg", ".jpeg", ".webp", ".PNG", ".JPG"];
 var IMG_ALIASES = {
   "銳能白": ["銳能白", "銳能娛樂白"],
-  "銳能娛樂黑": ["銳能娛樂黑", "銳能黑"]
+  "銳能娛樂黑": ["銳能娛樂黑", "銳能黑"],
+  "銳能冬季盃": ["銳能冬季盃", "銳能冬季盃LOGO"]
 };
 function imgCandidates(key) {
   var names = IMG_ALIASES[key] || [key], list = [];
@@ -392,20 +407,157 @@ section{position:relative}
 @keyframes frost{to{background-position:-220% 0}}
 .winter-desc{color:#B9D8EA;font-size:17px;line-height:1.95;max-width:540px;margin-bottom:28px}
 .winter-desc strong{color:#fff}
-.winter-facts{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);margin-bottom:34px;border:1px solid rgba(143,233,255,.22)}
+.winter-facts{list-style:none;display:grid;grid-template-columns:repeat(2,1fr);margin-bottom:34px;border:1px solid rgba(143,233,255,.22)}
 .winter-facts li{padding:14px 16px;background:rgba(3,14,32,.45)}
-.winter-facts li+li{border-left:1px solid rgba(143,233,255,.22)}
+.winter-facts li:nth-child(even){border-left:1px solid rgba(143,233,255,.22)}
+.winter-facts li:nth-child(n+3){border-top:1px solid rgba(143,233,255,.22)}
 .winter-facts span{display:block;font-size:13px;color:#7FA9C4;margin-bottom:2px}
 .winter-facts strong{font-size:17px;font-weight:900;color:#fff}
 .winter-visual{perspective:1200px}
-.winter-frame{position:relative;padding:12px;background:rgba(143,233,255,.06);border:1px solid rgba(143,233,255,.35);box-shadow:0 40px 100px -30px rgba(0,0,0,.85),0 0 80px -10px rgba(95,203,255,.35);transition:transform .5s var(--ease);will-change:transform}
+.winter-frame{position:relative;display:block;padding:12px;background:rgba(143,233,255,.06);border:1px solid rgba(143,233,255,.35);box-shadow:0 40px 100px -30px rgba(0,0,0,.85),0 0 80px -10px rgba(95,203,255,.35);transition:transform .5s var(--ease);will-change:transform}
 .winter-frame.brk::after{--c:var(--ice);inset:-8px;--l:28px}
 .winter-frame img{width:100%;height:auto}
 .glare{position:absolute;inset:12px;pointer-events:none;background:radial-gradient(500px circle at var(--gx,30%) var(--gy,20%),rgba(255,255,255,.18),transparent 45%);mix-blend-mode:screen}
 
+
+/* ---------- 冬季盃 2027 ---------- */
+.btn-winter{background:linear-gradient(100deg,#0B3863 0%,#1C7FC4 50%,#0B3863 100%);background-size:200% 100%;color:#fff}
+.btn-winter:hover{background-position:100% 0}
+.hero-notice{
+  display:flex;width:fit-content;align-items:center;gap:10px;max-width:100%;padding:5px 14px 5px 5px;margin-bottom:20px;
+  border:1px solid #CFE6F4;border-radius:999px;background:#F2F9FE;color:#0B3863;font-size:14px;font-weight:700;text-decoration:none;
+  transition:transform .35s var(--ease),border-color .3s,box-shadow .35s;
+}
+.hero-notice b{flex:none;padding:3px 11px;border-radius:999px;background:#1C7FC4;color:#fff;font-size:12.5px}
+.hero-notice svg{width:15px;height:15px;flex:none;transition:transform .35s var(--ease)}
+.hero-notice:hover{transform:translateY(-2px);border-color:#1C9BE0;box-shadow:0 12px 24px -14px rgba(28,127,196,.55)}
+.hero-notice:hover svg{transform:translateX(3px)}
+
+.countdown{margin:0 0 26px}
+.cd-label{font-size:14px;font-weight:700;color:var(--ice);letter-spacing:.04em;margin-bottom:10px}
+.cd-units{display:flex;gap:8px}
+.cd-unit{
+  min-width:76px;padding:10px 10px 8px;text-align:center;background:rgba(3,14,32,.55);border:1px solid rgba(143,233,255,.28);
+  clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px);
+}
+.cd-num{display:block;font-family:"Barlow Condensed";font-style:italic;font-weight:900;font-size:46px;line-height:1;color:#fff;font-variant-numeric:tabular-nums}
+.cd-num.tick{animation:cdTick .45s var(--ease)}
+@keyframes cdTick{from{opacity:.15;transform:translateY(-8px)}to{opacity:1;transform:none}}
+.cd-unit small{display:block;margin-top:4px;font-size:12px;color:#7FA9C4}
+.countdown.is-done .cd-units{display:none}
+.countdown.is-done .cd-label{font-size:17px;color:#fff;margin:0}
+
+.wc{background:linear-gradient(180deg,#EDF6FC 0%,#F8FBFE 55%,#FFFFFF 100%)}
+.wc .sec-head h2::before{background:linear-gradient(100deg,#8FE9FF,#1C7FC4)}
+.wc .sec-sub{color:#1C7FC4}
+.wc-top{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:28px;margin-bottom:40px}
+.wc-top .sec-head{margin-bottom:0}
+.tabs{
+  position:relative;display:inline-flex;gap:4px;max-width:100%;padding:5px;margin-bottom:36px;overflow-x:auto;scrollbar-width:none;
+  background:#fff;border:1px solid #D3E7F3;border-radius:999px;box-shadow:0 10px 30px -18px rgba(11,56,99,.35);
+}
+.tab{position:relative;z-index:1;flex:none;padding:10px 24px;border:0;border-radius:999px;background:none;cursor:pointer;font-size:15px;font-weight:700;color:var(--text-2);white-space:nowrap;transition:color .3s}
+.tab:hover{color:#0B3863}
+.tab[aria-selected="true"]{color:#fff}
+.tab .ripple-wave{background:rgba(143,233,255,.5)}
+.tab-ink{position:absolute;z-index:0;top:5px;bottom:5px;left:0;width:0;border-radius:999px;background:linear-gradient(100deg,#0B3863,#1C7FC4);box-shadow:0 8px 18px -8px rgba(28,127,196,.7);transition:transform .45s var(--ease),width .45s var(--ease)}
+.panel:focus-visible{outline-offset:10px}
+.wc-note{margin-top:22px;font-size:14px;color:var(--muted)}
+.wc-note a{color:#1C7FC4;font-weight:700}
+
+.stages{list-style:none;display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+.stage{
+  position:relative;display:flex;flex-direction:column;padding:26px 22px 22px;background:#fff;border:1px solid #D3E7F3;border-radius:6px;
+  transition:transform .45s var(--ease),box-shadow .45s var(--ease),border-color .45s;
+}
+.stage:hover{transform:translateY(-8px);border-color:#8FD3F5;box-shadow:0 26px 50px -28px rgba(11,56,99,.45)}
+.stage+.stage::before{content:"";position:absolute;left:-13px;top:50%;width:9px;height:9px;margin-top:-5px;border-top:2px solid #1C9BE0;border-right:2px solid #1C9BE0;transform:rotate(45deg)}
+.stage-no{font-family:"Barlow Condensed";font-style:italic;font-weight:900;font-size:40px;line-height:1;color:transparent;-webkit-text-stroke:1.5px #1C9BE0;margin-bottom:14px;transition:color .4s}
+.stage:hover .stage-no{color:#1C9BE0}
+.stage-icon{width:40px;height:40px;display:grid;place-items:center;margin-bottom:14px;color:#0A0A0A;background:var(--gold-grad);clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px)}
+.stage-icon svg{width:22px;height:22px}
+.stage h3{font-size:19px;font-weight:900;margin-bottom:8px}
+.stage p{font-size:14px;color:var(--text-2);line-height:1.85;margin-bottom:14px}
+.stage small{margin-top:auto;font-weight:700;font-size:13px;color:#1C7FC4}
+.stage.final{background:linear-gradient(160deg,#0B3863,#061B3A);border-color:#0B3863;color:#fff}
+.stage.final p{color:#B9D8EA}
+.stage.final small{color:var(--gold)}
+
+.weeks{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.week-title{display:flex;align-items:baseline;gap:8px;font-size:15px;font-weight:900;color:#0B3863;padding-bottom:10px;margin-bottom:12px;border-bottom:2px solid #0B3863}
+.week-title span{font-family:"Barlow Condensed";font-style:italic;font-weight:700;font-size:15px;color:#1C7FC4}
+.ticket{
+  --cut:78px;position:relative;display:grid;grid-template-columns:var(--cut) 1fr;min-height:104px;margin-bottom:12px;
+  background:#fff;border:1px solid #D3E7F3;border-radius:8px;transition:transform .4s var(--ease),background .3s;
+  -webkit-mask:radial-gradient(circle 8px at var(--cut) 0,#0000 98%,#000) top/100% 51% no-repeat,radial-gradient(circle 8px at var(--cut) 100%,#0000 98%,#000) bottom/100% 51% no-repeat;
+  mask:radial-gradient(circle 8px at var(--cut) 0,#0000 98%,#000) top/100% 51% no-repeat,radial-gradient(circle 8px at var(--cut) 100%,#0000 98%,#000) bottom/100% 51% no-repeat;
+}
+.ticket:hover{transform:translateY(-6px);background:#F5FBFF}
+.t-date{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px 6px;border-right:2px dashed #D3E7F3}
+.t-date strong{font-family:"Barlow Condensed";font-style:italic;font-weight:900;font-size:34px;line-height:1;color:#0B3863}
+.t-date span{margin-top:4px;font-size:13px;color:var(--muted)}
+.t-info{display:flex;flex-direction:column;justify-content:center;padding:12px 16px}
+.t-day{font-family:"Barlow Condensed";font-style:italic;font-weight:700;font-size:15px;color:#1C7FC4}
+.t-info strong{font-size:16px;font-weight:900;line-height:1.45}
+.t-info small{font-size:13px;color:var(--muted)}
+.ticket.final{background:linear-gradient(135deg,#0B3863,#061B3A);border-color:#0B3863}
+.ticket.final:hover{background:linear-gradient(135deg,#0E4579,#08234A)}
+.ticket.final .t-date{border-right-color:rgba(143,233,255,.3)}
+.ticket.final .t-date strong{color:var(--gold)}
+.ticket.final .t-date span,.ticket.final small{color:#9CC3DB}
+.ticket.final .t-day{color:var(--ice)}
+.ticket.final .t-info strong{color:#fff}
+
+.prize-total{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px;margin-bottom:28px}
+.prize-total>span{align-self:center;padding:4px 12px;font-size:15px;font-weight:900;color:#0B3863;border:1.5px solid #0B3863;border-radius:999px}
+.prize-total strong{font-family:"Barlow Condensed";font-style:italic;font-weight:900;font-size:clamp(46px,6vw,80px);line-height:1;color:var(--ink);font-variant-numeric:tabular-nums}
+.prize-total strong small{font-size:.45em;margin-right:4px;color:var(--gold-text)}
+.prize-total strong i{font-family:"Noto Sans TC";font-style:normal;font-size:.34em;margin-left:6px;color:#1C7FC4}
+.prize-total em{font-style:normal;font-size:clamp(28px,3.4vw,44px);font-weight:900;color:#1C9BE0}
+.podium{display:grid;grid-template-columns:1fr 1.15fr 1fr;align-items:end;gap:16px;margin-bottom:16px}
+.prize{position:relative;overflow:hidden;padding:26px 26px 24px;border-radius:6px;background:#fff;border:1px solid var(--line);transition:transform .45s var(--ease),box-shadow .45s var(--ease)}
+.prize:hover{transform:translateY(-8px);box-shadow:var(--shadow-lift)}
+.prize::before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:var(--medal)}
+.prize.silver{--medal:linear-gradient(90deg,#C9D2DC,#8E9BAA);order:1}
+.prize.gold{--medal:var(--gold-grad);order:2;padding:38px 30px 32px;background:linear-gradient(160deg,#FFF8DB 0%,#FFFFFF 62%);border-color:#F3D776}
+.prize.bronze{--medal:linear-gradient(90deg,#E2A46A,#B26B32);order:3}
+.prize-rank{display:flex;align-items:center;gap:10px;font-size:18px;font-weight:900;margin-bottom:12px}
+.prize-rank .en{font-style:italic;font-weight:700;font-size:16px;color:var(--muted)}
+.medal{flex:none;width:34px;height:34px;display:grid;place-items:center;border-radius:50%;background:var(--medal);color:#fff;font-family:"Barlow Condensed";font-style:italic;font-weight:900;font-size:18px}
+.prize-cash{font-family:"Barlow Condensed";font-style:italic;font-weight:900;font-size:44px;line-height:1.05}
+.prize.gold .prize-cash{font-size:58px}
+.prize-cash small{font-size:.42em;color:var(--gold-text);margin-right:4px}
+.prize-gem{display:flex;align-items:center;gap:6px;margin-top:6px;font-weight:700;font-size:15px;color:#1C7FC4}
+.prize-gem svg{width:16px;height:16px}
+.prize-extra{display:inline-block;margin-top:12px;padding:3px 12px;font-size:13px;font-weight:700;background:var(--gold);border-radius:999px}
+.prize-list{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.prize-list li{display:flex;flex-direction:column;gap:2px;padding:18px 20px;background:#fff;border:1px solid var(--line);border-radius:6px;transition:background .3s,transform .4s var(--ease)}
+.prize-list li:hover{background:#F2F9FE;transform:translateY(-4px)}
+.prize-list span{font-weight:900;font-size:15px}
+.prize-list small{font-size:12.5px;color:var(--muted);line-height:1.5}
+.prize-list strong{display:flex;align-items:center;gap:6px;margin-top:auto;padding-top:8px;font-family:"Barlow Condensed";font-style:italic;font-weight:900;font-size:26px;color:#0B3863}
+.prize-list strong svg{width:16px;height:16px;color:#1C9BE0}
+.prize-list strong em{font-family:"Noto Sans TC";font-style:normal;font-weight:700;font-size:13px;color:#1C7FC4}
+
+.reg{display:grid;grid-template-columns:1.35fr .85fr;gap:28px;align-items:start}
+.reg-list{list-style:none;display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.reg-list li{display:flex;gap:14px;padding:20px 20px 18px;background:#fff;border:1px solid #D3E7F3;border-radius:6px;transition:transform .4s var(--ease),border-color .4s}
+.reg-list li:hover{transform:translateY(-5px);border-color:#8FD3F5}
+.reg-list svg{flex:none;width:22px;height:22px;margin-top:3px;color:#1C9BE0}
+.reg-list strong{display:block;font-size:16px;font-weight:900;margin-bottom:3px}
+.reg-list span{display:block;font-size:14px;color:var(--text-2);line-height:1.8}
+.reg-cta{
+  position:sticky;top:100px;overflow:hidden;padding:32px 30px;border-radius:8px;color:#EAF8FF;
+  background:radial-gradient(400px 260px at 100% 0%,rgba(143,233,255,.3),transparent 60%),linear-gradient(160deg,#0B3863,#04122A);
+}
+.reg-cta h3{font-size:26px;font-weight:900;line-height:1.35;margin-bottom:10px;color:#fff}
+.reg-cta p{font-size:15px;color:#B9D8EA;line-height:1.9;margin-bottom:22px}
+.reg-cta .btn{width:100%}
+.reg-url{display:block;margin-top:14px;font-size:13px;color:#7FA9C4;word-break:break-all}
+
 /* ---------- stats ---------- */
 .stats{padding:72px 0;border-bottom:1px solid var(--line)}
-.stats-grid{display:grid;grid-template-columns:repeat(4,1fr)}
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr) 1.4fr}
 .stat{position:relative;padding:6px 30px}
 .stat+.stat::before{content:"";position:absolute;left:0;top:6%;bottom:6%;width:2px;background:var(--line);transform:skewX(-14deg)}
 .stat-num{display:flex;align-items:baseline;gap:6px;font-style:italic;font-weight:900;font-size:clamp(56px,6.6vw,100px);line-height:.95;font-variant-numeric:tabular-nums;color:var(--ink)}
@@ -627,6 +779,7 @@ section{position:relative}
 .faq[open] .faq-icon{background:var(--gold);border-color:var(--gold);transform:rotate(180deg)}
 .faq[open] .faq-icon::after{transform:rotate(0deg)}
 .faq-body{padding:0 56px 28px 4px;color:var(--text-2);font-size:16px;line-height:2}
+.faq-body a{color:var(--ink);font-weight:700;text-decoration-color:var(--gold);text-decoration-thickness:2px;text-underline-offset:3px}
 .faq[open] .faq-body{animation:faqIn .5s var(--ease)}
 @keyframes faqIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
 
@@ -676,6 +829,13 @@ section{position:relative}
   .step:nth-child(3){border-left:0}
   .step:nth-child(n+3){border-top:1px solid var(--line)}
   .stats-grid{grid-template-columns:repeat(2,1fr);row-gap:40px}
+  .stages{grid-template-columns:repeat(2,1fr)}
+  .stage+.stage::before{display:none}
+  .stage.final{grid-column:1/-1}
+  .weeks{grid-template-columns:repeat(2,1fr)}
+  .prize-list{grid-template-columns:repeat(2,1fr)}
+  .reg{grid-template-columns:1fr}
+  .reg-cta{position:static}
   .stat:nth-child(3)::before{display:none}
   .mcard{margin:0 auto}
   .footer-grid{grid-template-columns:1fr 1fr}
@@ -695,8 +855,20 @@ section{position:relative}
   .lt-title{font-size:15px;padding:10px 14px 10px 14px}
   .winter{padding:90px 0 96px}
   .winter-facts{grid-template-columns:1fr}
-  .winter-facts li+li{border-left:0;border-top:1px solid rgba(143,233,255,.22)}
-  .winter-facts li{display:flex;justify-content:space-between;align-items:baseline}
+  .winter-facts li{display:flex;justify-content:space-between;align-items:baseline;gap:14px;border-left:0 !important;border-top:1px solid rgba(143,233,255,.22)}
+  .winter-facts li:first-child{border-top:0}
+  .winter-facts strong{text-align:right}
+  .cd-unit{min-width:0;flex:1;padding:9px 4px 7px}
+  .cd-num{font-size:38px}
+  .stat.wide{grid-column:1/-1}
+  .stat.wide::before{display:none}
+  .tabs{display:flex;width:100%}
+  .tab{flex:1;padding:10px 6px;font-size:14.5px}
+  .stages,.weeks,.reg-list{grid-template-columns:1fr}
+  .podium{grid-template-columns:1fr}
+  .prize.gold{order:1}.prize.silver{order:2}.prize.bronze{order:3}
+  .prize.gold .prize-cash{font-size:50px}
+  .hero-notice{font-size:13px}
   .stats{padding:56px 0}
   .stat{padding:4px 14px;min-width:0}
   .stat-num{font-size:clamp(40px,12vw,58px);white-space:nowrap}
@@ -772,7 +944,7 @@ section{position:relative}
       <a href="#projects">專案實績</a>
     </nav>
     <div class="nav-actions">
-      <a class="btn btn-dark btn-sm ripple" href="https://lin.ee/xTKnekT" target="_blank" rel="noopener noreferrer">合作洽詢</a>
+      <a class="btn btn-winter btn-sm ripple" href="https://www.rebormnent.com/rnwintercup.html" target="_blank" rel="noopener noreferrer" data-wc-reg="冬季盃報名" data-wc-else="冬季盃官網">冬季盃報名</a>
       <button class="menu-toggle" id="menuToggle" type="button" aria-label="開啟網站選單" aria-expanded="false" aria-controls="menuPanel">
         <span></span><span></span><span></span>
       </button>
@@ -790,7 +962,8 @@ section{position:relative}
   <h2>銳能娛樂<br>官方網站導覽</h2>
   <div class="menu-group">
     <div class="menu-group-title">Official website</div>
-    <a class="menu-link ripple" href="#winter">2026 銳能冬季盃 <span>WINTER CUP</span></a>
+    <a class="menu-link ripple" href="#winter">銳能冬季盃 2027 <span>WINTER CUP</span></a>
+    <a class="menu-link ripple" href="#wc-info">冬季盃賽制與獎勵 <span>GUIDE</span></a>
     <a class="menu-link ripple" href="#season">2026 賽季進程 <span>SEASON</span></a>
     <a class="menu-link ripple" href="#about">關於銳能娛樂 <span>ABOUT</span></a>
     <a class="menu-link ripple" href="#services">業務與服務 <span>SERVICES</span></a>
@@ -801,6 +974,7 @@ section{position:relative}
   </div>
   <div class="menu-group">
     <div class="menu-group-title">REBORN official pages</div>
+    <a class="menu-link ripple" href="https://www.rebormnent.com/rnwintercup.html" target="_blank" rel="noopener noreferrer">銳能冬季盃官網 <span>WINTER CUP ↗</span></a>
     <a class="menu-link ripple" href="https://www.rebormnent.com/rnmembership.html" target="_blank" rel="noopener noreferrer">銳能會員 <span>MEMBERSHIP ↗</span></a>
     <a class="menu-link ripple" href="https://www.rebormnent.com/raa.html" target="_blank" rel="noopener noreferrer">RAA 銳能年度大賞 <span>RAA ↗</span></a>
     <a class="menu-link ripple" href="https://lin.ee/xTKnekT" target="_blank" rel="noopener noreferrer">銳能娛樂官方 LINE <span>LINE ↗</span></a>
@@ -815,6 +989,7 @@ section{position:relative}
   <canvas id="heroCanvas" aria-hidden="true"></canvas>
   <div class="hero-grid wrap">
     <div class="hero-copy">
+      <a class="hero-notice" href="https://www.rebormnent.com/rnwintercup.html" target="_blank" rel="noopener noreferrer" data-load style="--d:0"><b data-wc-reg="報名中" data-wc-pre="即將開戰" data-wc-live="進行中" data-wc-end="已落幕">報名中</b>銳能冬季盃 2027｜1/9–1/31<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       <p class="hero-kicker en" data-load style="--d:1"><span class="dot"></span>E-sports / Broadcast / Entertainment</p>
       <h1 class="hero-title">
         <span class="ht-en" data-text="REBORN" data-load style="--d:2">REBORN</span>
@@ -842,8 +1017,8 @@ section{position:relative}
         <span>REBORN CAM 01</span>
       </div>
       <div class="monitor-screen brk">
-        <div class="slide is-active" data-tag="Season 03" data-title="2026 銳能冬季盃｜即將登場" data-label="2026 銳能冬季盃">
-          <img src="銳能冬季盃.png" data-img="銳能冬季盃" alt="2026 銳能冬季盃 主視覺" onerror="nextImg(this)">
+        <div class="slide is-active" data-tag="Season 03" data-title="銳能冬季盃 2027｜報名開放中" data-label="銳能冬季盃 2027" data-wc-reg="銳能冬季盃 2027｜報名開放中" data-wc-pre="銳能冬季盃 2027｜1/9 開戰" data-wc-live="銳能冬季盃 2027｜賽事進行中" data-wc-end="銳能冬季盃 2027｜冬季冠軍出爐" data-wc-attr="data-title">
+          <img src="銳能冬季盃.png" data-img="銳能冬季盃" alt="銳能冬季盃 2027 主視覺" onerror="nextImg(this)">
         </div>
         <div class="slide" data-tag="Season 02" data-title="銳能秋季盃 2026" data-label="銳能秋季盃 2026">
           <img src="銳能秋季盃.png" data-img="銳能秋季盃" alt="銳能秋季盃 2026 主視覺" onerror="nextImg(this)">
@@ -861,7 +1036,7 @@ section{position:relative}
       </div>
       <div class="lower-third swap" id="lowerThird" aria-live="polite">
         <span class="lt-tag en" id="ltTag">Season 03</span>
-        <span class="lt-title" id="ltTitle">2026 銳能冬季盃｜即將登場</span>
+        <span class="lt-title" id="ltTitle" data-wc-reg="銳能冬季盃 2027｜報名開放中" data-wc-pre="銳能冬季盃 2027｜1/9 開戰" data-wc-live="銳能冬季盃 2027｜賽事進行中" data-wc-end="銳能冬季盃 2027｜冬季冠軍出爐">銳能冬季盃 2027｜報名開放中</span>
       </div>
       <div class="monitor-dots" id="monitorDots" role="group" aria-label="切換賽事畫面"></div>
     </div>
@@ -874,11 +1049,11 @@ section{position:relative}
   <div class="ticker-label en">Latest <span class="full">&nbsp;news</span></div>
   <div class="ticker-viewport">
     <div class="ticker-track">
-      <span>❄️ 銳能冬季盃即將登場｜2026 第三賽季正式進入倒數</span>
+      <span data-wc-reg="❄️ 銳能冬季盃 2027 報名開放中｜1/9 開戰，總獎勵 NT$14,500＋70,000 鑽石" data-wc-pre="❄️ 銳能冬季盃 2027 報名已截止｜1/9（六）16:00 正式開戰" data-wc-live="❄️ 銳能冬季盃 2027 進行中｜每個比賽日 16:00 開賽，賽程與成績請看冬季盃官網" data-wc-end="❄️ 銳能冬季盃 2027 圓滿落幕｜感謝所有參賽隊伍">❄️ 銳能冬季盃 2027 報名開放中｜1/9 開戰，總獎勵 NT$14,500＋70,000 鑽石</span>
       <span>🏆 RAA REBORN ANNUAL AWARDS 即將登場｜為 2026 銳能三大賽季寫下年度最終章</span>
       <span>🎮 銳能會員系統全面改版｜Google 一鍵登入、交流賽線上報名、完賽領點數</span>
       <span>🤝 賽事協辦、品牌合作與商業委託開放洽談｜請洽官方 LINE</span>
-      <span aria-hidden="true">❄️ 銳能冬季盃即將登場｜2026 第三賽季正式進入倒數</span>
+      <span aria-hidden="true" data-wc-reg="❄️ 銳能冬季盃 2027 報名開放中｜1/9 開戰，總獎勵 NT$14,500＋70,000 鑽石" data-wc-pre="❄️ 銳能冬季盃 2027 報名已截止｜1/9（六）16:00 正式開戰" data-wc-live="❄️ 銳能冬季盃 2027 進行中｜每個比賽日 16:00 開賽，賽程與成績請看冬季盃官網" data-wc-end="❄️ 銳能冬季盃 2027 圓滿落幕｜感謝所有參賽隊伍">❄️ 銳能冬季盃 2027 報名開放中｜1/9 開戰，總獎勵 NT$14,500＋70,000 鑽石</span>
       <span aria-hidden="true">🏆 RAA REBORN ANNUAL AWARDS 即將登場｜為 2026 銳能三大賽季寫下年度最終章</span>
       <span aria-hidden="true">🎮 銳能會員系統全面改版｜Google 一鍵登入、交流賽線上報名、完賽領點數</span>
       <span aria-hidden="true">🤝 賽事協辦、品牌合作與商業委託開放洽談｜請洽官方 LINE</span>
@@ -891,26 +1066,147 @@ section{position:relative}
   <canvas id="snowCanvas" aria-hidden="true"></canvas>
   <div class="winter-grid wrap">
     <div class="winter-copy" data-stagger>
-      <p class="season-chip en"><span class="pulse"></span>Season 03｜Coming soon</p>
-      <h2 class="winter-title" id="winterTitle"><span class="en">2026</span>銳能冬季盃</h2>
+      <p class="season-chip en"><span class="pulse"></span><span data-wc-reg="Season 03｜報名開放中" data-wc-pre="Season 03｜報名已截止" data-wc-live="Season 03｜賽事進行中" data-wc-end="Season 03｜賽事已結束">Season 03｜報名開放中</span></p>
+      <h2 class="winter-title" id="winterTitle"><span class="en">2027</span>銳能冬季盃</h2>
       <p class="winter-slogan">凍感全場啦！</p>
-      <p class="winter-desc">夏季盃點燃戰火，秋季盃 24 組隊伍正面交鋒，<strong>2026 第三賽季正式進入倒數</strong>。冬季盃是通往 RAA 年度大賞前的最後一戰：最強的隊伍，會在最冷的季節證明自己。賽程與報名資訊即將公布，先加入官方 LINE，第一時間搶得參賽資格。</p>
+      <p class="winter-desc">夏季盃點燃戰火，秋季盃 24 組正面交鋒，<strong>第三賽季的最後一戰正式開放報名</strong>。1 月 9 日起連續四個週末、7 個比賽日，24 隊從分組賽一路殺到冠軍衝刺：最強的隊伍，會在最冷的季節證明自己。</p>
+      <div class="countdown" id="countdown">
+        <p class="cd-label" id="cdLabel">距離報名截止</p>
+        <div class="cd-units" aria-hidden="true">
+          <div class="cd-unit"><span class="cd-num" data-cd="d">--</span><small>天</small></div>
+          <div class="cd-unit"><span class="cd-num" data-cd="h">--</span><small>時</small></div>
+          <div class="cd-unit"><span class="cd-num" data-cd="m">--</span><small>分</small></div>
+          <div class="cd-unit"><span class="cd-num" data-cd="s">--</span><small>秒</small></div>
+        </div>
+      </div>
       <ul class="winter-facts">
-        <li><span>賽季</span><strong>2026 第三賽季</strong></li>
-        <li><span>賽程</span><strong>確認中</strong></li>
-        <li><span>報名</span><strong>即將開放</strong></li>
+        <li><span>賽期</span><strong>1/9～1/31｜7 個比賽日</strong></li>
+        <li><span>規模</span><strong>24 隊｜A、B 兩組</strong></li>
+        <li><span>總獎勵</span><strong>NT$14,500＋70,000 鑽石</strong></li>
+        <li><span>報名截止</span><strong>1/9（六）00:00</strong></li>
       </ul>
       <div class="winter-cta btn-row">
-        <a class="btn btn-ice ripple" id="winterPrimary" href="https://lin.ee/xTKnekT" target="_blank" rel="noopener noreferrer"><span id="winterPrimaryText">冬季盃報名洽詢</span>
+        <a class="btn btn-ice ripple" id="winterPrimary" href="https://www.rebormnent.com/rnwintercup.html" target="_blank" rel="noopener noreferrer"><span data-wc-reg="立即報名冬季盃" data-wc-pre="前往冬季盃官網" data-wc-live="查看賽程與成績" data-wc-end="查看最終成績">立即報名冬季盃</span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
-        <a class="btn btn-ghost-ice ripple" href="#season">查看 2026 賽季</a>
+        <a class="btn btn-ghost-ice ripple" href="#wc-info">賽制、賽程與獎勵</a>
       </div>
     </div>
     <div class="winter-visual rv">
-      <div class="winter-frame brk" id="winterFrame" data-tilt data-label="2026 銳能冬季盃">
-        <img src="銳能冬季盃.png" data-img="銳能冬季盃" alt="2026 銳能冬季盃 賽事主視覺" loading="lazy" onerror="nextImg(this)">
+      <a class="winter-frame brk" id="winterFrame" href="https://www.rebormnent.com/rnwintercup.html" target="_blank" rel="noopener noreferrer" data-tilt data-label="銳能冬季盃 2027" aria-label="前往銳能冬季盃 2027 官網">
+        <img src="銳能冬季盃.png" data-img="銳能冬季盃" alt="銳能冬季盃 2027 賽事主視覺" loading="lazy" onerror="nextImg(this)">
         <span class="glare"></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== winter cup guide ===== -->
+<section class="sec wc" id="wc-info" data-nav="winter" aria-labelledby="wcTitle">
+  <div class="wrap">
+    <div class="wc-top">
+      <header class="sec-head rv">
+        <h2 id="wcTitle">冬季盃 2027 賽事資訊</h2>
+        <p class="sec-sub">Winter cup guide</p>
+        <p class="sec-desc">24 隊、7 個比賽日、一座冬季冠軍。賽制、賽程、獎勵與報名須知，一次看懂。</p>
+      </header>
+      <a class="btn btn-winter ripple rv" href="https://www.rebormnent.com/rnwintercup.html" target="_blank" rel="noopener noreferrer">前往冬季盃官網 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+
+    <div class="tabs" id="wcTabs" role="tablist" aria-label="冬季盃賽事資訊">
+      <span class="tab-ink" aria-hidden="true"></span>
+      <button class="tab ripple" type="button" role="tab" id="tab-format" aria-controls="panel-format" aria-selected="true">賽制</button>
+      <button class="tab ripple" type="button" role="tab" id="tab-schedule" aria-controls="panel-schedule" aria-selected="false" tabindex="-1">賽程</button>
+      <button class="tab ripple" type="button" role="tab" id="tab-prize" aria-controls="panel-prize" aria-selected="false" tabindex="-1">獎勵</button>
+      <button class="tab ripple" type="button" role="tab" id="tab-reg" aria-controls="panel-reg" aria-selected="false" tabindex="-1">報名須知</button>
+    </div>
+
+    <div class="panel" id="panel-format" role="tabpanel" aria-labelledby="tab-format" tabindex="0">
+      <ol class="stages" data-stagger>
+        <li class="stage"><span class="stage-no en">01</span><h3>分組賽</h3><p>24 隊抽籤分成 A、B 兩組，每組各打兩個比賽日。</p><small>Day 1–4</small></li>
+        <li class="stage"><span class="stage-no en">02</span><h3>突圍賽</h3><p>A、B 兩組第 5～10 名共 12 隊，搶下最後 4 個晉級名額。</p><small>Day 5</small></li>
+        <li class="stage"><span class="stage-no en">03</span><h3>積分衝刺賽</h3><p>兩組前 4 名加上突圍賽前 4 名，12 強正面對決，前 6 名帶著初始積分進入總決賽。</p><small>Day 6</small></li>
+        <li class="stage"><span class="stage-no en">04</span><h3>冠軍衝刺</h3><p>總決賽。積分達到門檻取得賽點，之後再吃雞才能封王。</p><small>Day 7</small></li>
+        <li class="stage final"><span class="stage-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4Z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg></span><h3>冬季冠軍</h3><p>NT$7,000＋24,000 鑽石，再加一面冠軍獎牌。</p><small>1/31</small></li>
+      </ol>
+      <p class="wc-note">完整賽制與積分規則，以<a href="https://www.rebormnent.com/rnwintercup.html" target="_blank" rel="noopener noreferrer">冬季盃官網</a>公告為準。</p>
+    </div>
+
+    <div class="panel" id="panel-schedule" role="tabpanel" aria-labelledby="tab-schedule" tabindex="0" hidden>
+      <div class="weeks" data-stagger>
+        <div class="week">
+          <h3 class="week-title">第一週末<span>Week 1</span></h3>
+          <article class="ticket"><div class="t-date"><strong>1/9</strong><span>週六</span></div><div class="t-info"><span class="t-day">Day 1</span><strong>分組賽 A 組</strong><small>第一天｜16:00 開賽</small></div></article>
+          <article class="ticket"><div class="t-date"><strong>1/10</strong><span>週日</span></div><div class="t-info"><span class="t-day">Day 2</span><strong>分組賽 B 組</strong><small>第一天｜16:00 開賽</small></div></article>
+        </div>
+        <div class="week">
+          <h3 class="week-title">第二週末<span>Week 2</span></h3>
+          <article class="ticket"><div class="t-date"><strong>1/16</strong><span>週六</span></div><div class="t-info"><span class="t-day">Day 3</span><strong>分組賽 A 組</strong><small>第二天｜16:00 開賽</small></div></article>
+          <article class="ticket"><div class="t-date"><strong>1/17</strong><span>週日</span></div><div class="t-info"><span class="t-day">Day 4</span><strong>分組賽 B 組</strong><small>第二天｜16:00 開賽</small></div></article>
+        </div>
+        <div class="week">
+          <h3 class="week-title">第三週末<span>Week 3</span></h3>
+          <article class="ticket"><div class="t-date"><strong>1/23</strong><span>週六</span></div><div class="t-info"><span class="t-day">Day 5</span><strong>突圍賽</strong><small>16:00 開賽</small></div></article>
+        </div>
+        <div class="week">
+          <h3 class="week-title">第四週末<span>Week 4</span></h3>
+          <article class="ticket"><div class="t-date"><strong>1/30</strong><span>週六</span></div><div class="t-info"><span class="t-day">Day 6</span><strong>積分衝刺賽</strong><small>16:00 開賽</small></div></article>
+          <article class="ticket final"><div class="t-date"><strong>1/31</strong><span>週日</span></div><div class="t-info"><span class="t-day">Day 7</span><strong>總決賽｜冠軍衝刺</strong><small>16:00 開賽</small></div></article>
+        </div>
+      </div>
+      <p class="wc-note">每個比賽日 16:00 開賽。直播連結、分組結果與即時成績，都會公布在<a href="https://www.rebormnent.com/rnwintercup.html" target="_blank" rel="noopener noreferrer">冬季盃官網</a>。</p>
+    </div>
+
+    <div class="panel" id="panel-prize" role="tabpanel" aria-labelledby="tab-prize" tabindex="0" hidden>
+      <div class="prize-total">
+        <span>總獎勵</span>
+        <strong><small>NT$</small><b data-count="14500">0</b></strong>
+        <em>＋</em>
+        <strong><b data-count="70000">0</b><i>鑽石</i></strong>
+      </div>
+      <div class="podium" data-stagger>
+        <article class="prize gold">
+          <div class="prize-rank"><span class="medal">1</span>冠軍<span class="en">Champion</span></div>
+          <div class="prize-cash"><small>NT$</small>7,000</div>
+          <div class="prize-gem"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.5 3h11l4.5 6-10 12L2 9l4.5-6Z"/></svg>24,000 鑽石</div>
+          <span class="prize-extra">冠軍獎牌</span>
+        </article>
+        <article class="prize silver">
+          <div class="prize-rank"><span class="medal">2</span>亞軍</div>
+          <div class="prize-cash"><small>NT$</small>4,500</div>
+          <div class="prize-gem"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.5 3h11l4.5 6-10 12L2 9l4.5-6Z"/></svg>18,000 鑽石</div>
+        </article>
+        <article class="prize bronze">
+          <div class="prize-rank"><span class="medal">3</span>季軍</div>
+          <div class="prize-cash"><small>NT$</small>3,000</div>
+          <div class="prize-gem"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.5 3h11l4.5 6-10 12L2 9l4.5-6Z"/></svg>12,000 鑽石</div>
+        </article>
+      </div>
+      <ul class="prize-list" data-stagger>
+        <li><span>殿軍</span><strong><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.5 3h11l4.5 6-10 12L2 9l4.5-6Z"/></svg>7,200<em>鑽石</em></strong></li>
+        <li><span>第五名</span><strong><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.5 3h11l4.5 6-10 12L2 9l4.5-6Z"/></svg>4,800<em>鑽石</em></strong></li>
+        <li><span>第六名</span><strong><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.5 3h11l4.5 6-10 12L2 9l4.5-6Z"/></svg>3,000<em>鑽石</em></strong></li>
+        <li><span>冠軍衝刺擊殺王</span><small>總決賽冠軍衝刺擊殺數最多</small><strong><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.5 3h11l4.5 6-10 12L2 9l4.5-6Z"/></svg>1,000<em>鑽石</em></strong></li>
+      </ul>
+      <p class="wc-note">鑽石為每隊合計。</p>
+    </div>
+
+    <div class="panel" id="panel-reg" role="tabpanel" aria-labelledby="tab-reg" tabindex="0" hidden>
+      <div class="reg">
+        <ul class="reg-list" data-stagger>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="m7.5 12.5 3 3 6-6.5"/></svg><div><strong>報名截止｜1/9（六）00:00</strong><span>截止前，隊長可以隨時修改或取消報名。</span></div></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="m7.5 12.5 3 3 6-6.5"/></svg><div><strong>正取 24 隊</strong><span>額滿後可以登記候補，正取釋出名額時依報名順序遞補。</span></div></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="m7.5 12.5 3 3 6-6.5"/></svg><div><strong>隊伍名單</strong><span>隊長與 3 名正選，再加上替補隊員；每位選手填暱稱、遊戲名稱與 UID。</span></div></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="m7.5 12.5 3 3 6-6.5"/></svg><div><strong>隊伍資料</strong><span>隊伍名稱（12 字以內）與隊伍 LOGO；選手照片可以不放。</span></div></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="m7.5 12.5 3 3 6-6.5"/></svg><div><strong>Google 一鍵登入</strong><span>用綁定銳能會員的 Google 帳號登入，會員資料自動帶入。</span></div></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="m7.5 12.5 3 3 6-6.5"/></svg><div><strong>不用提供個資</strong><span>不需要身分證字號、真實姓名、電話與生日。</span></div></li>
+        </ul>
+        <aside class="reg-cta rv">
+          <h3>隊伍準備好了嗎？</h3>
+          <p>報名、賽程、成績查詢與隊伍查詢，全部都在冬季盃官網。</p>
+          <a class="btn btn-ice ripple" href="https://www.rebormnent.com/rnwintercup.html" target="_blank" rel="noopener noreferrer"><span data-wc-reg="立即報名" data-wc-else="前往冬季盃官網">立即報名</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <span class="reg-url en">www.rebormnent.com/rnwintercup.html</span>
+        </aside>
       </div>
     </div>
   </div>
@@ -921,19 +1217,19 @@ section{position:relative}
   <div class="stats-grid wrap" data-stagger>
     <div class="stat">
       <div class="stat-num en"><span data-count="3">0</span><small>場</small></div>
-      <div class="stat-label">2026 季度盃賽<small>夏季盃、秋季盃、冬季盃</small></div>
+      <div class="stat-label">銳能季度盃賽<small>夏季盃、秋季盃、冬季盃</small></div>
     </div>
     <div class="stat">
-      <div class="stat-num en"><span data-count="24">0</span><small>組</small></div>
-      <div class="stat-label">秋季盃參賽隊伍<small>銳能秋季盃 2026</small></div>
-    </div>
-    <div class="stat">
-      <div class="stat-num en"><small>NT$</small><span data-count="8000">0</span></div>
-      <div class="stat-label">夏季盃總獎金<small>RUINENG SUMMER CUP</small></div>
+      <div class="stat-num en"><span data-count="24">0</span><small>隊</small></div>
+      <div class="stat-label">冬季盃參賽隊伍<small>A、B 兩組，7 個比賽日</small></div>
     </div>
     <div class="stat">
       <div class="stat-num en"><small>+</small><span data-count="50">0</span><small>點</small></div>
       <div class="stat-label">每場完賽會員點數<small>賽後補登，一鍵領取</small></div>
+    </div>
+    <div class="stat wide">
+      <div class="stat-num en"><small>NT$</small><span data-count="14500">0</span></div>
+      <div class="stat-label">冬季盃總獎金<small>另有 70,000 鑽石獎勵</small></div>
     </div>
   </div>
 </section>
@@ -958,7 +1254,7 @@ section{position:relative}
     <header class="sec-head rv">
       <h2>2026 銳能賽季</h2>
       <p class="sec-sub">Season road</p>
-      <p class="sec-desc">每一個季節，一場屬於銳能的季盃賽。從夏季盃、秋季盃到冬季盃，再由 RAA 年度大賞寫下終章，四個里程碑串起完整的 2026 競技年度。</p>
+      <p class="sec-desc">每一個季節，一場屬於銳能的季盃賽。從夏季盃、秋季盃到冬季盃，再由 RAA 年度大賞寫下終章，四個里程碑串起完整的 2026 競技年度。冬季盃跨年開打，2027 年 1 月登場。</p>
     </header>
 
     <ol class="road" id="road" data-stagger>
@@ -971,7 +1267,7 @@ section{position:relative}
         <a href="#featured"><span class="road-dot"></span><span class="road-season en">Season 02</span><strong>秋季盃</strong><small>24 組參賽</small></a>
       </li>
       <li class="road-node now">
-        <a href="#winter"><span class="road-dot"></span><span class="road-season en">Season 03</span><strong>冬季盃</strong><small>即將登場</small></a>
+        <a href="#winter"><span class="road-dot"></span><span class="road-season en">Season 03</span><strong>冬季盃</strong><small data-wc-reg="1/9 開戰｜報名開放中" data-wc-pre="1/9（六）開戰" data-wc-live="賽事進行中" data-wc-end="已圓滿落幕">1/9 開戰｜報名開放中</small></a>
       </li>
       <li class="road-node final">
         <a href="https://www.rebormnent.com/raa.html" target="_blank" rel="noopener noreferrer"><span class="road-dot"></span><span class="road-season en">Finale</span><strong>RAA 年度大賞</strong><small>2026 年度最終章</small></a>
@@ -1296,7 +1592,11 @@ section{position:relative}
       </details>
       <details class="faq">
         <summary class="ripple">想參加銳能的賽事，要怎麼報名？<span class="faq-icon" aria-hidden="true"></span></summary>
-        <div class="faq-body">賽事開放報名時，會在銳能娛樂官方 LINE 與會員系統公告。交流賽可以直接在銳能會員系統線上報名，送出後系統會自動寄出確認信，匯款資訊與付款狀態都能在「我的報名」查詢。</div>
+        <div class="faq-body">銳能冬季盃 2027 請直接到<a href="https://www.rebormnent.com/rnwintercup.html" target="_blank" rel="noopener noreferrer">冬季盃官網</a>報名：用 Google 帳號登入，銳能會員資料會自動帶入，報名截止時間是 1/9（六）00:00。其他賽事開放報名時，會在銳能娛樂官方 LINE 與會員系統公告；交流賽可以直接在銳能會員系統線上報名。</div>
+      </details>
+      <details class="faq">
+        <summary class="ripple">冬季盃比賽要在哪裡看？<span class="faq-icon" aria-hidden="true"></span></summary>
+        <div class="faq-body">冬季盃 1/9～1/31 共 7 個比賽日，每天 16:00 開賽。各比賽日的直播連結會公布在<a href="https://www.rebormnent.com/rnwintercup.html" target="_blank" rel="noopener noreferrer">冬季盃官網</a>，比賽期間也能在官網即時查看成績與參賽隊伍。</div>
       </details>
       <details class="faq">
         <summary class="ripple">會員點數怎麼累積？可以換什麼？<span class="faq-icon" aria-hidden="true"></span></summary>
@@ -1342,13 +1642,14 @@ section{position:relative}
     </div>
     <nav aria-label="官方頁面">
       <h4>Official pages</h4>
+      <a href="https://www.rebormnent.com/rnwintercup.html" target="_blank" rel="noopener noreferrer">銳能冬季盃官網</a>
       <a href="https://www.rebormnent.com/rnmembership.html" target="_blank" rel="noopener noreferrer">銳能會員</a>
       <a href="https://www.rebormnent.com/raa.html" target="_blank" rel="noopener noreferrer">RAA 年度大賞</a>
       <a href="https://lin.ee/xTKnekT" target="_blank" rel="noopener noreferrer">官方 LINE</a>
     </nav>
     <nav aria-label="網站導覽">
       <h4>Explore</h4>
-      <a href="#winter">2026 銳能冬季盃</a>
+      <a href="#winter">銳能冬季盃 2027</a>
       <a href="#season">2026 賽季進程</a>
       <a href="#services">核心服務</a>
       <a href="#member">銳能會員系統</a>
@@ -1371,20 +1672,69 @@ section{position:relative}
   "use strict";
 
   /* =========================================================
-     WINTER_CUP_URL：冬季盃賽事網站網址。填入後，
-     冬季盃橫幅的主要按鈕會改為「前往冬季盃賽事網站」。
+     冬季盃設定（台灣時間）
+     報名截止或賽程日期有變動時，只要改這裡：
+     網站上的倒數、按鈕文字與「報名中／已截止／進行中／已結束」
+     狀態會依照這三個時間自動切換。
      ========================================================= */
-  const WINTER_CUP_URL = "";
+  const WINTER = {
+    regDeadline: "2027-01-09T00:00:00+08:00", // 報名截止
+    start:       "2027-01-09T16:00:00+08:00", // Day 1 開賽
+    end:         "2027-02-01T00:00:00+08:00"  // 1/31 總決賽結束後
+  };
 
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 
-  if (WINTER_CUP_URL) {
-    $("#winterPrimary").href = WINTER_CUP_URL;
-    $("#winterPrimaryText").textContent = "前往冬季盃賽事網站";
+  /* ---------- 冬季盃狀態與倒數 ---------- */
+  const WT = { reg: Date.parse(WINTER.regDeadline), start: Date.parse(WINTER.start), end: Date.parse(WINTER.end) };
+  const winterPhase = now => now < WT.reg ? "reg" : now < WT.start ? "pre" : now < WT.end ? "live" : "end";
+  let currentPhase = null;
+  function applyPhase(phase) {
+    if (phase === currentPhase) return;
+    currentPhase = phase;
+    $$("[data-wc-reg]").forEach(el => {
+      const v = el.getAttribute("data-wc-" + phase) ?? (phase !== "reg" ? el.getAttribute("data-wc-else") : null) ?? el.getAttribute("data-wc-reg");
+      const attr = el.getAttribute("data-wc-attr");
+      if (attr) el.setAttribute(attr, v); else el.textContent = v;
+    });
+    const cd = $("#countdown");
+    if (cd) {
+      cd.classList.toggle("is-done", phase === "live" || phase === "end");
+      $("#cdLabel").textContent = {
+        reg: "距離報名截止",
+        pre: "距離 Day 1 開賽",
+        live: "冬季盃進行中｜賽程、直播與成績請看冬季盃官網",
+        end: "冬季盃 2027 已圓滿落幕，感謝每一支參賽隊伍"
+      }[phase];
+    }
   }
+  (function winterCountdown() {
+    const cells = {};
+    $$("[data-cd]").forEach(el => { cells[el.dataset.cd] = el; });
+    const pad = n => String(n).padStart(2, "0");
+    function put(key, val) {
+      const el = cells[key];
+      if (!el || el.textContent === val) return;
+      el.textContent = val;
+      if (!reduceMotion) { el.classList.remove("tick"); void el.offsetWidth; el.classList.add("tick"); }
+    }
+    function tick() {
+      const now = Date.now();
+      const phase = winterPhase(now);
+      applyPhase(phase);
+      if (phase !== "reg" && phase !== "pre") return;
+      const diff = Math.max(0, (phase === "reg" ? WT.reg : WT.start) - now);
+      put("d", String(Math.floor(diff / 864e5)));
+      put("h", pad(Math.floor(diff / 36e5) % 24));
+      put("m", pad(Math.floor(diff / 6e4) % 60));
+      put("s", pad(Math.floor(diff / 1e3) % 60));
+    }
+    tick();
+    setInterval(tick, 1000);
+  })();
 
   /* ---------- Loader（百分比 Count Up） ---------- */
   const loader = $("#loader"), loaderPct = $("#loaderPct"), loaderBar = $("#loaderBar");
@@ -1444,11 +1794,11 @@ section{position:relative}
   const sectionObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
-      const id = "#" + entry.target.id;
+      const id = "#" + (entry.target.dataset.nav || entry.target.id);
       navLinks.forEach(a => a.classList.toggle("is-active", a.getAttribute("href") === id));
     });
   }, { rootMargin: "-45% 0px -50% 0px" });
-  ["winter", "season", "about", "services", "member", "why", "business", "projects", "faq"].forEach(id => {
+  ["winter", "wc-info", "season", "about", "services", "member", "why", "business", "projects", "faq"].forEach(id => {
     const el = document.getElementById(id);
     if (el) sectionObserver.observe(el);
   });
@@ -1500,7 +1850,7 @@ section{position:relative}
     entries.forEach(entry => {
       if (entry.isIntersecting) { entry.target.classList.add("in"); revealObserver.unobserve(entry.target); }
     });
-  }, { threshold: 0.18, rootMargin: "0px 0px -6% 0px" });
+  }, { threshold: 0, rootMargin: "0px 0px -12% 0px" });
   $$("[data-stagger], .rv").forEach(el => revealObserver.observe(el));
 
   /* ---------- 會員卡：升級進度與點數入帳提示 ---------- */
@@ -1554,6 +1904,43 @@ section{position:relative}
       area.addEventListener("pointerleave", () => { el.style.transform = ""; });
     });
   }
+
+  /* ---------- 冬季盃資訊分頁 ---------- */
+  (function wcTabs() {
+    const list = $("#wcTabs");
+    if (!list) return;
+    const tabs = $$('[role="tab"]', list), ink = $(".tab-ink", list);
+    const current = () => tabs.find(t => t.getAttribute("aria-selected") === "true") || tabs[0];
+    const moveInk = t => { ink.style.width = t.offsetWidth + "px"; ink.style.transform = `translateX(${t.offsetLeft}px)`; };
+    function select(tab, focus) {
+      tabs.forEach(t => {
+        const on = t === tab;
+        t.setAttribute("aria-selected", String(on));
+        t.tabIndex = on ? 0 : -1;
+        const panel = document.getElementById(t.getAttribute("aria-controls"));
+        panel.hidden = !on;
+        if (on) {
+          $$("[data-stagger]", panel).forEach(g => { g.classList.remove("in"); void g.offsetWidth; g.classList.add("in"); });
+          $$(".rv", panel).forEach(el => el.classList.add("in"));
+        }
+      });
+      moveInk(tab);
+      if (focus) tab.focus();
+    }
+    tabs.forEach((t, i) => {
+      t.addEventListener("click", () => select(t));
+      t.addEventListener("keydown", e => {
+        const keys = { ArrowRight: i + 1, ArrowLeft: i - 1, Home: 0, End: tabs.length - 1 };
+        if (!(e.key in keys)) return;
+        e.preventDefault();
+        select(tabs[(keys[e.key] + tabs.length) % tabs.length], true);
+      });
+    });
+    moveInk(current());
+    window.addEventListener("resize", () => moveInk(current()));
+    window.addEventListener("load", () => moveInk(current()));
+    if (document.fonts) document.fonts.ready.then(() => moveInk(current()));
+  })();
 
   /* ---------- FAQ：一次只展開一題 ---------- */
   const faqs = $$(".faq");
